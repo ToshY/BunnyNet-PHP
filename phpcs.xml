@@ -114,5 +114,5 @@
     <rule ref="PSR12.Operators.OperatorSpacing"/>
     <rule ref="Squiz.Functions.MultiLineFunctionDeclaration"/>
     <rule ref="PSR12.Functions.ReturnTypeDeclaration"/>
-    <rule ref="PSR12.Functions.PSR12.Classes.AnonClassDeclaration"/>
+    <rule ref="PSR12.Classes.AnonClassDeclaration"/>
 </ruleset>
