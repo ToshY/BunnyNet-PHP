@@ -4,6 +4,8 @@
 </a>
 
 # BunnyNet API client for PHP
+[![PHPCS](https://github.com/ToshY/BunnyNet/actions/workflows/phpcs.yml/badge.svg)](https://github.com/ToshY/BunnyNet/actions/workflows/phpcs.yml)
+
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
 
