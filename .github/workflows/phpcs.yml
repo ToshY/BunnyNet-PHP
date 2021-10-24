@@ -1,4 +1,4 @@
-name: "phpcs"
+name: "php-cs"
 
 on:
     pull_request:
