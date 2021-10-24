@@ -14,6 +14,9 @@ use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
 
+/**
+ * Class AbstractRequest
+ */
 abstract class AbstractRequest extends Guzzle
 {
     /** @var string */
