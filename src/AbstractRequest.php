@@ -102,12 +102,7 @@ abstract class AbstractRequest extends Guzzle
     {
         $fileStream = fopen($filePath, 'r');
         if ($fileStream === false) {
-            throw new FileDoesNotExist(
-                sprintf(
-                    'The local file `%s` could not be opened. Please check if it exists.',
-                    $filePath
-                )
-            );
+            throw new FileDoesNotExist(sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath));
         }
 
         return $fileStream;
