@@ -1,6 +1,9 @@
-name: "php-cs"
+name: "PHP_CodeSniffer"
 
 on:
+    push:
+        branches:
+            - 'master'
     pull_request:
         paths:
             - "**.php"
