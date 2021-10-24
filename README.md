@@ -3,7 +3,7 @@
     <img alt="Bunny CDN Logo" src="https://bunny.net/v2/images/bunnynet-logo-dark.svg" width="300" />
 </a>
 
-# BunnyNet PHP library
+# BunnyNet API client for PHP
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
 
