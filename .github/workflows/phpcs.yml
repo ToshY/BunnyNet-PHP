@@ -5,10 +5,8 @@ on:
         branches:
             - 'master'
     pull_request:
-        paths:
-            - "**.php"
-            - "phpcs.xml"
-            - ".github/workflows/phpcs.yml"
+        branches:
+            - 'master'
 
 jobs:
     phpcs:
@@ -23,8 +21,7 @@ jobs:
                     curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
                     php phpcs.phar --version
 
-            -   uses: tinovyatkin/action-php-codesniffer@master
+            -   name: PHPCS check
+                uses: chekalsky/phpcs-action@v1
                 with:
-                    files: "**.php"
-                    phpcs_path: php phpcs.phar
-                    standard: phpcs.xml
+                    enable_warnings: true
