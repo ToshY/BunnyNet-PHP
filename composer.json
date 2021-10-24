@@ -1,0 +1,23 @@
+{
+  "name": "toshy/bunnynet",
+  "description": "BunnyNet API client for PHP",
+  "keywords": ["Bunny.net", "BunnyCDN", "BunnyWay", "ToshY"],
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "ToshY",
+      "homepage": "https://github.com/ToshY"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "guzzlehttp/guzzle": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "ToshY\\BunnyNet\\": "src/"
+    }
+  }
+}
