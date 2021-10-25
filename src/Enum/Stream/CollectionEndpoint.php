@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\Stream\Collection;
+namespace ToshY\BunnyNet\Enum\Stream;
 
 use ToshY\BunnyNet\Enum\Header;
 

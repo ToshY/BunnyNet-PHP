@@ -40,7 +40,6 @@ abstract class AbstractRequest extends Guzzle
         array $headers = [],
         $body = null
     ): StreamInterface {
-
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
@@ -84,7 +83,7 @@ abstract class AbstractRequest extends Guzzle
     {
         return sprintf(
             sprintf('/%s', $template),
-            array_map(
+            ...array_map(
                 function ($item) {
                     return ltrim($item, '/');
                 },
@@ -102,7 +101,9 @@ abstract class AbstractRequest extends Guzzle
     {
         $fileStream = fopen($filePath, 'r');
         if ($fileStream === false) {
-            throw new FileDoesNotExist(sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath));
+            throw new FileDoesNotExist(
+                sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath)
+            );
         }
 
         return $fileStream;
@@ -125,7 +126,7 @@ abstract class AbstractRequest extends Guzzle
      */
     private function getBody($body)
     {
-        switch ($body){
+        switch ($body) {
             case is_array($body):
                 return Utils::jsonEncode($body);
             case is_resource($body):

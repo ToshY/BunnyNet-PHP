@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\Storage\Browse;
+namespace ToshY\BunnyNet\Enum\Storage;
 
 use ToshY\BunnyNet\Enum\Header;
 
