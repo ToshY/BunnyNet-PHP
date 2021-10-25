@@ -12,7 +12,7 @@ use ToshY\BunnyNet\Enum\UuidType;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
 
 /**
- * Bunny CDN pull & storage zone API class
+ * Class ContentDeliveryNetwork
  */
 class ContentDeliveryNetwork extends AbstractRequest
 {
