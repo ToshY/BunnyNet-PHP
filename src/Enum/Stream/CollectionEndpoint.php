@@ -19,6 +19,18 @@ final class CollectionEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'collectionId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -29,6 +41,23 @@ final class CollectionEndpoint
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'collectionId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'name' => [
+                'type' => 'string',
+            ]
+        ],
     ];
 
     /** @var array */
@@ -38,6 +67,18 @@ final class CollectionEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'collectionId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -46,7 +87,32 @@ final class CollectionEndpoint
         'path' => 'library/%d/collections',
         'headers' => [
             Header::ACCEPT_JSON
-        ]
+        ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+        ],
+        'query' => [
+            'page' => [
+                'required' => false,
+                'type' => 'integer',
+            ],
+            'itemsPerPage' => [
+                'required' => false,
+                'type' => 'integer',
+            ],
+            'search' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'orderBy' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+        ],
+        'body' => [],
     ];
 
     /** @var array */
@@ -56,6 +122,19 @@ final class CollectionEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
+        ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'name' => [
+                'type' => 'string',
+            ],
         ],
     ];
 }

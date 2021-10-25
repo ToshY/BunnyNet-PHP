@@ -19,6 +19,22 @@ final class ManageEndpoint
         'headers' => [
             Header::ACCEPT_ALL,
         ],
+        'params' => [
+            'storageZoneName' => [
+                'required' => true,
+                'type'  => 'string',
+            ],
+            'path' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'fileName' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -27,6 +43,24 @@ final class ManageEndpoint
         'path' => '%s/%s/%s',
         'headers' => [
             Header::CONTENT_TYPE_OCTET_STREAM,
+        ],
+        'params' => [
+            'storageZoneName' => [
+                'required' => true,
+                'type'  => 'string',
+            ],
+            'path' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'fileName' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
         ],
     ];
 
@@ -37,5 +71,21 @@ final class ManageEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'storageZoneName' => [
+                'required' => true,
+                'type'  => 'string',
+            ],
+            'path' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'fileName' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ],
+        'query' => [],
+        'body' => [],
     ];
 }

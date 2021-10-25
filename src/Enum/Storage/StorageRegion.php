@@ -35,12 +35,12 @@ final class StorageRegion
         'SG' => [
             'city' => 'Singapore',
             'url' => 'sg' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.02,
+            'cost' => 0.03,
         ],
         'SYD' => [
             'city' => 'Sydney',
             'url' => 'syd' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.02,
+            'cost' => 0.03,
         ],
     ];
 }

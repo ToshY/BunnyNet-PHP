@@ -19,6 +19,18 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -29,6 +41,26 @@ final class VideoEndpoint
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'title' => [
+                'type' => 'string',
+            ],
+            'collectionId' => [
+                'type' => 'string',
+            ],
+        ],
     ];
 
     /** @var array */
@@ -38,6 +70,18 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -46,7 +90,21 @@ final class VideoEndpoint
         'path' => 'library/%d/videos/%s',
         'headers' => [
             Header::ACCEPT_JSON
-        ]
+        ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+        ],
     ];
 
     /** @var array */
@@ -56,6 +114,18 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 
     /** @var array */
@@ -65,6 +135,35 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+        ],
+        'query' => [
+            'page' => [
+                'required' => false,
+                'type' => 'integer',
+            ],
+            'itemsPerPage' => [
+                'required' => false,
+                'type' => 'integer',
+            ],
+            'search' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'collection' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'orderBy' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+        ],
+        'body' => [],
     ];
 
     /** @var array */
@@ -73,6 +172,22 @@ final class VideoEndpoint
         'path' => 'library/%d/videos',
         'headers' => [
             Header::ACCEPT_JSON,
+        ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'title' => [
+                'type' => 'string',
+            ],
+            'collectionId' => [
+                'type' => 'string'
+            ],
         ],
     ];
 
@@ -83,15 +198,53 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [
+            'thumbnailUrl' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'body' => [],
     ];
 
     /** @var array */
-    public const FETCH_VIDEO_COLLECTION = [
+    public const FETCH_VIDEO_TO_COLLECTION = [
         'method' => 'POST',
         'path' => 'library/%d/videos/fetch',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
+        ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+        ],
+        'query' => [
+            'collectionId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+        ],
+        'body' => [
+            'required' => true,
+            'url' => [
+                'type' => 'string',
+            ],
+            'headers' => [
+                'type' => 'array'
+            ],
         ],
     ];
 
@@ -103,6 +256,26 @@ final class VideoEndpoint
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'url' => [
+                'type' => 'string',
+            ],
+            'headers' => [
+                'type' => 'array'
+            ],
+        ],
     ];
 
     /** @var array */
@@ -113,6 +286,30 @@ final class VideoEndpoint
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'srclang' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ],
+        'query' => [],
+        'body' => [
+            'required' => true,
+            'url' => [
+                'type' => 'string',
+            ],
+            'headers' => [
+                'type' => 'array'
+            ],
+        ],
     ];
 
     /** @var array */
@@ -122,5 +319,21 @@ final class VideoEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
+        'params' => [
+            'libraryId' => [
+                'required' => true,
+                'type' => 'integer',
+            ],
+            'videoId' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'srclang' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ],
+        'query' => [],
+        'body' => [],
     ];
 }

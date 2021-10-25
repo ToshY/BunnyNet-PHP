@@ -19,5 +19,17 @@ final class BrowseEndpoint
         'headers' => [
             Header::ACCEPT_ALL,
         ],
+        'params' => [
+            'storageZoneName' => [
+                'required' => true,
+                'type'  => 'string',
+            ],
+            'path' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ],
+        'query' => [],
+        'body' => [],
     ];
 }
