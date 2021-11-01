@@ -17,17 +17,15 @@ use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
 final class SecureUrl
 {
     /**
-     * @var string
-     *
      * Pull Zone (custom) hostname, including scheme:
      * e.g. `https://files-example.b-cdn.net` or `https://files.example.com`.
+     * @var string
      */
     private string $hostname;
 
     /**
-     * @var string
-     *
      * Pull Zone Url Token Authentication Key.
+     * @var string
      */
     private string $token;
 
@@ -51,7 +49,6 @@ final class SecureUrl
 
     /**
      * Generate URL with token/directory authentication.
-     *
      * @param string $file
      * @param int $expirationTime
      * @param string|null $userIp

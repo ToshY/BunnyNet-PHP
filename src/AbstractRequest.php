@@ -13,6 +13,9 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
+use ToshY\BunnyNet\Exception\InvalidBodyField;
+use ToshY\BunnyNet\Exception\InvalidPathParameterField;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterField;
 
 /**
  * Class AbstractRequest
@@ -88,6 +91,45 @@ abstract class AbstractRequest extends Guzzle
                     return ltrim($item, '/');
                 },
                 $pathCollection
+            )
+        );
+    }
+
+    /**
+     * @param array $values
+     * @param array $template
+     */
+    protected function validatePathField(array $values, array $template)
+    {
+        throw new InvalidPathParameterField(
+            sprintf(
+                'Invalid path parameter `%s` provided. Expected `%s` got `%s`.'
+            )
+        );
+    }
+
+    /**
+     * @param array $values
+     * @param array $template
+     */
+    protected function validateQueryField(array $values, array $template)
+    {
+        throw new InvalidQueryParameterField(
+            sprintf(
+                'Invalid query parameter `%s` provided. Expected `%s` got `%s`.'
+            )
+        );
+    }
+
+    /**
+     * @param array $values
+     * @param array $template
+     */
+    protected function validateBodyField(array $values, array $template)
+    {
+        throw new InvalidBodyField(
+            sprintf(
+                'Invalid body parameter `%s` provided. Expected `%s` got `%s`.'
             )
         );
     }

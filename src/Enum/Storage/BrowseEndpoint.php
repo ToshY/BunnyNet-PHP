@@ -15,19 +15,21 @@ final class BrowseEndpoint
     /** @var array */
     public const LIST_FILE_COLLECTION = [
         'method' => 'GET',
-        'path' => '%s/%s/',
+        'path' => [
+            'url' => '%s/%s/',
+            'params' => [
+                'storageZoneName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'path' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_ALL,
-        ],
-        'params' => [
-            'storageZoneName' => [
-                'required' => true,
-                'type'  => 'string',
-            ],
-            'path' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],

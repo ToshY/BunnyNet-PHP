@@ -15,19 +15,21 @@ final class VideoEndpoint
     /** @var array */
     public const GET_VIDEO = [
         'method' => 'GET',
-        'path' => 'library/%d/videos/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],
@@ -36,24 +38,25 @@ final class VideoEndpoint
     /** @var array */
     public const UPDATE_VIDEO = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'title' => [
                 'type' => 'string',
             ],
@@ -66,19 +69,21 @@ final class VideoEndpoint
     /** @var array */
     public const DELETE_VIDEO = [
         'method' => 'DELETE',
-        'path' => 'library/%d/videos/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],
@@ -87,42 +92,45 @@ final class VideoEndpoint
     /** @var array */
     public const UPLOAD_VIDEO = [
         'method' => 'PUT',
-        'path' => 'library/%d/videos/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
         ],
     ];
 
     /** @var array */
     public const REENCODE_VIDEO = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s/reencode',
+        'path' => [
+            'url' => 'library/%d/videos/%s/reencode',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],
@@ -131,24 +139,26 @@ final class VideoEndpoint
     /** @var array */
     public const LIST_VIDEOS = [
         'method' => 'GET',
-        'path' => 'library/%d/videos',
+        'path' => [
+            'url' => 'library/%d/videos',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
         ],
         'query' => [
             'page' => [
                 'required' => false,
-                'type' => 'integer',
+                'type' => 'int',
             ],
             'itemsPerPage' => [
                 'required' => false,
-                'type' => 'integer',
+                'type' => 'int',
             ],
             'search' => [
                 'required' => false,
@@ -169,19 +179,20 @@ final class VideoEndpoint
     /** @var array */
     public const CREATE_VIDEO = [
         'method' => 'POST',
-        'path' => 'library/%d/videos',
+        'path' => [
+            'url' => 'library/%d/videos',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'title' => [
                 'type' => 'string',
             ],
@@ -194,19 +205,21 @@ final class VideoEndpoint
     /** @var array */
     public const SET_THUMBNAIL = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s/thumbnail',
+        'path' => [
+            'url' => 'library/%d/videos/%s/thumbnail',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [
             'thumbnailUrl' => [
@@ -220,16 +233,18 @@ final class VideoEndpoint
     /** @var array */
     public const FETCH_VIDEO_TO_COLLECTION = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/fetch',
+        'path' => [
+            'url' => 'library/%d/videos/fetch',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
         ],
         'query' => [
             'collectionId' => [
@@ -238,12 +253,14 @@ final class VideoEndpoint
             ],
         ],
         'body' => [
-            'required' => true,
             'url' => [
                 'type' => 'string',
             ],
             'headers' => [
-                'type' => 'array'
+                'type' => 'array',
+                'options' => [
+                    'type' => 'array',
+                ],
             ],
         ],
     ];
@@ -251,29 +268,33 @@ final class VideoEndpoint
     /** @var array */
     public const FETCH_VIDEO_ID = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s/fetch',
+        'path' => [
+            'url' => 'library/%d/videos/%s/fetch',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'url' => [
                 'type' => 'string',
             ],
             'headers' => [
-                'type' => 'array'
+                'type' => 'array',
+                'options' => [
+                    'type' => 'array',
+                ],
             ],
         ],
     ];
@@ -281,33 +302,37 @@ final class VideoEndpoint
     /** @var array */
     public const ADD_CAPTION = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s/captions/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s/captions/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'srclang' => [
+                    'required' => true,
+                    'type' => 'string',
+                ]
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'srclang' => [
-                'required' => true,
-                'type' => 'string',
-            ]
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'url' => [
                 'type' => 'string',
             ],
             'headers' => [
-                'type' => 'array'
+                'type' => 'array',
+                'options' => [
+                    'type' => 'array',
+                ],
             ],
         ],
     ];
@@ -315,23 +340,25 @@ final class VideoEndpoint
     /** @var array */
     public const DELETE_CAPTION = [
         'method' => 'POST',
-        'path' => 'library/%d/videos/%s/captions/%s',
+        'path' => [
+            'url' => 'library/%d/videos/%s/captions/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'videoId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'srclang' => [
+                    'required' => true,
+                    'type' => 'string',
+                ]
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'videoId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'srclang' => [
-                'required' => true,
-                'type' => 'string',
-            ]
         ],
         'query' => [],
         'body' => [],

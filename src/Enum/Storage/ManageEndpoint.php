@@ -15,23 +15,25 @@ final class ManageEndpoint
     /** @var array */
     public const DOWNLOAD_FILE = [
         'method' => 'GET',
-        'path' => '%s/%s/%s',
+        'path' => [
+            'url' => '%s/%s/%s',
+            'params' => [
+                'storageZoneName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'path' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'fileName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ]
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_ALL,
-        ],
-        'params' => [
-            'storageZoneName' => [
-                'required' => true,
-                'type'  => 'string',
-            ],
-            'path' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'fileName' => [
-                'required' => true,
-                'type' => 'string',
-            ]
         ],
         'query' => [],
         'body' => [],
@@ -40,50 +42,53 @@ final class ManageEndpoint
     /** @var array */
     public const UPLOAD_FILE = [
         'method' => 'PUT',
-        'path' => '%s/%s/%s',
+        'path' => [
+            'url' => '%s/%s/%s',
+            'params' => [
+                'storageZoneName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'path' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'fileName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ]
+            ],
+        ],
         'headers' => [
             Header::CONTENT_TYPE_OCTET_STREAM,
         ],
-        'params' => [
-            'storageZoneName' => [
-                'required' => true,
-                'type'  => 'string',
-            ],
-            'path' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'fileName' => [
-                'required' => true,
-                'type' => 'string',
-            ]
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
         ],
     ];
 
     /** @var array */
     public const DELETE_FILE = [
         'method' => 'DELETE',
-        'path' => '%s/%s/%s',
+        'path' => [
+            'url' => '%s/%s/%s',
+            'params' => [
+                'storageZoneName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'path' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+                'fileName' => [
+                    'required' => true,
+                    'type' => 'string',
+                ]
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'storageZoneName' => [
-                'required' => true,
-                'type'  => 'string',
-            ],
-            'path' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'fileName' => [
-                'required' => true,
-                'type' => 'string',
-            ]
         ],
         'query' => [],
         'body' => [],

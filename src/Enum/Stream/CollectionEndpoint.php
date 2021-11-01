@@ -15,19 +15,21 @@ final class CollectionEndpoint
     /** @var array */
     public const GET_COLLECTION = [
         'method' => 'GET',
-        'path' => 'library/%d/collections/%s',
+        'path' => [
+            'url' => 'library/%d/collections/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'collectionId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'collectionId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],
@@ -36,24 +38,25 @@ final class CollectionEndpoint
     /** @var array */
     public const UPDATE_COLLECTION = [
         'method' => 'POST',
-        'path' => 'library/%d/collections/%s',
+        'path' => [
+            'url' => 'library/%d/collections/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'collectionId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'collectionId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'name' => [
                 'type' => 'string',
             ]
@@ -63,19 +66,21 @@ final class CollectionEndpoint
     /** @var array */
     public const DELETE_COLLECTION = [
         'method' => 'DELETE',
-        'path' => 'library/%d/collections/%s',
+        'path' => [
+            'url' => 'library/%d/collections/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+                'collectionId' => [
+                    'required' => true,
+                    'type' => 'string',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-            'collectionId' => [
-                'required' => true,
-                'type' => 'string',
-            ],
         ],
         'query' => [],
         'body' => [],
@@ -84,24 +89,26 @@ final class CollectionEndpoint
     /** @var array */
     public const GET_COLLECTION_LIST = [
         'method' => 'GET',
-        'path' => 'library/%d/collections',
+        'path' => [
+            'url' => 'library/%d/collections',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON
-        ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
         ],
         'query' => [
             'page' => [
                 'required' => false,
-                'type' => 'integer',
+                'type' => 'int',
             ],
             'itemsPerPage' => [
                 'required' => false,
-                'type' => 'integer',
+                'type' => 'int',
             ],
             'search' => [
                 'required' => false,
@@ -118,20 +125,21 @@ final class CollectionEndpoint
     /** @var array */
     public const CREATE_COLLECTION = [
         'method' => 'POST',
-        'path' => 'library/%d/collections/%s',
+        'path' => [
+            'url' => 'library/%d/collections/%s',
+            'params' => [
+                'libraryId' => [
+                    'required' => true,
+                    'type' => 'int',
+                ],
+            ],
+        ],
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
         ],
-        'params' => [
-            'libraryId' => [
-                'required' => true,
-                'type' => 'integer',
-            ],
-        ],
         'query' => [],
         'body' => [
-            'required' => true,
             'name' => [
                 'type' => 'string',
             ],
