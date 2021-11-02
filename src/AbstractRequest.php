@@ -8,17 +8,13 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use Exception;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
-use ToshY\BunnyNet\Exception\InvalidBodyField;
 use ToshY\BunnyNet\Exception\InvalidBodyParameterType;
-use ToshY\BunnyNet\Exception\InvalidPathParameterField;
-use ToshY\BunnyNet\Exception\InvalidPathParameterType;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterField;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirement;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterType;
 
 /**
@@ -27,37 +23,58 @@ use ToshY\BunnyNet\Exception\InvalidQueryParameterType;
 abstract class AbstractRequest extends Guzzle
 {
     /** @var string */
+    protected const SCHEME = 'https';
+
+    /** @var string */
     protected string $apiKey;
 
+    /** @var string */
+    protected string $hostRequest;
+
     /**
-     * @param string $method
-     * @param string $base
-     * @param string $path
+     * AbstractRequest constructor.
+     * @param string $hostRequest
+     */
+    protected function __construct(string $hostRequest)
+    {
+        parent::__construct();
+        $this->hostRequest = $hostRequest;
+    }
+
+    /**
+     * @return string
+     */
+    private function getHostRequest(): string
+    {
+        return $this->hostRequest;
+    }
+
+    /**
+     * @param array $endpoint
+     * @param array $pathParameters
      * @param array $query
-     * @param array $headers
      * @param null $body
      * @return StreamInterface
      * @throws GuzzleException
      */
     protected function createRequest(
-        string $method,
-        string $base,
-        string $path,
+        array $endpoint,
+        array $pathParameters = [],
         array $query = [],
-        array $headers = [],
         $body = null
     ): StreamInterface {
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
                 'headers' => array_merge(
-                    $headers,
+                    $endpoint['headers'],
                     $this->getAccessKeyHeader()
                 )
             ]
         );
 
-        $base = parse_url($base);
+        $base = parse_url($this->getHostRequest());
+        $path = $this->createUrlPath($endpoint['path'], $pathParameters);
         $query = empty($query) !== false ?
             sprintf(
                 '?%s',
@@ -66,14 +83,15 @@ abstract class AbstractRequest extends Guzzle
             : null;
 
         $url = sprintf(
-            'https://%s%s%s',
-            $base['host'],
+            '%s://%s%s%s',
+            self::SCHEME,
+            $base,
             $path,
             $query
         );
 
         $response = parent::request(
-            $method,
+            $endpoint['method'],
             $url,
             $options
         );
@@ -97,28 +115,6 @@ abstract class AbstractRequest extends Guzzle
                 $pathCollection
             )
         );
-    }
-    
-    /**
-     * @param array $values
-     * @param array $template
-     * @return array
-     * @throws InvalidQueryParameterType
-     */
-    protected function validateQueryField(array $values, array $template)
-    {
-        return $this->getValidInputFields($values, $template, InvalidQueryParameterType::class);
-    }
-
-    /**
-     * @param array $values
-     * @param array $template
-     * @return array
-     * @throws InvalidBodyParameterType
-     */
-    protected function validateBodyField(array $values, array $template): array
-    {
-        return $this->getValidInputFields($values, $template, InvalidBodyParameterType::class);
     }
 
     /**
@@ -168,11 +164,11 @@ abstract class AbstractRequest extends Guzzle
     /**
      * @param array $values
      * @param array $template
-     * @param $exception
      * @return array
-     * @throws InvalidPathParameterType|InvalidQueryParameterType|InvalidBodyParameterType
+     * @throws InvalidQueryParameterRequirement
+     * @throws InvalidQueryParameterType
      */
-    private function getValidInputFields(array $values, array $template, $exception): array
+    protected function validateQueryField(array $values, array $template): array
     {
         $intersectTemplateKeys = array_intersect_key($template, $values);
         $intersectValues = array_intersect_key($values, $template);
@@ -180,11 +176,12 @@ abstract class AbstractRequest extends Guzzle
             $parameterValue = $intersectValues[$key];
             $parameterValueType = gettype($parameterValue);
 
+            // Field type check
             $typeCheck = sprintf('is_%s', $templateValue['type']);
             if ($typeCheck($parameterValue) === false) {
-                throw new $exception(
+                throw new InvalidQueryParameterType(
                     sprintf(
-                        'Invalid parameter type provided for `%s`. Expected `%s` got `%s`.',
+                        'Invalid query parameter type provided for `%s`. Expected `%s` got `%s`.',
                         $key,
                         $templateValue['type'],
                         $parameterValueType
@@ -192,23 +189,82 @@ abstract class AbstractRequest extends Guzzle
                 );
             }
 
-            if (is_array($parameterValue) === true) {
-                foreach ($parameterValue as $subValue) {
-                    $traverseParameterValue = $subValue;
-                    if (is_array($traverseParameterValue) === false) {
-                        $traverseParameterValue = [$key => $subValue];
-                    }
-
-                    $traverseTemplateValue = $templateValue['options'];
-                    if (isset($templateValue['options']['type']) === true) {
-                        $traverseTemplateValue = [$key => $templateValue['options']];
-                    }
-
-                    $this->getValidInputFields($traverseParameterValue, $traverseTemplateValue, $exception);
+            // Check required fields
+            if (isset($templateValue['required']) === true) {
+                if (
+                    $templateValue['required'] === true
+                    && empty($parameterValue) === true
+                ) {
+                    throw new InvalidQueryParameterRequirement(
+                        sprintf(
+                            'Expected required parameter `%s` was not provided.',
+                            $key
+                        )
+                    );
                 }
             }
+
+            $this->recurseValidationOnArray(__FUNCTION__, $key, $templateValue, $parameterValue);
         }
 
         return $intersectValues;
+    }
+
+    /**
+     * @param array $values
+     * @param array $template
+     * @return array
+     * @throws InvalidBodyParameterType
+     */
+    protected function validateBodyField(array $values, array $template): array
+    {
+        $intersectTemplateKeys = array_intersect_key($template, $values);
+        $intersectValues = array_intersect_key($values, $template);
+        foreach ($intersectTemplateKeys as $key => $templateValue) {
+            $parameterValue = $intersectValues[$key];
+            $parameterValueType = gettype($parameterValue);
+
+            // Field type check
+            $typeCheck = sprintf('is_%s', $templateValue['type']);
+            if ($typeCheck($parameterValue) === false) {
+                throw new InvalidBodyParameterType(
+                    sprintf(
+                        'Invalid body parameter type provided for `%s`. Expected `%s` got `%s`.',
+                        $key,
+                        $templateValue['type'],
+                        $parameterValueType
+                    )
+                );
+            }
+
+            $this->recurseValidationOnArray(__FUNCTION__, $key, $templateValue, $parameterValue);
+        }
+
+        return $intersectValues;
+    }
+
+    /**
+     * @param string $methodName
+     * @param string $key
+     * @param array $templateValue
+     * @param $parameterValue
+     */
+    private function recurseValidationOnArray(string $methodName, string $key, array $templateValue, $parameterValue)
+    {
+        if (is_array($parameterValue) === true) {
+            foreach ($parameterValue as $subValue) {
+                $traverseParameterValue = $subValue;
+                if (is_array($traverseParameterValue) === false) {
+                    $traverseParameterValue = [$key => $subValue];
+                }
+
+                $traverseTemplateValue = $templateValue['options'];
+                if (isset($templateValue['options']['type']) === true) {
+                    $traverseTemplateValue = [$key => $templateValue['options']];
+                }
+
+                $this->$methodName($traverseParameterValue, $traverseTemplateValue);
+            }
+        }
     }
 }

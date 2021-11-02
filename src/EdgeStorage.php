@@ -38,7 +38,7 @@ final class EdgeStorage extends AbstractRequest
         $this->apiKey = $apiKey;
         $this->setHost($hostCode);
 
-        parent::__construct();
+        parent::__construct($this->getHostUrl());
     }
 
     /**
@@ -105,14 +105,10 @@ final class EdgeStorage extends AbstractRequest
     public function downloadFile(string $storageZoneName, string $path, string $fileName): StreamInterface
     {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path, $fileName]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path, $fileName]
         );
     }
 
@@ -122,8 +118,8 @@ final class EdgeStorage extends AbstractRequest
      * @param string $fileName
      * @param string $localFilePath
      * @return StreamInterface
-     * @throws GuzzleException
      * @throws FileDoesNotExist
+     * @throws GuzzleException
      */
     public function uploadFile(
         string $storageZoneName,
@@ -132,15 +128,12 @@ final class EdgeStorage extends AbstractRequest
         string $localFilePath
     ): StreamInterface {
         $endpoint = ManageEndpoint::UPLOAD_FILE;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path, $fileName]);
         $body = $this->openFileStream($localFilePath);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
+            $endpoint,
+            [$storageZoneName, $path, $fileName],
             [],
-            $endpoint['headers'],
             $body
         );
     }
@@ -155,14 +148,10 @@ final class EdgeStorage extends AbstractRequest
     public function deleteFile(string $storageZoneName, string $path, string $fileName): StreamInterface
     {
         $endpoint = ManageEndpoint::DELETE_FILE;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path, $fileName]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path, $fileName],
         );
     }
 
@@ -175,14 +164,10 @@ final class EdgeStorage extends AbstractRequest
     public function listFileCollection(string $storageZoneName, string $path): StreamInterface
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path],
         );
     }
 }

@@ -21,4 +21,7 @@ final class Host
 
     /** @var string Video stream endpoint */
     public const STREAM_ENDPOINT = 'video.bunnycdn.com';
+
+    /** @var string Logging endpoint */
+    public const LOG_ENDPOINT = 'logging.bunnycdn.com';
 }
