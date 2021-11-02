@@ -18,10 +18,7 @@ final class StorageEndpoint
     /** @var array */
     public const LIST_STORAGE_ZONES = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'storagezone',
-            'params' => [],
-        ],
+        'path' => 'storagezone',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -41,10 +38,7 @@ final class StorageEndpoint
     /** @var array */
     public const ADD_STORAGE_ZONE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone',
-            'params' => [],
-        ],
+        'path' => 'storagezone',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -72,15 +66,7 @@ final class StorageEndpoint
     /** @var array */
     public const GET_STORAGE_ZONE = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'storagezone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'storagezone/%d',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -91,15 +77,7 @@ final class StorageEndpoint
     /** @var array */
     public const UPDATE_STORAGE_ZONE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'storagezone/%d',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -127,15 +105,7 @@ final class StorageEndpoint
     /** @var array */
     public const DELETE_STORAGE_ZONE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'storagezone/%d',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -144,10 +114,7 @@ final class StorageEndpoint
     /** @var array */
     public const RESET_PASSWORD_QUERY = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone/resetPassword',
-            'params' => [],
-        ],
+        'path' => 'storagezone/resetPassword',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -156,15 +123,7 @@ final class StorageEndpoint
     /** @var array */
     public const RESET_PASSWORD_PATH = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone/%d/resetPassword',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'storagezone/%d/resetPassword',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -173,15 +132,7 @@ final class StorageEndpoint
     /** @var array */
     public const RESET_READONLY_PASSWORD = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'storagezone/resetReadOnlyPassword',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'storagezone/resetReadOnlyPassword',
         'headers' => [],
         'query' => [],
         'body' => [],

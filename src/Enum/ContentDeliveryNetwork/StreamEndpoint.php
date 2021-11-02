@@ -18,10 +18,7 @@ final class StreamEndpoint
     /** @var array */
     public const LIST_VIDEO_LIBRARIES = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'videolibrary',
-            'params' => [],
-        ],
+        'path' => 'videolibrary',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -41,10 +38,7 @@ final class StreamEndpoint
     /** @var array */
     public const ADD_VIDEO_LIBRARY = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary',
-            'params' => [],
-        ],
+        'path' => 'videolibrary',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -69,15 +63,7 @@ final class StreamEndpoint
     /** @var array */
     public const GET_VIDEO_LIBRARY = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'videolibrary/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -88,15 +74,7 @@ final class StreamEndpoint
     /** @var array */
     public const UPDATE_VIDEO_LIBRARY = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -202,15 +180,7 @@ final class StreamEndpoint
     /** @var array */
     public const DELETE_VIDEO_LIBRARY = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'videolibrary/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -221,10 +191,7 @@ final class StreamEndpoint
     /** @var array */
     public const RESET_PASSWORD_QUERY = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/resetApiKey',
-            'params' => [],
-        ],
+        'path' => 'videolibrary/resetApiKey',
         'headers' => [],
         'query' => [
             'id' => [
@@ -238,15 +205,7 @@ final class StreamEndpoint
     /** @var array */
     public const RESET_PASSWORD_PATH = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d/resetApiKey',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/resetApiKey',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -255,15 +214,7 @@ final class StreamEndpoint
     /** @var array */
     public const ADD_WATERMARK = [
         'method' => 'PUT',
-        'path' => [
-            'url' => 'videolibrary/%d/watermark',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/watermark',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -274,15 +225,7 @@ final class StreamEndpoint
     /** @var array */
     public const DELETE_WATERMARK = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'videolibrary/%d/watermark',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/watermark',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -293,15 +236,7 @@ final class StreamEndpoint
     /** @var array */
     public const ADD_ALLOWED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d/addAllowedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/addAllowedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -317,15 +252,7 @@ final class StreamEndpoint
     /** @var array */
     public const REMOVE_ALLOWED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d/removeAllowedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/removeAllowedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -341,15 +268,7 @@ final class StreamEndpoint
     /** @var array */
     public const ADD_BLOCKED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d/addBlockedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/addBlockedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -365,15 +284,7 @@ final class StreamEndpoint
     /** @var array */
     public const REMOVE_BLOCKED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'videolibrary/%d/removeBlockedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'videolibrary/%d/removeBlockedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,

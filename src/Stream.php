@@ -43,7 +43,7 @@ final class Stream extends AbstractRequest
     public function getCollection(int $libraryId, string $collectionId): StreamInterface
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $collectionId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $collectionId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -64,7 +64,7 @@ final class Stream extends AbstractRequest
     public function updateCollection(int $libraryId, string $collectionId, array $body): StreamInterface
     {
         $endpoint = CollectionEndpoint::UPDATE_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $collectionId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $collectionId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -85,7 +85,7 @@ final class Stream extends AbstractRequest
     public function createCollection(int $libraryId, array $body): StreamInterface
     {
         $endpoint = CollectionEndpoint::CREATE_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -106,7 +106,7 @@ final class Stream extends AbstractRequest
     public function deleteCollection(int $libraryId, string $collectionId): StreamInterface
     {
         $endpoint = CollectionEndpoint::DELETE_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $collectionId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $collectionId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -126,7 +126,7 @@ final class Stream extends AbstractRequest
     public function getCollectionList(int $libraryId, array $query): StreamInterface
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION_LIST;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -146,7 +146,7 @@ final class Stream extends AbstractRequest
     public function getVideo(int $libraryId, string $videoId): StreamInterface
     {
         $endpoint = VideoEndpoint::GET_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -167,7 +167,7 @@ final class Stream extends AbstractRequest
     public function updateVideo(int $libraryId, string $videoId, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::UPDATE_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -188,7 +188,7 @@ final class Stream extends AbstractRequest
     public function deleteVideo(int $libraryId, string $videoId): StreamInterface
     {
         $endpoint = VideoEndpoint::DELETE_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -210,7 +210,7 @@ final class Stream extends AbstractRequest
     public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): StreamInterface
     {
         $endpoint = VideoEndpoint::UPLOAD_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
         $body = $this->openFileStream($localFilePath);
 
         return $this->createRequest(
@@ -232,7 +232,7 @@ final class Stream extends AbstractRequest
     public function reencodeVideo(int $libraryId, string $videoId): StreamInterface
     {
         $endpoint = VideoEndpoint::REENCODE_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -252,7 +252,7 @@ final class Stream extends AbstractRequest
     public function listVideos(int $libraryId, array $query): StreamInterface
     {
         $endpoint = VideoEndpoint::LIST_VIDEOS;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -272,7 +272,7 @@ final class Stream extends AbstractRequest
     public function createVideo(int $libraryId, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::CREATE_VIDEO;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -294,7 +294,7 @@ final class Stream extends AbstractRequest
     public function setThumbnail(int $libraryId, string $videoId, array $query): StreamInterface
     {
         $endpoint = VideoEndpoint::SET_THUMBNAIL;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -315,7 +315,7 @@ final class Stream extends AbstractRequest
     public function fetchVideoToCollection(int $libraryId, array $query, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_TO_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -337,7 +337,7 @@ final class Stream extends AbstractRequest
     public function fetchVideoById(int $libraryId, string $videoId, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_ID;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -360,7 +360,7 @@ final class Stream extends AbstractRequest
     public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::ADD_CAPTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId, $sourceLanguage]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId, $sourceLanguage]);
 
         return $this->createRequest(
             $endpoint['method'],
@@ -383,7 +383,7 @@ final class Stream extends AbstractRequest
     public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): StreamInterface
     {
         $endpoint = VideoEndpoint::DELETE_CAPTION;
-        $urlPath = $this->createUrlPath($endpoint['path']['url'], [$libraryId, $videoId, $sourceLanguage]);
+        $urlPath = $this->createUrlPath($endpoint['path'], [$libraryId, $videoId, $sourceLanguage]);
 
         return $this->createRequest(
             $endpoint['method'],

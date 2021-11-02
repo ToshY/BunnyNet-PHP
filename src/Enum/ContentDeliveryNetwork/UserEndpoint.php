@@ -18,10 +18,7 @@ final class UserEndpoint
     /** @var array */
     public const GET_USER_DETAILS = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'user',
-            'params' => [],
-        ],
+        'path' => 'user',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -32,10 +29,7 @@ final class UserEndpoint
     /** @var array */
     public const UPDATE_USER_DETAILS = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'user',
-            'params' => [],
-        ],
+        'path' => 'user',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,

@@ -18,10 +18,7 @@ final class PurgeEndpoint
     /** @var array */
     public const PURGE_URL = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'purge',
-            'params' => [],
-        ],
+        'path' => 'purge',
         'headers' => [],
         'query' => [
             'url' => [
@@ -35,10 +32,7 @@ final class PurgeEndpoint
     /** @var array */
     public const PURGE_URL_HEADERS = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'purge',
-            'params' => [],
-        ],
+        'path' => 'purge',
         'headers' => [
             Header::ACCEPT_JSON,
         ],

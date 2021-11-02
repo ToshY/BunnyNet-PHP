@@ -18,10 +18,7 @@ final class BillingEndpoint
     /** @var array */
     public const GET_BILLING_DETAILS = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'billing',
-            'params' => [],
-        ],
+        'path' => 'billing',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -32,10 +29,7 @@ final class BillingEndpoint
     /** @var array */
     public const GET_BILLING_SUMMARY = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'billing/summary',
-            'params' => [],
-        ],
+        'path' => 'billing/summary',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -46,10 +40,7 @@ final class BillingEndpoint
     /** @var array */
     public const APPLY_PROMO_CODE = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'billing/applycode',
-            'params' => [],
-        ],
+        'path' => 'billing/applycode',
         'headers' => [
             Header::ACCEPT_JSON,
         ],

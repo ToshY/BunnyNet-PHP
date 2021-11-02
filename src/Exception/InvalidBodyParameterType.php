@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class InvalidPathParameterField
+ * Class InvalidBodyType
  */
-final class InvalidPathParameterField extends Exception
+final class InvalidBodyParameterType extends Exception
 {
     /**
-     * InvalidPathParameterField constructor.
+     * InvalidBodyType constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

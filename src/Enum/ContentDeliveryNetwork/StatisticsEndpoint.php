@@ -18,10 +18,7 @@ final class StatisticsEndpoint
     /** @var array */
     public const GET_STATISTICS = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'statistics',
-            'params' => [],
-        ],
+        'path' => 'statistics',
         'headers' => [
             Header::ACCEPT_JSON,
         ],

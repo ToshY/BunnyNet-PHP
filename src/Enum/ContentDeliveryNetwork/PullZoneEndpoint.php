@@ -18,10 +18,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const LIST_PULL_ZONES = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'pullzone',
-            'params' => [],
-        ],
+        'path' => 'pullzone',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -41,9 +38,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_PULL_ZONE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone',
-        ],
+        'path' => 'pullzone',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -68,15 +63,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const GET_PULL_ZONE = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'pullzone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'pullzone/%d',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -88,15 +75,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const UPDATE_PULL_ZONE = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'pullzone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'pullzone/%d',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -351,15 +330,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const DELETE_PULL_ZONE = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'pullzone/%d',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ]
-            ],
-        ],
+        'path' => 'pullzone/%d',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -368,19 +339,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const DELETE_EDGE_RULE = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'pullzone/%d/edgerules/%s',
-            'params' => [
-                'pullZoneId' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-                'edgeRuleId' => [
-                    'required' => true,
-                    'type' => 'string',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/edgerules/%s',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -389,15 +348,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_UPDATE_EDGE_RULE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/edgerules/addOrUpdate',
-            'params' => [
-                'pullZoneId' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/edgerules/addOrUpdate',
         'headers' => [
             Header::CONTENT_TYPE_JSON,
         ],
@@ -450,19 +401,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const SET_EDGE_RULE_ENABLED = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/edgerules/%s/setEdgeRuleEnabled',
-            'params' => [
-                'pullZoneId' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-                'edgeRuleId' => [
-                    'required' => true,
-                    'type' => 'string',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/edgerules/%s/setEdgeRuleEnabled',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -481,15 +420,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const GET_STATISTICS = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'pullzone/%d/waf/statistics',
-            'params' => [
-                'pullZoneId' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/waf/statistics',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -513,9 +444,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const LOAD_FREE_CERTIFICATE = [
         'method' => 'GET',
-        'path' => [
-            'url' => 'pullzone/loadFreeCertificate',
-        ],
+        'path' => 'pullzone/loadFreeCertificate',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -531,15 +460,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const PURGE_CACHE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/purgeCache',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/purgeCache',
         'headers' => [],
         'query' => [],
         'body' => [],
@@ -548,15 +469,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_CUSTOM_CERTIFICATE = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/addCertificate',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/addCertificate',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -578,15 +491,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const REMOVE_CERTIFICATE = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'pullzone/%d/removeCertificate',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/removeCertificate',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -602,15 +507,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_CUSTOM_HOSTNAME = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/addHostname',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/addHostname',
         'headers' => [
             Header::CONTENT_TYPE_JSON,
         ],
@@ -625,15 +522,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const REMOVE_CUSTOM_HOSTNAME = [
         'method' => 'DELETE',
-        'path' => [
-            'url' => 'pullzone/%d/removeHostname',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/removeHostname',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -649,15 +538,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const SET_FORCE_SSL = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/setForceSSL',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/setForceSSL',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -676,15 +557,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const RESET_TOKEN_KEY = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/resetSecurityKey',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/resetSecurityKey',
         'headers' => [
             Header::ACCEPT_JSON,
         ],
@@ -695,15 +568,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_ALLOWED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/addAllowedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/addAllowedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -719,15 +584,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const REMOVE_ALLOWED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/removeAllowedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/removeAllowedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -743,15 +600,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_BLOCKED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/addBlockedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/addBlockedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -767,15 +616,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const REMOVE_BLOCKED_REFERER = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/removeBlockedReferrer',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/removeBlockedReferrer',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -791,15 +632,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const ADD_BLOCKED_IP = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/addBlockedIp',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/addBlockedIp',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
@@ -815,15 +648,7 @@ final class PullZoneEndpoint
     /** @var array */
     public const REMOVE_BLOCKED_IP = [
         'method' => 'POST',
-        'path' => [
-            'url' => 'pullzone/%d/removeBlockedIp',
-            'params' => [
-                'id' => [
-                    'required' => true,
-                    'type' => 'int',
-                ],
-            ],
-        ],
+        'path' => 'pullzone/%d/removeBlockedIp',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,

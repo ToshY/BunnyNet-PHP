@@ -8,14 +8,18 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
+use Exception;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
 use ToshY\BunnyNet\Exception\InvalidBodyField;
+use ToshY\BunnyNet\Exception\InvalidBodyParameterType;
 use ToshY\BunnyNet\Exception\InvalidPathParameterField;
+use ToshY\BunnyNet\Exception\InvalidPathParameterType;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterField;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterType;
 
 /**
  * Class AbstractRequest
@@ -94,44 +98,27 @@ abstract class AbstractRequest extends Guzzle
             )
         );
     }
-
+    
     /**
      * @param array $values
      * @param array $template
-     */
-    protected function validatePathField(array $values, array $template)
-    {
-        throw new InvalidPathParameterField(
-            sprintf(
-                'Invalid path parameter `%s` provided. Expected `%s` got `%s`.'
-            )
-        );
-    }
-
-    /**
-     * @param array $values
-     * @param array $template
+     * @return array
+     * @throws InvalidQueryParameterType
      */
     protected function validateQueryField(array $values, array $template)
     {
-        throw new InvalidQueryParameterField(
-            sprintf(
-                'Invalid query parameter `%s` provided. Expected `%s` got `%s`.'
-            )
-        );
+        return $this->getValidInputFields($values, $template, InvalidQueryParameterType::class);
     }
 
     /**
      * @param array $values
      * @param array $template
+     * @return array
+     * @throws InvalidBodyParameterType
      */
-    protected function validateBodyField(array $values, array $template)
+    protected function validateBodyField(array $values, array $template): array
     {
-        throw new InvalidBodyField(
-            sprintf(
-                'Invalid body parameter `%s` provided. Expected `%s` got `%s`.'
-            )
-        );
+        return $this->getValidInputFields($values, $template, InvalidBodyParameterType::class);
     }
 
     /**
@@ -143,7 +130,9 @@ abstract class AbstractRequest extends Guzzle
     {
         $fileStream = fopen($filePath, 'r');
         if ($fileStream === false) {
-            throw new FileDoesNotExist(sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath));
+            throw new FileDoesNotExist(
+                sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath)
+            );
         }
 
         return $fileStream;
@@ -174,5 +163,52 @@ abstract class AbstractRequest extends Guzzle
             default:
                 return $body;
         }
+    }
+
+    /**
+     * @param array $values
+     * @param array $template
+     * @param $exception
+     * @return array
+     * @throws InvalidPathParameterType|InvalidQueryParameterType|InvalidBodyParameterType
+     */
+    private function getValidInputFields(array $values, array $template, $exception): array
+    {
+        $intersectTemplateKeys = array_intersect_key($template, $values);
+        $intersectValues = array_intersect_key($values, $template);
+        foreach ($intersectTemplateKeys as $key => $templateValue) {
+            $parameterValue = $intersectValues[$key];
+            $parameterValueType = gettype($parameterValue);
+
+            $typeCheck = sprintf('is_%s', $templateValue['type']);
+            if ($typeCheck($parameterValue) === false) {
+                throw new $exception(
+                    sprintf(
+                        'Invalid parameter type provided for `%s`. Expected `%s` got `%s`.',
+                        $key,
+                        $templateValue['type'],
+                        $parameterValueType
+                    )
+                );
+            }
+
+            if (is_array($parameterValue) === true) {
+                foreach ($parameterValue as $subValue) {
+                    $traverseParameterValue = $subValue;
+                    if (is_array($traverseParameterValue) === false) {
+                        $traverseParameterValue = [$key => $subValue];
+                    }
+
+                    $traverseTemplateValue = $templateValue['options'];
+                    if (isset($templateValue['options']['type']) === true) {
+                        $traverseTemplateValue = [$key => $templateValue['options']];
+                    }
+
+                    $this->getValidInputFields($traverseParameterValue, $traverseTemplateValue, $exception);
+                }
+            }
+        }
+
+        return $intersectValues;
     }
 }
