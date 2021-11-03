@@ -12,12 +12,13 @@ use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
 use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
-use ToshY\BunnyNet\Enum\Storage\StorageRegion;
+use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
 use ToshY\BunnyNet\Exception\RegionDoesNotExist;
 
 /**
  * Class EdgeStorage
+ * @link https://docs.bunny.net/reference/storage-api
  */
 final class EdgeStorage extends AbstractRequest
 {
@@ -57,7 +58,7 @@ final class EdgeStorage extends AbstractRequest
     public function setHost(string $hostCode): EdgeStorage
     {
         $upperCaseHostCode = strtoupper($hostCode);
-        if (array_key_exists($upperCaseHostCode, StorageRegion::LOCATION) !== true) {
+        if (array_key_exists($upperCaseHostCode, Region::STORAGE_STANDARD) !== true) {
             throw new RegionDoesNotExist(
                 sprintf(
                     'The region abbreviation `%s` is not a valid primary storage region.'
@@ -67,7 +68,7 @@ final class EdgeStorage extends AbstractRequest
             );
         }
 
-        $this->host = StorageRegion::LOCATION[$upperCaseHostCode];
+        $this->host = Region::STORAGE_STANDARD[$upperCaseHostCode];
         return $this;
     }
 

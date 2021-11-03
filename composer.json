@@ -1,5 +1,5 @@
 {
-  "name": "toshy/bunnynet",
+  "name": "toshy/bunnynet-php",
   "description": "BunnyNet API client for PHP",
   "keywords": ["Bunny.net", "BunnyCDN", "BunnyWay", "ToshY"],
   "type": "library",

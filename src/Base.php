@@ -18,8 +18,9 @@ use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
 
 /**
  * Class ContentDeliveryNetwork
+ * @link https://docs.bunny.net/reference/bunnynet-api-overview
  */
-class ContentDeliveryNetwork extends AbstractRequest
+class Base extends AbstractRequest
 {
     /** @var string Account API key */
     private string $accountApiKey;
@@ -47,10 +48,10 @@ class ContentDeliveryNetwork extends AbstractRequest
 
     /**
      * @param string $key
-     * @return ContentDeliveryNetwork
+     * @return Base
      * @throws KeyFormatNotSupported
      */
-    public function setAccountApiKey(string $key): ContentDeliveryNetwork
+    public function setAccountApiKey(string $key): Base
     {
         if (preg_match(UuidType::UUID_72, $key) !== 1) {
             throw new KeyFormatNotSupported(
@@ -131,7 +132,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addPullZone(array $body)
+    public function addPullZone(array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_PULL_ZONE;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -149,7 +150,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @return StreamInterface
      * @throws GuzzleException
      */
-    public function getPullZone(int $id)
+    public function getPullZone(int $id): StreamInterface
     {
         $endpoint = PullZoneEndpoint::GET_PULL_ZONE;
 
@@ -166,7 +167,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function updatePullZone(int $id, array $body)
+    public function updatePullZone(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::UPDATE_PULL_ZONE;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -184,7 +185,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @return StreamInterface
      * @throws GuzzleException
      */
-    public function deletePullZone(int $id)
+    public function deletePullZone(int $id): StreamInterface
     {
         $endpoint = PullZoneEndpoint::DELETE_PULL_ZONE;
 
@@ -200,7 +201,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @return StreamInterface
      * @throws GuzzleException
      */
-    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId)
+    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): StreamInterface
     {
         $endpoint = PullZoneEndpoint::DELETE_EDGE_RULE;
 
@@ -217,7 +218,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addOrUpdateEdgeRule(int $pullZoneId, array $body)
+    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_UPDATE_EDGE_RULE;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -238,7 +239,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function setEdgeRuleEnabled(int $pullZoneId, string $edgeRuleId, array $body)
+    public function setEdgeRuleEnabled(int $pullZoneId, string $edgeRuleId, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::SET_EDGE_RULE_ENABLED;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -259,7 +260,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function getStatistics(int $pullZoneId, array $query)
+    public function getStatistics(int $pullZoneId, array $query): StreamInterface
     {
         $endpoint = PullZoneEndpoint::GET_STATISTICS;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -278,7 +279,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function loadFreeCertificate(array $query)
+    public function loadFreeCertificate(array $query): StreamInterface
     {
         $endpoint = PullZoneEndpoint::LOAD_FREE_CERTIFICATE;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -294,7 +295,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @return StreamInterface
      * @throws GuzzleException
      */
-    public function purgeCache()
+    public function purgeCache(): StreamInterface
     {
         $endpoint = PullZoneEndpoint::PURGE_CACHE;
 
@@ -311,7 +312,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addCustomCertificate(int $id, array $body)
+    public function addCustomCertificate(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_CUSTOM_CERTIFICATE;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -331,7 +332,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function removeCertificate(int $id, array $body)
+    public function removeCertificate(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_CERTIFICATE;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -351,7 +352,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addCustomHostname(int $id, array $body)
+    public function addCustomHostname(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_CUSTOM_HOSTNAME;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -371,7 +372,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function removeCustomHostname(int $id, array $body)
+    public function removeCustomHostname(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_CUSTOM_HOSTNAME;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -391,7 +392,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function setForceSSL(int $id, array $body)
+    public function setForceSSL(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::SET_FORCE_SSL;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -409,7 +410,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @return StreamInterface
      * @throws GuzzleException
      */
-    public function resetTokenKey(int $id)
+    public function resetTokenKey(int $id): StreamInterface
     {
         $endpoint = PullZoneEndpoint::RESET_TOKEN_KEY;
 
@@ -426,7 +427,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addAllowedReferer(int $id, array $body)
+    public function addAllowedReferer(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_ALLOWED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -446,7 +447,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function removeAllowedReferer(int $id, array $body)
+    public function removeAllowedReferer(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_ALLOWED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -466,7 +467,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addBlockedReferer(int $id, array $body)
+    public function addBlockedReferer(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -486,7 +487,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function removeBlockedReferer(int $id, array $body)
+    public function removeBlockedReferer(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_BLOCKED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -506,7 +507,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addBlockedIP(int $id, array $body)
+    public function addBlockedIP(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_IP;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -526,7 +527,7 @@ class ContentDeliveryNetwork extends AbstractRequest
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function removeBlockedIP(int $id, array $body)
+    public function removeBlockedIP(int $id, array $body): StreamInterface
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_IP;
         $body = $this->validateBodyField($body, $endpoint['body']);

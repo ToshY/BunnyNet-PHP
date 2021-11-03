@@ -16,6 +16,7 @@ use ToshY\BunnyNet\Enum\Log\Log;
 
 /**
  * Class Logging
+ * @link https://docs.bunny.net/docs/cdn-logging
  */
 final class PullZoneLog extends AbstractRequest
 {

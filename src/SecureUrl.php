@@ -13,6 +13,8 @@ use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
 
 /**
  * Class SecureUrl
+ * @link https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication
+ * @link https://github.com/BunnyWay/BunnyCDN.TokenAuthentication
  */
 final class SecureUrl
 {
