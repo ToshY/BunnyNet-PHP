@@ -53,7 +53,8 @@ class Base extends AbstractRequest
      */
     public function setAccountApiKey(string $key): Base
     {
-        if (preg_match(UuidType::UUID_72, $key) !== 1) {
+        if (preg_match(UuidType::UUID_72, $key) !== 1)
+        {
             throw new KeyFormatNotSupported(
                 'Invalid API key: does not conform to the UUID 72 characters format.'
             );

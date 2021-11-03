@@ -39,7 +39,6 @@
     <rule ref="Generic.PHP.LowerCaseKeyword"/>
     <rule ref="Generic.PHP.LowerCaseConstant"/>
     <rule ref="Generic.PHP.LowerCaseType"/>
-
     <rule ref="PSR12.Keywords.ShortFormTypeKeywords"/>
     <rule ref="PSR12.Files.ImportStatement"/>
     <rule ref="PSR12.Namespaces.CompoundNamespaceDepth"/>
