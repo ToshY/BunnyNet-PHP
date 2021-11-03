@@ -13,21 +13,21 @@ use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
 
 /**
  * Class SecureUrl
+ * @link https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication
+ * @link https://github.com/BunnyWay/BunnyCDN.TokenAuthentication
  */
 final class SecureUrl
 {
     /**
-     * @var string
-     *
      * Pull Zone (custom) hostname, including scheme:
      * e.g. `https://files-example.b-cdn.net` or `https://files.example.com`.
+     * @var string
      */
     private string $hostname;
 
     /**
-     * @var string
-     *
      * Pull Zone Url Token Authentication Key.
+     * @var string
      */
     private string $token;
 
@@ -51,7 +51,6 @@ final class SecureUrl
 
     /**
      * Generate URL with token/directory authentication.
-     *
      * @param string $file
      * @param int $expirationTime
      * @param string|null $userIp

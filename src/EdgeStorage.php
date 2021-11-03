@@ -10,14 +10,15 @@ namespace ToshY\BunnyNet;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
-use ToshY\BunnyNet\Enum\Storage\Browse\BrowseEndpoint;
-use ToshY\BunnyNet\Enum\Storage\Manage\ManageEndpoint;
-use ToshY\BunnyNet\Enum\Storage\StorageRegion;
+use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
+use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
+use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExist;
 use ToshY\BunnyNet\Exception\RegionDoesNotExist;
 
 /**
  * Class EdgeStorage
+ * @link https://docs.bunny.net/reference/storage-api
  */
 final class EdgeStorage extends AbstractRequest
 {
@@ -36,9 +37,9 @@ final class EdgeStorage extends AbstractRequest
         string $hostCode = 'FS'
     ) {
         $this->apiKey = $apiKey;
-        $this->getStorageRegion($hostCode);
+        $this->setHost($hostCode);
 
-        parent::__construct();
+        parent::__construct($this->getHostUrl());
     }
 
     /**
@@ -57,7 +58,7 @@ final class EdgeStorage extends AbstractRequest
     public function setHost(string $hostCode): EdgeStorage
     {
         $upperCaseHostCode = strtoupper($hostCode);
-        if (array_key_exists($upperCaseHostCode, StorageRegion::LOCATION) !== true) {
+        if (array_key_exists($upperCaseHostCode, Region::STORAGE_STANDARD) !== true) {
             throw new RegionDoesNotExist(
                 sprintf(
                     'The region abbreviation `%s` is not a valid primary storage region.'
@@ -67,7 +68,7 @@ final class EdgeStorage extends AbstractRequest
             );
         }
 
-        $this->host = StorageRegion::LOCATION[$upperCaseHostCode];
+        $this->host = Region::STORAGE_STANDARD[$upperCaseHostCode];
         return $this;
     }
 
@@ -105,14 +106,10 @@ final class EdgeStorage extends AbstractRequest
     public function downloadFile(string $storageZoneName, string $path, string $fileName): StreamInterface
     {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path, $fileName]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path, $fileName]
         );
     }
 
@@ -122,8 +119,8 @@ final class EdgeStorage extends AbstractRequest
      * @param string $fileName
      * @param string $localFilePath
      * @return StreamInterface
-     * @throws GuzzleException
      * @throws FileDoesNotExist
+     * @throws GuzzleException
      */
     public function uploadFile(
         string $storageZoneName,
@@ -132,15 +129,12 @@ final class EdgeStorage extends AbstractRequest
         string $localFilePath
     ): StreamInterface {
         $endpoint = ManageEndpoint::UPLOAD_FILE;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path, $fileName]);
         $body = $this->openFileStream($localFilePath);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
+            $endpoint,
+            [$storageZoneName, $path, $fileName],
             [],
-            $endpoint['headers'],
             $body
         );
     }
@@ -155,14 +149,10 @@ final class EdgeStorage extends AbstractRequest
     public function deleteFile(string $storageZoneName, string $path, string $fileName): StreamInterface
     {
         $endpoint = ManageEndpoint::DELETE_FILE;
-        $urlPath = $this->createUrlPath(ManageEndpoint::DELETE_FILE['path'], [$storageZoneName, $path, $fileName]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path, $fileName],
         );
     }
 
@@ -175,34 +165,10 @@ final class EdgeStorage extends AbstractRequest
     public function listFileCollection(string $storageZoneName, string $path): StreamInterface
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION;
-        $urlPath = $this->createUrlPath($endpoint['path'], [$storageZoneName, $path]);
 
         return $this->createRequest(
-            $endpoint['method'],
-            $this->getHostUrl(),
-            $urlPath,
-            [],
-            $endpoint['headers']
+            $endpoint,
+            [$storageZoneName, $path],
         );
-    }
-
-    /**
-     * @param string $storageRegion
-     * @return array
-     * @throws RegionDoesNotExist
-     */
-    private function getStorageRegion(string $storageRegion): array
-    {
-        if (array_key_exists(strtoupper($storageRegion), StorageRegion::LOCATION) !== true) {
-            throw new RegionDoesNotExist(
-                sprintf(
-                    'The region `%s` is not a valid primary storage region.'
-                    . ' Please check your storage dashboard for the correct hostname.',
-                    $storageRegion
-                )
-            );
-        }
-
-        return StorageRegion::LOCATION[$storageRegion];
     }
 }
