@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class FileDoesNotExist
+ * Class InvalidBodyType
  */
-final class FileDoesNotExist extends Exception
+final class InvalidBodyParameterTypeException extends Exception
 {
     /**
-     * FileDoesNotExist constructor.
+     * InvalidBodyType constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

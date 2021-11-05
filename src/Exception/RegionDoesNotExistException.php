@@ -14,7 +14,7 @@ use Throwable;
 /**
  * Class RegionDoesNotExist
  */
-final class RegionDoesNotExist extends Exception
+final class RegionDoesNotExistException extends Exception
 {
     /**
      * RegionDoesNotExist constructor.

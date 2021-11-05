@@ -13,14 +13,14 @@ use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
 use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
 use ToshY\BunnyNet\Enum\Region;
-use ToshY\BunnyNet\Exception\FileDoesNotExist;
-use ToshY\BunnyNet\Exception\RegionDoesNotExist;
+use ToshY\BunnyNet\Exception\FileDoesNotExistException;
+use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
 
 /**
  * Class EdgeStorage
  * @link https://docs.bunny.net/reference/storage-api
  */
-final class EdgeStorage extends AbstractRequest
+final class EdgeStorageRequest extends AbstractRequest
 {
     /** @var array */
     private array $host;
@@ -30,7 +30,7 @@ final class EdgeStorage extends AbstractRequest
 
     /**
      * EdgeStorage constructor.
-     * @throws RegionDoesNotExist
+     * @throws RegionDoesNotExistException
      */
     public function __construct(
         string $apiKey,
@@ -52,14 +52,14 @@ final class EdgeStorage extends AbstractRequest
 
     /**
      * @param string $hostCode
-     * @return EdgeStorage
-     * @throws RegionDoesNotExist
+     * @return EdgeStorageRequest
+     * @throws RegionDoesNotExistException
      */
-    public function setHost(string $hostCode): EdgeStorage
+    public function setHost(string $hostCode): EdgeStorageRequest
     {
         $upperCaseHostCode = strtoupper($hostCode);
         if (array_key_exists($upperCaseHostCode, Region::STORAGE_STANDARD) !== true) {
-            throw new RegionDoesNotExist(
+            throw new RegionDoesNotExistException(
                 sprintf(
                     'The region abbreviation `%s` is not a valid primary storage region.'
                     . ' Please check your storage dashboard for the correct hostname.',
@@ -119,7 +119,7 @@ final class EdgeStorage extends AbstractRequest
      * @param string $fileName
      * @param string $localFilePath
      * @return array
-     * @throws FileDoesNotExist
+     * @throws FileDoesNotExistException
      * @throws GuzzleException
      */
     public function uploadFile(

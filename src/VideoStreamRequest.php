@@ -13,13 +13,13 @@ use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\Stream\CollectionEndpoint;
 use ToshY\BunnyNet\Enum\Stream\VideoEndpoint;
-use ToshY\BunnyNet\Exception\FileDoesNotExist;
+use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 
 /**
  * Class Stream
  * @link https://docs.bunny.net/reference/api-overview
  */
-final class VideoStream extends AbstractRequest
+final class VideoStreamRequest extends AbstractRequest
 {
     /** @var string */
     protected string $apiKey;
@@ -57,7 +57,7 @@ final class VideoStream extends AbstractRequest
      * @param string $collectionId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function updateCollection(int $libraryId, string $collectionId, array $body): array
@@ -77,7 +77,7 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function createCollection(int $libraryId, array $body): array
@@ -113,10 +113,10 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param array $query
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function getCollectionList(int $libraryId, array $query): array
+    public function getCollectionList(int $libraryId, array $query = []): array
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION_LIST;
         $query = $this->validateBodyField($query, $endpoint['query']);
@@ -150,7 +150,7 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function updateVideo(int $libraryId, string $videoId, array $body): array
@@ -187,7 +187,7 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param string $localFilePath
      * @return array
-     * @throws FileDoesNotExist
+     * @throws FileDoesNotExistException
      * @throws GuzzleException
      */
     public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): array
@@ -223,11 +223,11 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function listVideos(int $libraryId, array $query): array
+    public function listVideos(int $libraryId, array $query = []): array
     {
         $endpoint = VideoEndpoint::LIST_VIDEOS;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -243,7 +243,7 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function createVideo(int $libraryId, array $body): array
@@ -264,8 +264,8 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function setThumbnail(int $libraryId, string $videoId, array $query): array
@@ -285,12 +285,12 @@ final class VideoStream extends AbstractRequest
      * @param array $query
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function fetchVideoToCollection(int $libraryId, array $query, array $body): array
+    public function fetchVideoToCollection(int $libraryId, array $query = [], array $body): array
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_TO_COLLECTION;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -309,7 +309,7 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function fetchVideoById(int $libraryId, string $videoId, array $body): array
@@ -331,7 +331,7 @@ final class VideoStream extends AbstractRequest
      * @param string $sourceLanguage
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
@@ -353,7 +353,7 @@ final class VideoStream extends AbstractRequest
      * @param string $sourceLanguage
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
