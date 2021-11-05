@@ -282,15 +282,15 @@ final class VideoStreamRequest extends AbstractRequest
 
     /**
      * @param int $libraryId
-     * @param array $query
      * @param array $body
+     * @param array $query
      * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function fetchVideoToCollection(int $libraryId, array $query = [], array $body): array
+    public function fetchVideoToCollection(int $libraryId, array $body, array $query = []): array
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_TO_COLLECTION;
         $query = $this->validateQueryField($query, $endpoint['query']);
