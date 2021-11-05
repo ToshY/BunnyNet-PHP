@@ -9,10 +9,13 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\CDN\BillingEndpoint;
 use ToshY\BunnyNet\Enum\CDN\PullZoneEndpoint;
 use ToshY\BunnyNet\Enum\CDN\PurgeEndpoint;
+use ToshY\BunnyNet\Enum\CDN\StatisticsEndpoint;
+use ToshY\BunnyNet\Enum\CDN\StorageEndpoint;
+use ToshY\BunnyNet\Enum\CDN\StreamEndpoint;
+use ToshY\BunnyNet\Enum\CDN\UserEndpoint;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\UuidType;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
@@ -58,6 +61,238 @@ class BaseRequest extends AbstractRequest
         }
         $this->apiKey = $key;
         return $this;
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function listVideoLibraries(array $query): array
+    {
+        $endpoint = StreamEndpoint::LIST_VIDEO_LIBRARIES;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query
+        );
+    }
+
+    /**
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function addVideoLibrary(array $body): array
+    {
+        $endpoint = StreamEndpoint::ADD_VIDEO_LIBRARY;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getVideoLibrary(int $id): array
+    {
+        $endpoint = StreamEndpoint::GET_VIDEO_LIBRARY;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function updateVideoLibrary(int $id, array $body): array
+    {
+        $endpoint = StreamEndpoint::ADD_VIDEO_LIBRARY;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function deleteVideoLibrary(int $id): array
+    {
+        $endpoint = StreamEndpoint::DELETE_VIDEO_LIBRARY;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function resetVideoLibraryPasswordByQuery(array $query): array
+    {
+        $endpoint = StreamEndpoint::RESET_PASSWORD_QUERY;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function resetVideoLibraryPasswordByPath(int $id): array
+    {
+        $endpoint = StreamEndpoint::RESET_PASSWORD_PATH;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function addWatermark(int $id): array
+    {
+        $endpoint = StreamEndpoint::ADD_WATERMARK;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function deleteWatermark(int $id): array
+    {
+        $endpoint = StreamEndpoint::DELETE_WATERMARK;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function addVideoLibraryAllowedReferer(int $id, array $body): array
+    {
+        $endpoint = StreamEndpoint::ADD_ALLOWED_REFERER;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function removeVideoLibraryAllowedReferer(int $id, array $body): array
+    {
+        $endpoint = StreamEndpoint::REMOVE_ALLOWED_REFERER;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function addVideoLibraryBlockedReferer(int $id, array $body): array
+    {
+        $endpoint = StreamEndpoint::ADD_BLOCKED_REFERER;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function removeVideoLibraryBlockedReferer(int $id, array $body): array
+    {
+        $endpoint = StreamEndpoint::REMOVE_BLOCKED_REFERER;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
     }
 
     /**
@@ -258,7 +493,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function getStatistics(int $pullZoneId, array $query = []): array
+    public function getStatisticsPullZone(int $pullZoneId, array $query = []): array
     {
         $endpoint = PullZoneEndpoint::GET_STATISTICS;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -408,7 +643,7 @@ class BaseRequest extends AbstractRequest
      * @return array
      * @throws GuzzleException
      */
-    public function resetTokenKey(int $id): array
+    public function resetPullZoneTokenKey(int $id): array
     {
         $endpoint = PullZoneEndpoint::RESET_TOKEN_KEY;
 
@@ -425,7 +660,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function addAllowedReferer(int $id, array $body): array
+    public function addPullZoneAllowedReferer(int $id, array $body): array
     {
         $endpoint = PullZoneEndpoint::ADD_ALLOWED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -445,7 +680,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function removeAllowedReferer(int $id, array $body): array
+    public function removePullZoneAllowedReferer(int $id, array $body): array
     {
         $endpoint = PullZoneEndpoint::REMOVE_ALLOWED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -465,7 +700,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function addBlockedReferer(int $id, array $body): array
+    public function addPullZoneBlockedReferer(int $id, array $body): array
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -485,7 +720,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function removeBlockedReferer(int $id, array $body): array
+    public function removePullZoneBlockedReferer(int $id, array $body): array
     {
         $endpoint = PullZoneEndpoint::REMOVE_BLOCKED_REFERER;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -505,7 +740,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function addBlockedIP(int $id, array $body): array
+    public function addPullZoneBlockedIP(int $id, array $body): array
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_IP;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -525,9 +760,9 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
-    public function removeBlockedIP(int $id, array $body): array
+    public function removePullZoneBlockedIP(int $id, array $body): array
     {
-        $endpoint = PullZoneEndpoint::ADD_BLOCKED_IP;
+        $endpoint = PullZoneEndpoint::REMOVE_BLOCKED_IP;
         $body = $this->validateBodyField($body, $endpoint['body']);
 
         return $this->createRequest(
@@ -545,7 +780,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function purgeURL(array $query)
+    public function purgeURL(array $query): array
     {
         $endpoint = PurgeEndpoint::PURGE_URL;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -564,7 +799,7 @@ class BaseRequest extends AbstractRequest
      * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function purgeURLbyHeader(array $query)
+    public function purgeURLbyHeader(array $query): array
     {
         $endpoint = PurgeEndpoint::PURGE_URL_HEADER;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -573,6 +808,198 @@ class BaseRequest extends AbstractRequest
             $endpoint,
             [],
             $query,
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function getStatistics(array $query = []): array
+    {
+        $endpoint = StatisticsEndpoint::GET_STATISTICS;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query,
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function listStorageZone(array $query = []): array
+    {
+        $endpoint = StorageEndpoint::LIST_STORAGE_ZONES;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query,
+        );
+    }
+
+    /**
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function addStorageZone(array $body): array
+    {
+        $endpoint = StorageEndpoint::ADD_STORAGE_ZONE;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getStorageZone(int $id): array
+    {
+        $endpoint = StorageEndpoint::GET_STORAGE_ZONE;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function updateStorageZone(int $id, array $body): array
+    {
+        $endpoint = StorageEndpoint::UPDATE_STORAGE_ZONE;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [$id],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function deleteStorageZone(int $id): array
+    {
+        $endpoint = StorageEndpoint::DELETE_STORAGE_ZONE;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function resetStorageZonePasswordByQuery(array $query): array
+    {
+        $endpoint = StorageEndpoint::RESET_PASSWORD_QUERY;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query,
+        );
+    }
+
+    /**
+     * @param array $id
+     * @return array
+     * @throws GuzzleException
+     */
+    public function resetStorageZonePasswordByPath(array $id): array
+    {
+        $endpoint = StorageEndpoint::RESET_PASSWORD_PATH;
+
+        return $this->createRequest(
+            $endpoint,
+            [$id]
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws GuzzleException
+     */
+    public function resetStorageZoneReadOnlyPassword(array $query): array
+    {
+        $endpoint = StorageEndpoint::RESET_READONLY_PASSWORD;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            $query,
+        );
+    }
+
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getUserDetails(): array
+    {
+        $endpoint = UserEndpoint::GET_USER_DETAILS;
+
+        return $this->createRequest(
+            $endpoint
+        );
+    }
+
+    /**
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws GuzzleException
+     */
+    public function updateUserDetails(array $body): array
+    {
+        $endpoint = StorageEndpoint::UPDATE_STORAGE_ZONE;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->createRequest(
+            $endpoint,
+            [],
+            [],
+            $body
         );
     }
 }

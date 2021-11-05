@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\Stream\CollectionEndpoint;
 use ToshY\BunnyNet\Enum\Stream\VideoEndpoint;

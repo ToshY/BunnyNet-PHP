@@ -9,10 +9,9 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\StreamInterface;
+use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
 use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
-use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
 

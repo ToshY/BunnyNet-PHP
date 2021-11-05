@@ -10,7 +10,6 @@ namespace ToshY\BunnyNet;
 
 use DateTimeInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\Log\LogEndpoint;
 
