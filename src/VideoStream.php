@@ -39,10 +39,10 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param string $collectionId
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function getCollection(int $libraryId, string $collectionId): StreamInterface
+    public function getCollection(int $libraryId, string $collectionId): array
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION;
 
@@ -56,11 +56,11 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param string $collectionId
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function updateCollection(int $libraryId, string $collectionId, array $body): StreamInterface
+    public function updateCollection(int $libraryId, string $collectionId, array $body): array
     {
         $endpoint = CollectionEndpoint::UPDATE_COLLECTION;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -76,11 +76,11 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function createCollection(int $libraryId, array $body): StreamInterface
+    public function createCollection(int $libraryId, array $body): array
     {
         $endpoint = CollectionEndpoint::CREATE_COLLECTION;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -96,10 +96,10 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param string $collectionId
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function deleteCollection(int $libraryId, string $collectionId): StreamInterface
+    public function deleteCollection(int $libraryId, string $collectionId): array
     {
         $endpoint = CollectionEndpoint::DELETE_COLLECTION;
 
@@ -112,11 +112,11 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param array $query
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function getCollectionList(int $libraryId, array $query): StreamInterface
+    public function getCollectionList(int $libraryId, array $query): array
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION_LIST;
         $query = $this->validateBodyField($query, $endpoint['query']);
@@ -131,10 +131,10 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param string $videoId
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function getVideo(int $libraryId, string $videoId): StreamInterface
+    public function getVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::GET_VIDEO;
 
@@ -149,11 +149,11 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param string $videoId
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function updateVideo(int $libraryId, string $videoId, array $body): StreamInterface
+    public function updateVideo(int $libraryId, string $videoId, array $body): array
     {
         $endpoint = VideoEndpoint::UPDATE_VIDEO;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -169,10 +169,10 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param string $videoId
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function deleteVideo(int $libraryId, string $videoId): StreamInterface
+    public function deleteVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::DELETE_VIDEO;
 
@@ -186,11 +186,11 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param string $videoId
      * @param string $localFilePath
-     * @return StreamInterface
+     * @return array
      * @throws FileDoesNotExist
      * @throws GuzzleException
      */
-    public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): StreamInterface
+    public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): array
     {
         $endpoint = VideoEndpoint::UPLOAD_VIDEO;
         $body = $this->openFileStream($localFilePath);
@@ -206,10 +206,10 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param string $videoId
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function reencodeVideo(int $libraryId, string $videoId): StreamInterface
+    public function reencodeVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::REENCODE_VIDEO;
 
@@ -222,12 +222,12 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param array $query
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidQueryParameterRequirement
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function listVideos(int $libraryId, array $query): StreamInterface
+    public function listVideos(int $libraryId, array $query): array
     {
         $endpoint = VideoEndpoint::LIST_VIDEOS;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -242,11 +242,11 @@ final class VideoStream extends AbstractRequest
     /**
      * @param int $libraryId
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function createVideo(int $libraryId, array $body): StreamInterface
+    public function createVideo(int $libraryId, array $body): array
     {
         $endpoint = VideoEndpoint::CREATE_VIDEO;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -263,12 +263,12 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param string $videoId
      * @param array $query
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidQueryParameterRequirement
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function setThumbnail(int $libraryId, string $videoId, array $query): StreamInterface
+    public function setThumbnail(int $libraryId, string $videoId, array $query): array
     {
         $endpoint = VideoEndpoint::SET_THUMBNAIL;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -284,13 +284,13 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param array $query
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws Exception\InvalidQueryParameterRequirement
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function fetchVideoToCollection(int $libraryId, array $query, array $body): StreamInterface
+    public function fetchVideoToCollection(int $libraryId, array $query, array $body): array
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_TO_COLLECTION;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -308,11 +308,11 @@ final class VideoStream extends AbstractRequest
      * @param int $libraryId
      * @param string $videoId
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function fetchVideoById(int $libraryId, string $videoId, array $body): StreamInterface
+    public function fetchVideoById(int $libraryId, string $videoId, array $body): array
     {
         $endpoint = VideoEndpoint::FETCH_VIDEO_ID;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -330,11 +330,11 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param string $sourceLanguage
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): StreamInterface
+    public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
     {
         $endpoint = VideoEndpoint::ADD_CAPTION;
         $body = $this->validateBodyField($body, $endpoint['body']);
@@ -352,11 +352,11 @@ final class VideoStream extends AbstractRequest
      * @param string $videoId
      * @param string $sourceLanguage
      * @param array $body
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidBodyParameterType
      * @throws GuzzleException
      */
-    public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): StreamInterface
+    public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
     {
         $endpoint = VideoEndpoint::DELETE_CAPTION;
         $body = $this->validateBodyField($body, $endpoint['body']);

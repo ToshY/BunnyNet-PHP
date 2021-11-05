@@ -54,7 +54,7 @@ abstract class AbstractRequest extends Guzzle
      * @param array $pathParameters
      * @param array $query
      * @param null $body
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
     protected function createRequest(
@@ -62,7 +62,7 @@ abstract class AbstractRequest extends Guzzle
         array $pathParameters = [],
         array $query = [],
         $body = null
-    ): StreamInterface {
+    ): array {
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
@@ -70,12 +70,15 @@ abstract class AbstractRequest extends Guzzle
                     $endpoint['headers'],
                     $this->getAccessKeyHeader()
                 )
-            ]
+            ],
+            function ($value) {
+                return empty($value) === false;
+            }
         );
 
-        $base = parse_url($this->getHostRequest());
+        $base = $this->getHostRequest();
         $path = $this->createUrlPath($endpoint['path'], $pathParameters);
-        $query = empty($query) !== false ?
+        $query = empty($query) === false ?
             sprintf(
                 '?%s',
                 http_build_query($query, '', '&', PHP_QUERY_RFC3986)
@@ -96,7 +99,22 @@ abstract class AbstractRequest extends Guzzle
             $options
         );
 
-        return $response->getBody();
+        $responseBodyContents = $response->getBody()->getContents();
+
+        try {
+            $content = Utils::jsonDecode($responseBodyContents, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\Exception $e) {
+            $content = $responseBodyContents;
+        }
+
+        return [
+            'content' => $content,
+            'headers' => $response->getHeaders(),
+            'status' => [
+                'code' => $response->getStatusCode(),
+                'reason' => $response->getReasonPhrase(),
+            ],
+        ];
     }
 
     /**
@@ -135,30 +153,24 @@ abstract class AbstractRequest extends Guzzle
     }
 
     /**
-     * @return string
+     * @return array
      */
-    private function getAccessKeyHeader(): string
+    private function getAccessKeyHeader(): array
     {
-        return sprintf(
-            'AccessKey: %s',
-            $this->apiKey
-        );
+        return [
+            'AccessKey' => $this->apiKey,
+        ];
     }
 
     /**
      * @param $body
-     * @return string|resource|null
      */
     private function getBody($body)
     {
-        switch ($body) {
-            case is_array($body):
-                return Utils::jsonEncode($body);
-            case is_resource($body):
-            case is_null($body):
-            default:
-                return $body;
+        if (is_array($body) === true) {
+            return Utils::jsonEncode($body);
         }
+        return $body;
     }
 
     /**

@@ -1,0 +1,14 @@
+version: 2
+updates:
+    -   package-ecosystem: "github-actions"
+        directory: "/"
+        target-branch: "master"
+        schedule:
+            interval: "weekly"
+            day: "sunday"
+
+    -   package-ecosystem: "composer"
+        directory: "/"
+        target-branch: "master"
+        schedule:
+            interval: "daily"

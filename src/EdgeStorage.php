@@ -100,10 +100,10 @@ final class EdgeStorage extends AbstractRequest
      * @param string $storageZoneName
      * @param string $path
      * @param string $fileName
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function downloadFile(string $storageZoneName, string $path, string $fileName): StreamInterface
+    public function downloadFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
 
@@ -118,7 +118,7 @@ final class EdgeStorage extends AbstractRequest
      * @param string $path
      * @param string $fileName
      * @param string $localFilePath
-     * @return StreamInterface
+     * @return array
      * @throws FileDoesNotExist
      * @throws GuzzleException
      */
@@ -127,7 +127,7 @@ final class EdgeStorage extends AbstractRequest
         string $path,
         string $fileName,
         string $localFilePath
-    ): StreamInterface {
+    ): array {
         $endpoint = ManageEndpoint::UPLOAD_FILE;
         $body = $this->openFileStream($localFilePath);
 
@@ -143,10 +143,10 @@ final class EdgeStorage extends AbstractRequest
      * @param string $storageZoneName
      * @param string $path
      * @param string $fileName
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function deleteFile(string $storageZoneName, string $path, string $fileName): StreamInterface
+    public function deleteFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DELETE_FILE;
 
@@ -159,10 +159,10 @@ final class EdgeStorage extends AbstractRequest
     /**
      * @param string $storageZoneName
      * @param string $path
-     * @return StreamInterface
+     * @return array
      * @throws GuzzleException
      */
-    public function listFileCollection(string $storageZoneName, string $path): StreamInterface
+    public function listFileCollection(string $storageZoneName, string $path): array
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION;
 

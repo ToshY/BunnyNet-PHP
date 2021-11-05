@@ -30,7 +30,7 @@ final class PurgeEndpoint
     ];
 
     /** @var array */
-    public const PURGE_URL_HEADERS = [
+    public const PURGE_URL_HEADER = [
         'method' => 'GET',
         'path' => 'purge',
         'headers' => [

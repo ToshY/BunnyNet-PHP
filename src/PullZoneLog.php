@@ -39,12 +39,12 @@ final class PullZoneLog extends AbstractRequest
      * @param DateTimeInterface $dateTime
      * @param int $pullZoneId
      * @param array $query
-     * @return StreamInterface
+     * @return array
      * @throws Exception\InvalidQueryParameterRequirement
      * @throws Exception\InvalidQueryParameterType
      * @throws GuzzleException
      */
-    public function getLogging(DateTimeInterface $dateTime, int $pullZoneId, array $query): StreamInterface
+    public function getLogging(DateTimeInterface $dateTime, int $pullZoneId, array $query): array
     {
         $endpoint = Log::GET_LOGGING;
         $dateTimeFormat = $dateTime->format('d-m-y');
