@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Enum\UuidType;
-use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
+use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 
 /**
  * Class SecureUrl
  * @link https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication
  * @link https://github.com/BunnyWay/BunnyCDN.TokenAuthentication
  */
-final class SecureUrl
+final class SecureUrlGenerator
 {
     /**
      * Pull Zone (custom) hostname, including scheme:
@@ -35,14 +35,14 @@ final class SecureUrl
      * SecureUrl constructor.
      * @param string $hostname
      * @param string $token
-     * @throws KeyFormatNotSupported
+     * @throws KeyFormatNotSupportedException
      */
     public function __construct(string $hostname, string $token)
     {
         $this->hostname = $hostname;
 
         if (preg_match(UuidType::UUID_36, $token) !== 1) {
-            throw new KeyFormatNotSupported(
+            throw new KeyFormatNotSupportedException(
                 'Invalid token: does not conform to the UUID 36 characters format.'
             );
         }

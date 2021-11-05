@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class InvalidQueryParameterRequirement
+ * Class FileDoesNotExist
  */
-final class InvalidQueryParameterRequirement extends Exception
+final class FileDoesNotExistException extends Exception
 {
     /**
-     * InvalidQueryParameterRequirement constructor.
+     * FileDoesNotExist constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

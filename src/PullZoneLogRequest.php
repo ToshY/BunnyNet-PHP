@@ -12,13 +12,13 @@ use DateTimeInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Enum\Log\Log;
+use ToshY\BunnyNet\Enum\Log\LogEndpoint;
 
 /**
  * Class Logging
  * @link https://docs.bunny.net/docs/cdn-logging
  */
-final class PullZoneLog extends AbstractRequest
+final class PullZoneLogRequest extends AbstractRequest
 {
     /** @var string */
     protected string $apiKey;
@@ -40,13 +40,13 @@ final class PullZoneLog extends AbstractRequest
      * @param int $pullZoneId
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function getLogging(DateTimeInterface $dateTime, int $pullZoneId, array $query): array
     {
-        $endpoint = Log::GET_LOGGING;
+        $endpoint = LogEndpoint::GET_LOGGING;
         $dateTimeFormat = $dateTime->format('d-m-y');
         $query = $this->validateQueryField($query, $endpoint['query']);
 

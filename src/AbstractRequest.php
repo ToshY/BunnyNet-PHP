@@ -8,14 +8,14 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
+use Exception;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
-use Psr\Http\Message\StreamInterface;
-use ToshY\BunnyNet\Exception\FileDoesNotExist;
-use ToshY\BunnyNet\Exception\InvalidBodyParameterType;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirement;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterType;
+use ToshY\BunnyNet\Exception\FileDoesNotExistException;
+use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
 
 /**
  * Class AbstractRequest
@@ -103,7 +103,7 @@ abstract class AbstractRequest extends Guzzle
 
         try {
             $content = Utils::jsonDecode($responseBodyContents, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $content = $responseBodyContents;
         }
 
@@ -138,13 +138,13 @@ abstract class AbstractRequest extends Guzzle
     /**
      * @param string $filePath
      * @return resource
-     * @throws FileDoesNotExist
+     * @throws FileDoesNotExistException
      */
     protected function openFileStream(string $filePath)
     {
         $fileStream = fopen($filePath, 'r');
         if ($fileStream === false) {
-            throw new FileDoesNotExist(
+            throw new FileDoesNotExistException(
                 sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath)
             );
         }
@@ -177,8 +177,8 @@ abstract class AbstractRequest extends Guzzle
      * @param array $values
      * @param array $template
      * @return array
-     * @throws InvalidQueryParameterRequirement
-     * @throws InvalidQueryParameterType
+     * @throws InvalidQueryParameterRequirementException
+     * @throws InvalidQueryParameterTypeException
      */
     protected function validateQueryField(array $values, array $template): array
     {
@@ -191,7 +191,7 @@ abstract class AbstractRequest extends Guzzle
             // Field type check
             $typeCheck = sprintf('is_%s', $templateValue['type']);
             if ($typeCheck($parameterValue) === false) {
-                throw new InvalidQueryParameterType(
+                throw new InvalidQueryParameterTypeException(
                     sprintf(
                         'Invalid query parameter type provided for `%s`. Expected `%s` got `%s`.',
                         $key,
@@ -207,7 +207,7 @@ abstract class AbstractRequest extends Guzzle
                     $templateValue['required'] === true
                     && empty($parameterValue) === true
                 ) {
-                    throw new InvalidQueryParameterRequirement(
+                    throw new InvalidQueryParameterRequirementException(
                         sprintf(
                             'Expected required parameter `%s` was not provided.',
                             $key
@@ -226,7 +226,7 @@ abstract class AbstractRequest extends Guzzle
      * @param array $values
      * @param array $template
      * @return array
-     * @throws InvalidBodyParameterType
+     * @throws InvalidBodyParameterTypeException
      */
     protected function validateBodyField(array $values, array $template): array
     {
@@ -239,7 +239,7 @@ abstract class AbstractRequest extends Guzzle
             // Field type check
             $typeCheck = sprintf('is_%s', $templateValue['type']);
             if ($typeCheck($parameterValue) === false) {
-                throw new InvalidBodyParameterType(
+                throw new InvalidBodyParameterTypeException(
                     sprintf(
                         'Invalid body parameter type provided for `%s`. Expected `%s` got `%s`.',
                         $key,

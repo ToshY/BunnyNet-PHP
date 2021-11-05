@@ -10,7 +10,7 @@ namespace ToshY\BunnyNet\Enum\Log;
 
 use ToshY\BunnyNet\Enum\Header;
 
-final class Log
+final class LogEndpoint
 {
     /** @var array */
     public const GET_LOGGING = [

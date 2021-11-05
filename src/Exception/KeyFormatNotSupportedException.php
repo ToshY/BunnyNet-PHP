@@ -14,7 +14,7 @@ use Throwable;
 /**
  * Class KeyFormatNotSupported
  */
-final class KeyFormatNotSupported extends Exception
+final class KeyFormatNotSupportedException extends Exception
 {
     /**
      * KeyFormatNotSupported constructor.

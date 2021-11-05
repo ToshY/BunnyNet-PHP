@@ -15,18 +15,18 @@ use ToshY\BunnyNet\Enum\CDN\PullZoneEndpoint;
 use ToshY\BunnyNet\Enum\CDN\PurgeEndpoint;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\UuidType;
-use ToshY\BunnyNet\Exception\KeyFormatNotSupported;
+use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 
 /**
  * Class ContentDeliveryNetwork
  * @link https://docs.bunny.net/reference/bunnynet-api-overview
  */
-class Base extends AbstractRequest
+class BaseRequest extends AbstractRequest
 {
     /**
      * ContentDeliveryNetwork constructor.
      * @param string|null $accountApiKey
-     * @throws KeyFormatNotSupported
+     * @throws KeyFormatNotSupportedException
      */
     public function __construct(
         string $accountApiKey
@@ -46,13 +46,13 @@ class Base extends AbstractRequest
 
     /**
      * @param string $key
-     * @return Base
-     * @throws KeyFormatNotSupported
+     * @return BaseRequest
+     * @throws KeyFormatNotSupportedException
      */
-    public function setApiKey(string $key): Base
+    public function setApiKey(string $key): BaseRequest
     {
         if (preg_match(UuidType::UUID_72, $key) !== 1) {
-            throw new KeyFormatNotSupported(
+            throw new KeyFormatNotSupportedException(
                 'Invalid API key: does not conform to the UUID 72 characters format.'
             );
         }
@@ -89,8 +89,8 @@ class Base extends AbstractRequest
     /**
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function applyPromoCode(array $query): array
@@ -108,11 +108,11 @@ class Base extends AbstractRequest
     /**
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function listPullZones(array $query): array
+    public function listPullZones(array $query = []): array
     {
         $endpoint = PullZoneEndpoint::LIST_PULL_ZONES;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -127,7 +127,7 @@ class Base extends AbstractRequest
     /**
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addPullZone(array $body): array
@@ -162,7 +162,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function updatePullZone(int $id, array $body): array
@@ -213,7 +213,7 @@ class Base extends AbstractRequest
      * @param int $pullZoneId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addOrUpdateEdgeRule(int $pullZoneId, array $body): array
@@ -234,7 +234,7 @@ class Base extends AbstractRequest
      * @param string $edgeRuleId
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function setEdgeRuleEnabled(int $pullZoneId, string $edgeRuleId, array $body): array
@@ -254,11 +254,11 @@ class Base extends AbstractRequest
      * @param int $pullZoneId
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
-    public function getStatistics(int $pullZoneId, array $query): array
+    public function getStatistics(int $pullZoneId, array $query = []): array
     {
         $endpoint = PullZoneEndpoint::GET_STATISTICS;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -273,8 +273,8 @@ class Base extends AbstractRequest
     /**
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function loadFreeCertificate(array $query): array
@@ -307,7 +307,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addCustomCertificate(int $id, array $body): array
@@ -327,7 +327,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function removeCertificate(int $id, array $body): array
@@ -347,7 +347,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addCustomHostname(int $id, array $body): array
@@ -367,7 +367,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function removeCustomHostname(int $id, array $body): array
@@ -387,7 +387,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function setForceSSL(int $id, array $body): array
@@ -422,7 +422,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addAllowedReferer(int $id, array $body): array
@@ -442,7 +442,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function removeAllowedReferer(int $id, array $body): array
@@ -462,7 +462,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addBlockedReferer(int $id, array $body): array
@@ -482,7 +482,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function removeBlockedReferer(int $id, array $body): array
@@ -502,7 +502,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function addBlockedIP(int $id, array $body): array
@@ -522,7 +522,7 @@ class Base extends AbstractRequest
      * @param int $id
      * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterType
+     * @throws Exception\InvalidBodyParameterTypeException
      * @throws GuzzleException
      */
     public function removeBlockedIP(int $id, array $body): array
@@ -541,8 +541,8 @@ class Base extends AbstractRequest
     /**
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function purgeURL(array $query)
@@ -560,8 +560,8 @@ class Base extends AbstractRequest
     /**
      * @param array $query
      * @return array
-     * @throws Exception\InvalidQueryParameterRequirement
-     * @throws Exception\InvalidQueryParameterType
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws GuzzleException
      */
     public function purgeURLbyHeader(array $query)
