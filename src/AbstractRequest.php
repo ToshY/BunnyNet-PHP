@@ -55,7 +55,6 @@ abstract class AbstractRequest extends Guzzle
      * @param array $query
      * @param null $body
      * @return array
-     * @throws GuzzleException
      */
     protected function createRequest(
         array $endpoint,
@@ -69,7 +68,7 @@ abstract class AbstractRequest extends Guzzle
                 'headers' => array_merge(
                     $endpoint['headers'],
                     $this->getAccessKeyHeader()
-                )
+                ),
             ],
             function ($value) {
                 return empty($value) === false;
@@ -92,6 +91,9 @@ abstract class AbstractRequest extends Guzzle
             $path,
             $query
         );
+
+        // HTTP errors should be returned as response and not as part of exception.
+        $options['http_errors'] = false;
 
         $response = parent::request(
             $endpoint['method'],
