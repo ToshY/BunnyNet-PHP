@@ -9,7 +9,7 @@
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
 
-<sub>Note: This is a non-official library for the <a href="https://docs.bunny.net/docs">bunny.net API</a>.</sub>
+<sub>Note: This is a non-official library for the [bunny.net API](https://docs.bunny.net/docs).</sub>
 
 ## Installation
 
@@ -27,7 +27,7 @@ use ToshY\BunnyNet\EdgeStorageRequest;
 use ToshY\BunnyNet\VideoStreamRequest;
 use Toshy\BunnyNet\PullZoneLogRequest;
 use ToshY\BunnyNet\SecureUrlGenerator;
-use \ToshY\BunnyNet\PricingCalculator;
+use ToshY\BunnyNet\PricingCalculator;
 
 // Classes for API endpoints.
 $bunnyBase = new BaseRequest(
