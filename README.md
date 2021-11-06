@@ -15,7 +15,7 @@ This is a non-official library for the [bunny.net API](https://docs.bunny.net/do
 ## Installation
 
 ```bash
-composer require toshy/bunnynet
+composer require toshy/bunnynet-php
 ```
 
 ## Usage
