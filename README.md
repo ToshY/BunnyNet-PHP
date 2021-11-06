@@ -63,8 +63,10 @@ This library was created with the hand of the available [bunny.net API docs](htt
 Special thanks to the bunny.net support team for answering my questions regarding the API.
 
 ## Notes
-I've tried to keep the naming conventions as close as possible to the original API so
-passing arguments to the underlying methods should be kind of straightforward.
+* I've tried to keep the naming conventions as close as possible to the original API so 
+  passing arguments to the underlying methods should be kind of straightforward.
+* Only tested the storage zone endpoints for listing, uploading, downloading and deleteting, but I'm fairly confident
+  the other endpoints should work just fine. If not, just submit an issue and I'll have a look at it.
 
 ## Licence
 The BunnyNet PHP library is licensed under [MIT](https://github.com/ToshY/BunnyNet/blob/master/LICENSE). 

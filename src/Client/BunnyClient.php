@@ -1,27 +1,28 @@
 <?php
 
 /**
- * Written by ToshY, <24-10-2021>
+ * Written by ToshY, <6-11-2021>
  */
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet;
+namespace ToshY\BunnyNet\Client;
 
-use Exception;
-use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Utils;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
 
 /**
- * Class AbstractRequest
+ * Class BunnyClient
  */
-abstract class AbstractRequest extends Guzzle
+class BunnyClient
 {
+    /** @var bool */
+    private const THROW_CLIENT_EXCEPTIONS = false;
+
     /** @var string */
     protected const SCHEME = 'https';
 
@@ -31,14 +32,16 @@ abstract class AbstractRequest extends Guzzle
     /** @var string */
     protected string $hostRequest;
 
+    /** @var HttpClientInterface */
+    protected HttpClientInterface $client;
+
     /**
-     * AbstractRequest constructor.
-     * @param string $hostRequest
+     * BunnyClient constructor.
      */
-    protected function __construct(string $hostRequest)
+    public function __construct(string $hostRequest)
     {
-        parent::__construct();
         $this->hostRequest = $hostRequest;
+        $this->client = HttpClient::create();
     }
 
     /**
@@ -55,9 +58,8 @@ abstract class AbstractRequest extends Guzzle
      * @param array $query
      * @param null $body
      * @return array
-     * @throws GuzzleException
      */
-    protected function createRequest(
+    protected function request(
         array $endpoint,
         array $pathParameters = [],
         array $query = [],
@@ -67,9 +69,9 @@ abstract class AbstractRequest extends Guzzle
             [
                 'body' => $this->getBody($body),
                 'headers' => array_merge(
-                    $endpoint['headers'],
+                    array_merge(...$endpoint['headers']),
                     $this->getAccessKeyHeader()
-                )
+                ),
             ],
             function ($value) {
                 return empty($value) === false;
@@ -93,26 +95,24 @@ abstract class AbstractRequest extends Guzzle
             $query
         );
 
-        $response = parent::request(
+        $response = $this->client->request(
             $endpoint['method'],
             $url,
             $options
         );
 
-        $responseBodyContents = $response->getBody()->getContents();
-
         try {
-            $content = Utils::jsonDecode($responseBodyContents, true, 512, JSON_THROW_ON_ERROR);
-        } catch (Exception $e) {
-            $content = $responseBodyContents;
+            $responseContent = $response->toArray(self::THROW_CLIENT_EXCEPTIONS);
+        } catch (\Exception $e) {
+            $responseContent = $response->getContent(self::THROW_CLIENT_EXCEPTIONS);
         }
 
         return [
-            'content' => $content,
-            'headers' => $response->getHeaders(),
+            'content' => $responseContent,
+            'headers' => $response->getHeaders(self::THROW_CLIENT_EXCEPTIONS),
             'status' => [
                 'code' => $response->getStatusCode(),
-                'reason' => $response->getReasonPhrase(),
+                'info' => $response->getInfo(),
             ],
         ];
     }
@@ -124,6 +124,18 @@ abstract class AbstractRequest extends Guzzle
      */
     protected function createUrlPath(string $template, array $pathCollection): string
     {
+        /*
+         * The following is a (temporary?) hack for optional path parameters for root directory at storage zone.
+         * TODO: Refactor this (possible by adding the required parameter to constants for path).
+         */
+        foreach ($pathCollection as $index => $item) {
+            if (empty($item) === true) {
+                unset($pathCollection[$index]);
+                $argumentPosition = strpos($template, 's', -1);
+                $template = substr($template, 0, (int)$argumentPosition - 2);
+            }
+        }
+
         return sprintf(
             sprintf('/%s', $template),
             ...array_map(
@@ -142,14 +154,14 @@ abstract class AbstractRequest extends Guzzle
      */
     protected function openFileStream(string $filePath)
     {
-        $fileStream = fopen($filePath, 'r');
-        if ($fileStream === false) {
+        $fileRealPath = realpath($filePath);
+        if ($fileRealPath === false) {
             throw new FileDoesNotExistException(
                 sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath)
             );
         }
 
-        return $fileStream;
+        return fopen($fileRealPath, 'r');
     }
 
     /**
@@ -164,11 +176,12 @@ abstract class AbstractRequest extends Guzzle
 
     /**
      * @param $body
+     * @return mixed|string
      */
     private function getBody($body)
     {
         if (is_array($body) === true) {
-            return Utils::jsonEncode($body);
+            return json_encode($body);
         }
         return $body;
     }
