@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use GuzzleHttp\Exception\GuzzleException;
+use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
 use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
@@ -19,7 +19,7 @@ use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
  * Class EdgeStorage
  * @link https://docs.bunny.net/reference/storage-api
  */
-final class EdgeStorageRequest extends AbstractRequest
+final class EdgeStorageRequest extends BunnyClient
 {
     /** @var array */
     private array $host;
@@ -100,13 +100,12 @@ final class EdgeStorageRequest extends AbstractRequest
      * @param string $path
      * @param string $fileName
      * @return array
-     * @throws GuzzleException
      */
     public function downloadFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
 
-        return $this->createRequest(
+        return $this->request(
             $endpoint,
             [$storageZoneName, $path, $fileName]
         );
@@ -119,7 +118,6 @@ final class EdgeStorageRequest extends AbstractRequest
      * @param string $localFilePath
      * @return array
      * @throws FileDoesNotExistException
-     * @throws GuzzleException
      */
     public function uploadFile(
         string $storageZoneName,
@@ -130,7 +128,7 @@ final class EdgeStorageRequest extends AbstractRequest
         $endpoint = ManageEndpoint::UPLOAD_FILE;
         $body = $this->openFileStream($localFilePath);
 
-        return $this->createRequest(
+        return $this->request(
             $endpoint,
             [$storageZoneName, $path, $fileName],
             [],
@@ -143,13 +141,12 @@ final class EdgeStorageRequest extends AbstractRequest
      * @param string $path
      * @param string $fileName
      * @return array
-     * @throws GuzzleException
      */
     public function deleteFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DELETE_FILE;
 
-        return $this->createRequest(
+        return $this->request(
             $endpoint,
             [$storageZoneName, $path, $fileName],
         );
@@ -159,13 +156,12 @@ final class EdgeStorageRequest extends AbstractRequest
      * @param string $storageZoneName
      * @param string $path
      * @return array
-     * @throws GuzzleException
      */
     public function listFileCollection(string $storageZoneName, string $path): array
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION;
 
-        return $this->createRequest(
+        return $this->request(
             $endpoint,
             [$storageZoneName, $path],
         );
