@@ -9,7 +9,8 @@
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
 
-<sub>Note: This is a non-official library for the [bunny.net API](https://docs.bunny.net/docs).</sub>
+#### Note: 
+This is a non-official library for the [bunny.net API](https://docs.bunny.net/docs).
 
 ## Installation
 
