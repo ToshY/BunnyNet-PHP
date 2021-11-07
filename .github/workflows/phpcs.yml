@@ -24,7 +24,7 @@ jobs:
                     php phpcs.phar --version
 
             -   name: Run PHPCS
-                uses: tinovyatkin/action-php-codesniffer@v1
+                uses: thenabeel/action-phpcs@v8
                 with:
                     phpcs_path: php phpcs.phar
                     standard: phpcs.xml
