@@ -138,12 +138,7 @@ class BunnyClient
 
         return sprintf(
             sprintf('/%s', $template),
-            ...array_map(
-                function ($item) {
-                    return ltrim($item, '/');
-                },
-                $pathCollection
-            )
+            ...$pathCollection
         );
     }
 
