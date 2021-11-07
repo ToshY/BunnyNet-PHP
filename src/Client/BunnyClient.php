@@ -124,6 +124,11 @@ class BunnyClient
      */
     protected function createUrlPath(string $template, array $pathCollection): string
     {
+
+        /*
+         * The following is a (temporary?) hack for optional path parameters for root directory at storage zone.
+         * TODO: Refactor this (possible by adding the required parameter to constants for path).
+         */
         foreach ($pathCollection as $index => $item) {
             if (empty($item) === true) {
                 unset($pathCollection[$index]);
