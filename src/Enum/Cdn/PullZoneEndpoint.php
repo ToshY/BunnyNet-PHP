@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\CDN;
+namespace ToshY\BunnyNet\Enum\Cdn;
 
 use ToshY\BunnyNet\Enum\Header;
 

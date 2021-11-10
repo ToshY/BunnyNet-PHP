@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class InvalidQueryParameterRequirement
+ * Class InvalidQueryParameterRequirementException
  */
 final class InvalidQueryParameterRequirementException extends Exception
 {
     /**
-     * InvalidQueryParameterRequirement constructor.
+     * InvalidQueryParameterRequirementException constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

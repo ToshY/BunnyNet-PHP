@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class InvalidBodyType
+ * Class InvalidBodyParameterTypeException
  */
 final class InvalidBodyParameterTypeException extends Exception
 {
     /**
-     * InvalidBodyType constructor.
+     * InvalidBodyParameterTypeException constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class RegionDoesNotExist
+ * Class RegionDoesNotExistException
  */
 final class RegionDoesNotExistException extends Exception
 {
     /**
-     * RegionDoesNotExist constructor.
+     * RegionDoesNotExistException constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous
