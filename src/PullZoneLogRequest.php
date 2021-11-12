@@ -45,7 +45,7 @@ final class PullZoneLogRequest extends BunnyClient
     public function getLogging(DateTimeInterface $dateTime, int $pullZoneId, array $query): array
     {
         $endpoint = LogEndpoint::GET_LOGGING;
-        $dateTimeFormat = $dateTime->format('d-m-y');
+        $dateTimeFormat = $dateTime->format('m-d-y');
         $query = $this->validateQueryField($query, $endpoint['query']);
 
         return $this->request(

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\Cdn;
+namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
@@ -45,9 +45,6 @@ final class StreamEndpoint
         ],
         'query' => [],
         'body' => [
-            'Id' => [
-                'type' => 'int',
-            ],
             'Name' => [
                 'type' => 'string'
             ],
@@ -85,94 +82,97 @@ final class StreamEndpoint
                 'type' => 'string',
             ],
             'CustomHTML' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'PlayerKeyColor' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'EnableTokenAuthentication' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableTokenIPVerification' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ResetToken' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'WatermarkPositionLeft' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'WatermarkPositionTop' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'WatermarkWidth' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'EnabledResolutions' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'ViAiPublisherId' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'VastTagUrl' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'WebhookUrl' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'CaptionsFontSize' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'CaptionsFontColor' => [
-                'type' => 'string'
+                'type' => 'string',
+            ],
+            'CaptionsBackground' => [
+                'type' => 'string',
             ],
             'UILanguage' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'AllowEarlyPlay' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'PlayerTokenAuthenticationEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'BlockNoneReferrer' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableMP4Fallback' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'KeepOriginalFiles' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'AllowDirectPlay' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableDRM' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'Controls' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'Bitrate240p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate360p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate480p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate720p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate1080p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate1440p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Bitrate2160p' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
         ],
     ];
