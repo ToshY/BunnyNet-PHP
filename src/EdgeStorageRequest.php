@@ -157,13 +157,19 @@ final class EdgeStorageRequest extends BunnyClient
      * @param string $path
      * @return array
      */
-    public function listFileCollection(string $storageZoneName, string $path): array
+    public function listFiles(string $storageZoneName, string $path = ''): array
     {
-        $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION;
+        $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_DIRECTORY;
+        $pathParameters = [$storageZoneName, $path];
+        if(empty($path) === true)
+        {
+            $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_ROOT;
+            $pathParameters = [$storageZoneName];
+        }
 
         return $this->request(
             $endpoint,
-            [$storageZoneName, $path],
+            $pathParameters,
         );
     }
 }

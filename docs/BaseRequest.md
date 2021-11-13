@@ -1,7 +1,7 @@
-# BaseRequest
+# Base Request
 
 ## Usage
-
+Provide the API key available from the **Account Settings** panel.
 ```php
 require 'vendor/autoload.php';
 
@@ -256,7 +256,7 @@ $bunnyBase->updatePullZone(1, [
   'Type' => 0,
 ]);
 ```
-*Notes*:
+*Note*:
 * `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds.
   The UI will show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
 * `OriginShieldZoneCode` accepts either the 2 digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
@@ -307,7 +307,7 @@ $bunnyBase->addOrUpdateEdgeRule(1, [
     'Enabled' => true,
 ]);
 ```
-*Notes*:
+*Note*:
 * `ActionType` can be specified as one of the following integer values:
   
 | *Value*    | *API description* | *UI description* |
@@ -365,8 +365,8 @@ $bunnyBase->setEdgeRuleEnabled(1, 'b697018b-a587-403f-b0d0-aa5062ff7467', [
     'Value' => false,
 ]);
 ```
-*Notes*:
-* The `Id` denotes the pull zone ID (the same as the first argument) and is required.
+*Note*:
+* The `Id` denotes the pull zone ID (the same as the first argument) and is a required parameter.
 ---
 #### Get statistics.
 ```php
@@ -444,7 +444,7 @@ $bunnyBase->addPullZoneAllowedReferer(1, [
     'Hostname' => '*.example.com,*.example.org',
 ]);
 ```
-*Notes*:
+*Note*:
 * Adding of allowed referer allows for multiple domains through comma separated values. Other
   endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
 ---
@@ -681,7 +681,7 @@ $bunnyBase->addVideoLibraryAllowedReferer(1, [
     'Hostname' => '*.example.com,*.example.org',
 ]);
 ```
-*Notes*:
+*Note*:
 * Adding of allowed referer allows for multiple domains through comma separated values. Other
 endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
 ---
