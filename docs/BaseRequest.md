@@ -1,7 +1,11 @@
 # Base Request
 
+Manage settings for pull zones, storage, and video libraries through the bunny.net API.
+
 ## Usage
-Provide the API key available from the **Account Settings** panel.
+
+Provide the API key available from the **Account Settings** section.
+
 ```php
 require 'vendor/autoload.php';
 
@@ -11,7 +15,9 @@ $bunnyBase = new BaseRequest(
     '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989'
 );
 ```
+
 ---
+
 ## Endpoints
 
 The base request has the following endpoints available:
@@ -73,14 +79,21 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
+
 ---
+
 ### User
+
 #### Get user details.
+
 ```php
 $bunnyBase->getUserDetails();
 ```
+
 ---
+
 #### Update user details.
+
 ```php
 $bunnyBase->updateUserDetails([
     'FirstName' => 'John',
@@ -96,26 +109,39 @@ $bunnyBase->updateUserDetails([
     'ReceivePromotionalEmails' => false,
 ]);
 ```
+
 ---
+
 ### Billing
+
 #### Get billing details.
+
 ```php
 $bunnyBase->getBillingDetails();
 ```
+
 ---
+
 #### Get billing summary.
+
 ```php
 $bunnyBase->getBillingSummary();
 ```
+
 ---
+
 #### Apply promo code.
+
 ```php
 $bunnyBase->applyPromoCode([
     'CouponCode' => 'XXXYYYZZZ'
 ]);
 ```
+
 ---
+
 ### Statistics
+
 ```php
 $bunnyBase->getStatistics([
     'dateFrom' => 'Y-m-d H:i:s',
@@ -126,17 +152,24 @@ $bunnyBase->getStatistics([
     'hourly' => false,
 ]);
 ```
+
 ---
+
 ### Pull Zone
+
 #### List pull zones.
+
 ```php
 $bunnyBase->listPullZones([
     'page' => 1,
     'perPage' => 1000,
 ]);
 ```
+
 ---
+
 #### Add pull zone.
+
 ```php
 // External bucket
 $bunnyBase->addPullZone([
@@ -152,13 +185,19 @@ $bunnyBase->addPullZone([
     'Type' => 0,
 ]);
 ```
+
 ---
+
 #### Get pull zone.
+
 ```php
 $bunnyBase->getPullZone(1);
 ```
+
 ---
+
 #### Update pull zone.
+
 ```php
 $bunnyBase->updatePullZone(1, [
   'OriginUrl' => 'https://my-bucket-2.service.com',
@@ -256,26 +295,36 @@ $bunnyBase->updatePullZone(1, [
   'Type' => 0,
 ]);
 ```
+
 *Note*:
-* `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds.
-  The UI will show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
+
+* `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
+  show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
 * `OriginShieldZoneCode` accepts either the 2 digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-  or
-* `WAFEnabled` and `WAFEnabledRules` are not yet implemented. This feature is currently being worked on and does
-  not have an ETA. It is advised to not update these values until the feature is implemented and are therefore removed
-  from the example above.
+* `WAFEnabled` and `WAFEnabledRules` are not yet implemented. This feature is currently being worked on and does not
+  have an ETA. It is advised **not** to update these values until the feature is implemented, therefore these options
+  are removed from the example above.
+
 ---
+
 #### Delete pull zone.
+
 ```php
 $bunnyBase->deletePullZone(1);
 ```
+
 ---
+
 #### Delete edge rule.
+
 ```php
 $bunnyBase->deleteEdgeRule(1, 'b697018b-a587-403f-b0d0-aa5062ff7467');
 ```
+
 ---
+
 #### Add or update edge rule.
+
 ```php
 $bunnyBase->addOrUpdateEdgeRule(1, [
     'Guid' => 'b697018b-a587-403f-b0d0-aa5062ff7467',
@@ -307,9 +356,11 @@ $bunnyBase->addOrUpdateEdgeRule(1, [
     'Enabled' => true,
 ]);
 ```
+
 *Note*:
+
 * `ActionType` can be specified as one of the following integer values:
-  
+
 | *Value*    | *API description* | *UI description* |
 | ----------- | ----------- | ----------- |
 | 0 | ForceSSL | Force SSL |
@@ -352,8 +403,11 @@ $bunnyBase->addOrUpdateEdgeRule(1, [
 | 0 | MatchAny | Match Any |
 | 1 | MatchAll | Match All |
 | 2 | MatchNone | Match None |
+
 ---
+
 #### Set edge rule enabled.
+
 ```php
 use ToshY\BunnyNet\BaseRequest;
 
@@ -365,10 +419,15 @@ $bunnyBase->setEdgeRuleEnabled(1, 'b697018b-a587-403f-b0d0-aa5062ff7467', [
     'Value' => false,
 ]);
 ```
+
 *Note*:
+
 * The `Id` denotes the pull zone ID (the same as the first argument) and is a required parameter.
+
 ---
+
 #### Get statistics.
+
 ```php
 $bunnyBase->getStatisticsPullZone(1, [
     'dateFrom' => 'Y-m-d H:i:s',
@@ -376,20 +435,29 @@ $bunnyBase->getStatisticsPullZone(1, [
     'hourly' => false,
 ]);
 ```
+
 ---
+
 #### Load free certificate.
+
 ```php
 $bunnyBase->loadFreeCertificate([
     'hostname' => 'cdn.example.com'
 ]);
 ```
+
 ---
+
 #### Purge cache.
+
 ```php
 $bunnyBase->purgeCache(1);
 ```
+
 ---
+
 #### Add custom certificate. (needs further testing)
+
 ```php
 $bunnyBase->addCustomCertificate(1, [
     'Hostname' => 'cdn.example.com',
@@ -397,42 +465,60 @@ $bunnyBase->addCustomCertificate(1, [
     'CertificateKey' => '',
 ]);
 ```
+
 ---
+
 #### Remove certificate.
+
 ```php
 $bunnyBase->removeCertificate(1, [
     'Hostname' => 'cdn.example.com',
 ]);
 ```
+
 ---
+
 #### Add custom hostname.
+
 ```php
 $bunnyBase->addCustomHostname(1, [
     'Hostname' => 'cdn.example.com',
 ]);
 ```
+
 ---
+
 #### Remove custom hostname.
+
 ```php
 $bunnyBase->removeCustomHostname(1, [
     'Hostname' => 'cdn.example.com',
 ]);
 ```
+
 ---
+
 #### Set force SSL.
+
 ```php
 $bunnyBase->setForceSSL(1, [
     'Hostname' => 'cdn.example.com',
     'ForceSSL' => true,
 ]);
 ```
+
 ---
+
 #### Reset token key.
+
 ```php
 $bunnyBase->resetPullZoneTokenKey(1);
 ```
+
 ---
+
 #### Add allowed referer.
+
 ```php
 // Single
 $bunnyBase->addPullZoneAllowedReferer(1, [
@@ -444,47 +530,68 @@ $bunnyBase->addPullZoneAllowedReferer(1, [
     'Hostname' => '*.example.com,*.example.org',
 ]);
 ```
+
 *Note*:
-* Adding of allowed referer allows for multiple domains through comma separated values. Other
-  endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
+
+* Adding of allowed referer allows for multiple domains through comma separated values. Other endpoints, like removing
+  the allowed referer, or adding/removing blocked referer do not support this.
+
 ---
+
 #### Remove allowed referer.
+
 ```php
 $bunnyBase->removePullZoneAllowedReferer(1, [
     'Hostname' => '*.example.com',
 ]);
 ```
+
 ---
+
 #### Add blocked referer.
+
 ```php
 $bunnyBase->addPullZoneBlockedReferer(1, [
     'Hostname' => '*.evil.org',
 ]);
 ```
+
 ---
+
 #### Remove blocked referer.
+
 ```php
 $bunnyBase->removePullZoneBlockedReferer(1, [
     'Hostname' => '*.evil.org',
 ]);
 ```
+
 ---
+
 #### Add blocked IP.
+
 ```php
 $bunnyBase->addPullZoneBlockedIP(1, [
     'BlockedIp' => '12.345.67.89',
 ]);
 ```
+
 ---
+
 #### Remove Blocked IP.
+
 ```php
 $bunnyBase->removePullZoneBlockedIP(1, [
     'BlockedIp' => '12.345.67.89',
 ]);
 ```
+
 ---
+
 ### Purge
+
 #### Purge URL.
+
 ```php
 // Single file
 $bunnyBase->purgeUrl([
@@ -496,8 +603,11 @@ $bunnyBase->purgeUrl([
     'url' => 'https://myzone.b-cdn.net/css/*',
 ]);
 ```
+
 ---
+
 #### Purge URL by headers.
+
 ```php
 // Single file
 $bunnyBase->purgeUrlbyHeader([
@@ -513,17 +623,24 @@ $bunnyBase->purgeUrlbyHeader([
     'headerValue' => 'CustomHeaderValue',
 ]);
 ```
+
 ---
+
 ### Storage Zone
+
 #### List storage zones.
+
 ```php
 $bunnyBase->listStorageZone([
     'page' => 1,
     'perPage' => 1000,
 ]);
 ```
+
 ---
+
 #### Add storage zone.
+
 ```php
 $bunnyBase->addStorageZone([
     'OriginUrl' => 'https://my-bucket.service.com',
@@ -535,13 +652,19 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+
 ---
+
 #### Get storage zone.
+
 ```php
 $bunnyBase->getStorageZone(1);
 ```
+
 ---
+
 #### Update storage zone.
+
 ```php
 $bunnyBase->updateStorageZone(1, [
     'ReplicationZones' => [
@@ -553,42 +676,60 @@ $bunnyBase->updateStorageZone(1, [
     'Rewrite404To200' => true,
 ]);
 ```
+
 ---
+
 #### Delete storage zone.
+
 ```php
 $bunnyBase->deleteStorageZone(1);
 ```
+
 ---
+
 #### Reset storage zone password by path parameter.
+
 ```php
 $bunnyBase->resetStorageZonePasswordByPath(1);
 ```
+
 ---
+
 #### Reset storage zone password by query parameter.
+
 ```php
 $bunnyBase->resetStorageZonePasswordByQuery([
     'id' => 1,
 ]);
 ```
+
 ---
+
 #### Reset storage zone ready only password by query parameter.
+
 ```php
 $bunnyBase->resetStorageZoneReadOnlyPassword([
     'id' => 1,
 ]);
 ```
+
 ---
+
 ### Stream Video Library
 
 #### List video libraries.
+
 ```php
 $bunnyBase->listVideoLibraries([
     'page' => 1,
     'perPage' => 1000,
 ]);
 ```
+
 ---
+
 #### Add video library.
+
 ```php
 $bunnyBase->addVideoLibrary([
     'id' => 1,
@@ -598,13 +739,19 @@ $bunnyBase->addVideoLibrary([
     ],
 ]);
 ```
+
 ---
+
 #### Get video library.
+
 ```php
 $bunnyBase->getVideoLibrary(1);
 ```
+
 ---
+
 #### Update video library.
+
 ```php
 $bunnyBase->updateVideoLibrary(1, [
     'Name' => 'Awesome Video Library V2',
@@ -641,35 +788,53 @@ $bunnyBase->updateVideoLibrary(1, [
     'Bitrate2160p' => 25000,
 ]);
 ```
+
 ---
+
 #### Delete video library.
+
 ```php
 $bunnyBase->deleteVideoLibrary(1);
 ```
+
 ---
+
 #### Reset video library password by path parameter.
+
 ```php
 $bunnyBase->resetVideoLibraryPasswordByPath(1);
 ```
+
 ---
+
 #### Reset video library password by query parameter.
+
 ```php
 $bunnyBase->resetVideoLibraryPasswordByQuery([
     'id' => 1,
 ]);
 ```
+
 ---
+
 #### Add watermark.
+
 ```php
 $bunnyBase->addWatermark(1);
 ```
+
 ---
+
 #### Delete watermark.
+
 ```php
 $bunnyBase->deleteWatermark(1);
 ```
+
 ---
+
 #### Add allowed referer.
+
 ```php
 // Single
 $bunnyBase->addVideoLibraryAllowedReferer(1, [
@@ -681,25 +846,36 @@ $bunnyBase->addVideoLibraryAllowedReferer(1, [
     'Hostname' => '*.example.com,*.example.org',
 ]);
 ```
+
 *Note*:
-* Adding of allowed referer allows for multiple domains through comma separated values. Other
-endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
+
+* Adding of allowed referer allows for multiple domains through comma separated values. Other endpoints, like removing
+  the allowed referer, or adding/removing blocked referer do not support this.
+
 ---
+
 #### Remove allowed referer.
+
 ```php
 $bunnyBase->removeVideoLibraryAllowedReferer(1, [
     'Hostname' => 'example.com',
 ]);
 ```
+
 ---
+
 #### Add blocked referer.
+
 ```php
 $bunnyBase->addVideoLibraryBlockedReferer(1, [
     'Hostname' => 'evil.org',
 ]);
 ```
+
 ---
+
 #### Remove blocked referer.
+
 ```php
 $bunnyBase->removeVideoLibraryBlockedReferer(1, [
     'Hostname' => 'evil.org',

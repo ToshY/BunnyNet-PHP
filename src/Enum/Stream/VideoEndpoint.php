@@ -58,7 +58,7 @@ final class VideoEndpoint
         'method' => 'PUT',
         'path' => 'library/%d/videos/%s',
         'headers' => [
-            Header::ACCEPT_JSON
+            Header::CONTENT_TYPE_OCTET_STREAM,
         ],
         'query' => [],
         'body' => [],
@@ -169,7 +169,7 @@ final class VideoEndpoint
     ];
 
     /** @var array */
-    public const FETCH_VIDEO_ID = [
+    public const FETCH_VIDEO = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/fetch',
         'headers' => [

@@ -1,8 +1,11 @@
 # Secure Url Generator
 
+Generate a secure url using token authentication (with IP validation).
+
 ## Usage
 
-The secure url generator is a tool to generate secure urls using token authentication.
+Provide the (custom) hostname (including scheme `http://` or `https://`) from the **General** section in **Pull Zones**,
+along with the **Url Token Authentication Key** found in the **Security** section of the same pull zone.
 
 ```php
 require 'vendor/autoload.php';
@@ -14,12 +17,19 @@ $bunnySecureUrl = new SecureUrlGenerator(
     '5509f27d-9103-4de6-8370-8bd68db859c9'
 );
 ```
+
 ---
+
 ## Options
+
 The edge storage request has the following methods available:
+
 * [Generate](#generate)
+
 ---
+
 ### Generate
+
 ```php
 // Root
 $bunnySecureUrl->generate(
@@ -99,9 +109,15 @@ $bunnySecureUrl->generate(
     true  
 );
 ```
+
 *Note*:
-* Token authentication only supports IPv4.
-* In order to reduce the false negatives (and increase privacy) for token authentication with IPv4, the default is to
-allow the full /24 subnet. In practice this means allowing instead `12.345.67.0` instead of `12.345.67.89` (user's actual IPv4).
-* Both `countries` and `referers` accept comma separated input, meaning you could
-allow or block multiple countries like so: `US,DE,JP`. Same for referers: `example.com,example.org`.
+
+* Token IP validation only supports IPv4.
+* In order to reduce the false negatives (and increase privacy) for Token IP validation, the default is to
+  allow the full /24 subnet. 
+  * Example: A token generated for an user with IPv4 `12.345.67.89` will allow the subnet `12.345.67.0`, to watch the content.
+* Both `countries` and `referers` accept comma separated input, meaning you could allow or block multiple countries like
+  so: `US,DE,JP`. Same for referers: `example.com,example.org`.
+* An edge case occurs when you add a blocked country to the Traffic Manager, and allow that same country for 
+  token authentication. This will result in a standard "Unable to connect" page. This issue is known 
+  and will hopefully be fixed in the near future.

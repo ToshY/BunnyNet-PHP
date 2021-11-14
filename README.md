@@ -9,8 +9,8 @@
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
 
-#### Note: 
-This is a non-official library for the [bunny.net API](https://docs.bunny.net/docs).
+<sub>**Note**: This is a non-official library for the [bunny.net API](https://docs.bunny.net/docs).
+</sub>
 
 ## Installation
 
@@ -18,7 +18,7 @@ This is a non-official library for the [bunny.net API](https://docs.bunny.net/do
 composer require toshy/bunnynet-php
 ```
 
-## Usage
+## Quickstart
 
 ```php
 require 'vendor/autoload.php';
@@ -45,7 +45,7 @@ $bunnyStream = new VideoStreamRequest(
 );
 
 $bunnyLog = new PullZoneLogRequest(
-    '986d288a-dd9b-4e79-9794-0a3ed1acd144',
+    '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
 );
 
 // Secure URL with token authentication.
@@ -58,16 +58,25 @@ $bunnySecureUrl = new SecureUrlGenerator(
 $bunnyPricingCalculator = new PricingCalculator();
 ```
 
+## Documentation
+Examples for each type of request can be found in the [docs](docs) directory.
+
+* [Base](docs/BaseRequest.md)
+* [Edge Storage](docs/EdgeStorageRequest.md)
+* [Video Stream](docs/VideoStreamRequest.md)
+* [Pull Zone Log](docs/PullZoneLogRequest.md)
+* [Secure Url Generator](docs/PullZoneLogRequest.md)
+* [Pricing Calculator](docs/PricingCalculator.md)
+
 ## Reference
 
 This library was created with the hand of the available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview). <br />
 Special thanks to the bunny.net support team for answering my questions regarding the API.
 
 ## Notes
-* I've tried to keep the naming conventions as close as possible to the original API so 
-  passing arguments to the underlying methods should be kind of straightforward.
-* Only tested the storage zone endpoints for listing, uploading, downloading and deleteting, but I'm fairly confident
-  the other endpoints should work just fine. If not, just submit an issue and I'll have a look at it.
+* Tried to keep the naming conventions as close as possible to the original API.
+* Tested the majority of the endpoints myself to validate if they are working correctly. If you happen to
+come across a bug, just submit an issue, and I'll take a look at it.
 
 ## Licence
-The BunnyNet PHP library is licensed under [MIT](https://github.com/ToshY/BunnyNet/blob/master/LICENSE). 
+The BunnyNet PHP library is licensed under [MIT](LICENSE). 
