@@ -11,16 +11,14 @@ use ToshY\BunnyNet\PricingCalculator;
 
 $bunnyPricingCalculator = new PricingCalculator();
 ```
-
+---
 ## Options
-
-The edge storage request has the following endpoints available:
-
+The pricing calculator has the following options available:
 * [Storage](#storage)
 * [Pull Zone](#pull-zone)
     * [Standard](#get-billing-details)
     * [Volume](#get-billing-summary)
-
+---
 ### Storage
 ```php
 // Calculate cost for storage region Falkenstein (5000 GB) and New York (1250 GB).

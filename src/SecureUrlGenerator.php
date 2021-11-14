@@ -55,10 +55,10 @@ final class SecureUrlGenerator
      * @param int $expirationTime
      * @param string|null $userIp
      * @param bool $isDirectoryToken
-     * @param bool|null $pathAllowed
-     * @param bool|null $countriesAllowed
-     * @param bool|null $countriesBlocked
-     * @param bool|null $referrersAllowed
+     * @param string|null $pathAllowed
+     * @param string|null $countriesAllowed
+     * @param string|null $countriesBlocked
+     * @param string|null $referrersAllowed
      * @param bool $allowSubnet
      * @return string
      */
@@ -67,28 +67,18 @@ final class SecureUrlGenerator
         int $expirationTime = 3600,
         ?string $userIp = null,
         bool $isDirectoryToken = false,
-        ?bool $pathAllowed = null,
-        ?bool $countriesAllowed = null,
-        ?bool $countriesBlocked = null,
-        ?bool $referrersAllowed = null,
+        ?string $pathAllowed = null,
+        ?string $countriesAllowed = null,
+        ?string $countriesBlocked = null,
+        ?string $referrersAllowed = null,
         bool $allowSubnet = true
     ): string {
         $url = sprintf('%s%s', $this->hostname, $file);
 
-        if ($countriesAllowed !== null) {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_countries={$countriesAllowed}";
-        }
-
-        if ($countriesBlocked !== null) {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_countries_blocked={$countriesBlocked}";
-        }
-
-        if ($referrersAllowed !== null) {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_referer={$referrersAllowed}";
-        }
+        // Parse optional path parameters
+        $this->parseOptionalPathParameter($url, 'token_countries', $countriesAllowed);
+        $this->parseOptionalPathParameter($url, 'token_countries_blocked', $countriesBlocked);
+        $this->parseOptionalPathParameter($url, 'token_referer', $referrersAllowed);
 
         $urlScheme = parse_url($url, PHP_URL_SCHEME);
         $urlHost = parse_url($url, PHP_URL_HOST);
@@ -98,35 +88,31 @@ final class SecureUrlGenerator
         $parameters = [];
         parse_str($urlQuery, $parameters);
 
-        // Check if the path is specified and overwrite the default
+        // If path is specified, overwrite
         $signaturePath = $urlPath;
-
         if ($pathAllowed !== null) {
             $signaturePath = $pathAllowed;
             $parameters['token_path'] = $signaturePath;
         }
 
-        // Expiration time
-        $expires = time() + $expirationTime;
-
-        // Construct the parameter data; sort alphabetically, very important
+        // Parameter data
         ksort($parameters);
-        $parameterData = "";
-        $parameterDataUrl = "";
+        $parameterData = '';
+        $parameterDataUrl = '';
         if (sizeof($parameters) > 0) {
             foreach ($parameters as $key => $value) {
                 if (strlen($parameterData) > 0) {
-                    $parameterData .= "&";
+                    $parameterData .= '&';
                 }
 
-                $parameterDataUrl .= "&";
-
+                $parameterDataUrl .= '&';
                 $parameterData .= sprintf('%s=%s', $key, $value);
                 $parameterDataUrl .= sprintf('%s=%s', $key, urlencode($value));
             }
         }
 
         // Generate the token
+        $expires = time() + $expirationTime;
         $hashableBase = sprintf('%s%s%s', $this->token, $signaturePath, $expires);
 
         // If using IP validation
@@ -166,5 +152,18 @@ final class SecureUrlGenerator
             $parameterDataUrl,
             $expires
         );
+    }
+
+    /**
+     * @param string $url
+     * @param string|null $pathParameterKey
+     * @param string|null $pathParameterValue
+     */
+    private function parseOptionalPathParameter(string &$url, ?string $pathParameterKey, ?string $pathParameterValue)
+    {
+        if ($pathParameterValue !== null) {
+            $url .= empty(parse_url($url, PHP_URL_QUERY)) === true ? '?' : '&';
+            $url .= sprintf('%s=%s', $pathParameterKey, $pathParameterValue);
+        }
     }
 }

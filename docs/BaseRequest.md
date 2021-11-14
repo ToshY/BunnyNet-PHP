@@ -11,7 +11,7 @@ $bunnyBase = new BaseRequest(
     '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989'
 );
 ```
-
+---
 ## Endpoints
 
 The base request has the following endpoints available:
@@ -73,7 +73,7 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
-
+---
 ### User
 #### Get user details.
 ```php
