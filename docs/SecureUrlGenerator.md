@@ -119,5 +119,7 @@ $bunnySecureUrl->generate(
 * Both `countries` and `referers` accept comma separated input, meaning you could allow or block multiple countries like
   so: `US,DE,JP`. Same for referers: `example.com,example.org`.
 * An edge case occurs when you add a blocked country to the Traffic Manager, and allow that same country for 
-  token authentication. This will result in a standard "Unable to connect" page. This issue is known 
-  and will hopefully be fixed in the near future.
+  token authentication. This will result in a standard "Unable to connect" page. According to support *"The reason for 
+  that would be is due to the fact that the Traffic manager doesn't resolve 
+  the DNS from that country and in turn, we start returning 127.0.0.1 queries towards the hostnames in use instead 
+  of the standard CDN routing. The traffic essentially doesn't even touch our servers in such a case."*
