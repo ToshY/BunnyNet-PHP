@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class KeyFormatNotSupported
+ * Class KeyFormatNotSupportedException
  */
 final class KeyFormatNotSupportedException extends Exception
 {
     /**
-     * KeyFormatNotSupported constructor.
+     * KeyFormatNotSupportedException constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

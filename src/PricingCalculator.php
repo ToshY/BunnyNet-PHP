@@ -15,14 +15,26 @@ use ToshY\BunnyNet\Enum\Region;
  */
 final class PricingCalculator
 {
+    /** @var array Cost template */
+    private const COST_TEMPLATE = [
+        'location' => [],
+        'size' => [
+            'value' => 0,
+            'unit' => 'GB'
+        ],
+        'cost' => [
+            'value' => 0,
+            'unit' => '$',
+        ],
+    ];
+
     /**
-     * Calculate zone and total cost.
      * @param array $regionCollection
      * @param string $unit
      * @param int $precision
      * @return array
      */
-    public function calculateRegionCost(array $regionCollection, string $unit, int $precision = 2): array
+    public function calculateStorageRegionCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
         $intersectTemplate = array_intersect_key(Region::STORAGE_STANDARD, $regionCollection);
@@ -37,7 +49,7 @@ final class PricingCalculator
      * @param int $precision
      * @return array[]
      */
-    public function calculateStandardCDNCost(array $regionCollection, string $unit, int $precision = 2): array
+    public function calculateStandardCdnCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
         $intersectTemplate = array_intersect_key(Region::CDN_STANDARD, $regionCollection);
@@ -52,7 +64,7 @@ final class PricingCalculator
      * @param int $precision
      * @return array[]
      */
-    public function calculateVolumeCDNCost(array $regionCollection, string $unit, int $precision = 2): array
+    public function calculateVolumeCdnCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
         $intersectTemplate = array_intersect_key(Region::CDN_VOLUME, $regionCollection);
@@ -75,57 +87,63 @@ final class PricingCalculator
         int $precision
     ): array {
         $userReportCost = [
-            'ALL' => [
-                'location' => '',
-                'GB' => 0,
-                'cost' => 0,
-            ]
+            'TOTAL' => self::COST_TEMPLATE,
         ];
 
         foreach ($intersectTemplate as $regionAbbreviation => $details) {
-            $gbSize = $this->convertBytes($intersectValues[$regionAbbreviation], $unit, 'GB', 2);
+            $gbSize = $this->convertBytes($intersectValues[$regionAbbreviation], $unit, 'GB',  false,2);
             $regionTotalCost = round($gbSize['value'] * $details['cost'], $precision);
-            $userReportCost[$regionAbbreviation] = [
-                'location' => $details['location'],
-                'GB' => $gbSize,
-                'cost' => sprintf('$%s', $regionTotalCost),
-            ];
 
-            $userReportCost['ALL']['location'] = isset($userReportCost['ALL']['location']) === true
-                ? implode('; ', $userReportCost['ALL']['location'])
-                : 'N/A';
-            $userReportCost['ALL']['GB'] = $userReportCost['ALL']['GB'] + $gbSize;
-            $userReportCost['ALL']['cost'] = $userReportCost['ALL']['cost'] + $regionTotalCost;
+            $locationReportCost = self::COST_TEMPLATE;
+            $locationReportCost['location'] = $details['location'];
+            $locationReportCost['size']['value'] = $gbSize['value'];
+            $locationReportCost['cost']['value'] = $regionTotalCost;
+            $userReportCost[$regionAbbreviation] = $locationReportCost;
+
+            $userReportCost['TOTAL']['location'][$regionAbbreviation] = $details['location'];
+            $userReportCost['TOTAL']['size']['value'] = $userReportCost['TOTAL']['size']['value'] + $gbSize['value'];
+            $userReportCost['TOTAL']['cost']['value'] = $userReportCost['TOTAL']['cost']['value'] + $regionTotalCost;
         }
         return $userReportCost;
     }
 
     /**
-     * @param float $value
+     * @param $value
      * @param string $inputUnit
      * @param string $outputUnit
+     * @param bool $binary
      * @param int $precision
      * @return array
      */
     private function convertBytes(
-        float $value,
+        $value,
         string $inputUnit = 'MB',
         string $outputUnit = 'GB',
+        bool $binary = true,
         int $precision = 2
     ): array {
-        $unitCollection = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+        switch ($binary) {
+            case false:
+                $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+                $mod = 1000;
+                break;
+            case true:
+            default:
+                $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
+                $mod = 1024;
+        }
 
-        $indexInputUnit = array_search($inputUnit, $unitCollection, true);
-        $indexOutputUnit = array_search($outputUnit, $unitCollection, true);
+        $indexInputUnit = array_search($inputUnit, $units, true);
+        $indexOutputUnit = array_search($outputUnit, $units, true);
 
-        $outputValue = round(
-            $value * pow(1000, $indexOutputUnit - $indexInputUnit),
-            $precision
-        );
+        $power = $indexOutputUnit - $indexInputUnit;
+        if ($power === false) {
+            $power = ($value > 0) ? floor(log($value, $mod)) : 0;
+        }
 
         return [
-            'value' => $outputValue,
-            'unit' => $outputUnit,
+            'value' => round($value / pow($mod, $power), $precision),
+            'unit' => $units[$indexOutputUnit],
         ];
     }
 }

@@ -12,12 +12,12 @@ use Exception;
 use Throwable;
 
 /**
- * Class FileDoesNotExist
+ * Class FileDoesNotExistException
  */
 final class FileDoesNotExistException extends Exception
 {
     /**
-     * FileDoesNotExist constructor.
+     * FileDoesNotExistException constructor.
      * @param $message
      * @param int $code
      * @param Throwable|null $previous

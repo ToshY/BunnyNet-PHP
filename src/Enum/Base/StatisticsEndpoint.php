@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\CDN;
+namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
@@ -25,11 +25,11 @@ final class StatisticsEndpoint
         'query' => [
             'dateFrom' => [
                 'required' => false,
-                'type' => 'datetime',
+                'type' => 'string',
             ],
             'dateTo' => [
                 'required' => false,
-                'type' => 'datetime',
+                'type' => 'string',
             ],
             'pullZone' => [
                 'required' => false,

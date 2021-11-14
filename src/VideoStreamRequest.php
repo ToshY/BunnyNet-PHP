@@ -268,6 +268,26 @@ final class VideoStreamRequest extends BunnyClient
 
     /**
      * @param int $libraryId
+     * @param string $videoId
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     */
+    public function fetchVideo(int $libraryId, string $videoId, array $body): array
+    {
+        $endpoint = VideoEndpoint::FETCH_VIDEO;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->request(
+            $endpoint,
+            [$libraryId, $videoId],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @param int $libraryId
      * @param array $body
      * @param array $query
      * @return array
@@ -285,26 +305,6 @@ final class VideoStreamRequest extends BunnyClient
             $endpoint,
             [$libraryId],
             $query,
-            $body
-        );
-    }
-
-    /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param array $body
-     * @return array
-     * @throws Exception\InvalidBodyParameterTypeException
-     */
-    public function fetchVideoById(int $libraryId, string $videoId, array $body): array
-    {
-        $endpoint = VideoEndpoint::FETCH_VIDEO_ID;
-        $body = $this->validateBodyField($body, $endpoint['body']);
-
-        return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            [],
             $body
         );
     }
@@ -334,20 +334,16 @@ final class VideoStreamRequest extends BunnyClient
      * @param int $libraryId
      * @param string $videoId
      * @param string $sourceLanguage
-     * @param array $body
      * @return array
-     * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
+    public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage): array
     {
         $endpoint = VideoEndpoint::DELETE_CAPTION;
-        $body = $this->validateBodyField($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
             [$libraryId, $videoId, $sourceLanguage],
-            [],
-            $body
+            []
         );
     }
 }

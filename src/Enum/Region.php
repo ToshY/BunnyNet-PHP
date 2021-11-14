@@ -1,7 +1,4 @@
 <?php
-/*
- * Written by ToshY, <3-11-2021>
- */
 
 /**
  * Written by ToshY, <24-10-2021>
@@ -68,6 +65,7 @@ final class Region
     /** @var float[] Volume plan for each TB tier in $/GB */
     public const CDN_VOLUME = [
         'TIER_01' => [
+            'location' => 'Tier 1',
             'cost' => 0.005,
             'storage' => [
                 'min' => 0,
@@ -76,6 +74,7 @@ final class Region
             ]
         ],
         'TIER_02' => [
+            'location' => 'Tier 2',
             'cost' => 0.004,
             'storage' => [
                 'min' => 500,
@@ -84,6 +83,7 @@ final class Region
             ]
         ],
         'TIER_03' => [
+            'location' => 'Tier 3',
             'cost' => 0.002,
             'storage' => [
                 'min' => 1000,

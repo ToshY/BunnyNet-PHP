@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\Enum\CDN\BillingEndpoint;
-use ToshY\BunnyNet\Enum\CDN\PullZoneEndpoint;
-use ToshY\BunnyNet\Enum\CDN\PurgeEndpoint;
-use ToshY\BunnyNet\Enum\CDN\StatisticsEndpoint;
-use ToshY\BunnyNet\Enum\CDN\StorageEndpoint;
-use ToshY\BunnyNet\Enum\CDN\StreamEndpoint;
-use ToshY\BunnyNet\Enum\CDN\UserEndpoint;
+use ToshY\BunnyNet\Enum\Base\BillingEndpoint;
+use ToshY\BunnyNet\Enum\Base\PullZoneEndpoint;
+use ToshY\BunnyNet\Enum\Base\PurgeEndpoint;
+use ToshY\BunnyNet\Enum\Base\StatisticsEndpoint;
+use ToshY\BunnyNet\Enum\Base\StorageEndpoint;
+use ToshY\BunnyNet\Enum\Base\StreamEndpoint;
+use ToshY\BunnyNet\Enum\Base\UserEndpoint;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\UuidType;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
@@ -740,7 +740,7 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function purgeURL(array $query): array
+    public function purgeUrl(array $query): array
     {
         $endpoint = PurgeEndpoint::PURGE_URL;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -758,7 +758,7 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function purgeURLbyHeader(array $query): array
+    public function purgeUrlByHeader(array $query): array
     {
         $endpoint = PurgeEndpoint::PURGE_URL_HEADER;
         $query = $this->validateQueryField($query, $endpoint['query']);
@@ -890,10 +890,10 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $id
+     * @param int $id
      * @return array
      */
-    public function resetStorageZonePasswordByPath(array $id): array
+    public function resetStorageZonePasswordByPath(int $id): array
     {
         $endpoint = StorageEndpoint::RESET_PASSWORD_PATH;
 
