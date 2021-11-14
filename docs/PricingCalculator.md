@@ -13,7 +13,7 @@ $bunnyPricingCalculator = new PricingCalculator();
 ```
 ---
 ## Options
-The pricing calculator has the following options available:
+The pricing calculator has the following methods available:
 * [Storage](#storage)
 * [Pull Zone](#pull-zone)
     * [Standard](#get-billing-details)

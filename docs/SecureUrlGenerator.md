@@ -2,7 +2,7 @@
 
 ## Usage
 
-The pricing calculator is just a basic tool to calculate the possible storage costs.
+The secure url generator is a tool to generate secure urls using token authentication.
 
 ```php
 require 'vendor/autoload.php';
@@ -16,7 +16,7 @@ $bunnySecureUrl = new SecureUrlGenerator(
 ```
 ---
 ## Options
-The edge storage request has the following endpoints available:
+The edge storage request has the following methods available:
 * [Generate](#generate)
 ---
 ### Generate
@@ -103,3 +103,5 @@ $bunnySecureUrl->generate(
 * Token authentication only supports IPv4.
 * In order to reduce the false negatives (and increase privacy) for token authentication with IPv4, the default is to
 allow the full /24 subnet. In practice this means allowing instead `12.345.67.0` instead of `12.345.67.89` (user's actual IPv4).
+* Both `countries` and `referers` accept comma separated input, meaning you could
+allow or block multiple countries like so: `US,DE,JP`. Same for referers: `example.com,example.org`.
