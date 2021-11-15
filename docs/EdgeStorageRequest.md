@@ -25,11 +25,11 @@ $bunnyEdgeStorage = new EdgeStorageRequest(
 
 The edge storage request has the following endpoints available:
 
-* [Browse](#browse)
-* [Manage](#manage)
-    * [Details](#get-billing-details)
-    * [Summary](#get-billing-summary)
-    * [Apply promo code](#apply-promo-code)
+* [Browse files](#browse)
+* [Manage files](#manage)
+    * [Upload](#upload-file)
+    * [Download](#download-file)
+    * [Delete](#delete-file)
 
 ---
 
