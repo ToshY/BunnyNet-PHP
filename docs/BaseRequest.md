@@ -643,7 +643,7 @@ $bunnyBase->listStorageZone([
 
 ```php
 $bunnyBase->addStorageZone([
-    'OriginUrl' => 'https://my-bucket.service.com',
+    'OriginUrl' => 'https://my-backup-bucket.service.com',
     'Name' => 'My Custom Storage Zone',
     'Region' => 'DE',
     'ReplicationRegions' => [
@@ -652,6 +652,10 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+*Note*:
+* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone. 
+  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, 
+  the system will try to proxy and fetch it from the `OriginUrl` instead.
 
 ---
 
