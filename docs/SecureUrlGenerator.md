@@ -22,7 +22,7 @@ $bunnySecureUrl = new SecureUrlGenerator(
 
 ## Options
 
-The edge storage request has the following methods available:
+The secure url generator has the following methods available:
 
 * [Generate](#generate)
 
