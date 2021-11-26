@@ -27,6 +27,7 @@ use ToshY\BunnyNet\EdgeStorageRequest;
 use ToshY\BunnyNet\VideoStreamRequest;
 use Toshy\BunnyNet\PullZoneLogRequest;
 use ToshY\BunnyNet\SecureUrlGenerator;
+use ToshY\BunnyNet\ImageOptimizer;
 use ToshY\BunnyNet\PricingCalculator;
 
 // Classes for API endpoints.
@@ -53,6 +54,9 @@ $bunnySecureUrl = new SecureUrlGenerator(
     '5509f27d-9103-4de6-8370-8bd68db859c9'
 );
 
+// Image optimizer
+$bunnyImageOptimizer = new ImageOptimizer();
+
 // Pricing calculator for CDN and storage tiers.
 $bunnyPricingCalculator = new PricingCalculator();
 ```
@@ -64,7 +68,8 @@ Examples for each type of request can be found in the [docs](docs) directory.
 * [Edge Storage](docs/EdgeStorageRequest.md)
 * [Video Stream](docs/VideoStreamRequest.md)
 * [Pull Zone Log](docs/PullZoneLogRequest.md)
-* [Secure Url Generator](docs/PullZoneLogRequest.md)
+* [Secure Url Generator](docs/SecureUrlGenerator.md)
+* [Image Optimizer](docs/ImageOptimizer.md)
 * [Pricing Calculator](docs/PricingCalculator.md)
 
 ## Reference
