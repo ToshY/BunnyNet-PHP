@@ -4,7 +4,11 @@
 </a>
 
 # BunnyNet API client for PHP
-[![PHPCS](https://github.com/ToshY/BunnyNet/actions/workflows/phpcs.yml/badge.svg)](https://github.com/ToshY/BunnyNet/actions/workflows/phpcs.yml)
+![GitHub Repo stars](https://img.shields.io/github/stars/toshy/bunnynet-php?label=Github%20stars&style=flat-square)
+![Packagist Downloads](https://img.shields.io/packagist/dm/toshy/bunnynet-php?label=Packagist%20downloads&style=flat-square&color=007ec6)
+![Packagist License](https://img.shields.io/packagist/l/toshy/bunnynet-php?label=License&style=flat-square&color=007ec6)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/toshy/bunnynet-php?label=Tag&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/toshy/bunnynet-php/PHP_CodeSniffer?label=Codesniffer&style=flat-square)
 
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
