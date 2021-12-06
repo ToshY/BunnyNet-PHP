@@ -31,5 +31,6 @@ final class Optimizer
         'contrast',
         'sepia',
         'auto_optimize',
+        'class',
     ];
 }
