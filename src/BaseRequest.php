@@ -12,6 +12,7 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Base\BillingEndpoint;
 use ToshY\BunnyNet\Enum\Base\PullZoneEndpoint;
 use ToshY\BunnyNet\Enum\Base\PurgeEndpoint;
+use ToshY\BunnyNet\Enum\Base\RegionEndpoint;
 use ToshY\BunnyNet\Enum\Base\StatisticsEndpoint;
 use ToshY\BunnyNet\Enum\Base\StorageEndpoint;
 use ToshY\BunnyNet\Enum\Base\StreamEndpoint;
@@ -61,6 +62,18 @@ final class BaseRequest extends BunnyClient
         }
         $this->apiKey = $key;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function listRegions(): array
+    {
+        $endpoint = RegionEndpoint::GET_REGION_LIST;
+
+        return $this->request(
+            $endpoint
+        );
     }
 
     /**

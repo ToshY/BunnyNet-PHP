@@ -22,6 +22,7 @@ $bunnyBase = new BaseRequest(
 
 The base request has the following endpoints available:
 
+* [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
 * [Billing](#billing)
@@ -79,6 +80,14 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
+
+---
+
+### Regions
+
+```php
+$bunnyBase->listRegions();
+```
 
 ---
 
