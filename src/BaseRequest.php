@@ -375,15 +375,20 @@ final class BaseRequest extends BunnyClient
 
     /**
      * @param int $id
+     * @param array $query
      * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getPullZone(int $id): array
+    public function getPullZone(int $id, array $query = []): array
     {
         $endpoint = PullZoneEndpoint::GET_PULL_ZONE;
+        $query = $this->validateQueryField($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
-            [$id]
+            [$id],
+            $query
         );
     }
 

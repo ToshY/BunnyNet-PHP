@@ -31,6 +31,10 @@ final class PullZoneEndpoint
                 'required' => false,
                 'type' => 'int',
             ],
+            'includeCertificate' => [
+                'required' => false,
+                'type' => 'int',
+            ],
         ],
         'body' => [],
     ];
@@ -57,6 +61,9 @@ final class PullZoneEndpoint
             'Type' => [
                 'type' => 'int'
             ],
+            'EnableAutoSSL' => [
+                'type' => 'bool'
+            ],
         ],
     ];
 
@@ -68,7 +75,12 @@ final class PullZoneEndpoint
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
         ],
-        'query' => [],
+        'query' => [
+            'includeCertificate' => [
+                'required' => false,
+                'type' => 'int',
+            ],
+        ],
         'body' => [],
     ];
 
