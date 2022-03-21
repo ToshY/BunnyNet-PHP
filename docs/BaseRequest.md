@@ -172,6 +172,7 @@ $bunnyBase->getStatistics([
 $bunnyBase->listPullZones([
     'page' => 1,
     'perPage' => 1000,
+    'includeCertificate' => true,
 ]);
 ```
 
@@ -192,6 +193,7 @@ $bunnyBase->addPullZone([
     'Name' => 'my-pullzone-1',
     'StorageZoneId' => 123456,
     'Type' => 0,
+    'EnableAutoSSL' => true,
 ]);
 ```
 
@@ -201,6 +203,12 @@ $bunnyBase->addPullZone([
 
 ```php
 $bunnyBase->getPullZone(1);
+```
+
+```php
+$bunnyBase->getPullZone(1, [
+    'includeCertificate' => true,
+]);
 ```
 
 ---
@@ -465,13 +473,13 @@ $bunnyBase->purgeCache(1);
 
 ---
 
-#### Add custom certificate. (needs further testing)
+#### Add custom certificate.
 
 ```php
 $bunnyBase->addCustomCertificate(1, [
     'Hostname' => 'cdn.example.com',
-    'Certificate' => '',
-    'CertificateKey' => '',
+    'Certificate' => base64_encode(file_get_contents('/certs/cert.pem')),
+    'CertificateKey' => base64_encode(file_get_contents('/certs/key.pem')),
 ]);
 ```
 
