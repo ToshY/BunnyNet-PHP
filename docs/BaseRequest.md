@@ -25,6 +25,7 @@ The base request has the following endpoints available:
 * [Abuse Case](#abuse-case)
   * [List](#list-abuse-cases)
   * [Check](#check-abuse-case)
+* [Countries](#countries)
 * [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
@@ -103,6 +104,14 @@ $bunnyBase->listAbuseCases([
 
 ```php
 $bunnyBase->checkAbuseCase(1);
+```
+
+---
+
+### Countries
+
+```php
+$bunnyBase->getCountryList();
 ```
 
 ---

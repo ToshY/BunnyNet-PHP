@@ -11,6 +11,7 @@ namespace ToshY\BunnyNet;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Base\AbuseCaseEndpoint;
 use ToshY\BunnyNet\Enum\Base\BillingEndpoint;
+use ToshY\BunnyNet\Enum\Base\CountryEndpoint;
 use ToshY\BunnyNet\Enum\Base\PullZoneEndpoint;
 use ToshY\BunnyNet\Enum\Base\PurgeEndpoint;
 use ToshY\BunnyNet\Enum\Base\RegionEndpoint;
@@ -103,6 +104,18 @@ final class BaseRequest extends BunnyClient
     public function listRegions(): array
     {
         $endpoint = RegionEndpoint::GET_REGION_LIST;
+
+        return $this->request(
+            $endpoint
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getCountryList(): array
+    {
+        $endpoint = CountryEndpoint::GET_COUNTRY_LIST;
 
         return $this->request(
             $endpoint
