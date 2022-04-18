@@ -1,9 +1,12 @@
 name: "PHP_CodeSniffer"
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
-      - 'master'
+      - master
     paths:
       - '**.php'
       - 'phpcs.xml'
