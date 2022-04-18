@@ -22,6 +22,9 @@ $bunnyBase = new BaseRequest(
 
 The base request has the following endpoints available:
 
+* [Abuse Case](#abuse-case)
+  * [List](#list-abuse-cases)
+  * [Check](#check-abuse-case)
 * [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
@@ -80,6 +83,27 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
+
+---
+
+### Abuse Case
+
+#### List abuse cases
+
+```php
+$bunnyBase->listAbuseCases([
+    'page' => 1,
+    'perPage' => 1000,
+]);
+```
+
+---
+
+#### Check abuse case
+
+```php
+$bunnyBase->checkAbuseCase(1);
+```
 
 ---
 
@@ -669,9 +693,12 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+
 *Note*:
-* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone. 
-  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, 
+
+* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage
+  Zone.
+  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
   the system will try to proxy and fetch it from the `OriginUrl` instead.
 
 ---
