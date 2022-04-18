@@ -114,15 +114,20 @@ final class BaseRequest extends BunnyClient
 
     /**
      * @param int $id
+     * @param array $query
      * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getVideoLibrary(int $id): array
+    public function getVideoLibrary(int $id, array $query = []): array
     {
         $endpoint = StreamEndpoint::GET_VIDEO_LIBRARY;
+        $query = $this->validateQueryField($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
-            [$id]
+            [$id],
+            $query
         );
     }
 

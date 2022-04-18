@@ -669,9 +669,12 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+
 *Note*:
-* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone. 
-  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, 
+
+* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage
+  Zone.
+  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
   the system will try to proxy and fetch it from the `OriginUrl` instead.
 
 ---
@@ -744,6 +747,7 @@ $bunnyBase->resetStorageZoneReadOnlyPassword([
 $bunnyBase->listVideoLibraries([
     'page' => 1,
     'perPage' => 1000,
+    'includeAccessKey' => false,
 ]);
 ```
 
@@ -769,6 +773,12 @@ $bunnyBase->addVideoLibrary([
 $bunnyBase->getVideoLibrary(1);
 ```
 
+```php
+$bunnyBase->getVideoLibrary(1, [
+    'includeAccessKey' => true,
+]);
+```
+
 ---
 
 #### Update video library.
@@ -784,6 +794,7 @@ $bunnyBase->updateVideoLibrary(1, [
     'WatermarkPositionLeft' => 0,
     'WatermarkPositionTop' => 0,
     'WatermarkWidth' => 0,
+    'WatermarkHeight' => 0,
     'EnabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
     'ViAiPublisherId' => '',
     'VastTagUrl' => '',
@@ -807,6 +818,8 @@ $bunnyBase->updateVideoLibrary(1, [
     'Bitrate1080p' => 5000,
     'Bitrate1440p' => 8000,
     'Bitrate2160p' => 25000,
+    'ShowHeatmap' => false,
+    'EnableContentTagging' => true,    
 ]);
 ```
 

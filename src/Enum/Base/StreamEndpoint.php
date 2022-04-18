@@ -31,6 +31,10 @@ final class StreamEndpoint
                 'required' => false,
                 'type' => 'int',
             ],
+            'includeAccessKey' => [
+                'required' => false,
+                'type' => 'bool',
+            ],
         ],
         'body' => [],
     ];
@@ -64,7 +68,12 @@ final class StreamEndpoint
         'headers' => [
             Header::ACCEPT_JSON,
         ],
-        'query' => [],
+        'query' => [
+            'includeAccessKey' => [
+                'required' => false,
+                'type' => 'bool',
+            ],
+        ],
         'body' => [],
     ];
 
@@ -103,6 +112,9 @@ final class StreamEndpoint
                 'type' => 'int',
             ],
             'WatermarkWidth' => [
+                'type' => 'int',
+            ],
+            'WatermarkHeight' => [
                 'type' => 'int',
             ],
             'EnabledResolutions' => [
@@ -173,6 +185,12 @@ final class StreamEndpoint
             ],
             'Bitrate2160p' => [
                 'type' => 'int',
+            ],
+            'ShowHeatmap' => [
+                'type' => 'bool',
+            ],
+            'EnableContentTagging' => [
+                'type' => 'bool',
             ],
         ],
     ];
