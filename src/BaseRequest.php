@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Client\BunnyClient;
+use ToshY\BunnyNet\Enum\Base\AbuseCaseEndpoint;
 use ToshY\BunnyNet\Enum\Base\BillingEndpoint;
 use ToshY\BunnyNet\Enum\Base\CountryEndpoint;
 use ToshY\BunnyNet\Enum\Base\PullZoneEndpoint;
@@ -63,6 +64,38 @@ final class BaseRequest extends BunnyClient
         }
         $this->apiKey = $key;
         return $this;
+    }
+
+    /**
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
+    public function listAbuseCases(array $query = []): array
+    {
+        $endpoint = AbuseCaseEndpoint::LIST_ABUSE_CASES;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->request(
+            $endpoint,
+            [],
+            $query
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function checkAbuseCase(int $id): array
+    {
+        $endpoint = AbuseCaseEndpoint::CHECK_ABUSE_CASE;
+
+        return $this->request(
+            $endpoint,
+            [$id]
+        );
     }
 
     /**

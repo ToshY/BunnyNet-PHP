@@ -91,7 +91,7 @@ final class PricingCalculator
         ];
 
         foreach ($intersectTemplate as $regionAbbreviation => $details) {
-            $gbSize = $this->convertBytes($intersectValues[$regionAbbreviation], $unit, 'GB',  false,2);
+            $gbSize = $this->convertBytes($intersectValues[$regionAbbreviation], $unit, 'GB', false, 2);
             $regionTotalCost = round($gbSize['value'] * $details['cost'], $precision);
 
             $locationReportCost = self::COST_TEMPLATE;

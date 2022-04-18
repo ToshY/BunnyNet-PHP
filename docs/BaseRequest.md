@@ -22,6 +22,9 @@ $bunnyBase = new BaseRequest(
 
 The base request has the following endpoints available:
 
+* [Abuse Case](#abuse-case)
+  * [List](#list-abuse-cases)
+  * [Check](#check-abuse-case)
 * [Countries](#countries)
 * [Regions](#regions)
 * [User](#user)
@@ -81,6 +84,27 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
+
+---
+
+### Abuse Case
+
+#### List abuse cases
+
+```php
+$bunnyBase->listAbuseCases([
+    'page' => 1,
+    'perPage' => 1000,
+]);
+```
+
+---
+
+#### Check abuse case
+
+```php
+$bunnyBase->checkAbuseCase(1);
+```
 
 ---
 
