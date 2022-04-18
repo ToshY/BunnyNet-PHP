@@ -25,6 +25,10 @@ The base request has the following endpoints available:
 * [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
+    * [Update](#get-user-details)
+    * [Reset API key](#reset-api-key)
+    * [Close Account](#close-the-account)
+    * [DPA](#get-dpa-details)
 * [Billing](#billing)
     * [Details](#get-billing-details)
     * [Summary](#get-billing-summary)
@@ -116,7 +120,36 @@ $bunnyBase->updateUserDetails([
     'VATNumber' => '',
     'ReceiveNotificationEmails' => true,
     'ReceivePromotionalEmails' => false,
+    'Password' => '1234Abcd',
+    'OldPassword' => 'Abcd1234',
 ]);
+```
+
+---
+
+#### Reset API key.
+
+```php
+$bunnyBase->resetUserApiKey();
+```
+
+---
+
+#### Close the account.
+
+```php
+$bunnyBase->closeTheAccount([
+    'Password' => 'Abcd1234',
+    'Reason' => 'Just a test.',
+]);
+```
+
+---
+
+#### Get DPA details.
+
+```php
+$bunnyBase->getDpaDetails();
 ```
 
 ---
@@ -669,9 +702,12 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+
 *Note*:
-* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone. 
-  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, 
+
+* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage
+  Zone.
+  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
   the system will try to proxy and fetch it from the `OriginUrl` instead.
 
 ---

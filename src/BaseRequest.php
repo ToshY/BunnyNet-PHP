@@ -958,7 +958,7 @@ final class BaseRequest extends BunnyClient
      */
     public function updateUserDetails(array $body): array
     {
-        $endpoint = StorageEndpoint::UPDATE_STORAGE_ZONE;
+        $endpoint = UserEndpoint::UPDATE_USER_DETAILS;
         $body = $this->validateBodyField($body, $endpoint['body']);
 
         return $this->request(
@@ -966,6 +966,48 @@ final class BaseRequest extends BunnyClient
             [],
             [],
             $body
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function resetUserApiKey(): array
+    {
+        $endpoint = UserEndpoint::RESET_API_KEY;
+
+        return $this->request(
+            $endpoint
+        );
+    }
+
+    /**
+     * @param array $body
+     * @return array
+     * @throws Exception\InvalidBodyParameterTypeException
+     */
+    public function closeTheAccount(array $body): array
+    {
+        $endpoint = UserEndpoint::CLOSE_ACCOUNT;
+        $body = $this->validateBodyField($body, $endpoint['body']);
+
+        return $this->request(
+            $endpoint,
+            [],
+            [],
+            $body
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDpaDetails(): array
+    {
+        $endpoint = UserEndpoint::GET_DPA_DETAILS;
+
+        return $this->request(
+            $endpoint
         );
     }
 }
