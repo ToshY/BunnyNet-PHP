@@ -69,6 +69,51 @@ final class UserEndpoint
             'ReceivePromotionalEmails' => [
                 'type' => 'bool',
             ],
+            'Password' => [
+                'type' => 'string',
+            ],
+            'OldPassword' => [
+                'type' => 'string',
+            ],
         ],
+    ];
+
+    /** @var array */
+    public const RESET_API_KEY = [
+        'method' => 'POST',
+        'path' => 'user/resetApiKey',
+        'headers' => [],
+        'query' => [],
+        'body' => [],
+    ];
+
+    /** @var array */
+    public const CLOSE_ACCOUNT = [
+        'method' => 'POST',
+        'path' => 'user/closeaccount',
+        'headers' => [
+            Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON
+        ],
+        'query' => [],
+        'body' => [
+            'Password' => [
+                'type' => 'string',
+            ],
+            'Reason' => [
+                'type' => 'string',
+            ],
+        ],
+    ];
+
+    /** @var array */
+    public const GET_DPA_DETAILS = [
+        'method' => 'GET',
+        'path' => 'user/dpa',
+        'headers' => [
+            Header::ACCEPT_JSON,
+        ],
+        'query' => [],
+        'body' => [],
     ];
 }

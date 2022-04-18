@@ -29,6 +29,10 @@ The base request has the following endpoints available:
 * [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
+    * [Update](#get-user-details)
+    * [Reset API key](#reset-api-key)
+    * [Close Account](#close-the-account)
+    * [DPA](#get-dpa-details)
 * [Billing](#billing)
     * [Details](#get-billing-details)
     * [Summary](#get-billing-summary)
@@ -149,7 +153,36 @@ $bunnyBase->updateUserDetails([
     'VATNumber' => '',
     'ReceiveNotificationEmails' => true,
     'ReceivePromotionalEmails' => false,
+    'Password' => '1234Abcd',
+    'OldPassword' => 'Abcd1234',
 ]);
+```
+
+---
+
+#### Reset API key.
+
+```php
+$bunnyBase->resetUserApiKey();
+```
+
+---
+
+#### Close the account.
+
+```php
+$bunnyBase->closeTheAccount([
+    'Password' => 'Abcd1234',
+    'Reason' => 'Just a test.',
+]);
+```
+
+---
+
+#### Get DPA details.
+
+```php
+$bunnyBase->getDpaDetails();
 ```
 
 ---
