@@ -22,6 +22,7 @@ $bunnyBase = new BaseRequest(
 
 The base request has the following endpoints available:
 
+* [Countries](#countries)
 * [Regions](#regions)
 * [User](#user)
     * [Details](#get-user-details)
@@ -80,6 +81,14 @@ The base request has the following endpoints available:
     * [Remove allowed referer](#remove-allowed-referer)
     * [Add blocked referer](#add-blocked-referer)
     * [Remove allowed referer](#remove-allowed-referer)
+
+---
+
+### Countries
+
+```php
+$bunnyBase->getCountryList();
+```
 
 ---
 
@@ -669,9 +678,12 @@ $bunnyBase->addStorageZone([
     ],
 ]);
 ```
+
 *Note*:
-* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone. 
-  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, 
+
+* The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage
+  Zone.
+  So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
   the system will try to proxy and fetch it from the `OriginUrl` instead.
 
 ---
