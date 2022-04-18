@@ -537,6 +537,63 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
+    public function getOriginShieldQueueStatistics(int $pullZoneId, array $query = []): array
+    {
+        $endpoint = PullZoneEndpoint::GET_ORIGIN_SHIELD_QUEUE_STATISTICS;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->request(
+            $endpoint,
+            [$pullZoneId],
+            $query,
+        );
+    }
+
+    /**
+     * @param int $pullZoneId
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
+    public function getSafeHopStatistics(int $pullZoneId, array $query = []): array
+    {
+        $endpoint = PullZoneEndpoint::GET_SAFEHOP_STATISTICS;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->request(
+            $endpoint,
+            [$pullZoneId],
+            $query,
+        );
+    }
+
+    /**
+     * @param int $pullZoneId
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
+    public function getOptimizerStatistics(int $pullZoneId, array $query = []): array
+    {
+        $endpoint = PullZoneEndpoint::GET_OPTIMIZER_STATISTICS;
+        $query = $this->validateQueryField($query, $endpoint['query']);
+
+        return $this->request(
+            $endpoint,
+            [$pullZoneId],
+            $query,
+        );
+    }
+
+    /**
+     * @param int $pullZoneId
+     * @param array $query
+     * @return array
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
     public function getStatisticsPullZone(int $pullZoneId, array $query = []): array
     {
         $endpoint = PullZoneEndpoint::GET_STATISTICS;

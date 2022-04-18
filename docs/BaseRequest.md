@@ -46,6 +46,9 @@ The base request has the following endpoints available:
     * [Delete](#delete-pull-zone)
     * [Delete edge rule](#delete-edge-rule)
     * [Add/Update edge rule](#add-or-update-edge-rule)
+    * [Origin Shield statistics](#get-origin-shield-queue-statistics)
+    * [SafeHop statistics](#get-safehop-statistics)
+    * [Optimizer statistics](#get-optimizer-statistics)
     * [Enable edge rule](#set-edge-rule-enabled)
     * [Statistics](#get-statistics)
     * [Load free certificate](#load-free-certificate)
@@ -288,6 +291,10 @@ $bunnyBase->updatePullZone(1, [
       '*.example.com',
       '*.example.org',
   ],
+  'BlockedReferrers' => [
+      '*.bad.com',
+      '*.evil.org',
+  ],
   'BlockedIps' => [
       '12.345.65.89',
       '10.111.21.31',
@@ -350,6 +357,7 @@ $bunnyBase->updatePullZone(1, [
   'LogForwardingHostname' => null,
   'LogForwardingPort' => 0,
   'LogForwardingToken' => null,
+  'LogForwardingProtocol' => 0,
   'LoggingSaveToStorage' => false,
   'LoggingStorageZoneId' => 0,
   'FollowRedirects' => false,
@@ -375,7 +383,32 @@ $bunnyBase->updatePullZone(1, [
   'OptimizerWatermarkOffset' => 3,
   'OptimizerWatermarkMinImageSize' => 300,
   'OptimizerAutomaticOptimizationEnabled' => true,
+  'OptimizerClasses' => [],
+  'OptimizerForceClasses' => false,
   'Type' => 0,
+  'OriginRetries' => 0,
+  'OriginConnectTimeout' => 10,
+  'OriginResponseTimeout' => 60,
+  'UseStaleWhileUpdating' => false,
+  'UseStaleWhileOffline' => false,
+  'OriginRetry5XXResponses' => false,
+  'OriginRetryConnectionTimeout' => true,
+  'OriginRetryResponseTimeout' => true,
+  'OriginRetryDelay' => 0,
+  'QueryStringVaryParameters' => [],
+  'OriginShieldEnableConcurrencyLimit' => false,
+  'OriginShieldMaxConcurrentRequests' => 5000,
+  'EnableCookieVary' => false,
+  'CookieVaryParameters' => [],
+  'EnableSafeHop' => false,
+  'OriginShieldQueueMaxWaitTime' => 30,
+  'OriginShieldMaxQueuedRequests' => 5000,
+  'UseBackgroundUpdate' => false,
+  'EnableAutoSSL' => false,
+  'LogFormat' => 0,
+  'LogForwardingFormat' => 0,
+  'ShieldDDosProtectionType' => 1,
+  'ShieldDDosProtectionEnabled' => false,
 ]);
 ```
 
@@ -384,7 +417,8 @@ $bunnyBase->updatePullZone(1, [
 * `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
   show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
 * `OriginShieldZoneCode` accepts either the 2 digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-* `WAFEnabled` and `WAFEnabledRules` are not yet implemented. This feature is currently being worked on and does not
+* `WAFEnabled`, `WAFDisabledRuleGroups`, `WAFEnableRequestHeaderLogging` and `WAFRequestHeaderIgnores` are not yet
+  implemented. This feature is currently being worked on and does not
   have an ETA. It is advised **not** to update these values until the feature is implemented, therefore these options
   are removed from the example above.
 
@@ -492,11 +526,6 @@ $bunnyBase->addOrUpdateEdgeRule(1, [
 #### Set edge rule enabled.
 
 ```php
-use ToshY\BunnyNet\BaseRequest;
-
-$bunnyBase = new BaseRequest(
-'2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989'
-);
 $bunnyBase->setEdgeRuleEnabled(1, 'b697018b-a587-403f-b0d0-aa5062ff7467', [
     'Id' => 1,
     'Value' => false,
@@ -506,6 +535,42 @@ $bunnyBase->setEdgeRuleEnabled(1, 'b697018b-a587-403f-b0d0-aa5062ff7467', [
 *Note*:
 
 * The `Id` denotes the pull zone ID (the same as the first argument) and is a required parameter.
+
+---
+
+#### Get origin shield queue statistics
+
+```php
+$bunnyBase->getOriginShieldQueueStatistics(1, [
+    'dateFrom' => 'Y-m-d H:i:s',
+    'dateTo' => 'Y-m-d H:i:s',
+    'hourly' => false,
+]);
+```
+
+---
+
+#### Get SafeHop statistics
+
+```php
+$bunnyBase->getSafeHopStatistics(1, [
+    'dateFrom' => 'Y-m-d H:i:s',
+    'dateTo' => 'Y-m-d H:i:s',
+    'hourly' => false,
+]);
+```
+
+---
+
+#### Get Optimizer statistics
+
+```php
+$bunnyBase->getOptimizerStatistics(1, [
+    'dateFrom' => 'Y-m-d H:i:s',
+    'dateTo' => 'Y-m-d H:i:s',
+    'hourly' => false,
+]);
+```
 
 ---
 

@@ -50,19 +50,19 @@ final class PullZoneEndpoint
         'query' => [],
         'body' => [
             'Name' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'OriginUrl' => [
                 'type' => 'string',
             ],
             'StorageZoneId' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'Type' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'EnableAutoSSL' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
         ],
     ];
@@ -94,9 +94,15 @@ final class PullZoneEndpoint
         'query' => [],
         'body' => [
             'OriginUrl' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'AllowedReferrers' => [
+                'type' => 'array',
+                'options' => [
+                    'type' => 'string',
+                ],
+            ],
+            'BlockedReferrers' => [
                 'type' => 'array',
                 'options' => [
                     'type' => 'string',
@@ -109,58 +115,58 @@ final class PullZoneEndpoint
                 ],
             ],
             'EnableGeoZoneUS' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableGeoZoneEU' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableGeoZoneASIA' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableGeoZoneSA' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableGeoZoneAF' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'BlockRootPathAccess' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'BlockPostRequests' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableQueryStringOrdering' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableWebpVary' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableAvifVary' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableMobileVary' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableCountryCodeVary' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableHostnameVary' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableCacheSlice' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ZoneSecurityEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ZoneSecurityIncludeHashRemoteIP' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'IgnoreQueryStrings' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'MonthlyBandwidthLimit' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'AccessControlOriginHeaderExtensions' => [
                 'type' => 'array',
@@ -169,10 +175,10 @@ final class PullZoneEndpoint
                 ],
             ],
             'EnableAccessControlOriginHeader' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'DisableCookies' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'BudgetRedirectedCountries' => [
                 'type' => 'array',
@@ -187,154 +193,264 @@ final class PullZoneEndpoint
                 ],
             ],
             'CacheControlMaxAgeOverride' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'CacheControlBrowserMaxAgeOverride' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'AddHostHeader' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'AddCanonicalHeader' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableLogging' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'LoggingIPAnonymizationEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'PermaCacheStorageZoneId' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'AWSSigningEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'AWSSigningKey' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'AWSSigningRegionName' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'AWSSigningSecret' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'EnableOriginShield' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OriginShieldZoneCode' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'EnableTLS1' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'EnableTLS1_1' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'CacheErrorResponses' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'VerifyOriginSSL' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'LogForwardingEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'LogForwardingHostname' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'LogForwardingPort' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'LogForwardingToken' => [
-                'type' => 'string'
+                'type' => 'string',
+            ],
+            'LogForwardingProtocol' => [
+                'type' => 'int',
             ],
             'LoggingSaveToStorage' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'LoggingStorageZoneId' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'FollowRedirects' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ConnectionLimitPerIPCount' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'RequestLimit' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'WAFEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
-            'WAFEnabledRules' => [
+            'WAFDisabledRuleGroups' => [
                 'type' => 'array',
                 'options' => [
-                    'type' => 'int',
+                    'type' => 'string',
+                ],
+            ],
+            'WAFDisabledRules' => [
+                'type' => 'array',
+                'options' => [
+                    'type' => 'string',
+                ],
+            ],
+            'WAFEnableRequestHeaderLogging' => [
+                'type' => 'bool',
+            ],
+            'WAFRequestHeaderIgnores' => [
+                'type' => 'array',
+                'options' => [
+                    'type' => 'string',
                 ],
             ],
             'ErrorPageEnableCustomCode' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ErrorPageCustomCode' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'ErrorPageEnableStatuspageWidget' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'ErrorPageStatuspageCode' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'ErrorPageWhitelabel' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerDesktopMaxWidth' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerMobileMaxWidth' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerImageQuality' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerMobileImageQuality' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerEnableWebP' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerEnableManipulationEngine' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerMinifyCSS' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerMinifyJavaScript' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerWatermarkEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
             'OptimizerWatermarkUrl' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'OptimizerWatermarkPosition' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerWatermarkOffset' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerWatermarkMinImageSize' => [
-                'type' => 'int'
+                'type' => 'int',
             ],
             'OptimizerAutomaticOptimizationEnabled' => [
-                'type' => 'bool'
+                'type' => 'bool',
+            ],
+            'OptimizerClasses' => [
+                'type' => 'array',
+                'options' => [
+                    'Name' => [
+                        'type' => 'int',
+                    ],
+                    'Properties' => [
+                        'type' => 'array',
+                        'options' => [
+                            'type' => 'array',
+                        ],
+                    ],
+                ],
+            ],
+            'OptimizerForceClasses' => [
+                'type' => 'bool',
             ],
             'Type' => [
-                'type' => 'bool'
+                'type' => 'bool',
+            ],
+            'OriginRetries' => [
+                'type' => 'int',
+            ],
+            'OriginConnectTimeout' => [
+                'type' => 'int',
+            ],
+            'OriginResponseTimeout' => [
+                'type' => 'int',
+            ],
+            'UseStaleWhileUpdating' => [
+                'type' => 'bool',
+            ],
+            'UseStaleWhileOffline' => [
+                'type' => 'bool',
+            ],
+            'OriginRetry5XXResponses' => [
+                'type' => 'bool',
+            ],
+            'OriginRetryConnectionTimeout' => [
+                'type' => 'bool',
+            ],
+            'OriginRetryResponseTimeout' => [
+                'type' => 'bool',
+            ],
+            'OriginRetryDelay' => [
+                'type' => 'int',
+            ],
+            'QueryStringVaryParameters' => [
+                'type' => 'array',
+                'options' => [
+                    'type' => 'string',
+                ],
+            ],
+            'OriginShieldEnableConcurrencyLimit' => [
+                'type' => 'bool',
+            ],
+            'OriginShieldMaxConcurrentRequests' => [
+                'type' => 'int',
+            ],
+            'EnableCookieVary' => [
+                'type' => 'bool',
+            ],
+            'CookieVaryParameters' => [
+                'type' => 'array',
+                'options' => [
+                    'type' => 'string',
+                ],
+            ],
+            'EnableSafeHop' => [
+                'type' => 'bool',
+            ],
+            'OriginShieldQueueMaxWaitTime' => [
+                'type' => 'int',
+            ],
+            'OriginShieldMaxQueuedRequests' => [
+                'type' => 'int',
+            ],
+            'UseBackgroundUpdate' => [
+                'type' => 'bool',
+            ],
+            'EnableAutoSSL' => [
+                'type' => 'bool',
+            ],
+            'LogFormat' => [
+                'type' => 'int',
+            ],
+            'LogForwardingFormat' => [
+                'type' => 'int',
+            ],
+            'ShieldDDosProtectionType' => [
+                'type' => 'int',
+            ],
+            'ShieldDDosProtectionEnabled' => [
+                'type' => 'bool',
             ],
         ],
     ];
@@ -388,7 +504,7 @@ final class PullZoneEndpoint
                         'type' => 'array',
                         'options' => [
                             'type' => 'string',
-                        ]
+                        ],
                     ],
                     'PatternMatchingType' => [
                         'type' => 'int',
@@ -428,6 +544,79 @@ final class PullZoneEndpoint
             ],
         ],
     ];
+
+    /** @var array */
+    public const GET_ORIGIN_SHIELD_QUEUE_STATISTICS = [
+        'method' => 'GET',
+        'path' => 'pullzone/%d/originshield/queuestatistics',
+        'headers' => [
+            Header::ACCEPT_JSON,
+        ],
+        'query' => [
+            'dateFrom' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'dateTo' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'hourly' => [
+                'required' => false,
+                'type' => 'bool',
+            ],
+        ],
+        'body' => [],
+    ];
+
+    /** @var array */
+    public const GET_SAFEHOP_STATISTICS = [
+        'method' => 'GET',
+        'path' => 'pullzone/%d/safehop/statistics',
+        'headers' => [
+            Header::ACCEPT_JSON,
+        ],
+        'query' => [
+            'dateFrom' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'dateTo' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'hourly' => [
+                'required' => false,
+                'type' => 'bool',
+            ],
+        ],
+        'body' => [],
+    ];
+
+    /** @var array */
+    public const GET_OPTIMIZER_STATISTICS = [
+        'method' => 'GET',
+        'path' => 'pullzone/%d/optimizer/statistics',
+        'headers' => [
+            Header::ACCEPT_JSON,
+        ],
+        'query' => [
+            'dateFrom' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'dateTo' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'hourly' => [
+                'required' => false,
+                'type' => 'bool',
+            ],
+        ],
+        'body' => [],
+    ];
+
 
     /** @var array */
     public const GET_STATISTICS = [
