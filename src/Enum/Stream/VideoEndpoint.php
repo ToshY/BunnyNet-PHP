@@ -113,6 +113,7 @@ final class VideoEndpoint
         'path' => 'library/%d/videos',
         'headers' => [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON_ALL,
         ],
         'query' => [],
         'body' => [
