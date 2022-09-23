@@ -99,7 +99,7 @@ final class VideoStreamRequest extends BunnyClient
         $endpoint = CollectionEndpoint::DELETE_COLLECTION;
 
         return $this->request(
-            $endpoint['method'],
+            $endpoint,
             [$libraryId, $collectionId],
         );
     }
@@ -168,7 +168,7 @@ final class VideoStreamRequest extends BunnyClient
         $endpoint = VideoEndpoint::DELETE_VIDEO;
 
         return $this->request(
-            $endpoint['method'],
+            $endpoint,
             [$libraryId, $videoId]
         );
     }
