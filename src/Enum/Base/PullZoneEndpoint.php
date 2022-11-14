@@ -33,7 +33,7 @@ final class PullZoneEndpoint
             ],
             'includeCertificate' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => 'bool',
             ],
         ],
         'body' => [],
