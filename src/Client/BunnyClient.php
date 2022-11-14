@@ -80,12 +80,7 @@ class BunnyClient
 
         $base = $this->getHostRequest();
         $path = $this->createUrlPath($endpoint['path'], $pathParameters);
-        $query = empty($query) === false ?
-            sprintf(
-                '?%s',
-                http_build_query($query, '', '&', PHP_QUERY_RFC3986)
-            )
-            : null;
+        $query = $this->createQuery($query);
 
         $url = sprintf(
             '%s://%s%s%s',
@@ -127,6 +122,30 @@ class BunnyClient
         return sprintf(
             sprintf('/%s', $template),
             ...$pathCollection
+        );
+    }
+
+    /**
+     * @param array $query
+     * @return string|null
+     */
+    protected function createQuery(array $query): ?string
+    {
+        if (empty($query) === true) {
+            return null;
+        }
+
+        foreach ($query as $key => $value) {
+            if (is_bool($value) === false) {
+                continue;
+            }
+
+            $query[$key] = $value ? 'true' : 'false';
+        }
+
+        return sprintf(
+            '?%s',
+            http_build_query($query, '', '&', PHP_QUERY_RFC3986)
         );
     }
 
