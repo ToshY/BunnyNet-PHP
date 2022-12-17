@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="ToshY_PHPMD_Ruleset">
+    <description>ToshY PHPMD ruleset</description>
+    <rule ref="rulesets/cleancode.xml">
+        <!-- Rule to exclude -->
+        <exclude name="StaticAccess"/>
+    </rule>
+    <rule ref="rulesets/codesize.xml"/>
+    <rule ref="rulesets/controversial.xml"/>
+    <rule ref="rulesets/unusedcode.xml"/>
+    <rule ref="rulesets/design.xml" />
+</ruleset>

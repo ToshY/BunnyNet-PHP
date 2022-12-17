@@ -1,0 +1,104 @@
+version: '3'
+
+env:
+  UID:
+    sh: id -u
+  GID:
+    sh: id -g
+  TTY: ''
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  # App
+  up:
+    desc: Up service
+    cmds:
+      - docker compose up -d --build --remove-orphans --force-recreate
+
+  down:
+    desc: Down service
+    cmds:
+      - docker compose down --remove-orphans
+
+  contribute:
+    desc: Contribute by running dev tools
+    cmds:
+      - task: phpcs:dry
+      - task: phpmd:check
+
+      # Composer
+  composer:install:
+    desc: Composer install
+    cmds:
+      - docker compose run --rm $TTY php composer install {{.CLI_ARGS | default "--no-cache --no-interaction --prefer-dist"}}
+
+  composer:autoload:
+    desc: Composer dump autoload
+    cmds:
+      - docker compose run --rm $TTY php composer dump-autoload {{.CLI_ARGS | default "--no-cache --no-interaction"}}
+
+  composer:require:
+    desc: Composer require package
+    summary: |
+      task composer:require p="my/package"
+    vars:
+      PACKAGE: '{{.p}}'
+    cmds:
+      - docker compose run --rm $TTY php composer require {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
+
+  composer:remove:
+    desc: Composer remove package
+    summary: |
+      task composer:remove p="my/package"
+    vars:
+      PACKAGE: '{{.p}}'
+    cmds:
+      - docker compose run --rm $TTY php composer remove {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
+
+  composer:update:
+    desc: Composer update package
+    summary: |
+      task composer:update p="my/package"
+    vars:
+      PACKAGE: '{{.p}}'
+    cmds:
+      - docker compose run --rm $TTY php composer update {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
+
+  # Tools
+  phpcs:dry:
+    desc: PHPCS dry run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run
+
+  phpcs:fix:
+    desc: PHPCS fix
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes
+
+  phpmd:check:
+    desc: PHPMD run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
+
+  phpmd:check:strict:
+    desc: PHPMD run with strict argument
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
+
+  phpmd:generate:baseline:
+    desc: PHPMD generate baseline
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpmd --generate-baseline src/ text phpmd.xml
+
+  rector:dry:
+    desc: Rector dry run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/rector --dry-run
+
+  rector:fix:
+    desc: Rector fix
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/rector

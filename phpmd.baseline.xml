@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<phpmd-baseline>
+  <violation rule="PHPMD\Rule\Design\LongClass" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\ExcessivePublicCount" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyMethods" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseRequest.php"/>
+  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/PricingCalculator.php"/>
+  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/SecureUrlGenerator.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/VideoStreamRequest.php"/>
+</phpmd-baseline>
