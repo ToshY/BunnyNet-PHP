@@ -4,12 +4,15 @@
 </a>
 
 # BunnyNet API client for PHP
-![GitHub Repo stars](https://img.shields.io/github/stars/toshy/bunnynet-php?label=Github%20stars&style=flat-square)
-![Packagist Downloads](https://img.shields.io/packagist/dm/toshy/bunnynet-php?label=Packagist%20downloads&style=flat-square&color=007ec6)
-![Packagist License](https://img.shields.io/packagist/l/toshy/bunnynet-php?label=License&style=flat-square&color=007ec6)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/toshy/bunnynet-php?label=Tag&style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpcs.yml?branch=master&label=Codesniffer&style=flat-square)
 
+<div align="left">
+    <img src="https://img.shields.io/packagist/v/toshy/bunnynet-php?label=Packagist" alt="Current bundle version" />
+    <img src="https://img.shields.io/packagist/dt/toshy/bunnynet-php?label=Downloads" alt="Packagist Total Downloads" />
+    <img src="https://img.shields.io/packagist/php-v/toshy/bunnynet-php?label=PHP" alt="PHP version requirement" />
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpcs.yml?branch=master&label=PHPCS" alt="Code style">
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpmd.yml?branch=master&label=PHPMD" alt="Mess detector">
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/security.yml?branch=master&label=Security check" alt="Security check">
+</div>
 
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming and image optimizers.
@@ -67,6 +70,7 @@ $bunnyPricingCalculator = new PricingCalculator();
 ```
 
 ## Documentation
+
 Examples for each type of request can be found in the [docs](docs) directory.
 
 * [Base](docs/BaseRequest.md)
@@ -79,13 +83,39 @@ Examples for each type of request can be found in the [docs](docs) directory.
 
 ## Reference
 
-This library was created with the hand of the available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview). <br />
+This library was created with the hand of the
+available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview). <br />
 Special thanks to the bunny.net support team for answering my questions regarding the API.
 
 ## Notes
+
 * Tried to keep the naming conventions as close as possible to the original API.
 * Tested the majority of the endpoints myself to validate if they are working correctly. If you happen to
-come across a bug, just submit an issue, and I'll take a look at it.
+  come across a bug, just submit an issue, and I'll take a look at it.
+
+## Contribute
+
+### Prerequisites
+
+* Docker Compose
+    * See the Docker Compose [installation guide](https://docs.docker.com/compose/install/) to get started.
+* Task
+    * See the Task [installation guide](https://taskfile.dev/installation/) to get started.
+
+### Up service
+
+```shell
+task up 
+```
+
+### Run checks
+
+Run `phpcs` and `phpmd` checks.
+
+```shell
+task contribute
+```
 
 ## Licence
+
 The BunnyNet PHP library is licensed under [MIT](LICENSE). 

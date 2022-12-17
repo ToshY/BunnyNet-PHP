@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  php:
+    build:
+      context: .docker
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+
