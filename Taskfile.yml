@@ -29,7 +29,7 @@ tasks:
       - task: phpcs:dry
       - task: phpmd:check
 
-      # Composer
+  # Composer
   composer:install:
     desc: Composer install
     cmds:
@@ -71,22 +71,22 @@ tasks:
   phpcs:dry:
     desc: PHPCS dry run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v
 
   phpcs:fix:
     desc: PHPCS fix
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes -v
 
   phpmd:check:
     desc: PHPMD run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
+      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml -v
 
   phpmd:check:strict:
     desc: PHPMD run with strict argument
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
+      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml -v
 
   phpmd:generate:baseline:
     desc: PHPMD generate baseline

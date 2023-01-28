@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ToshY\BunnyNet\Model\Endpoint\Base\User;
+
+use ToshY\BunnyNet\Enum\Method;
+use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+
+class ResendEmailConfirmation implements GenericEndpointInterface
+{
+    public function getMethod(): string
+    {
+        return Method::POST;
+    }
+
+    public function getPath(): string
+    {
+        return 'user/resend-email-confirmation';
+    }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
+}

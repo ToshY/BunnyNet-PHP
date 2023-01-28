@@ -2,86 +2,47 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Enum\Base;
+namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
+use ToshY\BunnyNet\Enum\Method;
+use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
 
-final class PullZoneEndpoint
+class AddPullZone implements GenericEndpointInterface
 {
-    public const LIST_PULL_ZONES = [
-        'method' => 'GET',
-        'path' => 'pullzone',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'page' => [
-                'required' => false,
-                'type' => 'int',
-            ],
-            'perPage' => [
-                'required' => false,
-                'type' => 'int',
-            ],
-            'includeCertificate' => [
-                'required' => false,
-                'type' => 'bool',
-            ],
-        ],
-        'body' => [],
-    ];
+    public function getMethod(): string
+    {
+        return Method::POST;
+    }
 
-    public const ADD_PULL_ZONE = [
-        'method' => 'POST',
-        'path' => 'pullzone',
-        'headers' => [
+    public function getPath(): string
+    {
+        return 'pullzone';
+    }
+
+    public function getHeaders(): array
+    {
+        return [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Name' => [
-                'type' => 'string',
-            ],
-            'OriginUrl' => [
-                'type' => 'string',
-            ],
-            'StorageZoneId' => [
-                'type' => 'int',
-            ],
-            'Type' => [
-                'type' => 'int',
-            ],
-            'EnableAutoSSL' => [
-                'type' => 'bool',
-            ],
-        ],
-    ];
+        ];
+    }
 
-    public const GET_PULL_ZONE = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [
-            'includeCertificate' => [
-                'required' => false,
-                'type' => 'int',
-            ],
-        ],
-        'body' => [],
-    ];
-
-    public const UPDATE_PULL_ZONE = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [],
-        'body' => [
+    /**
+     * OriginType (undocumented):
+     * 0 = URL
+     * 1 = -
+     * 2 = Storage Zone
+     * 3 = -
+     * 4 = Script
+     *
+     * LogAnonymizationType (undocumented):
+     * 0 = Remove one octet
+     * 1 = Drop IP
+     */
+    public function getBody(): array
+    {
+        return [
             'OriginUrl' => [
                 'type' => 'string',
             ],
@@ -484,391 +445,6 @@ final class PullZoneEndpoint
                 'required' => true,
                 'type' => 'string',
             ],
-        ],
-    ];
-
-    public const DELETE_PULL_ZONE = [
-        'method' => 'DELETE',
-        'path' => 'pullzone/%d',
-        'headers' => [],
-        'query' => [],
-        'body' => [],
-    ];
-
-    public const DELETE_EDGE_RULE = [
-        'method' => 'DELETE',
-        'path' => 'pullzone/%d/edgerules/%s',
-        'headers' => [],
-        'query' => [],
-        'body' => [],
-    ];
-
-    public const ADD_UPDATE_EDGE_RULE = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/edgerules/addOrUpdate',
-        'headers' => [
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Guid' => [
-                'type' => 'string',
-            ],
-            'ActionType' => [
-                'type' => 'int',
-            ],
-            'ActionParameter1' => [
-                'type' => 'string',
-            ],
-            'ActionParameter2' => [
-                'type' => 'string',
-            ],
-            'Triggers' => [
-                'type' => 'array',
-                'options' => [
-                    'Type' => [
-                        'type' => 'int',
-                    ],
-                    'PatternMatches' => [
-                        'type' => 'array',
-                        'options' => [
-                            'type' => 'string',
-                        ],
-                    ],
-                    'PatternMatchingType' => [
-                        'type' => 'int',
-                    ],
-                    'Parameter1' => [
-                        'type' => 'string',
-                    ],
-                ],
-            ],
-            'TriggerMatchingType' => [
-                'type' => 'int',
-            ],
-            'Description' => [
-                'type' => 'string',
-            ],
-            'Enabled' => [
-                'type' => 'bool',
-            ],
-        ],
-    ];
-
-    public const SET_EDGE_RULE_ENABLED = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/edgerules/%s/setEdgeRuleEnabled',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Id' => [
-                'type' => 'int',
-            ],
-            'Value' => [
-                'type' => 'bool',
-            ],
-        ],
-    ];
-
-    public const GET_ORIGIN_SHIELD_QUEUE_STATISTICS = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d/originshield/queuestatistics',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'dateFrom' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'dateTo' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'hourly' => [
-                'required' => false,
-                'type' => 'bool',
-            ],
-        ],
-        'body' => [],
-    ];
-
-    public const GET_SAFEHOP_STATISTICS = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d/safehop/statistics',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'dateFrom' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'dateTo' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'hourly' => [
-                'required' => false,
-                'type' => 'bool',
-            ],
-        ],
-        'body' => [],
-    ];
-
-    public const GET_OPTIMIZER_STATISTICS = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d/optimizer/statistics',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'dateFrom' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'dateTo' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'hourly' => [
-                'required' => false,
-                'type' => 'bool',
-            ],
-        ],
-        'body' => [],
-    ];
-
-
-    public const GET_STATISTICS = [
-        'method' => 'GET',
-        'path' => 'pullzone/%d/waf/statistics',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'dateFrom' => [
-                'required' => false,
-                'type' => 'datetime',
-            ],
-            'dateTo' => [
-                'required' => false,
-                'type' => 'datetime',
-            ],
-            'hourly' => [
-                'required' => false,
-                'type' => 'bool',
-            ],
-        ],
-        'body' => [],
-    ];
-
-    public const LOAD_FREE_CERTIFICATE = [
-        'method' => 'GET',
-        'path' => 'pullzone/loadFreeCertificate',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [
-            'hostname' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ],
-        'body' => [],
-    ];
-
-    public const PURGE_CACHE = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/purgeCache',
-        'headers' => [],
-        'query' => [],
-        'body' => [],
-    ];
-
-    public const ADD_CUSTOM_CERTIFICATE = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/addCertificate',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-            'Certificate' => [
-                'type' => 'string',
-            ],
-            'CertificateKey' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const REMOVE_CERTIFICATE = [
-        'method' => 'DELETE',
-        'path' => 'pullzone/%d/removeCertificate',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const ADD_CUSTOM_HOSTNAME = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/addHostname',
-        'headers' => [
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const REMOVE_CUSTOM_HOSTNAME = [
-        'method' => 'DELETE',
-        'path' => 'pullzone/%d/removeHostname',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const SET_FORCE_SSL = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/setForceSSL',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-            'ForceSSL' => [
-                'type' => 'bool',
-            ],
-        ],
-    ];
-
-    public const RESET_TOKEN_KEY = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/resetSecurityKey',
-        'headers' => [
-            Header::ACCEPT_JSON,
-        ],
-        'query' => [],
-        'body' => [],
-    ];
-
-    public const ADD_ALLOWED_REFERER = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/addAllowedReferrer',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const REMOVE_ALLOWED_REFERER = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/removeAllowedReferrer',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const ADD_BLOCKED_REFERER = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/addBlockedReferrer',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const REMOVE_BLOCKED_REFERER = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/removeBlockedReferrer',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'Hostname' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const ADD_BLOCKED_IP = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/addBlockedIp',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'BlockedIp' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
-
-    public const REMOVE_BLOCKED_IP = [
-        'method' => 'POST',
-        'path' => 'pullzone/%d/removeBlockedIp',
-        'headers' => [
-            Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
-        ],
-        'query' => [],
-        'body' => [
-            'BlockedIp' => [
-                'type' => 'string',
-            ],
-        ],
-    ];
+        ];
+    }
 }

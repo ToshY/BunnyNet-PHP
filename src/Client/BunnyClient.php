@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Client;
 
-use Exception;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
+use ToshY\BunnyNet\Model\Client\ClientResponseModel;
 
 class BunnyClient
 {
-    private const THROW_CLIENT_EXCEPTIONS = false;
+    public const THROW_CLIENT_EXCEPTIONS = false;
 
     protected const SCHEME = 'https';
 
@@ -37,7 +37,7 @@ class BunnyClient
         array $pathParameters = [],
         array $query = [],
         $body = null
-    ): array {
+    ): ClientResponseModel {
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
@@ -46,7 +46,7 @@ class BunnyClient
                     $this->getAccessKeyHeader()
                 ),
             ],
-            fn($value) => empty($value) === false
+            fn ($value) => empty($value) === false
         );
 
         $base = $this->getHostRequest();
@@ -67,22 +67,9 @@ class BunnyClient
             $options
         );
 
-        try {
-            $responseContent = $response->toArray(self::THROW_CLIENT_EXCEPTIONS);
-        } catch (Exception) {
-            $responseContent = $response->getContent(self::THROW_CLIENT_EXCEPTIONS);
-        }
-
-        return [
-            'content' => $responseContent,
-            'headers' => $response->getHeaders(self::THROW_CLIENT_EXCEPTIONS),
-            'status' => [
-                'code' => $response->getStatusCode(),
-                'info' => $response->getInfo(),
-            ],
-        ];
+        return new ClientResponseModel(response: $response);
     }
-    
+
     protected function createUrlPath(string $template, array $pathCollection): string
     {
         return sprintf(
@@ -112,8 +99,8 @@ class BunnyClient
     }
 
     /**
-     * @return resource
      * @throws FileDoesNotExistException
+     * @return resource
      */
     protected function openFileStream(string $filePath)
     {
@@ -223,8 +210,7 @@ class BunnyClient
         string $key,
         array $templateValue,
         $parameterValue
-    ): void
-    {
+    ): void {
         if (is_array($parameterValue) === true) {
             foreach ($parameterValue as $subValue) {
                 $traverseParameterValue = $subValue;
