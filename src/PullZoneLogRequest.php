@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Written by ToshY, <2-11-2021>
- */
-
 declare(strict_types=1);
 
 namespace ToshY\BunnyNet;

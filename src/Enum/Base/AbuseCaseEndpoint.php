@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Written by ToshY, <18-4-2022>
- */
-
 declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum\Base;
