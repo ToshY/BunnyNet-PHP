@@ -1,0 +1,11 @@
+grumphp:
+  process_timeout: 90
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: 'docker compose run -T --rm --no-deps php'
+  tasks:
+    shell:
+      scripts:
+        - [ "-c", "vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v --diff" ]
+    phpmd:
+      ruleset:
+        - phpmd.xml

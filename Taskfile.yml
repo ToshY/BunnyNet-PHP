@@ -26,6 +26,7 @@ tasks:
   contribute:
     desc: Contribute by running dev tools
     cmds:
+      - task: grum:init
       - task: phpcs:dry
       - task: phpmd:check
 
@@ -68,10 +69,15 @@ tasks:
       - docker compose run --rm $TTY php composer update {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
 
   # Tools
+  grum:init:
+    desc: Init GrumPHP
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/grumphp git:init
+
   phpcs:dry:
     desc: PHPCS dry run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v --diff
 
   phpcs:fix:
     desc: PHPCS fix

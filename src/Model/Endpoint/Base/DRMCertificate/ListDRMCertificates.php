@@ -10,7 +10,6 @@ use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
 
 class ListDRMCertificates implements GenericEndpointInterface
 {
-
     public function getMethod(): string
     {
         return Method::GET;
