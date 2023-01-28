@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class StatisticsEndpoint
- */
 final class StatisticsEndpoint
 {
-    /** @var array */
     public const GET_STATISTICS = [
         'method' => 'GET',
         'path' => 'statistics',

@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class PullZoneEndpoint
- */
 final class PullZoneEndpoint
 {
-    /** @var array */
     public const LIST_PULL_ZONES = [
         'method' => 'GET',
         'path' => 'pullzone',
@@ -35,7 +31,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_PULL_ZONE = [
         'method' => 'POST',
         'path' => 'pullzone',
@@ -63,7 +58,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const GET_PULL_ZONE = [
         'method' => 'GET',
         'path' => 'pullzone/%d',
@@ -80,7 +74,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPDATE_PULL_ZONE = [
         'method' => 'GET',
         'path' => 'pullzone/%d',
@@ -451,7 +444,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const DELETE_PULL_ZONE = [
         'method' => 'DELETE',
         'path' => 'pullzone/%d',
@@ -460,7 +452,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const DELETE_EDGE_RULE = [
         'method' => 'DELETE',
         'path' => 'pullzone/%d/edgerules/%s',
@@ -469,7 +460,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_UPDATE_EDGE_RULE = [
         'method' => 'POST',
         'path' => 'pullzone/%d/edgerules/addOrUpdate',
@@ -522,7 +512,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const SET_EDGE_RULE_ENABLED = [
         'method' => 'POST',
         'path' => 'pullzone/%d/edgerules/%s/setEdgeRuleEnabled',
@@ -541,7 +530,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const GET_ORIGIN_SHIELD_QUEUE_STATISTICS = [
         'method' => 'GET',
         'path' => 'pullzone/%d/originshield/queuestatistics',
@@ -565,7 +553,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const GET_SAFEHOP_STATISTICS = [
         'method' => 'GET',
         'path' => 'pullzone/%d/safehop/statistics',
@@ -589,7 +576,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const GET_OPTIMIZER_STATISTICS = [
         'method' => 'GET',
         'path' => 'pullzone/%d/optimizer/statistics',
@@ -614,7 +600,6 @@ final class PullZoneEndpoint
     ];
 
 
-    /** @var array */
     public const GET_STATISTICS = [
         'method' => 'GET',
         'path' => 'pullzone/%d/waf/statistics',
@@ -638,7 +623,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const LOAD_FREE_CERTIFICATE = [
         'method' => 'GET',
         'path' => 'pullzone/loadFreeCertificate',
@@ -654,7 +638,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const PURGE_CACHE = [
         'method' => 'POST',
         'path' => 'pullzone/%d/purgeCache',
@@ -663,7 +646,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_CUSTOM_CERTIFICATE = [
         'method' => 'POST',
         'path' => 'pullzone/%d/addCertificate',
@@ -685,7 +667,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_CERTIFICATE = [
         'method' => 'DELETE',
         'path' => 'pullzone/%d/removeCertificate',
@@ -701,7 +682,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const ADD_CUSTOM_HOSTNAME = [
         'method' => 'POST',
         'path' => 'pullzone/%d/addHostname',
@@ -716,7 +696,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_CUSTOM_HOSTNAME = [
         'method' => 'DELETE',
         'path' => 'pullzone/%d/removeHostname',
@@ -732,7 +711,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const SET_FORCE_SSL = [
         'method' => 'POST',
         'path' => 'pullzone/%d/setForceSSL',
@@ -751,7 +729,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const RESET_TOKEN_KEY = [
         'method' => 'POST',
         'path' => 'pullzone/%d/resetSecurityKey',
@@ -762,7 +739,6 @@ final class PullZoneEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_ALLOWED_REFERER = [
         'method' => 'POST',
         'path' => 'pullzone/%d/addAllowedReferrer',
@@ -778,7 +754,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_ALLOWED_REFERER = [
         'method' => 'POST',
         'path' => 'pullzone/%d/removeAllowedReferrer',
@@ -794,7 +769,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const ADD_BLOCKED_REFERER = [
         'method' => 'POST',
         'path' => 'pullzone/%d/addBlockedReferrer',
@@ -810,7 +784,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_BLOCKED_REFERER = [
         'method' => 'POST',
         'path' => 'pullzone/%d/removeBlockedReferrer',
@@ -826,7 +799,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const ADD_BLOCKED_IP = [
         'method' => 'POST',
         'path' => 'pullzone/%d/addBlockedIp',
@@ -842,7 +814,6 @@ final class PullZoneEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_BLOCKED_IP = [
         'method' => 'POST',
         'path' => 'pullzone/%d/removeBlockedIp',

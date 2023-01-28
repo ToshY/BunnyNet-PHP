@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Enum\Region;
 
-/**
- * Class SecureUrl
- */
 final class PricingCalculator
 {
-    /** @var array Cost template */
     private const COST_TEMPLATE = [
         'location' => [],
         'size' => [
@@ -24,12 +20,6 @@ final class PricingCalculator
         ],
     ];
 
-    /**
-     * @param array $regionCollection
-     * @param string $unit
-     * @param int $precision
-     * @return array
-     */
     public function calculateStorageRegionCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
@@ -39,12 +29,6 @@ final class PricingCalculator
         return $this->calculateUserTotalCost($intersectTemplate, $intersectValues, $unit, $precision);
     }
 
-    /**
-     * @param array $regionCollection
-     * @param string $unit
-     * @param int $precision
-     * @return array[]
-     */
     public function calculateStandardCdnCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
@@ -54,12 +38,6 @@ final class PricingCalculator
         return $this->calculateUserTotalCost($intersectTemplate, $intersectValues, $unit, $precision);
     }
 
-    /**
-     * @param array $regionCollection
-     * @param string $unit
-     * @param int $precision
-     * @return array[]
-     */
     public function calculateVolumeCdnCost(array $regionCollection, string $unit, int $precision = 2): array
     {
         $regionCollection = array_change_key_case($regionCollection, 1);
@@ -69,13 +47,6 @@ final class PricingCalculator
         return $this->calculateUserTotalCost($intersectTemplate, $intersectValues, $unit, $precision);
     }
 
-    /**
-     * @param array $intersectTemplate
-     * @param array $intersectValues
-     * @param string $unit
-     * @param int $precision
-     * @return array|array[]
-     */
     private function calculateUserTotalCost(
         array $intersectTemplate,
         array $intersectValues,
@@ -103,14 +74,6 @@ final class PricingCalculator
         return $userReportCost;
     }
 
-    /**
-     * @param $value
-     * @param string $inputUnit
-     * @param string $outputUnit
-     * @param bool $binary
-     * @param int $precision
-     * @return array
-     */
     private function convertBytes(
         $value,
         string $inputUnit = 'MB',
@@ -138,7 +101,7 @@ final class PricingCalculator
         }
 
         return [
-            'value' => round($value / pow($mod, $power), $precision),
+            'value' => round($value / $mod ** $power, $precision),
             'unit' => $units[$indexOutputUnit],
         ];
     }

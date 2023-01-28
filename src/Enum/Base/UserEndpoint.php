@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class UserEndpoint
- */
 final class UserEndpoint
 {
-    /** @var array */
     public const GET_USER_DETAILS = [
         'method' => 'GET',
         'path' => 'user',
@@ -22,7 +18,6 @@ final class UserEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPDATE_USER_DETAILS = [
         'method' => 'POST',
         'path' => 'user',
@@ -74,7 +69,6 @@ final class UserEndpoint
         ],
     ];
 
-    /** @var array */
     public const RESET_API_KEY = [
         'method' => 'POST',
         'path' => 'user/resetApiKey',
@@ -83,13 +77,12 @@ final class UserEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const CLOSE_ACCOUNT = [
         'method' => 'POST',
         'path' => 'user/closeaccount',
         'headers' => [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON
+            Header::CONTENT_TYPE_JSON,
         ],
         'query' => [],
         'body' => [
@@ -102,7 +95,6 @@ final class UserEndpoint
         ],
     ];
 
-    /** @var array */
     public const GET_DPA_DETAILS = [
         'method' => 'GET',
         'path' => 'user/dpa',

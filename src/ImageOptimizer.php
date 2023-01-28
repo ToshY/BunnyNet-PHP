@@ -7,16 +7,10 @@ namespace ToshY\BunnyNet;
 use ToshY\BunnyNet\Enum\Optimizer;
 
 /**
- * Class ImageOptimizer
  * @link https://support.bunny.net/hc/en-us/articles/360027448392-Bunny-Optimizer-Engine-Documentation
  */
 final class ImageOptimizer
 {
-    /**
-     * @param string $url
-     * @param array $optimizationCollection
-     * @return string
-     */
     public function generate(string $url, array $optimizationCollection = []): string
     {
         if (empty($optimizationCollection) === true) {
@@ -30,10 +24,6 @@ final class ImageOptimizer
         return sprintf('%s?%s', $url, $query);
     }
 
-    /**
-     * @param array $optimalisationCollection
-     * @return array
-     */
     private function validateOptimizationParameters(array $optimalisationCollection): array
     {
         $parameterValueCollection = [];

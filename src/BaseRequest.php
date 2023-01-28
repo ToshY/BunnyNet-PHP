@@ -20,14 +20,11 @@ use ToshY\BunnyNet\Enum\UuidType;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 
 /**
- * Class BaseRequest
  * @link https://docs.bunny.net/reference/bunnynet-api-overview
  */
 final class BaseRequest extends BunnyClient
 {
     /**
-     * BaseRequest constructor.
-     * @param string|null $accountApiKey
      * @throws KeyFormatNotSupportedException
      */
     public function __construct(
@@ -38,17 +35,12 @@ final class BaseRequest extends BunnyClient
         parent::__construct(Host::API_ENDPOINT);
     }
 
-    /**
-     * @return string
-     */
     public function getApiKey(): string
     {
         return $this->apiKey;
     }
 
     /**
-     * @param string $key
-     * @return BaseRequest
      * @throws KeyFormatNotSupportedException
      */
     public function setApiKey(string $key): BaseRequest
@@ -63,8 +55,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -80,10 +70,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function checkAbuseCase(int $id): array
     {
         $endpoint = AbuseCaseEndpoint::CHECK_ABUSE_CASE;
@@ -94,9 +80,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function listRegions(): array
     {
         $endpoint = RegionEndpoint::GET_REGION_LIST;
@@ -106,9 +89,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function getCountryList(): array
     {
         $endpoint = CountryEndpoint::GET_COUNTRY_LIST;
@@ -119,8 +99,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -137,8 +115,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addVideoLibrary(array $body): array
@@ -155,9 +131,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -174,9 +147,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updateVideoLibrary(int $id, array $body): array
@@ -192,10 +162,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function deleteVideoLibrary(int $id): array
     {
         $endpoint = StreamEndpoint::DELETE_VIDEO_LIBRARY;
@@ -207,8 +173,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -224,10 +188,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function resetVideoLibraryPasswordByPath(int $id): array
     {
         $endpoint = StreamEndpoint::RESET_PASSWORD_PATH;
@@ -238,10 +198,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function addWatermark(int $id): array
     {
         $endpoint = StreamEndpoint::ADD_WATERMARK;
@@ -252,10 +208,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function deleteWatermark(int $id): array
     {
         $endpoint = StreamEndpoint::DELETE_WATERMARK;
@@ -267,9 +219,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addVideoLibraryAllowedReferer(int $id, array $body): array
@@ -286,9 +235,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removeVideoLibraryAllowedReferer(int $id, array $body): array
@@ -305,9 +251,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addVideoLibraryBlockedReferer(int $id, array $body): array
@@ -324,9 +267,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removeVideoLibraryBlockedReferer(int $id, array $body): array
@@ -342,9 +282,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function getBillingDetails(): array
     {
         $endpoint = BillingEndpoint::GET_BILLING_DETAILS;
@@ -354,9 +291,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function getBillingSummary(): array
     {
         $endpoint = BillingEndpoint::GET_BILLING_SUMMARY;
@@ -367,8 +301,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -385,8 +317,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -403,8 +333,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addPullZone(array $body): array
@@ -421,9 +349,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -440,9 +365,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updatePullZone(int $id, array $body): array
@@ -458,10 +380,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function deletePullZone(int $id): array
     {
         $endpoint = PullZoneEndpoint::DELETE_PULL_ZONE;
@@ -472,11 +390,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $pullZoneId
-     * @param string $edgeRuleId
-     * @return array
-     */
     public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): array
     {
         $endpoint = PullZoneEndpoint::DELETE_EDGE_RULE;
@@ -488,9 +401,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addOrUpdateEdgeRule(int $pullZoneId, array $body): array
@@ -507,10 +417,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param string $edgeRuleId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function setEdgeRuleEnabled(int $pullZoneId, string $edgeRuleId, array $body): array
@@ -527,9 +433,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -546,9 +449,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -565,9 +465,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -584,9 +481,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -603,8 +497,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -620,9 +512,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function purgeCache(): array
     {
         $endpoint = PullZoneEndpoint::PURGE_CACHE;
@@ -634,9 +523,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addCustomCertificate(int $id, array $body): array
@@ -653,9 +539,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removeCertificate(int $id, array $body): array
@@ -672,9 +555,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addCustomHostname(int $id, array $body): array
@@ -691,9 +571,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removeCustomHostname(int $id, array $body): array
@@ -710,9 +587,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function setForceSSL(int $id, array $body): array
@@ -728,10 +602,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function resetPullZoneTokenKey(int $id): array
     {
         $endpoint = PullZoneEndpoint::RESET_TOKEN_KEY;
@@ -743,9 +613,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addPullZoneAllowedReferer(int $id, array $body): array
@@ -762,9 +629,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removePullZoneAllowedReferer(int $id, array $body): array
@@ -781,9 +645,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addPullZoneBlockedReferer(int $id, array $body): array
@@ -800,9 +661,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removePullZoneBlockedReferer(int $id, array $body): array
@@ -819,9 +677,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addPullZoneBlockedIP(int $id, array $body): array
@@ -838,9 +693,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function removePullZoneBlockedIP(int $id, array $body): array
@@ -857,8 +709,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -875,8 +725,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -893,8 +741,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -911,8 +757,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -929,8 +773,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addStorageZone(array $body): array
@@ -946,10 +788,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function getStorageZone(int $id): array
     {
         $endpoint = StorageEndpoint::GET_STORAGE_ZONE;
@@ -961,9 +799,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param int $id
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updateStorageZone(int $id, array $body): array
@@ -979,10 +814,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function deleteStorageZone(int $id): array
     {
         $endpoint = StorageEndpoint::DELETE_STORAGE_ZONE;
@@ -994,8 +825,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -1011,10 +840,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $id
-     * @return array
-     */
     public function resetStorageZonePasswordByPath(int $id): array
     {
         $endpoint = StorageEndpoint::RESET_PASSWORD_PATH;
@@ -1026,8 +851,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -1043,9 +866,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function getUserDetails(): array
     {
         $endpoint = UserEndpoint::GET_USER_DETAILS;
@@ -1056,8 +876,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updateUserDetails(array $body): array
@@ -1073,9 +891,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function resetUserApiKey(): array
     {
         $endpoint = UserEndpoint::RESET_API_KEY;
@@ -1086,8 +901,6 @@ final class BaseRequest extends BunnyClient
     }
 
     /**
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function closeTheAccount(array $body): array
@@ -1103,9 +916,6 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    /**
-     * @return array
-     */
     public function getDpaDetails(): array
     {
         $endpoint = UserEndpoint::GET_DPA_DETAILS;

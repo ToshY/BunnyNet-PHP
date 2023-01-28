@@ -8,7 +8,6 @@ use ToshY\BunnyNet\Enum\Header;
 
 final class LogEndpoint
 {
-    /** @var array */
     public const GET_LOGGING = [
         'method' => 'GET',
         'path' => '%s/%d.log',
@@ -38,7 +37,7 @@ final class LogEndpoint
             'search' => [
                 'required' => false,
                 'type' => 'string',
-            ]
+            ],
         ],
         'body' => [],
     ];

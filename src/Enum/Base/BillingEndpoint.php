@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class BillingEndpoint
- */
 final class BillingEndpoint
 {
-    /** @var array */
     public const GET_BILLING_DETAILS = [
         'method' => 'GET',
         'path' => 'billing',
@@ -22,7 +18,6 @@ final class BillingEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const GET_BILLING_SUMMARY = [
         'method' => 'GET',
         'path' => 'billing/summary',
@@ -33,7 +28,6 @@ final class BillingEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const APPLY_PROMO_CODE = [
         'method' => 'GET',
         'path' => 'billing/applycode',

@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
-/**
- * Class Optimizer
- */
 final class Optimizer
 {
-    /** @var string[] Optimizer parameters */
     public const OPTIMIZATION_PARAMETER_COLLECTION = [
         'width',
         'height',

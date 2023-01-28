@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class PurgeEndpoint
- */
 final class PurgeEndpoint
 {
-    /** @var array */
     public const PURGE_URL = [
         'method' => 'POST',
         'path' => 'purge',
@@ -25,7 +21,6 @@ final class PurgeEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const PURGE_URL_HEADER = [
         'method' => 'GET',
         'path' => 'purge',

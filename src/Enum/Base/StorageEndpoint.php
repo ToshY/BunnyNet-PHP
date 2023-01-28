@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class StorageEndpoint
- */
 final class StorageEndpoint
 {
-    /** @var array */
     public const LIST_STORAGE_ZONES = [
         'method' => 'GET',
         'path' => 'storagezone',
@@ -31,7 +27,6 @@ final class StorageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_STORAGE_ZONE = [
         'method' => 'POST',
         'path' => 'storagezone',
@@ -45,10 +40,10 @@ final class StorageEndpoint
                 'type' => 'string',
             ],
             'Name' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'Region' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'ReplicationRegions' => [
                 'type' => 'array',
@@ -59,7 +54,6 @@ final class StorageEndpoint
         ],
     ];
 
-    /** @var array */
     public const GET_STORAGE_ZONE = [
         'method' => 'GET',
         'path' => 'storagezone/%d',
@@ -70,7 +64,6 @@ final class StorageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPDATE_STORAGE_ZONE = [
         'method' => 'POST',
         'path' => 'storagezone/%d',
@@ -87,18 +80,17 @@ final class StorageEndpoint
                 ],
             ],
             'OriginUrl' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'Custom404FilePath' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'Rewrite404To200' => [
-                'type' => 'bool'
+                'type' => 'bool',
             ],
         ],
     ];
 
-    /** @var array */
     public const DELETE_STORAGE_ZONE = [
         'method' => 'POST',
         'path' => 'storagezone/%d',
@@ -107,7 +99,6 @@ final class StorageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const RESET_PASSWORD_QUERY = [
         'method' => 'POST',
         'path' => 'storagezone/resetPassword',
@@ -116,7 +107,6 @@ final class StorageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const RESET_PASSWORD_PATH = [
         'method' => 'POST',
         'path' => 'storagezone/%d/resetPassword',
@@ -125,7 +115,6 @@ final class StorageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const RESET_READONLY_PASSWORD = [
         'method' => 'POST',
         'path' => 'storagezone/resetReadOnlyPassword',

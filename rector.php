@@ -7,7 +7,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->phpVersion(phpVersion: PhpVersion::PHP_81);
+    $rectorConfig->phpVersion(phpVersion: PhpVersion::PHP_80);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses();
     $rectorConfig->parallel(seconds: 600, maxNumberOfProcess: 32);

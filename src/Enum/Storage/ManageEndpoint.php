@@ -8,7 +8,6 @@ use ToshY\BunnyNet\Enum\Header;
 
 final class ManageEndpoint
 {
-    /** @var array */
     public const DOWNLOAD_FILE = [
         'method' => 'GET',
         'path' => '%s/%s/%s',
@@ -19,7 +18,6 @@ final class ManageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPLOAD_FILE = [
         'method' => 'PUT',
         'path' => '%s/%s/%s',
@@ -30,7 +28,6 @@ final class ManageEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const DELETE_FILE = [
         'method' => 'DELETE',
         'path' => '%s/%s/%s',

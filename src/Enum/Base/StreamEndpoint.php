@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class StreamEndpoint
- */
 final class StreamEndpoint
 {
-    /** @var array */
     public const LIST_VIDEO_LIBRARIES = [
         'method' => 'GET',
         'path' => 'videolibrary',
@@ -35,7 +31,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_VIDEO_LIBRARY = [
         'method' => 'POST',
         'path' => 'videolibrary',
@@ -46,7 +41,7 @@ final class StreamEndpoint
         'query' => [],
         'body' => [
             'Name' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'ReplicationRegions' => [
                 'type' => 'array',
@@ -54,10 +49,9 @@ final class StreamEndpoint
                     'type' => 'string',
                 ],
             ],
-        ]
+        ],
     ];
 
-    /** @var array */
     public const GET_VIDEO_LIBRARY = [
         'method' => 'GET',
         'path' => 'videolibrary/%d',
@@ -73,7 +67,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPDATE_VIDEO_LIBRARY = [
         'method' => 'POST',
         'path' => 'videolibrary/%d',
@@ -191,7 +184,6 @@ final class StreamEndpoint
         ],
     ];
 
-    /** @var array */
     public const DELETE_VIDEO_LIBRARY = [
         'method' => 'DELETE',
         'path' => 'videolibrary/%d',
@@ -202,7 +194,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const RESET_PASSWORD_QUERY = [
         'method' => 'POST',
         'path' => 'videolibrary/resetApiKey',
@@ -211,12 +202,11 @@ final class StreamEndpoint
             'id' => [
                 'required' => true,
                 'type' => 'int',
-            ]
+            ],
         ],
         'body' => [],
     ];
 
-    /** @var array */
     public const RESET_PASSWORD_PATH = [
         'method' => 'POST',
         'path' => 'videolibrary/%d/resetApiKey',
@@ -225,7 +215,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_WATERMARK = [
         'method' => 'PUT',
         'path' => 'videolibrary/%d/watermark',
@@ -236,7 +225,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const DELETE_WATERMARK = [
         'method' => 'DELETE',
         'path' => 'videolibrary/%d/watermark',
@@ -247,7 +235,6 @@ final class StreamEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const ADD_ALLOWED_REFERER = [
         'method' => 'POST',
         'path' => 'videolibrary/%d/addAllowedReferrer',
@@ -263,7 +250,6 @@ final class StreamEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_ALLOWED_REFERER = [
         'method' => 'POST',
         'path' => 'videolibrary/%d/removeAllowedReferrer',
@@ -279,7 +265,6 @@ final class StreamEndpoint
         ],
     ];
 
-    /** @var array */
     public const ADD_BLOCKED_REFERER = [
         'method' => 'POST',
         'path' => 'videolibrary/%d/addBlockedReferrer',
@@ -295,7 +280,6 @@ final class StreamEndpoint
         ],
     ];
 
-    /** @var array */
     public const REMOVE_BLOCKED_REFERER = [
         'method' => 'POST',
         'path' => 'videolibrary/%d/removeBlockedReferrer',

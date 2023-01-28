@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class CountryEndpoint
- */
 final class CountryEndpoint
 {
-    /** @var array */
     public const GET_COUNTRY_LIST = [
         'method' => 'GET',
         'path' => 'country',

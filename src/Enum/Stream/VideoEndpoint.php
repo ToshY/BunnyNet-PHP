@@ -8,7 +8,6 @@ use ToshY\BunnyNet\Enum\Header;
 
 final class VideoEndpoint
 {
-    /** @var array */
     public const GET_VIDEO = [
         'method' => 'GET',
         'path' => 'library/%d/videos/%s',
@@ -19,7 +18,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPDATE_VIDEO = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s',
@@ -38,7 +36,6 @@ final class VideoEndpoint
         ],
     ];
 
-    /** @var array */
     public const DELETE_VIDEO = [
         'method' => 'DELETE',
         'path' => 'library/%d/videos/%s',
@@ -49,7 +46,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const UPLOAD_VIDEO = [
         'method' => 'PUT',
         'path' => 'library/%d/videos/%s',
@@ -60,7 +56,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const REENCODE_VIDEO = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/reencode',
@@ -71,7 +66,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const LIST_VIDEOS = [
         'method' => 'GET',
         'path' => 'library/%d/videos',
@@ -103,7 +97,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const CREATE_VIDEO = [
         'method' => 'POST',
         'path' => 'library/%d/videos',
@@ -117,12 +110,11 @@ final class VideoEndpoint
                 'type' => 'string',
             ],
             'collectionId' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
         ],
     ];
 
-    /** @var array */
     public const SET_THUMBNAIL = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/thumbnail',
@@ -138,7 +130,6 @@ final class VideoEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const FETCH_VIDEO_TO_COLLECTION = [
         'method' => 'POST',
         'path' => 'library/%d/videos/fetch',
@@ -165,7 +156,6 @@ final class VideoEndpoint
         ],
     ];
 
-    /** @var array */
     public const FETCH_VIDEO = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/fetch',
@@ -187,7 +177,6 @@ final class VideoEndpoint
         ],
     ];
 
-    /** @var array */
     public const ADD_CAPTION = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/captions/%s',
@@ -209,7 +198,6 @@ final class VideoEndpoint
         ],
     ];
 
-    /** @var array */
     public const DELETE_CAPTION = [
         'method' => 'POST',
         'path' => 'library/%d/videos/%s/captions/%s',

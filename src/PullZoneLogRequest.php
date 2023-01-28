@@ -12,14 +12,11 @@ use ToshY\BunnyNet\Enum\UuidType;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 
 /**
- * Class Logging
  * @link https://docs.bunny.net/docs/cdn-logging
  */
 final class PullZoneLogRequest extends BunnyClient
 {
     /**
-     * PullZoneLogRequest constructor.
-     * @param string $accountApiKey
      * @throws KeyFormatNotSupportedException
      */
     public function __construct(
@@ -30,17 +27,12 @@ final class PullZoneLogRequest extends BunnyClient
         parent::__construct(Host::API_ENDPOINT);
     }
 
-    /**
-     * @return string
-     */
     public function getApiKey(): string
     {
         return $this->apiKey;
     }
 
     /**
-     * @param string $key
-     * @return PullZoneLogRequest
      * @throws KeyFormatNotSupportedException
      */
     public function setApiKey(string $key): PullZoneLogRequest
@@ -55,10 +47,6 @@ final class PullZoneLogRequest extends BunnyClient
     }
 
     /**
-     * @param int $pullZoneId
-     * @param DateTimeInterface $dateTime
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */

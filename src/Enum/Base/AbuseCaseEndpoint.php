@@ -6,12 +6,8 @@ namespace ToshY\BunnyNet\Enum\Base;
 
 use ToshY\BunnyNet\Enum\Header;
 
-/**
- * Class AbuseCaseEndpoint
- */
 final class AbuseCaseEndpoint
 {
-    /** @var array */
     public const LIST_ABUSE_CASES = [
         'method' => 'GET',
         'path' => 'abusecase',
@@ -31,7 +27,6 @@ final class AbuseCaseEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const CHECK_ABUSE_CASE = [
         'method' => 'POST',
         'path' => 'abusecase/%d/check',

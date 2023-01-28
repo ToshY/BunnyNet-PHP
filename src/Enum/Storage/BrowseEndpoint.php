@@ -8,7 +8,6 @@ use ToshY\BunnyNet\Enum\Header;
 
 final class BrowseEndpoint
 {
-    /** @var array */
     public const LIST_FILE_COLLECTION_ROOT = [
         'method' => 'GET',
         'path' => '%s//',
@@ -19,7 +18,6 @@ final class BrowseEndpoint
         'body' => [],
     ];
 
-    /** @var array */
     public const LIST_FILE_COLLECTION_DIRECTORY = [
         'method' => 'GET',
         'path' => '%s/%s/',

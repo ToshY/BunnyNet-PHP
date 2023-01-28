@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Client;
 
+use Exception;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
@@ -11,50 +12,26 @@ use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
 
-/**
- * Class BunnyClient
- */
 class BunnyClient
 {
-    /** @var bool */
     private const THROW_CLIENT_EXCEPTIONS = false;
 
-    /** @var string */
     protected const SCHEME = 'https';
 
-    /** @var string */
     protected string $apiKey;
 
-    /** @var string */
-    protected string $hostRequest;
-
-    /** @var HttpClientInterface */
     protected HttpClientInterface $client;
 
-    /**
-     * BunnyClient constructor.
-     */
-    public function __construct(string $hostRequest)
+    public function __construct(protected string $hostRequest)
     {
-        $this->hostRequest = $hostRequest;
         $this->client = HttpClient::create();
     }
 
-    /**
-     * @return string
-     */
     private function getHostRequest(): string
     {
         return $this->hostRequest;
     }
 
-    /**
-     * @param array $endpoint
-     * @param array $pathParameters
-     * @param array $query
-     * @param null $body
-     * @return array
-     */
     protected function request(
         array $endpoint,
         array $pathParameters = [],
@@ -69,9 +46,7 @@ class BunnyClient
                     $this->getAccessKeyHeader()
                 ),
             ],
-            function ($value) {
-                return empty($value) === false;
-            }
+            fn($value) => empty($value) === false
         );
 
         $base = $this->getHostRequest();
@@ -94,7 +69,7 @@ class BunnyClient
 
         try {
             $responseContent = $response->toArray(self::THROW_CLIENT_EXCEPTIONS);
-        } catch (\Exception $e) {
+        } catch (Exception) {
             $responseContent = $response->getContent(self::THROW_CLIENT_EXCEPTIONS);
         }
 
@@ -107,12 +82,7 @@ class BunnyClient
             ],
         ];
     }
-
-    /**
-     * @param string $template
-     * @param array $pathCollection
-     * @return string
-     */
+    
     protected function createUrlPath(string $template, array $pathCollection): string
     {
         return sprintf(
@@ -121,10 +91,6 @@ class BunnyClient
         );
     }
 
-    /**
-     * @param array $query
-     * @return string|null
-     */
     protected function createQuery(array $query): ?string
     {
         if (empty($query) === true) {
@@ -146,7 +112,6 @@ class BunnyClient
     }
 
     /**
-     * @param string $filePath
      * @return resource
      * @throws FileDoesNotExistException
      */
@@ -162,9 +127,6 @@ class BunnyClient
         return fopen($fileRealPath, 'r');
     }
 
-    /**
-     * @return array
-     */
     private function getAccessKeyHeader(): array
     {
         return [
@@ -172,22 +134,15 @@ class BunnyClient
         ];
     }
 
-    /**
-     * @param $body
-     * @return mixed|string
-     */
-    private function getBody($body)
+    private function getBody($body): mixed
     {
         if (is_array($body) === true) {
-            return json_encode($body);
+            return json_encode($body, JSON_THROW_ON_ERROR);
         }
         return $body;
     }
 
     /**
-     * @param array $values
-     * @param array $template
-     * @return array
      * @throws InvalidQueryParameterRequirementException
      * @throws InvalidQueryParameterTypeException
      */
@@ -234,9 +189,6 @@ class BunnyClient
     }
 
     /**
-     * @param array $values
-     * @param array $template
-     * @return array
      * @throws InvalidBodyParameterTypeException
      */
     protected function validateBodyField(array $values, array $template): array
@@ -266,13 +218,12 @@ class BunnyClient
         return $intersectValues;
     }
 
-    /**
-     * @param string $methodName
-     * @param string $key
-     * @param array $templateValue
-     * @param $parameterValue
-     */
-    private function recurseValidationOnArray(string $methodName, string $key, array $templateValue, $parameterValue)
+    private function recurseValidationOnArray(
+        string $methodName,
+        string $key,
+        array $templateValue,
+        $parameterValue
+    ): void
     {
         if (is_array($parameterValue) === true) {
             foreach ($parameterValue as $subValue) {

@@ -12,42 +12,30 @@ use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
 
 /**
- * Class EdgeStorage
  * @link https://docs.bunny.net/reference/storage-api
  */
 final class EdgeStorageRequest extends BunnyClient
 {
-    /** @var array */
     private array $host;
 
-    /** @var string */
-    protected string $apiKey;
-
     /**
-     * EdgeStorage constructor.
      * @throws RegionDoesNotExistException
      */
     public function __construct(
-        string $apiKey,
+        protected string $apiKey,
         string $hostCode = 'FS'
     ) {
-        $this->apiKey = $apiKey;
         $this->setHost($hostCode);
 
         parent::__construct($this->getHostUrl());
     }
 
-    /**
-     * @return array
-     */
     public function getHost(): array
     {
         return $this->host;
     }
 
     /**
-     * @param string $hostCode
-     * @return EdgeStorageRequest
      * @throws RegionDoesNotExistException
      */
     public function setHost(string $hostCode): EdgeStorageRequest
@@ -67,36 +55,21 @@ final class EdgeStorageRequest extends BunnyClient
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getHostName(): string
     {
         return $this->getHost()['name'];
     }
 
-    /**
-     * @return string
-     */
     public function getHostUrl(): string
     {
         return $this->getHost()['url'];
     }
 
-    /**
-     * @return string
-     */
     public function getHostCost(): string
     {
         return $this->getHost()['cost'];
     }
 
-    /**
-     * @param string $storageZoneName
-     * @param string $path
-     * @param string $fileName
-     * @return array
-     */
     public function downloadFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
@@ -108,11 +81,6 @@ final class EdgeStorageRequest extends BunnyClient
     }
 
     /**
-     * @param string $storageZoneName
-     * @param string $path
-     * @param string $fileName
-     * @param string $localFilePath
-     * @return array
      * @throws FileDoesNotExistException
      */
     public function uploadFile(
@@ -132,12 +100,6 @@ final class EdgeStorageRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param string $storageZoneName
-     * @param string $path
-     * @param string $fileName
-     * @return array
-     */
     public function deleteFile(string $storageZoneName, string $path, string $fileName): array
     {
         $endpoint = ManageEndpoint::DELETE_FILE;
@@ -148,11 +110,6 @@ final class EdgeStorageRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param string $storageZoneName
-     * @param string $path
-     * @return array
-     */
     public function listFiles(string $storageZoneName, string $path = ''): array
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_DIRECTORY;

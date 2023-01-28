@@ -11,31 +11,16 @@ use ToshY\BunnyNet\Enum\Stream\VideoEndpoint;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 
 /**
- * Class Stream
  * @link https://docs.bunny.net/reference/api-overview
  */
 final class VideoStreamRequest extends BunnyClient
 {
-    /** @var string */
-    protected string $apiKey;
-
-    /**
-     * Stream constructor.
-     * @param string $apiKey
-     */
     public function __construct(
-        string $apiKey
+        protected string $apiKey
     ) {
-        $this->apiKey = $apiKey;
-
         parent::__construct(Host::STREAM_ENDPOINT);
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $collectionId
-     * @return array
-     */
     public function getCollection(int $libraryId, string $collectionId): array
     {
         $endpoint = CollectionEndpoint::GET_COLLECTION;
@@ -47,10 +32,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $collectionId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updateCollection(int $libraryId, string $collectionId, array $body): array
@@ -67,9 +48,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function createCollection(int $libraryId, array $body): array
@@ -85,11 +63,6 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $collectionId
-     * @return array
-     */
     public function deleteCollection(int $libraryId, string $collectionId): array
     {
         $endpoint = CollectionEndpoint::DELETE_COLLECTION;
@@ -101,9 +74,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function getCollectionList(int $libraryId, array $query = []): array
@@ -118,11 +88,6 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @return array
-     */
     public function getVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::GET_VIDEO;
@@ -135,10 +100,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function updateVideo(int $libraryId, string $videoId, array $body): array
@@ -154,11 +115,6 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @return array
-     */
     public function deleteVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::DELETE_VIDEO;
@@ -170,10 +126,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param string $localFilePath
-     * @return array
      * @throws FileDoesNotExistException
      */
     public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): array
@@ -189,11 +141,6 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @return array
-     */
     public function reencodeVideo(int $libraryId, string $videoId): array
     {
         $endpoint = VideoEndpoint::REENCODE_VIDEO;
@@ -205,9 +152,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -224,9 +168,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function createVideo(int $libraryId, array $body): array
@@ -243,10 +184,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
@@ -263,10 +200,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function fetchVideo(int $libraryId, string $videoId, array $body): array
@@ -283,10 +216,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param array $body
-     * @param array $query
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
@@ -306,11 +235,6 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param string $sourceLanguage
-     * @param array $body
-     * @return array
      * @throws Exception\InvalidBodyParameterTypeException
      */
     public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
@@ -326,12 +250,6 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    /**
-     * @param int $libraryId
-     * @param string $videoId
-     * @param string $sourceLanguage
-     * @return array
-     */
     public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage): array
     {
         $endpoint = VideoEndpoint::DELETE_CAPTION;
