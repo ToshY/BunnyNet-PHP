@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\User;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class Disable2FA implements GenericEndpointInterface
+class Disable2FA implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,7 +33,7 @@ class Disable2FA implements GenericEndpointInterface
     {
         return [
             'Password' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

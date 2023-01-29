@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\DNSZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateDNSZone implements GenericEndpointInterface
+class UpdateDNSZone implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -37,25 +38,25 @@ class UpdateDNSZone implements GenericEndpointInterface
     {
         return [
             'CustomNameserversEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'Nameserver1' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Nameserver2' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'SoaEmail' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LoggingEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LogAnonymizationType' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LoggingIPAnonymizationEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\StorageZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateStorageZone implements GenericEndpointInterface
+class UpdateStorageZone implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -37,19 +38,19 @@ class UpdateStorageZone implements GenericEndpointInterface
     {
         return [
             'ReplicationZones' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'OriginUrl' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Custom404FilePath' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Rewrite404To200' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

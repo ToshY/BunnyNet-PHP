@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
-final class UuidType
+enum Type: string
 {
-    /** @var string Standard UUIDv4 format for API keys */
-    public const UUID_36 = '/^'
+    case BOOLEAN_TYPE = 'bool';
+    case INT_TYPE = 'int';
+    case NUMERIC_TYPE = 'numeric';
+    case STRING_TYPE = 'string';
+    case ARRAY_TYPE = 'array';
+
+    case UUID36_TYPE = '/^'
     . '[0-9A-F]{8}-'
     . '[0-9A-F]{4}-'
     . '4[0-9A-F]{3}-'
@@ -15,8 +20,7 @@ final class UuidType
     . '[0-9A-F]{12}'
     . '$/i';
 
-    /** @var string Double UUIDv4 format for account API key */
-    public const UUID_72 = '/^'
+    case UUID72_TYPE = '/^'
     . '[0-9A-F]{8}-'
     . '[0-9A-F]{4}-'
     . '4[0-9A-F]{3}-'

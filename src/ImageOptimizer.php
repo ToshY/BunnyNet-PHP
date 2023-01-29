@@ -11,23 +11,29 @@ use ToshY\BunnyNet\Enum\Optimizer;
  */
 final class ImageOptimizer
 {
-    public function generate(string $url, array $optimizationCollection = []): string
-    {
+    public function generate(
+        string $url,
+        array $optimizationCollection = []
+    ): string {
         if (empty($optimizationCollection) === true) {
             return $url;
         }
 
         $optimizationCollection = $this->validateOptimizationParameters($optimizationCollection);
 
-        $query = http_build_query($optimizationCollection, '', '&', PHP_QUERY_RFC3986);
+        $query = http_build_query(
+            data: $optimizationCollection,
+            arg_separator: '&',
+            encoding_type: PHP_QUERY_RFC3986
+        );
 
         return sprintf('%s?%s', $url, $query);
     }
 
-    private function validateOptimizationParameters(array $optimalisationCollection): array
+    private function validateOptimizationParameters(array $optimizationCollection): array
     {
         $parameterValueCollection = [];
-        foreach ($optimalisationCollection as $parameterName => $parameterValue) {
+        foreach ($optimizationCollection as $parameterName => $parameterValue) {
             if (in_array($parameterName, Optimizer::OPTIMIZATION_PARAMETER_COLLECTION, true) === true) {
                 $parameterValueCollection[$parameterName] = $parameterValue;
             }

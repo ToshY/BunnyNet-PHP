@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\AbuseCase;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ListAbuseCases implements GenericEndpointInterface
+class ListAbuseCases implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -32,11 +33,11 @@ class ListAbuseCases implements GenericEndpointInterface
         return [
             'page' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'perPage' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
         ];
     }

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Client;
 
+use Exception;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
+use ToshY\BunnyNet\Exception\InvalidJSONForBodyException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
-use ToshY\BunnyNet\Model\Client\ClientResponseModel;
+use ToshY\BunnyNet\Model\Client\Response;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
 class BunnyClient
 {
@@ -22,8 +25,9 @@ class BunnyClient
 
     protected HttpClientInterface $client;
 
-    public function __construct(protected string $hostRequest)
-    {
+    public function __construct(
+        protected string $hostRequest
+    ) {
         $this->client = HttpClient::create();
     }
 
@@ -33,16 +37,16 @@ class BunnyClient
     }
 
     protected function request(
-        array $endpoint,
+        EndpointInterface $endpoint,
         array $pathParameters = [],
         array $query = [],
-        $body = null
-    ): ClientResponseModel {
+        mixed $body = null
+    ): Response {
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
                 'headers' => array_merge(
-                    array_merge(...$endpoint['headers']),
+                    array_merge(...$endpoint->getHeaders()),
                     $this->getAccessKeyHeader()
                 ),
             ],
@@ -50,7 +54,10 @@ class BunnyClient
         );
 
         $base = $this->getHostRequest();
-        $path = $this->createUrlPath($endpoint['path'], $pathParameters);
+        $path = $this->createUrlPath(
+            template: $endpoint->getPath(),
+            pathCollection: $pathParameters
+        );
         $query = $this->createQuery($query);
 
         $url = sprintf(
@@ -62,23 +69,28 @@ class BunnyClient
         );
 
         $response = $this->client->request(
-            $endpoint['method'],
+            $endpoint->getMethod()->value,
             $url,
             $options
         );
 
-        return new ClientResponseModel(response: $response);
+        return new Response(response: $response);
     }
 
-    protected function createUrlPath(string $template, array $pathCollection): string
-    {
+    protected function createUrlPath(
+        string $template,
+        array $pathCollection
+    ): string {
         return sprintf(
-            sprintf('/%s', $template),
+            sprintf(
+                '/%s',
+                $template
+            ),
             ...$pathCollection
         );
     }
 
-    protected function createQuery(array $query): ?string
+    protected function createQuery(array $query): string|null
     {
         if (empty($query) === true) {
             return null;
@@ -94,7 +106,11 @@ class BunnyClient
 
         return sprintf(
             '?%s',
-            http_build_query($query, '', '&', PHP_QUERY_RFC3986)
+            http_build_query(
+                data: $query,
+                arg_separator: '&',
+                encoding_type: PHP_QUERY_RFC3986
+            )
         );
     }
 
@@ -107,7 +123,10 @@ class BunnyClient
         $fileRealPath = realpath($filePath);
         if ($fileRealPath === false) {
             throw new FileDoesNotExistException(
-                sprintf('The local file `%s` could not be opened. Please check if it exists.', $filePath)
+                sprintf(
+                    'The local file `%s` could not be opened. Please check if it exists.',
+                    $filePath
+                )
             );
         }
 
@@ -121,20 +140,34 @@ class BunnyClient
         ];
     }
 
-    private function getBody($body): mixed
+    /**
+     * @throws InvalidJSONForBodyException
+     */
+    private function getBody(mixed $body): mixed
     {
-        if (is_array($body) === true) {
-            return json_encode($body, JSON_THROW_ON_ERROR);
+        if (is_array($body) === false) {
+            return $body;
         }
-        return $body;
+
+        try {
+            $jsonBody = json_encode(value: $body, flags: JSON_THROW_ON_ERROR);
+        } catch (Exception $e) {
+            throw new InvalidJSONForBodyException(
+                $e->getMessage()
+            );
+        }
+
+        return $jsonBody;
     }
 
     /**
      * @throws InvalidQueryParameterRequirementException
      * @throws InvalidQueryParameterTypeException
      */
-    protected function validateQueryField(array $values, array $template): array
-    {
+    protected function validateQueryField(
+        array $values,
+        array $template
+    ): array {
         $intersectTemplateKeys = array_intersect_key($template, $values);
         $intersectValues = array_intersect_key($values, $template);
         foreach ($intersectTemplateKeys as $key => $templateValue) {
@@ -178,8 +211,10 @@ class BunnyClient
     /**
      * @throws InvalidBodyParameterTypeException
      */
-    protected function validateBodyField(array $values, array $template): array
-    {
+    protected function validateBodyField(
+        array $values,
+        array $template
+    ): array {
         $intersectTemplateKeys = array_intersect_key($template, $values);
         $intersectValues = array_intersect_key($values, $template);
         foreach ($intersectTemplateKeys as $key => $templateValue) {
@@ -209,7 +244,7 @@ class BunnyClient
         string $methodName,
         string $key,
         array $templateValue,
-        $parameterValue
+        mixed $parameterValue
     ): void {
         if (is_array($parameterValue) === true) {
             foreach ($parameterValue as $subValue) {

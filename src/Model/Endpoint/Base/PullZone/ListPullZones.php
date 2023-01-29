@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ListPullZones implements GenericEndpointInterface
+class ListPullZones implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -32,15 +33,15 @@ class ListPullZones implements GenericEndpointInterface
         return [
             'page' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'perPage' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'includeCertificate' => [
                 'required' => false,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

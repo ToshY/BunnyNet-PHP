@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdatePullZone implements GenericEndpointInterface
+class UpdatePullZone implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -44,402 +45,402 @@ class UpdatePullZone implements GenericEndpointInterface
     {
         return [
             'OriginUrl' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'AllowedReferrers' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'BlockedReferrers' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'BlockedIps' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'EnableGeoZoneUS' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableGeoZoneEU' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableGeoZoneASIA' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableGeoZoneSA' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableGeoZoneAF' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'BlockRootPathAccess' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'BlockPostRequests' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableQueryStringOrdering' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableWebpVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableAvifVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableMobileVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableCountryCodeVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableHostnameVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableCacheSlice' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ZoneSecurityEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ZoneSecurityIncludeHashRemoteIP' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'IgnoreQueryStrings' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'MonthlyBandwidthLimit' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'AccessControlOriginHeaderExtensions' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'EnableAccessControlOriginHeader' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'DisableCookies' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'BudgetRedirectedCountries' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'BlockedCountries' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'CacheControlMaxAgeOverride' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'CacheControlBrowserMaxAgeOverride' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'AddHostHeader' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'AddCanonicalHeader' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableLogging' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LoggingIPAnonymizationEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'PermaCacheStorageZoneId' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'AWSSigningEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'AWSSigningKey' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'AWSSigningRegionName' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'AWSSigningSecret' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'EnableOriginShield' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginShieldZoneCode' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'EnableTLS1' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableTLS1_1' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'CacheErrorResponses' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'VerifyOriginSSL' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LogForwardingEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LogForwardingHostname' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LogForwardingPort' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LogForwardingToken' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LogForwardingProtocol' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LoggingSaveToStorage' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LoggingStorageZoneId' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'FollowRedirects' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ConnectionLimitPerIPCount' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'RequestLimit' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LimitRateAfter' => [
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'LimitRatePerSecond' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'BurstSize' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'WAFEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'WAFDisabledRuleGroups' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'WAFDisabledRules' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'WAFEnableRequestHeaderLogging' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'WAFRequestHeaderIgnores' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'ErrorPageEnableCustomCode' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ErrorPageCustomCode' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ErrorPageEnableStatuspageWidget' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ErrorPageStatuspageCode' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ErrorPageWhitelabel' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerDesktopMaxWidth' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerMobileMaxWidth' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerImageQuality' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerMobileImageQuality' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerEnableWebP' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerEnableManipulationEngine' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerMinifyCSS' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerMinifyJavaScript' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerWatermarkEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerWatermarkUrl' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'OptimizerWatermarkPosition' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerWatermarkOffset' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerWatermarkMinImageSize' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OptimizerAutomaticOptimizationEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OptimizerClasses' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
                     'Name' => [
-                        'type' => 'int',
+                        'type' => Type::INT_TYPE->value,
                     ],
                     'Properties' => [
-                        'type' => 'array',
+                        'type' => Type::ARRAY_TYPE->value,
                         'options' => [
-                            'type' => 'array',
+                            'type' => Type::ARRAY_TYPE->value,
                         ],
                     ],
                 ],
             ],
             'OptimizerForceClasses' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'Type' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginRetries' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OriginConnectTimeout' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OriginResponseTimeout' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'UseStaleWhileUpdating' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'UseStaleWhileOffline' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginRetry5XXResponses' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginRetryConnectionTimeout' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginRetryResponseTimeout' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginRetryDelay' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'DnsOriginPort' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'DnsOriginScheme' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'QueryStringVaryParameters' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'OriginShieldEnableConcurrencyLimit' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginShieldMaxConcurrentRequests' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'EnableCookieVary' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'CookieVaryParameters' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'type' => 'string',
+                    'type' => Type::STRING_TYPE->value,
                 ],
             ],
             'EnableSafeHop' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginShieldQueueMaxWaitTime' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OriginShieldMaxQueuedRequests' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'UseBackgroundUpdate' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableAutoSSL' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'LogAnonymizationType' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'StorageZoneId' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'EdgeScriptId' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'OriginType' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LogFormat' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'LogForwardingFormat' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'ShieldDDosProtectionType' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'ShieldDDosProtectionEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'OriginHostHeader' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'EnableSmartCache' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableRequestCoalescing' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'RequestCoalescingTimeout' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
         ];
     }

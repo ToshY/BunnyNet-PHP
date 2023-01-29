@@ -64,7 +64,7 @@ final class Region
                 'min' => 0,
                 'max' => 500,
                 'unit' => 'TB',
-            ]
+            ],
         ],
         'TIER_02' => [
             'location' => 'Tier 2',
@@ -73,7 +73,7 @@ final class Region
                 'min' => 500,
                 'max' => 1000,
                 'unit' => 'TB',
-            ]
+            ],
         ],
         'TIER_03' => [
             'location' => 'Tier 3',
@@ -82,7 +82,7 @@ final class Region
                 'min' => 1000,
                 'max' => 2000,
                 'unit' => 'TB',
-            ]
+            ],
         ],
     ];
 }

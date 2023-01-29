@@ -6,11 +6,11 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\StorageZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class GetStorageZone implements GenericEndpointInterface
+class GetStorageZone implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }

@@ -6,9 +6,26 @@ namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Enum\Stream\CollectionEndpoint;
-use ToshY\BunnyNet\Enum\Stream\VideoEndpoint;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
+use ToshY\BunnyNet\Model\Client\Response;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\CreateCollection;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\DeleteCollection;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\GetCollection;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\ListCollections;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\UpdateCollection;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\AddCaption;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\CreateVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\DeleteCaption;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\DeleteVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\FetchVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\GetVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\GetVideoHeatmap;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ListVideos;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ListVideoStatistics;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ReencodeVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\UpdateVideo;
+use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\UploadVideo;
 
 /**
  * @link https://docs.bunny.net/reference/api-overview
@@ -16,170 +33,148 @@ use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 final class VideoStreamRequest extends BunnyClient
 {
     public function __construct(
-        protected string $apiKey
+        protected string $apiKey,
     ) {
         parent::__construct(Host::STREAM_ENDPOINT);
     }
 
-    public function getCollection(int $libraryId, string $collectionId): array
+    public function getCollection(int $libraryId, string $collectionId): Response
     {
-        $endpoint = CollectionEndpoint::GET_COLLECTION;
+        $endpoint = new GetCollection();
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $collectionId],
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $collectionId],
         );
     }
 
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updateCollection(int $libraryId, string $collectionId, array $body): array
-    {
-        $endpoint = CollectionEndpoint::UPDATE_COLLECTION;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+    public function updateCollection(
+        int $libraryId,
+        string $collectionId,
+        array $body
+    ): Response {
+        $endpoint = new UpdateCollection();
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $collectionId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $collectionId],
+            body: $body,
+        );
+    }
+
+    public function deleteCollection(int $libraryId, string $collectionId): Response
+    {
+        $endpoint = new DeleteCollection();
+
+        return $this->request(
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $collectionId],
+        );
+    }
+
+    /**
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     * @return Response
+     * @param int $libraryId
+     * @param array $query
+     */
+    public function getCollectionList(int $libraryId, array $query = []): Response
+    {
+        $endpoint = new ListCollections();
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
+
+        return $this->request(
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            query: $query,
         );
     }
 
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function createCollection(int $libraryId, array $body): array
+    public function createCollection(int $libraryId, array $body): Response
     {
-        $endpoint = CollectionEndpoint::CREATE_COLLECTION;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $endpoint = new CreateCollection();
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            body: $body,
         );
     }
 
-    public function deleteCollection(int $libraryId, string $collectionId): array
+    public function getVideo(int $libraryId, string $videoId): Response
     {
-        $endpoint = CollectionEndpoint::DELETE_COLLECTION;
+        $endpoint = new GetVideo();
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $collectionId],
-        );
-    }
-
-    /**
-     * @throws Exception\InvalidBodyParameterTypeException
-     */
-    public function getCollectionList(int $libraryId, array $query = []): array
-    {
-        $endpoint = CollectionEndpoint::GET_COLLECTION_LIST;
-        $query = $this->validateBodyField($query, $endpoint['query']);
-
-        return $this->request(
-            $endpoint,
-            [$libraryId],
-            $query,
-        );
-    }
-
-    public function getVideo(int $libraryId, string $videoId): array
-    {
-        $endpoint = VideoEndpoint::GET_VIDEO;
-
-        return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            []
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
         );
     }
 
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updateVideo(int $libraryId, string $videoId, array $body): array
+    public function updateVideo(int $libraryId, string $videoId, array $body): Response
     {
-        $endpoint = VideoEndpoint::UPDATE_VIDEO;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $endpoint = new UpdateVideo();
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
+            body: $body,
         );
     }
 
-    public function deleteVideo(int $libraryId, string $videoId): array
+    public function deleteVideo(int $libraryId, string $videoId): Response
     {
-        $endpoint = VideoEndpoint::DELETE_VIDEO;
+        $endpoint = new DeleteVideo();
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId]
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
         );
     }
 
     /**
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
      * @throws FileDoesNotExistException
      */
-    public function uploadVideo(int $libraryId, string $videoId, string $localFilePath): array
-    {
-        $endpoint = VideoEndpoint::UPLOAD_VIDEO;
+    public function uploadVideo(
+        int $libraryId,
+        string $videoId,
+        string $localFilePath,
+        array $query = [],
+    ): Response {
+        $endpoint = new UploadVideo();
         $body = $this->openFileStream($localFilePath);
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
+            query: $query,
+            body: $body,
         );
     }
 
-    public function reencodeVideo(int $libraryId, string $videoId): array
+    public function getVideoHeatmap(int $libraryId, string $videoId): Response
     {
-        $endpoint = VideoEndpoint::REENCODE_VIDEO;
+        $endpoint = new GetVideoHeatmap();
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-        );
-    }
-
-    /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
-     */
-    public function listVideos(int $libraryId, array $query = []): array
-    {
-        $endpoint = VideoEndpoint::LIST_VIDEOS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
-
-        return $this->request(
-            $endpoint,
-            [$libraryId],
-            $query
-        );
-    }
-
-    /**
-     * @throws Exception\InvalidBodyParameterTypeException
-     */
-    public function createVideo(int $libraryId, array $body): array
-    {
-        $endpoint = VideoEndpoint::CREATE_VIDEO;
-        $body = $this->validateBodyField($body, $endpoint['body']);
-
-        return $this->request(
-            $endpoint,
-            [$libraryId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
         );
     }
 
@@ -187,31 +182,72 @@ final class VideoStreamRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function setThumbnail(int $libraryId, string $videoId, array $query): array
+    public function getVideoStatistics(int $libraryId, array $query = []): Response
     {
-        $endpoint = VideoEndpoint::SET_THUMBNAIL;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $endpoint = new ListVideoStatistics();
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            $query
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            query: $query,
+        );
+    }
+
+    public function reencodeVideo(int $libraryId, string $videoId): Response
+    {
+        $endpoint = new ReencodeVideo();
+
+        return $this->request(
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
+        );
+    }
+
+    /**
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
+    public function listVideos(int $libraryId, array $query = []): Response
+    {
+        $endpoint = new ListVideos();
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
+
+        return $this->request(
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            query: $query,
         );
     }
 
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function fetchVideo(int $libraryId, string $videoId, array $body): array
+    public function createVideo(int $libraryId, array $body): Response
     {
-        $endpoint = VideoEndpoint::FETCH_VIDEO;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $endpoint = new CreateVideo();
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            body: $body,
+        );
+    }
+
+    /**
+     * @throws Exception\InvalidQueryParameterRequirementException
+     * @throws Exception\InvalidQueryParameterTypeException
+     */
+    public function setThumbnail(int $libraryId, string $videoId, array $query): Response
+    {
+        $endpoint = new SetThumbnail();
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
+
+        return $this->request(
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId],
+            query: $query,
         );
     }
 
@@ -220,44 +256,49 @@ final class VideoStreamRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function fetchVideoToCollection(int $libraryId, array $body, array $query = []): array
+    public function fetchVideo(int $libraryId, array $body, array $query = []): Response
     {
-        $endpoint = VideoEndpoint::FETCH_VIDEO_TO_COLLECTION;
-        $query = $this->validateQueryField($query, $endpoint['query']);
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $endpoint = new FetchVideo();
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId],
-            $query,
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId],
+            query: $query,
+            body: $body,
         );
     }
 
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addCaption(int $libraryId, string $videoId, string $sourceLanguage, array $body): array
-    {
-        $endpoint = VideoEndpoint::ADD_CAPTION;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+    public function addCaption(
+        int $libraryId,
+        string $videoId,
+        string $sourceLanguage,
+        array $body
+    ): Response {
+        $endpoint = new AddCaption();
+        $body = $this->validateBodyField($body, $endpoint->getBody());
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId, $sourceLanguage],
-            [],
-            $body
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId, $sourceLanguage],
+            body: $body,
         );
     }
 
-    public function deleteCaption(int $libraryId, string $videoId, string $sourceLanguage): array
-    {
-        $endpoint = VideoEndpoint::DELETE_CAPTION;
+    public function deleteCaption(
+        int $libraryId,
+        string $videoId,
+        string $sourceLanguage
+    ): Response {
+        $endpoint = new DeleteCaption();
 
         return $this->request(
-            $endpoint,
-            [$libraryId, $videoId, $sourceLanguage],
-            []
+            endpoint: $endpoint,
+            pathParameters: [$libraryId, $videoId, $sourceLanguage],
         );
     }
 }

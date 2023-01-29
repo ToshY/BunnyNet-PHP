@@ -12,7 +12,7 @@ final class PricingCalculator
         'location' => [],
         'size' => [
             'value' => 0,
-            'unit' => 'GB'
+            'unit' => 'GB',
         ],
         'cost' => [
             'value' => 0,

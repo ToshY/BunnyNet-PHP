@@ -25,6 +25,16 @@ edge storage, video streaming and image optimizers.
 composer require toshy/bunnynet-php
 ```
 
+### Versions
+
+| PHP         | Release |
+|-------------|---------|
+| ^7.4 / ^8.0 | ^2.0    |
+| ^8.1        | ^3.0    |
+
+> Note: The `2.x` branch will no longer be actively maintained after the initial `3.0` release.
+
+
 ## Quickstart
 
 ```php
@@ -32,11 +42,11 @@ require 'vendor/autoload.php';
 
 use ToshY\BunnyNet\BaseRequest;
 use ToshY\BunnyNet\EdgeStorageRequest;
-use ToshY\BunnyNet\VideoStreamRequest;
-use Toshy\BunnyNet\PullZoneLogRequest;
-use ToshY\BunnyNet\SecureUrlGenerator;
 use ToshY\BunnyNet\ImageOptimizer;
 use ToshY\BunnyNet\PricingCalculator;
+use Toshy\BunnyNet\PullZoneLogRequest;
+use ToshY\BunnyNet\SecureUrlGenerator;
+use ToshY\BunnyNet\VideoStreamRequest;
 
 // Classes for API endpoints.
 $bunnyBase = new BaseRequest(
@@ -71,7 +81,7 @@ $bunnyPricingCalculator = new PricingCalculator();
 
 ## Documentation
 
-Examples for each type of request can be found in the [docs](docs) directory.
+Examples for each type of request can be found in the [docs](./docs) directory.
 
 * [Base](docs/BaseRequest.md)
 * [Edge Storage](docs/EdgeStorageRequest.md)
@@ -95,6 +105,8 @@ Special thanks to the bunny.net support team for answering my questions regardin
 
 ## Contribute
 
+Features and bugfixes should be based on the master branch.
+
 ### Prerequisites
 
 * Docker Compose
@@ -105,7 +117,7 @@ Special thanks to the bunny.net support team for answering my questions regardin
 ### Up service
 
 ```shell
-task up 
+task composer:install 
 ```
 
 ### Run checks
@@ -118,4 +130,4 @@ task contribute
 
 ## Licence
 
-The BunnyNet PHP library is licensed under [MIT](LICENSE). 
+The BunnyNet PHP library is licensed under [MIT](LICENSE).

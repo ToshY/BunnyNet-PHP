@@ -12,17 +12,6 @@ tasks:
     cmds:
       - task --list
 
-  # App
-  up:
-    desc: Up service
-    cmds:
-      - docker compose up -d --build --remove-orphans --force-recreate
-
-  down:
-    desc: Down service
-    cmds:
-      - docker compose down --remove-orphans
-
   contribute:
     desc: Contribute by running dev tools
     cmds:
@@ -77,22 +66,22 @@ tasks:
   phpcs:dry:
     desc: PHPCS dry run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v --diff
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --using-cache=no --dry-run -v --diff
 
   phpcs:fix:
     desc: PHPCS fix
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes -v
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --using-cache=no -v
 
   phpmd:check:
     desc: PHPMD run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml -v
+      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
 
   phpmd:check:strict:
     desc: PHPMD run with strict argument
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml -v
+      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
 
   phpmd:generate:baseline:
     desc: PHPMD generate baseline

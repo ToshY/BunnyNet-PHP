@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Compute;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CreateComputeScriptRelease implements GenericEndpointInterface
+class CreateComputeScriptRelease implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,7 +34,7 @@ class CreateComputeScriptRelease implements GenericEndpointInterface
         return [
             'uuid' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

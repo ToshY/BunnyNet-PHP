@@ -5,7 +5,7 @@ grumphp:
   tasks:
     shell:
       scripts:
-        - [ "-c", "vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run -v --diff" ]
+        - [ "-c", "vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run --using-cache=no -v --diff" ]
     phpmd:
       ruleset:
         - phpmd.xml

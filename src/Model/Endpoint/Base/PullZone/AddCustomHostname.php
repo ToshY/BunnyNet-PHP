@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class AddCustomHostname implements GenericEndpointInterface
+class AddCustomHostname implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,7 +33,7 @@ class AddCustomHostname implements GenericEndpointInterface
         return [
             'Hostname' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

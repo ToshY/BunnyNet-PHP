@@ -12,7 +12,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 use Throwable;
 use ToshY\BunnyNet\Client\BunnyClient;
 
-class ClientResponseModel
+class Response
 {
     public function __construct(
         private readonly ResponseInterface $response
@@ -49,7 +49,7 @@ class ClientResponseModel
         return $this->response->getStatusCode();
     }
 
-    public function getInfo(string $type = null)
+    public function getInfo(string $type = null): mixed
     {
         return $this->response->getInfo($type);
     }

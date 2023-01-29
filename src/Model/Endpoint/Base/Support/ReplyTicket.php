@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Support;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ReplyTicket implements GenericEndpointInterface
+class ReplyTicket implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,15 +33,21 @@ class ReplyTicket implements GenericEndpointInterface
         return [
             'Message' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Attachments' => [
                 'required' => false,
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'Body' => 'string',
-                    'FileName' => 'string',
-                    'ContentType' => 'string',
+                    'Body' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
+                    'FileName' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
+                    'Contenttype' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
                 ],
             ],
         ];

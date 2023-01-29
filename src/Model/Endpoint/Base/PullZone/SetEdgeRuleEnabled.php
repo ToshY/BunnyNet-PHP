@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class SetEdgeRuleEnabled implements GenericEndpointInterface
+class SetEdgeRuleEnabled implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,11 +34,11 @@ class SetEdgeRuleEnabled implements GenericEndpointInterface
         return [
             'Id' => [
                 'required' => true,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Enabled' => [
                 'required' => true,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Region;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ListRegions implements GenericEndpointInterface
+class ListRegions implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -32,11 +33,11 @@ class ListRegions implements GenericEndpointInterface
         return [
             'page' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'perPage' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
         ];
     }

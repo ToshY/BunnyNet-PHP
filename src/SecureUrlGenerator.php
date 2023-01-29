@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use ToshY\BunnyNet\Enum\UuidType;
+use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 
 /**
@@ -19,9 +19,11 @@ final class SecureUrlGenerator
     /**
      * @throws KeyFormatNotSupportedException
      */
-    public function __construct(private readonly string $hostname, string $token)
-    {
-        if (preg_match(UuidType::UUID_36, $token) !== 1) {
+    public function __construct(
+        private readonly string $hostname,
+        string $token
+    ) {
+        if (preg_match(Type::UUID36_TYPE->value, $token) !== 1) {
             throw new KeyFormatNotSupportedException(
                 'Invalid token: does not conform to the UUID 36 characters format.'
             );
@@ -32,12 +34,12 @@ final class SecureUrlGenerator
     public function generate(
         string $file,
         int $expirationTime = 3600,
-        ?string $userIp = null,
+        string|null $userIp = null,
         bool $isDirectoryToken = false,
-        ?string $pathAllowed = null,
-        ?string $countriesAllowed = null,
-        ?string $countriesBlocked = null,
-        ?string $referrersAllowed = null,
+        string|null $pathAllowed = null,
+        string|null $countriesAllowed = null,
+        string|null $countriesBlocked = null,
+        string|null $referrersAllowed = null,
         bool $allowSubnet = true
     ): string {
         $url = sprintf('%s%s', $this->hostname, $file);
@@ -121,11 +123,16 @@ final class SecureUrlGenerator
         );
     }
 
-    private function parseOptionalPathParameter(string &$url, ?string $pathParameterKey, ?string $pathParameterValue)
-    {
-        if ($pathParameterValue !== null) {
-            $url .= empty(parse_url($url, PHP_URL_QUERY)) === true ? '?' : '&';
-            $url .= sprintf('%s=%s', $pathParameterKey, $pathParameterValue);
+    private function parseOptionalPathParameter(
+        string &$url,
+        string|null $pathParameterKey,
+        string|null $pathParameterValue
+    ): void {
+        if ($pathParameterValue === null) {
+            return;
         }
+
+        $url .= empty(parse_url($url, PHP_URL_QUERY)) === true ? '?' : '&';
+        $url .= sprintf('%s=%s', $pathParameterKey, $pathParameterValue);
     }
 }

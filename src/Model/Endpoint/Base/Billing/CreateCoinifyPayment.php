@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Billing;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CreateCoinifyPayment implements GenericEndpointInterface
+class CreateCoinifyPayment implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -32,7 +33,7 @@ class CreateCoinifyPayment implements GenericEndpointInterface
         return [
             'amount' => [
                 'required' => true,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
         ];
     }

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Model\Endpoint\Base\Support;
 
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CloseTicket implements GenericEndpointInterface
+class CloseTicket implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }

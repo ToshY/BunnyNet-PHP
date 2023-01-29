@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class AddBlockedIP implements GenericEndpointInterface
+class AddBlockedIP implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,7 +34,7 @@ class AddBlockedIP implements GenericEndpointInterface
         return [
             'BlockedIp' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

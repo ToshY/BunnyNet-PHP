@@ -30,4 +30,4 @@ jobs:
           composer-options: '--prefer-stable'
 
       - name: PHP CS Fixer
-        run: php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run
+        run: php vendor/bin/php-cs-fixer fix . --allow-risky=yes --using-cache=no --dry-run -v --diff

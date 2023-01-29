@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Compute;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateComputeScriptCode implements GenericEndpointInterface
+class UpdateComputeScriptCode implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,7 +34,7 @@ class UpdateComputeScriptCode implements GenericEndpointInterface
         return [
             'Code' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\User;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CloseAccount implements GenericEndpointInterface
+class CloseAccount implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,10 +33,10 @@ class CloseAccount implements GenericEndpointInterface
     {
         return [
             'Password' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Reason' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

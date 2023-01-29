@@ -6,11 +6,11 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Billing;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class PreparePaymentAuthorization implements GenericEndpointInterface
+class PreparePaymentAuthorization implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }

@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class AddOrUpdateEdgeRule implements GenericEndpointInterface
+class AddOrUpdateEdgeRule implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -31,48 +32,48 @@ class AddOrUpdateEdgeRule implements GenericEndpointInterface
     {
         return [
             'Guid' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ActionType' => [
                 'required' => true,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'ActionParameter1' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ActionParameter2' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Triggers' => [
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
                     'Type' => [
-                        'type' => 'int',
+                        'type' => Type::INT_TYPE->value,
                     ],
                     'PatternMatches' => [
-                        'type' => 'array',
+                        'type' => Type::ARRAY_TYPE->value,
                         'options' => [
-                            'type' => 'string',
+                            'type' => Type::STRING_TYPE->value,
                         ],
                     ],
                     'PatternMatchingType' => [
-                        'type' => 'int',
+                        'type' => Type::INT_TYPE->value,
                     ],
                     'Parameter1' => [
-                        'type' => 'string',
+                        'type' => Type::STRING_TYPE->value,
                     ],
                 ],
             ],
             'TriggerMatchingType' => [
                 'required' => true,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Description' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Enabled' => [
                 'required' => true,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

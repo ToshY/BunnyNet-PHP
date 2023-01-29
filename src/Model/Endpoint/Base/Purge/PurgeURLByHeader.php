@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Model\Endpoint\Base\Purge;
 
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class PurgeURLByHeader implements GenericEndpointInterface
+class PurgeURLByHeader implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -29,19 +30,19 @@ class PurgeURLByHeader implements GenericEndpointInterface
         return [
             'url' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'headerName' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'headerValue' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'async' => [
                 'required' => false,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

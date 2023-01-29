@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Billing;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ConfigureAutoRecharge implements GenericEndpointInterface
+class ConfigureAutoRecharge implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,19 +33,19 @@ class ConfigureAutoRecharge implements GenericEndpointInterface
         return [
             'AutoRechargeEnabled' => [
                 'required' => true,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'PaymentMethodToken' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'PaymentAmount' => [
                 'required' => false,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'RechargeTreshold' => [
                 'required' => false,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
         ];
     }

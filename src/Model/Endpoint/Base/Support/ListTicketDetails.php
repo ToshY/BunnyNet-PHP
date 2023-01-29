@@ -6,11 +6,11 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Support;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ListTicketDetails implements GenericEndpointInterface
+class ListTicketDetails implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }

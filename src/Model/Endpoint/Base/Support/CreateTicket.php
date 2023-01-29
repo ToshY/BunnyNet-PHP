@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Support;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CreateTicket implements GenericEndpointInterface
+class CreateTicket implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,27 +34,33 @@ class CreateTicket implements GenericEndpointInterface
         return [
             'Subject' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LinkedPullZone' => [
                 'required' => true,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Message' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LinkedStorageZone' => [
                 'required' => true,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Attachments' => [
                 'required' => false,
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'Body' => 'string',
-                    'FileName' => 'string',
-                    'ContentType' => 'string',
+                    'Body' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
+                    'FileName' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
+                    'Contenttype' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
                 ],
             ],
         ];

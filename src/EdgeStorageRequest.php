@@ -10,6 +10,7 @@ use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
 use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
+use ToshY\BunnyNet\Model\Client\Response;
 
 /**
  * @link https://docs.bunny.net/reference/storage-api
@@ -70,8 +71,11 @@ final class EdgeStorageRequest extends BunnyClient
         return $this->getHost()['cost'];
     }
 
-    public function downloadFile(string $storageZoneName, string $path, string $fileName): array
-    {
+    public function downloadFile(
+        string $storageZoneName,
+        string $path,
+        string $fileName
+    ): Response {
         $endpoint = ManageEndpoint::DOWNLOAD_FILE;
 
         return $this->request(
@@ -88,7 +92,7 @@ final class EdgeStorageRequest extends BunnyClient
         string $path,
         string $fileName,
         string $localFilePath
-    ): array {
+    ): Response {
         $endpoint = ManageEndpoint::UPLOAD_FILE;
         $body = $this->openFileStream($localFilePath);
 
@@ -100,8 +104,11 @@ final class EdgeStorageRequest extends BunnyClient
         );
     }
 
-    public function deleteFile(string $storageZoneName, string $path, string $fileName): array
-    {
+    public function deleteFile(
+        string $storageZoneName,
+        string $path,
+        string $fileName
+    ): Response {
         $endpoint = ManageEndpoint::DELETE_FILE;
 
         return $this->request(
@@ -110,7 +117,7 @@ final class EdgeStorageRequest extends BunnyClient
         );
     }
 
-    public function listFiles(string $storageZoneName, string $path = ''): array
+    public function listFiles(string $storageZoneName, string $path = ''): Response
     {
         $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_DIRECTORY;
         $pathParameters = [$storageZoneName, $path];

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Endpoint;
 
-interface GenericEndpointInterface
+use ToshY\BunnyNet\Enum\Method;
+
+interface EndpointInterface
 {
-    public function getMethod(): string;
+    public function getMethod(): Method;
 
     public function getPath(): string;
 

@@ -6,11 +6,11 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class DeleteVideoLibrary implements GenericEndpointInterface
+class DeleteVideoLibrary implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::DELETE;
     }

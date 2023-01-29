@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\User;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateUserDetails implements GenericEndpointInterface
+class UpdateUserDetails implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -33,46 +34,46 @@ class UpdateUserDetails implements GenericEndpointInterface
     {
         return [
             'FirstName' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Email' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'BillingEmail' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'LastName' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'StreetAddress' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'City' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ZipCode' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Country' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'CompanyName' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'VATNumber' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ReceiveNotificationEmails' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ReceivePromotionalEmails' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'Password' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'OldPassword' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->phpVersion(phpVersion: PhpVersion::PHP_80);
+    $rectorConfig->phpVersion(phpVersion: PhpVersion::PHP_81);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses();
     $rectorConfig->parallel(seconds: 600, maxNumberOfProcess: 32);
@@ -22,6 +23,9 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip(criteria: [
         __DIR__ . '/vendor',
+        NullToStrictStringFuncCallArgRector::class => [
+            __DIR__ . '/src/SecureUrlGenerator.php',
+        ],
     ]);
 
     $rectorConfig->sets([

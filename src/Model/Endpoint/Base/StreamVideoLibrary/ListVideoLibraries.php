@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class ListVideoLibraries implements GenericEndpointInterface
+class ListVideoLibraries implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }
@@ -32,15 +33,15 @@ class ListVideoLibraries implements GenericEndpointInterface
         return [
             'page' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'perPage' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'includeAccessKey' => [
                 'required' => false,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
         ];
     }

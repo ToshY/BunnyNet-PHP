@@ -6,11 +6,11 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Compute;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class GetComputeScript implements GenericEndpointInterface
+class GetComputeScript implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::GET;
     }

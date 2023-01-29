@@ -11,4 +11,5 @@
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/PricingCalculator.php"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/SecureUrlGenerator.php"/>
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/VideoStreamRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/VideoStreamRequest.php"/>
 </phpmd-baseline>

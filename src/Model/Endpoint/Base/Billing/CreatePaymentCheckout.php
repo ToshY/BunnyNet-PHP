@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\Billing;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class CreatePaymentCheckout implements GenericEndpointInterface
+class CreatePaymentCheckout implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,19 +33,19 @@ class CreatePaymentCheckout implements GenericEndpointInterface
         return [
             'RechargeAmount' => [
                 'required' => true,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'PaymentAmount' => [
                 'required' => true,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'PaymentRequestId' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Nonce' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

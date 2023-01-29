@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\DNSZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateDNSRecord implements GenericEndpointInterface
+class UpdateDNSRecord implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -62,74 +63,78 @@ class UpdateDNSRecord implements GenericEndpointInterface
         return [
             'Type' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Ttl' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Value' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Name' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Flags' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Tag' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Port' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'PullZoneId' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'ScriptId' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Accelerated' => [
                 'required' => false,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'MonitorType' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'GeolocationLatitude' => [
                 'required' => false,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'GeolocationLongitude' => [
                 'required' => false,
-                'type' => 'numeric',
+                'type' => Type::NUMERIC_TYPE->value,
             ],
             'LatencyZone' => [
                 'required' => false,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'SmartRoutingType' => [
                 'required' => false,
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Disabled' => [
                 'required' => false,
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnviromentalVariables' => [
                 'required' => false,
-                'type' => 'array',
+                'type' => Type::ARRAY_TYPE->value,
                 'options' => [
-                    'Name' => 'string',
-                    'Value' => 'string',
+                    'Name' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
+                    'Value' => [
+                        'type' => Type::STRING_TYPE->value,
+                    ],
                 ],
             ],
         ];

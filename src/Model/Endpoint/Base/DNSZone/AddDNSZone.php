@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\DNSZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class AddDNSZone implements GenericEndpointInterface
+class AddDNSZone implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -32,7 +33,7 @@ class AddDNSZone implements GenericEndpointInterface
         return [
             'Domain' => [
                 'required' => true,
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }

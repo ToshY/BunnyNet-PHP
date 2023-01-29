@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
-final class Method
+enum Method: string
 {
-    public const GET = 'GET';
+    case GET = 'GET';
 
-    public const POST = 'POST';
+    case POST = 'POST';
 
-    public const PUT = 'PUT';
+    case PUT = 'PUT';
 
-    public const DELETE = 'DELETE';
+    case DELETE = 'DELETE';
 }

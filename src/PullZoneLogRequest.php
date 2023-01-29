@@ -8,8 +8,11 @@ use DateTimeInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Enum\Log\LogEndpoint;
-use ToshY\BunnyNet\Enum\UuidType;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
+use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
+use ToshY\BunnyNet\Model\Client\Response;
 
 /**
  * @link https://docs.bunny.net/docs/cdn-logging
@@ -37,7 +40,7 @@ final class PullZoneLogRequest extends BunnyClient
      */
     public function setApiKey(string $key): PullZoneLogRequest
     {
-        if (preg_match(UuidType::UUID_72, $key) !== 1) {
+        if (preg_match(Type::UUID72_TYPE->value, $key) !== 1) {
             throw new KeyFormatNotSupportedException(
                 'Invalid API key: does not conform to the UUID 72 characters format.'
             );
@@ -46,11 +49,12 @@ final class PullZoneLogRequest extends BunnyClient
         return $this;
     }
 
+
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws InvalidQueryParameterTypeException
+     * @throws InvalidQueryParameterRequirementException
      */
-    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): array
+    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): Response
     {
         $endpoint = LogEndpoint::GET_LOGGING;
         $dateTimeFormat = $dateTime->format('m-d-y');

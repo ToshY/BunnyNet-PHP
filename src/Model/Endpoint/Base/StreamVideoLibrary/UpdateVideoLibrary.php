@@ -6,11 +6,12 @@ namespace ToshY\BunnyNet\Model\Endpoint\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Model\Endpoint\GenericEndpointInterface;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
-class UpdateVideoLibrary implements GenericEndpointInterface
+class UpdateVideoLibrary implements EndpointInterface
 {
-    public function getMethod(): string
+    public function getMethod(): Method
     {
         return Method::POST;
     }
@@ -31,112 +32,112 @@ class UpdateVideoLibrary implements GenericEndpointInterface
     {
         return [
             'Name' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'CustomHTML' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'PlayerKeyColor' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'EnableTokenAuthentication' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableTokenIPVerification' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'ResetToken' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'WatermarkPositionLeft' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'WatermarkPositionTop' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'WatermarkWidth' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'WatermarkHeight' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'EnabledResolutions' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'ViAiPublisherId' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'VastTagUrl' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'WebhookUrl' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'CaptionsFontSize' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'CaptionsFontColor' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'CaptionsBackground' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'UILanguage' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'AllowEarlyPlay' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'PlayerTokenAuthenticationEnabled' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'BlockNoneReferrer' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableMP4Fallback' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'KeepOriginalFiles' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'AllowDirectPlay' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableDRM' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'Controls' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
             'Bitrate240p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate360p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate480p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate720p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate1080p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate1440p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'Bitrate2160p' => [
-                'type' => 'int',
+                'type' => Type::INT_TYPE->value,
             ],
             'ShowHeatmap' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'EnableContentTagging' => [
-                'type' => 'bool',
+                'type' => Type::BOOLEAN_TYPE->value,
             ],
             'FontFamily' => [
-                'type' => 'string',
+                'type' => Type::STRING_TYPE->value,
             ],
         ];
     }
