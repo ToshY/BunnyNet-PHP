@@ -31,7 +31,7 @@ final class PullZoneLogRequest extends BunnyClient
     ) {
         $this->setApiKey($accountApiKey);
 
-        parent::__construct(Host::API_ENDPOINT);
+        parent::__construct(Host::LOGGING_ENDPOINT);
     }
 
     /**
