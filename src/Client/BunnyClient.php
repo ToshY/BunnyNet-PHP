@@ -38,14 +38,16 @@ class BunnyClient
 
     protected function request(
         EndpointInterface $endpoint,
-        array $pathParameters = [],
+        array $parameters = [],
         array $query = [],
-        mixed $body = null
+        mixed $body = null,
+        array $headers = [],
     ): Response {
         $options = array_filter(
             [
                 'body' => $this->getBody($body),
                 'headers' => array_merge(
+                    $headers,
                     array_merge(...$endpoint->getHeaders()),
                     $this->getAccessKeyHeader()
                 ),
@@ -56,7 +58,7 @@ class BunnyClient
         $base = $this->getHostRequest();
         $path = $this->createUrlPath(
             template: $endpoint->getPath(),
-            pathCollection: $pathParameters
+            pathCollection: $parameters
         );
         $query = $this->createQuery($query);
 

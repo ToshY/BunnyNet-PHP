@@ -97,3 +97,19 @@ tasks:
     desc: Rector fix
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector
+
+  php:cli:
+    desc: Spin up PHP container for local testing
+    summary: |
+      Useful for development. See Quickstart section in README for examples.
+    silent: true
+    vars:
+      PHP_VERSION: '{{.v | default "8.1"}}'
+      FILE_NAME: '{{.f | default "example.php"}}'
+    cmds:
+      - |
+        if [[ ! -e ./{{.FILE_NAME}} ]]; then
+          touch ./{{.FILE_NAME}}
+          echo -e "<?php\n\nrequire 'vendor/autoload.php';\n" > ./example.php
+        fi
+        docker run -it --rm --user ${UID}:${GID} -v $(pwd):/app php:{{.PHP_VERSION}}-cli php /app/{{.FILE_NAME}}

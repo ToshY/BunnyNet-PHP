@@ -11,38 +11,51 @@ use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
 use ToshY\BunnyNet\Model\Client\Response;
+use ToshY\BunnyNet\Model\Endpoint\EdgeStorage\BrowseFiles\ListFiles;
+use ToshY\BunnyNet\Model\Endpoint\EdgeStorage\ManageFiles\DeleteFile;
+use ToshY\BunnyNet\Model\Endpoint\EdgeStorage\ManageFiles\DownloadFile;
+use ToshY\BunnyNet\Model\Endpoint\EdgeStorage\ManageFiles\UploadFile;
 
 /**
  * @link https://docs.bunny.net/reference/storage-api
  */
 final class EdgeStorageRequest extends BunnyClient
 {
-    private array $host;
+    private string $host;
 
     /**
      * @throws RegionDoesNotExistException
      */
     public function __construct(
         protected string $apiKey,
-        string $hostCode = 'FS'
+        Region|string $hostCode = 'FS'
     ) {
         $this->setHost($hostCode);
 
-        parent::__construct($this->getHostUrl());
-    }
-
-    public function getHost(): array
-    {
-        return $this->host;
+        parent::__construct($this->host);
     }
 
     /**
      * @throws RegionDoesNotExistException
      */
-    public function setHost(string $hostCode): EdgeStorageRequest
+    public function setHost(Region|string $hostCode): EdgeStorageRequest
     {
-        $upperCaseHostCode = strtoupper($hostCode);
-        if (array_key_exists($upperCaseHostCode, Region::STORAGE_STANDARD) !== true) {
+        if ($hostCode instanceof Region === true) {
+            $this->host = $hostCode->host();
+            return $this;
+        }
+
+        $filteredRegionCollection = array_filter(
+            Region::cases(),
+            function (Region $region) use ($hostCode) {
+                if (strtoupper($region->name) === strtoupper($hostCode)) {
+                    return $region;
+                }
+            },
+        );
+
+        $foundRegion = array_pop($filteredRegionCollection);
+        if ($foundRegion === null) {
             throw new RegionDoesNotExistException(
                 sprintf(
                     'The region abbreviation `%s` is not a valid primary storage region.'
@@ -52,23 +65,8 @@ final class EdgeStorageRequest extends BunnyClient
             );
         }
 
-        $this->host = Region::STORAGE_STANDARD[$upperCaseHostCode];
+        $this->host = $foundRegion->host();
         return $this;
-    }
-
-    public function getHostName(): string
-    {
-        return $this->getHost()['name'];
-    }
-
-    public function getHostUrl(): string
-    {
-        return $this->getHost()['url'];
-    }
-
-    public function getHostCost(): string
-    {
-        return $this->getHost()['cost'];
     }
 
     public function downloadFile(
@@ -76,11 +74,11 @@ final class EdgeStorageRequest extends BunnyClient
         string $path,
         string $fileName
     ): Response {
-        $endpoint = ManageEndpoint::DOWNLOAD_FILE;
+        $endpoint = new DownloadFile();
 
         return $this->request(
-            $endpoint,
-            [$storageZoneName, $path, $fileName]
+            endpoint: $endpoint,
+            parameters: [$storageZoneName, $path, $fileName]
         );
     }
 
@@ -91,16 +89,17 @@ final class EdgeStorageRequest extends BunnyClient
         string $storageZoneName,
         string $path,
         string $fileName,
-        string $localFilePath
+        string $localFilePath,
+        array $headers = [],
     ): Response {
-        $endpoint = ManageEndpoint::UPLOAD_FILE;
+        $endpoint = new UploadFile();
         $body = $this->openFileStream($localFilePath);
 
         return $this->request(
-            $endpoint,
-            [$storageZoneName, $path, $fileName],
-            [],
-            $body
+            endpoint: $endpoint,
+            parameters: [$storageZoneName, $path, $fileName],
+            body: $body,
+            headers: $headers
         );
     }
 
@@ -109,26 +108,21 @@ final class EdgeStorageRequest extends BunnyClient
         string $path,
         string $fileName
     ): Response {
-        $endpoint = ManageEndpoint::DELETE_FILE;
+        $endpoint = new DeleteFile();
 
         return $this->request(
-            $endpoint,
-            [$storageZoneName, $path, $fileName],
+            endpoint: $endpoint,
+            parameters: [$storageZoneName, $path, $fileName],
         );
     }
 
     public function listFiles(string $storageZoneName, string $path = ''): Response
     {
-        $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_DIRECTORY;
-        $pathParameters = [$storageZoneName, $path];
-        if (empty($path) === true) {
-            $endpoint = BrowseEndpoint::LIST_FILE_COLLECTION_ROOT;
-            $pathParameters = [$storageZoneName];
-        }
+        $endpoint = new ListFiles();
 
         return $this->request(
-            $endpoint,
-            $pathParameters,
+            endpoint: $endpoint,
+            parameters: [$storageZoneName, $path],
         );
     }
 }

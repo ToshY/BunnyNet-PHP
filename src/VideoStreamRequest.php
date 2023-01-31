@@ -44,7 +44,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $collectionId],
+            parameters: [$libraryId, $collectionId],
         );
     }
 
@@ -61,7 +61,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $collectionId],
+            parameters: [$libraryId, $collectionId],
             body: $body,
         );
     }
@@ -72,7 +72,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $collectionId],
+            parameters: [$libraryId, $collectionId],
         );
     }
 
@@ -90,7 +90,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             query: $query,
         );
     }
@@ -105,7 +105,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             body: $body,
         );
     }
@@ -116,7 +116,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
         );
     }
 
@@ -130,7 +130,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
             body: $body,
         );
     }
@@ -141,7 +141,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
         );
     }
 
@@ -162,7 +162,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
             query: $query,
             body: $body,
         );
@@ -174,7 +174,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
         );
     }
 
@@ -189,7 +189,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             query: $query,
         );
     }
@@ -200,7 +200,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
         );
     }
 
@@ -215,7 +215,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             query: $query,
         );
     }
@@ -230,7 +230,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             body: $body,
         );
     }
@@ -246,7 +246,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId],
+            parameters: [$libraryId, $videoId],
             query: $query,
         );
     }
@@ -264,7 +264,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId],
+            parameters: [$libraryId],
             query: $query,
             body: $body,
         );
@@ -284,7 +284,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId, $sourceLanguage],
+            parameters: [$libraryId, $videoId, $sourceLanguage],
             body: $body,
         );
     }
@@ -298,7 +298,7 @@ final class VideoStreamRequest extends BunnyClient
 
         return $this->request(
             endpoint: $endpoint,
-            pathParameters: [$libraryId, $videoId, $sourceLanguage],
+            parameters: [$libraryId, $videoId, $sourceLanguage],
         );
     }
 }

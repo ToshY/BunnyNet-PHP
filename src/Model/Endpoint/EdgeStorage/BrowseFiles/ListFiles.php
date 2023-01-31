@@ -26,7 +26,7 @@ class ListFiles implements EndpointInterface
     public function getHeaders(): array
     {
         return [
-            Header::ACCEPT_ALL,
+            Header::ACCEPT_JSON,
         ];
     }
 }

@@ -40,6 +40,7 @@ composer require toshy/bunnynet-php
 ```php
 require 'vendor/autoload.php';
 
+use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\BaseRequest;
 use ToshY\BunnyNet\EdgeStorageRequest;
 use ToshY\BunnyNet\ImageOptimizer;
@@ -55,7 +56,7 @@ $bunnyBase = new BaseRequest(
 
 $bunnyEdgeStorage = new EdgeStorageRequest(
     '6bf3d93a-5078-4d65-a437-501c44576fe6',
-    'FS'
+    Region::FS
 );
 
 $bunnyStream = new VideoStreamRequest(
@@ -74,9 +75,6 @@ $bunnySecureUrl = new SecureUrlGenerator(
 
 // Image optimizer
 $bunnyImageOptimizer = new ImageOptimizer();
-
-// Pricing calculator for CDN and storage tiers.
-$bunnyPricingCalculator = new PricingCalculator();
 ```
 
 ## Documentation

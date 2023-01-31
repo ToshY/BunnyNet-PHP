@@ -4,85 +4,42 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
-final class Region
+enum Region
 {
-    /** @var array[] Storage plan for each location in $/GB */
-    public const STORAGE_STANDARD = [
-        'FS' => [
-            'location' => 'Falkenstein',
-            'url' => Host::STORAGE_ENDPOINT,
-            'cost' => 0.01,
-        ],
-        'NY' => [
-            'location' => 'New York',
-            'url' => 'ny' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.02,
-        ],
-        'LA' => [
-            'location' => 'Los Angeles',
-            'url' => 'la' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.02,
-        ],
-        'SG' => [
-            'location' => 'Singapore',
-            'url' => 'sg' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.03,
-        ],
-        'SYD' => [
-            'location' => 'Sydney',
-            'url' => 'syd' . '.' . Host::STORAGE_ENDPOINT,
-            'cost' => 0.03,
-        ],
-    ];
+    /** Germany (Falkenstein / Frankfurt) */
+    case DE;
+    case FS;
 
-    /** @var float[] Standard plan for each location in $/GB */
-    public const CDN_STANDARD = [
-        'EUROPE_NORTH_AMERICA' => [
-            'location' => 'Europe & North America',
-            'cost' => 0.01,
-        ],
-        'ASIA_OCEANIA' => [
-            'location' => 'Asia & Oceania',
-            'cost' => 0.03,
-        ],
-        'SOUTH_AMERICA' => [
-            'location' => 'South America',
-            'cost' => 0.045,
-        ],
-        'MIDDLE_EAST_AFRICA' => [
-            'location' => 'Middle East & Africa',
-            'cost' => 0.06,
-        ],
-    ];
+    /** United States (New York) */
+    case NY;
 
-    /** @var float[] Volume plan for each TB tier in $/GB */
-    public const CDN_VOLUME = [
-        'TIER_01' => [
-            'location' => 'Tier 1',
-            'cost' => 0.005,
-            'storage' => [
-                'min' => 0,
-                'max' => 500,
-                'unit' => 'TB',
-            ],
-        ],
-        'TIER_02' => [
-            'location' => 'Tier 2',
-            'cost' => 0.004,
-            'storage' => [
-                'min' => 500,
-                'max' => 1000,
-                'unit' => 'TB',
-            ],
-        ],
-        'TIER_03' => [
-            'location' => 'Tier 3',
-            'cost' => 0.002,
-            'storage' => [
-                'min' => 1000,
-                'max' => 2000,
-                'unit' => 'TB',
-            ],
-        ],
-    ];
+    /** United States (Lost Angeles) */
+    case LA;
+
+    /** Singapore (Singapore) */
+    case SG;
+
+    /** Sidney (Oceania) */
+    case SYD;
+
+    /** London (United Kingdom) */
+    case UK;
+
+    /** Norway (Stockholm) */
+    case SE;
+
+    /** Brazil (Sao Paolo) */
+    case BR;
+
+    /** Africa (Johannesburg) */
+    case JH;
+
+    public function host(): string
+    {
+        $subdomain = sprintf('%s.', strtolower($this->name));
+        if (in_array($this->name, [self::DE->name, self::FS->name]) === true) {
+            $subdomain = '';
+        }
+        return $subdomain . Host::STORAGE_ENDPOINT;
+    }
 }
