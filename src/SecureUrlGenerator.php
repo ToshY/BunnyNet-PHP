@@ -44,7 +44,6 @@ final class SecureUrlGenerator
     ): string {
         $url = sprintf('%s%s', $this->hostname, $file);
 
-        // Parse optional path parameters
         $this->parseOptionalPathParameter($url, 'token_countries', $countriesAllowed);
         $this->parseOptionalPathParameter($url, 'token_countries_blocked', $countriesBlocked);
         $this->parseOptionalPathParameter($url, 'token_referer', $referrersAllowed);
@@ -57,14 +56,12 @@ final class SecureUrlGenerator
         $parameters = [];
         parse_str($urlQuery, $parameters);
 
-        // If path is specified, overwrite
         $signaturePath = $urlPath;
         if ($pathAllowed !== null) {
             $signaturePath = $pathAllowed;
             $parameters['token_path'] = $signaturePath;
         }
 
-        // Parameter data
         ksort($parameters);
         $parameterData = '';
         $parameterDataUrl = '';
@@ -80,13 +77,11 @@ final class SecureUrlGenerator
             }
         }
 
-        // Generate the token
         $expires = time() + $expirationTime;
         $hashableBase = sprintf('%s%s%s', $this->token, $signaturePath, $expires);
 
-        // If using IP validation
+        // Check for IP validation; Additional check to allow subnet to reduce false negatives (IPv4).
         if ($userIp !== null) {
-            // Allow subnet to reduce false negatives (IPv4)
             if ($allowSubnet === true) {
                 $hashableBase .= preg_replace('/^([\d]+.[\d]+.[\d]+).[\d]+$/', '$1.0', $userIp);
             }
