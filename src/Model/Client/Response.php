@@ -43,6 +43,17 @@ class Response
 
     /**
      * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function getHeaders(): array
+    {
+        return $this->response->getHeaders();
+    }
+
+    /**
+     * @throws TransportExceptionInterface
      */
     public function getStatusCode(): int
     {
