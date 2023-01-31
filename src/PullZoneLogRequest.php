@@ -13,6 +13,7 @@ use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
 use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
 use ToshY\BunnyNet\Model\Client\Response;
+use ToshY\BunnyNet\Model\Endpoint\Logging\GetPullZoneLogging;
 
 /**
  * @link https://docs.bunny.net/docs/cdn-logging
@@ -28,11 +29,6 @@ final class PullZoneLogRequest extends BunnyClient
         $this->setApiKey($accountApiKey);
 
         parent::__construct(Host::LOGGING_ENDPOINT);
-    }
-
-    public function getApiKey(): string
-    {
-        return $this->apiKey;
     }
 
     /**
@@ -56,9 +52,9 @@ final class PullZoneLogRequest extends BunnyClient
      */
     public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): Response
     {
-        $endpoint = LogEndpoint::GET_LOGGING;
+        $endpoint = new GetPullZoneLogging();
         $dateTimeFormat = $dateTime->format('m-d-y');
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
         return $this->request(
             $endpoint,
