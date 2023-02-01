@@ -3,9 +3,8 @@ grumphp:
   git_hook_variables:
     EXEC_GRUMPHP_COMMAND: 'docker compose run -T --rm --no-deps php'
   tasks:
+    phpcsfixer:
+      config: '.php-cs-fixer.dist.php'
     shell:
       scripts:
-        - [ "-c", "vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run --using-cache=no -v --diff" ]
-    phpmd:
-      ruleset:
-        - phpmd.xml
+        - [ "-c", "vendor/bin/phpmd --strict src/ text phpmd.xml" ]

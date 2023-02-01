@@ -6,8 +6,6 @@ namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
-use ToshY\BunnyNet\Enum\Storage\BrowseEndpoint;
-use ToshY\BunnyNet\Enum\Storage\ManageEndpoint;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
 use ToshY\BunnyNet\Model\Client\Response;

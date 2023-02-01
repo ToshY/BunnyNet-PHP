@@ -6,7 +6,6 @@ namespace ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
 
 class DeleteCaption implements EndpointInterface

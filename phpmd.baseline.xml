@@ -8,7 +8,6 @@
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Endpoint/Base/PullZone/AddPullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Endpoint/Base/PullZone/UpdatePullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Endpoint/Base/StreamVideoLibrary/UpdateVideoLibrary.php" method="getBody"/>
-  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/PricingCalculator.php"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/SecureUrlGenerator.php"/>
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/VideoStreamRequest.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/VideoStreamRequest.php"/>

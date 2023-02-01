@@ -37,7 +37,7 @@ enum Region
     public function host(): string
     {
         $subdomain = sprintf('%s.', strtolower($this->name));
-        if (in_array($this->name, [self::DE->name, self::FS->name]) === true) {
+        if (in_array($this->name, [self::DE->name, self::FS->name], true) === true) {
             $subdomain = '';
         }
         return $subdomain . Host::STORAGE_ENDPOINT;

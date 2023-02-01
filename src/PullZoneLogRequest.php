@@ -7,7 +7,6 @@ namespace ToshY\BunnyNet;
 use DateTimeInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Enum\Log\LogEndpoint;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
 use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
