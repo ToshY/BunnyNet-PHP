@@ -1,0 +1,22 @@
+name: 🚀 Feature Request
+title: "[Feature]: "
+labels: ["enhancement"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the new feature
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example
+      description: |
+        A simple example of the new feature in action.
