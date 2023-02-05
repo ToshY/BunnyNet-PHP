@@ -16,16 +16,25 @@
       "ToshY\\BunnyNet\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "ToshY\\BunnyNet\\Tests\\": "tests/"
+    }
+  },
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^8.1",
     "ext-json": "*",
-    "symfony/http-client": "^4.4|^5.0|^6.0"
+    "symfony/http-client": "^5.4|^6.0",
+    "psr/http-client": "^1.0",
+    "guzzlehttp/psr7": "^2.4"
   },
   "require-dev": {
     "rector/rector": "^0.15.1",
     "phpmd/phpmd": "^2.13",
     "friendsofphp/php-cs-fixer": "^3.13",
-    "phpro/grumphp": "^1.15"
+    "phpro/grumphp": "^1.15",
+    "phpstan/phpstan": "^1.9",
+    "phpunit/phpunit": "^9.6"
   },
   "config": {
     "allow-plugins": {

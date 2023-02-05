@@ -9,13 +9,13 @@ use ToshY\BunnyNet\Enum\Optimizer;
 /**
  * @link https://support.bunny.net/hc/en-us/articles/360027448392-Bunny-Optimizer-Engine-Documentation
  */
-final class ImageOptimizer
+class ImageOptimizer
 {
     public function generate(
         string $url,
-        array $optimizationCollection = []
+        array $optimizationCollection = [],
     ): string {
-        if (empty($optimizationCollection) === true) {
+        if (true === empty($optimizationCollection)) {
             return $url;
         }
 
@@ -34,9 +34,11 @@ final class ImageOptimizer
     {
         $parameterValueCollection = [];
         foreach ($optimizationCollection as $parameterName => $parameterValue) {
-            if (in_array($parameterName, Optimizer::OPTIMIZATION_PARAMETER_COLLECTION, true) === true) {
-                $parameterValueCollection[$parameterName] = $parameterValue;
+            if (false === in_array($parameterName, Optimizer::OPTIMIZATION_PARAMETER_COLLECTION, true)) {
+                continue;
             }
+
+            $parameterValueCollection[$parameterName] = $parameterValue;
         }
 
         return $parameterValueCollection;

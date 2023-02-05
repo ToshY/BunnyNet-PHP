@@ -5,47 +5,45 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Client;
 
 use Exception;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use ToshY\BunnyNet\Exception\FileDoesNotExistException;
-use ToshY\BunnyNet\Exception\InvalidBodyParameterTypeException;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Exception\InvalidJSONForBodyException;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
-use ToshY\BunnyNet\Model\Client\Response;
-use ToshY\BunnyNet\Model\Endpoint\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointInterface;
 
 class BunnyClient
 {
-    public const THROW_CLIENT_EXCEPTIONS = false;
-
     protected const SCHEME = 'https';
 
-    protected string $apiKey;
+    protected readonly string $apiKey;
 
-    protected HttpClientInterface $client;
+    public readonly string $baseUrl;
 
     public function __construct(
-        protected string $hostRequest
+        protected readonly ClientInterface $client,
     ) {
-        $this->client = HttpClient::create();
     }
 
-    private function getHostRequest(): string
+    public function setBaseUrl(string $baseUrl): self
     {
-        return $this->hostRequest;
+        $this->baseUrl = $baseUrl;
+        return $this;
     }
 
-    protected function request(
+    /**
+     * @throws ClientExceptionInterface
+     * @throws InvalidJSONForBodyException
+     */
+    public function request(
         EndpointInterface $endpoint,
         array $parameters = [],
         array $query = [],
         mixed $body = null,
         array $headers = [],
-    ): Response {
-        $options = array_filter(
+    ): ResponseInterface {
+        $headers = array_filter(
             [
-                'body' => $this->getBody($body),
                 'headers' => array_merge(
                     $headers,
                     array_merge(...$endpoint->getHeaders()),
@@ -55,7 +53,6 @@ class BunnyClient
             fn ($value) => empty($value) === false
         );
 
-        $base = $this->getHostRequest();
         $path = $this->createUrlPath(
             template: $endpoint->getPath(),
             pathCollection: $parameters
@@ -65,21 +62,24 @@ class BunnyClient
         $url = sprintf(
             '%s://%s%s%s',
             self::SCHEME,
-            $base,
+            $this->baseUrl,
             $path,
             $query
         );
 
-        $response = $this->client->request(
-            $endpoint->getMethod()->value,
-            $url,
-            $options
+        $request = new Request(
+            method: $endpoint->getMethod()->value,
+            uri: $url,
+            headers: $headers,
+            body: $this->getBody($body),
         );
 
-        return new Response(response: $response);
+        return $this->client->sendRequest(
+            request: $request
+        );
     }
 
-    protected function createUrlPath(
+    private function createUrlPath(
         string $template,
         array $pathCollection
     ): string {
@@ -92,7 +92,7 @@ class BunnyClient
         );
     }
 
-    protected function createQuery(array $query): string|null
+    private function createQuery(array $query): string|null
     {
         if (empty($query) === true) {
             return null;
@@ -114,25 +114,6 @@ class BunnyClient
                 encoding_type: PHP_QUERY_RFC3986
             )
         );
-    }
-
-    /**
-     * @throws FileDoesNotExistException
-     * @return resource
-     */
-    protected function openFileStream(string $filePath)
-    {
-        $fileRealPath = realpath($filePath);
-        if ($fileRealPath === false) {
-            throw new FileDoesNotExistException(
-                sprintf(
-                    'The local file `%s` could not be opened. Please check if it exists.',
-                    $filePath
-                )
-            );
-        }
-
-        return fopen($fileRealPath, 'r');
     }
 
     private function getAccessKeyHeader(): array
@@ -160,108 +141,5 @@ class BunnyClient
         }
 
         return $jsonBody;
-    }
-
-    /**
-     * @throws InvalidQueryParameterRequirementException
-     * @throws InvalidQueryParameterTypeException
-     */
-    protected function validateQueryField(
-        array $values,
-        array $template
-    ): array {
-        $intersectTemplateKeys = array_intersect_key($template, $values);
-        $intersectValues = array_intersect_key($values, $template);
-        foreach ($intersectTemplateKeys as $key => $templateValue) {
-            $parameterValue = $intersectValues[$key];
-            $parameterValueType = gettype($parameterValue);
-
-            // Field type check
-            $typeCheck = sprintf('is_%s', $templateValue['type']);
-            if ($typeCheck($parameterValue) === false) {
-                throw new InvalidQueryParameterTypeException(
-                    sprintf(
-                        'Invalid query parameter type provided for `%s`. Expected `%s` got `%s`.',
-                        $key,
-                        $templateValue['type'],
-                        $parameterValueType
-                    )
-                );
-            }
-
-            // Check required fields
-            if (isset($templateValue['required']) === true) {
-                if (
-                    $templateValue['required'] === true
-                    && empty($parameterValue) === true
-                ) {
-                    throw new InvalidQueryParameterRequirementException(
-                        sprintf(
-                            'Expected required parameter `%s` was not provided.',
-                            $key
-                        )
-                    );
-                }
-            }
-
-            $this->recurseValidationOnArray(__FUNCTION__, $key, $templateValue, $parameterValue);
-        }
-
-        return $intersectValues;
-    }
-
-    /**
-     * @throws InvalidBodyParameterTypeException
-     */
-    protected function validateBodyField(
-        array $values,
-        array $template
-    ): array {
-        $intersectTemplateKeys = array_intersect_key($template, $values);
-        $intersectValues = array_intersect_key($values, $template);
-        foreach ($intersectTemplateKeys as $key => $templateValue) {
-            $parameterValue = $intersectValues[$key];
-            $parameterValueType = gettype($parameterValue);
-
-            // Field type check
-            $typeCheck = sprintf('is_%s', $templateValue['type']);
-            if ($typeCheck($parameterValue) === false) {
-                throw new InvalidBodyParameterTypeException(
-                    sprintf(
-                        'Invalid body parameter type provided for `%s`. Expected `%s` got `%s`.',
-                        $key,
-                        $templateValue['type'],
-                        $parameterValueType
-                    )
-                );
-            }
-
-            $this->recurseValidationOnArray(__FUNCTION__, $key, $templateValue, $parameterValue);
-        }
-
-        return $intersectValues;
-    }
-
-    private function recurseValidationOnArray(
-        string $methodName,
-        string $key,
-        array $templateValue,
-        mixed $parameterValue
-    ): void {
-        if (is_array($parameterValue) === true) {
-            foreach ($parameterValue as $subValue) {
-                $traverseParameterValue = $subValue;
-                if (is_array($traverseParameterValue) === false) {
-                    $traverseParameterValue = [$key => $subValue];
-                }
-
-                $traverseTemplateValue = $templateValue['options'];
-                if (isset($templateValue['options']['type']) === true) {
-                    $traverseTemplateValue = [$key => $templateValue['options']];
-                }
-
-                $this->$methodName($traverseParameterValue, $traverseTemplateValue);
-            }
-        }
     }
 }

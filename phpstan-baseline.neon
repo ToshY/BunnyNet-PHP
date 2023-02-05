@@ -1,0 +1,1611 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:request\\(\\)\\.$#"
+			count: 62
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Call to an undefined static method ToshY\\\\BunnyNet\\\\Validator\\\\ParameterValidator\\:\\:getBody\\(\\)\\.$#"
+			count: 25
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addCustomCertificate\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addCustomHostname\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addOrUpdateEdgeRule\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addPullZone\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addPullZoneAllowedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addPullZoneBlockedIP\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addPullZoneBlockedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addStorageZone\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addVideoLibrary\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addVideoLibraryAllowedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:addVideoLibraryBlockedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:applyPromoCode\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:closeTheAccount\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getOptimizerStatistics\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getOriginShieldQueueStatistics\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getPullZone\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getSafeHopStatistics\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getStatistics\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getStatisticsPullZone\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:getVideoLibrary\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:listAbuseCases\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:listPullZones\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:listStorageZone\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:listVideoLibraries\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:loadFreeCertificate\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:purgeUrl\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:purgeUrlByHeader\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removeCertificate\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removeCustomHostname\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removePullZoneAllowedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removePullZoneBlockedIP\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removePullZoneBlockedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removeVideoLibraryAllowedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:removeVideoLibraryBlockedReferer\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:resetStorageZonePasswordByQuery\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:resetStorageZoneReadOnlyPassword\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:resetVideoLibraryPasswordByQuery\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:setEdgeRuleEnabled\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:setForceSSL\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:updatePullZone\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:updateStorageZone\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:updateUserDetails\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\BaseRequest\\:\\:updateVideoLibrary\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Result of static method ToshY\\\\BunnyNet\\\\Validator\\\\ParameterValidator\\:\\:validate\\(\\) \\(void\\) is used\\.$#"
+			count: 17
+			path: src/BaseRequest.php
+
+		-
+			message: "#^Class ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient has an uninitialized readonly property \\$apiKey\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Class ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient has an uninitialized readonly property \\$baseUrl\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:createQuery\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:createUrlPath\\(\\) has parameter \\$pathCollection with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:getAccessKeyHeader\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:request\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:request\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:request\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Readonly property ToshY\\\\BunnyNet\\\\Client\\\\BunnyClient\\:\\:\\$baseUrl is assigned outside of the constructor\\.$#"
+			count: 1
+			path: src/Client/BunnyClient.php
+
+		-
+			message: "#^Call to an undefined method ToshY\\\\BunnyNet\\\\EdgeStorageRequest\\:\\:openFileStream\\(\\)\\.$#"
+			count: 1
+			path: src/EdgeStorageRequest.php
+
+		-
+			message: "#^Call to an undefined method ToshY\\\\BunnyNet\\\\EdgeStorageRequest\\:\\:request\\(\\)\\.$#"
+			count: 4
+			path: src/EdgeStorageRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\EdgeStorageRequest\\:\\:uploadFile\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/EdgeStorageRequest.php
+
+		-
+			message: "#^Property ToshY\\\\BunnyNet\\\\EdgeStorageRequest\\:\\:\\$host is unused\\.$#"
+			count: 1
+			path: src/EdgeStorageRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\FileDoesNotExistException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/FileDoesNotExistException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\FileDoesNotExistException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/FileDoesNotExistException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidBodyParameterTypeException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidBodyParameterTypeException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidBodyParameterTypeException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidBodyParameterTypeException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidJSONForBodyException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidJSONForBodyException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidJSONForBodyException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidJSONForBodyException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidQueryParameterRequirementException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidQueryParameterRequirementException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidQueryParameterRequirementException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidQueryParameterRequirementException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidQueryParameterTypeException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidQueryParameterTypeException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidQueryParameterTypeException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidQueryParameterTypeException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidTypeForKeyValueException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidTypeForKeyValueException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidTypeForKeyValueException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidTypeForKeyValueException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidTypeForListValueException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidTypeForListValueException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\InvalidTypeForListValueException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/InvalidTypeForListValueException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\KeyFormatNotSupportedException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/KeyFormatNotSupportedException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\KeyFormatNotSupportedException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/KeyFormatNotSupportedException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\ParameterIsRequiredException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/ParameterIsRequiredException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\ParameterIsRequiredException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/ParameterIsRequiredException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\RegionDoesNotExistException\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
+			count: 1
+			path: src/Exception/RegionDoesNotExistException.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Exception\\\\RegionDoesNotExistException\\:\\:__construct\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: src/Exception/RegionDoesNotExistException.php
+
+		-
+			message: "#^Call to sprintf contains 4 placeholders, 1 value given\\.$#"
+			count: 1
+			path: src/Helper/EndpointHelper.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\ImageOptimizer\\:\\:generate\\(\\) has parameter \\$optimizationCollection with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ImageOptimizer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\ImageOptimizer\\:\\:validateOptimizationParameters\\(\\) has parameter \\$optimizationCollection with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ImageOptimizer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\ImageOptimizer\\:\\:validateOptimizationParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ImageOptimizer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\AbstractParameter\\:\\:__construct\\(\\) has parameter \\$children with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/AbstractParameter.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\AbuseCase\\\\CheckAbuseCase\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/AbuseCase/CheckAbuseCase.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\AbuseCase\\\\ListAbuseCases\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/AbuseCase/ListAbuseCases.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\AbuseCase\\\\ListAbuseCases\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/AbuseCase/ListAbuseCases.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\AbuseCase\\\\ResolveAbuseCase\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/AbuseCase/ResolveAbuseCase.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\AbuseCase\\\\ResolveDmcaCase\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/AbuseCase/ResolveDmcaCase.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\ApplyPromoCode\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/ApplyPromoCode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\ApplyPromoCode\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/ApplyPromoCode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\ClaimAffiliateCredits\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/ClaimAffiliateCredits.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\ConfigureAutoRecharge\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/ConfigureAutoRecharge.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\ConfigureAutoRecharge\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/ConfigureAutoRecharge.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\CreateCoinifyPayment\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/CreateCoinifyPayment.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\CreateCoinifyPayment\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/CreateCoinifyPayment.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\CreatePaymentCheckout\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/CreatePaymentCheckout.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\CreatePaymentCheckout\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/CreatePaymentCheckout.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\GetAffiliateDetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/GetAffiliateDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\GetBillingDetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/GetBillingDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\GetBillingSummary\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/GetBillingSummary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\GetTheCoinifyBtcExchangeRate\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/GetTheCoinifyBtcExchangeRate.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Billing\\\\PreparePaymentAuthorization\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Billing/PreparePaymentAuthorization.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScript\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScript\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScriptRelease\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScriptRelease.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScriptRelease\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScriptRelease.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScriptReleaseByPathParameter\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScriptReleaseByPathParameter.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScriptVariable\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\CreateComputeScriptVariable\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/CreateComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\DeleteComputeScript\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/DeleteComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\DeleteComputeScriptVariable\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/DeleteComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\GetComputeScript\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/GetComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\GetComputeScriptCode\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/GetComputeScriptCode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\GetComputeScriptVariable\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/GetComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\ListComputeScriptReleases\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/ListComputeScriptReleases.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\ListComputeScriptReleases\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/ListComputeScriptReleases.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\ListComputeScripts\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/ListComputeScripts.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\ListComputeScripts\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/ListComputeScripts.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScript\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScript\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScript.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScriptCode\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScriptCode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScriptCode\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScriptCode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScriptVariable\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Compute\\\\UpdateComputeScriptVariable\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Compute/UpdateComputeScriptVariable.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Countries\\\\ListCountries\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Countries/ListCountries.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Countries\\\\ListCountries\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Countries/ListCountries.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\AddDNSRecord\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/AddDNSRecord.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\AddDNSRecord\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/AddDNSRecord.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\AddDNSZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/AddDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\AddDNSZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/AddDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\CheckDNSZoneAvailability\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/CheckDNSZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\CheckDNSZoneAvailability\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/CheckDNSZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\DeleteDNSRecord\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/DeleteDNSRecord.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\DeleteDNSZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/DeleteDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\DismissDNSConfigurationNotice\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/DismissDNSConfigurationNotice.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\ExportDNSRecords\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/ExportDNSRecords.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\GetDNSZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/GetDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\GetDNSZoneQueryStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/GetDNSZoneQueryStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\GetDNSZoneQueryStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/GetDNSZoneQueryStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\ImportDNSRecords\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/ImportDNSRecords.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\ListDNSZones\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/ListDNSZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\ListDNSZones\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/ListDNSZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\RecheckDNSConfiguration\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/RecheckDNSConfiguration.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\UpdateDNSRecord\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/UpdateDNSRecord.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\UpdateDNSRecord\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/UpdateDNSRecord.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\UpdateDNSZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/UpdateDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DNSZone\\\\UpdateDNSZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DNSZone/UpdateDNSZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DRMCertificate\\\\ListDRMCertificates\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DRMCertificate/ListDRMCertificates.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\DRMCertificate\\\\ListDRMCertificates\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/DRMCertificate/ListDRMCertificates.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddAllowedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddAllowedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddBlockedIP\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddBlockedIP.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddBlockedIP\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddBlockedIP.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddBlockedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddBlockedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddCustomCertificate\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddCustomCertificate.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddCustomCertificate\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddCustomCertificate.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddCustomHostname\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddCustomHostname.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddCustomHostname\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddCustomHostname.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddOrUpdateEdgeRule\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddOrUpdateEdgeRule.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddOrUpdateEdgeRule\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddOrUpdateEdgeRule.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddPullZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddPullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\AddPullZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/AddPullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\CheckPullZoneAvailability\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/CheckPullZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\CheckPullZoneAvailability\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/CheckPullZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteAllowedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteAllowedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteBlockedIP\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteBlockedIP.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteBlockedIP\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteBlockedIP.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteBlockedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteBlockedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeleteEdgeRule\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeleteEdgeRule.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\DeletePullZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/DeletePullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetOptimizerStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetOptimizerStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetOptimizerStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetOptimizerStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetOriginShieldQueueStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetOriginShieldQueueStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetOriginShieldQueueStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetOriginShieldQueueStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetPullZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetPullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetPullZone\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetPullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetSafeHopStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetSafeHopStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetSafeHopStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetSafeHopStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetWAFStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetWAFStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\GetWAFStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/GetWAFStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\ListPullZones\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/ListPullZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\ListPullZones\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/ListPullZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\LoadFreeCertificate\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/LoadFreeCertificate.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\LoadFreeCertificate\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/LoadFreeCertificate.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\PurgeCache\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/PurgeCache.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\PurgeCache\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/PurgeCache.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\ResetTokenKey\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/ResetTokenKey.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\SetEdgeRuleEnabled\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/SetEdgeRuleEnabled.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\SetEdgeRuleEnabled\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/SetEdgeRuleEnabled.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\SetForceSSL\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/SetForceSSL.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\SetForceSSL\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/SetForceSSL.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\UpdatePullZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/UpdatePullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\PullZone\\\\UpdatePullZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/PullZone/UpdatePullZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Purge\\\\PurgeURL\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Purge/PurgeURL.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Purge\\\\PurgeURL\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Purge/PurgeURL.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Purge\\\\PurgeURLByHeader\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Purge/PurgeURLByHeader.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Purge\\\\PurgeURLByHeader\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Purge/PurgeURLByHeader.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Region\\\\ListRegions\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Region/ListRegions.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Region\\\\ListRegions\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Region/ListRegions.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Statistics\\\\GetStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Statistics/GetStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Statistics\\\\GetStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Statistics/GetStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\AddStorageZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/AddStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\AddStorageZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/AddStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\CheckStorageZoneAvailability\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/CheckStorageZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\CheckStorageZoneAvailability\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/CheckStorageZoneAvailability.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\DeleteStorageZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/DeleteStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\GetStorageZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/GetStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\ListStorageZones\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/ListStorageZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\ListStorageZones\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/ListStorageZones.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\ResetPassword\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/ResetPassword.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\ResetReadOnlyPassword\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/ResetReadOnlyPassword.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\ResetReadOnlyPassword\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/ResetReadOnlyPassword.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\UpdateStorageZone\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/UpdateStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StorageZone\\\\UpdateStorageZone\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StorageZone/UpdateStorageZone.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddAllowedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddAllowedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddBlockedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddBlockedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddVideoLibrary\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddVideoLibrary\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\AddWatermark\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/AddWatermark.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\DeleteVideoLibrary\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/DeleteVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\DeleteWatermark\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/DeleteWatermark.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\GetVideoLibrary\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/GetVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\GetVideoLibrary\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/GetVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\ListVideoLibraries\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/ListVideoLibraries.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\ListVideoLibraries\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/ListVideoLibraries.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\RemoveAllowedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/RemoveAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\RemoveAllowedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/RemoveAllowedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\RemoveBlockedReferer\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/RemoveBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\RemoveBlockedReferer\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/RemoveBlockedReferer.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\ResetPassword\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/ResetPassword.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\ResetPassword\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/ResetPassword.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\ResetPasswordByPathParameter\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/ResetPasswordByPathParameter.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\UpdateVideoLibrary\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/UpdateVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\StreamVideoLibrary\\\\UpdateVideoLibrary\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/StreamVideoLibrary/UpdateVideoLibrary.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\CloseTicket\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/CloseTicket.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\CreateTicket\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/CreateTicket.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\CreateTicket\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/CreateTicket.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\ListTicketDetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/ListTicketDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\ListTickets\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/ListTickets.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\ReplyTicket\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/ReplyTicket.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\Support\\\\ReplyTicket\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/Support/ReplyTicket.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\AcceptDPA\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/AcceptDPA.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\CloseAccount\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/CloseAccount.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\CloseAccount\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/CloseAccount.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Disable2FA\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Disable2FA.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Disable2FA\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Disable2FA.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Enable2FA\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Enable2FA.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Enable2FA\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Enable2FA.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Generate2FAVerification\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Generate2FAVerification.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\GetDPADetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/GetDPADetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\GetDPADetailsHTML\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/GetDPADetailsHTML.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\GetHomeFeed\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/GetHomeFeed.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\GetUserDetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/GetUserDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\GetWhatsNewItems\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/GetWhatsNewItems.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\ListCloseAccountReasons\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/ListCloseAccountReasons.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\ResendEmailConfirmation\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/ResendEmailConfirmation.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\ResetAPIKey\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/ResetAPIKey.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\ResetWhatsNew\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/ResetWhatsNew.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\SetNotificationsOpened\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/SetNotificationsOpened.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\UpdateUserDetails\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/UpdateUserDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\UpdateUserDetails\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/UpdateUserDetails.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Verify2FACode\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Verify2FACode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Base\\\\User\\\\Verify2FACode\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Base/User/Verify2FACode.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\EdgeStorage\\\\BrowseFiles\\\\ListFiles\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/EdgeStorage/BrowseFiles/ListFiles.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\EdgeStorage\\\\ManageFiles\\\\DeleteFile\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/EdgeStorage/ManageFiles/DeleteFile.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\EdgeStorage\\\\ManageFiles\\\\DownloadFile\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/EdgeStorage/ManageFiles/DownloadFile.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\EdgeStorage\\\\ManageFiles\\\\UploadFile\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/EdgeStorage/ManageFiles/UploadFile.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\EndpointInterface\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/EndpointInterface.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Logging\\\\GetPullZoneLogging\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Logging/GetPullZoneLogging.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Logging\\\\GetPullZoneLogging\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Logging/GetPullZoneLogging.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\CreateCollection\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/CreateCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\CreateCollection\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/CreateCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\DeleteCollection\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/DeleteCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\GetCollection\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/GetCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\ListCollections\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/ListCollections.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\ListCollections\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/ListCollections.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\UpdateCollection\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/UpdateCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageCollections\\\\UpdateCollection\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageCollections/UpdateCollection.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\AddCaption\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/AddCaption.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\AddCaption\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/AddCaption.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\CreateVideo\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/CreateVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\CreateVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/CreateVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\DeleteCaption\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/DeleteCaption.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\DeleteVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/DeleteVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\FetchVideo\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/FetchVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\FetchVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/FetchVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\FetchVideo\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/FetchVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\GetVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/GetVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\GetVideoHeatmap\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/GetVideoHeatmap.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\ListVideoStatistics\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/ListVideoStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\ListVideoStatistics\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/ListVideoStatistics.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\ListVideos\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/ListVideos.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\ListVideos\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/ListVideos.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\ReencodeVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/ReencodeVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\SetThumbnail\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/SetThumbnail.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\SetThumbnail\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/SetThumbnail.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\UpdateVideo\\:\\:getBody\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/UpdateVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\UpdateVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/UpdateVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\UploadVideo\\:\\:getHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/UploadVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Model\\\\Stream\\\\ManageVideos\\\\UploadVideo\\:\\:getQuery\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Stream/ManageVideos/UploadVideo.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\PullZoneLogRequest\\:\\:getLog\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PullZoneLogRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Validator\\\\ParameterValidator\\:\\:validate\\(\\) has parameter \\$template with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Validator/ParameterValidator.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\Validator\\\\ParameterValidator\\:\\:validate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Validator/ParameterValidator.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between false and true will always evaluate to false\\.$#"
+			count: 1
+			path: src/Validator/ParameterValidator.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:addCaption\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:createCollection\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:createVideo\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:fetchVideo\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:fetchVideo\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:getCollectionList\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:getVideoStatistics\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:listVideos\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:setThumbnail\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:updateCollection\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:updateVideo\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php
+
+		-
+			message: "#^Method ToshY\\\\BunnyNet\\\\VideoStreamRequest\\:\\:uploadVideo\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/VideoStreamRequest.php

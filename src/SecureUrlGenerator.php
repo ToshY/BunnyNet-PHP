@@ -4,31 +4,17 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
-
 /**
  * @link https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication
  * @link https://github.com/BunnyWay/BunnyCDN.TokenAuthentication
+ * @note Requires the desired pull zone Url Token Authentication Key.
  */
-final class SecureUrlGenerator
+class SecureUrlGenerator
 {
-    /** Pull Zone Url Token Authentication Key.*/
-    private readonly string $token;
-
-    /**
-     * @throws KeyFormatNotSupportedException
-     */
     public function __construct(
+        private readonly string $token,
         private readonly string $hostname,
-        string $token
     ) {
-        if (preg_match(Type::UUID36_TYPE->value, $token) !== 1) {
-            throw new KeyFormatNotSupportedException(
-                'Invalid token: does not conform to the UUID 36 characters format.'
-            );
-        }
-        $this->token = $token;
     }
 
     public function generate(
@@ -81,8 +67,8 @@ final class SecureUrlGenerator
         $hashableBase = sprintf('%s%s%s', $this->token, $signaturePath, $expires);
 
         // Check for IP validation; Additional check to allow subnet to reduce false negatives (IPv4).
-        if ($userIp !== null) {
-            if ($allowSubnet === true) {
+        if (null !== $userIp) {
+            if (true === $allowSubnet) {
                 $hashableBase .= preg_replace('/^([\d]+.[\d]+.[\d]+).[\d]+$/', '$1.0', $userIp);
             }
             $hashableBase .= $userIp;
@@ -95,7 +81,7 @@ final class SecureUrlGenerator
         $token = strtr($token, '+/', '-_');
         $token = str_replace('=', '', $token);
 
-        if ($isDirectoryToken === true) {
+        if (true === $isDirectoryToken) {
             return sprintf(
                 '%s://%s/bcdn_token=%s&expires=%s%s%s',
                 $urlScheme,
@@ -123,7 +109,7 @@ final class SecureUrlGenerator
         string|null $pathParameterKey,
         string|null $pathParameterValue
     ): void {
-        if ($pathParameterValue === null) {
+        if (null === $pathParameterValue) {
             return;
         }
 

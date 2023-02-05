@@ -5,60 +5,44 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use DateTimeInterface;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterRequirementException;
-use ToshY\BunnyNet\Exception\InvalidQueryParameterTypeException;
-use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
-use ToshY\BunnyNet\Model\Client\Response;
-use ToshY\BunnyNet\Model\Endpoint\Logging\GetPullZoneLogging;
+use ToshY\BunnyNet\Model\Logging\GetPullZoneLogging;
+use ToshY\BunnyNet\Validator\ParameterValidator;
 
 /**
  * @link https://docs.bunny.net/docs/cdn-logging
+ * @note Requires the account API key.
  */
-final class PullZoneLogRequest extends BunnyClient
+class PullZoneLogRequest
 {
-    /**
-     * @throws KeyFormatNotSupportedException
-     */
     public function __construct(
-        string $accountApiKey
+        protected readonly string $apiKey,
+        protected readonly BunnyClient $client,
     ) {
-        $this->setApiKey($accountApiKey);
-
-        parent::__construct(Host::LOGGING_ENDPOINT);
+        $this->client->setBaseUrl(Host::LOGGING_ENDPOINT);
     }
 
     /**
-     * @throws KeyFormatNotSupportedException
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @throws ClientExceptionInterface
      */
-    public function setApiKey(string $key): PullZoneLogRequest
-    {
-        if (preg_match(Type::UUID72_TYPE->value, $key) !== 1) {
-            throw new KeyFormatNotSupportedException(
-                'Invalid API key: does not conform to the UUID 72 characters format.'
-            );
-        }
-        $this->apiKey = $key;
-        return $this;
-    }
-
-
-    /**
-     * @throws InvalidQueryParameterTypeException
-     * @throws InvalidQueryParameterRequirementException
-     */
-    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): Response
+    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): ResponseInterface
     {
         $endpoint = new GetPullZoneLogging();
         $dateTimeFormat = $dateTime->format('m-d-y');
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
-        return $this->request(
-            $endpoint,
-            [$dateTimeFormat, $pullZoneId],
-            $query
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$dateTimeFormat, $pullZoneId],
+            query: $query
         );
     }
 }

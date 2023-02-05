@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
+use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Base\AbuseCaseEndpoint;
 use ToshY\BunnyNet\Enum\Base\BillingEndpoint;
@@ -16,53 +17,30 @@ use ToshY\BunnyNet\Enum\Base\StorageEndpoint;
 use ToshY\BunnyNet\Enum\Base\StreamEndpoint;
 use ToshY\BunnyNet\Enum\Base\UserEndpoint;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Exception\KeyFormatNotSupportedException;
-use ToshY\BunnyNet\Model\Client\Response;
+use ToshY\BunnyNet\Validator\ParameterValidator;
 
 /**
  * @link https://docs.bunny.net/reference/bunnynet-api-overview
+ * @note Requires the account API key.
+ * @todo refactor this and add the new model endpoints
  */
-final class BaseRequest extends BunnyClient
+class BaseRequest
 {
-    /**
-     * @throws KeyFormatNotSupportedException
-     */
     public function __construct(
-        string $accountApiKey
+        protected readonly string $apiKey,
+        protected readonly BunnyClient $client,
     ) {
-        $this->setApiKey($accountApiKey);
-
-        parent::__construct(Host::API_ENDPOINT);
-    }
-
-    public function getApiKey(): string
-    {
-        return $this->apiKey;
-    }
-
-    /**
-     * @throws KeyFormatNotSupportedException
-     */
-    public function setApiKey(string $key): BaseRequest
-    {
-        if (preg_match(Type::UUID72_TYPE->value, $key) !== 1) {
-            throw new KeyFormatNotSupportedException(
-                'Invalid API key: does not conform to the UUID 72 characters format.'
-            );
-        }
-        $this->apiKey = $key;
-        return $this;
+        $this->client->setBaseUrl(Host::API_ENDPOINT);
     }
 
     /**
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function listAbuseCases(array $query = []): Response
+    public function listAbuseCases(array $query = []): ResponseInterface
     {
         $endpoint = AbuseCaseEndpoint::LIST_ABUSE_CASES;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -71,7 +49,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function checkAbuseCase(int $id): Response
+    public function checkAbuseCase(int $id): ResponseInterface
     {
         $endpoint = AbuseCaseEndpoint::CHECK_ABUSE_CASE;
 
@@ -81,7 +59,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function listRegions(): Response
+    public function listRegions(): ResponseInterface
     {
         $endpoint = RegionEndpoint::GET_REGION_LIST;
 
@@ -90,7 +68,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getCountryList(): Response
+    public function getCountryList(): ResponseInterface
     {
         $endpoint = CountryEndpoint::GET_COUNTRY_LIST;
 
@@ -103,10 +81,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function listVideoLibraries(array $query): Response
+    public function listVideoLibraries(array $query): ResponseInterface
     {
         $endpoint = StreamEndpoint::LIST_VIDEO_LIBRARIES;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -118,10 +96,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addVideoLibrary(array $body): Response
+    public function addVideoLibrary(array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::ADD_VIDEO_LIBRARY;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -135,10 +113,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getVideoLibrary(int $id, array $query = []): Response
+    public function getVideoLibrary(int $id, array $query = []): ResponseInterface
     {
         $endpoint = StreamEndpoint::GET_VIDEO_LIBRARY;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -150,10 +128,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updateVideoLibrary(int $id, array $body): Response
+    public function updateVideoLibrary(int $id, array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::ADD_VIDEO_LIBRARY;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -163,7 +141,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function deleteVideoLibrary(int $id): Response
+    public function deleteVideoLibrary(int $id): ResponseInterface
     {
         $endpoint = StreamEndpoint::DELETE_VIDEO_LIBRARY;
 
@@ -177,10 +155,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function resetVideoLibraryPasswordByQuery(array $query): Response
+    public function resetVideoLibraryPasswordByQuery(array $query): ResponseInterface
     {
         $endpoint = StreamEndpoint::RESET_PASSWORD_QUERY;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -189,7 +167,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function resetVideoLibraryPasswordByPath(int $id): Response
+    public function resetVideoLibraryPasswordByPath(int $id): ResponseInterface
     {
         $endpoint = StreamEndpoint::RESET_PASSWORD_PATH;
 
@@ -199,7 +177,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function addWatermark(int $id): Response
+    public function addWatermark(int $id): ResponseInterface
     {
         $endpoint = StreamEndpoint::ADD_WATERMARK;
 
@@ -209,7 +187,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function deleteWatermark(int $id): Response
+    public function deleteWatermark(int $id): ResponseInterface
     {
         $endpoint = StreamEndpoint::DELETE_WATERMARK;
 
@@ -222,10 +200,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addVideoLibraryAllowedReferer(int $id, array $body): Response
+    public function addVideoLibraryAllowedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::ADD_ALLOWED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -238,10 +216,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removeVideoLibraryAllowedReferer(int $id, array $body): Response
+    public function removeVideoLibraryAllowedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::REMOVE_ALLOWED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -254,10 +232,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addVideoLibraryBlockedReferer(int $id, array $body): Response
+    public function addVideoLibraryBlockedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::ADD_BLOCKED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -270,10 +248,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removeVideoLibraryBlockedReferer(int $id, array $body): Response
+    public function removeVideoLibraryBlockedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = StreamEndpoint::REMOVE_BLOCKED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -283,7 +261,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getBillingDetails(): Response
+    public function getBillingDetails(): ResponseInterface
     {
         $endpoint = BillingEndpoint::GET_BILLING_DETAILS;
 
@@ -292,7 +270,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getBillingSummary(): Response
+    public function getBillingSummary(): ResponseInterface
     {
         $endpoint = BillingEndpoint::GET_BILLING_SUMMARY;
 
@@ -305,10 +283,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function applyPromoCode(array $query): Response
+    public function applyPromoCode(array $query): ResponseInterface
     {
         $endpoint = BillingEndpoint::APPLY_PROMO_CODE;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -321,10 +299,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function listPullZones(array $query = []): Response
+    public function listPullZones(array $query = []): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::LIST_PULL_ZONES;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -336,10 +314,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addPullZone(array $body): Response
+    public function addPullZone(array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_PULL_ZONE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -353,10 +331,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getPullZone(int $id, array $query = []): Response
+    public function getPullZone(int $id, array $query = []): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::GET_PULL_ZONE;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -368,10 +346,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updatePullZone(int $id, array $body): Response
+    public function updatePullZone(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::UPDATE_PULL_ZONE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -381,7 +359,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function deletePullZone(int $id): Response
+    public function deletePullZone(int $id): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::DELETE_PULL_ZONE;
 
@@ -391,7 +369,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): Response
+    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::DELETE_EDGE_RULE;
 
@@ -404,10 +382,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): Response
+    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_UPDATE_EDGE_RULE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -424,9 +402,9 @@ final class BaseRequest extends BunnyClient
         int $pullZoneId,
         string $edgeRuleId,
         array $body
-    ): Response {
+    ): ResponseInterface {
         $endpoint = PullZoneEndpoint::SET_EDGE_RULE_ENABLED;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -443,9 +421,9 @@ final class BaseRequest extends BunnyClient
     public function getOriginShieldQueueStatistics(
         int $pullZoneId,
         array $query = []
-    ): Response {
+    ): ResponseInterface {
         $endpoint = PullZoneEndpoint::GET_ORIGIN_SHIELD_QUEUE_STATISTICS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -458,10 +436,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getSafeHopStatistics(int $pullZoneId, array $query = []): Response
+    public function getSafeHopStatistics(int $pullZoneId, array $query = []): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::GET_SAFEHOP_STATISTICS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -474,10 +452,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getOptimizerStatistics(int $pullZoneId, array $query = []): Response
+    public function getOptimizerStatistics(int $pullZoneId, array $query = []): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::GET_OPTIMIZER_STATISTICS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -490,10 +468,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getStatisticsPullZone(int $pullZoneId, array $query = []): Response
+    public function getStatisticsPullZone(int $pullZoneId, array $query = []): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::GET_STATISTICS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -506,10 +484,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function loadFreeCertificate(array $query): Response
+    public function loadFreeCertificate(array $query): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::LOAD_FREE_CERTIFICATE;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -518,7 +496,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function purgeCache(): Response
+    public function purgeCache(): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::PURGE_CACHE;
 
@@ -531,10 +509,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addCustomCertificate(int $id, array $body): Response
+    public function addCustomCertificate(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_CUSTOM_CERTIFICATE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -547,10 +525,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removeCertificate(int $id, array $body): Response
+    public function removeCertificate(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_CERTIFICATE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -563,10 +541,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addCustomHostname(int $id, array $body): Response
+    public function addCustomHostname(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_CUSTOM_HOSTNAME;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -579,10 +557,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removeCustomHostname(int $id, array $body): Response
+    public function removeCustomHostname(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_CUSTOM_HOSTNAME;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -595,10 +573,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function setForceSSL(int $id, array $body): Response
+    public function setForceSSL(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::SET_FORCE_SSL;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -608,7 +586,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function resetPullZoneTokenKey(int $id): Response
+    public function resetPullZoneTokenKey(int $id): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::RESET_TOKEN_KEY;
 
@@ -621,10 +599,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addPullZoneAllowedReferer(int $id, array $body): Response
+    public function addPullZoneAllowedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_ALLOWED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -637,10 +615,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removePullZoneAllowedReferer(int $id, array $body): Response
+    public function removePullZoneAllowedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_ALLOWED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -653,10 +631,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addPullZoneBlockedReferer(int $id, array $body): Response
+    public function addPullZoneBlockedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -669,10 +647,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removePullZoneBlockedReferer(int $id, array $body): Response
+    public function removePullZoneBlockedReferer(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_BLOCKED_REFERER;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -685,10 +663,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addPullZoneBlockedIP(int $id, array $body): Response
+    public function addPullZoneBlockedIP(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::ADD_BLOCKED_IP;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -701,10 +679,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function removePullZoneBlockedIP(int $id, array $body): Response
+    public function removePullZoneBlockedIP(int $id, array $body): ResponseInterface
     {
         $endpoint = PullZoneEndpoint::REMOVE_BLOCKED_IP;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -718,10 +696,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function purgeUrl(array $query): Response
+    public function purgeUrl(array $query): ResponseInterface
     {
         $endpoint = PurgeEndpoint::PURGE_URL;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -734,10 +712,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function purgeUrlByHeader(array $query): Response
+    public function purgeUrlByHeader(array $query): ResponseInterface
     {
         $endpoint = PurgeEndpoint::PURGE_URL_HEADER;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -750,10 +728,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function getStatistics(array $query = []): Response
+    public function getStatistics(array $query = []): ResponseInterface
     {
         $endpoint = StatisticsEndpoint::GET_STATISTICS;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -766,10 +744,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function listStorageZone(array $query = []): Response
+    public function listStorageZone(array $query = []): ResponseInterface
     {
         $endpoint = StorageEndpoint::LIST_STORAGE_ZONES;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -781,10 +759,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function addStorageZone(array $body): Response
+    public function addStorageZone(array $body): ResponseInterface
     {
         $endpoint = StorageEndpoint::ADD_STORAGE_ZONE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -794,7 +772,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getStorageZone(int $id): Response
+    public function getStorageZone(int $id): ResponseInterface
     {
         $endpoint = StorageEndpoint::GET_STORAGE_ZONE;
 
@@ -807,10 +785,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updateStorageZone(int $id, array $body): Response
+    public function updateStorageZone(int $id, array $body): ResponseInterface
     {
         $endpoint = StorageEndpoint::UPDATE_STORAGE_ZONE;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -820,7 +798,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function deleteStorageZone(int $id): Response
+    public function deleteStorageZone(int $id): ResponseInterface
     {
         $endpoint = StorageEndpoint::DELETE_STORAGE_ZONE;
 
@@ -834,10 +812,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function resetStorageZonePasswordByQuery(array $query): Response
+    public function resetStorageZonePasswordByQuery(array $query): ResponseInterface
     {
         $endpoint = StorageEndpoint::RESET_PASSWORD_QUERY;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -846,7 +824,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function resetStorageZonePasswordByPath(int $id): Response
+    public function resetStorageZonePasswordByPath(int $id): ResponseInterface
     {
         $endpoint = StorageEndpoint::RESET_PASSWORD_PATH;
 
@@ -860,10 +838,10 @@ final class BaseRequest extends BunnyClient
      * @throws Exception\InvalidQueryParameterRequirementException
      * @throws Exception\InvalidQueryParameterTypeException
      */
-    public function resetStorageZoneReadOnlyPassword(array $query): Response
+    public function resetStorageZoneReadOnlyPassword(array $query): ResponseInterface
     {
         $endpoint = StorageEndpoint::RESET_READONLY_PASSWORD;
-        $query = $this->validateQueryField($query, $endpoint['query']);
+        $query = ParameterValidator::validate($query, $endpoint['query']);
 
         return $this->request(
             $endpoint,
@@ -872,7 +850,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getUserDetails(): Response
+    public function getUserDetails(): ResponseInterface
     {
         $endpoint = UserEndpoint::GET_USER_DETAILS;
 
@@ -884,10 +862,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function updateUserDetails(array $body): Response
+    public function updateUserDetails(array $body): ResponseInterface
     {
         $endpoint = UserEndpoint::UPDATE_USER_DETAILS;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -897,7 +875,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function resetUserApiKey(): Response
+    public function resetUserApiKey(): ResponseInterface
     {
         $endpoint = UserEndpoint::RESET_API_KEY;
 
@@ -909,10 +887,10 @@ final class BaseRequest extends BunnyClient
     /**
      * @throws Exception\InvalidBodyParameterTypeException
      */
-    public function closeTheAccount(array $body): Response
+    public function closeTheAccount(array $body): ResponseInterface
     {
         $endpoint = UserEndpoint::CLOSE_ACCOUNT;
-        $body = $this->validateBodyField($body, $endpoint['body']);
+        $body = ParameterValidator::getBody($body, $endpoint['body']);
 
         return $this->request(
             $endpoint,
@@ -922,7 +900,7 @@ final class BaseRequest extends BunnyClient
         );
     }
 
-    public function getDpaDetails(): Response
+    public function getDpaDetails(): ResponseInterface
     {
         $endpoint = UserEndpoint::GET_DPA_DETAILS;
 

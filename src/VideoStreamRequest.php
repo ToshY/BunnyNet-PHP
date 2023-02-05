@@ -4,91 +4,110 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
-use ToshY\BunnyNet\Model\Client\Response;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\CreateCollection;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\DeleteCollection;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\GetCollection;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\ListCollections;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageCollections\UpdateCollection;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\AddCaption;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\CreateVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\DeleteCaption;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\DeleteVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\FetchVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\GetVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\GetVideoHeatmap;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ListVideos;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ListVideoStatistics;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\ReencodeVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\SetThumbnail;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\UpdateVideo;
-use ToshY\BunnyNet\Model\Endpoint\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Helper\EndpointHelper;
+use ToshY\BunnyNet\Model\Stream\ManageCollections\CreateCollection;
+use ToshY\BunnyNet\Model\Stream\ManageCollections\DeleteCollection;
+use ToshY\BunnyNet\Model\Stream\ManageCollections\GetCollection;
+use ToshY\BunnyNet\Model\Stream\ManageCollections\ListCollections;
+use ToshY\BunnyNet\Model\Stream\ManageCollections\UpdateCollection;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\AddCaption;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\CreateVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\DeleteCaption;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\DeleteVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\FetchVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\GetVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\GetVideoHeatmap;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\ListVideos;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\ListVideoStatistics;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\ReencodeVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\UpdateVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Validator\ParameterValidator;
 
 /**
  * @link https://docs.bunny.net/reference/api-overview
+ * @note Requires the desired stream video library API key.
  */
-final class VideoStreamRequest extends BunnyClient
+class VideoStreamRequest
 {
     public function __construct(
-        protected string $apiKey,
+        protected readonly string $apiKey,
+        protected readonly BunnyClient $client,
     ) {
-        parent::__construct(Host::STREAM_ENDPOINT);
+        $this->client->setBaseUrl(Host::STREAM_ENDPOINT);
     }
 
-    public function getCollection(int $libraryId, string $collectionId): Response
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
+    public function getCollection(int $libraryId, string $collectionId): ResponseInterface
     {
         $endpoint = new GetCollection();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $collectionId],
         );
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
     public function updateCollection(
         int $libraryId,
         string $collectionId,
         array $body
-    ): Response {
+    ): ResponseInterface {
         $endpoint = new UpdateCollection();
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $collectionId],
             body: $body,
         );
     }
 
-    public function deleteCollection(int $libraryId, string $collectionId): Response
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
+    public function deleteCollection(int $libraryId, string $collectionId): ResponseInterface
     {
         $endpoint = new DeleteCollection();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $collectionId],
         );
     }
 
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
-     * @return Response
-     * @param int $libraryId
-     * @param array $query
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function getCollectionList(int $libraryId, array $query = []): Response
+    public function getCollectionList(int $libraryId, array $query = []): ResponseInterface
     {
         $endpoint = new ListCollections();
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             query: $query,
@@ -96,58 +115,79 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function createCollection(int $libraryId, array $body): Response
+    public function createCollection(int $libraryId, array $body): ResponseInterface
     {
         $endpoint = new CreateCollection();
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             body: $body,
         );
     }
 
-    public function getVideo(int $libraryId, string $videoId): Response
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
+    public function getVideo(int $libraryId, string $videoId): ResponseInterface
     {
         $endpoint = new GetVideo();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
         );
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function updateVideo(int $libraryId, string $videoId, array $body): Response
+    public function updateVideo(int $libraryId, string $videoId, array $body): ResponseInterface
     {
         $endpoint = new UpdateVideo();
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             body: $body,
         );
     }
 
-    public function deleteVideo(int $libraryId, string $videoId): Response
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
+    public function deleteVideo(int $libraryId, string $videoId): ResponseInterface
     {
         $endpoint = new DeleteVideo();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
         );
     }
 
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      * @throws FileDoesNotExistException
      */
     public function uploadVideo(
@@ -155,12 +195,13 @@ final class VideoStreamRequest extends BunnyClient
         string $videoId,
         string $localFilePath,
         array $query = [],
-    ): Response {
+    ): ResponseInterface {
         $endpoint = new UploadVideo();
-        $body = $this->openFileStream($localFilePath);
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
+        $body = EndpointHelper::openFileStream($localFilePath);
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
@@ -168,52 +209,64 @@ final class VideoStreamRequest extends BunnyClient
         );
     }
 
-    public function getVideoHeatmap(int $libraryId, string $videoId): Response
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
+    public function getVideoHeatmap(int $libraryId, string $videoId): ResponseInterface
     {
         $endpoint = new GetVideoHeatmap();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
         );
     }
 
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function getVideoStatistics(int $libraryId, array $query = []): Response
+    public function getVideoStatistics(int $libraryId, array $query = []): ResponseInterface
     {
         $endpoint = new ListVideoStatistics();
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             query: $query,
         );
     }
 
-    public function reencodeVideo(int $libraryId, string $videoId): Response
+    public function reEncodeVideo(int $libraryId, string $videoId): ResponseInterface
     {
         $endpoint = new ReencodeVideo();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
         );
     }
 
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @throws ClientExceptionInterface
      */
-    public function listVideos(int $libraryId, array $query = []): Response
+    public function listVideos(int $libraryId, array $query = []): ResponseInterface
     {
         $endpoint = new ListVideos();
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             query: $query,
@@ -221,14 +274,19 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function createVideo(int $libraryId, array $body): Response
+    public function createVideo(int $libraryId, array $body): ResponseInterface
     {
         $endpoint = new CreateVideo();
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             body: $body,
@@ -236,15 +294,19 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function setThumbnail(int $libraryId, string $videoId, array $query): Response
+    public function setThumbnail(int $libraryId, string $videoId, array $query): ResponseInterface
     {
         $endpoint = new SetThumbnail();
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
@@ -252,17 +314,20 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
-     * @throws Exception\InvalidQueryParameterRequirementException
-     * @throws Exception\InvalidQueryParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
-    public function fetchVideo(int $libraryId, array $body, array $query = []): Response
+    public function fetchVideo(int $libraryId, array $body, array $query = []): ResponseInterface
     {
         $endpoint = new FetchVideo();
-        $query = $this->validateQueryField($query, $endpoint->getQuery());
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($query, $endpoint->getQuery());
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
             query: $query,
@@ -271,32 +336,41 @@ final class VideoStreamRequest extends BunnyClient
     }
 
     /**
-     * @throws Exception\InvalidBodyParameterTypeException
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      */
     public function addCaption(
         int $libraryId,
         string $videoId,
         string $sourceLanguage,
         array $body
-    ): Response {
+    ): ResponseInterface {
         $endpoint = new AddCaption();
-        $body = $this->validateBodyField($body, $endpoint->getBody());
 
-        return $this->request(
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId, $sourceLanguage],
             body: $body,
         );
     }
 
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\InvalidJSONForBodyException
+     */
     public function deleteCaption(
         int $libraryId,
         string $videoId,
         string $sourceLanguage
-    ): Response {
+    ): ResponseInterface {
         $endpoint = new DeleteCaption();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId, $sourceLanguage],
         );

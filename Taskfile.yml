@@ -30,6 +30,11 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php composer dump-autoload {{.CLI_ARGS | default "--no-cache --no-interaction"}}
 
+  composer:autoload:dev:
+    desc: Composer dump autoload dev
+    cmds:
+      - task composer:autoload -- --dev --no-cache --no-interaction
+
   composer:require:
     desc: Composer require package
     summary: |
@@ -63,7 +68,7 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php vendor/bin/grumphp git:init
 
-  phpcs:dry:
+  phpcs:
     desc: PHPCS dry run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix --dry-run -v --diff
@@ -73,22 +78,42 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix -v
 
-  phpmd:check:
+  phpmd:
     desc: PHPMD run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
 
-  phpmd:check:strict:
+  phpmd:strict:
     desc: PHPMD run with strict argument
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
 
-  phpmd:generate:baseline:
-    desc: PHPMD generate baseline
+  phpmd:baseline:
+    desc: PHPMD update baseline
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd --generate-baseline src/ text phpmd.xml
 
-  rector:dry:
+  phpstan:
+    desc: PHPStan run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpstan analyse --error-format=table
+
+  phpstan:baseline:
+    desc: PHPStan update baseline
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpstan --generate-baseline
+
+  phpunit:
+    desc: PHPunit run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpunit
+
+  phpunit:config:
+    desc: PHPunit generate config
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpunit --generate-configuration
+
+  rector:
     desc: Rector dry run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector --dry-run
