@@ -81,7 +81,7 @@ final class CollectionEndpoint
     /** @var array */
     public const CREATE_COLLECTION = [
         'method' => 'POST',
-        'path' => 'library/%d/collections/%s',
+        'path' => 'library/%d/collections',
         'headers' => [
             Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON_ALL,
