@@ -1,5 +1,4 @@
-name: Security Check
-
+name: PHPUnit
 on:
   push:
     branches:
@@ -7,12 +6,10 @@ on:
   pull_request:
     branches:
       - master
-  schedule:
-    - cron: '0 3 * * 0'
 
 jobs:
-  build:
-    name: Security check
+  phpcs:
+    name: PHPUnit
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,11 +29,5 @@ jobs:
         with:
           composer-options: '--prefer-stable'
 
-      - id: security-check
-        name: Check for vulnerabilities
-        uses: symfonycorp/security-checker-action@v5
-        with:
-          disable-exit-code: 1
-
-      - name: Display vulnerabilities as JSON
-        run: echo ${{ steps.security-check.outputs.vulns }}
+      - name: PHPUnit
+        run: php vendor/bin/phpunit

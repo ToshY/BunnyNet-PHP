@@ -8,9 +8,11 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class CreateComputeScriptRelease implements EndpointInterface
+class CreateComputeScriptRelease implements EndpointInterface, EndpointQueryInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -34,6 +36,13 @@ class CreateComputeScriptRelease implements EndpointInterface
     {
         return [
             new AbstractParameter(name: 'uuid', type: Type::STRING_TYPE, required: true),
+        ];
+    }
+
+    public function getBody(): array
+    {
+        return [
+            new AbstractParameter(name: 'Note', type: Type::STRING_TYPE),
         ];
     }
 }

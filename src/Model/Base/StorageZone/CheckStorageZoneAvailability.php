@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class CheckStorageZoneAvailability implements EndpointInterface
+class CheckStorageZoneAvailability implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -30,7 +31,7 @@ class CheckStorageZoneAvailability implements EndpointInterface
         ];
     }
 
-    public function getQuery(): array
+    public function getBody(): array
     {
         return [
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),

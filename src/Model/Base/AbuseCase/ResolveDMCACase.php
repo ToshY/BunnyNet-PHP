@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class ResolveDmcaCase implements EndpointInterface
+class ResolveDMCACase implements EndpointInterface
 {
     public function getMethod(): Method
     {

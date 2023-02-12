@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Exception;
 
 use Exception;
-use Throwable;
 
-final class FileDoesNotExistException extends Exception
+class FileDoesNotExistException extends Exception
 {
-    public const MESSAGE = 'Key `%s` expected value of type `%s` got `%s` (%s).';
+    public const MESSAGE = 'The specified file `%s` does not exist.';
 
-    public function __construct($message, $code = 0, Throwable $previous = null)
+    public static function withFileName(string $fileName): self
     {
-        parent::__construct($message, $code, $previous);
+        return new self(
+            sprintf(
+                self::MESSAGE,
+                $fileName
+            ),
+        );
     }
 }

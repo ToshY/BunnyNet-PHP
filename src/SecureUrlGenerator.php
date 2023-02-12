@@ -5,18 +5,122 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 /**
+ * Token authentication system to strictly control who, where and for how long can access your content.
+ *
+ * Provide the API key of the specific pull zone you want to use, available at the **Url Token Authentication Key** section.
+ *
+ * ```php
+ * <?php
+ *
+ * require 'vendor/autoload.php';
+ *
+ * use ToshY\BunnyNet\SecureUrlGenerator;
+ *
+ * $bunnySecureUrl = new SecureUrlGenerator(
+ *     token: '5509f27d-9103-4de6-8370-8bd68db859c9',
+ *     hostname: 'https://custom-pullzone.b-cdn.net'
+ * );
+ * ```
+ *
  * @link https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication
  * @link https://github.com/BunnyWay/BunnyCDN.TokenAuthentication
- * @note Requires the desired pull zone Url Token Authentication Key.
  */
 class SecureUrlGenerator
 {
+    /**
+     * @param string $token
+     * @param string $hostname
+     */
     public function __construct(
         private readonly string $token,
         private readonly string $hostname,
     ) {
     }
 
+    /**
+     * Generate secure URL.
+     *
+     * ```php
+     * <?php
+     *
+     * // File from root directory
+     * $bunnySecureUrl->generate(
+     *     file: '/bunny.jpg',
+     *     expirationTime: 3600,
+     *     userIp: null,
+     *     isDirectoryToken: false,
+     *     pathAllowed: null,
+     *     countriesAllowed: null,
+     *     countriesBlocked: null,
+     *     referrersAllowed: null,
+     *     allowSubnet: true
+     * );
+     *
+     * // File from subdirectory
+     * $bunnySecureUrl->generate(
+     *     file: '/css/custom.css'
+     * );
+     *
+     * // With IPv4
+     * $bunnySecureUrl->generate(
+     *     file: '/css/custom.css',
+     *     userIp: '12.345.67.89'
+     * );
+     *
+     * // With directory token enabled and path specified for video streaming
+     * $bunnySecureUrl->generate(
+     *     file: '/videos/awesome.m3u8',
+     *     userIp: '12.345.67.89',
+     *     isDirectoryToken: true,
+     *     pathAllowed: '/videos'
+     * );
+     *
+     * // Allow or block certain countries, e.g. allow "US" and block "RU".
+     * $bunnySecureUrl->generate(
+     *     file: '/videos/awesome.m3u8',
+     *     userIp: '12.345.67.89',
+     *     isDirectoryToken: true,
+     *     pathAllowed: '/videos'
+     *     countriesAllowed: 'US',
+     *     countriesBlocked: 'RU'
+     * );
+     *
+     * // Allow or block certain countries, e.g. allow "US" and block "RU".
+     * $bunnySecureUrl->generate(
+     *     file: '/videos/awesome.m3u8',
+     *     userIp: '12.345.67.89',
+     *     isDirectoryToken: true,
+     *     pathAllowed: '/videos'
+     *     referrersAllowed: 'example.com'
+     * );
+     * ```
+     *
+     * ```text
+     * Notes:
+     * - Token IP validation only supports IPv4.
+     * - In order to reduce the false negatives (and increase privacy) for Token IP validation, the default is to
+     * allow the full /24 subnet.
+     *   > Example: A token generated for an user with IPv4 `12.345.67.89` will allow the subnet `12.345.67.0`, to watch the content.
+     * - Both `countries` and `referers` accept comma separated input, meaning you could allow or block multiple countries like
+     * so: `US,DE,JP`. Same for referers: `example.com,example.org`.
+     * - An edge case occurs when you add a blocked country to the Traffic Manager, and allow that same country for
+     * token authentication. This will result in a standard "Unable to connect" page. According to support "The reason for
+     * that would be is due to the fact that the Traffic manager doesn't resolve
+     * the DNS from that country and in turn, we start returning 127.0.0.1 queries towards the hostnames in use instead
+     * of the standard CDN routing. The traffic essentially doesn't even touch our servers in such a case."
+     * ```
+     *
+     * @param string $file
+     * @param int $expirationTime
+     * @param string|null $userIp
+     * @param bool $isDirectoryToken
+     * @param string|null $pathAllowed
+     * @param string|null $countriesAllowed
+     * @param string|null $countriesBlocked
+     * @param string|null $referrersAllowed
+     * @param bool $allowSubnet
+     * @return string
+     */
     public function generate(
         string $file,
         int $expirationTime = 3600,
@@ -104,6 +208,13 @@ class SecureUrlGenerator
         );
     }
 
+    /**
+     * @ignore
+     * @param string $url
+     * @param string|null $pathParameterKey
+     * @param string|null $pathParameterValue
+     * @return void
+     */
     private function parseOptionalPathParameter(
         string &$url,
         string|null $pathParameterKey,

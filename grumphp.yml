@@ -10,3 +10,4 @@ grumphp:
     shell:
       scripts:
         - [ "-c", "vendor/bin/phpmd --strict src/ text phpmd.xml" ]
+    phpunit:

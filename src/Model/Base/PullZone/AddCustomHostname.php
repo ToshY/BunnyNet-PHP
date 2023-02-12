@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class AddCustomHostname implements EndpointInterface
+class AddCustomHostname implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -29,7 +30,7 @@ class AddCustomHostname implements EndpointInterface
         ];
     }
 
-    public function getQuery(): array
+    public function getBody(): array
     {
         return [
             new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),

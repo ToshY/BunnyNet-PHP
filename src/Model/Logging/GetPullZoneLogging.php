@@ -9,8 +9,9 @@ use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class GetPullZoneLogging implements EndpointInterface
+class GetPullZoneLogging implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {

@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class AddBlockedIP implements EndpointInterface
+class AddBlockedIP implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {

@@ -13,7 +13,8 @@
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpcs.yml?branch=master&label=PHPCS" alt="Code style">
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpmd.yml?branch=master&label=PHPMD" alt="Mess detector">
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpstan.yml?branch=master&label=PHPStan" alt="Static analysis">
-    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/security.yml?branch=master&label=Security check" alt="Security check">
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpunit.yml?branch=master&label=PHPUnit" alt="Unit tests">
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/security.yml?branch=master&label=Security" alt="Security">
 </div>
 
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
@@ -23,10 +24,10 @@ edge storage, video streaming and image optimizers.
 <b>Note</b>: This is a non-official library for the <a href="https://docs.bunny.net/docs">bunny.net API</a>.
 </small>
 
-## Installation
+## 🧰 Install
 
 ```bash
-composer require toshy/bunnynet-php
+composer require toshy/bunnynet-php:^3.0
 ```
 
 ### Versions
@@ -36,7 +37,7 @@ composer require toshy/bunnynet-php
 | ~~^7.4 / ^8.0~~ | ~~^2.0~~ |
 | ^8.1            | ^3.0     |
 
-> Note: The `2.x` branch will no longer be actively maintained after the initial `3.0` release.
+> Note: The `2.x` is not longer actively maintained.
 
 
 ## Quickstart
@@ -44,10 +45,10 @@ composer require toshy/bunnynet-php
 ```php
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\BaseRequest;
+use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\EdgeStorageRequest;
+use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\ImageOptimizer;
 use ToshY\BunnyNet\PricingCalculator;
 use Toshy\BunnyNet\PullZoneLogRequest;
@@ -91,7 +92,7 @@ $bunnySecureUrl = new SecureUrlGenerator(
 $bunnyImageOptimizer = new ImageOptimizer();
 ```
 
-## Documentation
+## 📜 Documentation
 
 Examples for each type of request can be found in the [docs](./docs) directory.
 
@@ -102,21 +103,20 @@ Examples for each type of request can be found in the [docs](./docs) directory.
 * [Secure Url Generator](docs/SecureUrlGenerator.md)
 * [Image Optimizer](docs/ImageOptimizer.md)
 
-## Reference
+### Reference
 
 This library was created with the hand of the
 available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview). <br />
-Special thanks to the bunny.net support team for answering my questions regarding the API.
 
-## Notes
+### Notes
 
 * Tried to keep the naming conventions as close as possible to the original API.
 * Tested the majority of the endpoints myself to validate if they are working correctly. If you happen to
   come across a bug, just submit an issue, and I'll take a look at it.
 
-## Contribute
+## 🛠️ Contribute
 
-Features and bugfixes should be based on the master branch.
+Features and bugfixes should be based on the `master` branch.
 
 ### Prerequisites
 
@@ -131,12 +131,12 @@ task composer:install
 
 ### Run checks
 
-Run `phpcs`, `phpmd` and `phpstan`.
+Run `phpcs`, `phpstan`, `phpmd` and `phpunit`.
 
 ```shell
 task contribute
 ```
 
-## Licence
+## ❕ Licence
 
 The BunnyNet PHP library is licensed under [MIT](LICENSE).

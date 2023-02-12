@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <phpmd-baseline>
+  <violation rule="PHPMD\Rule\Design\LongClass" file="src/BaseRequest.php"/>
   <violation rule="PHPMD\Rule\ExcessivePublicCount" file="src/BaseRequest.php"/>
   <violation rule="PHPMD\Rule\Design\TooManyMethods" file="src/BaseRequest.php"/>
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseRequest.php"/>
   <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseRequest.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\UnusedPrivateField" file="src/EdgeStorageRequest.php"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Base/PullZone/AddPullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Base/PullZone/UpdatePullZone.php" method="getBody"/>

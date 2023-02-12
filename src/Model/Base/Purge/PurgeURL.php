@@ -8,8 +8,9 @@ use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class PurgeURL implements EndpointInterface
+class PurgeURL implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {

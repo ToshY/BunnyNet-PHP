@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Exception;
 
 use Exception;
-use Throwable;
 
-final class InvalidJSONForBodyException extends Exception
+class InvalidJSONForBodyException extends Exception
 {
-    public function __construct($message, $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
+    public static function withMessage(
+        string $message
+    ): self {
+        return new self($message);
     }
 }

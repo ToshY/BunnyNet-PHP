@@ -5,14 +5,25 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Exception;
 
 use Exception;
-use Throwable;
+use ToshY\BunnyNet\Enum\Type;
 
-final class InvalidTypeForListValueException extends Exception
+class InvalidTypeForListValueException extends Exception
 {
     public const MESSAGE = 'Key `%s` expected list value of type `%s` got `%s` (%s).';
 
-    public function __construct($message, $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
+    public static function withParentKeyValueType(
+        string $parentKey,
+        Type $expectedValueType,
+        mixed $actualValue,
+    ): self {
+        return new self(
+            sprintf(
+                self::MESSAGE,
+                $parentKey,
+                $expectedValueType->value,
+                gettype($actualValue),
+                is_array($actualValue) === true ? json_encode($actualValue) : $actualValue,
+            )
+        );
     }
 }

@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class DeleteCertificate implements EndpointInterface
+class DeleteCertificate implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -22,9 +23,6 @@ class DeleteCertificate implements EndpointInterface
         return 'pullzone/%d/removeCertificate';
     }
 
-    /**
-     * @return array<array<string,string>>
-     */
     public function getHeaders(): array
     {
         return [
@@ -33,10 +31,7 @@ class DeleteCertificate implements EndpointInterface
         ];
     }
 
-    /**
-     * @return array<AbstractParameter>
-     */
-    public function getQuery(): array
+    public function getBody(): array
     {
         return [
             new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),

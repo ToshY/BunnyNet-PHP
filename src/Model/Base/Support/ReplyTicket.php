@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class ReplyTicket implements EndpointInterface
+class ReplyTicket implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -36,7 +37,7 @@ class ReplyTicket implements EndpointInterface
             new AbstractParameter(name: 'Attachments', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'Body', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'FileName', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'Contenttype', type: Type::STRING_TYPE),
+                new AbstractParameter(name: 'ContentType', type: Type::STRING_TYPE),
             ]),
         ];
     }

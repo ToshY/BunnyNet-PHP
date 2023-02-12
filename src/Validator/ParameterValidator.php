@@ -13,16 +13,19 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 class ParameterValidator
 {
     /**
-     * @throws InvalidTypeForListValueException
      * @throws InvalidTypeForKeyValueException
+     * @throws InvalidTypeForListValueException
      * @throws ParameterIsRequiredException
+     * @return void
+     * @param array<string,mixed> $values
+     * @param array<AbstractParameter> $template
+     * @param string|null $parentKey
      */
     public static function validate(
         array $values,
         array $template,
         string $parentKey = null,
     ): void {
-        /** @var AbstractParameter $abstractParameterObject */
         foreach ($template as $abstractParameterObject) {
             $abstractParameterObjectName = $abstractParameterObject->getName();
             $abstractParameterObjectType = $abstractParameterObject->getType();
@@ -52,11 +55,8 @@ class ParameterValidator
                 true === $parameterIsRequired
                 && false === $parameterNameInValuesKey
             ) {
-                throw new ParameterIsRequiredException(
-                    sprintf(
-                        ParameterIsRequiredException::MESSAGE,
-                        $abstractParameterObjectName
-                    )
+                throw ParameterIsRequiredException::withKey(
+                    key: $abstractParameterObjectName
                 );
             }
 
@@ -67,17 +67,15 @@ class ParameterValidator
                 && null !== $abstractParameterObjectChildren
             ) {
                 foreach ($abstractParameterObjectChildren as $childAbstractParameterObject) {
-                    if (null !== $childAbstractParameterObject->getName()) {
-                        if (
-                            false === is_array($abstractParameterObjectChildren)
-                            || false === is_array($parameterValue)
-                        ) {
-                            self::checkTypeForKeyValue(
-                                value: $parameterValue,
-                                parameterType: $abstractParameterObjectType,
-                                parameterName: $abstractParameterObjectName,
-                            );
-                        }
+                    if (
+                        null !== $childAbstractParameterObject->getName()
+                        && false === is_array($parameterValue)
+                    ) {
+                        self::checkTypeForKeyValue(
+                            value: $parameterValue,
+                            parameterType: $abstractParameterObjectType,
+                            parameterName: $abstractParameterObjectName,
+                        );
                     }
 
                     self::validate(
@@ -97,6 +95,7 @@ class ParameterValidator
     }
 
     /**
+     * @ignore
      * @throws InvalidTypeForKeyValueException
      */
     private static function checkTypeForKeyValue(
@@ -109,38 +108,31 @@ class ParameterValidator
             return;
         }
 
-        throw new InvalidTypeForKeyValueException(
-            sprintf(
-                InvalidTypeForKeyValueException::MESSAGE,
-                $parameterName,
-                $parameterType->value,
-                gettype($value),
-                is_array($value) === true ? json_encode($value) : $value
-            )
+        throw InvalidTypeForKeyValueException::withKeyValueType(
+            key:  $parameterName,
+            expectedValueType: $parameterType,
+            actualValue: $value,
         );
     }
 
     /**
+     * @ignore
      * @throws InvalidTypeForListValueException
      */
     private static function checkTypeForListValue(
         mixed $value,
         Type $parameterType,
-        string $parentKey
+        string $parentKey,
     ): void {
         $isType = sprintf('is_%s', $parameterType->value);
         if (true === $isType($value)) {
             return;
         }
 
-        throw new InvalidTypeForListValueException(
-            sprintf(
-                InvalidTypeForListValueException::MESSAGE,
-                $parentKey,
-                $parameterType->value,
-                gettype($value),
-                is_array($value) === true ? json_encode($value) : $value
-            )
+        throw InvalidTypeForListValueException::withParentKeyValueType(
+            parentKey: $parentKey,
+            expectedValueType: $parameterType,
+            actualValue: $value,
         );
     }
 }

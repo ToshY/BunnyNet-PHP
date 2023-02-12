@@ -26,8 +26,7 @@ body:
     attributes:
       label: How to reproduce
       description: |
-        Provide a usefull reproduction case. See the README or contribution guidelines on how can setup an isolated test
-        case. 
+        Provide a usefull reproduction case.
         ⚠️ Make sure you omit any personal info, credentials, or API keys before you submit the reproduction case!
     validations:
       required: true

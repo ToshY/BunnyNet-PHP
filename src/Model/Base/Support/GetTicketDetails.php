@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Stream\ManageVideos;
+namespace ToshY\BunnyNet\Model\Base\Support;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class ReencodeVideo implements EndpointInterface
+class GetTicketDetails implements EndpointInterface
 {
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::GET;
     }
 
     public function getPath(): string
     {
-        return 'library/%d/videos/%s/reencode';
+        return 'support/ticket/details/%d';
     }
 
     public function getHeaders(): array

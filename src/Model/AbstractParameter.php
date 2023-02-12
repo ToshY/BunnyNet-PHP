@@ -8,6 +8,12 @@ use ToshY\BunnyNet\Enum\Type;
 
 class AbstractParameter implements ParameterInterface
 {
+    /**
+     * @param string|null $name
+     * @param Type $type
+     * @param bool $required
+     * @param array<AbstractParameter>|null $children
+     */
     public function __construct(
         private readonly string|null $name,
         private readonly Type $type,

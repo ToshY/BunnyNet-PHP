@@ -10,21 +10,47 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\RegionDoesNotExistException;
+use ToshY\BunnyNet\Helper\EndpointHelper;
 use ToshY\BunnyNet\Model\EdgeStorage\BrowseFiles\ListFiles;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DeleteFile;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DownloadFile;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
 
 /**
+ * Browse and manage files through the Edge Storage API.
+ *
+ * Provide the API key of the specific storage zone you want to use, available at the **FTP & API Access** section.
+ *
+ * ```php
+ * <?php
+ *
+ * require 'vendor/autoload.php';
+ *
+ * use ToshY\BunnyNet\Client\BunnyClient;
+ * use ToshY\BunnyNet\EdgeStorageRequest;
+ * use ToshY\BunnyNet\Enum\Region;
+ *
+ * // Create a BunnyClient using any HTTP client implementing Psr\Http\Client\ClientInterface
+ * $bunnyClient = new BunnyClient(
+ *     client: new \Symfony\Component\HttpClient\HttpClient()
+ * );
+ *
+ * $bunnyEdgeStorage = new EdgeStorageRequest(
+ *     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
+ *     regionCode: Region::FS,
+ *     client: $bunnyClient
+ * );
+ * ```
+ *
  * @link https://docs.bunny.net/reference/storage-api
- * @note Requires the desired storage zone API key.
  */
 class EdgeStorageRequest
 {
-    private string $host;
-
     /**
      * @throws RegionDoesNotExistException
+     * @param BunnyClient $client
+     * @param Region|string $regionCode
+     * @param string $apiKey
      */
     public function __construct(
         protected readonly string $apiKey,
@@ -38,6 +64,8 @@ class EdgeStorageRequest
 
     /**
      * @throws RegionDoesNotExistException
+     * @return string
+     * @param Region|string $hostCode
      */
     public function setHost(Region|string $hostCode): string
     {
@@ -56,11 +84,8 @@ class EdgeStorageRequest
 
         $foundRegion = array_pop($filteredRegionCollection);
         if (null === $foundRegion) {
-            throw new RegionDoesNotExistException(
-                sprintf(
-                    RegionDoesNotExistException::MESSAGE,
-                    $hostCode
-                )
+            throw RegionDoesNotExistException::withHostCode(
+                hostCode: $hostCode
             );
         }
 
@@ -68,8 +93,11 @@ class EdgeStorageRequest
     }
 
     /**
-     * @throws Exception\InvalidJSONForBodyException
      * @throws ClientExceptionInterface
+     * @param string $path
+     * @param string $fileName
+     * @return ResponseInterface
+     * @param string $storageZoneName
      */
     public function downloadFile(
         string $storageZoneName,
@@ -78,7 +106,7 @@ class EdgeStorageRequest
     ): ResponseInterface {
         $endpoint = new DownloadFile();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path, $fileName]
         );
@@ -86,8 +114,13 @@ class EdgeStorageRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
      * @throws FileDoesNotExistException
+     * @param string $fileName
+     * @param string $localFilePath
+     * @param array<string,mixed> $headers
+     * @return ResponseInterface
+     * @param string $storageZoneName
+     * @param string $path
      */
     public function uploadFile(
         string $storageZoneName,
@@ -97,19 +130,21 @@ class EdgeStorageRequest
         array $headers = [],
     ): ResponseInterface {
         $endpoint = new UploadFile();
-        $body = $this->openFileStream($localFilePath);
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path, $fileName],
-            body: $body,
+            body: EndpointHelper::openFileStream($localFilePath),
             headers: $headers
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $path
+     * @param string $fileName
+     * @return ResponseInterface
+     * @param string $storageZoneName
      */
     public function deleteFile(
         string $storageZoneName,
@@ -118,7 +153,7 @@ class EdgeStorageRequest
     ): ResponseInterface {
         $endpoint = new DeleteFile();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path, $fileName],
         );
@@ -126,13 +161,15 @@ class EdgeStorageRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $path
+     * @return ResponseInterface
+     * @param string $storageZoneName
      */
     public function listFiles(string $storageZoneName, string $path = ''): ResponseInterface
     {
         $endpoint = new ListFiles();
 
-        return $this->request(
+        return $this->client->request(
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path],
         );

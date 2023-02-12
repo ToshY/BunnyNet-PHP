@@ -24,7 +24,7 @@ use ToshY\BunnyNet\Model\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\ListVideoStatistics;
-use ToshY\BunnyNet\Model\Stream\ManageVideos\ReencodeVideo;
+use ToshY\BunnyNet\Model\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\SetThumbnail;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\UploadVideo;
@@ -36,6 +36,10 @@ use ToshY\BunnyNet\Validator\ParameterValidator;
  */
 class VideoStreamRequest
 {
+    /**
+     * @param string $apiKey
+     * @param BunnyClient $client
+     */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
@@ -45,7 +49,9 @@ class VideoStreamRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $collectionId
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function getCollection(int $libraryId, string $collectionId): ResponseInterface
     {
@@ -63,6 +69,10 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param string $collectionId
+     * @param array<string,mixed> $body
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function updateCollection(
         int $libraryId,
@@ -76,13 +86,15 @@ class VideoStreamRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $collectionId],
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $collectionId
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function deleteCollection(int $libraryId, string $collectionId): ResponseInterface
     {
@@ -96,10 +108,12 @@ class VideoStreamRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function getCollectionList(int $libraryId, array $query = []): ResponseInterface
     {
@@ -120,6 +134,9 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @return ResponseInterface
+     * @param int $libraryId
+     * @param array<string,mixed> $body
      */
     public function createCollection(int $libraryId, array $body): ResponseInterface
     {
@@ -130,13 +147,15 @@ class VideoStreamRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $videoId
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function getVideo(int $libraryId, string $videoId): ResponseInterface
     {
@@ -154,6 +173,10 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param string $videoId
+     * @param array<string,mixed> $body
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function updateVideo(int $libraryId, string $videoId, array $body): ResponseInterface
     {
@@ -164,13 +187,15 @@ class VideoStreamRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $videoId
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function deleteVideo(int $libraryId, string $videoId): ResponseInterface
     {
@@ -184,11 +209,15 @@ class VideoStreamRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @throws FileDoesNotExistException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param string $localFilePath
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
      */
     public function uploadVideo(
         int $libraryId,
@@ -197,7 +226,6 @@ class VideoStreamRequest
         array $query = [],
     ): ResponseInterface {
         $endpoint = new UploadVideo();
-        $body = EndpointHelper::openFileStream($localFilePath);
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 
@@ -205,13 +233,15 @@ class VideoStreamRequest
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
-            body: $body,
+            body: EndpointHelper::openFileStream($localFilePath),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $videoId
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function getVideoHeatmap(int $libraryId, string $videoId): ResponseInterface
     {
@@ -225,10 +255,12 @@ class VideoStreamRequest
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function getVideoStatistics(int $libraryId, array $query = []): ResponseInterface
     {
@@ -243,9 +275,15 @@ class VideoStreamRequest
         );
     }
 
+    /**
+     * @throws ClientExceptionInterface
+     * @param string $videoId
+     * @return ResponseInterface
+     * @param int $libraryId
+     */
     public function reEncodeVideo(int $libraryId, string $videoId): ResponseInterface
     {
-        $endpoint = new ReencodeVideo();
+        $endpoint = new ReEncodeVideo();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -254,11 +292,13 @@ class VideoStreamRequest
     }
 
     /**
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @throws ClientExceptionInterface
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function listVideos(int $libraryId, array $query = []): ResponseInterface
     {
@@ -279,6 +319,9 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @return ResponseInterface
+     * @param int $libraryId
+     * @param array<string,mixed> $body
      */
     public function createVideo(int $libraryId, array $body): ResponseInterface
     {
@@ -289,16 +332,19 @@ class VideoStreamRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId],
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
      */
     public function setThumbnail(int $libraryId, string $videoId, array $query): ResponseInterface
     {
@@ -319,6 +365,10 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $body
+     * @param array<string,mixed> $query
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function fetchVideo(int $libraryId, array $body, array $query = []): ResponseInterface
     {
@@ -331,7 +381,7 @@ class VideoStreamRequest
             endpoint: $endpoint,
             parameters: [$libraryId],
             query: $query,
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
@@ -341,6 +391,11 @@ class VideoStreamRequest
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param string $sourceLanguage
+     * @param array<string,mixed> $body
+     * @return ResponseInterface
      */
     public function addCaption(
         int $libraryId,
@@ -355,13 +410,16 @@ class VideoStreamRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId, $sourceLanguage],
-            body: $body,
+            body: EndpointHelper::getBody($body),
         );
     }
 
     /**
      * @throws ClientExceptionInterface
-     * @throws Exception\InvalidJSONForBodyException
+     * @param string $videoId
+     * @param string $sourceLanguage
+     * @return ResponseInterface
+     * @param int $libraryId
      */
     public function deleteCaption(
         int $libraryId,

@@ -6,9 +6,12 @@ namespace ToshY\BunnyNet\Model\Base\Support;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class ListTickets implements EndpointInterface
+class ListTickets implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {
@@ -24,6 +27,14 @@ class ListTickets implements EndpointInterface
     {
         return [
             Header::ACCEPT_JSON,
+        ];
+    }
+
+    public function getQuery(): array
+    {
+        return [
+            new AbstractParameter(name: 'page', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
         ];
     }
 }

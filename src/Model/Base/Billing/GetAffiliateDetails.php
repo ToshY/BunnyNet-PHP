@@ -20,6 +20,7 @@ class GetAffiliateDetails implements EndpointInterface
         return 'billing/affiliate';
     }
 
+
     public function getHeaders(): array
     {
         return [

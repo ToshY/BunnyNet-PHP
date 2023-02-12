@@ -8,9 +8,11 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class FetchVideo implements EndpointInterface
+class FetchVideo implements EndpointInterface, EndpointQueryInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {

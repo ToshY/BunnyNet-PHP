@@ -15,9 +15,10 @@ tasks:
   contribute:
     desc: Contribute by running dev tools
     cmds:
-      - task: grum:init
-      - task: phpcs:dry
-      - task: phpmd:check
+      - task: phpcs
+      - task: phpstan
+      - task: phpmd
+      - task: phpunit
 
   # Composer
   composer:install:
@@ -104,12 +105,12 @@ tasks:
       - docker compose run --rm $TTY php vendor/bin/phpstan --generate-baseline
 
   phpunit:
-    desc: PHPunit run
+    desc: PHPUnit run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpunit
 
   phpunit:config:
-    desc: PHPunit generate config
+    desc: PHPUnit generate config
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpunit --generate-configuration
 
@@ -122,6 +123,12 @@ tasks:
     desc: Rector fix
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector
+
+  phpdoc:
+    desc: Test PHP docs using phpDocumentor
+    cmds:
+      - rm -rf $(pwd)/.phpdoc $(pwd)/docs2
+      - docker run --rm -v $(pwd):/data --user $UID:$GID phpdoc/phpdoc:3.3 phpdoc
 
   test:
     desc: Create example file for manual testing

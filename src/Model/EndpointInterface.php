@@ -8,9 +8,18 @@ use ToshY\BunnyNet\Enum\Method;
 
 interface EndpointInterface
 {
+    /**
+     * @return Method
+     */
     public function getMethod(): Method;
 
+    /**
+     * @return string
+     */
     public function getPath(): string;
 
+    /**
+     * @return array<array<string,string>>
+     */
     public function getHeaders(): array;
 }

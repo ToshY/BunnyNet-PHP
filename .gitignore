@@ -4,3 +4,4 @@ composer.lock
 *.php~
 example.php
 phpstan.neon
+.phpdoc

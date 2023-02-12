@@ -1,0 +1,21 @@
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+>
+    <paths>
+        <output>docs2</output>
+        <cache>.phpdoc/cache</cache>
+    </paths>
+    <version number="3.0.0">
+        <api format="php">
+            <source dsn=".">
+                <path>src</path>
+            </source>
+            <default-package-name>ToshY\BunnyNet</default-package-name>
+        </api>
+    </version>
+    <template name="default"/>
+    <setting name="template.color" value="orange"/>
+</phpdocumentor>

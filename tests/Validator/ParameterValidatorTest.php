@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Validator;
+namespace ToshY\BunnyNet\Tests\Validator;
 
 use PHPUnit\Framework\TestCase;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Exception\InvalidTypeForKeyValueException;
 use ToshY\BunnyNet\Exception\InvalidTypeForListValueException;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Validator\ParameterValidator;
 
 class ParameterValidatorTest extends TestCase
 {
@@ -217,7 +218,7 @@ class ParameterValidatorTest extends TestCase
 
         $template = [
             new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
@@ -244,6 +245,39 @@ class ParameterValidatorTest extends TestCase
         );
     }
 
+    public function testNestedParametersCommaSeparatedValuesOnParemter2Child(): void
+    {
+        $this->expectNotToPerformAssertions();
+
+        $template = [
+            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                ]),
+            ]),
+        ];
+
+        $values = [
+            'Parameter1' => 'test1',
+            'Parameter2' => 'test2',
+            'Parameter3' => [
+                'NestedParameter1' => 1,
+                'NestedParameter2' => [
+                    'test3',
+                    'test4,test5,test6,test7',
+                ],
+            ],
+        ];
+
+        ParameterValidator::validate(
+            $values,
+            $template
+        );
+    }
+
     public function testNestedParametersThrowsExceptionOnParameter1Type(): void
     {
         $this->expectException(InvalidTypeForKeyValueException::class);
@@ -259,7 +293,7 @@ class ParameterValidatorTest extends TestCase
 
         $template = [
             new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
@@ -301,7 +335,7 @@ class ParameterValidatorTest extends TestCase
 
         $template = [
             new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
@@ -337,7 +371,7 @@ class ParameterValidatorTest extends TestCase
 
         $template = [
             new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
@@ -379,7 +413,7 @@ class ParameterValidatorTest extends TestCase
 
         $template = [
             new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [

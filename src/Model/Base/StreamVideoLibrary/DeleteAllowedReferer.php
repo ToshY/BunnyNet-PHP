@@ -8,9 +8,10 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class RemoveBlockedReferer implements EndpointInterface
+class DeleteAllowedReferer implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -19,7 +20,7 @@ class RemoveBlockedReferer implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'videolibrary/%d/removeBlockedReferrer';
+        return 'videolibrary/%d/removeAllowedReferrer';
     }
 
     public function getHeaders(): array
