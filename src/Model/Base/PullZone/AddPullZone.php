@@ -116,7 +116,6 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'LimitRatePerSecond', type: Type::INT_TYPE),
             new AbstractParameter(name: 'BurstSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'WAFEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'WAFDisabledRuleGroups', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
@@ -148,6 +147,9 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'OptimizerWatermarkMinImageSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerAutomaticOptimizationEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'WAFRequestHeaderIgnores', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
+            new AbstractParameter(name: 'OptimizerClasses', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'Name', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::ARRAY_TYPE),

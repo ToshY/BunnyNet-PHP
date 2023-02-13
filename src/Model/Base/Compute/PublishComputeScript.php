@@ -10,8 +10,9 @@ use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class CreateComputeScriptVariable implements EndpointInterface, EndpointBodyInterface
+class PublishComputeScript implements EndpointInterface, EndpointQueryInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +21,7 @@ class CreateComputeScriptVariable implements EndpointInterface, EndpointBodyInte
 
     public function getPath(): string
     {
-        return 'compute/script/%d/variables/add';
+        return 'compute/script/%d/publish';
     }
 
     public function getHeaders(): array
@@ -31,12 +32,17 @@ class CreateComputeScriptVariable implements EndpointInterface, EndpointBodyInte
         ];
     }
 
+    public function getQuery(): array
+    {
+        return [
+            new AbstractParameter(name: 'uuid', type: Type::STRING_TYPE, required: true),
+        ];
+    }
+
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE, required: true),
-            new AbstractParameter(name: 'DefaultValue', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'Note', type: Type::STRING_TYPE),
         ];
     }
 }

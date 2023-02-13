@@ -17,29 +17,6 @@ use ToshY\BunnyNet\Enum\Optimizer;
  * use ToshY\BunnyNet\ImageOptimizer;
  *
  * $bunnyImageOptimizer = new ImageOptimizer();
- *
- * $bunnyImageOptimizer->generate(
- *     'https://myzone.b-cdn.net/bunny.jpg',
- *     [
- *         'width' => 200,
- *         'height' => 300,
- *         'aspect_ratio' => '16:9',
- *         'quality' => 85,
- *         'sharpen' => false,
- *         'blur' => 0,
- *         'crop' => '50,50',
- *         'crop_gravity' => 'center',
- *         'flip' => false,
- *         'flop' => false,
- *         'brightness' => 0,
- *         'saturation' => 0,
- *         'hue' => 0,
- *         'contrast' => 0,
- *         'sepia' => 0,
- *         'auto_optimize' => 'medium',
- *         'class' => 'my-custom-class',
- *     ]
- * );
  * ```
  *
  * @link https://docs.bunny.net/docs/stream-image-processing
@@ -48,6 +25,33 @@ use ToshY\BunnyNet\Enum\Optimizer;
 class ImageOptimizer
 {
     /**
+     * Generate URL with optimization parameters.
+     *
+     * ```php
+     * $bunnyImageOptimizer->generate(
+     *     'https://myzone.b-cdn.net/bunny.jpg',
+     *     [
+     *         'width' => 200,
+     *         'height' => 300,
+     *         'aspect_ratio' => '16:9',
+     *         'quality' => 85,
+     *         'sharpen' => false,
+     *         'blur' => 0,
+     *         'crop' => '50,50',
+     *         'crop_gravity' => 'center',
+     *         'flip' => false,
+     *         'flop' => false,
+     *         'brightness' => 0,
+     *         'saturation' => 0,
+     *         'hue' => 0,
+     *         'contrast' => 0,
+     *         'sepia' => 0,
+     *         'auto_optimize' => 'medium',
+     *         'class' => 'my-custom-class',
+     *     ]
+     * );
+     * ```
+     *
      * @param string $url
      * @param array<string,mixed> $optimizationCollection
      * @return string

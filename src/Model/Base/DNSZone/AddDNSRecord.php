@@ -31,35 +31,6 @@ class AddDNSRecord implements EndpointInterface, EndpointBodyInterface
         ];
     }
 
-    /**
-     * Type:
-     * 0 = A
-     * 1 = AAAA
-     * 2 = CNAME
-     * 3 = TXT
-     * 4 = MX
-     * 5 = RDR (Redirect)
-     * 6 = -
-     * 7 = PZ (Pull Zone)
-     * 8 = SRV
-     * 9 = CAA
-     * 10 = PTR
-     * 11 = SCR (Script)
-     * 12 = NS
-     *
-     * TTL: in seconds gets rounded to the nearest possible value in UI.
-     * - 15 seconds
-     * - 30 seconds
-     * - 1 minute
-     * - 2 minutes
-     * - 5 minutes
-     * - 15 minutes
-     * - 30 minutes
-     * - 1 hour
-     * - 5 hours
-     * - 12 hours
-     * - 1 day
-     */
     public function getBody(): array
     {
         return [

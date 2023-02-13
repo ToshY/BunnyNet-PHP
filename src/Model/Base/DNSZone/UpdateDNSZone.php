@@ -31,11 +31,6 @@ class UpdateDNSZone implements EndpointInterface, EndpointBodyInterface
         ];
     }
 
-    /**
-     * LogAnonymizationType:
-     * 0 = Remove one octet
-     * 1 = Drop IP
-     */
     public function getBody(): array
     {
         return [

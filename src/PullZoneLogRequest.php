@@ -23,8 +23,7 @@ use ToshY\BunnyNet\Validator\ParameterValidator;
  * require 'vendor/autoload.php';
  *
  * use ToshY\BunnyNet\Client\BunnyClient;
- * use ToshY\BunnyNet\EdgeStorageRequest;
- * use ToshY\BunnyNet\Enum\Region;
+ * use ToshY\BunnyNet\PullZoneLogRequest;
  *
  * // Create a BunnyClient using any HTTP client implementing Psr\Http\Client\ClientInterface
  * $bunnyClient = new BunnyClient(
@@ -53,6 +52,35 @@ class PullZoneLogRequest
     }
 
     /**
+     * Generate URL with optimization parameters.
+     *
+     * ```php
+     * // Logging of yesterday.
+     * $bunnyLog->getLog(
+     *     pullZoneId: 1,
+     *     dateTime: new DateTime('-1 day')
+     * );
+     *
+     * // Logging of yesterday with start/end lines, ordering, status codes and search term.
+     * $bunnyLog->getLog(
+     *     pullZoneId: 1,
+     *     dateTime: new DateTime('-1 day'),
+     *     query: [
+     *         'start' => 10,
+     *         'end' => 20,
+     *         'order' => 'asc',
+     *         'status' => [
+     *             100,
+     *             200,
+     *             300,
+     *             400,
+     *             500,
+     *         ],
+     *         'search' => 'bunny.jpg'
+     *     ]
+     * );
+     * ```
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException

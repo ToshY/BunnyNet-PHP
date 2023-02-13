@@ -41,9 +41,7 @@ class SecureUrlGenerator
      * Generate secure URL.
      *
      * ```php
-     * <?php
-     *
-     * // File from root directory
+     * // File from root directory.
      * $bunnySecureUrl->generate(
      *     file: '/bunny.jpg',
      *     expirationTime: 3600,
@@ -56,12 +54,12 @@ class SecureUrlGenerator
      *     allowSubnet: true
      * );
      *
-     * // File from subdirectory
+     * // File from subdirectory.
      * $bunnySecureUrl->generate(
      *     file: '/css/custom.css'
      * );
      *
-     * // With IPv4
+     * // With IPv4.
      * $bunnySecureUrl->generate(
      *     file: '/css/custom.css',
      *     userIp: '12.345.67.89'
@@ -95,12 +93,12 @@ class SecureUrlGenerator
      * );
      * ```
      *
-     * ```text
+     * ---
      * Notes:
      * - Token IP validation only supports IPv4.
      * - In order to reduce the false negatives (and increase privacy) for Token IP validation, the default is to
      * allow the full /24 subnet.
-     *   > Example: A token generated for an user with IPv4 `12.345.67.89` will allow the subnet `12.345.67.0`, to watch the content.
+     *   - Example: A token generated for an user with IPv4 `12.345.67.89` will allow the subnet `12.345.67.0`, to watch the content.
      * - Both `countries` and `referers` accept comma separated input, meaning you could allow or block multiple countries like
      * so: `US,DE,JP`. Same for referers: `example.com,example.org`.
      * - An edge case occurs when you add a blocked country to the Traffic Manager, and allow that same country for
@@ -108,7 +106,7 @@ class SecureUrlGenerator
      * that would be is due to the fact that the Traffic manager doesn't resolve
      * the DNS from that country and in turn, we start returning 127.0.0.1 queries towards the hostnames in use instead
      * of the standard CDN routing. The traffic essentially doesn't even touch our servers in such a case."
-     * ```
+     * ---
      *
      * @param string $file
      * @param int $expirationTime

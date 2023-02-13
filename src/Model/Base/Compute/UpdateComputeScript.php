@@ -31,11 +31,6 @@ class UpdateComputeScript implements EndpointInterface, EndpointBodyInterface
         ];
     }
 
-    /**
-     * ScriptType:
-     * 0 = DNS
-     * 1 = CDN
-     */
     public function getBody(): array
     {
         return [

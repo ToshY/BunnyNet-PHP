@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class CreateComputeScript implements EndpointInterface, EndpointBodyInterface
+class AddComputeScript implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
