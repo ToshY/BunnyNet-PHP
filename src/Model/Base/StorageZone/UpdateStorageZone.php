@@ -31,11 +31,6 @@ class UpdateStorageZone implements EndpointInterface, EndpointBodyInterface
         ];
     }
 
-    /**
-     * ZoneTier (undocumented):
-     * 0 = Standard (HDD)
-     * 1 = Edge (SSD)
-     */
     public function getBody(): array
     {
         return [

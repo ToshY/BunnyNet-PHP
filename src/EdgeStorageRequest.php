@@ -19,7 +19,7 @@ use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
 /**
  * Browse and manage files through the Edge Storage API.
  *
- * Provide the API key of the specific storage zone you want to use, available at the **FTP & API Access** section.
+ * Provide the (read-only) password of the specific storage zone you want to use, available at the **FTP & API Access** section.
  *
  * ```php
  * <?php
@@ -35,6 +35,7 @@ use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
  *     client: new \Symfony\Component\HttpClient\HttpClient()
  * );
  *
+ * // For regionCode, see cases documented with "Main" in ToshY\BunnyNet\Enum\Region
  * $bunnyEdgeStorage = new EdgeStorageRequest(
  *     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
  *     regionCode: Region::FS,
@@ -63,11 +64,12 @@ class EdgeStorageRequest
     }
 
     /**
+     * @ignore
      * @throws RegionDoesNotExistException
      * @return string
      * @param Region|string $hostCode
      */
-    public function setHost(Region|string $hostCode): string
+    private function setHost(Region|string $hostCode): string
     {
         if (true === $hostCode instanceof Region) {
             return $hostCode->host();
@@ -93,6 +95,26 @@ class EdgeStorageRequest
     }
 
     /**
+     * Manage Files | Download File.
+     *
+     * ```php
+     * // Root directory
+     * $bunnyEdgeStorage->downloadFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: '',
+     *     fileName: 'bunny.jpg'
+     * );
+     *
+     * // Subdirectory
+     * $bunnyEdgeStorage->downloadFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: 'css',
+     *     fileName: 'custom.css'
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/get_-storagezonename-path-filename
+     *
      * @throws ClientExceptionInterface
      * @param string $path
      * @param string $fileName
@@ -113,6 +135,39 @@ class EdgeStorageRequest
     }
 
     /**
+     * Manage Files | Upload File.
+     *
+     * ```php
+     * // Root directory
+     * $bunnyEdgeStorage->uploadFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: '',
+     *     fileName: 'remote-bunny.jpg',
+     *     localFilePath: './local-bunny.jpg'
+     * );
+     *
+     * // Subdirectory
+     * $bunnyEdgeStorage->uploadFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: 'css',
+     *     fileName: 'remote-custom.css',
+     *     localFilePath: './local-custom.css'
+     * );
+     *
+     * // Subdirectory with additional SHA256 checksum header
+     * $bunnyEdgeStorage->uploadFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: 'css',
+     *     fileName: 'remote-custom.css',
+     *     localFilePath: './local-custom.css',
+     *     headers: [
+     *         'Checksum': '253852201067799f637d8bb144f32d7aaeef3182beaa61168e0aa87dbe336d7c'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/put_-storagezonename-path-filename
+     *
      * @throws ClientExceptionInterface
      * @throws FileDoesNotExistException
      * @param string $fileName
@@ -140,6 +195,26 @@ class EdgeStorageRequest
     }
 
     /**
+     * Manage Files | Delete File.
+     *
+     * ```php
+     * // Root directory
+     * $bunnyEdgeStorage->deleteFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: '',
+     *     fileName: 'bunny.jpg'
+     * );
+     *
+     * // Subdirectory
+     * $bunnyEdgeStorage->deleteFile(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: 'css',
+     *     fileName: 'custom.css'
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/delete_-storagezonename-path-filename
+     *
      * @throws ClientExceptionInterface
      * @param string $path
      * @param string $fileName
@@ -160,6 +235,23 @@ class EdgeStorageRequest
     }
 
     /**
+     * Browse Files | List Files.
+     *
+     * ```php
+     * // Root directory
+     * $bunnyEdgeStorage->listFiles(
+     *     storageZoneName: 'my-storage-zone-1'
+     * );
+     *
+     * // Subdirectory
+     * $bunnyEdgeStorage->listFiles(
+     *     storageZoneName: 'my-storage-zone-1',
+     *     path: 'css'
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/get_-storagezonename-path-
+     *
      * @throws ClientExceptionInterface
      * @param string $path
      * @return ResponseInterface

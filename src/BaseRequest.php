@@ -157,10 +157,12 @@ class BaseRequest
      * Abuse Case | List Abuse Cases.
      *
      * ```php
-     * $bunnyBase->listAbuseCases([
-     *     'page' => 1,
-     *     'perPage' => 1000,
-     * ]);
+     * $bunnyBase->listAbuseCases(
+     *     query: [
+     *         'page' => 1,
+     *         'perPage' => 1000,
+     *     ]
+     * );
      * ```
      *
      * @link https://docs.bunny.net/reference/abusecasepublic_index
@@ -1322,10 +1324,10 @@ class BaseRequest
      * - `ReplicationRegions` possible values:
      *   - UK = London (United Kingdom)
      *   - SE = Norway (Stockholm)
-     *   - NY = New York (United States)
-     *   - LA = Lost Angeles (United States)
+     *   - NY = New York (United States East)
+     *   - LA = Los Angeles (United States West)
      *   - SG = Singapore (Singapore)
-     *   - SYD = Sidney (Oceania)
+     *   - SYD = Sydney (Oceania)
      *   - BR = Sao Paolo (Brazil)
      *   - JH = Johannesburg (Africa)
      * ---
@@ -3714,13 +3716,26 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | List Storage Zones.
+     *
+     * ```php
+     * $bunnyBase->listStorageZones(
+     *     query: [
+     *         'page' => 0,
+     *         'perPage' => 1000,
+     *         'includeDeleted' => 1000
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_index
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
      * @return ResponseInterface
-     * @note renamed `listStorageZone` to `listStorageZones`.
      */
     public function listStorageZones(array $query = []): ResponseInterface
     {
@@ -3735,14 +3750,56 @@ class BaseRequest
     }
 
     /**
-     * Add storage zone.
+     * Storage Zone | Add Storage Zone.
+     *
+     * ```php
+     * $bunnyBase->addStorageZone(
+     *     body: [
+     *         'OriginUrl' => '',
+     *         'Name' => 'Test',
+     *         'Region' => 'DE',
+     *         'ReplicationRegions' => '',
+     *         'ZoneTier' => 0
+     *     ]
+     * );
+     * ```
      * ---
      * Notes:
      * - The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone
-     * So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone, the system will try to proxy and fetch it from the `OriginUrl` instead.
+     * So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
+     * the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
+     * - `ZoneTier` possible values (undocumented):
+     *   - 0 = Standard = HDD
+     *   - 1 = Edge = SSD
+     * - `Region` possible values:
+     *   - DE = Falkenstein / Frankfurt (Germany) | HDD + SSD
+     *   - UK = London (United Kingdom) | HDD
+     *   - SE = Norway (Stockholm) | HDD
+     *   - NY = New York (United States) | HDD
+     *   - LA = Los Angeles (United States) | HDD
+     *   - SG = Singapore (Singapore) | HDD
+     *   - SYD = Sydney (Oceania) | HDD
+     *   - BR = Sao Paolo (Brazil) | HDD
+     *   - JH = Johannesburg (Africa) | HDD
+     * - `ReplicationRegions` possible values:
+     *   - DE = Frankfurt (Germany) | SSD
+     *   - UK = London (United Kingdom) | HDD + SSD
+     *   - SE = Norway (Stockholm) | HDD + SSD
+     *   - CZ = Prague (Czech Republic) | SSD
+     *   - ES = Madrid (Spain) | SSD
+     *   - NY = New York (United States East) | HDD + SSD
+     *   - LA = Los Angeles (United States West) | HDD + SSD
+     *   - WA = Seattle (United States West) | SSD
+     *   - MI = Miami (United States East) | SSD
+     *   - SG = Singapore (Singapore) | HDD + SSD
+     *   - HK = Hong Kong (SAR of China) | SSD
+     *   - JP = Tokyo (Japan) | SSD
+     *   - SYD = Sydney (Oceania) | HDD + SSD
+     *   - BR = Sao Paolo (Brazil) | HDD + SSD
+     *   - JH = Johannesburg (Africa) | HDD + SSD
      * ---
      *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer
+     * @link https://docs.bunny.net/reference/storagezonepublic_add
      *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
@@ -3765,6 +3822,14 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Check Storage Zone Availability.
+     *
+     * ```php
+     * $bunnyBase->checkStorageZoneAvailability();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_checkavailability
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3786,6 +3851,16 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Get Storage Zone.
+     *
+     * ```php
+     * $bunnyBase->checkStorageZoneAvailability(
+     *     id: 1
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_index2
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -3801,6 +3876,56 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Update Storage Zone.
+     *
+     * ```php
+     * $bunnyBase->addStorageZone(
+     *     body: [
+     *         'ReplicationRegions' => '',
+     *         'OriginUrl' => '',
+     *         'Custom404FilePath' => 'my-custom-404.html',
+     *         'Rewrite404To200' => false,
+     *     ]
+     * );
+     * ```
+     * ---
+     * Notes:
+     * - The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone
+     * So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
+     * the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
+     * - `ZoneTier` possible values (undocumented):
+     *   - 0 = Standard = HDD
+     *   - 1 = Edge = SSD
+     * - `Region` possible values:
+     *   - DE = Falkenstein / Frankfurt (Germany) | HDD + SSD
+     *   - UK = London (United Kingdom) | HDD
+     *   - SE = Norway (Stockholm) | HDD
+     *   - NY = New York (United States) | HDD
+     *   - LA = Los Angeles (United States) | HDD
+     *   - SG = Singapore (Singapore) | HDD
+     *   - SYD = Sydney (Oceania) | HDD
+     *   - BR = Sao Paolo (Brazil) | HDD
+     *   - JH = Johannesburg (Africa) | HDD
+     * - `ReplicationRegions` possible values:
+     *   - DE = Frankfurt (Germany) | SSD
+     *   - UK = London (United Kingdom) | HDD + SSD
+     *   - SE = Norway (Stockholm) | HDD + SSD
+     *   - CZ = Prague (Czech Republic) | SSD
+     *   - ES = Madrid (Spain) | SSD
+     *   - NY = New York (United States East) | HDD + SSD
+     *   - LA = Los Angeles (United States West) | HDD + SSD
+     *   - WA = Seattle (United States West) | SSD
+     *   - MI = Miami (United States East) | SSD
+     *   - SG = Singapore (Singapore) | HDD + SSD
+     *   - HK = Hong Kong (SAR of China) | SSD
+     *   - JP = Tokyo (Japan) | SSD
+     *   - SYD = Sydney (Oceania) | HDD + SSD
+     *   - BR = Sao Paolo (Brazil) | HDD + SSD
+     *   - JH = Johannesburg (Africa) | HDD + SSD
+     * ---
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_update
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3824,6 +3949,16 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Delete Storage Zone.
+     *
+     * ```php
+     * $bunnyBase->deleteStorageZone(
+     *     id: 1
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_delete
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -3839,10 +3974,19 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Reset Password.
+     *
+     * ```php
+     * $bunnyBase->resetStorageZonePassword(
+     *     id: 1
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_resetpassword
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
-     * @note renamed `resetStorageZonePasswordByPath` to `resetStorageZonePassword`.
      */
     public function resetStorageZonePassword(int $id): ResponseInterface
     {
@@ -3855,6 +3999,18 @@ class BaseRequest
     }
 
     /**
+     * Storage Zone | Reset Read-Only Password.
+     *
+     * ```php
+     * $bunnyBase->resetStorageZoneReadOnlyPassword(
+     *     query: [
+     *         'id' => 1
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/storagezonepublic_resetreadonlypassword
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3875,6 +4031,14 @@ class BaseRequest
     }
 
     /**
+     * User | Get Home Feed.
+     *
+     * ```php
+     * $bunnyBase->getHomeFeed();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_homefeed
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -3888,6 +4052,14 @@ class BaseRequest
     }
 
     /**
+     * User | Get User Details.
+     *
+     * ```php
+     * $bunnyBase->getUserDetails();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_index
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -3901,6 +4073,31 @@ class BaseRequest
     }
 
     /**
+     * User | Update User Details.
+     *
+     * ```php
+     * $bunnyBase->updateUserDetails(
+     *     body: [
+     *         'FirstName' => 'John',
+     *         'Email' => 'john.doe@example.com',
+     *         'BillingEmail' => 'john.doe@example.com',
+     *         'LastName' => 'Doe',
+     *         'StreetAddress' => '1985 Robinson Court',
+     *         'City' => 'Windom',
+     *         'ZipCode' => '75492',
+     *         'Country' => 'US',
+     *         'CompanyName' => '',
+     *         'VATNumber' => '',
+     *         'ReceiveNotificationEmails' => true,
+     *         'ReceivePromotionalEmails' => false,
+     *         'Password' => '1234Abcd',
+     *         'OldPassword' => 'Abcd1234'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_updateuser
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3922,6 +4119,14 @@ class BaseRequest
     }
 
     /**
+     * User | Resend Email Confirmation.
+     *
+     * ```php
+     * $bunnyBase->resendEmailConfirmation();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_resendemailconfirmation
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -3935,6 +4140,14 @@ class BaseRequest
     }
 
     /**
+     * User | Reset API Key.
+     *
+     * ```php
+     * $bunnyBase->resetUserApiKey();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_resetapikey
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -3948,6 +4161,14 @@ class BaseRequest
     }
 
     /**
+     * User | List Close Account Reasons.
+     *
+     * ```php
+     * $bunnyBase->listCloseAccountReasons();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_listcloseaccountreasons
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -3961,6 +4182,19 @@ class BaseRequest
     }
 
     /**
+     * User | Close Account.
+     *
+     * ```php
+     * $bunnyBase->closeAccount(
+     *     body: [
+     *         'Password' => 'LoremIpsumDolor',
+     *         'Reason' => 'No longer needed.'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_closeaccount
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3982,9 +4216,16 @@ class BaseRequest
     }
 
     /**
+     * User | Get DPA Details.
+     *
+     * ```php
+     * $bunnyBase->getDPADetails();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_dpa
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
-     * @note renamed `getDpaDetails` to `getDPADetails`.
      */
     public function getDPADetails(): ResponseInterface
     {
@@ -3996,6 +4237,14 @@ class BaseRequest
     }
 
     /**
+     * User | Accept DPA.
+     *
+     * ```php
+     * $bunnyBase->acceptDPA();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_dpaaccept
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4009,6 +4258,14 @@ class BaseRequest
     }
 
     /**
+     * User | Get DPA Details (HTML).
+     *
+     * ```php
+     * $bunnyBase->getDPADetailsHTML();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_dpapdfhhtml
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4022,10 +4279,18 @@ class BaseRequest
     }
 
     /**
+     * User | Set Notifications Opened.
+     *
+     * ```php
+     * $bunnyBase->setNotificationsOpened();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_setnotificationsopened
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
-    public function setNotiticationsOpened(): ResponseInterface
+    public function setNotificationsOpened(): ResponseInterface
     {
         $endpoint = new SetNotificationsOpened();
 
@@ -4035,6 +4300,14 @@ class BaseRequest
     }
 
     /**
+     * User | Get What's New Items.
+     *
+     * ```php
+     * $bunnyBase->getWhatsNewItems();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_whatsnew
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4048,6 +4321,14 @@ class BaseRequest
     }
 
     /**
+     * User | Reset What's New.
+     *
+     * ```php
+     * $bunnyBase->resetWhatsNew();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_whatsnewreset
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4061,6 +4342,14 @@ class BaseRequest
     }
 
     /**
+     * User | Generate 2FA Verification.
+     *
+     * ```php
+     * $bunnyBase->generate2FAVerification();
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_twofactorgenerateverification
+     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4074,6 +4363,18 @@ class BaseRequest
     }
 
     /**
+     * User | Disable 2FA.
+     *
+     * ```php
+     * $bunnyBase->disable2FA(
+     *     body: [
+     *         'Password' => 'LoremIpsumDolor'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_twofactordisable
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4095,6 +4396,20 @@ class BaseRequest
     }
 
     /**
+     * User | Enable 2FA.
+     *
+     * ```php
+     * $bunnyBase->disable2FA(
+     *     body: [
+     *         'SecretValidator' => '',
+     *         'Secret' => '',
+     *         'TestPin' => '123456'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_twofactorenable
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4116,6 +4431,20 @@ class BaseRequest
     }
 
     /**
+     * User | Verify 2FA Code.
+     *
+     * ```php
+     * $bunnyBase->verify2FACode(
+     *     body: [
+     *         'SecretValidator' => '',
+     *         'Secret' => '',
+     *         'TestPin' => '123456'
+     *     ]
+     * );
+     * ```
+     *
+     * @link https://docs.bunny.net/reference/userpublic_twofactorverify
+     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException

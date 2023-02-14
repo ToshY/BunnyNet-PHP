@@ -40,68 +40,9 @@ composer require toshy/bunnynet-php:^3.0
 > Note: The `2.x` is not longer actively maintained.
 
 
-## Quickstart
-
-```php
-require 'vendor/autoload.php';
-
-use ToshY\BunnyNet\BaseRequest;
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\EdgeStorageRequest;
-use ToshY\BunnyNet\Enum\Region;
-use ToshY\BunnyNet\ImageOptimizer;
-use ToshY\BunnyNet\PricingCalculator;
-use Toshy\BunnyNet\PullZoneLogRequest;
-use ToshY\BunnyNet\SecureUrlGenerator;
-use ToshY\BunnyNet\VideoStreamRequest;
-
-// Create a BunnyClient using any HTTP client implementing Psr\Http\Client\ClientInterface
-$bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\HttpClient()
-)
-
-// API endpoints
-$bunnyBase = new BaseRequest(
-    apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient
-);
-
-$bunnyEdgeStorage = new EdgeStorageRequest(
-    apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
-    regionCode: Region::FS,
-    client: $bunnyClient
-);
-
-$bunnyStream = new VideoStreamRequest(
-    apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc',
-    client: $bunnyClient
-);
-
-$bunnyLog = new PullZoneLogRequest(
-    apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient
-);
-
-// Secure URL with token authentication.
-$bunnySecureUrl = new SecureUrlGenerator(
-    token: '5509f27d-9103-4de6-8370-8bd68db859c9',
-    hostname: 'https://custom-pullzone.b-cdn.net'
-);
-
-// Image optimizer
-$bunnyImageOptimizer = new ImageOptimizer();
-```
-
 ## 📜 Documentation
 
-Examples for each type of request can be found in the [docs](./docs) directory.
-
-* [Base](docs/BaseRequest.md)
-* [Edge Storage](docs/EdgeStorageRequest.md)
-* [Video Stream](docs/VideoStreamRequest.md)
-* [Pull Zone Log](docs/PullZoneLogRequest.md)
-* [Secure Url Generator](docs/SecureUrlGenerator.md)
-* [Image Optimizer](docs/ImageOptimizer.md)
+For more details and code examples, please check the [documentation website](http://ToshY.github.io/BunnyNet-PHP).
 
 ### Reference
 
@@ -110,7 +51,7 @@ available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-ove
 
 ### Notes
 
-* Tried to keep the naming conventions as close as possible to the original API.
+* Naming conventions are kept close to the original API specification.
 * Tested the majority of the endpoints myself to validate if they are working correctly. If you happen to
   come across a bug, just submit an issue, and I'll take a look at it.
 
@@ -136,6 +77,8 @@ Run `phpcs`, `phpstan`, `phpmd` and `phpunit`.
 ```shell
 task contribute
 ```
+
+> Note: 
 
 ## ❕ Licence
 

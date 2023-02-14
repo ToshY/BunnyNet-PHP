@@ -6,32 +6,50 @@ namespace ToshY\BunnyNet\Enum;
 
 enum Region
 {
-    /** Germany (Falkenstein / Frankfurt) */
+    /** Falkenstein / Frankfurt (Germany) | Main */
     case DE;
     case FS;
 
-    /** United States (New York) */
-    case NY;
-
-    /** United States (Lost Angeles) */
-    case LA;
-
-    /** Singapore (Singapore) */
-    case SG;
-
-    /** Sidney (Oceania) */
-    case SYD;
-
-    /** London (United Kingdom) */
+    /** London (United Kingdom) | Main */
     case UK;
 
-    /** Norway (Stockholm) */
+    /** Norway (Stockholm) | Main */
     case SE;
 
-    /** Brazil (Sao Paolo) */
+    /** Prague (Czech Republic) */
+    case CZ;
+
+    /** Madrid (Spain) */
+    case ES;
+
+    /** New York (United States East) | Main */
+    case NY;
+
+    /** Los Angeles (United States West) | Main */
+    case LA;
+
+    /** Seattle (United States West) */
+    case WA;
+
+    /** Miami (United States East) */
+    case MI;
+
+    /** Singapore (Singapore) | Main */
+    case SG;
+
+    /** Hong Kong (SAR of China) */
+    case HK;
+
+    /** Tokyo (Japan) */
+    case JP;
+
+    /** Sydney (Oceania) | Main */
+    case SYD;
+
+    /** Sao Paolo (Brazil) | Main */
     case BR;
 
-    /** Africa (Johannesburg) */
+    /** Johannesburg (Africa) | Main */
     case JH;
 
     public function host(): string
