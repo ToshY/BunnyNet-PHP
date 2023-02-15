@@ -7,7 +7,7 @@ grumphp:
       config: '.php-cs-fixer.dist.php'
     phpstan:
       configuration: 'phpstan.neon.dist'
-    shell:
-      scripts:
-        - [ "-c", "vendor/bin/phpmd --strict src/ text phpmd.xml" ]
+    phpmd:
+      ruleset:
+        - 'phpmd.xml'
     phpunit:
