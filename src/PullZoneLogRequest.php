@@ -15,7 +15,7 @@ use ToshY\BunnyNet\Validator\ParameterValidator;
 /**
  * The logging service provides an easy-to-use API endpoint for downloading the raw log files.
  *
- * Provide the API key available at the **[Account Settings](https://panel.bunny.net/account)** section.
+ * Provide the API key available at the **[Account Settings > API](https://panel.bunny.net/account)** section.
  *
  * ```php
  * <?php
@@ -58,13 +58,13 @@ class PullZoneLogRequest
      * // Logging of yesterday.
      * $bunnyLog->getLog(
      *     pullZoneId: 1,
-     *     dateTime: new DateTime('-1 day')
+     *     dateTime: new \DateTime('-1 day')
      * );
      *
      * // Logging of yesterday with start/end lines, ordering, status codes and search term.
      * $bunnyLog->getLog(
      *     pullZoneId: 1,
-     *     dateTime: new DateTime('-1 day'),
+     *     dateTime: new \DateTime('-1 day'),
      *     query: [
      *         'start' => 10,
      *         'end' => 20,

@@ -19,7 +19,7 @@ use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
 /**
  * Browse and manage files through the Edge Storage API.
  *
- * Provide the (read-only) password of the specific storage zone you want to use, available at the **FTP & API Access** section.
+ * Provide the **(Read-Only) Password** available at the **FTP & API Access** section of your specific storage zone.
  *
  * ```php
  * <?php

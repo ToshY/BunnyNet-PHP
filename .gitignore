@@ -5,3 +5,4 @@ composer.lock
 example.php
 phpstan.neon
 .phpdoc
+docs

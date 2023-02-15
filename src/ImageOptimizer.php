@@ -51,6 +51,17 @@ class ImageOptimizer
      *     ]
      * );
      * ```
+     * ---
+     * Notes:
+     * - The `quality` argument determines the compression level of the resulting image with 0 being the lowest level of
+     * compression and 100 being the highest. Higher compression means smaller files, but might visually degrade the image
+     * (e.g. JPEG compression under 70 tends to produce visible artefacts). The `quality` argument is ignored if the requested
+     * output image format is lossless (e.g. PNG).
+     * - The `crop` argument crops the output image to the given width and height. Two formats are accepted. Format 1 one only
+     * includes the width and height of the crop: `width,height`. Format 2 also includes the X and Y position of where the crop
+     * should start: `width,height,x,y`. Image resizing with the width and height parameters is processed after the crop and
+     * the resized measurements. If only width and height are given, the `Crop Gravity` parameter will be used.
+     * ---
      *
      * @param string $url
      * @param array<string,mixed> $optimizationCollection

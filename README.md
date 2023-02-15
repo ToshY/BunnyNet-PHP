@@ -64,21 +64,20 @@ Features and bugfixes should be based on the `master` branch.
 * [Docker Compose](https://docs.docker.com/compose/install/)
 * [Task (optional)](https://taskfile.dev/installation/)
 
-### Up service
+### Install dependencies
 
 ```shell
 task composer:install 
 ```
 
-### Run checks
-
-Run `phpcs`, `phpstan`, `phpmd` and `phpunit`.
+### Enable GrumPHP
 
 ```shell
-task contribute
+task grum:init
 ```
 
-> Note: 
+> Note: Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 
+> You can also run these checks with `task contribute`.
 
 ## ❕ Licence
 

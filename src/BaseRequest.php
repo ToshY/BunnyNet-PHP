@@ -47,6 +47,7 @@ use ToshY\BunnyNet\Model\Base\DNSZone\DismissDNSConfigurationNotice;
 use ToshY\BunnyNet\Model\Base\DNSZone\ExportDNSRecords;
 use ToshY\BunnyNet\Model\Base\DNSZone\GetDNSZone;
 use ToshY\BunnyNet\Model\Base\DNSZone\GetDNSZoneQueryStatistics;
+use ToshY\BunnyNet\Model\Base\DNSZone\ImportDNSRecords;
 use ToshY\BunnyNet\Model\Base\DNSZone\ListDNSZones;
 use ToshY\BunnyNet\Model\Base\DNSZone\RecheckDNSConfiguration;
 use ToshY\BunnyNet\Model\Base\DNSZone\UpdateDNSRecord;
@@ -117,7 +118,7 @@ use ToshY\BunnyNet\Validator\ParameterValidator;
 /**
  * Base endpoint for pull zones, video libraries, storage zones, billing, support, and lots more.
  *
- * Provide the API key available at the **[Account Settings](https://panel.bunny.net/account)** section.
+ * Provide the API key available at the **[Account Settings > API](https://panel.bunny.net/account)** section.
  *
  * ```php
  * <?php
@@ -2308,7 +2309,7 @@ class BaseRequest
      */
     public function importDNSRecords(int $zoneId, string $localFilePath): ResponseInterface
     {
-        $endpoint = new DismissDNSConfigurationNotice();
+        $endpoint = new ImportDNSRecords();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -3185,8 +3186,8 @@ class BaseRequest
      *     id: 1,
      *     body: [
      *         'Hostname' => 'cdn.example.com',
-     *         'Certificate' => '<base64-encoded-cert-pem>',
-     *         'CertificateKey' => '<base64-encoded-key-pem>'
+     *         'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
+     *         'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t'
      *     ]
      * );
      * ```

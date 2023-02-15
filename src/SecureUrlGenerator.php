@@ -7,7 +7,7 @@ namespace ToshY\BunnyNet;
 /**
  * Token authentication system to strictly control who, where and for how long can access your content.
  *
- * Provide the API key of the specific pull zone you want to use, available at the **Url Token Authentication Key** section.
+ * Provide the API key for the specific pull zone you want to use, available at the **Security > Token Authentication > Url Token Authentication Key** section.
  *
  * ```php
  * <?php
