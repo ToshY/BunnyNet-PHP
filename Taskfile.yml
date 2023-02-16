@@ -127,20 +127,5 @@ tasks:
   phpdoc:
     desc: Test PHP docs using phpDocumentor
     cmds:
-      - rm -rf $(pwd)/.phpdoc $(pwd)/docs2
+      - rm -rf $(pwd)/.phpdoc $(pwd)/docs
       - docker run --rm -v $(pwd):/data --user $UID:$GID phpdoc/phpdoc:3.3 phpdoc
-
-  test:
-    desc: Create example file for manual testing
-    summary: |
-      See Quickstart section in README for examples.
-    silent: true
-    vars:
-      FILE_NAME: '{{.f | default "example.php"}}'
-    cmds:
-      - |
-        if [[ ! -e ./{{.FILE_NAME}} ]]; then
-          touch ./{{.FILE_NAME}}
-          echo -e "<?php\n\nrequire 'vendor/autoload.php';\n" > ./example.php
-        fi
-      - docker compose run --rm $TTY php php {{.FILE_NAME}}

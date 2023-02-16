@@ -42,12 +42,12 @@ composer require toshy/bunnynet-php:^3.0
 
 ## 📜 Documentation
 
-For more details and code examples, please check the [documentation website](http://ToshY.github.io/BunnyNet-PHP).
+For more details and code examples, please check the [documentation website](https://ToshY.github.io/BunnyNet-PHP).
 
 ### Reference
 
 This library was created with the hand of the
-available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview). <br />
+available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview).
 
 ### Notes
 
