@@ -1,7 +1,7 @@
 {
   "name": "toshy/bunnynet-php",
   "description": "BunnyNet API client for PHP",
-  "keywords": ["Bunny.net", "BunnyCDN", "BunnyWay", "ToshY"],
+  "keywords": ["Bunny.net", "BunnyCDN", "BunnyWay", "BunnyNet-PHP", "BunnyWay-PHP","ToshY"],
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
@@ -24,7 +24,6 @@
   "require": {
     "php": "^8.1",
     "ext-json": "*",
-    "symfony/http-client": "^5.4|^6.0",
     "psr/http-client": "^1.0",
     "guzzlehttp/psr7": "^2.4"
   },
