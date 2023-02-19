@@ -29,8 +29,6 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
-        with:
-          composer-options: '--prefer-stable'
 
       - name: PHPMD
         run: php vendor/bin/phpmd --strict src/ text phpmd.xml

@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.1']
+        php-versions:
+          - '8.1'
+          - '8.2'
 
     steps:
       - name: Checkout
@@ -26,8 +28,6 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
-        with:
-          composer-options: '--prefer-stable'
 
       - name: PHP CS Fixer
-        run: php vendor/bin/php-cs-fixer fix . --allow-risky=yes --using-cache=no --dry-run -v --diff
+        run: PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer fix . --allow-risky=yes --using-cache=no --dry-run -v --diff
