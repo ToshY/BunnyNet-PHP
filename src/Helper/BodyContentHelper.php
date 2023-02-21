@@ -8,7 +8,7 @@ use Throwable;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\InvalidJSONForBodyException;
 
-class EndpointHelper
+class BodyContentHelper
 {
     /**
      * @throws FileDoesNotExistException

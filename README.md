@@ -18,7 +18,7 @@
 </div>
 
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
-edge storage, video streaming and image optimizers.
+edge storage, video streaming, image optimizers and much more!
 
 <small>
 <b>Note</b>: This is a non-official library for the <a href="https://docs.bunny.net/docs">bunny.net API</a>.
@@ -30,30 +30,13 @@ edge storage, video streaming and image optimizers.
 composer require toshy/bunnynet-php:^3.0
 ```
 
-### Versions
-
-| PHP             | Release  |
-|-----------------|----------|
-| ~~^7.4 / ^8.0~~ | ~~^2.0~~ |
-| ^8.1            | ^3.0     |
-
-> Note: The `2.x` is not longer actively maintained.
+> Note: The `2.x` is not longer actively maintained. See [UPGRADE.md](./UPGRADE.md) for upgrade instructions.
 
 
 ## 📜 Documentation
 
-For more details and code examples, please check the [documentation website](https://ToshY.github.io/BunnyNet-PHP).
-
-### Reference
-
-This library was created with the hand of the
-available [bunny.net API docs](https://docs.bunny.net/reference/bunnynet-api-overview).
-
-### Notes
-
-* Naming conventions are kept close to the original API specification.
-* Tested the majority of the endpoints myself to validate if they are working correctly. If you happen to
-  come across a bug, just submit an issue, and I'll take a look at it.
+Full documentation is available at [hhttps://ToshY.github.io/BunnyNet-PHP](https://ToshY.github.io/BunnyNet-PHP)
+or in the [docs](./docs) directory.
 
 ## 🛠️ Contribute
 

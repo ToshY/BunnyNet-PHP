@@ -95,7 +95,6 @@ class ParameterValidator
     }
 
     /**
-     * @ignore
      * @throws InvalidTypeForKeyValueException
      */
     private static function checkTypeForKeyValue(
@@ -116,7 +115,6 @@ class ParameterValidator
     }
 
     /**
-     * @ignore
      * @throws InvalidTypeForListValueException
      */
     private static function checkTypeForListValue(

@@ -124,8 +124,14 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector
 
-  phpdoc:
-    desc: Test PHP docs using phpDocumentor
+  mkdocs:
+    desc: MkDocs build
     cmds:
-      - rm -rf $(pwd)/.phpdoc $(pwd)/docs
-      - docker run --rm -v $(pwd):/data --user $UID:$GID phpdoc/phpdoc:3.3 phpdoc
+      - docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.0.13 build
+
+  mkdocs:live:
+    desc: MkDocs development server
+    vars:
+      PORT: '{{.p | default "8001"}}'
+    cmds:
+      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs squidfunk/mkdocs-material:9.0.13

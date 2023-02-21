@@ -29,6 +29,7 @@ class BunnyClient
     public function setBaseUrl(string $baseUrl): self
     {
         $this->baseUrl = $baseUrl;
+
         return $this;
     }
 
@@ -86,7 +87,6 @@ class BunnyClient
     }
 
     /**
-     * @ignore
      * @param string $template
      * @param array<int,mixed> $pathCollection
      * @return string
@@ -105,7 +105,6 @@ class BunnyClient
     }
 
     /**
-     * @ignore
      * @param array<string,mixed> $query
      * @return string|null
      */
@@ -134,7 +133,6 @@ class BunnyClient
     }
 
     /**
-     * @ignore
      * @return string[]
      */
     private function getAccessKeyHeader(): array

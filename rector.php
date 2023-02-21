@@ -24,7 +24,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip(criteria: [
         __DIR__ . '/vendor',
         NullToStrictStringFuncCallArgRector::class => [
-            __DIR__ . '/src/SecureUrlGenerator.php',
+            __DIR__ . '/src/TokenAuthentication.php',
         ],
     ]);
 

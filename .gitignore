@@ -2,7 +2,5 @@
 composer.lock
 .php-cs-fixer.cache
 *.php~
-example.php
 phpstan.neon
-.phpdoc
-docs
+/site

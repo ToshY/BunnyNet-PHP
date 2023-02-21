@@ -8,7 +8,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Helper\EndpointHelper;
+use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\Base\AbuseCase\CheckAbuseCase;
 use ToshY\BunnyNet\Model\Base\AbuseCase\ListAbuseCases;
 use ToshY\BunnyNet\Model\Base\AbuseCase\ResolveAbuseCase;
@@ -341,7 +341,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -382,7 +382,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -624,7 +624,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -692,7 +692,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -778,7 +778,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -856,7 +856,7 @@ class BaseRequest
             endpoint: $endpoint,
             parameters: [$id],
             query: $query,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -897,7 +897,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id, $uuid],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -935,7 +935,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -974,7 +974,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id, $variableId],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1158,7 +1158,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1208,7 +1208,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1351,7 +1351,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1480,7 +1480,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1653,7 +1653,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1689,7 +1689,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1725,7 +1725,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1761,7 +1761,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1827,7 +1827,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -1901,7 +1901,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2020,7 +2020,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2111,7 +2111,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$zoneId],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2204,7 +2204,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$zoneId, $id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2314,7 +2314,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$zoneId],
-            body: EndpointHelper::openFileStream($localFilePath),
+            body: BodyContentHelper::openFileStream($localFilePath),
         );
     }
 
@@ -2520,7 +2520,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2729,7 +2729,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2877,7 +2877,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$pullZoneId],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -2923,7 +2923,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$pullZoneId, $edgeRuleId],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3141,7 +3141,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3174,7 +3174,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3216,7 +3216,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3252,7 +3252,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3288,7 +3288,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3324,7 +3324,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3361,7 +3361,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3427,7 +3427,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3463,7 +3463,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3499,7 +3499,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3535,7 +3535,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3571,7 +3571,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3607,7 +3607,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3818,7 +3818,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3847,7 +3847,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -3945,7 +3945,7 @@ class BaseRequest
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -4115,7 +4115,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -4212,7 +4212,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -4392,7 +4392,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -4427,7 +4427,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 
@@ -4462,7 +4462,7 @@ class BaseRequest
 
         return $this->client->request(
             endpoint: $endpoint,
-            body: EndpointHelper::getBody($body),
+            body: BodyContentHelper::getBody($body),
         );
     }
 }

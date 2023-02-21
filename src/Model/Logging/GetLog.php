@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
 use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class GetPullZoneLogging implements EndpointInterface, EndpointQueryInterface
+class GetLog implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {

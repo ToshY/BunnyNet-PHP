@@ -20,25 +20,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Pages
+      - name: Setup pages
         uses: actions/configure-pages@v3
 
-      - name: Cache phpDocumentor build files
-        id: phpdocumentor-cache
+      - name: Setup cache
         uses: actions/cache@v3
         with:
-          path: .phpdoc/cache
-          key: ${{ runner.os }}-phpdocumentor-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-phpdocumentor-
+          key: ${{ github.sha }}
+          path: .cache
 
-      - name: Build with phpDocumentor
-        run: docker run --rm --volume "$(pwd):/data" phpdoc/phpdoc:3.3
+      - name: Build docs
+        run: docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.0.13 build
 
-      - name: Upload artifact
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: docs
+          path: ./site
 
   deploy:
     needs: build
