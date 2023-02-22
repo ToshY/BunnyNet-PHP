@@ -30,7 +30,7 @@ use ToshY\BunnyNet\Model\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
-class StreamRequest
+class StreamAPI
 {
     /**
      * @param string $apiKey

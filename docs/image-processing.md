@@ -1,6 +1,8 @@
 # Image Processing
 
-Bunny Optimizer is a real-time on the fly image manipulation and optimization service that automatically optimizes your images for faster image delivery, bandwidth savings and enables smart dynamic image manipulation using a simple query API.
+Bunny Optimizer is a real-time on the fly image manipulation and optimization service that automatically optimizes your
+images for faster image delivery, bandwidth savings and enables smart dynamic image manipulation using a simple query
+API.
 
 ## Setup
 

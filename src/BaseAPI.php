@@ -115,33 +115,7 @@ use ToshY\BunnyNet\Model\Base\User\UpdateUserDetails;
 use ToshY\BunnyNet\Model\Base\User\Verify2FACode;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
-/**
- * Base endpoint for pull zones, video libraries, storage zones, billing, support, and lots more.
- *
- * Provide the API key available at the **[Account Settings > API](https://panel.bunny.net/account)** section.
- *
- * ```php
- * <?php
- *
- * require 'vendor/autoload.php';
- *
- * use ToshY\BunnyNet\BaseRequest;
- * use ToshY\BunnyNet\Client\BunnyClient;
- *
- * // Create a BunnyClient using any HTTP client implementing Psr\Http\Client\ClientInterface
- * $bunnyClient = new BunnyClient(
- *     client: new \Symfony\Component\HttpClient\HttpClient()
- * );
- *
- * $bunnyBase = new BaseRequest(
- *     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
- *     client: $bunnyClient
- * );
- * ```
- *
- * @link https://docs.bunny.net/reference/bunnynet-api-overview
- */
-class BaseRequest
+class BaseAPI
 {
     /**
      * @param string $apiKey
@@ -155,19 +129,6 @@ class BaseRequest
     }
 
     /**
-     * Abuse Case | List Abuse Cases.
-     *
-     * ```php
-     * $bunnyBase->listAbuseCases(
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000,
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/abusecasepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -188,16 +149,6 @@ class BaseRequest
     }
 
     /**
-     * Abuse Case | Resolve DMCA Case.
-     *
-     * ```php
-     * $bunnyBase->resolveDMCACase(
-     *     id: 1,
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/abusecasepublic_resolveabusecase
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -213,16 +164,6 @@ class BaseRequest
     }
 
     /**
-     * Abuse Case | Resolve Abuse Case.
-     *
-     * ```php
-     * $bunnyBase->resolveAbuseCase(
-     *     id: 1,
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/abusecasepublic_resolveabusecase2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -238,16 +179,6 @@ class BaseRequest
     }
 
     /**
-     * Abuse Case | Check Abuse Case.
-     *
-     * ```php
-     * $bunnyBase->checkAbuseCase(
-     *     id: 1,
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/abusecasepublic_checkabusecase
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -263,14 +194,6 @@ class BaseRequest
     }
 
     /**
-     * Countries | Get Country List.
-     *
-     * ```php
-     * $bunnyBase->getCountryList();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/countriespublic_getcountrylist
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -284,14 +207,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Get Billing Details.
-     *
-     * ```php
-     * $bunnyBase->getBillingDetails();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_index
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -305,26 +220,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Configure Auto Recharge.
-     *
-     * ```php
-     * $bunnyBase->configureAutoRecharge(
-     *     body: [
-     *         'AutoRechargeEnabled' => true,
-     *         'PaymentMethodToken' => 1000,
-     *         'PaymentAmount' => 10,
-     *         'RechargeTreshold' => 2
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `RechargeTreshold` (misspelled) has a range of 2-2000.
-     * - `PaymentAmount` has a range of 10-2000.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_configureautorecharge
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -346,26 +241,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Create Payment Checkout.
-     *
-     * ```php
-     * $bunnyBase->configureAutoRecharge(
-     *     body: [
-     *         'RechargeAmount' => 10,
-     *         'PaymentAmount' => 10,
-     *         'PaymentRequestId' => 123456,
-     *         'Nonce' => 'ab'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `RechargeAmount` has a range of 10-10000.
-     * - `PaymentAmount` has a range of 10-10000.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_checkout
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -387,14 +262,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Prepare Payment Authorization.
-     *
-     * ```php
-     * $bunnyBase->preparePaymentAuthorization();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -408,14 +275,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Get Affiliate Details.
-     *
-     * ```php
-     * $bunnyBase->getAffiliateDetails();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_affiliatedetails
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -429,14 +288,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Claim Affiliate Credits.
-     *
-     * ```php
-     * $bunnyBase->claimAffiliateCredits();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_affiliateclaim
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -450,14 +301,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Get The Coinify BTC exchange rate.
-     *
-     * ```php
-     * $bunnyBase->getCoinifyBTCExchangeRate();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_coinifyexchangerate
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -471,18 +314,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Create Coinify payment.
-     *
-     * ```php
-     * $bunnyBase->createCoinifyPayment(
-     *     query: [
-     *         'amount' => 123
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_createcoinifypayment
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -503,14 +334,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Get Billing Summary.
-     *
-     * ```php
-     * $bunnyBase->getBillingSummary();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_summary
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -524,18 +347,6 @@ class BaseRequest
     }
 
     /**
-     * Billing | Apply Promo Code.
-     *
-     * ```php
-     * $bunnyBase->applyPromoCode(
-     *     query: [
-     *         'CouponCode' => 'YOUFOUNDME'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/billingpublic_applycode
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -556,19 +367,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | List Compute Scripts.
-     *
-     * ```php
-     * $bunnyBase->listComputeScripts(
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -589,25 +387,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Create Compute Script.
-     *
-     * ```php
-     * $bunnyBase->addComputeScript(
-     *     body: [
-     *         'Name' => 'Test',
-     *         'ScriptType' => 1000
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `ScriptType` possible values:
-     *   - 0 = CDN
-     *   - 1 = DNS
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_addscript
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -629,16 +408,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Get Compute Script.
-     *
-     * ```php
-     * $bunnyBase->getComputeScript(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_index2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -654,26 +423,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Update Compute Script.
-     *
-     * ```php
-     * $bunnyBase->updateComputeScript(
-     *     id: 1,
-     *     body: [
-     *         'Name' => 'Test',
-     *         'ScriptType' => 1000
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `ScriptType` possible values:
-     *   - 0 = CDN
-     *   - 1 = DNS
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_update
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -697,16 +446,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Delete Compute Script.
-     *
-     * ```php
-     * $bunnyBase->deleteComputeScript(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_delete
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -722,16 +461,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Get Compute Script Code.
-     *
-     * ```php
-     * $bunnyBase->getComputeScriptCode(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_getcode
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -747,19 +476,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Update Compute Script Code.
-     *
-     * ```php
-     * $bunnyBase->updateComputeScriptCode(
-     *     id: 1,
-     *     body: [
-     *         'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_setcode
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -783,20 +499,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | List Compute Script Releases.
-     *
-     * ```php
-     * $bunnyBase->listComputeScriptReleases(
-     *     id: 1,
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_getreleases
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -819,22 +521,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Publish Compute Script.
-     *
-     * ```php
-     * $bunnyBase->publishComputeScript(
-     *     id: 1,
-     *     query: [
-     *         'uuid' => '173d4dfc-a8dd-42f5-a55c-cba765c75aa5'
-     *     ],
-     *     body: [
-     *         'Note' => 'Initial release'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_publish
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -861,20 +547,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Publish Compute Script (by path parameter).
-     *
-     * ```php
-     * $bunnyBase->publishComputeScriptByPathParameter(
-     *     id: 1,
-     *     uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
-     *     body: [
-     *         'Note' => 'Initial release'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_publish2
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -902,21 +574,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Create Compute Script Variable.
-     *
-     * ```php
-     * $bunnyBase->addComputeScriptVariable(
-     *     id: 1,
-     *     body: [
-     *         'Name' => 'New Variable',
-     *         'Required' => true,
-     *         'DefaultValue' => 'Hello World'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_addvariable
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -940,21 +597,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Create Compute Script Variable.
-     *
-     * ```php
-     * $bunnyBase->updateComputeScriptVariable(
-     *     id: 1,
-     *     variableId: 2,
-     *     body: [
-     *         'DefaultValue' => 'Hello World the Sequel',
-     *         'Required' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_updatevariable
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -979,17 +621,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Get Compute Script Variable.
-     *
-     * ```php
-     * $bunnyBase->getComputeScriptVariable(
-     *     id: 1,
-     *     variableId: 2
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_getvariable
-     *
      * @throws ClientExceptionInterface
      * @param int $variableId
      * @return ResponseInterface
@@ -1006,17 +637,6 @@ class BaseRequest
     }
 
     /**
-     * Compute | Delete Compute Script Variable.
-     *
-     * ```php
-     * $bunnyBase->deleteComputeScriptVariable(
-     *     id: 1,
-     *     variableId: 2
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/computeedgescriptpublic_deletevariable
-     *
      * @throws ClientExceptionInterface
      * @param int $variableId
      * @return ResponseInterface
@@ -1033,19 +653,6 @@ class BaseRequest
     }
 
     /**
-     * Support | List Tickets.
-     *
-     * ```php
-     * $bunnyBase->listTickets(
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/supportpublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1066,16 +673,6 @@ class BaseRequest
     }
 
     /**
-     * Support | Get Ticket Details.
-     *
-     * ```php
-     * $bunnyBase->getTicketDetails(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/supportpublic_index2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1091,16 +688,6 @@ class BaseRequest
     }
 
     /**
-     * Support | Close Ticket.
-     *
-     * ```php
-     * $bunnyBase->closeTicket(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/supportpublic_close
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1116,30 +703,6 @@ class BaseRequest
     }
 
     /**
-     * Support | Reply Ticket.
-     *
-     * ```php
-     * $bunnyBase->closeTicket(
-     *     id: 1,
-     *     body: [
-     *         'Message' => 'Hope you're having a nice day!\n\nThe weather is nice outside.',
-     *         'Attachments' => [
-     *             [
-     *                 'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
-     *                 'FileName' => 'details.txt',
-     *                 'ContentType' => 'text/plain'
-     *             ]
-     *         ]
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - You can supply the `Body` for an attachment by base64 encoding its contents.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/supportpublic_reply
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1164,34 +727,6 @@ class BaseRequest
 
 
     /**
-     * Support | Create Ticket.
-     *
-     * ```php
-     * $bunnyBase->createTicket(
-     *     id: 1,
-     *     body: [
-     *         'Subject' => 'Good day!',
-     *         'LinkedPullZone' => 1,
-     *         'Message' => 'Hope you're having a nice day!\n\nThe weather is nice outside.',
-     *         'LinkedStorageZone' => 2,
-     *         'Attachments' => [
-     *             [
-     *                 'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
-     *                 'FileName' => 'details.txt',
-     *                 'ContentType' => 'text/plain'
-     *             ]
-     *         ]
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `LinkedPullZone` and `LinkedStorageZone` are not required unlike stated in the API specifications.
-     * - You can supply the `Body` for an attachment by base64 encoding its contents.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/supportpublic_createticket
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1213,19 +748,6 @@ class BaseRequest
     }
 
     /**
-     * DRM Certificate | List DRM Certificates.
-     *
-     * ```php
-     * $bunnyBase->listDRMCertificates(
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/drmcertificatepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1246,14 +768,6 @@ class BaseRequest
     }
 
     /**
-     * Region | List Regions.
-     *
-     * ```php
-     * $bunnyBase->listRegions();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/regionpublic_index
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -1267,20 +781,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | List Video Libraries.
-     *
-     * ```php
-     * $bunnyBase->listVideoLibraries(
-     *     query: [
-     *         'page' => 0,
-     *         'perPage' => 1000,
-     *         'includeAccessKey' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1301,40 +801,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Add Video Library.
-     *
-     * ```php
-     * $bunnyBase->addVideoLibrary(
-     *     body: [
-     *         'Name' => 'New Video Library',
-     *         'ReplicationRegions' => [
-     *             'UK',
-     *             'SE',
-     *             'NY',
-     *             'LA',
-     *             'SG',
-     *             'SYD',
-     *             'BR',
-     *             'JH'
-     *         ]
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `ReplicationRegions` possible values:
-     *   - UK = London (United Kingdom)
-     *   - SE = Norway (Stockholm)
-     *   - NY = New York (United States East)
-     *   - LA = Los Angeles (United States West)
-     *   - SG = Singapore (Singapore)
-     *   - SYD = Sydney (Oceania)
-     *   - BR = Sao Paolo (Brazil)
-     *   - JH = Johannesburg (Africa)
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_add
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1356,19 +822,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Get Video Library.
-     *
-     * ```php
-     * $bunnyBase->getVideoLibrary(
-     *     id: 1,
-     *     query: [
-     *         'includeAccessKey' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_index2
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1391,77 +844,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Update Video Library.
-     *
-     * ```php
-     * $bunnyBase->updateVideoLibrary(
-     *     id: 1,
-     *     body: [
-     *         'Name' => 'New Video Library V2',
-     *         'CustomHTML' => '<style>.plyr--full-ui input[type=range]{color: purple}</style>',
-     *         'PlayerKeyColor' => '6a329f',
-     *         'EnableTokenAuthentication' => true,
-     *         'EnableTokenIPVerification' => false,
-     *         'ResetToken' => false,
-     *         'WatermarkPositionLeft' => 0,
-     *         'WatermarkPositionTop' => 0,
-     *         'WatermarkWidth' => 0,
-     *         'WatermarkHeight' => 0,
-     *         'EnabledResolutions' => '720p,1080p,1440p,2160p',
-     *         'ViAiPublisherId' => '',
-     *         'VastTagUrl' => '',
-     *         'WebhookUrl' => 'https://example.com/video-status',
-     *         'CaptionsFontSize' => 20,
-     *         'CaptionsFontColor' => 'white',
-     *         'CaptionsBackground' => 'black',
-     *         'UILanguage' => 'GR',
-     *         'AllowEarlyPlay' => true,
-     *         'PlayerTokenAuthenticationEnabled' => true,
-     *         'BlockNoneReferrer' => true,
-     *         'EnableMP4Fallback' => true,
-     *         'KeepOriginalFiles' => true,
-     *         'AllowDirectPlay' => true,
-     *         'EnableDRM' => false,
-     *         'Controls' => play,progress,current-time,mute,volume,pip,fullscreen',
-     *         'Bitrate240p' => 600,
-     *         'Bitrate360p' => 800,
-     *         'Bitrate480p' => 1400,
-     *         'Bitrate720p' => 2800,
-     *         'Bitrate1080p' => 5000,
-     *         'Bitrate1440p' => 8000,
-     *         'Bitrate2160p' => 25000,
-     *         'ShowHeatmap' => false,
-     *         'EnableContentTagging' => true,
-     *         'FontFamily' => 'Arial'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `EnabledResolutions` possible values (comma separated):
-     *   - 240p
-     *   - 360p
-     *   - 480p
-     *   - 720p
-     *   - 1080p
-     *   - 1440p
-     *   - 2160p
-     * - `Controls` possible values (comma separated):
-     *   - play-large
-     *   - play
-     *   - progress
-     *   - current-time
-     *   - mute
-     *   - volume
-     *   - captions
-     *   - settings
-     *   - pip
-     *   - airplay
-     *   - fullscreen
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_update
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1485,16 +867,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Delete Video Library.
-     *
-     * ```php
-     * $bunnyBase->deleteVideoLibrary(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_delete
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1510,18 +882,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Reset Password.
-     *
-     * ```php
-     * $bunnyBase->resetVideoLibraryPassword(
-     *     query: [
-     *         'id' => 1
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_resetpassword
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1542,16 +902,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Reset Password (by path parameter).
-     *
-     * ```php
-     * $bunnyBase->resetVideoLibraryPasswordByPathParameter(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_resetpassword2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1567,16 +917,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Add Watermark.
-     *
-     * ```php
-     * $bunnyBase->addWatermark(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_addwatermark
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1592,16 +932,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Delete Watermark.
-     *
-     * ```php
-     * $bunnyBase->deleteWatermark(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_deletewatermark
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1617,24 +947,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Add Allowed Referer.
-     *
-     * ```php
-     * $bunnyBase->addVideoLibraryAllowedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.example.com,*.example.org'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - Adding of allowed referer allows for multiple domains through comma separated values.
-     *   - Other endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1658,19 +970,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Remove Allowed Referer.
-     *
-     * ```php
-     * $bunnyBase->removeVideoLibraryAllowedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_removeallowedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1694,19 +993,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Add Blocked Referer.
-     *
-     * ```php
-     * $bunnyBase->addVideoLibraryBlockedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'evil.org'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1730,19 +1016,6 @@ class BaseRequest
     }
 
     /**
-     * Stream Video Library | Remove Blocked Referer.
-     *
-     * ```php
-     * $bunnyBase->removeVideoLibraryBlockedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'evil.org'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/videolibrarypublic_removeblockedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1766,19 +1039,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | List DNS Zones.
-     *
-     * ```php
-     * $bunnyBase->listDNSZones(
-     *     query: [
-     *         'page' => 1,
-     *         'perPage' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1799,18 +1059,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Add DNS Zone.
-     *
-     * ```php
-     * $bunnyBase->addDNSZone(
-     *     body: [
-     *         'Domain' => 'example.com',
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_add
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1832,16 +1080,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Get DNS Zone.
-     *
-     * ```php
-     * $bunnyBase->addDNSZone(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_index2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1857,32 +1095,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Update DNS Zone.
-     *
-     * ```php
-     * $bunnyBase->addDNSZone(
-     *     id: 1,
-     *     body: [
-     *         'CustomNameserversEnabled' => true,
-     *         'Nameserver1' => 'abbby.ns.cloudflare.com',
-     *         'Nameserver2' => 'jonah.ns.cloudflare.com',
-     *         'SoaEmail' => 'admin@example.com',
-     *         'LoggingEnabled' => true,
-     *         'LogAnonymizationType' => true,
-     *         'LoggingIPAnonymizationEnabled' => true,
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `LogAnonymizationType` possible values (undocumented):
-     *   - 0 = Remove one octet
-     *   - 1 = Drop IP
-     * - To disable `LoggingIPAnonymizationEnabled`, you first need to agree to the DPA agreement (GDPR).
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_update
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -1906,16 +1118,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Delete DNS Zone.
-     *
-     * ```php
-     * $bunnyBase->deleteDNSZone(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_delete
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1931,16 +1133,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Export DNS Zone.
-     *
-     * ```php
-     * $bunnyBase->exportDNSZone(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_export
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -1956,20 +1148,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Get DNS Query Statistics.
-     *
-     * ```php
-     * $bunnyBase->getDNSZoneQueryStatistics(
-     *     id: 1,
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_statistics
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -1992,18 +1170,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Get DNS Query Statistics.
-     *
-     * ```php
-     * $bunnyBase->getDNSZoneQueryStatistics(
-     *     body: [
-     *         'Name' => 'example.com',
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_checkavailability
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2025,74 +1191,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Add DNS Record.
-     *
-     * ```php
-     * $bunnyBase->addDNSRecord(
-     *     zoneId: 1,
-     *     body: [
-     *         'Type' => 3,
-     *         'Ttl' => 15,
-     *         'Value' => 'My TXT Value',
-     *         'Name' => '',
-     *         'Weight' => 0,
-     *         'Priority' => 0,
-     *         'Flags' => 0,
-     *         'Tag' => '',
-     *         'Port' => 0,
-     *         'PullZoneId' => 0,
-     *         'ScriptId' => 0,
-     *         'Accelerated' => false,
-     *         'MonitorType' => 0,
-     *         'GeolocationLatitude' => 0,
-     *         'GeolocationLongitude' => 0,
-     *         'LatencyZone' => null,
-     *         'SmartRoutingType' => 0,
-     *         'Disabled' => false,
-     *         'EnviromentalVariables' => [
-     *             [
-     *                 'Name' => 'Hello',
-     *                 'Value' => 'World'
-     *             ]
-     *         ]
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `Type` possible values:
-     *   - 0 = A
-     *   - 1 = AAAA
-     *   - 2 = CNAME
-     *   - 3 = TXT
-     *   - 4 = MX
-     *   - 5 = RDR (Redirect)
-     *   - 6 = -
-     *   - 7 = PZ (Pull Zone)
-     *   - 8 = SRV
-     *   - 9 = CAA
-     *   - 10 = PTR
-     *   - 11 = SCR (Script)
-     *   - 12 = NS
-     * - `TTL` possible values (in seconds; gets rounded to the nearest possible value if deviating):
-     *   - 15 seconds
-     *   - 30 seconds
-     *   - 60 = 1 minute
-     *   - 120 = 2 minutes
-     *   - 300 = 5 minutes
-     *   - 900 = 15 minutes
-     *   - 1800 = 30 minutes
-     *   - 3600 = 1 hour
-     *   - 18000 = 5 hours
-     *   - 43200 = 12 hours
-     *   - 86400 = 1 day
-     * - `MonitorType` possible values:
-     *   - Undetermined.
-     * - `ScriptId` can be supplied but is not returned in the response.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_addrecord
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2116,75 +1214,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Update DNS Record.
-     *
-     * ```php
-     * $bunnyBase->updateDNSRecord(
-     *     zoneId: 1,
-     *     id: 2,
-     *     body: [
-     *         'Type' => 3,
-     *         'Ttl' => 15,
-     *         'Value' => 'My TXT Value',
-     *         'Name' => '',
-     *         'Weight' => 0,
-     *         'Priority' => 0,
-     *         'Flags' => 0,
-     *         'Tag' => '',
-     *         'Port' => 0,
-     *         'PullZoneId' => 0,
-     *         'ScriptId' => 0,
-     *         'Accelerated' => false,
-     *         'MonitorType' => 0,
-     *         'GeolocationLatitude' => 0,
-     *         'GeolocationLongitude' => 0,
-     *         'LatencyZone' => null,
-     *         'SmartRoutingType' => 0,
-     *         'Disabled' => false,
-     *         'EnviromentalVariables' => [
-     *             [
-     *                 'Name' => 'Hello',
-     *                 'Value' => 'World'
-     *             ]
-     *         ]
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `Type` possible values:
-     *   - 0 = A
-     *   - 1 = AAAA
-     *   - 2 = CNAME
-     *   - 3 = TXT
-     *   - 4 = MX
-     *   - 5 = RDR (Redirect)
-     *   - 6 = -
-     *   - 7 = PZ (Pull Zone)
-     *   - 8 = SRV
-     *   - 9 = CAA
-     *   - 10 = PTR
-     *   - 11 = SCR (Script)
-     *   - 12 = NS
-     * - `TTL` possible values (in seconds; gets rounded to the nearest possible value if deviating):
-     *   - 15 seconds
-     *   - 30 seconds
-     *   - 60 = 1 minute
-     *   - 120 = 2 minutes
-     *   - 300 = 5 minutes
-     *   - 900 = 15 minutes
-     *   - 1800 = 30 minutes
-     *   - 3600 = 1 hour
-     *   - 18000 = 5 hours
-     *   - 43200 = 12 hours
-     *   - 86400 = 1 day
-     * - `MonitorType` possible values:
-     *   - Undetermined.
-     * - `ScriptId` can be supplied but is not returned in the response.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_updaterecord
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2209,17 +1238,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Delete DNS Record.
-     *
-     * ```php
-     * $bunnyBase->deleteDNSRecord(
-     *     zoneId: 1,
-     *     id: 2
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_deleterecord
-     *
      * @throws ClientExceptionInterface
      * @param int $id
      * @return ResponseInterface
@@ -2236,16 +1254,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Delete DNS Record.
-     *
-     * ```php
-     * $bunnyBase->recheckDNSConfiguration(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_recheckdns
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -2261,16 +1269,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Dismiss DNS Configuration Notice.
-     *
-     * ```php
-     * $bunnyBase->dismissDNSConfigurationNotice(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_dismissnameservercheck
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -2286,21 +1284,6 @@ class BaseRequest
     }
 
     /**
-     * DNS Zone | Import DNS Records.
-     *
-     * ```php
-     * $bunnyBase->importDNSRecords(
-     *     zoneId: 1,
-     *     localFilePath: './records.txt'
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `localFilePath` is the path to the local file containing the DNS records for your zone.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/dnszonepublic_import
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\FileDoesNotExistException
      * @return ResponseInterface
@@ -2319,20 +1302,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | List Pull Zones.
-     *
-     * ```php
-     * $bunnyBase->listPullZones(
-     *     query: [
-     *         'page' => 0,
-     *         'perPage' => 1000,
-     *         'includeCertificate' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -2353,157 +1322,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Pull Zone.
-     *
-     * ```php
-     * $bunnyBase->addPullZone(
-     *     body: [
-     *         'OriginUrl' => 'https://my-bucket-2.service.com',
-     *         'AllowedReferrers' => [],
-     *         'BlockedReferrers' => [],
-     *         'BlockedIps' => [],
-     *         'EnableGeoZoneUS' => true,
-     *         'EnableGeoZoneEU' => true,
-     *         'EnableGeoZoneASIA' => true,
-     *         'EnableGeoZoneSA' => true,
-     *         'EnableGeoZoneAF' => true,
-     *         'BlockRootPathAccess' => false,
-     *         'BlockPostRequests' => false,
-     *         'EnableQueryStringOrdering' => true,
-     *         'EnableWebpVary' => false,
-     *         'EnableAvifVary' => false,
-     *         'EnableMobileVary' => false,
-     *         'EnableCountryCodeVary' => false,
-     *         'EnableHostnameVary' => false,
-     *         'EnableCacheSlice' => false,
-     *         'ZoneSecurityEnabled' => false,
-     *         'ZoneSecurityIncludeHashRemoteIP' => false,
-     *         'IgnoreQueryStrings' => true,
-     *         'MonthlyBandwidthLimit' => 0,
-     *         'AccessControlOriginHeaderExtensions' => [],
-     *         'EnableAccessControlOriginHeader' => true,
-     *         'DisableCookies' => true,
-     *         'BudgetRedirectedCountries' => [],
-     *         'BlockedCountries' => [],
-     *         'CacheControlMaxAgeOverride' => 30,
-     *         'CacheControlBrowserMaxAgeOverride' => 157784760,
-     *         'AddHostHeader' => false,
-     *         'AddCanonicalHeader' => false,
-     *         'EnableLogging' => true,
-     *         'LoggingIPAnonymizationEnabled' => true,
-     *         'PermaCacheStorageZoneId' => 0,
-     *         'AWSSigningEnabled' => false,
-     *         'AWSSigningKey' => null,
-     *         'AWSSigningRegionName' => null,
-     *         'AWSSigningSecret' => null,
-     *         'EnableOriginShield' => false,
-     *         'OriginShieldZoneCode' => 'FR',
-     *         'EnableTLS1' => true,
-     *         'EnableTLS1_1' => true,
-     *         'CacheErrorResponses' => false,
-     *         'VerifyOriginSSL' => false,
-     *         'LogForwardingEnabled' => false,
-     *         'LogForwardingHostname' => null,
-     *         'LogForwardingPort' => 0,
-     *         'LogForwardingToken' => null,
-     *         'LogForwardingProtocol' => 0,
-     *         'LoggingSaveToStorage' => false,
-     *         'LoggingStorageZoneId' => 0,
-     *         'FollowRedirects' => false,
-     *         'ConnectionLimitPerIPCount' => 0,
-     *         'RequestLimit' => 0,
-     *         'LimitRateAfter' => 0,
-     *         'LimitRatePerSecond' => 0,
-     *         'BurstSize' => 0,
-     *         'WAFEnabled' => false,
-     *         'WAFDisabledRuleGroups' => [],
-     *         'WAFDisabledRules' => [],
-     *         'WAFEnableRequestHeaderLogging' => false,
-     *         'WAFRequestHeaderIgnores' => [],
-     *         'ErrorPageEnableCustomCode' => false,
-     *         'ErrorPageCustomCode' => null,
-     *         'ErrorPageEnableStatuspageWidget' => false,
-     *         'ErrorPageStatuspageCode' => null,
-     *         'ErrorPageWhitelabel' => false,
-     *         'OptimizerEnabled' => false,
-     *         'OptimizerDesktopMaxWidth' => 1600,
-     *         'OptimizerMobileMaxWidth' => 800,
-     *         'OptimizerImageQuality' => 85,
-     *         'OptimizerMobileImageQuality' => 70,
-     *         'OptimizerEnableWebP' => true,
-     *         'OptimizerEnableManipulationEngine' => true,
-     *         'OptimizerMinifyCSS' => true,
-     *         'OptimizerMinifyJavaScript' => true,
-     *         'OptimizerWatermarkEnabled' => true,
-     *         'OptimizerWatermarkUrl' => '',
-     *         'OptimizerWatermarkPosition' => 0,
-     *         'OptimizerWatermarkOffset' => 3,
-     *         'OptimizerWatermarkMinImageSize' => 300,
-     *         'OptimizerAutomaticOptimizationEnabled' => true,
-     *         'OptimizerClasses' => [],
-     *         'OptimizerForceClasses' => false,
-     *         'Type' => 0,
-     *         'OriginRetries' => 0,
-     *         'OriginConnectTimeout' => 10,
-     *         'OriginResponseTimeout' => 60,
-     *         'UseStaleWhileUpdating' => false,
-     *         'UseStaleWhileOffline' => false,
-     *         'OriginRetry5XXResponses' => false,
-     *         'OriginRetryConnectionTimeout' => true,
-     *         'OriginRetryResponseTimeout' => true,
-     *         'OriginRetryDelay' => 0,
-     *         'DnsOriginPort' => 0,
-     *         'DnsOriginScheme' => '',
-     *         'QueryStringVaryParameters' => [],
-     *         'OriginShieldEnableConcurrencyLimit' => false,
-     *         'OriginShieldMaxConcurrentRequests' => 5000,
-     *         'EnableCookieVary' => false,
-     *         'CookieVaryParameters' => [],
-     *         'EnableSafeHop' => false,
-     *         'OriginShieldQueueMaxWaitTime' => 30,
-     *         'UseBackgroundUpdate' => false,
-     *         'OriginShieldMaxQueuedRequests' => 5000,
-     *         'EnableAutoSSL' => false,
-     *         'LogAnonymizationType' => 0,
-     *         'StorageZoneId' => 0,
-     *         'EdgeScriptId' => 0,
-     *         'OriginType' => 0,
-     *         'LogFormat' => 0,
-     *         'LogForwardingFormat' => 0,
-     *         'ShieldDDosProtectionType' => 1,
-     *         'ShieldDDosProtectionEnabled' => false,
-     *         'OriginHostHeader' => '',
-     *         'EnableSmartCache' => false,
-     *         'EnableRequestCoalescing' => false,
-     *         'RequestCoalescingTimeout' => 30,
-     *         'Name' => 'New Pull Zone'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `Type` possible values:
-     *   - 0 = Premium
-     *   - 1 = Volume
-     * - `OriginType possible values (undocumented):
-     *   - 0 = URL
-     *   - 1 = -
-     *   - 2 = Storage Zone
-     *   - 3 = -
-     *   - 4 = Script
-     * - `LogAnonymizationType` possible values (undocumented):
-     *   - 0 = Remove one octet
-     *   - 1 = Drop IP
-     * - `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
-     * show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
-     * - `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-     * - `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
-     * It is advised **not** to update these values until the feature is implemented, therefore these options
-     * are removed from the example above.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_add
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2525,19 +1343,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Get Pull Zone.
-     *
-     * ```php
-     * $bunnyBase->getPullZone(
-     *     id: 1,
-     *     query: [
-     *         'includeCertificate' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_index2
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -2560,157 +1365,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Update Pull Zone.
-     *
-     * ```php
-     * $bunnyBase->updatePullZone(
-     *     body: [
-     *         'OriginUrl' => 'https://my-bucket-2.service.com',
-     *         'AllowedReferrers' => [],
-     *         'BlockedReferrers' => [],
-     *         'BlockedIps' => [],
-     *         'EnableGeoZoneUS' => true,
-     *         'EnableGeoZoneEU' => true,
-     *         'EnableGeoZoneASIA' => true,
-     *         'EnableGeoZoneSA' => true,
-     *         'EnableGeoZoneAF' => true,
-     *         'BlockRootPathAccess' => false,
-     *         'BlockPostRequests' => false,
-     *         'EnableQueryStringOrdering' => true,
-     *         'EnableWebpVary' => false,
-     *         'EnableAvifVary' => false,
-     *         'EnableMobileVary' => false,
-     *         'EnableCountryCodeVary' => false,
-     *         'EnableHostnameVary' => false,
-     *         'EnableCacheSlice' => false,
-     *         'ZoneSecurityEnabled' => false,
-     *         'ZoneSecurityIncludeHashRemoteIP' => false,
-     *         'IgnoreQueryStrings' => true,
-     *         'MonthlyBandwidthLimit' => 0,
-     *         'AccessControlOriginHeaderExtensions' => [],
-     *         'EnableAccessControlOriginHeader' => true,
-     *         'DisableCookies' => true,
-     *         'BudgetRedirectedCountries' => [],
-     *         'BlockedCountries' => [],
-     *         'CacheControlMaxAgeOverride' => 30,
-     *         'CacheControlBrowserMaxAgeOverride' => 157784760,
-     *         'AddHostHeader' => false,
-     *         'AddCanonicalHeader' => false,
-     *         'EnableLogging' => true,
-     *         'LoggingIPAnonymizationEnabled' => true,
-     *         'PermaCacheStorageZoneId' => 0,
-     *         'AWSSigningEnabled' => false,
-     *         'AWSSigningKey' => null,
-     *         'AWSSigningRegionName' => null,
-     *         'AWSSigningSecret' => null,
-     *         'EnableOriginShield' => false,
-     *         'OriginShieldZoneCode' => 'FR',
-     *         'EnableTLS1' => true,
-     *         'EnableTLS1_1' => true,
-     *         'CacheErrorResponses' => false,
-     *         'VerifyOriginSSL' => false,
-     *         'LogForwardingEnabled' => false,
-     *         'LogForwardingHostname' => null,
-     *         'LogForwardingPort' => 0,
-     *         'LogForwardingToken' => null,
-     *         'LogForwardingProtocol' => 0,
-     *         'LoggingSaveToStorage' => false,
-     *         'LoggingStorageZoneId' => 0,
-     *         'FollowRedirects' => false,
-     *         'ConnectionLimitPerIPCount' => 0,
-     *         'RequestLimit' => 0,
-     *         'LimitRateAfter' => 0,
-     *         'LimitRatePerSecond' => 0,
-     *         'BurstSize' => 0,
-     *         'WAFEnabled' => false,
-     *         'WAFDisabledRuleGroups' => [],
-     *         'WAFDisabledRules' => [],
-     *         'WAFEnableRequestHeaderLogging' => false,
-     *         'WAFRequestHeaderIgnores' => [],
-     *         'ErrorPageEnableCustomCode' => false,
-     *         'ErrorPageCustomCode' => null,
-     *         'ErrorPageEnableStatuspageWidget' => false,
-     *         'ErrorPageStatuspageCode' => null,
-     *         'ErrorPageWhitelabel' => false,
-     *         'OptimizerEnabled' => false,
-     *         'OptimizerDesktopMaxWidth' => 1600,
-     *         'OptimizerMobileMaxWidth' => 800,
-     *         'OptimizerImageQuality' => 85,
-     *         'OptimizerMobileImageQuality' => 70,
-     *         'OptimizerEnableWebP' => true,
-     *         'OptimizerEnableManipulationEngine' => true,
-     *         'OptimizerMinifyCSS' => true,
-     *         'OptimizerMinifyJavaScript' => true,
-     *         'OptimizerWatermarkEnabled' => true,
-     *         'OptimizerWatermarkUrl' => '',
-     *         'OptimizerWatermarkPosition' => 0,
-     *         'OptimizerWatermarkOffset' => 3,
-     *         'OptimizerWatermarkMinImageSize' => 300,
-     *         'OptimizerAutomaticOptimizationEnabled' => true,
-     *         'OptimizerClasses' => [],
-     *         'OptimizerForceClasses' => false,
-     *         'Type' => 0,
-     *         'OriginRetries' => 0,
-     *         'OriginConnectTimeout' => 10,
-     *         'OriginResponseTimeout' => 60,
-     *         'UseStaleWhileUpdating' => false,
-     *         'UseStaleWhileOffline' => false,
-     *         'OriginRetry5XXResponses' => false,
-     *         'OriginRetryConnectionTimeout' => true,
-     *         'OriginRetryResponseTimeout' => true,
-     *         'OriginRetryDelay' => 0,
-     *         'DnsOriginPort' => 0,
-     *         'DnsOriginScheme' => '',
-     *         'QueryStringVaryParameters' => [],
-     *         'OriginShieldEnableConcurrencyLimit' => false,
-     *         'OriginShieldMaxConcurrentRequests' => 5000,
-     *         'EnableCookieVary' => false,
-     *         'CookieVaryParameters' => [],
-     *         'EnableSafeHop' => false,
-     *         'OriginShieldQueueMaxWaitTime' => 30,
-     *         'UseBackgroundUpdate' => false,
-     *         'OriginShieldMaxQueuedRequests' => 5000,
-     *         'EnableAutoSSL' => false,
-     *         'LogAnonymizationType' => 0,
-     *         'StorageZoneId' => 0,
-     *         'EdgeScriptId' => 0,
-     *         'OriginType' => 0,
-     *         'LogFormat' => 0,
-     *         'LogForwardingFormat' => 0,
-     *         'ShieldDDosProtectionType' => 1,
-     *         'ShieldDDosProtectionEnabled' => false,
-     *         'OriginHostHeader' => '',
-     *         'EnableSmartCache' => false,
-     *         'EnableRequestCoalescing' => false,
-     *         'RequestCoalescingTimeout' => 30,
-     *         'Name' => 'New Pull Zone'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `Type` possible values:
-     *   - 0 = Premium
-     *   - 1 = Volume
-     * - `OriginType possible values (undocumented):
-     *   - 0 = URL
-     *   - 1 = -
-     *   - 2 = Storage Zone
-     *   - 3 = -
-     *   - 4 = Script
-     * - `LogAnonymizationType` possible values (undocumented):
-     *   - 0 = Remove one octet
-     *   - 1 = Drop IP
-     * - `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
-     * show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
-     * - `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-     * - `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
-     * It is advised **not** to update these values until the feature is implemented, therefore these options
-     * are removed from the example above.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_updatepullzone
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2734,16 +1388,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Delete Pull Zone.
-     *
-     * ```php
-     * $bunnyBase->deletePullZone(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_delete
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -2759,17 +1403,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Delete Edge Rule.
-     *
-     * ```php
-     * $bunnyBase->deleteEdgeRule(
-     *     pullZoneId: 1,
-     *     edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587'
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_deleteedgerule
-     *
      * @throws ClientExceptionInterface
      * @param string $edgeRuleId
      * @return ResponseInterface
@@ -2786,79 +1419,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add/Update Edge Rule.
-     *
-     * ```php
-     * $bunnyBase->deleteEdgeRule(
-     *     pullZoneId: 1,
-     *     body: [
-     *         'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587',
-     *         'ActionType' => 4,
-     *         'ActionParameter1' => '',
-     *         'ActionParameter2' => '',
-     *         'Triggers' => [
-     *             [
-     *                 'Type' => 0,
-     *                 'PatternMatches' => [
-     *                     'https://example.b-cdn.net/images/*',
-     *                     'https://example.b-cdn.net/videos/*'
-     *                 ]
-     *                 'PatternMatchingType' => 0,
-     *                 'Parameter1' => ''
-     *             ]
-     *         ],
-     *         'TriggerMatchingType' => 0,
-     *         'Description' => '',
-     *         'Enabled' => true
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - `ActionType` possible values:
-     *   - 0 = Force SSL
-     *   - 1 = Redirect To URL
-     *   - 2 = Change Origin URL
-     *   - 3 = Override Cache Time
-     *   - 4 = Block Request
-     *   - 5 = Set Response header
-     *   - 6 = Set Request Header
-     *   - 7 = Force Download
-     *   - 8 = Disable Token Authentication
-     *   - 9 = Enable Token Authentication
-     *   - 10 = Override Cache Time Public
-     *   - 11 = Ignore Cache Vary: URL Query String
-     *   - 12 = Disable Bunny Optimizer
-     *   - 13 = Force Compression
-     *   - 14 = Set Status Code
-     *   - 15 = Bypass Perma-Cache
-     *   - 16 = Override Browser Cache Time
-     * - `Type` in a `Trigger` object can have the following possible values:
-     *   - 0 = URL
-     *   - 1 = Request Header
-     *   - 2 = Response Header
-     *   - 3 = File/URL Extension
-     *   - 4 = Country Code (2 letter)
-     *   - 5 = Remote IP
-     *   - 6 = Query String
-     *   - 7 = Random Chance (%)
-     *   - 8 = Status Code
-     *   - 9 = Request method
-     * - `TriggerMatchingType` possible values:
-     *   - 0 = URL
-     *   - 1 = Request Header
-     *   - 2 = Response Header
-     *   - 3 = File/URL Extension
-     *   - 4 = Country Code (2 letter)
-     *   - 5 = Remote IP
-     *   - 6 = Query String
-     *   - 7 = Random Chance (%)
-     *   - 8 = Status Code
-     *   - 9 = Request method
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addedgerule
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2882,25 +1442,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add/Update Edge Rule.
-     *
-     * ```php
-     * $bunnyBase->deleteEdgeRule(
-     *     pullZoneId: 1,
-     *     edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
-     *     body: [
-     *         'Id' => 1,
-     *         'Value' => true
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - The `Id` in the body denotes the pull zone ID (the same as the first argument) and is (for some reason) a required parameter.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -2928,21 +1469,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Get Origin Shield Queue Statistics.
-     *
-     * ```php
-     * $bunnyBase->getOriginShieldQueueStatistics(
-     *     pullZoneId: 1,
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y',
-     *         'hourly' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_originshieldconcurrencystatistics
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -2967,21 +1493,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Get SafeHop Statistics.
-     *
-     * ```php
-     * $bunnyBase->getSafeHopStatistics(
-     *     pullZoneId: 1,
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y',
-     *         'hourly' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_safehopstatistics
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3004,21 +1515,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Get Optimizer Statistics.
-     *
-     * ```php
-     * $bunnyBase->getOptimizerStatistics(
-     *     pullZoneId: 1,
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y',
-     *         'hourly' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_optimizerstatistics
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3041,19 +1537,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Get WAF Statistics (undocumented).
-     *
-     * ```php
-     * $bunnyBase->getWAFStatistics(
-     *     pullZoneId: 1,
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y',
-     *         'hourly' => false
-     *     ]
-     * );
-     * ```
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3076,18 +1559,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Load Free Certificate.
-     *
-     * ```php
-     * $bunnyBase->loadFreeCertificate(
-     *     query: [
-     *         'hostname' => 'cdn.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_loadfreecertificate
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3108,20 +1579,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Purge Cache (by tag).
-     *
-     * ```php
-     * $bunnyBase->purgePullZoneCache(
-     *     id: 1,
-     *     body: [
-     *         'CacheTag' => 'mytag-region-*'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_purgecachepostbytag
-     * @link https://bunny.net/blog/introducing-tag-based-cdn-cache-purging/
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3130,7 +1587,6 @@ class BaseRequest
      * @return ResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
-     * @note Changed `purgeCache` to `purgePullZoneCache` with option body params `CacheTag`.
      */
     public function purgePullZoneCache(int $id, array $body = []): ResponseInterface
     {
@@ -3146,18 +1602,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Check Pull Zone Availability.
-     *
-     * ```php
-     * $bunnyBase->checkPullZoneAvailability(
-     *     body: [
-     *         'Name' => 'test'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_checkavailability
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3179,25 +1623,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Custom Certificate.
-     *
-     * ```php
-     * $bunnyBase->addCustomCertificate(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'cdn.example.com',
-     *         'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
-     *         'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - Both `Certificate` and `CertificateKey` require the file contents to be sent as base64 encoded strings.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addcertificate
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3221,19 +1646,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Remove Custom Certificate.
-     *
-     * ```php
-     * $bunnyBase->removeCertificate(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'cdn.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_removecertificate
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3257,19 +1669,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Custom Hostname.
-     *
-     * ```php
-     * $bunnyBase->addCustomHostname(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'cdn.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addhostname
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3293,19 +1692,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Remove Custom Hostname.
-     *
-     * ```php
-     * $bunnyBase->removeCustomHostname(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'cdn.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_removehostname
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3329,20 +1715,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Set Force SSL.
-     *
-     * ```php
-     * $bunnyBase->setForceSSL(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => 'cdn.example.com',
-     *         'ForceSSL' => true
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_setforcessl
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3366,16 +1738,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Reset Token Key.
-     *
-     * ```php
-     * $bunnyBase->resetPullZoneTokenKey(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_resetsecuritykey
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -3391,24 +1753,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Allowed Referer.
-     *
-     * ```php
-     * $bunnyBase->addPullZoneAllowedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.example.com,*.example.org'
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - Adding of allowed referer allows for multiple domains through comma separated values.
-     *   - Other endpoints, like removing the allowed referer, or adding/removing blocked referer do not support this.
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3432,19 +1776,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Remove Allowed Referer.
-     *
-     * ```php
-     * $bunnyBase->removePullZoneAllowedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.example.com'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_removeallowedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3468,19 +1799,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Blocked Referer.
-     *
-     * ```php
-     * $bunnyBase->addPullZoneBlockedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.evil.org'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addblockedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3504,19 +1822,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Remove Blocked Referer.
-     *
-     * ```php
-     * $bunnyBase->removePullZoneBlockedReferer(
-     *     id: 1,
-     *     body: [
-     *         'Hostname' => '*.evil.org'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_removeblockedreferrer
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3540,19 +1845,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Add Blocked IP.
-     *
-     * ```php
-     * $bunnyBase->addPullZoneBlockedIP(
-     *     id: 1,
-     *     body: [
-     *         'BlockedIp' => '12.345.67.89'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_addblockedip
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3576,19 +1868,6 @@ class BaseRequest
     }
 
     /**
-     * Pull Zone | Remove Blocked IP.
-     *
-     * ```php
-     * $bunnyBase->removePullZoneBlockedIP(
-     *     id: 1,
-     *     body: [
-     *         'BlockedIp' => '12.345.67.89'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/pullzonepublic_removeblockedip
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3612,19 +1891,6 @@ class BaseRequest
     }
 
     /**
-     * Purge | Purge URL.
-     *
-     * ```php
-     * $bunnyBase->purgeUrl(
-     *     query: [
-     *         'url' => 'https://example.b-cdn.net/images/*',
-     *         'async' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/purgepublic_indexpost
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3645,21 +1911,6 @@ class BaseRequest
     }
 
     /**
-     * Purge | Purge URL (by header).
-     *
-     * ```php
-     * $bunnyBase->purgeUrlByHeader(
-     *     query: [
-     *         'url' => 'https://example.b-cdn.net/images/*',
-     *         'headerName' => '',
-     *         'headerValue' => '',
-     *         'async' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/purgepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3680,23 +1931,6 @@ class BaseRequest
     }
 
     /**
-     * Statistics | Get Statistics (traffic, cache hit & bandwidth).
-     *
-     * ```php
-     * $bunnyBase->getStatistics(
-     *     query: [
-     *         'dateFrom' => 'm-d-Y',
-     *         'dateTo' => 'm-d-Y',
-     *         'pullZone' => -1,
-     *         'serverZoneId' => -1,
-     *         'loadErrors' => false,
-     *         'hourly' => false
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/statisticspublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3717,20 +1951,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | List Storage Zones.
-     *
-     * ```php
-     * $bunnyBase->listStorageZones(
-     *     query: [
-     *         'page' => 0,
-     *         'perPage' => 1000,
-     *         'includeDeleted' => 1000
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_index
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -3751,57 +1971,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Add Storage Zone.
-     *
-     * ```php
-     * $bunnyBase->addStorageZone(
-     *     body: [
-     *         'OriginUrl' => '',
-     *         'Name' => 'Test',
-     *         'Region' => 'DE',
-     *         'ReplicationRegions' => '',
-     *         'ZoneTier' => 0
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone
-     * So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
-     * the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
-     * - `ZoneTier` possible values (undocumented):
-     *   - 0 = Standard = HDD
-     *   - 1 = Edge = SSD
-     * - `Region` possible values:
-     *   - DE = Falkenstein / Frankfurt (Germany) | HDD + SSD
-     *   - UK = London (United Kingdom) | HDD
-     *   - SE = Norway (Stockholm) | HDD
-     *   - NY = New York (United States) | HDD
-     *   - LA = Los Angeles (United States) | HDD
-     *   - SG = Singapore (Singapore) | HDD
-     *   - SYD = Sydney (Oceania) | HDD
-     *   - BR = Sao Paolo (Brazil) | HDD
-     *   - JH = Johannesburg (Africa) | HDD
-     * - `ReplicationRegions` possible values:
-     *   - DE = Frankfurt (Germany) | SSD
-     *   - UK = London (United Kingdom) | HDD + SSD
-     *   - SE = Norway (Stockholm) | HDD + SSD
-     *   - CZ = Prague (Czech Republic) | SSD
-     *   - ES = Madrid (Spain) | SSD
-     *   - NY = New York (United States East) | HDD + SSD
-     *   - LA = Los Angeles (United States West) | HDD + SSD
-     *   - WA = Seattle (United States West) | SSD
-     *   - MI = Miami (United States East) | SSD
-     *   - SG = Singapore (Singapore) | HDD + SSD
-     *   - HK = Hong Kong (SAR of China) | SSD
-     *   - JP = Tokyo (Japan) | SSD
-     *   - SYD = Sydney (Oceania) | HDD + SSD
-     *   - BR = Sao Paolo (Brazil) | HDD + SSD
-     *   - JH = Johannesburg (Africa) | HDD + SSD
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_add
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3823,14 +1992,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Check Storage Zone Availability.
-     *
-     * ```php
-     * $bunnyBase->checkStorageZoneAvailability();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_checkavailability
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3852,16 +2013,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Get Storage Zone.
-     *
-     * ```php
-     * $bunnyBase->checkStorageZoneAvailability(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_index2
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -3877,56 +2028,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Update Storage Zone.
-     *
-     * ```php
-     * $bunnyBase->addStorageZone(
-     *     body: [
-     *         'ReplicationRegions' => '',
-     *         'OriginUrl' => '',
-     *         'Custom404FilePath' => 'my-custom-404.html',
-     *         'Rewrite404To200' => false,
-     *     ]
-     * );
-     * ```
-     * ---
-     * Notes:
-     * - The `OriginUrl` parameter allows you to specify a backup data source, in case the file does not exist on the Storage Zone
-     * So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
-     * the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
-     * - `ZoneTier` possible values (undocumented):
-     *   - 0 = Standard = HDD
-     *   - 1 = Edge = SSD
-     * - `Region` possible values:
-     *   - DE = Falkenstein / Frankfurt (Germany) | HDD + SSD
-     *   - UK = London (United Kingdom) | HDD
-     *   - SE = Norway (Stockholm) | HDD
-     *   - NY = New York (United States) | HDD
-     *   - LA = Los Angeles (United States) | HDD
-     *   - SG = Singapore (Singapore) | HDD
-     *   - SYD = Sydney (Oceania) | HDD
-     *   - BR = Sao Paolo (Brazil) | HDD
-     *   - JH = Johannesburg (Africa) | HDD
-     * - `ReplicationRegions` possible values:
-     *   - DE = Frankfurt (Germany) | SSD
-     *   - UK = London (United Kingdom) | HDD + SSD
-     *   - SE = Norway (Stockholm) | HDD + SSD
-     *   - CZ = Prague (Czech Republic) | SSD
-     *   - ES = Madrid (Spain) | SSD
-     *   - NY = New York (United States East) | HDD + SSD
-     *   - LA = Los Angeles (United States West) | HDD + SSD
-     *   - WA = Seattle (United States West) | SSD
-     *   - MI = Miami (United States East) | SSD
-     *   - SG = Singapore (Singapore) | HDD + SSD
-     *   - HK = Hong Kong (SAR of China) | SSD
-     *   - JP = Tokyo (Japan) | SSD
-     *   - SYD = Sydney (Oceania) | HDD + SSD
-     *   - BR = Sao Paolo (Brazil) | HDD + SSD
-     *   - JH = Johannesburg (Africa) | HDD + SSD
-     * ---
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_update
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -3950,16 +2051,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Delete Storage Zone.
-     *
-     * ```php
-     * $bunnyBase->deleteStorageZone(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_delete
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -3975,16 +2066,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Reset Password.
-     *
-     * ```php
-     * $bunnyBase->resetStorageZonePassword(
-     *     id: 1
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_resetpassword
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      * @param int $id
@@ -4000,18 +2081,6 @@ class BaseRequest
     }
 
     /**
-     * Storage Zone | Reset Read-Only Password.
-     *
-     * ```php
-     * $bunnyBase->resetStorageZoneReadOnlyPassword(
-     *     query: [
-     *         'id' => 1
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/storagezonepublic_resetreadonlypassword
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -4032,14 +2101,6 @@ class BaseRequest
     }
 
     /**
-     * User | Get Home Feed.
-     *
-     * ```php
-     * $bunnyBase->getHomeFeed();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_homefeed
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4053,14 +2114,6 @@ class BaseRequest
     }
 
     /**
-     * User | Get User Details.
-     *
-     * ```php
-     * $bunnyBase->getUserDetails();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_index
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4074,31 +2127,6 @@ class BaseRequest
     }
 
     /**
-     * User | Update User Details.
-     *
-     * ```php
-     * $bunnyBase->updateUserDetails(
-     *     body: [
-     *         'FirstName' => 'John',
-     *         'Email' => 'john.doe@example.com',
-     *         'BillingEmail' => 'john.doe@example.com',
-     *         'LastName' => 'Doe',
-     *         'StreetAddress' => '1985 Robinson Court',
-     *         'City' => 'Windom',
-     *         'ZipCode' => '75492',
-     *         'Country' => 'US',
-     *         'CompanyName' => '',
-     *         'VATNumber' => '',
-     *         'ReceiveNotificationEmails' => true,
-     *         'ReceivePromotionalEmails' => false,
-     *         'Password' => '1234Abcd',
-     *         'OldPassword' => 'Abcd1234'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_updateuser
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4120,14 +2148,6 @@ class BaseRequest
     }
 
     /**
-     * User | Resend Email Confirmation.
-     *
-     * ```php
-     * $bunnyBase->resendEmailConfirmation();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_resendemailconfirmation
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4141,14 +2161,6 @@ class BaseRequest
     }
 
     /**
-     * User | Reset API Key.
-     *
-     * ```php
-     * $bunnyBase->resetUserApiKey();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_resetapikey
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4162,14 +2174,6 @@ class BaseRequest
     }
 
     /**
-     * User | List Close Account Reasons.
-     *
-     * ```php
-     * $bunnyBase->listCloseAccountReasons();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_listcloseaccountreasons
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4183,19 +2187,6 @@ class BaseRequest
     }
 
     /**
-     * User | Close Account.
-     *
-     * ```php
-     * $bunnyBase->closeAccount(
-     *     body: [
-     *         'Password' => 'LoremIpsumDolor',
-     *         'Reason' => 'No longer needed.'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_closeaccount
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4217,14 +2208,6 @@ class BaseRequest
     }
 
     /**
-     * User | Get DPA Details.
-     *
-     * ```php
-     * $bunnyBase->getDPADetails();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_dpa
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4238,14 +2221,6 @@ class BaseRequest
     }
 
     /**
-     * User | Accept DPA.
-     *
-     * ```php
-     * $bunnyBase->acceptDPA();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_dpaaccept
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4259,14 +2234,6 @@ class BaseRequest
     }
 
     /**
-     * User | Get DPA Details (HTML).
-     *
-     * ```php
-     * $bunnyBase->getDPADetailsHTML();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_dpapdfhhtml
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4280,14 +2247,6 @@ class BaseRequest
     }
 
     /**
-     * User | Set Notifications Opened.
-     *
-     * ```php
-     * $bunnyBase->setNotificationsOpened();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_setnotificationsopened
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4301,14 +2260,6 @@ class BaseRequest
     }
 
     /**
-     * User | Get What's New Items.
-     *
-     * ```php
-     * $bunnyBase->getWhatsNewItems();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_whatsnew
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4322,14 +2273,6 @@ class BaseRequest
     }
 
     /**
-     * User | Reset What's New.
-     *
-     * ```php
-     * $bunnyBase->resetWhatsNew();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_whatsnewreset
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4343,14 +2286,6 @@ class BaseRequest
     }
 
     /**
-     * User | Generate 2FA Verification.
-     *
-     * ```php
-     * $bunnyBase->generate2FAVerification();
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_twofactorgenerateverification
-     *
      * @throws ClientExceptionInterface
      * @return ResponseInterface
      */
@@ -4364,18 +2299,6 @@ class BaseRequest
     }
 
     /**
-     * User | Disable 2FA.
-     *
-     * ```php
-     * $bunnyBase->disable2FA(
-     *     body: [
-     *         'Password' => 'LoremIpsumDolor'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_twofactordisable
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4397,20 +2320,6 @@ class BaseRequest
     }
 
     /**
-     * User | Enable 2FA.
-     *
-     * ```php
-     * $bunnyBase->disable2FA(
-     *     body: [
-     *         'SecretValidator' => '',
-     *         'Secret' => '',
-     *         'TestPin' => '123456'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_twofactorenable
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
@@ -4432,20 +2341,6 @@ class BaseRequest
     }
 
     /**
-     * User | Verify 2FA Code.
-     *
-     * ```php
-     * $bunnyBase->verify2FACode(
-     *     body: [
-     *         'SecretValidator' => '',
-     *         'Secret' => '',
-     *         'TestPin' => '123456'
-     *     ]
-     * );
-     * ```
-     *
-     * @link https://docs.bunny.net/reference/userpublic_twofactorverify
-     *
      * @throws ClientExceptionInterface
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException

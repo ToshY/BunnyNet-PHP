@@ -1,31 +1,44 @@
 ## 3.x
 
+This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes.
+
 ### ‼️ Breaking changes
 
-- Return type for public methods changed from `array` to `Psr\Http\Message\ResponseInterface` model.
-    - `$response['content']` => `$response->getBody()->getContents()`
-    - `$response['headers']` => `$response->getHeaders()`
-    - `$response['status']['code']` => `$response->getStatusCode()`
-    - `$response['status']['info']` => `$response->getReasonPhrase()`
-- The class `PullZoneLogRequest` was renamed to `LoggingRequest`.
-- The class `VideoStreamRequest` was renamed to `StreamRequest`.
-- The class `SecureUrlGenerator` was renamed to `TokenAuthentication`.
-    - The method `generate` was renamed to `sign`.
-- The class `ImageOptimizer` was renamed to `ImageProcessor`.
-- The class `PricingCalculator` was removed (as deemed unrelated to API).
-- The method `fetchVideoToCollection` was removed as it's no longer in Stream API specs.
-- The method `listStorageZone` was renamed to `listStorageZones`.
-- The method `resetStorageZonePasswordByPath` was renamed to `resetStorageZonePassword`.
-- The method `getCollectionList` was renamed to `listCollections`.
-- Methods having `the` in the name have been renamed.
-    - `closeTheAccount` => `closeAccount`
-- Method having lowercase abbreviations have been renamed to uppercase abbreviations.
-    - `getDpaDetails` => `getDPADetails`
+- Request (PSR-18)
+  - Addition of `Psr\Http\Client\ClientInterface` requires the user to construct a `BunnyClient`, and supply
+  the `BunnyClient` to the API classes. Examples can be found in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/base-api/).
+- Response (PSR-7)
+  - Return type for public API methods changed from `array` to `Psr\Http\Message\ResponseInterface` model:
+      - From `$response['content']` to `$response->getBody()->getContents()`
+      - From`$response['headers']` to `$response->getHeaders()`
+      - From`$response['status']['code']` to `$response->getStatusCode()`
+      - From`$response['status']['info']` to `$response->getReasonPhrase()`
+- Endpoints
+  - The following public classes have been **renamed**:
+    - The class `BaseRequest` was renamed to `BaseAPI`.
+    - The class `EdgeStorageRequest` was renamed to `EdgeStorageAPI`.
+    - The class `PullZoneLogRequest` was renamed to `LoggingAPI`.
+    - The class `VideoStreamRequest` was renamed to `StreamAPI`.
+    - The class `SecureUrlGenerator` was renamed to `TokenAuthentication`.
+        - The method `generate` was renamed to `sign`.
+    - The class `ImageOptimizer` was renamed to `ImageProcessor`.
+    - The class `PricingCalculator` was removed.
+  - The following public methods have been **renamed**:
+    - The method `listStorageZone` was renamed to `listStorageZones`.
+    - The method `resetStorageZonePasswordByPath` was renamed to `resetStorageZonePassword`.
+    - The method `getCollectionList` was renamed to `listCollections`.
+    - The method `purgeCache` was renamed to `purgePullZoneCache`.
+    - The method(s) having `the` in the name have been renamed.
+        - `closeTheAccount` => `closeAccount`
+    - The method(s) having lowercase abbreviations have been renamed to uppercase abbreviations.
+        - `getDpaDetails` => `getDPADetails`
+  - The following public methods have been **removed**:
+    - The method `fetchVideoToCollection` was removed as it's no longer in Stream API specifications.
 
 > Note: Please take in consideration that due to the impact of this release I cannot fully guarantee this list of
 > breaking changes is complete. Thank you for your understanding.
 
-### Updates
+### General Updates
 
 - Base API
     - Notes:
@@ -47,7 +60,7 @@
                     - The arguments `$path` and `$fileName` switched order to `$fileName` and `$path`; The `$path` argument now has a default value `''`, denoting the root directory.
 - Stream API
     - Notes:
-        - Multiple changes/additions to endpoints.
+        - Updates and additions of endpoints to be up-to-date with the latest API specifications.
     - Changes:
         - Manage Videos
             - Added:
@@ -66,7 +79,7 @@
                 - Fetch Video (to Collection)
 - Token Authentication
     - Notes:
-        - Added optional argument `limit`. Limits download speed (in kB/s).
+        - Added optional argument `limit`. Limits download speed in kB/s.
 
 ### Noteworthy
 
@@ -75,6 +88,7 @@
     - Internal usage of named arguments.
     - Transforming from old "enum" classes to more explicit endpoint specific classes.
         - Internal changes of array for query/body parameter templates to `AbstractParameter` class.
+- Decided on composition over inheritance when implementing PSR feature.
 - Added issue templates for creating bug/feature reports.
 - Updated/added phpmd, phpcs, phpstan, phpunit for contributions and in pipelines.
-- Added documentation to GitHub pages with [mkdocs (material)](https://hub.docker.com/r/squidfunk/mkdocs-material).
+- Added [documentation website](https://ToshY.github.io/BunnyNet-PHP) to GitHub pages with the help of [mkdocs (material)](https://hub.docker.com/r/squidfunk/mkdocs-material).

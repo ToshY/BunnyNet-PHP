@@ -10,14 +10,14 @@ Edge Storage is a cloud storage solution provided by bunny.net that automaticall
 require 'vendor/autoload.php';
 
 use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\EdgeStorageRequest;
+use ToshY\BunnyNet\EdgeStorageAPI;
 use ToshY\BunnyNet\Enum\Region;
 
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\HttpClient() # (1)
 );
 
-$edgeStorageRequest = new EdgeStorageRequest(
+$edgeStorageAPI = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6', # (2)
     regionCode: Region::FS, # (3)
     client: $bunnyClient
@@ -46,13 +46,13 @@ $edgeStorageRequest = new EdgeStorageRequest(
 <?php
 
 // Root directory.
-$edgeStorageRequest->downloadFile(
+$edgeStorageAPI->downloadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageRequest->downloadFile(
+$edgeStorageAPI->downloadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
     path: 'css'
@@ -65,14 +65,14 @@ $edgeStorageRequest->downloadFile(
 <?php
 
 // Root directory.
-$edgeStorageRequest->uploadFile(
+$edgeStorageAPI->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-bunny.jpg',
     localFilePath: './local-bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageRequest->uploadFile(
+$edgeStorageAPI->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
@@ -80,7 +80,7 @@ $edgeStorageRequest->uploadFile(
 );
 
 // Subdirectory with additional SHA256 checksum header.
-$edgeStorageRequest->uploadFile(
+$edgeStorageAPI->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
@@ -97,13 +97,13 @@ $edgeStorageRequest->uploadFile(
 <?php
 
 // Root directory.
-$edgeStorageRequest->deleteFile(
+$edgeStorageAPI->deleteFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageRequest->deleteFile(
+$edgeStorageAPI->deleteFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
     path: 'css'
@@ -118,13 +118,13 @@ $edgeStorageRequest->deleteFile(
 <?php
 
 // Root directory.
-$edgeStorageRequest->listFiles(
+$edgeStorageAPI->listFiles(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageRequest->listFiles(
+$edgeStorageAPI->listFiles(
     storageZoneName: 'my-storage-zone-1',
     path: 'css'
 );

@@ -35,7 +35,7 @@ composer require toshy/bunnynet-php:^3.0
 
 ## 📜 Documentation
 
-Full documentation is available at [hhttps://ToshY.github.io/BunnyNet-PHP](https://ToshY.github.io/BunnyNet-PHP)
+Full documentation is available at [https://ToshY.github.io/BunnyNet-PHP](https://ToshY.github.io/BunnyNet-PHP)
 or in the [docs](./docs) directory.
 
 ## 🛠️ Contribute
@@ -64,4 +64,4 @@ task grum:init
 
 ## ❕ Licence
 
-The BunnyNet PHP library is licensed under [MIT](LICENSE).
+This repository comes with a [MIT license](./LICENSE).

@@ -16,7 +16,7 @@ use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DeleteFile;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DownloadFile;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
 
-class EdgeStorageRequest
+class EdgeStorageAPI
 {
     /**
      * @throws RegionDoesNotExistException

@@ -12,7 +12,7 @@ use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Model\Logging\GetLog;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
-class LoggingRequest
+class LoggingAPI
 {
     /**
      * @param string $apiKey

@@ -17,13 +17,13 @@ Searchable logs are stored for up to 3 days. If long-term log storage is require
 require 'vendor/autoload.php';
 
 use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\LoggingRequest;
+use ToshY\BunnyNet\LoggingAPI;
 
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\HttpClient() # (1)
 );
 
-$loggingRequest = new LoggingRequest(
+$loggingAPI = new LoggingAPI(
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989', # (2)
     client: $bunnyClient
 );
@@ -40,13 +40,13 @@ Generate secure URL.
 <?php
 
 // Logging of yesterday.
-$loggingRequest->getLog(
+$loggingAPI->getLog(
     pullZoneId: 1,
     dateTime: new \DateTime('-1 day')
 );
 
 // Logging of yesterday narrowed down by additional query parameters.
-$loggingRequest->getLog(
+$loggingAPI->getLog(
     pullZoneId: 1,
     dateTime: new \DateTime('-1 day'),
     query: [
@@ -60,7 +60,7 @@ $loggingRequest->getLog(
             400,
             500,
         ],
-        'search' => 'bunny.jpg'
+        'search' => 'bunny.jpg',
     ]
 );
 ```

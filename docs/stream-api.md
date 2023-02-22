@@ -10,13 +10,13 @@ Bunny Stream was designed for developers to easily upload, process, and display 
 require 'vendor/autoload.php';
 
 use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\StreamRequest;
+use ToshY\BunnyNet\StreamAPI;
 
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\HttpClient() # (1)
 );
 
-$streamRequest = new StreamRequest(
+$streamAPI = new StreamAPI(
     apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc', # (2)
     client: $bunnyClient
 );
@@ -34,7 +34,7 @@ $streamRequest = new StreamRequest(
 ```php
 <?php
 
-$streamRequest->getCollection(
+$streamAPI->getCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
 );
@@ -45,7 +45,7 @@ $streamRequest->getCollection(
 ```php
 <?php
 
-$streamRequest->updateCollection(
+$streamAPI->updateCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
     body: [
@@ -59,7 +59,7 @@ $streamRequest->updateCollection(
 ```php
 <?php
 
-$streamRequest->deleteCollection(
+$streamAPI->deleteCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
 );
@@ -70,7 +70,7 @@ $streamRequest->deleteCollection(
 ```php
 <?php
 
-$streamRequest->listCollections(
+$streamAPI->listCollections(
     libraryId: 1,
     query: [
         'page' => 1,
@@ -86,7 +86,7 @@ $streamRequest->listCollections(
 ```php
 <?php
 
-$streamRequest->createCollection(
+$streamAPI->createCollection(
     libraryId: 1,
     body: [
         'name' => 'Bunny Collection'
@@ -101,7 +101,7 @@ $streamRequest->createCollection(
 ```php
 <?php
 
-$streamRequest->getVideo(
+$streamAPI->getVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -112,7 +112,7 @@ $streamRequest->getVideo(
 ```php
 <?php
 
-$streamRequest->updateVideo(
+$streamAPI->updateVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     body: [
@@ -159,7 +159,7 @@ $streamRequest->updateVideo(
 ```php
 <?php
 
-$streamRequest->deleteVideo(
+$streamAPI->deleteVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -170,7 +170,7 @@ $streamRequest->deleteVideo(
 ```php
 <?php
 
-$streamRequest->createVideo(
+$streamAPI->createVideo(
     libraryId: 1,
     body: [
         'title' => 'Bunny Hoppers',
@@ -191,7 +191,7 @@ $streamRequest->createVideo(
 ```php
 <?php
 
-$streamRequest->uploadVideo(
+$streamAPI->uploadVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     localFilePath: './bunny-hop.mp4',
@@ -206,7 +206,7 @@ $streamRequest->uploadVideo(
 ```php
 <?php
 
-$streamRequest->getVideoHeatmap(
+$streamAPI->getVideoHeatmap(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -217,7 +217,7 @@ $streamRequest->getVideoHeatmap(
 ```php
 <?php
 
-$streamRequest->getVideoStatistics(
+$streamAPI->getVideoStatistics(
     libraryId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -233,7 +233,7 @@ $streamRequest->getVideoStatistics(
 ```php
 <?php
 
-$streamRequest->reEncodeVideo(
+$streamAPI->reEncodeVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -244,7 +244,7 @@ $streamRequest->reEncodeVideo(
 ```php
 <?php
 
-$streamRequest->listVideos(
+$streamAPI->listVideos(
     libraryId: 1,
     query: [
         'page' => 1,
@@ -261,7 +261,7 @@ $streamRequest->listVideos(
 ```php
 <?php
 
-$streamRequest->setThumbnail(
+$streamAPI->setThumbnail(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
     query: [
@@ -275,7 +275,7 @@ $streamRequest->setThumbnail(
 ```php
 <?php
 
-$streamRequest->fetchVideo(
+$streamAPI->fetchVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
     query: [
@@ -297,7 +297,7 @@ $streamRequest->fetchVideo(
 ```php
 <?php
 
-$streamRequest->addCaption(
+$streamAPI->addCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     sourceLanguage: 'jp',
@@ -319,7 +319,7 @@ $streamRequest->addCaption(
 ```php
 <?php
 
-$streamRequest->deleteCaption(
+$streamAPI->deleteCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     sourceLanguage: 'jp'
