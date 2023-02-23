@@ -19,22 +19,22 @@ $bunnyClient = new BunnyClient(
 
 $edgeStorageAPI = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6', # (2)
-    regionCode: Region::FS, # (3)
+    region: Region::FS, # (3)
     client: $bunnyClient
 );
 ```
 
 1. Create a BunnyClient using any HTTP client implementing `Psr\Http\Client\ClientInterface`.
 2. Provide the **(Read-Only) Password** available at the **FTP & API Access** section of your specific storage zone.
-3. The `regionCode` can have the following values:
-    - `Region::DE` / `'DE'`
-    - `Region::UK` / `'UK'`
-    - `Region::NY` / `'NY'`
-    - `Region::LA` / `'LA'`
-    - `Region::SG` / `'SG'`
-    - `Region::SYD` / `'SYD'`
-    - `Region::BR` / `'BR'`
-    - `Region::JH` / `'JH'`
+3. The `region` can have the following values:
+    - `Region::DE`
+    - `Region::UK`
+    - `Region::NY`
+    - `Region::LA`
+    - `Region::SG`
+    - `Region::SYD`
+    - `Region::BR`
+    - `Region::JH`
 
 ## Usage
 
