@@ -34,11 +34,14 @@ This release reworks (almost) the entire codebase, and therefore results in quit
         - `getDpaDetails` => `getDPADetails`
   - The following public methods have been **removed**:
     - The method `fetchVideoToCollection` was removed as it's no longer in Stream API specifications.
+  - Base API
+    - The argument `$accountApiKey` was renamed to `$apiKey`.
+  - Logging API
+    - The argument `$accountApiKey` was renamed to `$apiKey`.
   - Edge Storage API
-    - Notes:
-      - The argument `$hostCode` has been changed to `$region` and now accepts a `Region` case.
-          - Example: For `Falkenstein` region this would now be `Region::FS` (default).
-          - For a complete list of available `Region` cases, see the example in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/edge-storage-api/#setup). 
+    - The argument `$hostCode` was changed to `$region` and now accepts a `Region` instead of string type.
+      - Example: For `Falkenstein` region this would now be `Region::FS` (default).
+      - For a complete list of available `Region` cases, see the example in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/edge-storage-api/#setup). 
 
 > Note: Please take in consideration that due to the impact of this release I cannot fully guarantee this list of
 > breaking changes is complete. Thank you for your understanding.

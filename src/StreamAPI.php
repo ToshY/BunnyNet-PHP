@@ -40,7 +40,9 @@ class StreamAPI
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
     ) {
-        $this->client->setBaseUrl(Host::STREAM_ENDPOINT);
+        $this->client
+            ->setAPIKey($this->apiKey)
+            ->setBaseUrl(Host::STREAM_ENDPOINT);
     }
 
     /**

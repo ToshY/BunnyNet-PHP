@@ -125,7 +125,9 @@ class BaseAPI
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
     ) {
-        $this->client->setBaseUrl(Host::API_ENDPOINT);
+        $this->client
+            ->setAPIKey($this->apiKey)
+            ->setBaseUrl(Host::API_ENDPOINT);
     }
 
     /**

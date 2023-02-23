@@ -27,7 +27,9 @@ class EdgeStorageAPI
         protected readonly BunnyClient $client,
         Region $region = Region::FS,
     ) {
-        $this->client->setBaseUrl($region->host());
+        $this->client
+            ->setAPIKey($this->apiKey)
+            ->setBaseUrl($region->host());
     }
 
     /**

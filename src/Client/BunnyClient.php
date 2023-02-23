@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Client;
 
-use GuzzleHttp\Psr7\Request;
+use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -26,6 +26,21 @@ class BunnyClient
     ) {
     }
 
+    /**
+     * @param string $apiKey
+     * @return $this
+     */
+    public function setAPIKey(string $apiKey): self
+    {
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    /**
+     * @param string $baseUrl
+     * @return $this
+     */
     public function setBaseUrl(string $baseUrl): self
     {
         $this->baseUrl = $baseUrl;
@@ -51,7 +66,7 @@ class BunnyClient
     ): ResponseInterface {
         $headers = array_filter(
             [
-                'headers' => array_merge(
+                ...array_merge(
                     $headers,
                     array_merge(...$endpoint->getHeaders()),
                     $this->getAccessKeyHeader()

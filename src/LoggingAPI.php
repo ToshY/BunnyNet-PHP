@@ -22,7 +22,9 @@ class LoggingAPI
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
     ) {
-        $this->client->setBaseUrl(Host::LOGGING_ENDPOINT);
+        $this->client
+            ->setAPIKey($this->apiKey)
+            ->setBaseUrl(Host::LOGGING_ENDPOINT);
     }
 
     /**
