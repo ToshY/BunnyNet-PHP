@@ -53,17 +53,15 @@ $loggingAPI->getLog(
         'start' => 10,
         'end' => 20,
         'order' => 'asc',
-        'status' => [
-            100,
-            200,
-            300,
-            400,
-            500,
-        ],
+        'status' => '100,200,300,400,500',
         'search' => 'bunny.jpg',
     ]
 );
 ```
+
+!!! note
+
+    - The key `status` is an optional value consisting of comma separated status codes.
 
 ## Reference
 

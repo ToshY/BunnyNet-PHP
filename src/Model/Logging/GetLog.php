@@ -36,9 +36,7 @@ class GetLog implements EndpointInterface, EndpointQueryInterface
             new AbstractParameter(name: 'start', type: Type::INT_TYPE),
             new AbstractParameter(name: 'end', type: Type::INT_TYPE),
             new AbstractParameter(name: 'order', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'status', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::INT_TYPE),
-            ]),
+            new AbstractParameter(name: 'status', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
         ];
     }
