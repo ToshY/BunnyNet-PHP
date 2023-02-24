@@ -14,7 +14,7 @@ use ToshY\BunnyNet\EdgeStorageAPI;
 use ToshY\BunnyNet\Enum\Region;
 
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\HttpClient() # (1)
+    client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
 $edgeStorageAPI = new EdgeStorageAPI(

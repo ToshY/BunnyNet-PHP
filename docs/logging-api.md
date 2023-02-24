@@ -20,7 +20,7 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\LoggingAPI;
 
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\HttpClient() # (1)
+    client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
 $loggingAPI = new LoggingAPI(
