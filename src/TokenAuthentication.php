@@ -25,7 +25,7 @@ class TokenAuthentication
      * @param string|null $countriesAllowed
      * @param string|null $countriesBlocked
      * @param string|null $referrersAllowed
-     * @param int|null $limit
+     * @param int|null $speedLimit
      * @param bool $allowSubnet
      * @return string
      */
@@ -38,7 +38,7 @@ class TokenAuthentication
         string|null $countriesAllowed = null,
         string|null $countriesBlocked = null,
         string|null $referrersAllowed = null,
-        int|null $limit = null,
+        int|null $speedLimit = null,
         bool $allowSubnet = true
     ): string {
         $url = sprintf('%s%s', $this->hostname, $file);
@@ -46,7 +46,7 @@ class TokenAuthentication
         $this->parseOptionalPathParameter($url, 'token_countries', $countriesAllowed);
         $this->parseOptionalPathParameter($url, 'token_countries_blocked', $countriesBlocked);
         $this->parseOptionalPathParameter($url, 'token_referer', $referrersAllowed);
-        $this->parseOptionalPathParameter($url, 'limit', $limit);
+        $this->parseOptionalPathParameter($url, 'limit', $speedLimit);
 
         $urlScheme = parse_url($url, PHP_URL_SCHEME);
         $urlHost = parse_url($url, PHP_URL_HOST);
@@ -82,10 +82,11 @@ class TokenAuthentication
 
         // Check for IP validation; Additional check to allow subnet to reduce false negatives (IPv4).
         if (null !== $userIp) {
+            $ipBase = $userIp;
             if (true === $allowSubnet) {
-                $hashableBase .= preg_replace('/^([\d]+.[\d]+.[\d]+).[\d]+$/', '$1.0', $userIp);
+                $ipBase = preg_replace('/^(\d+.\d+.\d+).\d+$/', '$1.0', $userIp);
             }
-            $hashableBase .= $userIp;
+            $hashableBase .= $ipBase;
         }
         $hashableBase .= $parameterData;
 
@@ -97,7 +98,7 @@ class TokenAuthentication
 
         if (true === $isDirectoryToken) {
             return sprintf(
-                '%s://%s/bcdn_token=%s&expires=%s%s%s',
+                '%s://%s/bcdn_token=%s&expires=%d%s%s',
                 $urlScheme,
                 $urlHost,
                 $token,
@@ -108,7 +109,7 @@ class TokenAuthentication
         }
 
         return sprintf(
-            '%s://%s%s?token=%s%s&expires=%s',
+            '%s://%s%s?token=%s%s&expires=%d',
             $urlScheme,
             $urlHost,
             $urlPath,

@@ -36,7 +36,7 @@ $tokenAuthentication->sign(
     countriesAllowed: null,
     countriesBlocked: null,
     referrersAllowed: null,
-    limit: null,
+    speedLimit: null, # (2)
     allowSubnet: true
 );
 
@@ -51,50 +51,52 @@ $tokenAuthentication->sign(
     expirationTime: 10
 );
 
-// With IPv4.
+// With IPv4 and not allowing associated subnet.
 $tokenAuthentication->sign(
     file: '/css/custom.css',
-    userIp: '12.345.67.89'
+    userIp: '12.345.67.89',
+    allowSubnet: false
 );
 
 // With directory token enabled and path specified for video streaming.
 $tokenAuthentication->sign(
-    file: '/videos/awesome.m3u8',
+    file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
-    pathAllowed: '/videos'
+    pathAllowed: '/videos/cute-bunnies'
 );
 
 // Allow or block certain countries, e.g. allow "US" and block "RU".
 $tokenAuthentication->sign(
-    file: '/videos/awesome.m3u8',
+    file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
-    pathAllowed: '/videos',
+    pathAllowed: '/videos/cute-bunnies',
     countriesAllowed: 'US',
     countriesBlocked: 'RU'
 );
 
 // Allow from specific referrer.
 $tokenAuthentication->sign(
-    file: '/videos/awesome.m3u8',
+    file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
-    pathAllowed: '/videos',
+    pathAllowed: '/videos/cute-bunnies',
     referrersAllowed: 'example.com'
 );
 
-// Limit the download speed limit to 5 Mb/s (5120 kB/s).
+// Limit the download speed limit to 5 Mb/s.
 $tokenAuthentication->sign(
-    file: '/videos/awesome.m3u8',
+    file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
-    pathAllowed: '/videos',
-    limit: 5120
+    pathAllowed: '/videos/cute-bunnies',
+    speedLimit: 5120
 );
 ```
 
 1. Time in seconds the resource is available after signing.
+2. Speed download limit in kB/s.
 
 !!! note
 

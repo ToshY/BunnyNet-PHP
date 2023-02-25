@@ -87,7 +87,7 @@ This release reworks (almost) the entire codebase, and therefore results in quit
                 - Fetch Video (to Collection)
 - Token Authentication
     - Notes:
-        - Added optional argument `limit`. Limits download speed in kB/s.
+        - Added optional argument `$speedLimit`. Limits download speed in kB/s.
 
 ### Noteworthy
 
