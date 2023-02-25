@@ -26,12 +26,10 @@ $tokenAuthentication = new TokenAuthentication(
 Sign a URL.
 
 ```php
-<?php
-
 // Root directory.
 $tokenAuthentication->sign(
     file: '/bunny.jpg',
-    expirationTime: 3600,
+    expirationTime: 3600, # (1)
     userIp: null,
     isDirectoryToken: false,
     pathAllowed: null,
@@ -45,6 +43,12 @@ $tokenAuthentication->sign(
 // Subdirectory.
 $tokenAuthentication->sign(
     file: '/css/custom.css'
+);
+
+// Change expiration time.
+$tokenAuthentication->sign(
+    file: '/css/custom.css',
+    expirationTime: 10
 );
 
 // With IPv4.
@@ -89,6 +93,8 @@ $tokenAuthentication->sign(
     limit: 5120
 );
 ```
+
+1. Time in seconds the resource is available after signing.
 
 !!! note
 

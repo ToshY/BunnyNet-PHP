@@ -38,6 +38,7 @@ markdown_extensions:
   - tables
   - toc
   - admonition
+  - pymdownx.extra:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -45,10 +46,12 @@ markdown_extensions:
       linenums: true
       anchor_linenums: true
       line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
+      guess_lang: false
+      extend_pygments_lang:
+        - name: php
+          lang: php
+          options:
+            startinline: true
 extra:
   generator: false
   social:

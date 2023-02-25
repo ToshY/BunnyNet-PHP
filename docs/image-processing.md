@@ -21,8 +21,6 @@ $imageProcessor = new ImageProcessor();
 Generate URL with optimization parameters.
 
 ```php
-<?php
-
 $imageProcessor->generate(
     'https://myzone.b-cdn.net/bunny.jpg',
     [

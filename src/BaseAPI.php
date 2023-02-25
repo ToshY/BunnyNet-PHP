@@ -73,6 +73,8 @@ use ToshY\BunnyNet\Model\Base\PullZone\PurgeCache;
 use ToshY\BunnyNet\Model\Base\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Base\PullZone\SetForceSSL;
+use ToshY\BunnyNet\Model\Base\PullZone\SetZoneSecurityEnabled;
+use ToshY\BunnyNet\Model\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
 use ToshY\BunnyNet\Model\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\Base\Purge\PurgeURLByHeader;
@@ -1467,6 +1469,42 @@ class BaseAPI
             endpoint: $endpoint,
             parameters: [$pullZoneId, $edgeRuleId],
             body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @param bool $enabled
+     * @return ResponseInterface
+     * @param int $pullZoneId
+     */
+    public function setZoneSecurityEnabled(
+        int $pullZoneId,
+        bool $enabled
+    ): ResponseInterface {
+        $endpoint = new SetZoneSecurityEnabled();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$pullZoneId, $enabled]
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @param bool $enabled
+     * @return ResponseInterface
+     * @param int $pullZoneId
+     */
+    public function setZoneSecurityIncludeHashRemoteIPEnabled(
+        int $pullZoneId,
+        bool $enabled
+    ): ResponseInterface {
+        $endpoint = new SetZoneSecurityIncludeHashRemoteIPEnabled();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$pullZoneId, $enabled]
         );
     }
 

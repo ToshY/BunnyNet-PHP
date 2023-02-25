@@ -43,8 +43,6 @@ $edgeStorageAPI = new EdgeStorageAPI(
 #### [Download File](https://docs.bunny.net/reference/get_-storagezonename-path-filename)
 
 ```php
-<?php
-
 // Root directory.
 $edgeStorageAPI->downloadFile(
     storageZoneName: 'my-storage-zone-1',
@@ -62,8 +60,6 @@ $edgeStorageAPI->downloadFile(
 #### [Upload File](https://docs.bunny.net/reference/put_-storagezonename-path-filename)
 
 ```php
-<?php
-
 // Root directory.
 $edgeStorageAPI->uploadFile(
     storageZoneName: 'my-storage-zone-1',
@@ -94,8 +90,6 @@ $edgeStorageAPI->uploadFile(
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 
 ```php
-<?php
-
 // Root directory.
 $edgeStorageAPI->deleteFile(
     storageZoneName: 'my-storage-zone-1',
@@ -115,8 +109,6 @@ $edgeStorageAPI->deleteFile(
 #### [List Files](https://docs.bunny.net/reference/get_-storagezonename-path-)
 
 ```php
-<?php
-
 // Root directory.
 $edgeStorageAPI->listFiles(
     storageZoneName: 'my-storage-zone-1',

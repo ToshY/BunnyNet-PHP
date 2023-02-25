@@ -37,8 +37,6 @@ $loggingAPI = new LoggingAPI(
 Generate secure URL.
 
 ```php
-<?php
-
 // Logging of yesterday.
 $loggingAPI->getLog(
     pullZoneId: 1,

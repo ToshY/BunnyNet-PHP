@@ -32,8 +32,6 @@ $streamAPI = new StreamAPI(
 #### [Get Collection](https://docs.bunny.net/reference/collection_getcollection)
 
 ```php
-<?php
-
 $streamAPI->getCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
@@ -43,8 +41,6 @@ $streamAPI->getCollection(
 #### [Update Collection](https://docs.bunny.net/reference/collection_updatecollection)
 
 ```php
-<?php
-
 $streamAPI->updateCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
@@ -57,8 +53,6 @@ $streamAPI->updateCollection(
 #### [Delete Collection](https://docs.bunny.net/reference/collection_deletecollection)
 
 ```php
-<?php
-
 $streamAPI->deleteCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
@@ -68,8 +62,6 @@ $streamAPI->deleteCollection(
 #### [List Collections](https://docs.bunny.net/reference/collection_list)
 
 ```php
-<?php
-
 $streamAPI->listCollections(
     libraryId: 1,
     query: [
@@ -84,8 +76,6 @@ $streamAPI->listCollections(
 #### [Create Collection](https://docs.bunny.net/reference/collection_createcollection)
 
 ```php
-<?php
-
 $streamAPI->createCollection(
     libraryId: 1,
     body: [
@@ -99,8 +89,6 @@ $streamAPI->createCollection(
 #### [Get Video](https://docs.bunny.net/reference/video_getvideo)
 
 ```php
-<?php
-
 $streamAPI->getVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -110,8 +98,6 @@ $streamAPI->getVideo(
 #### [Update Video](https://docs.bunny.net/reference/video_updatevideo)
 
 ```php
-<?php
-
 $streamAPI->updateVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
@@ -157,8 +143,6 @@ $streamAPI->updateVideo(
 #### [Delete Video](https://docs.bunny.net/reference/video_deletevideo)
 
 ```php
-<?php
-
 $streamAPI->deleteVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -168,8 +152,6 @@ $streamAPI->deleteVideo(
 #### [Create Video](https://docs.bunny.net/reference/video_createvideo)
 
 ```php
-<?php
-
 $streamAPI->createVideo(
     libraryId: 1,
     body: [
@@ -189,8 +171,6 @@ $streamAPI->createVideo(
 #### [Upload Video](https://docs.bunny.net/reference/video_uploadvideo)
 
 ```php
-<?php
-
 $streamAPI->uploadVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
@@ -204,8 +184,6 @@ $streamAPI->uploadVideo(
 #### [Get Video Heatmap](https://docs.bunny.net/reference/video_getvideoheatmap)
 
 ```php
-<?php
-
 $streamAPI->getVideoHeatmap(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -215,8 +193,6 @@ $streamAPI->getVideoHeatmap(
 #### [Get Video Statistics](https://docs.bunny.net/reference/video_getvideostatistics)
 
 ```php
-<?php
-
 $streamAPI->getVideoStatistics(
     libraryId: 1,
     query: [
@@ -231,8 +207,6 @@ $streamAPI->getVideoStatistics(
 #### [Re-encode Video](https://docs.bunny.net/reference/video_reencodevideo)
 
 ```php
-<?php
-
 $streamAPI->reEncodeVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -242,8 +216,6 @@ $streamAPI->reEncodeVideo(
 #### [List Videos](https://docs.bunny.net/reference/video_list)
 
 ```php
-<?php
-
 $streamAPI->listVideos(
     libraryId: 1,
     query: [
@@ -259,8 +231,6 @@ $streamAPI->listVideos(
 #### [Set Thumbnail](https://docs.bunny.net/reference/video_setthumbnail)
 
 ```php
-<?php
-
 $streamAPI->setThumbnail(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -273,8 +243,6 @@ $streamAPI->setThumbnail(
 #### [Fetch Video](https://docs.bunny.net/reference/video_fetchnewvideo)
 
 ```php
-<?php
-
 $streamAPI->fetchVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
@@ -295,8 +263,6 @@ $streamAPI->fetchVideo(
 #### [Add Caption](https://docs.bunny.net/reference/video_addcaption)
 
 ```php
-<?php
-
 $streamAPI->addCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
@@ -317,8 +283,6 @@ $streamAPI->addCaption(
 #### [Delete Caption](https://docs.bunny.net/reference/video_deletecaption)
 
 ```php
-<?php
-
 $streamAPI->deleteCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
