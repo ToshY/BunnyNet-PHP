@@ -22,8 +22,8 @@ Generate URL with optimization parameters.
 
 ```php
 $imageProcessor->generate(
-    'https://myzone.b-cdn.net/bunny.jpg',
-    [
+    url: 'https://myzone.b-cdn.net/bunny.jpg',
+    optimization: [
         'width' => 200,
         'height' => 300,
         'aspect_ratio' => '16:9',

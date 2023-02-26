@@ -88,6 +88,10 @@ This release reworks (almost) the entire codebase, and therefore results in quit
 - Token Authentication
     - Notes:
         - Added optional argument `$speedLimit`. Limits download speed in kB/s.
+  - Image Processor
+    - Notes:
+        - The argument `$optimizationCollection` was renamed to `$optimization`.
+        - Bug fix when supplying boolean values (e.g. flip/flop) were converted to integers.
 
 ### Noteworthy
 

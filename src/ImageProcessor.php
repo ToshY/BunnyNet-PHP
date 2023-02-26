@@ -8,19 +8,27 @@ class ImageProcessor
 {
     /**
      * @param string $url
-     * @param array<string,mixed> $optimizationCollection
+     * @param array<string,mixed> $optimization
      * @return string
      */
     public function generate(
         string $url,
-        array $optimizationCollection = [],
+        array $optimization = [],
     ): string {
-        if (true === empty($optimizationCollection)) {
+        if (true === empty($optimization)) {
             return $url;
         }
 
+        foreach ($optimization as $key => $value) {
+            if (false === is_bool($value)) {
+                continue;
+            }
+
+            $optimization[$key] = $value ? 'true' : 'false';
+        }
+
         $query = http_build_query(
-            data: $optimizationCollection,
+            data: $optimization,
             arg_separator: '&',
             encoding_type: PHP_QUERY_RFC3986
         );
