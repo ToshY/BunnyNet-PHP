@@ -8,8 +8,8 @@ use DateTimeInterface;
 use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
+use ToshY\BunnyNet\Model\API\Logging\GetLog;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Model\Logging\GetLog;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
 class LoggingAPI

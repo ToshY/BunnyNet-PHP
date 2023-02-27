@@ -6,9 +6,9 @@
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseAPI.php"/>
   <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseAPI.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/AddPullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/UpdatePullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Base/PullZone/AddPullZone.php" method="getBody"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Base/PullZone/UpdatePullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/StreamAPI.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/StreamAPI.php"/>
   <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/TokenAuthentication.php" method="sign"/>

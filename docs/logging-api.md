@@ -23,7 +23,7 @@ $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
-$loggingAPI = new LoggingAPI(
+$loggingApi = new LoggingAPI(
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989', # (2)
     client: $bunnyClient
 );
@@ -38,13 +38,13 @@ Generate secure URL.
 
 ```php
 // Logging of yesterday.
-$loggingAPI->getLog(
+$loggingApi->getLog(
     pullZoneId: 1,
     dateTime: new \DateTime('-1 day')
 );
 
 // Logging of yesterday narrowed down by additional query parameters.
-$loggingAPI->getLog(
+$loggingApi->getLog(
     pullZoneId: 1,
     dateTime: new \DateTime('-1 day'),
     query: [

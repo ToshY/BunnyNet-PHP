@@ -17,7 +17,7 @@ $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
-$edgeStorageAPI = new EdgeStorageAPI(
+$edgeStorageApi = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6', # (2)
     region: Region::FS, # (3)
     client: $bunnyClient
@@ -44,13 +44,13 @@ $edgeStorageAPI = new EdgeStorageAPI(
 
 ```php
 // Root directory.
-$edgeStorageAPI->downloadFile(
+$edgeStorageApi->downloadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageAPI->downloadFile(
+$edgeStorageApi->downloadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
     path: 'css'
@@ -61,14 +61,14 @@ $edgeStorageAPI->downloadFile(
 
 ```php
 // Root directory.
-$edgeStorageAPI->uploadFile(
+$edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-bunny.jpg',
     localFilePath: './local-bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageAPI->uploadFile(
+$edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
@@ -76,7 +76,7 @@ $edgeStorageAPI->uploadFile(
 );
 
 // Subdirectory with additional SHA256 checksum header.
-$edgeStorageAPI->uploadFile(
+$edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
@@ -91,13 +91,13 @@ $edgeStorageAPI->uploadFile(
 
 ```php
 // Root directory.
-$edgeStorageAPI->deleteFile(
+$edgeStorageApi->deleteFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageAPI->deleteFile(
+$edgeStorageApi->deleteFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
     path: 'css'
@@ -110,13 +110,13 @@ $edgeStorageAPI->deleteFile(
 
 ```php
 // Root directory.
-$edgeStorageAPI->listFiles(
+$edgeStorageApi->listFiles(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'bunny.jpg'
 );
 
 // Subdirectory.
-$edgeStorageAPI->listFiles(
+$edgeStorageApi->listFiles(
     storageZoneName: 'my-storage-zone-1',
     path: 'css'
 );

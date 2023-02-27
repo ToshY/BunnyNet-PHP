@@ -17,7 +17,7 @@ $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
-$baseAPI = new BaseAPI(
+$baseApi = new BaseAPI(
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989', # (2)
     client: $bunnyClient
 );
@@ -33,7 +33,7 @@ $baseAPI = new BaseAPI(
 #### [List Abuse Cases](https://docs.bunny.net/reference/abusecasepublic_index)
 
 ```php
-$baseAPI->listAbuseCases(
+$baseApi->listAbuseCases(
     query: [
         'page' => 1,
         'perPage' => 1000,
@@ -44,7 +44,7 @@ $baseAPI->listAbuseCases(
 #### [Resolve DMCA Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase)
 
 ```php
-$baseAPI->resolveDMCACase(
+$baseApi->resolveDmcaCase(
     id: 1,
 );
 ```
@@ -52,7 +52,7 @@ $baseAPI->resolveDMCACase(
 #### [Resolve Abuse Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase2)
 
 ```php
-$baseAPI->resolveAbuseCase(
+$baseApi->resolveAbuseCase(
     id: 1,
 );
 ```
@@ -60,7 +60,7 @@ $baseAPI->resolveAbuseCase(
 #### [Check Abuse Case](https://docs.bunny.net/reference/abusecasepublic_checkabusecase)
 
 ```php
-$baseAPI->checkAbuseCase(
+$baseApi->checkAbuseCase(
     id: 1,
 );
 ```
@@ -70,7 +70,7 @@ $baseAPI->checkAbuseCase(
 #### [Get Country List](https://docs.bunny.net/reference/countriespublic_getcountrylist)
 
 ```php
-$baseAPI->getCountryList();
+$baseApi->getCountryList();
 ```
 
 ### Billing
@@ -78,13 +78,13 @@ $baseAPI->getCountryList();
 #### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
 
 ```php
-$baseAPI->getBillingDetails();
+$baseApi->getBillingDetails();
 ```
 
 #### [Configure Auto Recharge](https://docs.bunny.net/reference/billingpublic_configureautorecharge)
 
 ```php
-$baseAPI->configureAutoRecharge(
+$baseApi->configureAutoRecharge(
     body: [
         'AutoRechargeEnabled' => true,
         'PaymentMethodToken' => 1000,
@@ -102,7 +102,7 @@ $baseAPI->configureAutoRecharge(
 #### [Create Payment Checkout](https://docs.bunny.net/reference/billingpublic_checkout)
 
 ```php
-$baseAPI->createPaymentCheckout(
+$baseApi->createPaymentCheckout(
     body: [
         'RechargeAmount' => 10,
         'PaymentAmount' => 10,
@@ -120,31 +120,31 @@ $baseAPI->createPaymentCheckout(
 #### [Prepare Payment Authorization](https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization)
 
 ```php
-$baseAPI->preparePaymentAuthorization();
+$baseApi->preparePaymentAuthorization();
 ```
 
 #### [Get Affiliate Details](https://docs.bunny.net/reference/billingpublic_affiliatedetails)
 
 ```php
-$baseAPI->getAffiliateDetails();
+$baseApi->getAffiliateDetails();
 ```
 
 #### [Claim Affiliate Credits](https://docs.bunny.net/reference/billingpublic_affiliateclaim)
 
 ```php
-$baseAPI->claimAffiliateCredits();
+$baseApi->claimAffiliateCredits();
 ```
 
-#### [Get The Coinify BTC exchange rate](https://docs.bunny.net/reference/billingpublic_coinifyexchangerate)
+#### [Get The Coinify Bitcoin exchange rate](https://docs.bunny.net/reference/billingpublic_coinifyexchangerate)
 
 ```php
-$baseAPI->getCoinifyBTCExchangeRate();
+$baseApi->getCoinifyBitcoinExchangeRate();
 ```
 
 #### [Create Coinify payment](https://docs.bunny.net/reference/billingpublic_createcoinifypayment)
 
 ```php
-$baseAPI->createCoinifyPayment(
+$baseApi->createCoinifyPayment(
     query: [
         'amount' => 123
     ]
@@ -154,13 +154,13 @@ $baseAPI->createCoinifyPayment(
 #### [Get Billing Summary](https://docs.bunny.net/reference/billingpublic_summary)
 
 ```php
-$baseAPI->getBillingSummary();
+$baseApi->getBillingSummary();
 ```
 
 #### [Apply Promo Code](https://docs.bunny.net/reference/billingpublic_applycode)
 
 ```php
-$baseAPI->applyPromoCode(
+$baseApi->applyPromoCode(
     query: [
         'CouponCode' => 'YOUFOUNDME'
     ]
@@ -172,7 +172,7 @@ $baseAPI->applyPromoCode(
 #### [List Compute Scripts](https://docs.bunny.net/reference/computeedgescriptpublic_index)
 
 ```php
-$baseAPI->listComputeScripts(
+$baseApi->listComputeScripts(
     query: [
         'page' => 1,
         'perPage' => 1000
@@ -183,7 +183,7 @@ $baseAPI->listComputeScripts(
 #### [Add Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_addscript)
 
 ```php
-$baseAPI->addComputeScript(
+$baseApi->addComputeScript(
     body: [
         'Name' => 'Test',
         'ScriptType' => 1000
@@ -200,7 +200,7 @@ $baseAPI->addComputeScript(
 #### [Get Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_index2)
 
 ```php
-$baseAPI->getComputeScript(
+$baseApi->getComputeScript(
     id: 1
 );
 ```
@@ -208,7 +208,7 @@ $baseAPI->getComputeScript(
 #### [Update Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_update)
 
 ```php
-$baseAPI->updateComputeScript(
+$baseApi->updateComputeScript(
     id: 1,
     body: [
         'Name' => 'Test',
@@ -226,7 +226,7 @@ $baseAPI->updateComputeScript(
 #### [Delete Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_delete)
 
 ```php
-$baseAPI->deleteComputeScript(
+$baseApi->deleteComputeScript(
     id: 1
 );
 ```
@@ -234,7 +234,7 @@ $baseAPI->deleteComputeScript(
 #### [Get Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_getcode)
 
 ```php
-$baseAPI->getComputeScriptCode(
+$baseApi->getComputeScriptCode(
     id: 1
 );
 ```
@@ -242,7 +242,7 @@ $baseAPI->getComputeScriptCode(
 #### [Update Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_setcode)
 
 ```php
-$baseAPI->updateComputeScriptCode(
+$baseApi->updateComputeScriptCode(
     id: 1,
     body: [
         'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
@@ -253,7 +253,7 @@ $baseAPI->updateComputeScriptCode(
 #### [List Compute Script Releases](https://docs.bunny.net/reference/computeedgescriptpublic_getreleases)
 
 ```php
-$baseAPI->listComputeScriptReleases(
+$baseApi->listComputeScriptReleases(
     id: 1,
     query: [
         'page' => 1,
@@ -265,7 +265,7 @@ $baseAPI->listComputeScriptReleases(
 #### [Publish Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_publish)
 
 ```php
-$baseAPI->publishComputeScript(
+$baseApi->publishComputeScript(
     id: 1,
     query: [
         'uuid' => '173d4dfc-a8dd-42f5-a55c-cba765c75aa5'
@@ -279,7 +279,7 @@ $baseAPI->publishComputeScript(
 #### [Publish Compute Script (by path parameter)](https://docs.bunny.net/reference/computeedgescriptpublic_publish2)
 
 ```php
-$baseAPI->publishComputeScriptByPathParameter(
+$baseApi->publishComputeScriptByPathParameter(
     id: 1,
     uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
     body: [
@@ -291,7 +291,7 @@ $baseAPI->publishComputeScriptByPathParameter(
 #### [Create Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_addvariable)
 
 ```php
-$baseAPI->addComputeScriptVariable(
+$baseApi->addComputeScriptVariable(
     id: 1,
     body: [
         'Name' => 'New Variable',
@@ -304,7 +304,7 @@ $baseAPI->addComputeScriptVariable(
 #### [Update Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_updatevariable)
 
 ```php
-$baseAPI->updateComputeScriptVariable(
+$baseApi->updateComputeScriptVariable(
     id: 1,
     variableId: 2,
     body: [
@@ -317,7 +317,7 @@ $baseAPI->updateComputeScriptVariable(
 #### [Get Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_getvariable)
 
 ```php
-$baseAPI->getComputeScriptVariable(
+$baseApi->getComputeScriptVariable(
     id: 1,
     variableId: 2
 );
@@ -326,7 +326,7 @@ $baseAPI->getComputeScriptVariable(
 #### [Delete Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_deletevariable)
 
 ```php
-$baseAPI->deleteComputeScriptVariable(
+$baseApi->deleteComputeScriptVariable(
     id: 1,
     variableId: 2
 );
@@ -337,7 +337,7 @@ $baseAPI->deleteComputeScriptVariable(
 #### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
 
 ```php
-$baseAPI->listTickets(
+$baseApi->listTickets(
     query: [
         'page' => 1,
         'perPage' => 1000
@@ -348,7 +348,7 @@ $baseAPI->listTickets(
 #### [Get Ticket Details](https://docs.bunny.net/reference/supportpublic_index2)
 
 ```php
-$baseAPI->getTicketDetails(
+$baseApi->getTicketDetails(
     id: 1
 );
 ```
@@ -356,7 +356,7 @@ $baseAPI->getTicketDetails(
 #### [Close Ticket](https://docs.bunny.net/reference/supportpublic_close)
 
 ```php
-$baseAPI->closeTicket(
+$baseApi->closeTicket(
     id: 1
 );
 ```
@@ -364,7 +364,7 @@ $baseAPI->closeTicket(
 #### [Reply Ticket](https://docs.bunny.net/reference/supportpublic_reply)
 
 ```php
-$baseAPI->closeTicket(
+$baseApi->closeTicket(
     id: 1,
     body: [
         'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
@@ -386,7 +386,7 @@ $baseAPI->closeTicket(
 #### [Create Ticket](https://docs.bunny.net/reference/supportpublic_createticket)
 
 ```php
-$baseAPI->createTicket(
+$baseApi->createTicket(
     id: 1,
     body: [
         'Subject' => 'Good day!',
@@ -414,7 +414,7 @@ $baseAPI->createTicket(
 #### [List DRM Certificates](https://docs.bunny.net/reference/drmcertificatepublic_index)
 
 ```php
-$baseAPI->listDRMCertificates(
+$baseApi->listDrmCertificates(
     query: [
         'page' => 1,
         'perPage' => 1000
@@ -427,7 +427,7 @@ $baseAPI->listDRMCertificates(
 #### [List Regions](https://docs.bunny.net/reference/regionpublic_index)
 
 ```php
-$baseAPI->listRegions();
+$baseApi->listRegions();
 ```
 
 ### Stream Video Library
@@ -435,7 +435,7 @@ $baseAPI->listRegions();
 #### [List Video Libraries](https://docs.bunny.net/reference/videolibrarypublic_index)
 
 ```php
-$baseAPI->listVideoLibraries(
+$baseApi->listVideoLibraries(
     query: [
         'page' => 0,
         'perPage' => 1000,
@@ -447,7 +447,7 @@ $baseAPI->listVideoLibraries(
 #### [Add Video Library](https://docs.bunny.net/reference/videolibrarypublic_add)
 
 ```php
-$baseAPI->addVideoLibrary(
+$baseApi->addVideoLibrary(
     body: [
         'Name' => 'New Video Library',
         'ReplicationRegions' => [
@@ -479,7 +479,7 @@ $baseAPI->addVideoLibrary(
 #### [Get Video Library](https://docs.bunny.net/reference/videolibrarypublic_index2)
 
 ```php
-$baseAPI->getVideoLibrary(
+$baseApi->getVideoLibrary(
     id: 1,
     query: [
         'includeAccessKey' => false
@@ -490,7 +490,7 @@ $baseAPI->getVideoLibrary(
 #### [Update Video Library]()
 
 ```php
-$baseAPI->updateVideoLibrary(
+$baseApi->updateVideoLibrary(
     id: 1,
     body: [
         'Name' => 'New Video Library V2',
@@ -559,7 +559,7 @@ $baseAPI->updateVideoLibrary(
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
 ```php
-$baseAPI->deleteVideoLibrary(
+$baseApi->deleteVideoLibrary(
     id: 1
 );
 ```
@@ -567,7 +567,7 @@ $baseAPI->deleteVideoLibrary(
 #### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
 
 ```php
-$baseAPI->resetVideoLibraryPassword(
+$baseApi->resetVideoLibraryPassword(
     query: [
         'id' => 1
     ]
@@ -577,7 +577,7 @@ $baseAPI->resetVideoLibraryPassword(
 #### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
 
 ```php
-$baseAPI->resetVideoLibraryPassword(
+$baseApi->resetVideoLibraryPassword(
     query: [
         'id' => 1
     ]
@@ -587,7 +587,7 @@ $baseAPI->resetVideoLibraryPassword(
 #### [Reset Password (by path parameter)](https://docs.bunny.net/reference/videolibrarypublic_resetpassword2)
 
 ```php
-$baseAPI->resetVideoLibraryPasswordByPathParameter(
+$baseApi->resetVideoLibraryPasswordByPathParameter(
     id: 1
 );
 ```
@@ -595,7 +595,7 @@ $baseAPI->resetVideoLibraryPasswordByPathParameter(
 #### [Add Watermark](https://docs.bunny.net/reference/videolibrarypublic_addwatermark)
 
 ```php
-$baseAPI->addWatermark(
+$baseApi->addWatermark(
     id: 1
 );
 ```
@@ -603,7 +603,7 @@ $baseAPI->addWatermark(
 #### [Delete Watermark](https://docs.bunny.net/reference/videolibrarypublic_deletewatermark)
 
 ```php
-$baseAPI->deleteWatermark(
+$baseApi->deleteWatermark(
     id: 1
 );
 ```
@@ -611,7 +611,7 @@ $baseAPI->deleteWatermark(
 #### [Add Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer)
 
 ```php
-$baseAPI->addVideoLibraryAllowedReferer(
+$baseApi->addVideoLibraryAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com,*.example.org'
@@ -626,7 +626,7 @@ $baseAPI->addVideoLibraryAllowedReferer(
 #### [Remove Allowed Referer](https://docs.bunny.net/reference/videolibrarypublic_removeallowedreferrer)
 
 ```php
-$baseAPI->removeVideoLibraryAllowedReferer(
+$baseApi->removeVideoLibraryAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com'
@@ -641,7 +641,7 @@ $baseAPI->removeVideoLibraryAllowedReferer(
 #### [Add Blocked Referer](ttps://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
 
 ```php
-$baseAPI->addVideoLibraryBlockedReferer(
+$baseApi->addVideoLibraryBlockedReferer(
     id: 1,
     body: [
         'Hostname' => 'evil.org'
@@ -656,7 +656,7 @@ $baseAPI->addVideoLibraryBlockedReferer(
 #### [Remove Blocked Referer](https://docs.bunny.net/reference/videolibrarypublic_removeblockedreferrer)
 
 ```php
-$baseAPI->removeVideoLibraryBlockedReferer(
+$baseApi->removeVideoLibraryBlockedReferer(
     id: 1,
     body: [
         'Hostname' => 'evil.org'
@@ -673,7 +673,7 @@ $baseAPI->removeVideoLibraryBlockedReferer(
 #### [List DNS Zones](https://docs.bunny.net/reference/dnszonepublic_index)
 
 ```php
-$baseAPI->listDNSZones(
+$baseApi->listDnsZones(
     query: [
         'page' => 1,
         'perPage' => 1000
@@ -684,7 +684,7 @@ $baseAPI->listDNSZones(
 #### [Add DNS Zone](https://docs.bunny.net/reference/dnszonepublic_add)
 
 ```php
-$baseAPI->addDNSZone(
+$baseApi->addDnsZone(
     body: [
         'Domain' => 'example.com',
     ]
@@ -694,7 +694,7 @@ $baseAPI->addDNSZone(
 #### [Get DNS Zone](https://docs.bunny.net/reference/dnszonepublic_index2)
 
 ```php
-$baseAPI->getDNSZone(
+$baseApi->getDnsZone(
     id: 1
 );
 ```
@@ -702,7 +702,7 @@ $baseAPI->getDNSZone(
 #### [Update DNS Zone](https://docs.bunny.net/reference/dnszonepublic_update)
 
 ```php
-$baseAPI->updateDNSZone(
+$baseApi->updateDnsZone(
     id: 1,
     body: [
         'CustomNameserversEnabled' => true,
@@ -726,7 +726,7 @@ $baseAPI->updateDNSZone(
 #### [Delete DNS Zone](https://docs.bunny.net/reference/dnszonepublic_delete)
 
 ```php
-$baseAPI->deleteDNSZone(
+$baseApi->deleteDnsZone(
     id: 1
 );
 ```
@@ -734,7 +734,7 @@ $baseAPI->deleteDNSZone(
 #### [Export DNS Zone](https://docs.bunny.net/reference/dnszonepublic_export)
 
 ```php
-$baseAPI->exportDNSZone(
+$baseApi->exportDnsZone(
     id: 1
 );
 ```
@@ -742,7 +742,7 @@ $baseAPI->exportDNSZone(
 #### [Get DNS Query Statistics](https://docs.bunny.net/reference/dnszonepublic_statistics)
 
 ```php
-$baseAPI->getDNSZoneQueryStatistics(
+$baseApi->getDnsZoneQueryStatistics(
     id: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -754,7 +754,7 @@ $baseAPI->getDNSZoneQueryStatistics(
 #### [Check DNS Zone Availability](https://docs.bunny.net/reference/dnszonepublic_checkavailability)
 
 ```php
-$baseAPI->checkDNSZoneAvailability(
+$baseApi->checkDnsZoneAvailability(
     body: [
         'Name' => 'example.com',
     ]
@@ -764,7 +764,7 @@ $baseAPI->checkDNSZoneAvailability(
 #### [Add DNS Record](https://docs.bunny.net/reference/dnszonepublic_addrecord)
 
 ```php
-$baseAPI->addDNSRecord(
+$baseApi->addDnsRecord(
     zoneId: 1,
     body: [
         'Type' => 3,
@@ -831,7 +831,7 @@ $baseAPI->addDNSRecord(
 #### [Update DNS Record](https://docs.bunny.net/reference/dnszonepublic_updaterecord)
 
 ```php
-$baseAPI->updateDNSRecord(
+$baseApi->updateDnsRecord(
     zoneId: 1,
     id: 2,
     body: [
@@ -899,16 +899,16 @@ $baseAPI->updateDNSRecord(
 #### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_deleterecord)
 
 ```php
-$baseAPI->deleteDNSRecord(
+$baseApi->deleteDnsRecord(
     zoneId: 1,
     id: 2
 );
 ```
 
-#### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_recheckdns)
+#### [Recheck DNS Configuration](https://docs.bunny.net/reference/dnszonepublic_recheckdns)
 
 ```php
-$baseAPI->recheckDNSConfiguration(
+$baseApi->recheckDNSConfiguration(
     id: 1
 );
 ```
@@ -916,7 +916,7 @@ $baseAPI->recheckDNSConfiguration(
 #### [Dismiss DNS Configuration Notice](https://docs.bunny.net/reference/dnszonepublic_dismissnameservercheck)
 
 ```php
-$baseAPI->dismissDNSConfigurationNotice(
+$baseApi->dismissDnsConfigurationNotice(
     id: 1
 );
 ```
@@ -924,7 +924,7 @@ $baseAPI->dismissDNSConfigurationNotice(
 #### [Import DNS Records](https://docs.bunny.net/reference/dnszonepublic_import)
 
 ```php
-$baseAPI->importDNSRecords(
+$baseApi->importDnsRecords(
     zoneId: 1,
     localFilePath: './records.txt'
 );
@@ -939,7 +939,7 @@ $baseAPI->importDNSRecords(
 #### [List Pull Zones](https://docs.bunny.net/reference/pullzonepublic_index)
 
 ```php
-$baseAPI->listPullZones(
+$baseApi->listPullZones(
     query: [
         'page' => 0,
         'perPage' => 1000,
@@ -951,7 +951,7 @@ $baseAPI->listPullZones(
 #### [Add Pull Zone](https://docs.bunny.net/reference/pullzonepublic_add)
 
 ```php
-$baseAPI->addPullZone(
+$baseApi->addPullZone(
     body: [
         'OriginUrl' => 'https://my-bucket-2.service.com',
         'AllowedReferrers' => [],
@@ -1100,7 +1100,7 @@ $baseAPI->addPullZone(
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
 ```php
-$baseAPI->getPullZone(
+$baseApi->getPullZone(
     id: 1,
     query: [
         'includeCertificate' => false
@@ -1111,7 +1111,7 @@ $baseAPI->getPullZone(
 #### [Update Pull Zone](https://docs.bunny.net/reference/pullzonepublic_updatepullzone)
 
 ```php
-$baseAPI->updatePullZone(
+$baseApi->updatePullZone(
     id: 1,
     body: [
         'OriginUrl' => 'https://my-bucket-2.service.com',
@@ -1260,7 +1260,7 @@ $baseAPI->updatePullZone(
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
 ```php
-$baseAPI->deletePullZone(
+$baseApi->deletePullZone(
     id: 1
 );
 ```
@@ -1268,7 +1268,7 @@ $baseAPI->deletePullZone(
 #### [Delete Edge Rule](https://docs.bunny.net/reference/pullzonepublic_deleteedgerule)
 
 ```php
-$baseAPI->deleteEdgeRule(
+$baseApi->deleteEdgeRule(
     pullZoneId: 1,
     edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587'
 );
@@ -1277,7 +1277,7 @@ $baseAPI->deleteEdgeRule(
 #### [Add/Update Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
 
 ```php
-$baseAPI->addOrUpdateEdgeRule(
+$baseApi->addOrUpdateEdgeRule(
     pullZoneId: 1,
     body: [
         'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587',
@@ -1341,7 +1341,7 @@ $baseAPI->addOrUpdateEdgeRule(
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
 
 ```php
-$baseAPI->setEdgeRuleEnabled(
+$baseApi->setEdgeRuleEnabled(
     pullZoneId: 1,
     edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
     body: [
@@ -1358,7 +1358,7 @@ $baseAPI->setEdgeRuleEnabled(
 #### Set Zone Security Enabled (undocumented)
 
 ```php
-$baseAPI->setZoneSecurityEnabled(
+$baseApi->setZoneSecurityEnabled(
     Id: 1,
     Value: true
 );
@@ -1371,7 +1371,7 @@ $baseAPI->setZoneSecurityEnabled(
 #### Set Zone Security Include Hash Remote IP Enabled (undocumented)
 
 ```php
-$baseAPI->setZoneSecurityIncludeHashRemoteIPEnabled(
+$baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
     Id: 1,
     Value: true
 );
@@ -1393,7 +1393,7 @@ B♭  Gm  Cm  F   Dm  E♭m F7  B♭
 #### [Get Origin Shield Queue Statistics](https://docs.bunny.net/reference/pullzonepublic_originshieldconcurrencystatistics)
 
 ```php
-$baseAPI->getOriginShieldQueueStatistics(
+$baseApi->getOriginShieldQueueStatistics(
     pullZoneId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -1406,7 +1406,7 @@ $baseAPI->getOriginShieldQueueStatistics(
 #### [Get SafeHop Statistics](https://docs.bunny.net/reference/pullzonepublic_safehopstatistics)
 
 ```php
-$baseAPI->getSafeHopStatistics(
+$baseApi->getSafeHopStatistics(
     pullZoneId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -1419,7 +1419,7 @@ $baseAPI->getSafeHopStatistics(
 #### [Get Optimizer Statistics](https://docs.bunny.net/reference/pullzonepublic_optimizerstatistics)
 
 ```php
-$baseAPI->getOptimizerStatistics(
+$baseApi->getOptimizerStatistics(
     pullZoneId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -1432,7 +1432,7 @@ $baseAPI->getOptimizerStatistics(
 #### Get WAF Statistics (undocumented)
 
 ```php
-$baseAPI->getWAFStatistics(
+$baseApi->getWafStatistics(
     pullZoneId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -1445,7 +1445,7 @@ $baseAPI->getWAFStatistics(
 #### [Load Free Certificate](https://docs.bunny.net/reference/pullzonepublic_loadfreecertificate)
 
 ```php
-$baseAPI->loadFreeCertificate(
+$baseApi->loadFreeCertificate(
     query: [
         'hostname' => 'cdn.example.com'
     ]
@@ -1455,7 +1455,7 @@ $baseAPI->loadFreeCertificate(
 #### [Purge Cache (by tag)](https://docs.bunny.net/reference/pullzonepublic_purgecachepostbytag)
 
 ```php
-$baseAPI->purgePullZoneCache(
+$baseApi->purgePullZoneCache(
     id: 1,
     body: [
         'CacheTag' => 'mytag-region-*'
@@ -1466,7 +1466,7 @@ $baseAPI->purgePullZoneCache(
 #### [Check Pull Zone Availability](https://docs.bunny.net/reference/pullzonepublic_checkavailability)
 
 ```php
-$baseAPI->checkPullZoneAvailability(
+$baseApi->checkPullZoneAvailability(
     body: [
         'Name' => 'test'
     ]
@@ -1476,7 +1476,7 @@ $baseAPI->checkPullZoneAvailability(
 #### [Add Custom Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
 
 ```php
-$baseAPI->addCustomCertificate(
+$baseApi->addCustomCertificate(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
@@ -1493,7 +1493,7 @@ $baseAPI->addCustomCertificate(
 #### [Remove Custom Certificate](https://docs.bunny.net/reference/pullzonepublic_removecertificate)
 
 ```php
-$baseAPI->removeCertificate(
+$baseApi->removeCertificate(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com'
@@ -1504,7 +1504,7 @@ $baseAPI->removeCertificate(
 #### [Add Custom Hostname](https://docs.bunny.net/reference/pullzonepublic_addhostname)
 
 ```php
-$baseAPI->addCustomHostname(
+$baseApi->addCustomHostname(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com'
@@ -1515,7 +1515,7 @@ $baseAPI->addCustomHostname(
 #### [Remove Custom Hostname](https://docs.bunny.net/reference/pullzonepublic_removehostname)
 
 ```php
-$baseAPI->removeCustomHostname(
+$baseApi->removeCustomHostname(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com'
@@ -1526,7 +1526,7 @@ $baseAPI->removeCustomHostname(
 #### [Set Force SSL](https://docs.bunny.net/reference/pullzonepublic_setforcessl)
 
 ```php
-$baseAPI->setForceSSL(
+$baseApi->setForceSsl(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
@@ -1538,7 +1538,7 @@ $baseAPI->setForceSSL(
 #### [Reset Token Key](https://docs.bunny.net/reference/pullzonepublic_resetsecuritykey)
 
 ```php
-$baseAPI->resetPullZoneTokenKey(
+$baseApi->resetPullZoneTokenKey(
     id: 1
 );
 ```
@@ -1546,7 +1546,7 @@ $baseAPI->resetPullZoneTokenKey(
 #### [Add Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer)
 
 ```php
-$baseAPI->addPullZoneAllowedReferer(
+$baseApi->addPullZoneAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com,*.example.org'
@@ -1561,7 +1561,7 @@ $baseAPI->addPullZoneAllowedReferer(
 #### [Remove Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_removeallowedreferrer)
 
 ```php
-$baseAPI->removePullZoneAllowedReferer(
+$baseApi->removePullZoneAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com'
@@ -1576,7 +1576,7 @@ $baseAPI->removePullZoneAllowedReferer(
 #### [Add Blocked Referer](https://docs.bunny.net/reference/pullzonepublic_addblockedreferrer)
 
 ```php
-$baseAPI->addPullZoneBlockedReferer(
+$baseApi->addPullZoneBlockedReferer(
     id: 1,
     body: [
         'Hostname' => '*.evil.org'
@@ -1591,7 +1591,7 @@ $baseAPI->addPullZoneBlockedReferer(
 #### [Remove Blocked Referer](https://docs.bunny.net/reference/pullzonepublic_removeblockedreferrer)
 
 ```php
-$baseAPI->removePullZoneBlockedReferer(
+$baseApi->removePullZoneBlockedReferer(
     id: 1,
     body: [
         'Hostname' => '*.evil.org'
@@ -1602,7 +1602,7 @@ $baseAPI->removePullZoneBlockedReferer(
 #### [Add Blocked IP](https://docs.bunny.net/reference/pullzonepublic_addblockedip)
 
 ```php
-$baseAPI->addPullZoneBlockedIP(
+$baseApi->addPullZoneBlockedIp(
     id: 1,
     body: [
         'BlockedIp' => '12.345.67.89'
@@ -1613,7 +1613,7 @@ $baseAPI->addPullZoneBlockedIP(
 #### [Remove Blocked IP](https://docs.bunny.net/reference/pullzonepublic_removeblockedip)
 
 ```php
-$baseAPI->removePullZoneBlockedIP(
+$baseApi->removePullZoneBlockedIp(
     id: 1,
     body: [
         'BlockedIp' => '12.345.67.89'
@@ -1626,7 +1626,7 @@ $baseAPI->removePullZoneBlockedIP(
 #### [Purge URL](https://docs.bunny.net/reference/purgepublic_indexpost)
 
 ```php
-$baseAPI->purgeUrl(
+$baseApi->purgeUrl(
     query: [
         'url' => 'https://example.b-cdn.net/images/*',
         'async' => false
@@ -1637,7 +1637,7 @@ $baseAPI->purgeUrl(
 #### [ Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
 
 ```php
-$baseAPI->purgeUrlByHeader(
+$baseApi->purgeUrlByHeader(
     query: [
         'url' => 'https://example.b-cdn.net/images/*',
         'headerName' => '',
@@ -1652,7 +1652,7 @@ $baseAPI->purgeUrlByHeader(
 #### [Get Statistics (traffic, cache hit & bandwidth)](https://docs.bunny.net/reference/statisticspublic_index)
 
 ```php
-$baseAPI->getStatistics(
+$baseApi->getStatistics(
     query: [
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
@@ -1669,7 +1669,7 @@ $baseAPI->getStatistics(
 #### [List Storage Zones](https://docs.bunny.net/reference/storagezonepublic_index)
 
 ```php
-$baseAPI->listStorageZones(
+$baseApi->listStorageZones(
     query: [
         'page' => 0,
         'perPage' => 1000,
@@ -1681,7 +1681,7 @@ $baseAPI->listStorageZones(
 #### [Add Storage Zone](https://docs.bunny.net/reference/storagezonepublic_add)
 
 ```php
-$baseAPI->addStorageZone(
+$baseApi->addStorageZone(
     body: [
         'OriginUrl' => '',
         'Name' => 'Test',
@@ -1730,13 +1730,13 @@ $baseAPI->addStorageZone(
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
 ```php
-$baseAPI->checkStorageZoneAvailability();
+$baseApi->checkStorageZoneAvailability();
 ```
 
 #### [Get Storage Zone](https://docs.bunny.net/reference/storagezonepublic_index2)
 
 ```php
-$baseAPI->getStorageZone(
+$baseApi->getStorageZone(
     id: 1
 );
 ```
@@ -1744,7 +1744,7 @@ $baseAPI->getStorageZone(
 #### [Get Storage Zone](https://docs.bunny.net/reference/storagezonepublic_index2)
 
 ```php
-$baseAPI->getStorageZone(
+$baseApi->getStorageZone(
     id: 1
 );
 ```
@@ -1752,7 +1752,7 @@ $baseAPI->getStorageZone(
 #### [Update Storage Zone](https://docs.bunny.net/reference/storagezonepublic_update)
 
 ```php
-$baseAPI->updateStorageZone(
+$baseApi->updateStorageZone(
     id: 1,
     body: [
         'ReplicationZones' => '',
@@ -1788,7 +1788,7 @@ $baseAPI->updateStorageZone(
 #### [Delete Storage Zone](https://docs.bunny.net/reference/storagezonepublic_delete)
 
 ```php
-$baseAPI->deleteStorageZone(
+$baseApi->deleteStorageZone(
     id: 1
 );
 ```
@@ -1796,7 +1796,7 @@ $baseAPI->deleteStorageZone(
 #### [Reset Password](https://docs.bunny.net/reference/storagezonepublic_resetpassword)
 
 ```php
-$baseAPI->resetStorageZonePassword(
+$baseApi->resetStorageZonePassword(
     id: 1
 );
 ```
@@ -1804,7 +1804,7 @@ $baseAPI->resetStorageZonePassword(
 #### [Reset Read-Only Password](https://docs.bunny.net/reference/storagezonepublic_resetreadonlypassword)
 
 ```php
-$baseAPI->resetStorageZoneReadOnlyPassword(
+$baseApi->resetStorageZoneReadOnlyPassword(
     query: [
         'id' => 1
     ]
@@ -1816,19 +1816,19 @@ $baseAPI->resetStorageZoneReadOnlyPassword(
 #### [Get Home Feed](ttps://docs.bunny.net/reference/userpublic_homefeed)
 
 ```php
-$baseAPI->getHomeFeed();
+$baseApi->getHomeFeed();
 ```
 
 #### [Get User Details](https://docs.bunny.net/reference/userpublic_index)
 
 ```php
-$baseAPI->getUserDetails();
+$baseApi->getUserDetails();
 ```
 
 #### [Update User Details](https://docs.bunny.net/reference/userpublic_updateuser)
 
 ```php
-$baseAPI->updateUserDetails(
+$baseApi->updateUserDetails(
     body: [
         'FirstName' => 'John',
         'Email' => 'john.doe@example.com',
@@ -1851,25 +1851,25 @@ $baseAPI->updateUserDetails(
 #### [Resend Email Confirmation](https://docs.bunny.net/reference/userpublic_resendemailconfirmation)
 
 ```php
-$baseAPI->resendEmailConfirmation();
+$baseApi->resendEmailConfirmation();
 ```
 
 #### [Reset API Key](https://docs.bunny.net/reference/userpublic_resetapikey)
 
 ```php
-$baseAPI->resetUserApiKey();
+$baseApi->resetUserApiKey();
 ```
 
 #### [List Close Account Reasons](https://docs.bunny.net/reference/userpublic_listcloseaccountreasons)
 
 ```php
-$baseAPI->listCloseAccountReasons();
+$baseApi->listCloseAccountReasons();
 ```
 
 #### [Close Account](https://docs.bunny.net/reference/userpublic_closeaccount)
 
 ```php
-$baseAPI->closeAccount(
+$baseApi->closeAccount(
     body: [
         'Password' => 'Abcd1234',
         'Reason' => 'No longer needed.'
@@ -1880,49 +1880,49 @@ $baseAPI->closeAccount(
 #### [Get DPA Details](https://docs.bunny.net/reference/userpublic_dpa)
 
 ```php
-$baseAPI->getDPADetails();
+$baseApi->getDpaDetails();
 ```
 
 #### [Accept DPA](https://docs.bunny.net/reference/userpublic_dpaaccept)
 
 ```php
-$baseAPI->acceptDPA();
+$baseApi->acceptDpa();
 ```
 
 #### [Get DPA Details (HTML)](https://docs.bunny.net/reference/userpublic_dpapdfhhtml)
 
 ```php
-$baseAPI->getDPADetailsHTML();
+$baseApi->getDpaDetailsHtml();
 ```
 
 #### [Set Notifications Opened](https://docs.bunny.net/reference/userpublic_setnotificationsopened)
 
 ```php
-$baseAPI->setNotificationsOpened();
+$baseApi->setNotificationsOpened();
 ```
 
 #### [Get What's New Items](https://docs.bunny.net/reference/userpublic_whatsnew)
 
 ```php
-$baseAPI->getWhatsNewItems();
+$baseApi->getWhatsNewItems();
 ```
 
 #### [Reset What's New](https://docs.bunny.net/reference/userpublic_whatsnewreset)
 
 ```php
-$baseAPI->resetWhatsNew();
+$baseApi->resetWhatsNew();
 ```
 
 #### [Generate 2FA Verification](https://docs.bunny.net/reference/userpublic_twofactorgenerateverification)
 
 ```php
-$baseAPI->generate2FAVerification();
+$baseApi->generateTwoFactorAuthenticationVerification();
 ```
 
 #### [Disable 2FA](https://docs.bunny.net/reference/userpublic_twofactordisable)
 
 ```php
-$baseAPI->disable2FA(
+$baseApi->disableTwoFactorAuthentication(
     body: [
         'Password' => 'LoremIpsumDolor'
     ]
@@ -1932,7 +1932,7 @@ $baseAPI->disable2FA(
 #### [Enable 2FA](https://docs.bunny.net/reference/userpublic_twofactorenable)
 
 ```php
-$baseAPI->enable2FA(
+$baseApi->enableTwoFactorAuthentication(
     body: [
         'SecretValidator' => '',
         'Secret' => '',
@@ -1944,7 +1944,7 @@ $baseAPI->enable2FA(
 #### [Verify 2FA Code](https://docs.bunny.net/reference/userpublic_twofactorverify)
 
 ```php
-$baseAPI->verify2FACode(
+$baseApi->verifyTwoFactorAuthenticationCode(
     body: [
         'SecretValidator' => '',
         'Secret' => '',

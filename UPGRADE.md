@@ -1,10 +1,9 @@
 ## 3.x
 
-This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes. While I
-personally think it comes with a lot of improvements, both in code quality and API functionality, it requires
-the user to rework 
+This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes. Please
+read the following notes carefully before upgrading.
 
-The `3.x` release also comes with the notion that the `2.x` branch will no longer be maintained.
+The `2.x` branch will now no longer be maintained.
 
 ### ‼️ Breaking changes
 
@@ -27,6 +26,7 @@ The `3.x` release also comes with the notion that the `2.x` branch will no longe
     - The class `SecureUrlGenerator` was renamed to `TokenAuthentication`.
         - The method `generate` was renamed to `sign`.
     - The class `ImageOptimizer` was renamed to `ImageProcessor`.
+        - The argument `$optimizationCollection` was renamed to `$optimization`.
     - The class `PricingCalculator` was removed.
   - The following public methods have been **renamed**:
     - The method `listStorageZone` was renamed to `listStorageZones`.
@@ -46,21 +46,27 @@ The `3.x` release also comes with the notion that the `2.x` branch will no longe
   - Edge Storage API
     - The argument `$hostCode` was changed to `$region` and now only accepts a `Region` case.
       - Example: For the `Falkenstein` region (previously `'FS'` code) this would now be `Region::FS` (default).
-      - For a complete list of available `Region` cases, see the example in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/edge-storage-api/#setup). 
+      - For a complete list of available `Region` cases, see the example in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/edge-storage-api/#setup).
 
 > Note: Please take in consideration that due to the impact of this release I cannot fully guarantee this list of
 > breaking changes is complete. Thank you for your understanding.
 
 ### General Updates
 
+- Styleguide
+    - Regarding [PHP RFC: Class Naming](https://wiki.php.net/rfc/class-naming), class names with initialism, e.g. `API`,
+      will be uppercase for the initialism part.
+        - Variable names for instances of these classes will follow the camelCase naming convention.
+            - E.g. `$baseApi` for the `BaseAPI` class.
+        - Method names including an initialism will (still) follow the camelCase naming convention.
+            - Example: get DPA details => `getDpaDetails`.
+            - Example: get DNS zone => `getDnsZone`.
 - Base API
     - Notes:
-        - Updates and additions of endpoints to be up-to-date with the latest API specifications.
+        - Updating to the latest API specifications.
 - Edge Storage API
     - Notes:
-        - For the `$hostCode` in the construction and `setHost` method can now accept either `Region` or `string`
-          values.
-            - Example: For `Falkenstein` region either `Region::FS` (new/preferred way) or `'FS'` (old way) both work.
+        - Updating to the latest API specifications.
     - Changes:
         - Manage Files
             - Updated:
@@ -73,7 +79,7 @@ The `3.x` release also comes with the notion that the `2.x` branch will no longe
                     - The arguments `$path` and `$fileName` switched order to `$fileName` and `$path`; The `$path` argument now has a default value `''`, denoting the root directory.
 - Stream API
     - Notes:
-        - Updates and additions of endpoints to be up-to-date with the latest API specifications.
+        - Updating to the latest API specifications.
     - Changes:
         - Manage Videos
             - Added:
@@ -93,9 +99,8 @@ The `3.x` release also comes with the notion that the `2.x` branch will no longe
 - Token Authentication
     - Notes:
         - Added optional argument `$speedLimit`. Limits download speed in kB/s.
-  - Image Processor
+- Image Processor
     - Notes:
-        - The argument `$optimizationCollection` was renamed to `$optimization`.
         - Bug fix when supplying boolean values (e.g. flip/flop) were converted to integers.
 
 ### Noteworthy

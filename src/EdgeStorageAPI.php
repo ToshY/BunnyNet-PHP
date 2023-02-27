@@ -9,11 +9,11 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
+use ToshY\BunnyNet\Model\API\EdgeStorage\BrowseFiles\ListFiles;
+use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DeleteFile;
+use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DownloadFile;
+use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Model\EdgeStorage\BrowseFiles\ListFiles;
-use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DeleteFile;
-use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DownloadFile;
-use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\UploadFile;
 
 class EdgeStorageAPI
 {

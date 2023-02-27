@@ -8,112 +8,112 @@ use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
-use ToshY\BunnyNet\Model\Base\AbuseCase\CheckAbuseCase;
-use ToshY\BunnyNet\Model\Base\AbuseCase\ListAbuseCases;
-use ToshY\BunnyNet\Model\Base\AbuseCase\ResolveAbuseCase;
-use ToshY\BunnyNet\Model\Base\AbuseCase\ResolveDMCACase;
-use ToshY\BunnyNet\Model\Base\Billing\ApplyPromoCode;
-use ToshY\BunnyNet\Model\Base\Billing\ClaimAffiliateCredits;
-use ToshY\BunnyNet\Model\Base\Billing\ConfigureAutoRecharge;
-use ToshY\BunnyNet\Model\Base\Billing\CreateCoinifyPayment;
-use ToshY\BunnyNet\Model\Base\Billing\CreatePaymentCheckout;
-use ToshY\BunnyNet\Model\Base\Billing\GetAffiliateDetails;
-use ToshY\BunnyNet\Model\Base\Billing\GetBillingDetails;
-use ToshY\BunnyNet\Model\Base\Billing\GetBillingSummary;
-use ToshY\BunnyNet\Model\Base\Billing\GetCoinifyBTCExchangeRate;
-use ToshY\BunnyNet\Model\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\Base\Compute\AddComputeScript;
-use ToshY\BunnyNet\Model\Base\Compute\PublishComputeScript;
-use ToshY\BunnyNet\Model\Base\Compute\PublishComputeScriptByPathParameter;
-use ToshY\BunnyNet\Model\Base\Compute\AddComputeScriptVariable;
-use ToshY\BunnyNet\Model\Base\Compute\DeleteComputeScript;
-use ToshY\BunnyNet\Model\Base\Compute\DeleteComputeScriptVariable;
-use ToshY\BunnyNet\Model\Base\Compute\GetComputeScript;
-use ToshY\BunnyNet\Model\Base\Compute\GetComputeScriptCode;
-use ToshY\BunnyNet\Model\Base\Compute\GetComputeScriptVariable;
-use ToshY\BunnyNet\Model\Base\Compute\ListComputeScriptReleases;
-use ToshY\BunnyNet\Model\Base\Compute\ListComputeScripts;
-use ToshY\BunnyNet\Model\Base\Compute\UpdateComputeScript;
-use ToshY\BunnyNet\Model\Base\Compute\UpdateComputeScriptCode;
-use ToshY\BunnyNet\Model\Base\Compute\UpdateComputeScriptVariable;
-use ToshY\BunnyNet\Model\Base\Countries\ListCountries;
-use ToshY\BunnyNet\Model\Base\DNSZone\AddDNSRecord;
-use ToshY\BunnyNet\Model\Base\DNSZone\AddDNSZone;
-use ToshY\BunnyNet\Model\Base\DNSZone\CheckDNSZoneAvailability;
-use ToshY\BunnyNet\Model\Base\DNSZone\DeleteDNSRecord;
-use ToshY\BunnyNet\Model\Base\DNSZone\DeleteDNSZone;
-use ToshY\BunnyNet\Model\Base\DNSZone\DismissDNSConfigurationNotice;
-use ToshY\BunnyNet\Model\Base\DNSZone\ExportDNSRecords;
-use ToshY\BunnyNet\Model\Base\DNSZone\GetDNSZone;
-use ToshY\BunnyNet\Model\Base\DNSZone\GetDNSZoneQueryStatistics;
-use ToshY\BunnyNet\Model\Base\DNSZone\ImportDNSRecords;
-use ToshY\BunnyNet\Model\Base\DNSZone\ListDNSZones;
-use ToshY\BunnyNet\Model\Base\DNSZone\RecheckDNSConfiguration;
-use ToshY\BunnyNet\Model\Base\DNSZone\UpdateDNSRecord;
-use ToshY\BunnyNet\Model\Base\DNSZone\UpdateDNSZone;
-use ToshY\BunnyNet\Model\Base\DRMCertificate\ListDRMCertificates;
-use ToshY\BunnyNet\Model\Base\PullZone\AddCustomCertificate;
-use ToshY\BunnyNet\Model\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\Base\PullZone\AddOrUpdateEdgeRule;
-use ToshY\BunnyNet\Model\Base\PullZone\AddPullZone;
-use ToshY\BunnyNet\Model\Base\PullZone\CheckPullZoneAvailability;
-use ToshY\BunnyNet\Model\Base\PullZone\DeleteCertificate;
-use ToshY\BunnyNet\Model\Base\PullZone\DeleteCustomHostname;
-use ToshY\BunnyNet\Model\Base\PullZone\DeleteEdgeRule;
-use ToshY\BunnyNet\Model\Base\PullZone\DeletePullZone;
-use ToshY\BunnyNet\Model\Base\PullZone\GetOptimizerStatistics;
-use ToshY\BunnyNet\Model\Base\PullZone\GetOriginShieldQueueStatistics;
-use ToshY\BunnyNet\Model\Base\PullZone\GetPullZone;
-use ToshY\BunnyNet\Model\Base\PullZone\GetSafeHopStatistics;
-use ToshY\BunnyNet\Model\Base\PullZone\GetWAFStatistics;
-use ToshY\BunnyNet\Model\Base\PullZone\ListPullZones;
-use ToshY\BunnyNet\Model\Base\PullZone\LoadFreeCertificate;
-use ToshY\BunnyNet\Model\Base\PullZone\PurgeCache;
-use ToshY\BunnyNet\Model\Base\PullZone\ResetTokenKey;
-use ToshY\BunnyNet\Model\Base\PullZone\SetEdgeRuleEnabled;
-use ToshY\BunnyNet\Model\Base\PullZone\SetForceSSL;
-use ToshY\BunnyNet\Model\Base\PullZone\SetZoneSecurityEnabled;
-use ToshY\BunnyNet\Model\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
-use ToshY\BunnyNet\Model\Base\PullZone\UpdatePullZone;
-use ToshY\BunnyNet\Model\Base\Purge\PurgeURL;
-use ToshY\BunnyNet\Model\Base\Purge\PurgeURLByHeader;
-use ToshY\BunnyNet\Model\Base\Region\ListRegions;
-use ToshY\BunnyNet\Model\Base\Statistics\GetStatistics;
-use ToshY\BunnyNet\Model\Base\StorageZone\AddStorageZone;
-use ToshY\BunnyNet\Model\Base\StorageZone\CheckStorageZoneAvailability;
-use ToshY\BunnyNet\Model\Base\StorageZone\DeleteStorageZone;
-use ToshY\BunnyNet\Model\Base\StorageZone\GetStorageZone;
-use ToshY\BunnyNet\Model\Base\StorageZone\ListStorageZones;
-use ToshY\BunnyNet\Model\Base\StorageZone\UpdateStorageZone;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\AddVideoLibrary;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\AddWatermark;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\DeleteVideoLibrary;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\DeleteWatermark;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\GetVideoLibrary;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\ListVideoLibraries;
-use ToshY\BunnyNet\Model\Base\StreamVideoLibrary\UpdateVideoLibrary;
-use ToshY\BunnyNet\Model\Base\Support\CloseTicket;
-use ToshY\BunnyNet\Model\Base\Support\CreateTicket;
-use ToshY\BunnyNet\Model\Base\Support\GetTicketDetails;
-use ToshY\BunnyNet\Model\Base\Support\ListTickets;
-use ToshY\BunnyNet\Model\Base\Support\ReplyTicket;
-use ToshY\BunnyNet\Model\Base\User\AcceptDPA;
-use ToshY\BunnyNet\Model\Base\User\CloseAccount;
-use ToshY\BunnyNet\Model\Base\User\Disable2FA;
-use ToshY\BunnyNet\Model\Base\User\Enable2FA;
-use ToshY\BunnyNet\Model\Base\User\Generate2FAVerification;
-use ToshY\BunnyNet\Model\Base\User\GetDPADetails;
-use ToshY\BunnyNet\Model\Base\User\GetDPADetailsHTML;
-use ToshY\BunnyNet\Model\Base\User\GetHomeFeed;
-use ToshY\BunnyNet\Model\Base\User\GetUserDetails;
-use ToshY\BunnyNet\Model\Base\User\GetWhatsNewItems;
-use ToshY\BunnyNet\Model\Base\User\ListCloseAccountReasons;
-use ToshY\BunnyNet\Model\Base\User\ResendEmailConfirmation;
-use ToshY\BunnyNet\Model\Base\User\ResetAPIKey;
-use ToshY\BunnyNet\Model\Base\User\ResetWhatsNew;
-use ToshY\BunnyNet\Model\Base\User\SetNotificationsOpened;
-use ToshY\BunnyNet\Model\Base\User\UpdateUserDetails;
-use ToshY\BunnyNet\Model\Base\User\Verify2FACode;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\CheckAbuseCase;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
+use ToshY\BunnyNet\Model\API\Base\Billing\ApplyPromoCode;
+use ToshY\BunnyNet\Model\API\Base\Billing\ClaimAffiliateCredits;
+use ToshY\BunnyNet\Model\API\Base\Billing\ConfigureAutoRecharge;
+use ToshY\BunnyNet\Model\API\Base\Billing\CreateCoinifyPayment;
+use ToshY\BunnyNet\Model\API\Base\Billing\CreatePaymentCheckout;
+use ToshY\BunnyNet\Model\API\Base\Billing\GetAffiliateDetails;
+use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingDetails;
+use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
+use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
+use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
+use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScript;
+use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScriptVariable;
+use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScript;
+use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScriptVariable;
+use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScript;
+use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptCode;
+use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptVariable;
+use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScriptReleases;
+use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScripts;
+use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScript;
+use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScriptByPathParameter;
+use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScript;
+use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptCode;
+use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptVariable;
+use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\CheckDNSZoneAvailability;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSRecord;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSZone;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\DismissDNSConfigurationNotice;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\ExportDNSRecords;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZone;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZoneQueryStatistics;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\ImportDNSRecords;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\ListDNSZones;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\RecheckDNSConfiguration;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSRecord;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSZone;
+use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddOrUpdateEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
+use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
+use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
+use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCustomHostname;
+use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\DeletePullZone;
+use ToshY\BunnyNet\Model\API\Base\PullZone\GetOptimizerStatistics;
+use ToshY\BunnyNet\Model\API\Base\PullZone\GetOriginShieldQueueStatistics;
+use ToshY\BunnyNet\Model\API\Base\PullZone\GetPullZone;
+use ToshY\BunnyNet\Model\API\Base\PullZone\GetSafeHopStatistics;
+use ToshY\BunnyNet\Model\API\Base\PullZone\GetWAFStatistics;
+use ToshY\BunnyNet\Model\API\Base\PullZone\ListPullZones;
+use ToshY\BunnyNet\Model\API\Base\PullZone\LoadFreeCertificate;
+use ToshY\BunnyNet\Model\API\Base\PullZone\PurgeCache;
+use ToshY\BunnyNet\Model\API\Base\PullZone\ResetTokenKey;
+use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
+use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
+use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityEnabled;
+use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
+use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
+use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
+use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
+use ToshY\BunnyNet\Model\API\Base\Region\ListRegions;
+use ToshY\BunnyNet\Model\API\Base\Statistics\GetStatistics;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\AddStorageZone;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\CheckStorageZoneAvailability;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\DeleteStorageZone;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZone;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\ListStorageZones;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\UpdateStorageZone;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddVideoLibrary;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddWatermark;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteVideoLibrary;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteWatermark;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\GetVideoLibrary;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\ListVideoLibraries;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\UpdateVideoLibrary;
+use ToshY\BunnyNet\Model\API\Base\Support\CloseTicket;
+use ToshY\BunnyNet\Model\API\Base\Support\CreateTicket;
+use ToshY\BunnyNet\Model\API\Base\Support\GetTicketDetails;
+use ToshY\BunnyNet\Model\API\Base\Support\ListTickets;
+use ToshY\BunnyNet\Model\API\Base\Support\ReplyTicket;
+use ToshY\BunnyNet\Model\API\Base\User\AcceptDPA;
+use ToshY\BunnyNet\Model\API\Base\User\CloseAccount;
+use ToshY\BunnyNet\Model\API\Base\User\DisableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\API\Base\User\EnableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\API\Base\User\GenerateTwoFactorAuthenticationVerification;
+use ToshY\BunnyNet\Model\API\Base\User\GetDPADetails;
+use ToshY\BunnyNet\Model\API\Base\User\GetDPADetailsHTML;
+use ToshY\BunnyNet\Model\API\Base\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\API\Base\User\GetUserDetails;
+use ToshY\BunnyNet\Model\API\Base\User\GetWhatsNewItems;
+use ToshY\BunnyNet\Model\API\Base\User\ListCloseAccountReasons;
+use ToshY\BunnyNet\Model\API\Base\User\ResendEmailConfirmation;
+use ToshY\BunnyNet\Model\API\Base\User\ResetAPIKey;
+use ToshY\BunnyNet\Model\API\Base\User\ResetWhatsNew;
+use ToshY\BunnyNet\Model\API\Base\User\SetNotificationsOpened;
+use ToshY\BunnyNet\Model\API\Base\User\UpdateUserDetails;
+use ToshY\BunnyNet\Model\API\Base\User\VerifyTwoFactorAuthenticationCode;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
@@ -163,7 +163,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resolveDMCACase(int $id): BunnyClientResponseInterface
+    public function resolveDmcaCase(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ResolveDMCACase();
 
@@ -334,9 +334,9 @@ class BaseAPI
      * @throws Exception\JsonException
      * @return BunnyClientResponseInterface
      */
-    public function getCoinifyBTCExchangeRate(): BunnyClientResponseInterface
+    public function getCoinifyBitcoinExchangeRate(): BunnyClientResponseInterface
     {
-        $endpoint = new GetCoinifyBTCExchangeRate();
+        $endpoint = new GetCoinifyBitcoinExchangeRate();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -831,7 +831,7 @@ class BaseAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function listDRMCertificates(array $query = []): BunnyClientResponseInterface
+    public function listDrmCertificates(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListDRMCertificates();
 
@@ -981,7 +981,7 @@ class BaseAPI
      */
     public function resetVideoLibraryPassword(array $query): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\ResetPassword();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\ResetPassword();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 
@@ -1000,7 +1000,7 @@ class BaseAPI
      */
     public function resetVideoLibraryPasswordByPathParameter(int $id): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\ResetPasswordByPathParameter();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\ResetPasswordByPathParameter();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1056,7 +1056,7 @@ class BaseAPI
      */
     public function addVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\AddAllowedReferer();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\AddAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -1081,7 +1081,7 @@ class BaseAPI
      */
     public function removeVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\DeleteAllowedReferer();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -1106,7 +1106,7 @@ class BaseAPI
      */
     public function addVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\AddBlockedReferer();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\AddBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -1131,7 +1131,7 @@ class BaseAPI
      */
     public function removeVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StreamVideoLibrary\DeleteBlockedReferer();
+        $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -1152,7 +1152,7 @@ class BaseAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function listDNSZones(array $query = []): BunnyClientResponseInterface
+    public function listDnsZones(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListDNSZones();
 
@@ -1175,7 +1175,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addDNSZone(array $body): BunnyClientResponseInterface
+    public function addDnsZone(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddDNSZone();
 
@@ -1194,7 +1194,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getDNSZone(int $id): BunnyClientResponseInterface
+    public function getDnsZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetDNSZone();
 
@@ -1216,7 +1216,7 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateDNSZone(int $id, array $body = []): BunnyClientResponseInterface
+    public function updateDnsZone(int $id, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new UpdateDNSZone();
 
@@ -1236,7 +1236,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteDNSZone(int $id): BunnyClientResponseInterface
+    public function deleteDnsZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteDNSZone();
 
@@ -1253,7 +1253,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function exportDNSZone(int $id): BunnyClientResponseInterface
+    public function exportDnsZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ExportDNSRecords();
 
@@ -1274,7 +1274,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getDNSZoneQueryStatistics(int $id, array $query = []): BunnyClientResponseInterface
+    public function getDnsZoneQueryStatistics(int $id, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetDNSZoneQueryStatistics();
 
@@ -1298,7 +1298,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function checkDNSZoneAvailability(array $body): BunnyClientResponseInterface
+    public function checkDnsZoneAvailability(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CheckDNSZoneAvailability();
 
@@ -1322,7 +1322,7 @@ class BaseAPI
      * @param int $zoneId
      * @param array<string,mixed> $body
      */
-    public function addDNSRecord(int $zoneId, array $body): BunnyClientResponseInterface
+    public function addDnsRecord(int $zoneId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddDNSRecord();
 
@@ -1348,7 +1348,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function updateDNSRecord(int $zoneId, int $id, array $body): BunnyClientResponseInterface
+    public function updateDnsRecord(int $zoneId, int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateDNSRecord();
 
@@ -1369,7 +1369,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function deleteDNSRecord(int $zoneId, int $id): BunnyClientResponseInterface
+    public function deleteDnsRecord(int $zoneId, int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteDNSRecord();
 
@@ -1386,7 +1386,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function recheckDNSConfiguration(int $id): BunnyClientResponseInterface
+    public function recheckDnsConfiguration(int $id): BunnyClientResponseInterface
     {
         $endpoint = new RecheckDNSConfiguration();
 
@@ -1403,7 +1403,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function dismissDNSConfigurationNotice(int $id): BunnyClientResponseInterface
+    public function dismissDnsConfigurationNotice(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DismissDNSConfigurationNotice();
 
@@ -1422,7 +1422,7 @@ class BaseAPI
      * @param int $zoneId
      * @param string $localFilePath
      */
-    public function importDNSRecords(int $zoneId, string $localFilePath): BunnyClientResponseInterface
+    public function importDnsRecords(int $zoneId, string $localFilePath): BunnyClientResponseInterface
     {
         $endpoint = new ImportDNSRecords();
 
@@ -1741,7 +1741,7 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getWAFStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
+    public function getWafStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetWAFStatistics();
 
@@ -1936,7 +1936,7 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function setForceSSL(int $id, array $body): BunnyClientResponseInterface
+    public function setForceSsl(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new SetForceSSL();
 
@@ -1980,7 +1980,7 @@ class BaseAPI
      */
     public function addPullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\AddAllowedReferer();
+        $endpoint = new Model\API\Base\PullZone\AddAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2005,7 +2005,7 @@ class BaseAPI
      */
     public function removePullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\DeleteAllowedReferer();
+        $endpoint = new Model\API\Base\PullZone\DeleteAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2030,7 +2030,7 @@ class BaseAPI
      */
     public function addPullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\AddBlockedReferer();
+        $endpoint = new Model\API\Base\PullZone\AddBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2055,7 +2055,7 @@ class BaseAPI
      */
     public function removePullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\DeleteBlockedReferer();
+        $endpoint = new Model\API\Base\PullZone\DeleteBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2078,9 +2078,9 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneBlockedIP(int $id, array $body): BunnyClientResponseInterface
+    public function addPullZoneBlockedIp(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\AddBlockedIP();
+        $endpoint = new Model\API\Base\PullZone\AddBlockedIP();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2103,9 +2103,9 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneBlockedIP(int $id, array $body): BunnyClientResponseInterface
+    public function removePullZoneBlockedIp(int $id, array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\PullZone\DeleteBlockedIP();
+        $endpoint = new Model\API\Base\PullZone\DeleteBlockedIP();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2318,7 +2318,7 @@ class BaseAPI
      */
     public function resetStorageZonePassword(int $id): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StorageZone\ResetPassword();
+        $endpoint = new Model\API\Base\StorageZone\ResetPassword();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2338,7 +2338,7 @@ class BaseAPI
      */
     public function resetStorageZoneReadOnlyPassword(array $query): BunnyClientResponseInterface
     {
-        $endpoint = new Model\Base\StorageZone\ResetReadOnlyPassword();
+        $endpoint = new Model\API\Base\StorageZone\ResetReadOnlyPassword();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 
@@ -2475,7 +2475,7 @@ class BaseAPI
      * @throws Exception\JsonException
      * @return BunnyClientResponseInterface
      */
-    public function getDPADetails(): BunnyClientResponseInterface
+    public function getDpaDetails(): BunnyClientResponseInterface
     {
         $endpoint = new GetDPADetails();
 
@@ -2490,7 +2490,7 @@ class BaseAPI
      * @throws Exception\JsonException
      * @return BunnyClientResponseInterface
      */
-    public function acceptDPA(): BunnyClientResponseInterface
+    public function acceptDpa(): BunnyClientResponseInterface
     {
         $endpoint = new AcceptDPA();
 
@@ -2505,7 +2505,7 @@ class BaseAPI
      * @throws Exception\JsonException
      * @return BunnyClientResponseInterface
      */
-    public function getDPADetailsHTML(): BunnyClientResponseInterface
+    public function getDpaDetailsHtml(): BunnyClientResponseInterface
     {
         $endpoint = new GetDPADetailsHTML();
 
@@ -2565,9 +2565,9 @@ class BaseAPI
      * @throws Exception\JsonException
      * @return BunnyClientResponseInterface
      */
-    public function generate2FAVerification(): BunnyClientResponseInterface
+    public function generateTwoFactorAuthenticationVerification(): BunnyClientResponseInterface
     {
-        $endpoint = new Generate2FAVerification();
+        $endpoint = new GenerateTwoFactorAuthenticationVerification();
 
         return $this->client->request(
             endpoint: $endpoint
@@ -2585,9 +2585,9 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function disable2FA(array $body): BunnyClientResponseInterface
+    public function disableTwoFactorAuthentication(array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Disable2FA();
+        $endpoint = new DisableTwoFactorAuthentication();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2608,9 +2608,9 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function enable2FA(array $body): BunnyClientResponseInterface
+    public function enableTwoFactorAuthentication(array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Enable2FA();
+        $endpoint = new EnableTwoFactorAuthentication();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 
@@ -2631,9 +2631,9 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function verify2FACode(array $body): BunnyClientResponseInterface
+    public function verifyTwoFactorAuthenticationCode(array $body): BunnyClientResponseInterface
     {
-        $endpoint = new Verify2FACode();
+        $endpoint = new VerifyTwoFactorAuthenticationCode();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 

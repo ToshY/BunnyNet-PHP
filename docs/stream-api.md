@@ -16,7 +16,7 @@ $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
 );
 
-$streamAPI = new StreamAPI(
+$streamApi = new StreamAPI(
     apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc', # (2)
     client: $bunnyClient
 );
@@ -32,7 +32,7 @@ $streamAPI = new StreamAPI(
 #### [Get Collection](https://docs.bunny.net/reference/collection_getcollection)
 
 ```php
-$streamAPI->getCollection(
+$streamApi->getCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
 );
@@ -41,7 +41,7 @@ $streamAPI->getCollection(
 #### [Update Collection](https://docs.bunny.net/reference/collection_updatecollection)
 
 ```php
-$streamAPI->updateCollection(
+$streamApi->updateCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
     body: [
@@ -53,7 +53,7 @@ $streamAPI->updateCollection(
 #### [Delete Collection](https://docs.bunny.net/reference/collection_deletecollection)
 
 ```php
-$streamAPI->deleteCollection(
+$streamApi->deleteCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
 );
@@ -62,7 +62,7 @@ $streamAPI->deleteCollection(
 #### [List Collections](https://docs.bunny.net/reference/collection_list)
 
 ```php
-$streamAPI->listCollections(
+$streamApi->listCollections(
     libraryId: 1,
     query: [
         'page' => 1,
@@ -76,7 +76,7 @@ $streamAPI->listCollections(
 #### [Create Collection](https://docs.bunny.net/reference/collection_createcollection)
 
 ```php
-$streamAPI->createCollection(
+$streamApi->createCollection(
     libraryId: 1,
     body: [
         'name' => 'Bunny Collection'
@@ -89,7 +89,7 @@ $streamAPI->createCollection(
 #### [Get Video](https://docs.bunny.net/reference/video_getvideo)
 
 ```php
-$streamAPI->getVideo(
+$streamApi->getVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -98,7 +98,7 @@ $streamAPI->getVideo(
 #### [Update Video](https://docs.bunny.net/reference/video_updatevideo)
 
 ```php
-$streamAPI->updateVideo(
+$streamApi->updateVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     body: [
@@ -143,7 +143,7 @@ $streamAPI->updateVideo(
 #### [Delete Video](https://docs.bunny.net/reference/video_deletevideo)
 
 ```php
-$streamAPI->deleteVideo(
+$streamApi->deleteVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -152,7 +152,7 @@ $streamAPI->deleteVideo(
 #### [Create Video](https://docs.bunny.net/reference/video_createvideo)
 
 ```php
-$streamAPI->createVideo(
+$streamApi->createVideo(
     libraryId: 1,
     body: [
         'title' => 'Bunny Hoppers',
@@ -171,7 +171,7 @@ $streamAPI->createVideo(
 #### [Upload Video](https://docs.bunny.net/reference/video_uploadvideo)
 
 ```php
-$streamAPI->uploadVideo(
+$streamApi->uploadVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     localFilePath: './bunny-hop.mp4',
@@ -184,7 +184,7 @@ $streamAPI->uploadVideo(
 #### [Get Video Heatmap](https://docs.bunny.net/reference/video_getvideoheatmap)
 
 ```php
-$streamAPI->getVideoHeatmap(
+$streamApi->getVideoHeatmap(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -193,7 +193,7 @@ $streamAPI->getVideoHeatmap(
 #### [Get Video Statistics](https://docs.bunny.net/reference/video_getvideostatistics)
 
 ```php
-$streamAPI->getVideoStatistics(
+$streamApi->getVideoStatistics(
     libraryId: 1,
     query: [
         'dateFrom' => 'm-d-Y',
@@ -207,7 +207,7 @@ $streamAPI->getVideoStatistics(
 #### [Re-encode Video](https://docs.bunny.net/reference/video_reencodevideo)
 
 ```php
-$streamAPI->reEncodeVideo(
+$streamApi->reEncodeVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
@@ -216,7 +216,7 @@ $streamAPI->reEncodeVideo(
 #### [List Videos](https://docs.bunny.net/reference/video_list)
 
 ```php
-$streamAPI->listVideos(
+$streamApi->listVideos(
     libraryId: 1,
     query: [
         'page' => 1,
@@ -231,7 +231,7 @@ $streamAPI->listVideos(
 #### [Set Thumbnail](https://docs.bunny.net/reference/video_setthumbnail)
 
 ```php
-$streamAPI->setThumbnail(
+$streamApi->setThumbnail(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
     query: [
@@ -243,7 +243,7 @@ $streamAPI->setThumbnail(
 #### [Fetch Video](https://docs.bunny.net/reference/video_fetchnewvideo)
 
 ```php
-$streamAPI->fetchVideo(
+$streamApi->fetchVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
     query: [
@@ -263,7 +263,7 @@ $streamAPI->fetchVideo(
 #### [Add Caption](https://docs.bunny.net/reference/video_addcaption)
 
 ```php
-$streamAPI->addCaption(
+$streamApi->addCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     sourceLanguage: 'jp',
@@ -283,7 +283,7 @@ $streamAPI->addCaption(
 #### [Delete Caption](https://docs.bunny.net/reference/video_deletecaption)
 
 ```php
-$streamAPI->deleteCaption(
+$streamApi->deleteCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     sourceLanguage: 'jp'
