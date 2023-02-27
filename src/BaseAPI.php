@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
@@ -115,6 +114,7 @@ use ToshY\BunnyNet\Model\Base\User\ResetWhatsNew;
 use ToshY\BunnyNet\Model\Base\User\SetNotificationsOpened;
 use ToshY\BunnyNet\Model\Base\User\UpdateUserDetails;
 use ToshY\BunnyNet\Model\Base\User\Verify2FACode;
+use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
 class BaseAPI
@@ -134,13 +134,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listAbuseCases(array $query = []): ResponseInterface
+    public function listAbuseCases(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListAbuseCases();
 
@@ -154,10 +158,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resolveDMCACase(int $id): ResponseInterface
+    public function resolveDMCACase(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ResolveDMCACase();
 
@@ -169,10 +175,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resolveAbuseCase(int $id): ResponseInterface
+    public function resolveAbuseCase(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ResolveAbuseCase();
 
@@ -184,10 +192,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function checkAbuseCase(int $id): ResponseInterface
+    public function checkAbuseCase(int $id): BunnyClientResponseInterface
     {
         $endpoint = new CheckAbuseCase();
 
@@ -199,9 +209,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getCountryList(): ResponseInterface
+    public function getCountryList(): BunnyClientResponseInterface
     {
         $endpoint = new ListCountries();
 
@@ -212,9 +224,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getBillingDetails(): ResponseInterface
+    public function getBillingDetails(): BunnyClientResponseInterface
     {
         $endpoint = new GetBillingDetails();
 
@@ -225,14 +239,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function configureAutoRecharge(array $body): ResponseInterface
+    public function configureAutoRecharge(array $body): BunnyClientResponseInterface
     {
         $endpoint = new ConfigureAutoRecharge();
 
@@ -246,14 +262,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function createPaymentCheckout(array $body): ResponseInterface
+    public function createPaymentCheckout(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CreatePaymentCheckout();
 
@@ -267,9 +285,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function preparePaymentAuthorization(): ResponseInterface
+    public function preparePaymentAuthorization(): BunnyClientResponseInterface
     {
         $endpoint = new PreparePaymentAuthorization();
 
@@ -280,9 +300,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getAffiliateDetails(): ResponseInterface
+    public function getAffiliateDetails(): BunnyClientResponseInterface
     {
         $endpoint = new GetAffiliateDetails();
 
@@ -293,9 +315,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function claimAffiliateCredits(): ResponseInterface
+    public function claimAffiliateCredits(): BunnyClientResponseInterface
     {
         $endpoint = new ClaimAffiliateCredits();
 
@@ -306,9 +330,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getCoinifyBTCExchangeRate(): ResponseInterface
+    public function getCoinifyBTCExchangeRate(): BunnyClientResponseInterface
     {
         $endpoint = new GetCoinifyBTCExchangeRate();
 
@@ -319,13 +345,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function createCoinifyPayment(array $query): ResponseInterface
+    public function createCoinifyPayment(array $query): BunnyClientResponseInterface
     {
         $endpoint = new CreateCoinifyPayment();
 
@@ -339,9 +367,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getBillingSummary(): ResponseInterface
+    public function getBillingSummary(): BunnyClientResponseInterface
     {
         $endpoint = new GetBillingSummary();
 
@@ -352,13 +382,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function applyPromoCode(array $query): ResponseInterface
+    public function applyPromoCode(array $query): BunnyClientResponseInterface
     {
         $endpoint = new ApplyPromoCode();
 
@@ -372,13 +404,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listComputeScripts(array $query): ResponseInterface
+    public function listComputeScripts(array $query): BunnyClientResponseInterface
     {
         $endpoint = new ListComputeScripts();
 
@@ -392,14 +426,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addComputeScript(array $body): ResponseInterface
+    public function addComputeScript(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddComputeScript();
 
@@ -413,10 +449,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getComputeScript(int $id): ResponseInterface
+    public function getComputeScript(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetComputeScript();
 
@@ -428,15 +466,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateComputeScript(int $id, array $body): ResponseInterface
+    public function updateComputeScript(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateComputeScript();
 
@@ -451,10 +491,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteComputeScript(int $id): ResponseInterface
+    public function deleteComputeScript(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteComputeScript();
 
@@ -466,10 +508,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getComputeScriptCode(int $id): ResponseInterface
+    public function getComputeScriptCode(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetComputeScriptCode();
 
@@ -481,15 +525,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateComputeScriptCode(int $id, array $body = []): ResponseInterface
+    public function updateComputeScriptCode(int $id, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new UpdateComputeScriptCode();
 
@@ -504,14 +550,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function listComputeScriptReleases(int $id, array $query = []): ResponseInterface
+    public function listComputeScriptReleases(int $id, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListComputeScriptReleases();
 
@@ -526,16 +574,18 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function publishComputeScript(int $id, array $query, array $body = []): ResponseInterface
+    public function publishComputeScript(int $id, array $query, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new PublishComputeScript();
 
@@ -552,20 +602,22 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param string $uuid
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
     public function publishComputeScriptByPathParameter(
         int $id,
         string $uuid,
         array $body = []
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new PublishComputeScriptByPathParameter();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -579,15 +631,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addComputeScriptVariable(int $id, array $body): ResponseInterface
+    public function addComputeScriptVariable(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddComputeScriptVariable();
 
@@ -602,16 +656,18 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param int $variableId
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function updateComputeScriptVariable(int $id, int $variableId, array $body): ResponseInterface
+    public function updateComputeScriptVariable(int $id, int $variableId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateComputeScriptVariable();
 
@@ -626,11 +682,13 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param int $variableId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getComputeScriptVariable(int $id, int $variableId): ResponseInterface
+    public function getComputeScriptVariable(int $id, int $variableId): BunnyClientResponseInterface
     {
         $endpoint = new GetComputeScriptVariable();
 
@@ -642,11 +700,13 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param int $variableId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteComputeScriptVariable(int $id, int $variableId): ResponseInterface
+    public function deleteComputeScriptVariable(int $id, int $variableId): BunnyClientResponseInterface
     {
         $endpoint = new DeleteComputeScriptVariable();
 
@@ -658,13 +718,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listTickets(array $query = []): ResponseInterface
+    public function listTickets(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListTickets();
 
@@ -678,10 +740,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getTicketDetails(int $id): ResponseInterface
+    public function getTicketDetails(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetTicketDetails();
 
@@ -693,10 +757,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function closeTicket(int $id): ResponseInterface
+    public function closeTicket(int $id): BunnyClientResponseInterface
     {
         $endpoint = new CloseTicket();
 
@@ -708,15 +774,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function replyTicket(int $id, array $body = []): ResponseInterface
+    public function replyTicket(int $id, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new ReplyTicket();
 
@@ -732,14 +800,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function createTicket(array $body): ResponseInterface
+    public function createTicket(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CreateTicket();
 
@@ -753,13 +823,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listDRMCertificates(array $query = []): ResponseInterface
+    public function listDRMCertificates(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListDRMCertificates();
 
@@ -773,9 +845,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function listRegions(): ResponseInterface
+    public function listRegions(): BunnyClientResponseInterface
     {
         $endpoint = new ListRegions();
 
@@ -786,13 +860,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listVideoLibraries(array $query = []): ResponseInterface
+    public function listVideoLibraries(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListVideoLibraries();
 
@@ -806,14 +882,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addVideoLibrary(array $body): ResponseInterface
+    public function addVideoLibrary(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddVideoLibrary();
 
@@ -827,14 +905,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getVideoLibrary(int $id, array $query = []): ResponseInterface
+    public function getVideoLibrary(int $id, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetVideoLibrary();
 
@@ -849,15 +929,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateVideoLibrary(int $id, array $body): ResponseInterface
+    public function updateVideoLibrary(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateVideoLibrary();
 
@@ -872,10 +954,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteVideoLibrary(int $id): ResponseInterface
+    public function deleteVideoLibrary(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteVideoLibrary();
 
@@ -887,13 +971,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function resetVideoLibraryPassword(array $query): ResponseInterface
+    public function resetVideoLibraryPassword(array $query): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\ResetPassword();
 
@@ -907,10 +993,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resetVideoLibraryPasswordByPathParameter(int $id): ResponseInterface
+    public function resetVideoLibraryPasswordByPathParameter(int $id): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\ResetPasswordByPathParameter();
 
@@ -922,10 +1010,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function addWatermark(int $id): ResponseInterface
+    public function addWatermark(int $id): BunnyClientResponseInterface
     {
         $endpoint = new AddWatermark();
 
@@ -937,10 +1027,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteWatermark(int $id): ResponseInterface
+    public function deleteWatermark(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteWatermark();
 
@@ -952,15 +1044,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addVideoLibraryAllowedReferer(int $id, array $body): ResponseInterface
+    public function addVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\AddAllowedReferer();
 
@@ -975,15 +1069,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeVideoLibraryAllowedReferer(int $id, array $body): ResponseInterface
+    public function removeVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\DeleteAllowedReferer();
 
@@ -998,15 +1094,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addVideoLibraryBlockedReferer(int $id, array $body): ResponseInterface
+    public function addVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\AddBlockedReferer();
 
@@ -1021,15 +1119,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeVideoLibraryBlockedReferer(int $id, array $body): ResponseInterface
+    public function removeVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StreamVideoLibrary\DeleteBlockedReferer();
 
@@ -1044,13 +1144,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listDNSZones(array $query = []): ResponseInterface
+    public function listDNSZones(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListDNSZones();
 
@@ -1064,14 +1166,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addDNSZone(array $body): ResponseInterface
+    public function addDNSZone(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddDNSZone();
 
@@ -1085,10 +1189,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getDNSZone(int $id): ResponseInterface
+    public function getDNSZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetDNSZone();
 
@@ -1100,15 +1206,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateDNSZone(int $id, array $body = []): ResponseInterface
+    public function updateDNSZone(int $id, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new UpdateDNSZone();
 
@@ -1123,10 +1231,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteDNSZone(int $id): ResponseInterface
+    public function deleteDNSZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteDNSZone();
 
@@ -1138,10 +1248,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function exportDNSZone(int $id): ResponseInterface
+    public function exportDNSZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ExportDNSRecords();
 
@@ -1153,14 +1265,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getDNSZoneQueryStatistics(int $id, array $query = []): ResponseInterface
+    public function getDNSZoneQueryStatistics(int $id, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetDNSZoneQueryStatistics();
 
@@ -1175,14 +1289,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function checkDNSZoneAvailability(array $body): ResponseInterface
+    public function checkDNSZoneAvailability(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CheckDNSZoneAvailability();
 
@@ -1196,15 +1312,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $zoneId
      * @param array<string,mixed> $body
      */
-    public function addDNSRecord(int $zoneId, array $body): ResponseInterface
+    public function addDNSRecord(int $zoneId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddDNSRecord();
 
@@ -1219,16 +1337,18 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param int $id
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function updateDNSRecord(int $zoneId, int $id, array $body): ResponseInterface
+    public function updateDNSRecord(int $zoneId, int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateDNSRecord();
 
@@ -1243,11 +1363,13 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param int $id
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function deleteDNSRecord(int $zoneId, int $id): ResponseInterface
+    public function deleteDNSRecord(int $zoneId, int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteDNSRecord();
 
@@ -1259,10 +1381,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function recheckDNSConfiguration(int $id): ResponseInterface
+    public function recheckDNSConfiguration(int $id): BunnyClientResponseInterface
     {
         $endpoint = new RecheckDNSConfiguration();
 
@@ -1274,10 +1398,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function dismissDNSConfigurationNotice(int $id): ResponseInterface
+    public function dismissDNSConfigurationNotice(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DismissDNSConfigurationNotice();
 
@@ -1289,12 +1415,14 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\FileDoesNotExistException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $zoneId
      * @param string $localFilePath
      */
-    public function importDNSRecords(int $zoneId, string $localFilePath): ResponseInterface
+    public function importDNSRecords(int $zoneId, string $localFilePath): BunnyClientResponseInterface
     {
         $endpoint = new ImportDNSRecords();
 
@@ -1307,13 +1435,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listPullZones(array $query = []): ResponseInterface
+    public function listPullZones(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListPullZones();
 
@@ -1327,14 +1457,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addPullZone(array $body): ResponseInterface
+    public function addPullZone(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddPullZone();
 
@@ -1348,14 +1480,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getPullZone(int $id, array $query = []): ResponseInterface
+    public function getPullZone(int $id, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetPullZone();
 
@@ -1370,15 +1504,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updatePullZone(int $id, array $body): ResponseInterface
+    public function updatePullZone(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdatePullZone();
 
@@ -1393,10 +1529,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deletePullZone(int $id): ResponseInterface
+    public function deletePullZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeletePullZone();
 
@@ -1408,11 +1546,13 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $edgeRuleId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): ResponseInterface
+    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): BunnyClientResponseInterface
     {
         $endpoint = new DeleteEdgeRule();
 
@@ -1424,15 +1564,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      * @param array<string,mixed> $body
      */
-    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): ResponseInterface
+    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddOrUpdateEdgeRule();
 
@@ -1447,20 +1589,22 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param string $edgeRuleId
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
     public function setEdgeRuleEnabled(
         int $pullZoneId,
         string $edgeRuleId,
         array $body
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new SetEdgeRuleEnabled();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1474,14 +1618,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param bool $enabled
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
     public function setZoneSecurityEnabled(
         int $pullZoneId,
         bool $enabled
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new SetZoneSecurityEnabled();
 
         return $this->client->request(
@@ -1492,14 +1638,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param bool $enabled
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
     public function setZoneSecurityIncludeHashRemoteIPEnabled(
         int $pullZoneId,
         bool $enabled
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new SetZoneSecurityIncludeHashRemoteIPEnabled();
 
         return $this->client->request(
@@ -1510,17 +1658,19 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
     public function getOriginShieldQueueStatistics(
         int $pullZoneId,
         array $query = []
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new GetOriginShieldQueueStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1534,14 +1684,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getSafeHopStatistics(int $pullZoneId, array $query = []): ResponseInterface
+    public function getSafeHopStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetSafeHopStatistics();
 
@@ -1556,14 +1708,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getOptimizerStatistics(int $pullZoneId, array $query = []): ResponseInterface
+    public function getOptimizerStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetOptimizerStatistics();
 
@@ -1578,14 +1732,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getWAFStatistics(int $pullZoneId, array $query = []): ResponseInterface
+    public function getWAFStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetWAFStatistics();
 
@@ -1600,13 +1756,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function loadFreeCertificate(array $query): ResponseInterface
+    public function loadFreeCertificate(array $query): BunnyClientResponseInterface
     {
         $endpoint = new LoadFreeCertificate();
 
@@ -1620,15 +1778,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function purgePullZoneCache(int $id, array $body = []): ResponseInterface
+    public function purgePullZoneCache(int $id, array $body = []): BunnyClientResponseInterface
     {
         $endpoint = new PurgeCache();
 
@@ -1643,14 +1803,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function checkPullZoneAvailability(array $body): ResponseInterface
+    public function checkPullZoneAvailability(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CheckPullZoneAvailability();
 
@@ -1664,15 +1826,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addCustomCertificate(int $id, array $body): ResponseInterface
+    public function addCustomCertificate(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddCustomCertificate();
 
@@ -1687,15 +1851,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeCertificate(int $id, array $body): ResponseInterface
+    public function removeCertificate(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new DeleteCertificate();
 
@@ -1710,15 +1876,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addCustomHostname(int $id, array $body): ResponseInterface
+    public function addCustomHostname(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddCustomHostname();
 
@@ -1733,15 +1901,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeCustomHostname(int $id, array $body): ResponseInterface
+    public function removeCustomHostname(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new DeleteCustomHostname();
 
@@ -1756,15 +1926,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function setForceSSL(int $id, array $body): ResponseInterface
+    public function setForceSSL(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new SetForceSSL();
 
@@ -1779,10 +1951,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resetPullZoneTokenKey(int $id): ResponseInterface
+    public function resetPullZoneTokenKey(int $id): BunnyClientResponseInterface
     {
         $endpoint = new ResetTokenKey();
 
@@ -1794,15 +1968,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneAllowedReferer(int $id, array $body): ResponseInterface
+    public function addPullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\AddAllowedReferer();
 
@@ -1817,15 +1993,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneAllowedReferer(int $id, array $body): ResponseInterface
+    public function removePullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\DeleteAllowedReferer();
 
@@ -1840,15 +2018,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneBlockedReferer(int $id, array $body): ResponseInterface
+    public function addPullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\AddBlockedReferer();
 
@@ -1863,15 +2043,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneBlockedReferer(int $id, array $body): ResponseInterface
+    public function removePullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\DeleteBlockedReferer();
 
@@ -1886,15 +2068,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneBlockedIP(int $id, array $body): ResponseInterface
+    public function addPullZoneBlockedIP(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\AddBlockedIP();
 
@@ -1909,15 +2093,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneBlockedIP(int $id, array $body): ResponseInterface
+    public function removePullZoneBlockedIP(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\PullZone\DeleteBlockedIP();
 
@@ -1932,13 +2118,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function purgeUrl(array $query): ResponseInterface
+    public function purgeUrl(array $query): BunnyClientResponseInterface
     {
         $endpoint = new PurgeURL();
 
@@ -1952,13 +2140,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function purgeUrlByHeader(array $query): ResponseInterface
+    public function purgeUrlByHeader(array $query): BunnyClientResponseInterface
     {
         $endpoint = new PurgeURLByHeader();
 
@@ -1972,13 +2162,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function getStatistics(array $query = []): ResponseInterface
+    public function getStatistics(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetStatistics();
 
@@ -1992,13 +2184,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function listStorageZones(array $query = []): ResponseInterface
+    public function listStorageZones(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListStorageZones();
 
@@ -2012,14 +2206,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function addStorageZone(array $body): ResponseInterface
+    public function addStorageZone(array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddStorageZone();
 
@@ -2033,14 +2229,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function checkStorageZoneAvailability(array $body): ResponseInterface
+    public function checkStorageZoneAvailability(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CheckStorageZoneAvailability();
 
@@ -2054,10 +2252,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getStorageZone(int $id): ResponseInterface
+    public function getStorageZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new GetStorageZone();
 
@@ -2069,15 +2269,17 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateStorageZone(int $id, array $body): ResponseInterface
+    public function updateStorageZone(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateStorageZone();
 
@@ -2092,10 +2294,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteStorageZone(int $id): ResponseInterface
+    public function deleteStorageZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteStorageZone();
 
@@ -2107,10 +2311,12 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function resetStorageZonePassword(int $id): ResponseInterface
+    public function resetStorageZonePassword(int $id): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StorageZone\ResetPassword();
 
@@ -2122,13 +2328,15 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function resetStorageZoneReadOnlyPassword(array $query): ResponseInterface
+    public function resetStorageZoneReadOnlyPassword(array $query): BunnyClientResponseInterface
     {
         $endpoint = new Model\Base\StorageZone\ResetReadOnlyPassword();
 
@@ -2142,9 +2350,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getHomeFeed(): ResponseInterface
+    public function getHomeFeed(): BunnyClientResponseInterface
     {
         $endpoint = new GetHomeFeed();
 
@@ -2155,9 +2365,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getUserDetails(): ResponseInterface
+    public function getUserDetails(): BunnyClientResponseInterface
     {
         $endpoint = new GetUserDetails();
 
@@ -2168,14 +2380,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function updateUserDetails(array $body): ResponseInterface
+    public function updateUserDetails(array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateUserDetails();
 
@@ -2189,9 +2403,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function resendEmailConfirmation(): ResponseInterface
+    public function resendEmailConfirmation(): BunnyClientResponseInterface
     {
         $endpoint = new ResendEmailConfirmation();
 
@@ -2202,9 +2418,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function resetUserApiKey(): ResponseInterface
+    public function resetUserApiKey(): BunnyClientResponseInterface
     {
         $endpoint = new ResetAPIKey();
 
@@ -2215,9 +2433,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function listCloseAccountReasons(): ResponseInterface
+    public function listCloseAccountReasons(): BunnyClientResponseInterface
     {
         $endpoint = new ListCloseAccountReasons();
 
@@ -2228,14 +2448,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function closeAccount(array $body): ResponseInterface
+    public function closeAccount(array $body): BunnyClientResponseInterface
     {
         $endpoint = new CloseAccount();
 
@@ -2249,9 +2471,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getDPADetails(): ResponseInterface
+    public function getDPADetails(): BunnyClientResponseInterface
     {
         $endpoint = new GetDPADetails();
 
@@ -2262,9 +2486,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function acceptDPA(): ResponseInterface
+    public function acceptDPA(): BunnyClientResponseInterface
     {
         $endpoint = new AcceptDPA();
 
@@ -2275,9 +2501,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getDPADetailsHTML(): ResponseInterface
+    public function getDPADetailsHTML(): BunnyClientResponseInterface
     {
         $endpoint = new GetDPADetailsHTML();
 
@@ -2288,9 +2516,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function setNotificationsOpened(): ResponseInterface
+    public function setNotificationsOpened(): BunnyClientResponseInterface
     {
         $endpoint = new SetNotificationsOpened();
 
@@ -2301,9 +2531,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function getWhatsNewItems(): ResponseInterface
+    public function getWhatsNewItems(): BunnyClientResponseInterface
     {
         $endpoint = new GetWhatsNewItems();
 
@@ -2314,9 +2546,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function resetWhatsNew(): ResponseInterface
+    public function resetWhatsNew(): BunnyClientResponseInterface
     {
         $endpoint = new ResetWhatsNew();
 
@@ -2327,9 +2561,11 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
-     * @return ResponseInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
+     * @return BunnyClientResponseInterface
      */
-    public function generate2FAVerification(): ResponseInterface
+    public function generate2FAVerification(): BunnyClientResponseInterface
     {
         $endpoint = new Generate2FAVerification();
 
@@ -2340,14 +2576,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function disable2FA(array $body): ResponseInterface
+    public function disable2FA(array $body): BunnyClientResponseInterface
     {
         $endpoint = new Disable2FA();
 
@@ -2361,14 +2599,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function enable2FA(array $body): ResponseInterface
+    public function enable2FA(array $body): BunnyClientResponseInterface
     {
         $endpoint = new Enable2FA();
 
@@ -2382,14 +2622,16 @@ class BaseAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
-    public function verify2FACode(array $body): ResponseInterface
+    public function verify2FACode(array $body): BunnyClientResponseInterface
     {
         $endpoint = new Verify2FACode();
 

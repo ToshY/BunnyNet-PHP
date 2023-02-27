@@ -6,9 +6,9 @@ namespace ToshY\BunnyNet;
 
 use DateTimeInterface;
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
+use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Model\Logging\GetLog;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
@@ -29,15 +29,17 @@ class LoggingAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param int $pullZoneId
      * @param DateTimeInterface $dateTime
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): ResponseInterface
+    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetLog();
         $dateTimeFormat = $dateTime->format('m-d-y');

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
+use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Model\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Stream\ManageCollections\GetCollection;
@@ -47,11 +47,13 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $collectionId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getCollection(int $libraryId, string $collectionId): ResponseInterface
+    public function getCollection(int $libraryId, string $collectionId): BunnyClientResponseInterface
     {
         $endpoint = new GetCollection();
 
@@ -63,20 +65,22 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param string $collectionId
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
     public function updateCollection(
         int $libraryId,
         string $collectionId,
         array $body
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateCollection();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -91,11 +95,13 @@ class StreamAPI
     /**
 
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $collectionId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function deleteCollection(int $libraryId, string $collectionId): ResponseInterface
+    public function deleteCollection(int $libraryId, string $collectionId): BunnyClientResponseInterface
     {
         $endpoint = new DeleteCollection();
 
@@ -108,14 +114,16 @@ class StreamAPI
     /**
 
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function listCollections(int $libraryId, array $query = []): ResponseInterface
+    public function listCollections(int $libraryId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListCollections();
 
@@ -130,15 +138,17 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      * @param array<string,mixed> $body
      */
-    public function createCollection(int $libraryId, array $body): ResponseInterface
+    public function createCollection(int $libraryId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new CreateCollection();
 
@@ -153,11 +163,13 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $videoId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideo(int $libraryId, string $videoId): ResponseInterface
+    public function getVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
     {
         $endpoint = new GetVideo();
 
@@ -169,16 +181,18 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param string $videoId
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function updateVideo(int $libraryId, string $videoId, array $body): ResponseInterface
+    public function updateVideo(int $libraryId, string $videoId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new UpdateVideo();
 
@@ -193,11 +207,13 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $videoId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function deleteVideo(int $libraryId, string $videoId): ResponseInterface
+    public function deleteVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
     {
         $endpoint = new DeleteVideo();
 
@@ -209,6 +225,8 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -217,14 +235,14 @@ class StreamAPI
      * @param string $videoId
      * @param string $localFilePath
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
     public function uploadVideo(
         int $libraryId,
         string $videoId,
         string $localFilePath,
         array $query = [],
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new UploadVideo();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -239,11 +257,13 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $videoId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideoHeatmap(int $libraryId, string $videoId): ResponseInterface
+    public function getVideoHeatmap(int $libraryId, string $videoId): BunnyClientResponseInterface
     {
         $endpoint = new GetVideoHeatmap();
 
@@ -255,14 +275,16 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideoStatistics(int $libraryId, array $query = []): ResponseInterface
+    public function getVideoStatistics(int $libraryId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListVideoStatistics();
 
@@ -277,11 +299,13 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $videoId
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function reEncodeVideo(int $libraryId, string $videoId): ResponseInterface
+    public function reEncodeVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
     {
         $endpoint = new ReEncodeVideo();
 
@@ -293,14 +317,16 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function listVideos(int $libraryId, array $query = []): ResponseInterface
+    public function listVideos(int $libraryId, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListVideos();
 
@@ -315,15 +341,17 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      * @param array<string,mixed> $body
      */
-    public function createVideo(int $libraryId, array $body): ResponseInterface
+    public function createVideo(int $libraryId, array $body): BunnyClientResponseInterface
     {
         $endpoint = new CreateVideo();
 
@@ -338,15 +366,17 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
-    public function setThumbnail(int $libraryId, string $videoId, array $query): ResponseInterface
+    public function setThumbnail(int $libraryId, string $videoId, array $query): BunnyClientResponseInterface
     {
         $endpoint = new SetThumbnail();
 
@@ -361,16 +391,18 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
      * @param array<string,mixed> $body
      * @param array<string,mixed> $query
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function fetchVideo(int $libraryId, array $body, array $query = []): ResponseInterface
+    public function fetchVideo(int $libraryId, array $body, array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new FetchVideo();
 
@@ -387,6 +419,8 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws Exception\InvalidJSONForBodyException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
@@ -395,14 +429,14 @@ class StreamAPI
      * @param string $videoId
      * @param string $sourceLanguage
      * @param array<string,mixed> $body
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      */
     public function addCaption(
         int $libraryId,
         string $videoId,
         string $sourceLanguage,
         array $body
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new AddCaption();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -416,16 +450,18 @@ class StreamAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $videoId
      * @param string $sourceLanguage
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
     public function deleteCaption(
         int $libraryId,
         string $videoId,
         string $sourceLanguage
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteCaption();
 
         return $this->client->request(

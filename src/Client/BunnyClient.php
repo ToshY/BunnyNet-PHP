@@ -7,7 +7,10 @@ namespace ToshY\BunnyNet\Client;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
+use ToshY\BunnyNet\Exception\BunnyClientResponseException;
+use ToshY\BunnyNet\Exception\JsonException;
+use ToshY\BunnyNet\Helper\BunnyClientHelper;
+use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
 class BunnyClient
@@ -49,13 +52,15 @@ class BunnyClient
     }
 
     /**
+     * @throws BunnyClientResponseException
      * @throws ClientExceptionInterface
-     * @param array<int,mixed> $parameters
-     * @param array<string,mixed> $query
+     * @throws JsonException
      * @param mixed|null $body
      * @param array<string,mixed> $headers
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param EndpointInterface $endpoint
+     * @param array<int,mixed> $parameters
+     * @param array<string,mixed> $query
      */
     public function request(
         EndpointInterface $endpoint,
@@ -63,7 +68,7 @@ class BunnyClient
         array $query = [],
         mixed $body = null,
         array $headers = [],
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $headers = array_filter(
             [
                 ...array_merge(
@@ -75,11 +80,13 @@ class BunnyClient
             fn ($value) => empty($value) === false
         );
 
-        $path = $this->createUrlPath(
+        $path = BunnyClientHelper::createUrlPath(
             template: $endpoint->getPath(),
             pathCollection: $parameters
         );
-        $query = $this->createQuery($query);
+        $query = BunnyClientHelper::createQuery(
+            query: $query
+        );
 
         $url = sprintf(
             '%s://%s%s%s',
@@ -89,6 +96,10 @@ class BunnyClient
             $query
         );
 
+        /*
+         *
+         */
+
         $request = new Request(
             method: $endpoint->getMethod()->value,
             uri: $url,
@@ -96,54 +107,13 @@ class BunnyClient
             body: $body,
         );
 
-        return $this->client->sendRequest(
+        $response = $this->client->sendRequest(
             request: $request
         );
-    }
 
-    /**
-     * @param string $template
-     * @param array<int,mixed> $pathCollection
-     * @return string
-     */
-    private function createUrlPath(
-        string $template,
-        array $pathCollection
-    ): string {
-        return sprintf(
-            sprintf(
-                '/%s',
-                $template
-            ),
-            ...$pathCollection
-        );
-    }
-
-    /**
-     * @param array<string,mixed> $query
-     * @return string|null
-     */
-    private function createQuery(array $query): string|null
-    {
-        if (true === empty($query)) {
-            return null;
-        }
-
-        foreach ($query as $key => $value) {
-            if (false === is_bool($value)) {
-                continue;
-            }
-
-            $query[$key] = $value ? 'true' : 'false';
-        }
-
-        return sprintf(
-            '?%s',
-            http_build_query(
-                data: $query,
-                arg_separator: '&',
-                encoding_type: PHP_QUERY_RFC3986
-            )
+        return BunnyClientHelper::parseResponse(
+            request: $request,
+            response: $response
         );
     }
 

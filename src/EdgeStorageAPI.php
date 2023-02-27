@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
+use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Model\EdgeStorage\BrowseFiles\ListFiles;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DeleteFile;
 use ToshY\BunnyNet\Model\EdgeStorage\ManageFiles\DownloadFile;
@@ -34,16 +34,18 @@ class EdgeStorageAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $fileName
      * @param string $path
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param string $storageZoneName
      */
     public function downloadFile(
         string $storageZoneName,
         string $fileName,
         string $path = ''
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new DownloadFile();
 
         return $this->client->request(
@@ -54,11 +56,13 @@ class EdgeStorageAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @throws FileDoesNotExistException
      * @param string $localFilePath
      * @param string $path
      * @param array<string,mixed> $headers
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param string $storageZoneName
      * @param string $fileName
      */
@@ -68,7 +72,7 @@ class EdgeStorageAPI
         string $localFilePath,
         string $path = '',
         array $headers = [],
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new UploadFile();
 
         return $this->client->request(
@@ -81,16 +85,18 @@ class EdgeStorageAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $fileName
      * @param string $path
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param string $storageZoneName
      */
     public function deleteFile(
         string $storageZoneName,
         string $fileName,
         string $path = ''
-    ): ResponseInterface {
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteFile();
 
         return $this->client->request(
@@ -101,11 +107,13 @@ class EdgeStorageAPI
 
     /**
      * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JsonException
      * @param string $path
-     * @return ResponseInterface
+     * @return BunnyClientResponseInterface
      * @param string $storageZoneName
      */
-    public function listFiles(string $storageZoneName, string $path = ''): ResponseInterface
+    public function listFiles(string $storageZoneName, string $path = ''): BunnyClientResponseInterface
     {
         $endpoint = new ListFiles();
 

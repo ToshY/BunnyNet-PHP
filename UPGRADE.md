@@ -1,18 +1,23 @@
 ## 3.x
 
-This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes.
+This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes. While I
+personally think it comes with a lot of improvements, both in code quality and API functionality, it requires
+the user to rework 
+
+The `3.x` release also comes with the notion that the `2.x` branch will no longer be maintained.
 
 ### ‼️ Breaking changes
 
 - Request (PSR-18)
   - Addition of `Psr\Http\Client\ClientInterface` requires the user to construct a `BunnyClient`, and supply
   the `BunnyClient` to the API classes. Examples can be found in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/base-api/).
-- Response (PSR-7)
-  - Return type for public API methods changed from `array` to `Psr\Http\Message\ResponseInterface` model:
-      - From `$response['content']` to `$response->getBody()->getContents()`
-      - From`$response['headers']` to `$response->getHeaders()`
-      - From`$response['status']['code']` to `$response->getStatusCode()`
-      - From`$response['status']['info']` to `$response->getReasonPhrase()`
+- Response
+  - Return type for public API methods changed from `array` to `ToshY\BunnyNet\Model\Client\BunnyClientResponse`:
+      - Change from `$response['content']` to `$response->getContents()`
+      - Change from `$response['headers']` to `$response->getHeaders()`
+      - Change from `$response['status']['code']` to `$response->getStatusCode()`
+      - Change from `$response['status']['info']` to `$response->getReasonPhrase()`
+      - A new method `getBody()` was added.
 - Endpoints
   - The following public classes have been **renamed**:
     - The class `BaseRequest` was renamed to `BaseAPI`.
@@ -39,8 +44,8 @@ This release reworks (almost) the entire codebase, and therefore results in quit
   - Logging API
     - The argument `$accountApiKey` was renamed to `$apiKey`.
   - Edge Storage API
-    - The argument `$hostCode` was changed to `$region` and now accepts a `Region` instead of string type.
-      - Example: For `Falkenstein` region this would now be `Region::FS` (default).
+    - The argument `$hostCode` was changed to `$region` and now only accepts a `Region` case.
+      - Example: For the `Falkenstein` region (previously `'FS'` code) this would now be `Region::FS` (default).
       - For a complete list of available `Region` cases, see the example in the [documentation website](https://ToshY.github.io/BunnyNet-PHP/edge-storage-api/#setup). 
 
 > Note: Please take in consideration that due to the impact of this release I cannot fully guarantee this list of
