@@ -12,18 +12,17 @@ require 'vendor/autoload.php';
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\StreamAPI;
 
+// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
+    client: new \Symfony\Component\HttpClient\Psr18Client()
 );
 
+// Provide the "API key" available at the "API > API Key" section of your specific video library.
 $streamApi = new StreamAPI(
-    apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc', # (2)
+    apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc',
     client: $bunnyClient
 );
 ```
-
-1. Create a BunnyClient using any HTTP client implementing `Psr\Http\Client\ClientInterface`.
-2. Provide the **API key** available at the **API > API Key** section of your specific video library.
 
 ## Usage
 
@@ -165,7 +164,7 @@ $streamApi->createVideo(
 
     - The `title` does not need to match or require a file extension.
     - A `collectionId` is not required.
-    - The response returns the video's GUID, which is required for video upload (see [uploadVideo](#upload-video)).
+    - The response returns the video's GUID, which is required for video upload (see [Upload Video](#upload-video)).
 
 
 #### [Upload Video](https://docs.bunny.net/reference/video_uploadvideo)
@@ -245,7 +244,6 @@ $streamApi->setThumbnail(
 ```php
 $streamApi->fetchVideo(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
     query: [
         'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144'
     ],

@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use ToshY\BunnyNet\Enum\MimeType;
 use ToshY\BunnyNet\Exception\BunnyClientResponseException;
-use ToshY\BunnyNet\Exception\JsonException;
+use ToshY\BunnyNet\Exception\JSONException;
 use ToshY\BunnyNet\Model\Client\BunnyClientResponse;
 
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
@@ -67,7 +67,7 @@ class BunnyClientHelper
 
     /**
      * @throws BunnyClientResponseException
-     * @throws JsonException
+     * @throws JSONException
      * @return BunnyClientResponseInterface
      * @param RequestInterface $request
      * @param ResponseInterface $response
@@ -107,7 +107,7 @@ class BunnyClientHelper
                 );
             }
         } catch (Throwable $e) {
-            throw new JsonException($e->getMessage().sprintf(' for "%s".', $request->getUri()), $e->getCode());
+            throw new JSONException($e->getMessage().sprintf(' for "%s".', $request->getUri()), $e->getCode());
         }
 
         return new BunnyClientResponse(

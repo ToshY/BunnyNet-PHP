@@ -128,16 +128,16 @@ class BaseAPI
         protected readonly BunnyClient $client,
     ) {
         $this->client
-            ->setAPIKey($this->apiKey)
+            ->setApiKey($this->apiKey)
             ->setBaseUrl(Host::API_ENDPOINT);
     }
 
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -159,7 +159,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -176,7 +176,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -193,7 +193,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -210,7 +210,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getCountryList(): BunnyClientResponseInterface
@@ -225,7 +225,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getBillingDetails(): BunnyClientResponseInterface
@@ -240,8 +240,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -263,8 +262,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -286,7 +284,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function preparePaymentAuthorization(): BunnyClientResponseInterface
@@ -301,7 +299,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getAffiliateDetails(): BunnyClientResponseInterface
@@ -316,7 +314,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function claimAffiliateCredits(): BunnyClientResponseInterface
@@ -331,7 +329,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getCoinifyBitcoinExchangeRate(): BunnyClientResponseInterface
@@ -346,7 +344,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -368,7 +366,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getBillingSummary(): BunnyClientResponseInterface
@@ -383,7 +381,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -405,7 +403,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -427,8 +425,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -450,7 +447,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -467,8 +464,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -492,7 +488,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -509,7 +505,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -526,8 +522,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -551,7 +546,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -575,8 +570,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -603,8 +597,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -632,8 +625,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -657,8 +649,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -683,7 +674,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param int $variableId
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -701,7 +692,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param int $variableId
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -719,7 +710,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -741,7 +732,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -758,7 +749,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -775,8 +766,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -801,8 +791,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -824,7 +813,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -846,7 +835,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function listRegions(): BunnyClientResponseInterface
@@ -861,7 +850,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -883,8 +872,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -906,7 +894,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -930,8 +918,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -955,7 +942,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -972,7 +959,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -994,7 +981,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1011,7 +998,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1028,7 +1015,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1045,8 +1032,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1070,8 +1056,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1095,8 +1080,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1120,8 +1104,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1145,7 +1128,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1167,8 +1150,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1190,7 +1172,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1207,8 +1189,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1232,7 +1213,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1249,7 +1230,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1266,7 +1247,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1290,8 +1271,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1313,8 +1293,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1338,8 +1317,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1364,7 +1342,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param int $id
      * @return BunnyClientResponseInterface
      * @param int $zoneId
@@ -1382,7 +1360,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1399,7 +1377,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1416,7 +1394,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\FileDoesNotExistException
      * @return BunnyClientResponseInterface
      * @param int $zoneId
@@ -1436,7 +1414,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1458,8 +1436,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1481,7 +1458,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1505,8 +1482,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1530,7 +1506,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1547,7 +1523,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $edgeRuleId
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1565,8 +1541,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1590,8 +1565,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1619,7 +1593,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param bool $enabled
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1639,7 +1613,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param bool $enabled
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1659,7 +1633,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1685,7 +1659,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1709,7 +1683,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1733,7 +1707,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1757,7 +1731,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1779,8 +1753,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1804,8 +1777,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1827,8 +1799,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1836,7 +1807,7 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addCustomCertificate(int $id, array $body): BunnyClientResponseInterface
+    public function addCertificate(int $id, array $body): BunnyClientResponseInterface
     {
         $endpoint = new AddCustomCertificate();
 
@@ -1852,8 +1823,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1877,8 +1847,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1902,8 +1871,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1927,8 +1895,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1952,7 +1919,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -1969,8 +1936,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -1994,8 +1960,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2019,8 +1984,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2044,8 +2008,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2069,8 +2032,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2094,8 +2056,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2119,7 +2080,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2141,7 +2102,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2163,7 +2124,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2185,7 +2146,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2207,8 +2168,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2230,8 +2190,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2253,7 +2212,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -2270,8 +2229,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2295,7 +2253,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -2312,7 +2270,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      * @param int $id
      */
@@ -2329,7 +2287,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2351,7 +2309,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getHomeFeed(): BunnyClientResponseInterface
@@ -2366,7 +2324,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getUserDetails(): BunnyClientResponseInterface
@@ -2381,8 +2339,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2404,7 +2361,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function resendEmailConfirmation(): BunnyClientResponseInterface
@@ -2419,7 +2376,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function resetUserApiKey(): BunnyClientResponseInterface
@@ -2434,7 +2391,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function listCloseAccountReasons(): BunnyClientResponseInterface
@@ -2449,8 +2406,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2472,7 +2428,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getDpaDetails(): BunnyClientResponseInterface
@@ -2487,7 +2443,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function acceptDpa(): BunnyClientResponseInterface
@@ -2502,7 +2458,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getDpaDetailsHtml(): BunnyClientResponseInterface
@@ -2517,7 +2473,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function setNotificationsOpened(): BunnyClientResponseInterface
@@ -2532,7 +2488,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function getWhatsNewItems(): BunnyClientResponseInterface
@@ -2547,7 +2503,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function resetWhatsNew(): BunnyClientResponseInterface
@@ -2562,7 +2518,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
     public function generateTwoFactorAuthenticationVerification(): BunnyClientResponseInterface
@@ -2577,8 +2533,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2600,8 +2555,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -2623,8 +2577,7 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException

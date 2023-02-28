@@ -6,7 +6,9 @@ namespace ToshY\BunnyNet\Helper;
 
 use Throwable;
 use ToshY\BunnyNet\Exception\FileDoesNotExistException;
-use ToshY\BunnyNet\Exception\InvalidJSONForBodyException;
+use ToshY\BunnyNet\Exception\JSONException;
+
+use const JSON_THROW_ON_ERROR;
 
 class BodyContentHelper
 {
@@ -27,7 +29,9 @@ class BodyContentHelper
     }
 
     /**
-     * @throws InvalidJSONForBodyException
+     * @throws JSONException
+     * @return mixed
+     * @param mixed $body
      */
     public static function getBody(mixed $body): mixed
     {
@@ -36,10 +40,13 @@ class BodyContentHelper
         }
 
         try {
-            $jsonBody = json_encode(value: $body, flags: JSON_THROW_ON_ERROR);
+            $jsonBody = json_encode(
+                value: $body,
+                flags: JSON_THROW_ON_ERROR
+            );
         } catch (Throwable $e) {
-            throw InvalidJSONForBodyException::withMessage(
-                message: $e->getMessage()
+            throw new JSONException(
+                $e->getMessage()
             );
         }
 

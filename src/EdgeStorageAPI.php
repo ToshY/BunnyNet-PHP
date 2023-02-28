@@ -28,14 +28,14 @@ class EdgeStorageAPI
         Region $region = Region::FS,
     ) {
         $this->client
-            ->setAPIKey($this->apiKey)
+            ->setApiKey($this->apiKey)
             ->setBaseUrl($region->host());
     }
 
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $fileName
      * @param string $path
      * @return BunnyClientResponseInterface
@@ -57,7 +57,7 @@ class EdgeStorageAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws FileDoesNotExistException
      * @param string $localFilePath
      * @param string $path
@@ -86,7 +86,7 @@ class EdgeStorageAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $fileName
      * @param string $path
      * @return BunnyClientResponseInterface
@@ -108,7 +108,7 @@ class EdgeStorageAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $path
      * @return BunnyClientResponseInterface
      * @param string $storageZoneName

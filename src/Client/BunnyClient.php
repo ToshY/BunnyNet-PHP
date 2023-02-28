@@ -8,7 +8,7 @@ use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use ToshY\BunnyNet\Exception\BunnyClientResponseException;
-use ToshY\BunnyNet\Exception\JsonException;
+use ToshY\BunnyNet\Exception\JSONException;
 use ToshY\BunnyNet\Helper\BunnyClientHelper;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
@@ -33,7 +33,7 @@ class BunnyClient
      * @param string $apiKey
      * @return $this
      */
-    public function setAPIKey(string $apiKey): self
+    public function setApiKey(string $apiKey): self
     {
         $this->apiKey = $apiKey;
 
@@ -54,7 +54,7 @@ class BunnyClient
     /**
      * @throws BunnyClientResponseException
      * @throws ClientExceptionInterface
-     * @throws JsonException
+     * @throws JSONException
      * @param mixed|null $body
      * @param array<string,mixed> $headers
      * @return BunnyClientResponseInterface

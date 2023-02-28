@@ -41,14 +41,14 @@ class StreamAPI
         protected readonly BunnyClient $client,
     ) {
         $this->client
-            ->setAPIKey($this->apiKey)
+            ->setApiKey($this->apiKey)
             ->setBaseUrl(Host::STREAM_ENDPOINT);
     }
 
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $collectionId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -66,8 +66,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -93,10 +92,9 @@ class StreamAPI
     }
 
     /**
-
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $collectionId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -112,10 +110,9 @@ class StreamAPI
     }
 
     /**
-
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -139,8 +136,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -164,7 +160,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $videoId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -182,8 +178,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -208,7 +203,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $videoId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -226,7 +221,31 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param int $libraryId
+     * @param array<string,mixed> $body
+     */
+    public function createVideo(int $libraryId, array $body): BunnyClientResponseInterface
+    {
+        $endpoint = new CreateVideo();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -258,7 +277,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $videoId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -276,7 +295,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -300,7 +319,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $videoId
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -318,7 +337,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -342,32 +361,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $libraryId
-     * @param array<string,mixed> $body
-     */
-    public function createVideo(int $libraryId, array $body): BunnyClientResponseInterface
-    {
-        $endpoint = new CreateVideo();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$libraryId],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -392,8 +386,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -420,8 +413,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
-     * @throws Exception\InvalidJSONForBodyException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -451,7 +443,7 @@ class StreamAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @param string $videoId
      * @param string $sourceLanguage
      * @return BunnyClientResponseInterface

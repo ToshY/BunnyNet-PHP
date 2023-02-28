@@ -33,12 +33,14 @@ The `2.x` branch will now no longer be maintained.
     - The method `resetStorageZonePasswordByPath` was renamed to `resetStorageZonePassword`.
     - The method `getCollectionList` was renamed to `listCollections`.
     - The method `purgeCache` was renamed to `purgePullZoneCache`.
+    - The method `addCustomCertificate` was renamed to `addCertificate`.
     - The method(s) having `the` in the name have been renamed.
         - `closeTheAccount` => `closeAccount`
     - The method(s) having lowercase abbreviations have been renamed to uppercase abbreviations.
         - `getDpaDetails` => `getDPADetails`
-  - The following public methods have been **removed**:
-    - The method `fetchVideoToCollection` was removed as it's no longer in Stream API specifications.
+  - The following public methods have been **changed**:
+    - The method `fetchVideoToCollection` was renamed to `fetchVideo`, therefore removing the original `fetchVideo` method.
+      - The new `fetchVideo` method has the same arguments `fetchVideoToCollection` used to have.
   - Base API
     - The argument `$accountApiKey` was renamed to `$apiKey`.
   - Logging API

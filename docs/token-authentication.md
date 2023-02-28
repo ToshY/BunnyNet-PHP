@@ -12,14 +12,12 @@ require 'vendor/autoload.php';
 
 use ToshY\BunnyNet\TokenAuthentication;
 
+// Provide the API key for the specific pull zone you want to use, available at the "Security > Token Authentication > Url Token Authentication Key" section.
 $tokenAuthentication = new TokenAuthentication(
-    token: '5509f27d-9103-4de6-8370-8bd68db859c9', # (1)
+    token: '5509f27d-9103-4de6-8370-8bd68db859c9',
     hostname: 'https://custom-pullzone.b-cdn.net'
 );
 ```
-
-1. Provide the API key for the specific pull zone you want to use, available at the **Security > Token Authentication >
-   Url Token Authentication Key** section.
 
 ## Usage
 
@@ -29,14 +27,14 @@ Sign a URL.
 // Root directory.
 $tokenAuthentication->sign(
     file: '/bunny.jpg',
-    expirationTime: 3600, # (1)
+    expirationTime: 3600,
     userIp: null,
     isDirectoryToken: false,
     pathAllowed: null,
     countriesAllowed: null,
     countriesBlocked: null,
     referrersAllowed: null,
-    speedLimit: null, # (2)
+    speedLimit: null,
     allowSubnet: true
 );
 
@@ -95,11 +93,10 @@ $tokenAuthentication->sign(
 );
 ```
 
-1. Time in seconds the resource is available after signing.
-2. Speed download limit in kB/s.
-
 !!! note
 
+    - The argument `expirationTime` denotes the time in seconds the resource is available after signing.
+    - The argument `speedLimit` denotes the download speed limit (in kB/s) for the resource.
     - Token IP validation only supports IPv4.
     - In order to reduce the false negatives (and increase privacy) for Token IP validation, the default is to
     allow the full `/24` subnet. As an example, a token signed for a user with IPv4 `12.345.67.89` will allow 

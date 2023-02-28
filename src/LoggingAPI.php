@@ -23,14 +23,14 @@ class LoggingAPI
         protected readonly BunnyClient $client,
     ) {
         $this->client
-            ->setAPIKey($this->apiKey)
+            ->setApiKey($this->apiKey)
             ->setBaseUrl(Host::LOGGING_ENDPOINT);
     }
 
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JsonException
+     * @throws Exception\JSONException
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
@@ -39,8 +39,11 @@ class LoggingAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function getLog(int $pullZoneId, DateTimeInterface $dateTime, array $query = []): BunnyClientResponseInterface
-    {
+    public function getLog(
+        int $pullZoneId,
+        DateTimeInterface $dateTime,
+        array $query = []
+    ): BunnyClientResponseInterface {
         $endpoint = new GetLog();
         $dateTimeFormat = $dateTime->format('m-d-y');
 

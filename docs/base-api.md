@@ -13,18 +13,17 @@ require 'vendor/autoload.php';
 use ToshY\BunnyNet\BaseAPI;
 use ToshY\BunnyNet\Client\BunnyClient;
 
+// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
+    client: new \Symfony\Component\HttpClient\Psr18Client()
 );
 
+// Provide the API key available at the "Account Settings > API" section.
 $baseApi = new BaseAPI(
-    apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989', # (2)
+    apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
     client: $bunnyClient
 );
 ```
-
-1. Create a BunnyClient using any HTTP client implementing `Psr\Http\Client\ClientInterface`.
-2. Provide the API key available at the **Account Settings > API** section.
 
 ## Usage
 
@@ -288,7 +287,7 @@ $baseApi->publishComputeScriptByPathParameter(
 );
 ```
 
-#### [Create Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_addvariable)
+#### [Add Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_addvariable)
 
 ```php
 $baseApi->addComputeScriptVariable(
@@ -561,16 +560,6 @@ $baseApi->updateVideoLibrary(
 ```php
 $baseApi->deleteVideoLibrary(
     id: 1
-);
-```
-
-#### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
-
-```php
-$baseApi->resetVideoLibraryPassword(
-    query: [
-        'id' => 1
-    ]
 );
 ```
 
@@ -1377,15 +1366,6 @@ $baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
 );
 ```
 
-```
-============================================================
-T   Tp  Sp  D   Dp  S   D7  T
-------------------------------------------------------------
-A   F#m Bm  E   C#m D   E7  A
-A#  Gm  Cm  F   Dm  D#  F7  A#
-B♭  Gm  Cm  F   Dm  E♭m F7  B♭
-```
-
 !!! note
 
     - This endpoint corresponds to toggling the **Token IP Validation** switch in the **Token Authentication > Security** section of your pull zone.
@@ -1473,10 +1453,10 @@ $baseApi->checkPullZoneAvailability(
 );
 ```
 
-#### [Add Custom Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
+#### [Add Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
 
 ```php
-$baseApi->addCustomCertificate(
+$baseApi->addCertificate(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
@@ -1490,7 +1470,7 @@ $baseApi->addCustomCertificate(
 
     - The keys `Certificate` and `CertificateKey` require the file contents to be sent as base64 encoded strings.
 
-#### [Remove Custom Certificate](https://docs.bunny.net/reference/pullzonepublic_removecertificate)
+#### [Remove Certificate](https://docs.bunny.net/reference/pullzonepublic_removecertificate)
 
 ```php
 $baseApi->removeCertificate(

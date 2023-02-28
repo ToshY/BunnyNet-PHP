@@ -13,28 +13,29 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\EdgeStorageAPI;
 use ToshY\BunnyNet\Enum\Region;
 
+// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client() # (1)
+    client: new \Symfony\Component\HttpClient\Psr18Client()
 );
 
+// Provide the "(Read-Only) Password" available at the "FTP & API Access" section of your specific storage zone.
 $edgeStorageApi = new EdgeStorageAPI(
-    apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6', # (2)
-    region: Region::FS, # (3)
+    apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
+    region: Region::FS,
     client: $bunnyClient
 );
 ```
 
-1. Create a BunnyClient using any HTTP client implementing `Psr\Http\Client\ClientInterface`.
-2. Provide the **(Read-Only) Password** available at the **FTP & API Access** section of your specific storage zone.
-3. The `region` can have the following values:
-    - `Region::DE`
-    - `Region::UK`
-    - `Region::NY`
-    - `Region::LA`
-    - `Region::SG`
-    - `Region::SYD`
-    - `Region::BR`
-    - `Region::JH`
+!!! note 
+    - The argument `region` has the following possible values:
+        - `Region::DE` = Falkenstein / Frankfurt (Germany)
+        - `Region::UK` = London (United Kingdom)
+        - `Region::NY` = New York (United States East)
+        - `Region::LA` = Los Angeles (United States West)
+        - `Region::SG` = Singapore (Singapore)
+        - `Region::SYD` = Sydney (Oceania)
+        - `Region::BR` = Sao Paolo (Brazil)
+        - `Region::JH` = Johannesburg (Africa)
 
 ## Usage
 

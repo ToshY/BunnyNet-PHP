@@ -6,6 +6,8 @@ docs_dir: docs/
 site_dir: site/
 theme:
   name: material
+  font: false
+  favicon: images/favicon.png
   features:
     - navigation.footer
     - navigation.indexes
@@ -34,24 +36,22 @@ theme:
         icon: material/weather-night
         name: Switch to light mode
 markdown_extensions:
-  - abbr
-  - tables
-  - toc
-  - admonition
+  - abbr:
+  - tables:
+  - toc:
+  - admonition:
   - pymdownx.extra:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
-      linenums: true
-      anchor_linenums: true
-      line_spans: __span
-      guess_lang: false
-      extend_pygments_lang:
-        - name: php
-          lang: php
-          options:
-            startinline: true
+      use_pygments: false
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js
+  - javascripts/highlight.js
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css
+  - stylesheets/extra.css
 extra:
   generator: false
   social:
