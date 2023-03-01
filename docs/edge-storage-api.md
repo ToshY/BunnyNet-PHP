@@ -83,10 +83,20 @@ $edgeStorageApi->uploadFile(
     localFilePath: './local-custom.css',
     path: 'css',
     headers: [
-        'Checksum': '253852201067799f637d8bb144f32d7aaeef3182beaa61168e0aa87dbe336d7c'
+        'Checksum' => '253852201067799f637d8bb144f32d7aaeef3182beaa61168e0aa87dbe336d7c'
     ]
 );
 ```
+
+!!! note
+
+    - Supplying either a correct or incorrect `Checksum`, this endpoint currently returns a `400` status code with the following response: 
+    ```
+    {
+      "HttpCode": 400,
+      "Message": "Unable to upload file."
+    }
+    ```
 
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 
@@ -112,8 +122,7 @@ $edgeStorageApi->deleteFile(
 ```php
 // Root directory.
 $edgeStorageApi->listFiles(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'bunny.jpg'
+    storageZoneName: 'my-storage-zone-1'
 );
 
 // Subdirectory.

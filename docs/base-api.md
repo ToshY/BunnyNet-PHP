@@ -66,10 +66,10 @@ $baseApi->checkAbuseCase(
 
 ### Countries
 
-#### [Get Country List](https://docs.bunny.net/reference/countriespublic_getcountrylist)
+#### [List Countries](https://docs.bunny.net/reference/countriespublic_getcountrylist)
 
 ```php
-$baseApi->getCountryList();
+$baseApi->listCountries();
 ```
 
 ### Billing
@@ -420,6 +420,13 @@ $baseApi->listDrmCertificates(
     ]
 );
 ```
+
+!!! note
+
+    - This endpoint currently returns a `500` status code with the following response: 
+    ```
+    {"Message":"An error has occurred."}
+    ```
 
 ### Region
 
@@ -1710,7 +1717,11 @@ $baseApi->addStorageZone(
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
 ```php
-$baseApi->checkStorageZoneAvailability();
+$baseApi->checkStorageZoneAvailability(
+    body: [
+        'Name' => 'Test'
+    ]
+);
 ```
 
 #### [Get Storage Zone](https://docs.bunny.net/reference/storagezonepublic_index2)

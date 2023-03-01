@@ -213,7 +213,7 @@ class BaseAPI
      * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
-    public function getCountryList(): BunnyClientResponseInterface
+    public function listCountries(): BunnyClientResponseInterface
     {
         $endpoint = new ListCountries();
 
@@ -410,7 +410,7 @@ class BaseAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function listComputeScripts(array $query): BunnyClientResponseInterface
+    public function listComputeScripts(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListComputeScripts();
 

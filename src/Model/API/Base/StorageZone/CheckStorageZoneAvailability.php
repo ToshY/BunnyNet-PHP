@@ -15,7 +15,7 @@ class CheckStorageZoneAvailability implements EndpointInterface, EndpointBodyInt
 {
     public function getMethod(): Method
     {
-        return Method::GET;
+        return Method::POST;
     }
 
     public function getPath(): string
