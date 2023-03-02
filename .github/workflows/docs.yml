@@ -30,7 +30,7 @@ jobs:
           path: .cache
 
       - name: Build docs
-        run: docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.0.13 build
+        run: docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
