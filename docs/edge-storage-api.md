@@ -83,20 +83,14 @@ $edgeStorageApi->uploadFile(
     localFilePath: './local-custom.css',
     path: 'css',
     headers: [
-        'Checksum' => '253852201067799f637d8bb144f32d7aaeef3182beaa61168e0aa87dbe336d7c'
+        'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C'
     ]
 );
 ```
 
 !!! note
 
-    - Supplying either a correct or incorrect `Checksum`, this endpoint currently returns a `400` status code with the following response: 
-    ```
-    {
-      "HttpCode": 400,
-      "Message": "Unable to upload file."
-    }
-    ```
+    - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header **must** be in uppercase characters for a successful upload.
 
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 
