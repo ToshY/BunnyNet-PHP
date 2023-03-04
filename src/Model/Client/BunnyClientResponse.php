@@ -29,19 +29,19 @@ class BunnyClientResponse implements BunnyClientResponseInterface
     }
 
     /**
-     * @return StreamInterface
-     */
-    public function getBody(): StreamInterface
-    {
-        return $this->response->getBody();
-    }
-
-    /**
      * @return mixed
      */
     public function getContents(): mixed
     {
         return $this->contents;
+    }
+
+    /**
+     * @return StreamInterface
+     */
+    public function getBody(): StreamInterface
+    {
+        return $this->response->getBody();
     }
 
     /**
