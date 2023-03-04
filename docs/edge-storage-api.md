@@ -73,7 +73,7 @@ $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
-    path: 'css',
+    path: 'css'
 );
 
 // Subdirectory with additional SHA256 checksum header.
@@ -83,7 +83,7 @@ $edgeStorageApi->uploadFile(
     localFilePath: './local-custom.css',
     path: 'css',
     headers: [
-        'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C'
+        'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',
     ]
 );
 ```

@@ -40,4 +40,4 @@ body:
     id: additional-context
     attributes:
       label: Additional Context
-      description: "Optional: any other context about the problem: log messages, screenshots, etc."
+      description: "Optional: any other context about the problem: screenshots, response messages, etc."

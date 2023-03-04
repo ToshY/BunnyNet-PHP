@@ -58,7 +58,7 @@ $loggingApi->getLog(
 
 !!! note
 
-    - The key `status` is an optional value consisting of comma separated status codes.
+    - The key `status` consists of comma separated status codes.
 
 ## Reference
 

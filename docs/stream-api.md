@@ -44,7 +44,7 @@ $streamApi->updateCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
     body: [
-        'name' => 'Bunny Hopping Collection V2'
+        'name' => 'Bunny Hopping Collection V2',
     ]
 );
 ```
@@ -67,7 +67,7 @@ $streamApi->listCollections(
         'page' => 1,
         'perPage' => 100,
         'search' => 'bunny',
-        'orderBy' => 'date'
+        'orderBy' => 'date',
     ]
 );
 ```
@@ -78,7 +78,7 @@ $streamApi->listCollections(
 $streamApi->createCollection(
     libraryId: 1,
     body: [
-        'name' => 'Bunny Collection'
+        'name' => 'Bunny Collection',
     ]
 );
 ```
@@ -107,32 +107,32 @@ $streamApi->updateVideo(
             [
                 'title' => 'Chapter 1',
                 'start' => 0,
-                'end' => 300
+                'end' => 300,
             ],
             [
                 'title' => 'Chapter 2',
                 'start' => 301,
-                'end' => 500
+                'end' => 500,
             ],
         ]
         'moments' => [
             [
                 'label' => 'Awesome Scene 1',
-                'timestamp' => 70
+                'timestamp' => 70,
             ],
             [
                 'title' => 'Awesome Scene 2',
-                'timestamp' => 120
+                'timestamp' => 120,
             ],
         ]
         'metaTags' => [
             [
                 'property' => 'description',
-                'value' => 'My Video Description'
+                'value' => 'My Video Description',
             ],
             [
                 'property' => 'robots',
-                'value' => 'noindex,nofollow'
+                'value' => 'noindex,nofollow',
             ]
         ]
     ]
@@ -155,7 +155,7 @@ $streamApi->createVideo(
     libraryId: 1,
     body: [
         'title' => 'Bunny Hoppers',
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144'
+        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
     ]
 );
 ```
@@ -175,7 +175,7 @@ $streamApi->uploadVideo(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     localFilePath: './bunny-hop.mp4',
     query: [
-        'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p'
+        'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
     ]
 );
 ```
@@ -198,7 +198,7 @@ $streamApi->getVideoStatistics(
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
         'hourly' => false,
-        'videoGuid' => 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+        'videoGuid' => 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     ]
 );
 ```
@@ -208,7 +208,7 @@ $streamApi->getVideoStatistics(
 ```php
 $streamApi->reEncodeVideo(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
 );
 ```
 
@@ -222,7 +222,7 @@ $streamApi->listVideos(
         'itemsPerPage' => 100,
         'search' => 'bunny',
         'collection' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-        'orderBy' => 'date'
+        'orderBy' => 'date',
     ]
 );
 ```
@@ -232,9 +232,9 @@ $streamApi->listVideos(
 ```php
 $streamApi->setThumbnail(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     query: [
-        'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg'
+        'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg',
     ]
 );
 ```
@@ -245,15 +245,15 @@ $streamApi->setThumbnail(
 $streamApi->fetchVideo(
     libraryId: 1,
     query: [
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144'
+        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
     ],
     body: [
-        'url' =>'https://example.com/bunny-hop.mp4',
+        'url' => 'https://example.com/bunny-hop.mp4',
         'headers' => [
             'newKey' => 'New Value',
-            'newKey-1' => 'New Value',
-            'newKey-2' => 'New Value'
-        ]
+            'newKey-1' => 'New Value 1',
+            'newKey-2' => 'New Value 2',
+        ],
     ]
 );
 ```
@@ -266,9 +266,9 @@ $streamApi->addCaption(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     sourceLanguage: 'jp',
     body: [
-        'srclang' =>'https://example.com/bunny-hop.mp4',
+        'srclang' => 'jp',
         'label' =>'Subtitles (Japanese)',
-        'captionsFile' =>'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K'
+        'captionsFile' =>'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
     ]
 );
 ```
