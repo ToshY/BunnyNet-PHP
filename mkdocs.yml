@@ -7,6 +7,7 @@ site_dir: site/
 theme:
   name: material
   font: false
+  logo: images/favicon.png
   favicon: images/favicon.png
   features:
     - navigation.footer
@@ -16,10 +17,6 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
-  icon:
-    logo: fontawesome/brands/readme
-    admonition:
-      note: fontawesome/solid/note-sticky
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -55,6 +52,9 @@ extra_css:
 extra:
   generator: false
   social:
+    - icon: material/rabbit
+      link: https://bunny.net?ref=pji59zr7a4
+      name: Affiliate link
     - icon: fontawesome/brands/btc
       link: bitcoin:1AD94f8jJ1E6RZL6NGpgSk3NtBr75C9eAw
       name: Bitcoin | BTC

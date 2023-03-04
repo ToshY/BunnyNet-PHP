@@ -290,7 +290,7 @@ $streamApi->deleteCaption(
 
 !!! note
 
-    - The `sourceLanguage` / `srclang` is the [language shortcode](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the caption.
+    - The `sourceLanguage` is the [language shortcode](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the caption.
 
 ## Reference
 
