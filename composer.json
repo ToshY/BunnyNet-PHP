@@ -1,7 +1,17 @@
 {
   "name": "toshy/bunnynet-php",
   "description": "BunnyNet API client for PHP",
-  "keywords": ["Bunny.net", "BunnyCDN", "BunnyWay", "BunnyNet-PHP", "BunnyWay-PHP","ToshY"],
+  "keywords": [
+    "Bunny.net",
+    "BunnyCDN",
+    "BunnyWay",
+    "BunnyNet-PHP",
+    "BunnyWay-PHP",
+    "Bunny PHP",
+    "Bunny CDN PHP",
+    "BunnyNet PHP client",
+    "ToshY"
+  ],
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
