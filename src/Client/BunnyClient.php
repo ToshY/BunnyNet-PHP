@@ -96,10 +96,6 @@ class BunnyClient
             $query,
         );
 
-        /*
-         *
-         */
-
         $request = new Request(
             method: $endpoint->getMethod()->value,
             uri: $url,
