@@ -15,7 +15,7 @@ class SetThumbnail implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {
-        return Method::DELETE;
+        return Method::POST;
     }
 
     public function getPath(): string

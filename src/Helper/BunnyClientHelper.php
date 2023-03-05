@@ -81,11 +81,7 @@ class BunnyClientHelper
         if ($statusCode < 200 || $statusCode >= 400) {
             $body = (string) $response->getBody();
 
-            if (strlen($body) > 0) {
-                throw new BunnyClientResponseException($body, $statusCode);
-            }
-
-            throw new BunnyClientResponseException('The response could not be parsed.', $statusCode);
+            throw new BunnyClientResponseException($body, $statusCode);
         }
 
         try {

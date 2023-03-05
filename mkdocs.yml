@@ -1,5 +1,5 @@
 site_name: BunnyNet-PHP
-site_description: BunnyNet API client for PHP
+site_description: bunny.net API client for PHP
 repo_name: ToshY/BunnyNet-PHP
 repo_url: https://github.com/ToshY/BunnyNet-PHP
 docs_dir: docs/

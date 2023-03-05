@@ -121,7 +121,7 @@ $streamApi->updateVideo(
                 'timestamp' => 70,
             ],
             [
-                'title' => 'Awesome Scene 2',
+                'label' => 'Awesome Scene 2',
                 'timestamp' => 120,
             ],
         ],
@@ -188,6 +188,14 @@ $streamApi->getVideoHeatmap(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
 );
 ```
+
+!!! warning
+
+    - This endpoint currently returns a `500` status code with the following response: 
+    ```
+    Internal Server Error
+    ```
+    A support ticket has been created at bunny.net regarding this issue.
 
 #### [Get Video Statistics](https://docs.bunny.net/reference/video_getvideostatistics)
 
