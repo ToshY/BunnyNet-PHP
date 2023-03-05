@@ -53,8 +53,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getCollection(int $libraryId, string $collectionId): BunnyClientResponseInterface
-    {
+    public function getCollection(
+        int $libraryId,
+        string $collectionId,
+    ): BunnyClientResponseInterface {
         $endpoint = new GetCollection();
 
         return $this->client->request(
@@ -99,8 +101,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function deleteCollection(int $libraryId, string $collectionId): BunnyClientResponseInterface
-    {
+    public function deleteCollection(
+        int $libraryId,
+        string $collectionId,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteCollection();
 
         return $this->client->request(
@@ -120,8 +124,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function listCollections(int $libraryId, array $query = []): BunnyClientResponseInterface
-    {
+    public function listCollections(
+        int $libraryId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ListCollections();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -144,8 +150,10 @@ class StreamAPI
      * @param int $libraryId
      * @param array<string,mixed> $body
      */
-    public function createCollection(int $libraryId, array $body): BunnyClientResponseInterface
-    {
+    public function createCollection(
+        int $libraryId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new CreateCollection();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -165,8 +173,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
-    {
+    public function getVideo(
+        int $libraryId,
+        string $videoId,
+    ): BunnyClientResponseInterface {
         $endpoint = new GetVideo();
 
         return $this->client->request(
@@ -187,8 +197,11 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function updateVideo(int $libraryId, string $videoId, array $body): BunnyClientResponseInterface
-    {
+    public function updateVideo(
+        int $libraryId,
+        string $videoId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateVideo();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -208,8 +221,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function deleteVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
-    {
+    public function deleteVideo(
+        int $libraryId,
+        string $videoId,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteVideo();
 
         return $this->client->request(
@@ -229,8 +244,10 @@ class StreamAPI
      * @param int $libraryId
      * @param array<string,mixed> $body
      */
-    public function createVideo(int $libraryId, array $body): BunnyClientResponseInterface
-    {
+    public function createVideo(
+        int $libraryId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new CreateVideo();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -282,8 +299,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideoHeatmap(int $libraryId, string $videoId): BunnyClientResponseInterface
-    {
+    public function getVideoHeatmap(
+        int $libraryId,
+        string $videoId,
+    ): BunnyClientResponseInterface {
         $endpoint = new GetVideoHeatmap();
 
         return $this->client->request(
@@ -303,8 +322,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function getVideoStatistics(int $libraryId, array $query = []): BunnyClientResponseInterface
-    {
+    public function getVideoStatistics(
+        int $libraryId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ListVideoStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -324,8 +345,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function reEncodeVideo(int $libraryId, string $videoId): BunnyClientResponseInterface
-    {
+    public function reEncodeVideo(
+        int $libraryId,
+        string $videoId,
+    ): BunnyClientResponseInterface {
         $endpoint = new ReEncodeVideo();
 
         return $this->client->request(
@@ -345,8 +368,10 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function listVideos(int $libraryId, array $query = []): BunnyClientResponseInterface
-    {
+    public function listVideos(
+        int $libraryId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ListVideos();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -370,8 +395,11 @@ class StreamAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function setThumbnail(int $libraryId, string $videoId, array $query): BunnyClientResponseInterface
-    {
+    public function setThumbnail(
+        int $libraryId,
+        string $videoId,
+        array $query,
+    ): BunnyClientResponseInterface {
         $endpoint = new SetThumbnail();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -395,8 +423,11 @@ class StreamAPI
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
-    public function fetchVideo(int $libraryId, array $body, array $query = []): BunnyClientResponseInterface
-    {
+    public function fetchVideo(
+        int $libraryId,
+        array $body,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new FetchVideo();
 
         ParameterValidator::validate($query, $endpoint->getQuery());

@@ -530,8 +530,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateComputeScriptCode(int $id, array $body = []): BunnyClientResponseInterface
-    {
+    public function updateComputeScriptCode(
+        int $id,
+        array $body = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateComputeScriptCode();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -554,8 +556,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function listComputeScriptReleases(int $id, array $query = []): BunnyClientResponseInterface
-    {
+    public function listComputeScriptReleases(
+        int $id,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ListComputeScriptReleases();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -579,8 +583,11 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function publishComputeScript(int $id, array $query, array $body = []): BunnyClientResponseInterface
-    {
+    public function publishComputeScript(
+        int $id,
+        array $query,
+        array $body = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new PublishComputeScript();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -633,8 +640,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addComputeScriptVariable(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addComputeScriptVariable(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new AddComputeScriptVariable();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -658,8 +667,11 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function updateComputeScriptVariable(int $id, int $variableId, array $body): BunnyClientResponseInterface
-    {
+    public function updateComputeScriptVariable(
+        int $id,
+        int $variableId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateComputeScriptVariable();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -679,8 +691,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getComputeScriptVariable(int $id, int $variableId): BunnyClientResponseInterface
-    {
+    public function getComputeScriptVariable(
+        int $id,
+        int $variableId,
+    ): BunnyClientResponseInterface {
         $endpoint = new GetComputeScriptVariable();
 
         return $this->client->request(
@@ -697,8 +711,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function deleteComputeScriptVariable(int $id, int $variableId): BunnyClientResponseInterface
-    {
+    public function deleteComputeScriptVariable(
+        int $id,
+        int $variableId,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteComputeScriptVariable();
 
         return $this->client->request(
@@ -774,8 +790,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function replyTicket(int $id, array $body = []): BunnyClientResponseInterface
-    {
+    public function replyTicket(
+        int $id,
+        array $body = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ReplyTicket();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -902,8 +920,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getVideoLibrary(int $id, array $query = []): BunnyClientResponseInterface
-    {
+    public function getVideoLibrary(
+        int $id,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetVideoLibrary();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -926,8 +946,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateVideoLibrary(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function updateVideoLibrary(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateVideoLibrary();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1040,8 +1062,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addVideoLibraryAllowedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\AddAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1064,8 +1088,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeVideoLibraryAllowedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removeVideoLibraryAllowedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1088,8 +1114,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addVideoLibraryBlockedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\AddBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1112,8 +1140,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeVideoLibraryBlockedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removeVideoLibraryBlockedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1197,8 +1227,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateDnsZone(int $id, array $body = []): BunnyClientResponseInterface
-    {
+    public function updateDnsZone(
+        int $id,
+        array $body = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateDNSZone();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1255,8 +1287,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getDnsZoneQueryStatistics(int $id, array $query = []): BunnyClientResponseInterface
-    {
+    public function getDnsZoneQueryStatistics(
+        int $id,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetDNSZoneQueryStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1301,8 +1335,10 @@ class BaseAPI
      * @param int $zoneId
      * @param array<string,mixed> $body
      */
-    public function addDnsRecord(int $zoneId, array $body): BunnyClientResponseInterface
-    {
+    public function addDnsRecord(
+        int $zoneId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new AddDNSRecord();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1326,8 +1362,11 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function updateDnsRecord(int $zoneId, int $id, array $body): BunnyClientResponseInterface
-    {
+    public function updateDnsRecord(
+        int $zoneId,
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateDNSRecord();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1347,8 +1386,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $zoneId
      */
-    public function deleteDnsRecord(int $zoneId, int $id): BunnyClientResponseInterface
-    {
+    public function deleteDnsRecord(
+        int $zoneId,
+        int $id,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteDNSRecord();
 
         return $this->client->request(
@@ -1400,8 +1441,10 @@ class BaseAPI
      * @param int $zoneId
      * @param string $localFilePath
      */
-    public function importDnsRecords(int $zoneId, string $localFilePath): BunnyClientResponseInterface
-    {
+    public function importDnsRecords(
+        int $zoneId,
+        string $localFilePath,
+    ): BunnyClientResponseInterface {
         $endpoint = new ImportDNSRecords();
 
         return $this->client->request(
@@ -1466,8 +1509,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $id
      */
-    public function getPullZone(int $id, array $query = []): BunnyClientResponseInterface
-    {
+    public function getPullZone(
+        int $id,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetPullZone();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1490,8 +1535,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updatePullZone(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function updatePullZone(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdatePullZone();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1528,8 +1575,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function deleteEdgeRule(int $pullZoneId, string $edgeRuleId): BunnyClientResponseInterface
-    {
+    public function deleteEdgeRule(
+        int $pullZoneId,
+        string $edgeRuleId,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteEdgeRule();
 
         return $this->client->request(
@@ -1549,8 +1598,10 @@ class BaseAPI
      * @param int $pullZoneId
      * @param array<string,mixed> $body
      */
-    public function addOrUpdateEdgeRule(int $pullZoneId, array $body): BunnyClientResponseInterface
-    {
+    public function addOrUpdateEdgeRule(
+        int $pullZoneId,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new AddOrUpdateEdgeRule();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1667,8 +1718,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getSafeHopStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
-    {
+    public function getSafeHopStatistics(
+        int $pullZoneId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetSafeHopStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1691,8 +1744,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getOptimizerStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
-    {
+    public function getOptimizerStatistics(
+        int $pullZoneId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetOptimizerStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1715,8 +1770,10 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      */
-    public function getWafStatistics(int $pullZoneId, array $query = []): BunnyClientResponseInterface
-    {
+    public function getWafStatistics(
+        int $pullZoneId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new GetWAFStatistics();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
@@ -1761,8 +1818,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function purgePullZoneCache(int $id, array $body = []): BunnyClientResponseInterface
-    {
+    public function purgePullZoneCache(
+        int $id,
+        array $body = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new PurgeCache();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1807,8 +1866,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addCertificate(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addCertificate(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new AddCustomCertificate();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1831,8 +1892,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeCertificate(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removeCertificate(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteCertificate();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1855,8 +1918,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addCustomHostname(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addCustomHostname(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new AddCustomHostname();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1879,8 +1944,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removeCustomHostname(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removeCustomHostname(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new DeleteCustomHostname();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1903,8 +1970,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function setForceSsl(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function setForceSsl(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new SetForceSSL();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1944,8 +2013,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addPullZoneAllowedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1968,8 +2039,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneAllowedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removePullZoneAllowedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteAllowedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -1992,8 +2065,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addPullZoneBlockedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -2016,8 +2091,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneBlockedReferer(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removePullZoneBlockedReferer(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteBlockedReferer();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -2040,8 +2117,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function addPullZoneBlockedIp(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function addPullZoneBlockedIp(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddBlockedIP();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -2064,8 +2143,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function removePullZoneBlockedIp(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function removePullZoneBlockedIp(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteBlockedIP();
 
         ParameterValidator::validate($body, $endpoint->getBody());
@@ -2237,8 +2318,10 @@ class BaseAPI
      * @param int $id
      * @param array<string,mixed> $body
      */
-    public function updateStorageZone(int $id, array $body): BunnyClientResponseInterface
-    {
+    public function updateStorageZone(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
         $endpoint = new UpdateStorageZone();
 
         ParameterValidator::validate($body, $endpoint->getBody());

@@ -113,8 +113,10 @@ class EdgeStorageAPI
      * @return BunnyClientResponseInterface
      * @param string $storageZoneName
      */
-    public function listFiles(string $storageZoneName, string $path = ''): BunnyClientResponseInterface
-    {
+    public function listFiles(
+        string $storageZoneName,
+        string $path = '',
+    ): BunnyClientResponseInterface {
         $endpoint = new ListFiles();
 
         return $this->client->request(
