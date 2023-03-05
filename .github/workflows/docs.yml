@@ -23,12 +23,6 @@ jobs:
       - name: Setup pages
         uses: actions/configure-pages@v3
 
-      - name: Setup cache
-        uses: actions/cache@v3
-        with:
-          key: ${{ github.sha }}
-          path: .cache
-
       - name: Build docs
         run: docker run --rm -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
 
