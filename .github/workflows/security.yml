@@ -1,5 +1,4 @@
 name: Security Check
-
 on:
   push:
     branches:
