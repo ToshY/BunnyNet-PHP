@@ -15,9 +15,6 @@ class ListFiles implements EndpointInterface
         return Method::GET;
     }
 
-    /**
-     * Note: second %s should be replaced by '' for root directory.
-     */
     public function getPath(): string
     {
         return '%s/%s/';

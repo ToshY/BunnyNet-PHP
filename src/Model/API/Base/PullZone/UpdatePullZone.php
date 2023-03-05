@@ -31,18 +31,6 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
         ];
     }
 
-    /**
-     * OriginType (undocumented):
-     * 0 = URL
-     * 1 = -
-     * 2 = Storage Zone
-     * 3 = -
-     * 4 = Script (hidden in UI)
-     *
-     * LogAnonymizationType (undocumented):
-     * 0 = Remove one octet
-     * 1 = Drop IP
-     */
     public function getBody(): array
     {
         return [
