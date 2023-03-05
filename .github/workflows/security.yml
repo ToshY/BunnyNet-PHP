@@ -1,5 +1,4 @@
 name: Security Check
-
 on:
   push:
     branches:
@@ -16,7 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ '8.0', '8.1' ]
+        php-versions:
+          - '8.1'
+          - '8.2'
 
     steps:
       - name: Checkout
@@ -32,11 +33,11 @@ jobs:
         with:
           composer-options: '--prefer-stable'
 
-      - name: Check for vulnerabilities
+      - id: security-check
+        name: Check for vulnerabilities
         uses: symfonycorp/security-checker-action@v5
         with:
           disable-exit-code: 1
-        id: security-check
 
       - name: Display vulnerabilities as JSON
         run: echo ${{ steps.security-check.outputs.vulns }}

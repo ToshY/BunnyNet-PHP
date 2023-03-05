@@ -12,24 +12,15 @@ tasks:
     cmds:
       - task --list
 
-  # App
-  up:
-    desc: Up service
-    cmds:
-      - docker compose up -d --build --remove-orphans --force-recreate
-
-  down:
-    desc: Down service
-    cmds:
-      - docker compose down --remove-orphans
-
   contribute:
     desc: Contribute by running dev tools
     cmds:
-      - task: phpcs:dry
-      - task: phpmd:check
+      - task: phpcs
+      - task: phpstan
+      - task: phpmd
+      - task: phpunit
 
-      # Composer
+  # Composer
   composer:install:
     desc: Composer install
     cmds:
@@ -39,6 +30,11 @@ tasks:
     desc: Composer dump autoload
     cmds:
       - docker compose run --rm $TTY php composer dump-autoload {{.CLI_ARGS | default "--no-cache --no-interaction"}}
+
+  composer:autoload:dev:
+    desc: Composer dump autoload dev
+    cmds:
+      - task composer:autoload -- --dev --no-cache --no-interaction
 
   composer:require:
     desc: Composer require package
@@ -68,32 +64,57 @@ tasks:
       - docker compose run --rm $TTY php composer update {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
 
   # Tools
-  phpcs:dry:
+  grum:init:
+    desc: Init GrumPHP
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/grumphp git:init
+
+  phpcs:
     desc: PHPCS dry run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes --dry-run
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix --dry-run -v --diff
 
   phpcs:fix:
     desc: PHPCS fix
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix . --allow-risky=yes
+      - docker compose run --rm $TTY php vendor/bin/php-cs-fixer fix -v
 
-  phpmd:check:
+  phpmd:
     desc: PHPMD run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
 
-  phpmd:check:strict:
+  phpmd:strict:
     desc: PHPMD run with strict argument
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
 
-  phpmd:generate:baseline:
-    desc: PHPMD generate baseline
+  phpmd:baseline:
+    desc: PHPMD update baseline
     cmds:
       - docker compose run --rm $TTY php vendor/bin/phpmd --generate-baseline src/ text phpmd.xml
 
-  rector:dry:
+  phpstan:
+    desc: PHPStan run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpstan analyse --error-format=table
+
+  phpstan:baseline:
+    desc: PHPStan update baseline
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpstan --generate-baseline
+
+  phpunit:
+    desc: PHPUnit run
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpunit
+
+  phpunit:config:
+    desc: PHPUnit generate config
+    cmds:
+      - docker compose run --rm $TTY php vendor/bin/phpunit --generate-configuration
+
+  rector:
     desc: Rector dry run
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector --dry-run
@@ -102,3 +123,15 @@ tasks:
     desc: Rector fix
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector
+
+  mkdocs:
+    desc: MkDocs build
+    cmds:
+      - docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
+
+  mkdocs:live:
+    desc: MkDocs development server
+    vars:
+      PORT: '{{.p | default "8001"}}'
+    cmds:
+      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0

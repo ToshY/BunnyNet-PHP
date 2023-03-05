@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
 <phpmd-baseline>
-  <violation rule="PHPMD\Rule\Design\LongClass" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\ExcessivePublicCount" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyMethods" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseRequest.php"/>
-  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/PricingCalculator.php"/>
-  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/SecureUrlGenerator.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/VideoStreamRequest.php"/>
+  <violation rule="PHPMD\Rule\Design\LongClass" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\ExcessivePublicCount" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyMethods" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/AddPullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/UpdatePullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
+  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/StreamAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/StreamAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/TokenAuthentication.php" method="sign"/>
+  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/TokenAuthentication.php"/>
+  <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validator/ParameterValidator.php" method="validate"/>
 </phpmd-baseline>

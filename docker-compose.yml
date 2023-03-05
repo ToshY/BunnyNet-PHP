@@ -3,8 +3,8 @@ version: '3.9'
 services:
   php:
     build:
-      context: .docker
+      context: .
       dockerfile: Dockerfile
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - ./:/app
-

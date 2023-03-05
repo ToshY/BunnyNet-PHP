@@ -1,3 +1,6 @@
 /vendor/
 composer.lock
 .php-cs-fixer.cache
+*.php~
+phpstan.neon
+/site

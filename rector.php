@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -22,6 +23,9 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip(criteria: [
         __DIR__ . '/vendor',
+        NullToStrictStringFuncCallArgRector::class => [
+            __DIR__ . '/src/TokenAuthentication.php',
+        ],
     ]);
 
     $rectorConfig->sets([

@@ -1,0 +1,49 @@
+name: docs
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pages
+        uses: actions/configure-pages@v3
+
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          key: ${{ github.sha }}
+          path: .cache
+
+      - name: Build docs
+        run: docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

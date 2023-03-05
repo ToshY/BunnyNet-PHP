@@ -1,0 +1,77 @@
+site_name: BunnyNet-PHP
+site_description: bunny.net API client for PHP
+repo_name: ToshY/BunnyNet-PHP
+repo_url: https://github.com/ToshY/BunnyNet-PHP
+docs_dir: docs/
+site_dir: site/
+theme:
+  name: material
+  font: false
+  logo: images/favicon.png
+  favicon: images/favicon.png
+  features:
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - toc.follow
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      accent: deep-orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: orange
+      accent: deep-orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+markdown_extensions:
+  - abbr:
+  - tables:
+  - toc:
+  - admonition:
+  - pymdownx.extra:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      use_pygments: false
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js
+  - javascripts/highlight.js
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css
+  - stylesheets/extra.css
+extra:
+  generator: false
+  social:
+    - icon: material/rabbit
+      link: https://bunny.net?ref=pji59zr7a4
+      name: Affiliate link
+    - icon: fontawesome/brands/btc
+      link: bitcoin:1AD94f8jJ1E6RZL6NGpgSk3NtBr75C9eAw
+      name: Bitcoin | BTC
+    - icon: fontawesome/solid/litecoin-sign
+      link: litecoin:LbGn7DvCPTK46KWPiL8KiAenVoQX5RJZe3
+      name: Litecoin | LTC
+    - icon: fontawesome/solid/dog
+      link: dogecoin:DNYQuYbPf8V69cs2nPfYMT6ZETjt7q8Nvf
+      name: Dogecoin | DOGE
+nav:
+  - About: index.md
+  - Getting Started: getting-started.md
+  - API:
+    - Base: base-api.md
+    - Edge Storage: edge-storage-api.md
+    - Stream: stream-api.md
+    - Logging: logging-api.md
+  - Other:
+    - Image Processing: image-processing.md
+    - Token Authentication: token-authentication.md

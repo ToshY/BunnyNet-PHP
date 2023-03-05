@@ -1,0 +1,13 @@
+grumphp:
+  process_timeout: 90
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: 'docker compose run -T --rm --no-deps php'
+  tasks:
+    phpcsfixer:
+      config: '.php-cs-fixer.dist.php'
+    phpstan:
+      configuration: 'phpstan.neon.dist'
+    phpmd:
+      ruleset:
+        - 'phpmd.xml'
+    phpunit:

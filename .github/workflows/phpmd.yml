@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1']
+        php-versions:
+          - '8.1'
+          - '8.2'
 
     steps:
       - name: Checkout
@@ -29,8 +31,6 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
-        with:
-          composer-options: '--prefer-stable'
 
       - name: PHPMD
         run: php vendor/bin/phpmd --strict src/ text phpmd.xml
