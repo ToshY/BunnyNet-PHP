@@ -1,7 +1,8 @@
 # Base API
 
-Base endpoint for pull zones, video libraries, storage zones, billing, support, etc. 
-Basically everything that can be done with the control panel can also be achieved with the API.
+Base endpoint for pull zones, video libraries, storage zones, billing, support, and more. 
+<br />
+Everything that can be done with the control panel can also be achieved with the API.
 
 ## Setup
 
@@ -421,12 +422,13 @@ $baseApi->listDrmCertificates(
 );
 ```
 
-!!! note
+!!! warning
 
     - This endpoint currently returns a `500` status code with the following response: 
     ```
     {"Message":"An error has occurred."}
     ```
+    A support ticket has been created at bunny.net regarding this issue.
 
 ### Region
 
@@ -1351,7 +1353,7 @@ $baseApi->setEdgeRuleEnabled(
 
     -  The key `Id` in the body denotes the pull zone ID (the same as the first argument) and is (for some reason) a required parameter.
 
-#### Set Zone Security Enabled (undocumented)
+#### Set Zone Security Enabled
 
 ```php
 $baseApi->setZoneSecurityEnabled(
@@ -1364,7 +1366,11 @@ $baseApi->setZoneSecurityEnabled(
 
     - This endpoint corresponds to toggling the **Enable Token Authentication** switch in the **Token Authentication > Security** section of your pull zone.
 
-#### Set Zone Security Include Hash Remote IP Enabled (undocumented)
+!!! warning
+    
+    - This endpoint is currently not documented in the API specifications.
+
+#### Set Zone Security Include Hash Remote IP Enabled
 
 ```php
 $baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
@@ -1376,6 +1382,10 @@ $baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
 !!! note
 
     - This endpoint corresponds to toggling the **Token IP Validation** switch in the **Token Authentication > Security** section of your pull zone.
+
+!!! warning
+
+    - This endpoint is currently not documented in the API specifications.
 
 #### [Get Origin Shield Queue Statistics](https://docs.bunny.net/reference/pullzonepublic_originshieldconcurrencystatistics)
 
@@ -1416,7 +1426,7 @@ $baseApi->getOptimizerStatistics(
 );
 ```
 
-#### Get WAF Statistics (undocumented)
+#### Get WAF Statistics
 
 ```php
 $baseApi->getWafStatistics(
@@ -1428,6 +1438,10 @@ $baseApi->getWafStatistics(
     ]
 );
 ```
+
+!!! warning
+
+    - This endpoint is currently not documented in the API specifications.
 
 #### [Load Free Certificate](https://docs.bunny.net/reference/pullzonepublic_loadfreecertificate)
 

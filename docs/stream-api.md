@@ -114,7 +114,7 @@ $streamApi->updateVideo(
                 'start' => 301,
                 'end' => 500,
             ],
-        ]
+        ],
         'moments' => [
             [
                 'label' => 'Awesome Scene 1',
@@ -124,7 +124,7 @@ $streamApi->updateVideo(
                 'title' => 'Awesome Scene 2',
                 'timestamp' => 120,
             ],
-        ]
+        ],
         'metaTags' => [
             [
                 'property' => 'description',
@@ -133,8 +133,8 @@ $streamApi->updateVideo(
             [
                 'property' => 'robots',
                 'value' => 'noindex,nofollow',
-            ]
-        ]
+            ],
+        ],
     ]
 );
 ```
@@ -162,7 +162,7 @@ $streamApi->createVideo(
 
 !!! note
 
-    - The `title` does not need to match or require a file extension.
+    - The `title` does not need to match the video filename and/or extension you're intending to upload.
     - A `collectionId` is not required.
     - The response returns the video's GUID, which is required for video upload (see [Upload Video](#upload-video)).
 
@@ -244,9 +244,6 @@ $streamApi->setThumbnail(
 ```php
 $streamApi->fetchVideo(
     libraryId: 1,
-    query: [
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-    ],
     body: [
         'url' => 'https://example.com/bunny-hop.mp4',
         'headers' => [
@@ -254,6 +251,9 @@ $streamApi->fetchVideo(
             'newKey-1' => 'New Value 1',
             'newKey-2' => 'New Value 2',
         ],
+    ],
+    query: [
+        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
     ]
 );
 ```

@@ -88,9 +88,9 @@ $edgeStorageApi->uploadFile(
 );
 ```
 
-!!! note
+!!! warning
 
-    - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header **must** be in uppercase characters for a successful upload.
+    - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header must be in **uppercase** characters to ensure a successful upload.
 
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 
