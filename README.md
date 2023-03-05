@@ -35,8 +35,7 @@ composer require toshy/bunnynet-php:^3.0
 
 ## 📜 Documentation
 
-Full documentation is available at [https://ToshY.github.io/BunnyNet-PHP](https://ToshY.github.io/BunnyNet-PHP)
-or in the [docs](./docs) directory.
+Full documentation is available at [https://toshy.github.io/BunnyNet-PHP](https://toshy.github.io/BunnyNet-PHP).
 
 ## 🛠️ Contribute
 
