@@ -33,7 +33,7 @@ $streamApi = new StreamAPI(
 ```php
 $streamApi->getCollection(
     libraryId: 1,
-    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
+    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
 );
 ```
 
@@ -45,7 +45,7 @@ $streamApi->updateCollection(
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
     body: [
         'name' => 'Bunny Hopping Collection V2',
-    ]
+    ],
 );
 ```
 
@@ -54,7 +54,7 @@ $streamApi->updateCollection(
 ```php
 $streamApi->deleteCollection(
     libraryId: 1,
-    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144'
+    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
 );
 ```
 
@@ -68,7 +68,7 @@ $streamApi->listCollections(
         'perPage' => 100,
         'search' => 'bunny',
         'orderBy' => 'date',
-    ]
+    ],
 );
 ```
 
@@ -79,7 +79,7 @@ $streamApi->createCollection(
     libraryId: 1,
     body: [
         'name' => 'Bunny Collection',
-    ]
+    ],
 );
 ```
 
@@ -90,7 +90,7 @@ $streamApi->createCollection(
 ```php
 $streamApi->getVideo(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
 );
 ```
 
@@ -135,7 +135,7 @@ $streamApi->updateVideo(
                 'value' => 'noindex,nofollow',
             ],
         ],
-    ]
+    ],
 );
 ```
 
@@ -144,7 +144,7 @@ $streamApi->updateVideo(
 ```php
 $streamApi->deleteVideo(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
 );
 ```
 
@@ -156,7 +156,7 @@ $streamApi->createVideo(
     body: [
         'title' => 'Bunny Hoppers',
         'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-    ]
+    ],
 );
 ```
 
@@ -176,7 +176,7 @@ $streamApi->uploadVideo(
     localFilePath: './bunny-hop.mp4',
     query: [
         'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
-    ]
+    ],
 );
 ```
 
@@ -185,7 +185,7 @@ $streamApi->uploadVideo(
 ```php
 $streamApi->getVideoHeatmap(
     libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd'
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
 );
 ```
 
@@ -207,7 +207,7 @@ $streamApi->getVideoStatistics(
         'dateTo' => 'm-d-Y',
         'hourly' => false,
         'videoGuid' => 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    ]
+    ],
 );
 ```
 
@@ -231,7 +231,7 @@ $streamApi->listVideos(
         'search' => 'bunny',
         'collection' => '97f20caa-649b-4302-9f6e-1d286e0da144',
         'orderBy' => 'date',
-    ]
+    ],
 );
 ```
 
@@ -243,7 +243,7 @@ $streamApi->setThumbnail(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     query: [
         'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg',
-    ]
+    ],
 );
 ```
 
@@ -262,7 +262,7 @@ $streamApi->fetchVideo(
     ],
     query: [
         'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-    ]
+    ],
 );
 ```
 
@@ -277,7 +277,7 @@ $streamApi->addCaption(
         'srclang' => 'jp',
         'label' =>'Subtitles (Japanese)',
         'captionsFile' =>'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
-    ]
+    ],
 );
 ```
 
@@ -292,7 +292,7 @@ $streamApi->addCaption(
 $streamApi->deleteCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    sourceLanguage: 'jp'
+    sourceLanguage: 'jp',
 );
 ```
 

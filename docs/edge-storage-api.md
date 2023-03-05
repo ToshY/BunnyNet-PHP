@@ -15,14 +15,14 @@ use ToshY\BunnyNet\Enum\Region;
 
 // Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client()
+    client: new \Symfony\Component\HttpClient\Psr18Client(),
 );
 
 // Provide the "(Read-Only) Password" available at the "FTP & API Access" section of your specific storage zone.
 $edgeStorageApi = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
     region: Region::FS,
-    client: $bunnyClient
+    client: $bunnyClient,
 );
 ```
 
@@ -47,14 +47,14 @@ $edgeStorageApi = new EdgeStorageAPI(
 // Root directory.
 $edgeStorageApi->downloadFile(
     storageZoneName: 'my-storage-zone-1',
-    fileName: 'bunny.jpg'
+    fileName: 'bunny.jpg',
 );
 
 // Subdirectory.
 $edgeStorageApi->downloadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
-    path: 'css'
+    path: 'css',
 );
 ```
 
@@ -65,7 +65,7 @@ $edgeStorageApi->downloadFile(
 $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-bunny.jpg',
-    localFilePath: './local-bunny.jpg'
+    localFilePath: './local-bunny.jpg',
 );
 
 // Subdirectory.
@@ -73,7 +73,7 @@ $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
     localFilePath: './local-custom.css',
-    path: 'css'
+    path: 'css',
 );
 
 // Subdirectory with additional SHA256 checksum header.
@@ -84,7 +84,7 @@ $edgeStorageApi->uploadFile(
     path: 'css',
     headers: [
         'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',
-    ]
+    ],
 );
 ```
 
@@ -98,14 +98,14 @@ $edgeStorageApi->uploadFile(
 // Root directory.
 $edgeStorageApi->deleteFile(
     storageZoneName: 'my-storage-zone-1',
-    fileName: 'bunny.jpg'
+    fileName: 'bunny.jpg',
 );
 
 // Subdirectory.
 $edgeStorageApi->deleteFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'custom.css',
-    path: 'css'
+    path: 'css',
 );
 ```
 
@@ -116,13 +116,13 @@ $edgeStorageApi->deleteFile(
 ```php
 // Root directory.
 $edgeStorageApi->listFiles(
-    storageZoneName: 'my-storage-zone-1'
+    storageZoneName: 'my-storage-zone-1',
 );
 
 // Subdirectory.
 $edgeStorageApi->listFiles(
     storageZoneName: 'my-storage-zone-1',
-    path: 'css'
+    path: 'css',
 );
 ```
 

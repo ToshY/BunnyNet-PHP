@@ -15,7 +15,7 @@ use ToshY\BunnyNet\TokenAuthentication;
 // Provide the API key for the specific pull zone you want to use, available at the "Security > Token Authentication > Url Token Authentication Key" section.
 $tokenAuthentication = new TokenAuthentication(
     token: '5509f27d-9103-4de6-8370-8bd68db859c9',
-    hostname: 'https://custom-pullzone.b-cdn.net'
+    hostname: 'https://custom-pullzone.b-cdn.net',
 );
 ```
 
@@ -40,13 +40,13 @@ $tokenAuthentication->sign(
 
 // Subdirectory.
 $tokenAuthentication->sign(
-    file: '/css/custom.css'
+    file: '/css/custom.css',
 );
 
 // Change expiration time.
 $tokenAuthentication->sign(
     file: '/css/custom.css',
-    expirationTime: 10
+    expirationTime: 10,
 );
 
 // With IPv4 and not allowing associated subnet.
@@ -61,7 +61,7 @@ $tokenAuthentication->sign(
     file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
-    pathAllowed: '/videos/cute-bunnies'
+    pathAllowed: '/videos/cute-bunnies',
 );
 
 // Allow or block certain countries, e.g. allow "US" and block "RU".
@@ -71,7 +71,7 @@ $tokenAuthentication->sign(
     isDirectoryToken: true,
     pathAllowed: '/videos/cute-bunnies',
     countriesAllowed: 'US',
-    countriesBlocked: 'RU'
+    countriesBlocked: 'RU',
 );
 
 // Allow from specific referrer.
@@ -80,7 +80,7 @@ $tokenAuthentication->sign(
     userIp: '12.345.67.89',
     isDirectoryToken: true,
     pathAllowed: '/videos/cute-bunnies',
-    referrersAllowed: 'example.com'
+    referrersAllowed: 'example.com',
 );
 
 // Limit the download speed limit to 5 Mb/s.
@@ -89,7 +89,7 @@ $tokenAuthentication->sign(
     userIp: '12.345.67.89',
     isDirectoryToken: true,
     pathAllowed: '/videos/cute-bunnies',
-    speedLimit: 5120
+    speedLimit: 5120,
 );
 ```
 

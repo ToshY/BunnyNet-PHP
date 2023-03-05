@@ -41,7 +41,7 @@ $imageProcessor->generate(
         'sepia' => 0,
         'auto_optimize' => 'medium',
         'class' => 'my-custom-class',
-    ]
+    ],
 );
 ```
 

@@ -16,13 +16,13 @@ use ToshY\BunnyNet\Client\BunnyClient;
 
 // Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client()
+    client: new \Symfony\Component\HttpClient\Psr18Client(),
 );
 
 // Provide the API key available at the "Account Settings > API" section.
 $baseApi = new BaseAPI(
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient
+    client: $bunnyClient,
 );
 ```
 
@@ -37,7 +37,7 @@ $baseApi->listAbuseCases(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -90,7 +90,7 @@ $baseApi->configureAutoRecharge(
         'PaymentMethodToken' => 1000,
         'PaymentAmount' => 10,
         'RechargeTreshold' => 2,
-    ]
+    ],
 );
 ```
 
@@ -108,7 +108,7 @@ $baseApi->createPaymentCheckout(
         'PaymentAmount' => 10,
         'PaymentRequestId' => 123456,
         'Nonce' => 'ab',
-    ]
+    ],
 );
 ```
 
@@ -147,7 +147,7 @@ $baseApi->getCoinifyBitcoinExchangeRate();
 $baseApi->createCoinifyPayment(
     query: [
         'amount' => 123,
-    ]
+    ],
 );
 ```
 
@@ -163,7 +163,7 @@ $baseApi->getBillingSummary();
 $baseApi->applyPromoCode(
     query: [
         'CouponCode' => 'YOUFOUNDME',
-    ]
+    ],
 );
 ```
 
@@ -176,7 +176,7 @@ $baseApi->listComputeScripts(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -187,7 +187,7 @@ $baseApi->addComputeScript(
     body: [
         'Name' => 'Test',
         'ScriptType' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -201,7 +201,7 @@ $baseApi->addComputeScript(
 
 ```php
 $baseApi->getComputeScript(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -213,7 +213,7 @@ $baseApi->updateComputeScript(
     body: [
         'Name' => 'Test',
         'ScriptType' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -227,7 +227,7 @@ $baseApi->updateComputeScript(
 
 ```php
 $baseApi->deleteComputeScript(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -235,7 +235,7 @@ $baseApi->deleteComputeScript(
 
 ```php
 $baseApi->getComputeScriptCode(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -246,7 +246,7 @@ $baseApi->updateComputeScriptCode(
     id: 1,
     body: [
         'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
-    ]
+    ],
 );
 ```
 
@@ -258,7 +258,7 @@ $baseApi->listComputeScriptReleases(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -272,7 +272,7 @@ $baseApi->publishComputeScript(
     ],
     body: [
         'Note' => 'Initial release',
-    ]
+    ],
 );
 ```
 
@@ -284,7 +284,7 @@ $baseApi->publishComputeScriptByPathParameter(
     uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
     body: [
         'Note' => 'Initial release',
-    ]
+    ],
 );
 ```
 
@@ -297,7 +297,7 @@ $baseApi->addComputeScriptVariable(
         'Name' => 'New Variable',
         'Required' => true,
         'DefaultValue' => 'Hello World',
-    ]
+    ],
 );
 ```
 
@@ -310,7 +310,7 @@ $baseApi->updateComputeScriptVariable(
     body: [
         'DefaultValue' => 'Hello World the Sequel',
         'Required' => false,
-    ]
+    ],
 );
 ```
 
@@ -319,7 +319,7 @@ $baseApi->updateComputeScriptVariable(
 ```php
 $baseApi->getComputeScriptVariable(
     id: 1,
-    variableId: 2
+    variableId: 2,
 );
 ```
 
@@ -328,7 +328,7 @@ $baseApi->getComputeScriptVariable(
 ```php
 $baseApi->deleteComputeScriptVariable(
     id: 1,
-    variableId: 2
+    variableId: 2,
 );
 ```
 
@@ -341,7 +341,7 @@ $baseApi->listTickets(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -349,7 +349,7 @@ $baseApi->listTickets(
 
 ```php
 $baseApi->getTicketDetails(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -357,7 +357,7 @@ $baseApi->getTicketDetails(
 
 ```php
 $baseApi->closeTicket(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -375,7 +375,7 @@ $baseApi->closeTicket(
                 'ContentType' => 'text/plain',
             ],
         ],
-    ]
+    ],
 );
 ```
 
@@ -400,7 +400,7 @@ $baseApi->createTicket(
                 'ContentType' => 'text/plain',
             ],
         ],
-    ]
+    ],
 );
 ```
 
@@ -418,7 +418,7 @@ $baseApi->listDrmCertificates(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -448,7 +448,7 @@ $baseApi->listVideoLibraries(
         'page' => 0,
         'perPage' => 1000,
         'includeAccessKey' => false,
-    ]
+    ],
 );
 ```
 
@@ -468,7 +468,7 @@ $baseApi->addVideoLibrary(
             'BR',
             'JH',
         ],
-    ]
+    ],
 );
 ```
 
@@ -491,7 +491,7 @@ $baseApi->getVideoLibrary(
     id: 1,
     query: [
         'includeAccessKey' => false,
-    ]
+    ],
 );
 ```
 
@@ -537,7 +537,7 @@ $baseApi->updateVideoLibrary(
         'ShowHeatmap' => false,
         'EnableContentTagging' => true,
         'FontFamily' => 'Arial',
-    ]
+    ],
 );
 ```
 
@@ -568,7 +568,7 @@ $baseApi->updateVideoLibrary(
 
 ```php
 $baseApi->deleteVideoLibrary(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -578,7 +578,7 @@ $baseApi->deleteVideoLibrary(
 $baseApi->resetVideoLibraryPassword(
     query: [
         'id' => 1,
-    ]
+    ],
 );
 ```
 
@@ -586,7 +586,7 @@ $baseApi->resetVideoLibraryPassword(
 
 ```php
 $baseApi->resetVideoLibraryPasswordByPathParameter(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -594,7 +594,7 @@ $baseApi->resetVideoLibraryPasswordByPathParameter(
 
 ```php
 $baseApi->addWatermark(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -602,7 +602,7 @@ $baseApi->addWatermark(
 
 ```php
 $baseApi->deleteWatermark(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -613,7 +613,7 @@ $baseApi->addVideoLibraryAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com,*.example.org',
-    ]
+    ],
 );
 ```
 
@@ -628,7 +628,7 @@ $baseApi->removeVideoLibraryAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com',
-    ]
+    ],
 );
 ```
 
@@ -643,7 +643,7 @@ $baseApi->addVideoLibraryBlockedReferer(
     id: 1,
     body: [
         'Hostname' => 'evil.org',
-    ]
+    ],
 );
 ```
 
@@ -658,7 +658,7 @@ $baseApi->removeVideoLibraryBlockedReferer(
     id: 1,
     body: [
         'Hostname' => 'evil.org',
-    ]
+    ],
 );
 ```
 
@@ -675,7 +675,7 @@ $baseApi->listDnsZones(
     query: [
         'page' => 1,
         'perPage' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -685,7 +685,7 @@ $baseApi->listDnsZones(
 $baseApi->addDnsZone(
     body: [
         'Domain' => 'example.com',
-    ]
+    ],
 );
 ```
 
@@ -693,7 +693,7 @@ $baseApi->addDnsZone(
 
 ```php
 $baseApi->getDnsZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -710,7 +710,7 @@ $baseApi->updateDnsZone(
         'LoggingEnabled' => true,
         'LogAnonymizationType' => true,
         'LoggingIPAnonymizationEnabled' => true,
-    ]
+    ],
 );
 ```
 
@@ -725,7 +725,7 @@ $baseApi->updateDnsZone(
 
 ```php
 $baseApi->deleteDnsZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -733,7 +733,7 @@ $baseApi->deleteDnsZone(
 
 ```php
 $baseApi->exportDnsZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -745,7 +745,7 @@ $baseApi->getDnsZoneQueryStatistics(
     query: [
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
-    ]
+    ],
 );
 ```
 
@@ -755,7 +755,7 @@ $baseApi->getDnsZoneQueryStatistics(
 $baseApi->checkDnsZoneAvailability(
     body: [
         'Name' => 'example.com',
-    ]
+    ],
 );
 ```
 
@@ -789,7 +789,7 @@ $baseApi->addDnsRecord(
                 'Value' => 'World',
             ],
         ],
-    ]
+    ],
 );
 ```
 
@@ -857,7 +857,7 @@ $baseApi->updateDnsRecord(
                 'Value' => 'World',
             ],
         ],
-    ]
+    ],
 );
 ```
 
@@ -899,7 +899,7 @@ $baseApi->updateDnsRecord(
 ```php
 $baseApi->deleteDnsRecord(
     zoneId: 1,
-    id: 2
+    id: 2,
 );
 ```
 
@@ -907,7 +907,7 @@ $baseApi->deleteDnsRecord(
 
 ```php
 $baseApi->recheckDNSConfiguration(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -915,7 +915,7 @@ $baseApi->recheckDNSConfiguration(
 
 ```php
 $baseApi->dismissDnsConfigurationNotice(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -924,7 +924,7 @@ $baseApi->dismissDnsConfigurationNotice(
 ```php
 $baseApi->importDnsRecords(
     zoneId: 1,
-    localFilePath: './records.txt'
+    localFilePath: './records.txt',
 );
 ```
 
@@ -942,7 +942,7 @@ $baseApi->listPullZones(
         'page' => 0,
         'perPage' => 1000,
         'includeCertificate' => false,
-    ]
+    ],
 );
 ```
 
@@ -1070,7 +1070,7 @@ $baseApi->addPullZone(
         'EnableRequestCoalescing' => false,
         'RequestCoalescingTimeout' => 30,
         'Name' => 'New Pull Zone',
-    ]
+    ],
 );
 ```
 
@@ -1102,7 +1102,7 @@ $baseApi->getPullZone(
     id: 1,
     query: [
         'includeCertificate' => false,
-    ]
+    ],
 );
 ```
 
@@ -1230,7 +1230,7 @@ $baseApi->updatePullZone(
         'EnableSmartCache' => false,
         'EnableRequestCoalescing' => false,
         'RequestCoalescingTimeout' => 30,
-    ]
+    ],
 );
 ```
 
@@ -1259,7 +1259,7 @@ $baseApi->updatePullZone(
 
 ```php
 $baseApi->deletePullZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1268,7 +1268,7 @@ $baseApi->deletePullZone(
 ```php
 $baseApi->deleteEdgeRule(
     pullZoneId: 1,
-    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587'
+    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
 );
 ```
 
@@ -1296,7 +1296,7 @@ $baseApi->addOrUpdateEdgeRule(
         'TriggerMatchingType' => 0,
         'Description' => '',
         'Enabled' => true
-    ]
+    ],
 );
 ```
 
@@ -1345,7 +1345,7 @@ $baseApi->setEdgeRuleEnabled(
     body: [
         'Id' => 1,
         'Value' => true,
-    ]
+    ],
 );
 ```
 
@@ -1396,7 +1396,7 @@ $baseApi->getOriginShieldQueueStatistics(
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
         'hourly' => false,
-    ]
+    ],
 );
 ```
 
@@ -1409,7 +1409,7 @@ $baseApi->getSafeHopStatistics(
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
         'hourly' => false,
-    ]
+    ],
 );
 ```
 
@@ -1422,7 +1422,7 @@ $baseApi->getOptimizerStatistics(
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
         'hourly' => false,
-    ]
+    ],
 );
 ```
 
@@ -1435,7 +1435,7 @@ $baseApi->getWafStatistics(
         'dateFrom' => 'm-d-Y',
         'dateTo' => 'm-d-Y',
         'hourly' => false,
-    ]
+    ],
 );
 ```
 
@@ -1449,7 +1449,7 @@ $baseApi->getWafStatistics(
 $baseApi->loadFreeCertificate(
     query: [
         'hostname' => 'cdn.example.com',
-    ]
+    ],
 );
 ```
 
@@ -1460,7 +1460,7 @@ $baseApi->purgePullZoneCache(
     id: 1,
     body: [
         'CacheTag' => 'mytag-region-*',
-    ]
+    ],
 );
 ```
 
@@ -1470,7 +1470,7 @@ $baseApi->purgePullZoneCache(
 $baseApi->checkPullZoneAvailability(
     body: [
         'Name' => 'test',
-    ]
+    ],
 );
 ```
 
@@ -1483,7 +1483,7 @@ $baseApi->addCertificate(
         'Hostname' => 'cdn.example.com',
         'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
         'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t',
-    ]
+    ],
 );
 ```
 
@@ -1498,7 +1498,7 @@ $baseApi->removeCertificate(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
-    ]
+    ],
 );
 ```
 
@@ -1509,7 +1509,7 @@ $baseApi->addCustomHostname(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
-    ]
+    ],
 );
 ```
 
@@ -1520,7 +1520,7 @@ $baseApi->removeCustomHostname(
     id: 1,
     body: [
         'Hostname' => 'cdn.example.com',
-    ]
+    ],
 );
 ```
 
@@ -1532,7 +1532,7 @@ $baseApi->setForceSsl(
     body: [
         'Hostname' => 'cdn.example.com',
         'ForceSSL' => true,
-    ]
+    ],
 );
 ```
 
@@ -1540,7 +1540,7 @@ $baseApi->setForceSsl(
 
 ```php
 $baseApi->resetPullZoneTokenKey(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1551,7 +1551,7 @@ $baseApi->addPullZoneAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com,*.example.org',
-    ]
+    ],
 );
 ```
 
@@ -1566,7 +1566,7 @@ $baseApi->removePullZoneAllowedReferer(
     id: 1,
     body: [
         'Hostname' => '*.example.com',
-    ]
+    ],
 );
 ```
 
@@ -1581,7 +1581,7 @@ $baseApi->addPullZoneBlockedReferer(
     id: 1,
     body: [
         'Hostname' => '*.evil.org',
-    ]
+    ],
 );
 ```
 
@@ -1596,7 +1596,7 @@ $baseApi->removePullZoneBlockedReferer(
     id: 1,
     body: [
         'Hostname' => '*.evil.org',
-    ]
+    ],
 );
 ```
 
@@ -1607,7 +1607,7 @@ $baseApi->addPullZoneBlockedIp(
     id: 1,
     body: [
         'BlockedIp' => '12.345.67.89',
-    ]
+    ],
 );
 ```
 
@@ -1618,7 +1618,7 @@ $baseApi->removePullZoneBlockedIp(
     id: 1,
     body: [
         'BlockedIp' => '12.345.67.89',
-    ]
+    ],
 );
 ```
 
@@ -1631,7 +1631,7 @@ $baseApi->purgeUrl(
     query: [
         'url' => 'https://example.b-cdn.net/images/*',
         'async' => false,
-    ]
+    ],
 );
 ```
 
@@ -1644,7 +1644,7 @@ $baseApi->purgeUrlByHeader(
         'headerName' => '',
         'headerValue' => '',
         'async' => false,
-    ]
+    ],
 );
 ```
 
@@ -1661,7 +1661,7 @@ $baseApi->getStatistics(
         'serverZoneId' => -1,
         'loadErrors' => false,
         'hourly' => false,
-    ]
+    ],
 );
 ```
 
@@ -1675,7 +1675,7 @@ $baseApi->listStorageZones(
         'page' => 0,
         'perPage' => 1000,
         'includeDeleted' => 1000,
-    ]
+    ],
 );
 ```
 
@@ -1689,7 +1689,7 @@ $baseApi->addStorageZone(
         'Region' => 'DE',
         'ReplicationRegions' => '',
         'ZoneTier' => 0,
-    ]
+    ],
 );
 ```
 
@@ -1734,7 +1734,7 @@ $baseApi->addStorageZone(
 $baseApi->checkStorageZoneAvailability(
     body: [
         'Name' => 'Test',
-    ]
+    ],
 );
 ```
 
@@ -1742,7 +1742,7 @@ $baseApi->checkStorageZoneAvailability(
 
 ```php
 $baseApi->getStorageZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1750,7 +1750,7 @@ $baseApi->getStorageZone(
 
 ```php
 $baseApi->getStorageZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1764,7 +1764,7 @@ $baseApi->updateStorageZone(
         'OriginUrl' => '',
         'Custom404FilePath' => 'my-custom-404.html',
         'Rewrite404To200' => false,
-    ]
+    ],
 );
 ```
 
@@ -1794,7 +1794,7 @@ $baseApi->updateStorageZone(
 
 ```php
 $baseApi->deleteStorageZone(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1802,7 +1802,7 @@ $baseApi->deleteStorageZone(
 
 ```php
 $baseApi->resetStorageZonePassword(
-    id: 1
+    id: 1,
 );
 ```
 
@@ -1812,7 +1812,7 @@ $baseApi->resetStorageZonePassword(
 $baseApi->resetStorageZoneReadOnlyPassword(
     query: [
         'id' => 1,
-    ]
+    ],
 );
 ```
 
@@ -1849,7 +1849,7 @@ $baseApi->updateUserDetails(
         'ReceivePromotionalEmails' => false,
         'Password' => '1234Abcd',
         'OldPassword' => 'Abcd1234',
-    ]
+    ],
 );
 ```
 
@@ -1878,7 +1878,7 @@ $baseApi->closeAccount(
     body: [
         'Password' => 'Abcd1234',
         'Reason' => 'No longer needed.',
-    ]
+    ],
 );
 ```
 
@@ -1930,7 +1930,7 @@ $baseApi->generateTwoFactorAuthenticationVerification();
 $baseApi->disableTwoFactorAuthentication(
     body: [
         'Password' => 'LoremIpsumDolor',
-    ]
+    ],
 );
 ```
 
@@ -1942,7 +1942,7 @@ $baseApi->enableTwoFactorAuthentication(
         'SecretValidator' => '',
         'Secret' => '',
         'TestPin' => '123456',
-    ]
+    ],
 );
 ```
 
@@ -1954,7 +1954,7 @@ $baseApi->verifyTwoFactorAuthenticationCode(
         'SecretValidator' => '',
         'Secret' => '',
         'TestPin' => '123456',
-    ]
+    ],
 );
 ```
 
