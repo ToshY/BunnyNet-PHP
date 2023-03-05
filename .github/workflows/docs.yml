@@ -16,6 +16,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TTY: -T
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
           path: .cache
 
       - name: Build docs
-        run: docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
+        run: docker run --rm $TTY -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
