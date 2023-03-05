@@ -609,7 +609,7 @@ class BaseAPI
     public function publishComputeScriptByPathParameter(
         int $id,
         string $uuid,
-        array $body = []
+        array $body = [],
     ): BunnyClientResponseInterface {
         $endpoint = new PublishComputeScriptByPathParameter();
 
@@ -865,7 +865,7 @@ class BaseAPI
 
         return $this->client->request(
             endpoint: $endpoint,
-            query: $query
+            query: $query,
         );
     }
 
@@ -1577,7 +1577,7 @@ class BaseAPI
     public function setEdgeRuleEnabled(
         int $pullZoneId,
         string $edgeRuleId,
-        array $body
+        array $body,
     ): BunnyClientResponseInterface {
         $endpoint = new SetEdgeRuleEnabled();
 
@@ -1600,13 +1600,13 @@ class BaseAPI
      */
     public function setZoneSecurityEnabled(
         int $pullZoneId,
-        bool $enabled
+        bool $enabled,
     ): BunnyClientResponseInterface {
         $endpoint = new SetZoneSecurityEnabled();
 
         return $this->client->request(
             endpoint: $endpoint,
-            parameters: [$pullZoneId, $enabled]
+            parameters: [$pullZoneId, $enabled],
         );
     }
 
@@ -1620,13 +1620,13 @@ class BaseAPI
      */
     public function setZoneSecurityIncludeHashRemoteIPEnabled(
         int $pullZoneId,
-        bool $enabled
+        bool $enabled,
     ): BunnyClientResponseInterface {
         $endpoint = new SetZoneSecurityIncludeHashRemoteIPEnabled();
 
         return $this->client->request(
             endpoint: $endpoint,
-            parameters: [$pullZoneId, $enabled]
+            parameters: [$pullZoneId, $enabled],
         );
     }
 
@@ -1643,7 +1643,7 @@ class BaseAPI
      */
     public function getOriginShieldQueueStatistics(
         int $pullZoneId,
-        array $query = []
+        array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new GetOriginShieldQueueStatistics();
 
@@ -2222,7 +2222,7 @@ class BaseAPI
 
         return $this->client->request(
             endpoint: $endpoint,
-            parameters: [$id]
+            parameters: [$id],
         );
     }
 
@@ -2332,7 +2332,7 @@ class BaseAPI
         $endpoint = new GetUserDetails();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2369,7 +2369,7 @@ class BaseAPI
         $endpoint = new ResendEmailConfirmation();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2384,7 +2384,7 @@ class BaseAPI
         $endpoint = new ResetAPIKey();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2399,7 +2399,7 @@ class BaseAPI
         $endpoint = new ListCloseAccountReasons();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2436,7 +2436,7 @@ class BaseAPI
         $endpoint = new GetDPADetails();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2451,7 +2451,7 @@ class BaseAPI
         $endpoint = new AcceptDPA();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2466,7 +2466,7 @@ class BaseAPI
         $endpoint = new GetDPADetailsHTML();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2481,7 +2481,7 @@ class BaseAPI
         $endpoint = new SetNotificationsOpened();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2496,7 +2496,7 @@ class BaseAPI
         $endpoint = new GetWhatsNewItems();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2511,7 +2511,7 @@ class BaseAPI
         $endpoint = new ResetWhatsNew();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 
@@ -2526,7 +2526,7 @@ class BaseAPI
         $endpoint = new GenerateTwoFactorAuthenticationVerification();
 
         return $this->client->request(
-            endpoint: $endpoint
+            endpoint: $endpoint,
         );
     }
 

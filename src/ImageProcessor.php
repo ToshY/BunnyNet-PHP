@@ -30,7 +30,7 @@ class ImageProcessor
         $query = http_build_query(
             data: $optimization,
             arg_separator: '&',
-            encoding_type: PHP_QUERY_RFC3986
+            encoding_type: PHP_QUERY_RFC3986,
         );
 
         return sprintf('%s?%s', $url, $query);

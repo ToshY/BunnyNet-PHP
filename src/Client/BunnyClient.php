@@ -74,18 +74,18 @@ class BunnyClient
                 ...array_merge(
                     $headers,
                     array_merge(...$endpoint->getHeaders()),
-                    $this->getAccessKeyHeader()
+                    $this->getAccessKeyHeader(),
                 ),
             ],
-            fn ($value) => empty($value) === false
+            fn ($value) => empty($value) === false,
         );
 
         $path = BunnyClientHelper::createUrlPath(
             template: $endpoint->getPath(),
-            pathCollection: $parameters
+            pathCollection: $parameters,
         );
         $query = BunnyClientHelper::createQuery(
-            query: $query
+            query: $query,
         );
 
         $url = sprintf(
@@ -93,7 +93,7 @@ class BunnyClient
             self::SCHEME,
             $this->baseUrl,
             $path,
-            $query
+            $query,
         );
 
         /*
@@ -108,12 +108,12 @@ class BunnyClient
         );
 
         $response = $this->client->sendRequest(
-            request: $request
+            request: $request,
         );
 
         return BunnyClientHelper::parseResponse(
             request: $request,
-            response: $response
+            response: $response,
         );
     }
 

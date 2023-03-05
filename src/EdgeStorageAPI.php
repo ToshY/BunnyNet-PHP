@@ -44,13 +44,13 @@ class EdgeStorageAPI
     public function downloadFile(
         string $storageZoneName,
         string $fileName,
-        string $path = ''
+        string $path = '',
     ): BunnyClientResponseInterface {
         $endpoint = new DownloadFile();
 
         return $this->client->request(
             endpoint: $endpoint,
-            parameters: [$storageZoneName, $path, $fileName]
+            parameters: [$storageZoneName, $path, $fileName],
         );
     }
 
@@ -79,7 +79,7 @@ class EdgeStorageAPI
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path, $fileName],
             body: BodyContentHelper::openFileStream($localFilePath),
-            headers: $headers
+            headers: $headers,
         );
     }
 
@@ -95,7 +95,7 @@ class EdgeStorageAPI
     public function deleteFile(
         string $storageZoneName,
         string $fileName,
-        string $path = ''
+        string $path = '',
     ): BunnyClientResponseInterface {
         $endpoint = new DeleteFile();
 

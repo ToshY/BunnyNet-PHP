@@ -42,7 +42,7 @@ class LoggingAPI
     public function getLog(
         int $pullZoneId,
         DateTimeInterface $dateTime,
-        array $query = []
+        array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new GetLog();
         $dateTimeFormat = $dateTime->format('m-d-y');

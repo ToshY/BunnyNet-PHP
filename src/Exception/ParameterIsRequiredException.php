@@ -16,8 +16,8 @@ class ParameterIsRequiredException extends Exception
         return new self(
             sprintf(
                 self::MESSAGE,
-                $key
-            )
+                $key,
+            ),
         );
     }
 }

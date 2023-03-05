@@ -56,7 +56,7 @@ class UpdateDNSRecord implements EndpointInterface, EndpointBodyInterface
                 children: [
                     new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
-                ]
+                ],
             ),
         ];
     }

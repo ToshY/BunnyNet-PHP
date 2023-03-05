@@ -78,7 +78,7 @@ class StreamAPI
     public function updateCollection(
         int $libraryId,
         string $collectionId,
-        array $body
+        array $body,
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateCollection();
 
@@ -427,7 +427,7 @@ class StreamAPI
         int $libraryId,
         string $videoId,
         string $sourceLanguage,
-        array $body
+        array $body,
     ): BunnyClientResponseInterface {
         $endpoint = new AddCaption();
 
@@ -452,7 +452,7 @@ class StreamAPI
     public function deleteCaption(
         int $libraryId,
         string $videoId,
-        string $sourceLanguage
+        string $sourceLanguage,
     ): BunnyClientResponseInterface {
         $endpoint = new DeleteCaption();
 

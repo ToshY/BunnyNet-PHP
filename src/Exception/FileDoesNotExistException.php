@@ -15,7 +15,7 @@ class FileDoesNotExistException extends Exception
         return new self(
             sprintf(
                 self::MESSAGE,
-                $fileName
+                $fileName,
             ),
         );
     }

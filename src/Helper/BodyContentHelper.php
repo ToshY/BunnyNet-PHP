@@ -21,7 +21,7 @@ class BodyContentHelper
         $fileRealPath = realpath($filePath);
         if (false === $fileRealPath) {
             throw FileDoesNotExistException::withFileName(
-                fileName: $filePath
+                fileName: $filePath,
             );
         }
 
@@ -42,11 +42,11 @@ class BodyContentHelper
         try {
             $jsonBody = json_encode(
                 value: $body,
-                flags: JSON_THROW_ON_ERROR
+                flags: JSON_THROW_ON_ERROR,
             );
         } catch (Throwable $e) {
             throw new JSONException(
-                $e->getMessage()
+                $e->getMessage(),
             );
         }
 

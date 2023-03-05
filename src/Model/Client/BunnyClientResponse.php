@@ -16,7 +16,7 @@ class BunnyClientResponse implements BunnyClientResponseInterface
      */
     public function __construct(
         private readonly ResponseInterface $response,
-        private readonly mixed $contents
+        private readonly mixed $contents,
     ) {
     }
 

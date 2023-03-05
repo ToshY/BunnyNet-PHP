@@ -26,14 +26,14 @@ class BunnyClientHelper
      */
     public static function createUrlPath(
         string $template,
-        array $pathCollection
+        array $pathCollection,
     ): string {
         return sprintf(
             sprintf(
                 '/%s',
-                $template
+                $template,
             ),
-            ...$pathCollection
+            ...$pathCollection,
         );
     }
 
@@ -60,8 +60,8 @@ class BunnyClientHelper
             http_build_query(
                 data: $query,
                 arg_separator: '&',
-                encoding_type: PHP_QUERY_RFC3986
-            )
+                encoding_type: PHP_QUERY_RFC3986,
+            ),
         );
     }
 
@@ -74,7 +74,7 @@ class BunnyClientHelper
      */
     public static function parseResponse(
         RequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
     ): BunnyClientResponseInterface {
         $statusCode = $response->getStatusCode();
 
@@ -91,7 +91,7 @@ class BunnyClientHelper
             if ($request->getHeaderLine('Accept') === MimeType::ALL) {
                 return new BunnyClientResponse(
                     response: $response,
-                    contents: $contents
+                    contents: $contents,
                 );
             }
 
@@ -99,7 +99,7 @@ class BunnyClientHelper
                 $contents = json_decode(
                     json: $contents,
                     associative: true,
-                    flags: JSON_BIGINT_AS_STRING | JSON_THROW_ON_ERROR
+                    flags: JSON_BIGINT_AS_STRING | JSON_THROW_ON_ERROR,
                 );
             }
         } catch (Throwable $e) {
@@ -108,7 +108,7 @@ class BunnyClientHelper
 
         return new BunnyClientResponse(
             response: $response,
-            contents: $contents
+            contents: $contents,
         );
     }
 

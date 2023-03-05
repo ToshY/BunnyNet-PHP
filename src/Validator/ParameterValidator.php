@@ -36,7 +36,7 @@ class ParameterValidator
                     self::checkTypeForListValue(
                         value: $value,
                         parameterType: $abstractParameterObjectType,
-                        parentKey: $parentKey
+                        parentKey: $parentKey,
                     );
                 }
             }
@@ -56,7 +56,7 @@ class ParameterValidator
                 && false === $parameterNameInValuesKey
             ) {
                 throw ParameterIsRequiredException::withKey(
-                    key: $abstractParameterObjectName
+                    key: $abstractParameterObjectName,
                 );
             }
 
@@ -81,7 +81,7 @@ class ParameterValidator
                     self::validate(
                         $parameterValue,
                         [$childAbstractParameterObject],
-                        $abstractParameterObjectName
+                        $abstractParameterObjectName,
                     );
                 }
             }
@@ -100,7 +100,7 @@ class ParameterValidator
     private static function checkTypeForKeyValue(
         mixed $value,
         Type $parameterType,
-        string $parameterName
+        string $parameterName,
     ): void {
         $isType = sprintf('is_%s', $parameterType->value);
         if (true === $isType($value)) {

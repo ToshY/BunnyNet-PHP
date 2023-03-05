@@ -39,7 +39,7 @@ class TokenAuthentication
         string|null $countriesBlocked = null,
         string|null $referrersAllowed = null,
         int|null $speedLimit = null,
-        bool $allowSubnet = true
+        bool $allowSubnet = true,
     ): string {
         $url = sprintf('%s%s', $this->hostname, $file);
 
@@ -104,7 +104,7 @@ class TokenAuthentication
                 $token,
                 $expires,
                 $parameterDataUrl,
-                $urlPath
+                $urlPath,
             );
         }
 
@@ -115,7 +115,7 @@ class TokenAuthentication
             $urlPath,
             $token,
             $parameterDataUrl,
-            $expires
+            $expires,
         );
     }
 
@@ -128,7 +128,7 @@ class TokenAuthentication
     private function parseOptionalPathParameter(
         string &$url,
         string|null $pathParameterKey,
-        mixed $pathParameterValue
+        mixed $pathParameterValue,
     ): void {
         if (null === $pathParameterValue) {
             return;

@@ -11,7 +11,17 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR12' => true,
         'strict_param' => true,
-        'array_syntax' => ['syntax' => 'short'],
+        'array_syntax' => [
+            'syntax' => 'short',
+        ],
+        'trailing_comma_in_multiline' => [
+            'elements' => [
+                'arguments',
+                'arrays',
+                'match',
+                'parameters',
+            ],
+        ],
         'no_unused_imports' => true,
     ])
     ->setFinder($finder);

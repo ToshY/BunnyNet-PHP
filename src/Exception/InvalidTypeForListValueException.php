@@ -23,7 +23,7 @@ class InvalidTypeForListValueException extends Exception
                 $expectedValueType->value,
                 gettype($actualValue),
                 is_array($actualValue) === true ? json_encode($actualValue) : $actualValue,
-            )
+            ),
         );
     }
 }
