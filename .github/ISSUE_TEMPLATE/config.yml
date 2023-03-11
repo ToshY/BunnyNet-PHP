@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://toshy.github.io/BunnyNet-PHP/
+    about: Read the docs.
