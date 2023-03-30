@@ -481,7 +481,7 @@ $baseApi->addVideoLibrary(
         - `LA` = Los Angeles (United States West)
         - `SG` = Singapore (Singapore)
         - `SYD` = Sydney (Oceania)
-        - `BR` = Sao Paolo (Brazil)
+        - `BR` = Sao Paulo (Brazil)
         - `JH` = Johannesburg (Africa)
 
 #### [Get Video Library](https://docs.bunny.net/reference/videolibrarypublic_index2)
