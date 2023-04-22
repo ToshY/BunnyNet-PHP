@@ -22,6 +22,7 @@ use ToshY\BunnyNet\Model\API\Base\Billing\CreatePaymentCheckout;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetAffiliateDetails;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingDetails;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
+use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
 use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
 use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScript;
@@ -411,6 +412,23 @@ class BaseAPI
 
         return $this->client->request(
             endpoint: $endpoint,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $billingRecordId
+     */
+    public function getBillingSummaryPdf(int $billingRecordId): BunnyClientResponseInterface
+    {
+        $endpoint = new GetBillingSummaryPDF();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$billingRecordId],
         );
     }
 

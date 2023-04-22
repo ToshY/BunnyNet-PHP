@@ -181,6 +181,14 @@ $baseApi->createCoinifyPayment(
 $baseApi->getBillingSummary();
 ```
 
+#### [Get Billing Summary PDF](https://docs.bunny.net/reference/billingpublic_summarypdf)
+
+```php
+$baseApi->getBillingSummaryPdf(
+    billingRecordId: 1,
+);
+```
+
 #### [Apply Promo Code](https://docs.bunny.net/reference/billingpublic_applycode)
 
 ```php
