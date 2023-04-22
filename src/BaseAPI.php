@@ -9,6 +9,8 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\CheckAbuseCase;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetAbuseCase;
+use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetDMCACase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
@@ -153,6 +155,40 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getDmcaCase(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new GetDMCACase();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getAbuseCase(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new GetAbuseCase();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
         );
     }
 

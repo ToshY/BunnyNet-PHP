@@ -41,6 +41,30 @@ $baseApi->listAbuseCases(
 );
 ```
 
+#### [Get DMCA Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase)
+
+```php
+$baseApi->getDmcaCase(
+    id: 1,
+);
+```
+
+!!! warning
+
+    - This endpoint currently returns a `401` status code.
+
+#### [Get Abuse Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase2)
+
+```php
+$baseApi->getAbuseCase(
+    id: 1,
+);
+```
+
+!!! warning
+
+    - This endpoint currently returns a `401` status code.
+
 #### [Resolve DMCA Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase)
 
 ```php
