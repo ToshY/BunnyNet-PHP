@@ -1822,6 +1822,26 @@ $baseApi->deleteStorageZone(
 );
 ```
 
+#### [Get Storage Zone Statistics](https://docs.bunny.net/reference/storagezonepublic_storagezonestatistics)
+
+```php
+$baseApi->getStorageZoneStatistics(
+    id: 1,
+    query: [
+        'dateFrom' => 'm-d-Y',
+        'dateTo' => 'm-d-Y',
+    ],
+);
+```
+
+#### [Get Storage Zone Connections](https://docs.bunny.net/reference/storagezonepublic_connections)
+
+```php
+$baseApi->getStorageZoneConnections(
+    id: 1,
+);
+```
+
 #### [Reset Password](https://docs.bunny.net/reference/storagezonepublic_resetpassword)
 
 ```php

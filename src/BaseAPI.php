@@ -85,6 +85,8 @@ use ToshY\BunnyNet\Model\API\Base\StorageZone\AddStorageZone;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\CheckStorageZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\DeleteStorageZone;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZone;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZoneConnections;
+use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddVideoLibrary;
@@ -2379,6 +2381,47 @@ class BaseAPI
     public function deleteStorageZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteStorageZone();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\JSONException
+     * @throws Exception\ParameterIsRequiredException
+     * @param int $id
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function getStorageZoneStatistics(int $id, array $query = []): BunnyClientResponseInterface
+    {
+        $endpoint = new GetStorageZoneStatistics();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getStorageZoneConnections(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new GetStorageZoneConnections();
 
         return $this->client->request(
             endpoint: $endpoint,
