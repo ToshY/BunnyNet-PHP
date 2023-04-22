@@ -1111,12 +1111,14 @@ $baseApi->addPullZone(
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
-    - The key `Type` has the following possible values (undocumented):
+    - The key `OriginType` has the following possible values (undocumented):
         - `0` = URL
         - `1` = (Unknown)
         - `2` = Storage Zone
         - `3` = (Unknown)
         - `4` = Script
+        - `5` = (Unknown)
+        - `6` = (Unknown)
     - The key `LogAnonymizationType` has the following possible values (undocumented):
         - `0` = Remove one octet
         - `1` = Drop IP
@@ -1271,12 +1273,14 @@ $baseApi->updatePullZone(
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
-    - The key `Type` has the following possible values (undocumented):
+    - The key `OriginType` has the following possible values (undocumented):
         - `0` = URL
         - `1` = (Unknown)
         - `2` = Storage Zone
         - `3` = (Unknown)
         - `4` = Script
+        - `5` = (Unknown)
+        - `6` = (Unknown)
     - The key `LogAnonymizationType` has the following possible values (undocumented):
         - `0` = Remove one octet
         - `1` = Drop IP
