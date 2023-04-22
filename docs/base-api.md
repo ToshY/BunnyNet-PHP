@@ -1952,10 +1952,22 @@ $baseApi->acceptDpa();
 $baseApi->getDpaDetailsHtml();
 ```
 
+#### [List Notifications](https://docs.bunny.net/reference/userpublic_notificationslist)
+
+```php
+$baseApi->listNotifications();
+```
+
 #### [Set Notifications Opened](https://docs.bunny.net/reference/userpublic_setnotificationsopened)
 
 ```php
 $baseApi->setNotificationsOpened();
+```
+
+#### [Get Marketing Details](https://docs.bunny.net/reference/userpublic_marketingdetails)
+
+```php
+$baseApi->getMarketingDetails();
 ```
 
 #### [Get What's New Items](https://docs.bunny.net/reference/userpublic_whatsnew)

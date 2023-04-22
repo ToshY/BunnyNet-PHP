@@ -110,9 +110,11 @@ use ToshY\BunnyNet\Model\API\Base\User\GenerateTwoFactorAuthenticationVerificati
 use ToshY\BunnyNet\Model\API\Base\User\GetDPADetails;
 use ToshY\BunnyNet\Model\API\Base\User\GetDPADetailsHTML;
 use ToshY\BunnyNet\Model\API\Base\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\API\Base\User\GetMarketingDetails;
 use ToshY\BunnyNet\Model\API\Base\User\GetUserDetails;
 use ToshY\BunnyNet\Model\API\Base\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\API\Base\User\ListCloseAccountReasons;
+use ToshY\BunnyNet\Model\API\Base\User\ListNotifications;
 use ToshY\BunnyNet\Model\API\Base\User\ResendEmailConfirmation;
 use ToshY\BunnyNet\Model\API\Base\User\ResetAPIKey;
 use ToshY\BunnyNet\Model\API\Base\User\ResetWhatsNew;
@@ -2656,9 +2658,39 @@ class BaseAPI
      * @throws Exception\JSONException
      * @return BunnyClientResponseInterface
      */
+    public function listNotifications(): BunnyClientResponseInterface
+    {
+        $endpoint = new ListNotifications();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
     public function setNotificationsOpened(): BunnyClientResponseInterface
     {
         $endpoint = new SetNotificationsOpened();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
+    public function getMarketingDetails(): BunnyClientResponseInterface
+    {
+        $endpoint = new GetMarketingDetails();
 
         return $this->client->request(
             endpoint: $endpoint,
