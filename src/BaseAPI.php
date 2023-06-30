@@ -14,6 +14,7 @@ use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetDMCACase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
+use ToshY\BunnyNet\Model\API\Base\APIKeys\ListAPIKeys;
 use ToshY\BunnyNet\Model\API\Base\Billing\ApplyPromoCode;
 use ToshY\BunnyNet\Model\API\Base\Billing\ClaimAffiliateCredits;
 use ToshY\BunnyNet\Model\API\Base\Billing\ConfigureAutoRecharge;
@@ -258,6 +259,27 @@ class BaseAPI
     public function listCountries(): BunnyClientResponseInterface
     {
         $endpoint = new ListCountries();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\JSONException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function listApiKeys(array $query): BunnyClientResponseInterface
+    {
+        $endpoint = new ListAPIKeys();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
 
         return $this->client->request(
             endpoint: $endpoint,

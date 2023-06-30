@@ -97,6 +97,26 @@ $baseApi->checkAbuseCase(
 $baseApi->listCountries();
 ```
 
+### API Keys
+
+#### [List API Keys](https://docs.bunny.net/reference/apikeypublic_listapikeys)
+
+```php
+$baseApi->listApiKeys(
+    query: [
+        'page' => 1,
+        'perPage' => 1000,
+    ],
+);
+```
+
+!!! warning
+
+    - This endpoint currently returns a `500` status code with the following response: 
+    ```
+    {"Message":"Authorization has been denied for this request."}
+    ```
+
 ### Billing
 
 #### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
