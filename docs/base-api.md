@@ -1691,7 +1691,7 @@ $baseApi->purgeUrl(
 );
 ```
 
-#### [ Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
+#### [Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
 
 ```php
 $baseApi->purgeUrlByHeader(
