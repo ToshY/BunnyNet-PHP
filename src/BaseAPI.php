@@ -81,6 +81,7 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
 use ToshY\BunnyNet\Model\API\Base\Region\ListRegions;
+use ToshY\BunnyNet\Model\API\Base\Search\GlobalSearch;
 use ToshY\BunnyNet\Model\API\Base\Statistics\GetStatistics;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\AddStorageZone;
 use ToshY\BunnyNet\Model\API\Base\StorageZone\CheckStorageZoneAvailability;
@@ -2273,6 +2274,28 @@ class BaseAPI
     public function getStatistics(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new GetStatistics();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\JSONException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function getGlobalSearch(array $query = [])
+    {
+        $endpoint = new GlobalSearch();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 
