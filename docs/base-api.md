@@ -1684,6 +1684,24 @@ $baseApi->purgeUrlByHeader(
 );
 ```
 
+### Search
+
+#### [Global Search](https://docs.bunny.net/reference/searchpublic_globalsearch)
+
+```php
+$baseApi->getGlobalSearch(
+    query: [
+        'search' => 'bunny',
+        'from' => 0,
+        'size' => 20,
+    ],
+);
+```
+
+!!! warning
+
+    - It is unclear from the current API specifications what you can actually search for with this endpoint.
+
 ### Statistics
 
 #### [Get Statistics (traffic, cache hit & bandwidth)](https://docs.bunny.net/reference/statisticspublic_index)
