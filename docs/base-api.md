@@ -499,10 +499,15 @@ $baseApi->listVideoLibraries(
     query: [
         'page' => 0,
         'perPage' => 1000,
+        'search' => 'bunny',
         'includeAccessKey' => false,
     ],
 );
 ```
+
+!!! note
+
+    - The key `search` is currently not functional.
 
 #### [Add Video Library](https://docs.bunny.net/reference/videolibrarypublic_add)
 
@@ -589,6 +594,10 @@ $baseApi->updateVideoLibrary(
         'ShowHeatmap' => false,
         'EnableContentTagging' => true,
         'FontFamily' => 'Arial',
+        'EnableTranscribing' => false,
+        'EnableTranscribingTitleGeneration' => false,
+        'EnableTranscribingDescriptionGeneration' => false,
+        'TranscribingCaptionLanguages' => [],
     ],
 );
 ```
@@ -615,6 +624,7 @@ $baseApi->updateVideoLibrary(
         - `pip`
         - `airplay`
         - `fullscreen`
+    - To get a full list of possible value options for key `TranscribingCaptionLanguages`, see the [Get Languages](#get-languages) endpoint.
 
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
