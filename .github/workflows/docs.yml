@@ -27,7 +27,7 @@ jobs:
         run: docker run --rm -v $(pwd):/docs squidfunk/mkdocs-material:9.1.0 build
 
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./site
 
