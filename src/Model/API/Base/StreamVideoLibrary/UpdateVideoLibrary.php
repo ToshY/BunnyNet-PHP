@@ -69,6 +69,12 @@ class UpdateVideoLibrary implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'ShowHeatmap', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableContentTagging', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'FontFamily', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'EnableTranscribing', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingTitleGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingDescriptionGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'TranscribingCaptionLanguages', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
         ];
     }
 }
