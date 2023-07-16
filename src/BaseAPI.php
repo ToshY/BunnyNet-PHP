@@ -96,6 +96,7 @@ use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteWatermark;
+use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\UpdateVideoLibrary;
@@ -1056,6 +1057,21 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
+    public function getLanguages(): BunnyClientResponseInterface
+    {
+        $endpoint = new GetLanguages();
+
+        return $this->client->request(
+            endpoint: $endpoint,
         );
     }
 

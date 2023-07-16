@@ -624,6 +624,12 @@ $baseApi->deleteVideoLibrary(
 );
 ```
 
+#### [Get Languages](https://docs.bunny.net/reference/videolibrarypublic_index3)
+
+```php
+$baseApi->getLanguages();
+```
+
 #### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
 
 ```php
