@@ -74,6 +74,7 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'CacheControlMaxAgeOverride', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'CacheControlPublicMaxAgeOverride', type: Type::INT_TYPE),
             new AbstractParameter(name: 'CacheControlBrowserMaxAgeOverride', type: Type::INT_TYPE),
             new AbstractParameter(name: 'AddHostHeader', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'AddCanonicalHeader', type: Type::BOOLEAN_TYPE),
@@ -134,9 +135,6 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'OptimizerWatermarkOffset', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkMinImageSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerAutomaticOptimizationEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFRequestHeaderIgnores', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
             new AbstractParameter(name: 'OptimizerClasses', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: 'Name', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
@@ -169,11 +167,13 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'OriginShieldQueueMaxWaitTime', type: Type::INT_TYPE),
             new AbstractParameter(name: 'UseBackgroundUpdate', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginShieldMaxQueuedRequests', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'UseBackgroundUpdate', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableAutoSSL', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'LogAnonymizationType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'StorageZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'EdgeScriptId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginType', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'MagicContainersAppId', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'LogFormat', type: Type::INT_TYPE),
             new AbstractParameter(name: 'LogForwardingFormat', type: Type::INT_TYPE),
             new AbstractParameter(name: 'ShieldDDosProtectionType', type: Type::INT_TYPE),
@@ -182,6 +182,23 @@ class AddPullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'EnableSmartCache', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableRequestCoalescing', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'RequestCoalescingTimeout', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'DisableLetsEncrypt', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'EnableBunnyImageAi', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'BunnyAiImageBlueprints', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'Name', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+                ]),
+            ]),
+            new AbstractParameter(name: 'PreloadingScreenEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenCode', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenLogoUrl', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenTheme', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenCodeEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenDelay', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'RoutingFilters', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+            ]),
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
         ];
     }
