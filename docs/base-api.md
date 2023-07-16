@@ -1764,10 +1764,15 @@ $baseApi->listStorageZones(
     query: [
         'page' => 0,
         'perPage' => 1000,
+        'search' => 'bunny',
         'includeDeleted' => 1000,
     ],
 );
 ```
+
+!!! note
+
+    - The key `search` is currently not functional.
 
 #### [Add Storage Zone](https://docs.bunny.net/reference/storagezonepublic_add)
 
