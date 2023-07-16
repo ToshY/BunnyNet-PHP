@@ -727,9 +727,15 @@ $baseApi->listDnsZones(
     query: [
         'page' => 1,
         'perPage' => 1000,
+        'search' => 'bunny.net',
     ],
 );
 ```
+
+!!! note
+
+    - The key `search` can be used to filter on `Id` or `Domain`. A search value with an `Id` value will perform an exact match,
+    whereas a search value with a `Domain` will perform a wildcard search: `bunny`, `nny` and `.net` will all match the DNS zone for `bunny.net`.
 
 #### [Add DNS Zone](https://docs.bunny.net/reference/dnszonepublic_add)
 
@@ -841,6 +847,7 @@ $baseApi->addDnsRecord(
                 'Value' => 'World',
             ],
         ],
+        'Comment' => '',
     ],
 );
 ```
@@ -855,7 +862,7 @@ $baseApi->addDnsRecord(
         - `3` = TXT
         - `4` = MX
         - `5` = RDR (Redirect)
-        - `6` = (Unknown)
+        - `6` = Flatten
         - `7` = PZ (Pull Zone)
         - `8` = SRV
         - `9` = CAA
@@ -876,7 +883,14 @@ $baseApi->addDnsRecord(
         - `86400` = 1 day
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
-        - (Unknown)
+        - `0` = None
+        - `1` = Ping
+        - `2` = HTTP
+        - `3` = Monitor
+    - The key `SmartRoutingType` has the following possible values:
+        - `0` = None
+        - `1` = Latency
+        - `2` = Geolocation
 
 #### [Update DNS Record](https://docs.bunny.net/reference/dnszonepublic_updaterecord)
 
@@ -909,6 +923,7 @@ $baseApi->updateDnsRecord(
                 'Value' => 'World',
             ],
         ],
+        'Comment' => '',
     ],
 );
 ```
@@ -923,7 +938,7 @@ $baseApi->updateDnsRecord(
         - `3` = TXT
         - `4` = MX
         - `5` = RDR (Redirect)
-        - `6` = (Unknown)
+        - `6` = Flatten
         - `7` = PZ (Pull Zone)
         - `8` = SRV
         - `9` = CAA
@@ -944,7 +959,14 @@ $baseApi->updateDnsRecord(
         - `86400` = 1 day
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
-        - (Unknown)
+        - `0` = None
+        - `1` = Ping
+        - `2` = HTTP
+        - `3` = Monitor
+    - The key `SmartRoutingType` has the following possible values:
+        - `0` = None
+        - `1` = Latency
+        - `2` = Geolocation
 
 #### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_deleterecord)
 
