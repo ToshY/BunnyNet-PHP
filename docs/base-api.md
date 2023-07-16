@@ -993,10 +993,15 @@ $baseApi->listPullZones(
     query: [
         'page' => 0,
         'perPage' => 1000,
+        'search' => 'bunny',
         'includeCertificate' => false,
     ],
 );
 ```
+
+!!! note
+
+    - The key `search` is currently not functional.
 
 #### [Add Pull Zone](https://docs.bunny.net/reference/pullzonepublic_add)
 
@@ -1030,7 +1035,8 @@ $baseApi->addPullZone(
         'DisableCookies' => true,
         'BudgetRedirectedCountries' => [],
         'BlockedCountries' => [],
-        'CacheControlMaxAgeOverride' => 30,
+        'CacheControlMaxAgeOverride' => -1,
+        'CacheControlPublicMaxAgeOverride' => -1,
         'CacheControlBrowserMaxAgeOverride' => 157784760,
         'AddHostHeader' => false,
         'AddCanonicalHeader' => false,
@@ -1108,11 +1114,13 @@ $baseApi->addPullZone(
         'OriginShieldQueueMaxWaitTime' => 30,
         'UseBackgroundUpdate' => false,
         'OriginShieldMaxQueuedRequests' => 5000,
+        'UseBackgroundUpdate' => true,
         'EnableAutoSSL' => false,
         'LogAnonymizationType' => 0,
         'StorageZoneId' => 0,
         'EdgeScriptId' => 0,
         'OriginType' => 0,
+        'MagicContainersAppId' => '',
         'LogFormat' => 0,
         'LogForwardingFormat' => 0,
         'ShieldDDosProtectionType' => 1,
@@ -1121,6 +1129,16 @@ $baseApi->addPullZone(
         'EnableSmartCache' => false,
         'EnableRequestCoalescing' => false,
         'RequestCoalescingTimeout' => 30,
+        'DisableLetsEncrypt' => false,
+        'EnableBunnyImageAi' => false,
+        'BunnyAiImageBlueprints' => [],
+        'PreloadingScreenEnabled' => false,
+        'PreloadingScreenCode' => '',
+        'PreloadingScreenLogoUrl' => null,
+        'PreloadingScreenTheme' => 0,
+        'PreloadingScreenCodeEnabled' => false,
+        'PreloadingScreenDelay' => 700,
+        'RoutingFilters' => [],
         'Name' => 'New Pull Zone',
     ],
 );
@@ -1131,17 +1149,38 @@ $baseApi->addPullZone(
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
-    - The key `OriginType` has the following possible values (undocumented):
-        - `0` = URL
-        - `1` = (Unknown)
-        - `2` = Storage Zone
-        - `3` = (Unknown)
-        - `4` = Script
-        - `5` = (Unknown)
-        - `6` = (Unknown)
-    - The key `LogAnonymizationType` has the following possible values (undocumented):
+    - The key `OriginType` has the following possible values:
+        - `0` = OriginUrl
+        - `1` = DnsAccelerate
+        - `2` = StorageZone
+        - `3` = LoadBalancer
+        - `4` = EdgeScript
+        - `5` = MagicContainers
+        - `6` = PushZone
+    - The key `LogFormat` has the following possible values:
+        - `0` = Plain
+        - `1` = JSON
+    - The key `LogForwardingFormat` has the following possible values:
+        - `0` = Plain
+        - `1` = JSON
+    - The key `ShieldDDosProtectionType` has the following possible values:
+        - `0` = DetectOnly
+        - `1` = ActiveStandard
+        - `2` = ActiveAggressive
+    - The key `LogAnonymizationType` has the following possible values:
         - `0` = Remove one octet
         - `1` = Drop IP
+    - The key `LogForwardingProtocol` has the following possible values:
+        - `0` = UDP
+        - `1` = TCP
+        - `2` = TCPEncrypted
+        - `3` = DataDog
+    - The key `OptimizerWatermarkPosition` has the following possible values:
+        - `0` = BottomLeft
+        - `1` = BottomRight
+        - `2` = TopLeft
+        - `4` = Center
+        - `5` = CenterStretch
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
@@ -1193,7 +1232,8 @@ $baseApi->updatePullZone(
         'DisableCookies' => true,
         'BudgetRedirectedCountries' => [],
         'BlockedCountries' => [],
-        'CacheControlMaxAgeOverride' => 30,
+        'CacheControlMaxAgeOverride' => -1,
+        'CacheControlPublicMaxAgeOverride' => -1,
         'CacheControlBrowserMaxAgeOverride' => 157784760,
         'AddHostHeader' => false,
         'AddCanonicalHeader' => false,
@@ -1271,11 +1311,13 @@ $baseApi->updatePullZone(
         'OriginShieldQueueMaxWaitTime' => 30,
         'UseBackgroundUpdate' => false,
         'OriginShieldMaxQueuedRequests' => 5000,
+        'UseBackgroundUpdate' => true,
         'EnableAutoSSL' => false,
         'LogAnonymizationType' => 0,
         'StorageZoneId' => 0,
         'EdgeScriptId' => 0,
         'OriginType' => 0,
+        'MagicContainersAppId' => '',
         'LogFormat' => 0,
         'LogForwardingFormat' => 0,
         'ShieldDDosProtectionType' => 1,
@@ -1284,6 +1326,16 @@ $baseApi->updatePullZone(
         'EnableSmartCache' => false,
         'EnableRequestCoalescing' => false,
         'RequestCoalescingTimeout' => 30,
+        'DisableLetsEncrypt' => false,
+        'EnableBunnyImageAi' => false,
+        'BunnyAiImageBlueprints' => [],
+        'PreloadingScreenEnabled' => false,
+        'PreloadingScreenCode' => '',
+        'PreloadingScreenLogoUrl' => null,
+        'PreloadingScreenTheme' => 0,
+        'PreloadingScreenCodeEnabled' => false,
+        'PreloadingScreenDelay' => 700,
+        'RoutingFilters' => [],
     ],
 );
 ```
@@ -1293,17 +1345,38 @@ $baseApi->updatePullZone(
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
-    - The key `OriginType` has the following possible values (undocumented):
-        - `0` = URL
-        - `1` = (Unknown)
-        - `2` = Storage Zone
-        - `3` = (Unknown)
-        - `4` = Script
-        - `5` = (Unknown)
-        - `6` = (Unknown)
-    - The key `LogAnonymizationType` has the following possible values (undocumented):
+    - The key `OriginType` has the following possible values:
+        - `0` = OriginUrl
+        - `1` = DnsAccelerate
+        - `2` = StorageZone
+        - `3` = LoadBalancer
+        - `4` = EdgeScript
+        - `5` = MagicContainers
+        - `6` = PushZone
+    - The key `LogFormat` has the following possible values:
+        - `0` = Plain
+        - `1` = JSON
+    - The key `LogForwardingFormat` has the following possible values:
+        - `0` = Plain
+        - `1` = JSON
+    - The key `ShieldDDosProtectionType` has the following possible values:
+        - `0` = DetectOnly
+        - `1` = ActiveStandard
+        - `2` = ActiveAggressive
+    - The key `LogAnonymizationType` has the following possible values:
         - `0` = Remove one octet
         - `1` = Drop IP
+    - The key `LogForwardingProtocol` has the following possible values:
+        - `0` = UDP
+        - `1` = TCP
+        - `2` = TCPEncrypted
+        - `3` = DataDog
+    - The key `OptimizerWatermarkPosition` has the following possible values:
+        - `0` = BottomLeft
+        - `1` = BottomRight
+        - `2` = TopLeft
+        - `4` = Center
+        - `5` = CenterStretch
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
@@ -1370,12 +1443,16 @@ $baseApi->addOrUpdateEdgeRule(
         - `8` = Disable Token Authentication
         - `9` = Enable Token Authentication
         - `10` = Override Cache Time Public
-        - `11` = Ignore Cache Vary: URL Query String
+        - `11` = Ignore Query String (Cache Vary)
         - `12` = Disable Bunny Optimizer
         - `13` = Force Compression
         - `14` = Set Status Code
         - `15` = Bypass Perma-Cache
         - `16` = Override Browser Cache Time
+        - `17` = Origin Storage
+        - `18` = Set Network Rate Limit
+        - `19` = Set Connection Limit
+        - `20` = Set Requests Per Second Limit
     - The key `Type` in a `Trigger` object has the following possible values:
         - `0` = URL
         - `1` = Request Header
@@ -1387,6 +1464,8 @@ $baseApi->addOrUpdateEdgeRule(
         - `7` = Random Chance (%)
         - `8` = Status Code
         - `9` = Request method
+        - `10` = Cookie Value
+        - `11` = Country State Code
     - The key `TriggerMatchingType` has the following possible values:
         - `0` = Match Any
         - `1` = Match All
