@@ -7,7 +7,6 @@ namespace ToshY\BunnyNet;
 use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\DeleteCollection;
@@ -266,17 +265,16 @@ class StreamAPI
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @throws FileDoesNotExistException
      * @param int $libraryId
      * @param string $videoId
-     * @param string $localFilePath
+     * @param mixed $body
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
     public function uploadVideo(
         int $libraryId,
         string $videoId,
-        string $localFilePath,
+        mixed $body,
         array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new UploadVideo();
@@ -287,7 +285,7 @@ class StreamAPI
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
-            body: BodyContentHelper::openFileStream($localFilePath),
+            body: $body,
         );
     }
 

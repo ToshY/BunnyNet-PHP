@@ -61,18 +61,28 @@ $edgeStorageApi->downloadFile(
 #### [Upload File](https://docs.bunny.net/reference/put_-storagezonename-path-filename)
 
 ```php
+/*
+ * File contents read into string from the local filesystem.
+ */
+$content = file_get_contents('./local-bunny.jpg');
+
+/*
+ * File contents handle from a `$filesystem` (e.g. Flysystem FtpAdapter).
+ */
+$content = $filesystem->readStream('./remote-custom.css');
+
 // Root directory.
 $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-bunny.jpg',
-    localFilePath: './local-bunny.jpg',
+    body: $content,
 );
 
 // Subdirectory.
 $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
-    localFilePath: './local-custom.css',
+    body: $content,
     path: 'css',
 );
 
@@ -80,7 +90,7 @@ $edgeStorageApi->uploadFile(
 $edgeStorageApi->uploadFile(
     storageZoneName: 'my-storage-zone-1',
     fileName: 'remote-custom.css',
-    localFilePath: './local-custom.css',
+    body: $content,
     path: 'css',
     headers: [
         'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',

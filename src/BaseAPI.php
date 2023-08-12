@@ -1533,21 +1533,20 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\FileDoesNotExistException
      * @return BunnyClientResponseInterface
      * @param int $zoneId
-     * @param string $localFilePath
+     * @param mixed $body
      */
     public function importDnsRecords(
         int $zoneId,
-        string $localFilePath,
+        mixed $body,
     ): BunnyClientResponseInterface {
         $endpoint = new ImportDNSRecords();
 
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$zoneId],
-            body: BodyContentHelper::openFileStream($localFilePath),
+            body: $body,
         );
     }
 
