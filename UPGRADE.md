@@ -1,3 +1,27 @@
+## 4.x
+
+This release comes with breaking changes to a couple of methods regarding uploading of files. To allow
+for more flexibility when uploading file contents, instead of passing the path to the local file,
+you are now required to read in the file contents before passing it to these methods. This change grants users more
+freedom on how to read file contents/streams (e.g. external sources) as it will now allow any of the following
+types `string|resource|StreamInterface|null` as `$body` parameter (previously `$localFilePath`).
+
+The `3.x` branch will now no longer be maintained.
+
+### ‼️ Breaking changes
+
+- File contents/stream should now be explicitly read before passing to the following methods. Examples in
+  the documentation have been updated.
+    - [`BaseAPI::importDnsRecords`](https://toshy.github.io/BunnyNet-PHP/base-api/#import-dns-records)
+      - Changed `$localFilePath` to `$body`.
+    - [`EdgeStorageAPI::uploadFile`](https://toshy.github.io/BunnyNet-PHP/edge-storage-api/#upload-file)
+        - Changed `$localFilePath` to `$body`.
+    - [`StreamAPI::uploadVideo`](https://toshy.github.io/BunnyNet-PHP/stream-api/#upload-video)
+        - Changed `$localFilePath` to `$body`.
+- `BodyContentHelper::openFileStream` and `FileDoesNotExistException::class` have been removed.
+    - While previously only used internally for the above-mentioned methods, the `openFileStream` was a public
+      static method and could've theoretically been used by users, which is the reason for explicitly stating it here.
+
 ## 3.x
 
 This release reworks (almost) the entire codebase, and therefore results in quite some breaking changes. Please
