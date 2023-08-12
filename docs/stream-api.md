@@ -275,7 +275,7 @@ $streamApi->addCaption(
     sourceLanguage: 'jp',
     body: [
         'srclang' => 'jp',
-        'label' =>'Subtitles (Japanese)',
+        'label' => 'Subtitles (Japanese)',
         'captionsFile' =>'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
     ],
 );
