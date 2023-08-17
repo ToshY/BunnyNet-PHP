@@ -170,10 +170,21 @@ $streamApi->createVideo(
 #### [Upload Video](https://docs.bunny.net/reference/video_uploadvideo)
 
 ```php
+/*
+ * File contents read into string from the local filesystem.
+ */
+$content = file_get_contents('./bunny-hop.mp4');
+
+/*
+ * File contents handle from a `$filesystem` (Flysystem FtpAdapter).
+ */
+$content = $filesystem->readStream('./bunny-hop.mp4');
+
+// Upload video.
 $streamApi->uploadVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    localFilePath: './bunny-hop.mp4',
+    body: $content,
     query: [
         'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
     ],

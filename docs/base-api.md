@@ -1012,9 +1012,20 @@ $baseApi->dismissDnsConfigurationNotice(
 #### [Import DNS Records](https://docs.bunny.net/reference/dnszonepublic_import)
 
 ```php
+/*
+ * File contents read into string from the local filesystem.
+ */
+$content = file_get_contents('./records.txt');
+
+/*
+ * File contents handle from a `$filesystem` (Flysystem FtpAdapter).
+ */
+$content = $filesystem->readStream('./records.txt');
+
+// Import DNS records.
 $baseApi->importDnsRecords(
     zoneId: 1,
-    localFilePath: './records.txt',
+    body: $content,
 );
 ```
 
