@@ -13,3 +13,7 @@ BunnyNet-PHP is a non-official library for the [bunny.net API](https://docs.bunn
 ### GitHub
 
 Project source code is [hosted on GitHub](https://github.com/ToshY/BunnyNet-PHP).
+
+!!! note
+
+    - The documentation website is based on the `master` branch.

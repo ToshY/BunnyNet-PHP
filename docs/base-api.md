@@ -1029,10 +1029,6 @@ $baseApi->importDnsRecords(
 );
 ```
 
-!!! note
-
-    - The argument `localFilePath` is the path to the local file containing the DNS records for your zone.
-
 ### Pull Zone
 
 #### [List Pull Zones](https://docs.bunny.net/reference/pullzonepublic_index)
