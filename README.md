@@ -27,15 +27,12 @@ edge storage, video streaming, image optimizers and much more!
 ## 🧰 Install
 
 ```bash
-composer require toshy/bunnynet-php:^3.0
+composer require toshy/bunnynet-php:^4.0
 ```
-
-> Note: The `2.x` is not longer actively maintained. See [UPGRADE.md](./UPGRADE.md) for upgrade instructions.
-
 
 ## 📜 Documentation
 
-Full documentation is available at [https://toshy.github.io/BunnyNet-PHP](https://toshy.github.io/BunnyNet-PHP).
+The documentation is available at [https://toshy.github.io/BunnyNet-PHP](https://toshy.github.io/BunnyNet-PHP).
 
 ## 🛠️ Contribute
 

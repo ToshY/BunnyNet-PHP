@@ -7,7 +7,6 @@ namespace ToshY\BunnyNet;
 use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
-use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\DeleteCollection;
@@ -25,6 +24,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnailByBody;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
@@ -266,17 +266,16 @@ class StreamAPI
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
-     * @throws FileDoesNotExistException
      * @param int $libraryId
      * @param string $videoId
-     * @param string $localFilePath
+     * @param mixed $body
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
     public function uploadVideo(
         int $libraryId,
         string $videoId,
-        string $localFilePath,
+        mixed $body,
         array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new UploadVideo();
@@ -287,7 +286,7 @@ class StreamAPI
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
-            body: BodyContentHelper::openFileStream($localFilePath),
+            body: $body,
         );
     }
 
@@ -408,6 +407,32 @@ class StreamAPI
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $libraryId
+     * @param string $videoId
+     * @param mixed $body
+     * @param array<string,string> $headers
+     */
+    public function setThumbnailByBody(
+        int $libraryId,
+        string $videoId,
+        mixed $body,
+        array $headers,
+    ): BunnyClientResponseInterface {
+        $endpoint = new SetThumbnailByBody();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+            body: $body,
+            headers: $headers,
         );
     }
 

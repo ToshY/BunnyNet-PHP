@@ -5,29 +5,12 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Helper;
 
 use Throwable;
-use ToshY\BunnyNet\Exception\FileDoesNotExistException;
 use ToshY\BunnyNet\Exception\JSONException;
 
 use const JSON_THROW_ON_ERROR;
 
 class BodyContentHelper
 {
-    /**
-     * @throws FileDoesNotExistException
-     * @return false|resource
-     */
-    public static function openFileStream(string $filePath)
-    {
-        $fileRealPath = realpath($filePath);
-        if (false === $fileRealPath) {
-            throw FileDoesNotExistException::withFileName(
-                fileName: $filePath,
-            );
-        }
-
-        return fopen($fileRealPath, 'r');
-    }
-
     /**
      * @throws JSONException
      * @return mixed
