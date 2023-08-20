@@ -418,11 +418,13 @@ class StreamAPI
      * @param int $libraryId
      * @param string $videoId
      * @param mixed $body
+     * @param array<string,string> $headers
      */
     public function setThumbnailByBody(
         int $libraryId,
         string $videoId,
         mixed $body,
+        array $headers,
     ): BunnyClientResponseInterface {
         $endpoint = new SetThumbnailByBody();
 
@@ -430,6 +432,7 @@ class StreamAPI
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             body: $body,
+            headers: $headers,
         );
     }
 

@@ -276,6 +276,9 @@ $streamApi->setThumbnailByBody(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     body: $content,
+    headers: [
+        'Content-Type' => 'image/jpeg',
+    ],
 );
 ```
 
