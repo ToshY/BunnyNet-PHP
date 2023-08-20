@@ -1015,12 +1015,12 @@ $baseApi->dismissDnsConfigurationNotice(
 /*
  * File contents read into string from the local filesystem.
  */
-$content = file_get_contents('./records.txt');
+$content = file_get_contents('./example.com.2023-08-20.bind');
 
 /*
  * File contents handle from a `$filesystem` (Flysystem FtpAdapter).
  */
-$content = $filesystem->readStream('./records.txt');
+$content = $filesystem->readStream('./example.com.2023-08-20.bind');
 
 // Import DNS records.
 $baseApi->importDnsRecords(
