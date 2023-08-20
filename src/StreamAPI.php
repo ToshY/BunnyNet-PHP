@@ -24,6 +24,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnailByBody;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
@@ -406,6 +407,29 @@ class StreamAPI
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
             query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $libraryId
+     * @param string $videoId
+     * @param mixed $body
+     */
+    public function setThumbnailByBody(
+        int $libraryId,
+        string $videoId,
+        mixed $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new SetThumbnailByBody();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+            query: $body,
         );
     }
 
