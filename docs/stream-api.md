@@ -258,6 +258,35 @@ $streamApi->setThumbnail(
 );
 ```
 
+#### Set Thumbnail (by body)
+
+```php
+/*
+ * File contents read into string from the local filesystem.
+ */
+$content = file_get_contents('./thumbnail.jpg');
+
+/*
+ * File contents handle from a `$filesystem` (Flysystem FtpAdapter).
+ */
+$content = $filesystem->readStream('./thumbnail.jpg');
+
+// Set video thumbnail by body contents.
+$streamApi->setThumbnailByBody(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    body: $content,
+);
+```
+
+!!! note
+
+    - This method allows for uploading a thumbnail based on body contents.
+
+!!! warning
+
+    - Adding a thumbnail by uploading body contents is not documented in the official Bunny.net API specification for the [Set Thumbnail](https://docs.bunny.net/reference/video_setthumbnail) endpoint.
+
 #### [Fetch Video](https://docs.bunny.net/reference/video_fetchnewvideo)
 
 ```php
