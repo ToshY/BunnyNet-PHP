@@ -429,7 +429,7 @@ class StreamAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
-            query: $body,
+            body: $body,
         );
     }
 
