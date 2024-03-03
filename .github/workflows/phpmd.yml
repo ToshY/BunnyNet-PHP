@@ -30,7 +30,7 @@ jobs:
         run: composer validate
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: PHPMD
         run: php vendor/bin/phpmd --strict src/ text phpmd.xml

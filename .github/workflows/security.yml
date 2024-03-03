@@ -29,7 +29,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
         with:
           composer-options: '--prefer-stable'
 
