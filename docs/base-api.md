@@ -158,7 +158,6 @@ $baseApi->createPaymentCheckout(
 
 !!! note
 
-    - The key `RechargeTreshold` (misspelled) has a value range of 2-2000.
     - The key `PaymentAmount` has a value range of 10-2000.
 
 #### [Prepare Payment Authorization](https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization)
