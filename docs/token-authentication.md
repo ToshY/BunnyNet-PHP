@@ -24,7 +24,7 @@ $tokenAuthentication = new TokenAuthentication(
 Sign a URL.
 
 ```php
-// Root directory.
+// File in root directory.
 $tokenAuthentication->sign(
     file: '/bunny.jpg',
     expirationTime: 3600,
@@ -38,7 +38,7 @@ $tokenAuthentication->sign(
     allowSubnet: true
 );
 
-// Subdirectory.
+// File in subdirectory.
 $tokenAuthentication->sign(
     file: '/css/custom.css',
 );
@@ -101,8 +101,8 @@ $tokenAuthentication->sign(
     - In order to reduce the false negatives (and increase privacy) for Token IP validation, the default is to
     allow the full `/24` subnet. As an example, a token signed for a user with IPv4 `12.345.67.89` will allow 
     `12.345.67.0/24` to access the resource.
-    - The `countriesAllowed`, `countriesBlocked` and `countriesBlocked` accept comma separated input. This means 
-    you could allow or block multiple countries like so: `US,DE,JP`. Same goes for referers: `example.com,example.org`.
+    - The arguments `countriesAllowed`, `countriesBlocked` and `referrersAllowed` accept comma separated input. This means
+    you could allow or block multiple countries like so: `US,DE,JP`. Same goes for the allowed referers: `example.com,example.org`.
     - An edge case occurs when you add a blocked country to the Traffic Manager, and allow that same country for
     token authentication. This will result in a standard **"Unable to connect"** page. According to support *"The reason for
     that would be is due to the fact that the Traffic manager doesn't resolve
