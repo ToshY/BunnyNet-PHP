@@ -38,7 +38,7 @@
     "nyholm/psr7": "^1.6.1"
   },
   "require-dev": {
-    "rector/rector": "^0.15.1 || ^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0 || ^1.0.0",
+    "rector/rector": "^1.0",
     "phpmd/phpmd": "^2.13",
     "friendsofphp/php-cs-fixer": "^3.13",
     "phpro/grumphp": "^1.15 || ^2.0",
