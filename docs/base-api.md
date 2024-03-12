@@ -552,7 +552,7 @@ $baseApi->getVideoLibrary(
 );
 ```
 
-#### [Update Video Library]()
+#### [Update Video Library](https://docs.bunny.net/reference/videolibrarypublic_update)
 
 ```php
 $baseApi->updateVideoLibrary(
