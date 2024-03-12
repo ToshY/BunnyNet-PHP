@@ -44,10 +44,10 @@ markdown_extensions:
   - pymdownx.highlight:
       use_pygments: false
 extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
   - javascripts/highlight.js
 extra_css:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css
   - stylesheets/extra.css
 extra:
   generator: false
@@ -55,15 +55,6 @@ extra:
     - icon: material/rabbit
       link: https://bunny.net?ref=pji59zr7a4
       name: Affiliate link
-    - icon: fontawesome/brands/btc
-      link: bitcoin:174vYWgHrUtq1eUQPqyUcxBxhg5LapuXkq
-      name: Bitcoin | BTC
-    - icon: fontawesome/solid/litecoin-sign
-      link: litecoin:LhoqPb4En6xaoCJvh3oLzwJCWU6i4wk1Nc
-      name: Litecoin | LTC
-    - icon: fontawesome/solid/dog
-      link: dogecoin:DTiyfdh3zrcp5PoNFVocGgQ3BPTjEYZohW
-      name: Dogecoin | DOGE
 nav:
   - About: index.md
   - Getting Started: getting-started.md
