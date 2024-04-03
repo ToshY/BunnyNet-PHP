@@ -37,6 +37,7 @@ class ListCollections implements EndpointInterface, EndpointQueryInterface
             new AbstractParameter(name: 'itemsPerPage', type: Type::INT_TYPE),
             new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'orderBy', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'includeThumbnails', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

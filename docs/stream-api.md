@@ -34,8 +34,15 @@ $streamApi = new StreamAPI(
 $streamApi->getCollection(
     libraryId: 1,
     collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
+    query: [
+        'includeThumbnails' => true,
+    ],
 );
 ```
+
+!!! note
+
+    - If the query parameter `includeThumbnails` is set to `true`, the response item(s) will include a non-empty array key `previewImageUrls` containing the URLs for the corresponding image thumbnails.
 
 #### [Update Collection](https://docs.bunny.net/reference/collection_updatecollection)
 
@@ -68,9 +75,14 @@ $streamApi->listCollections(
         'perPage' => 100,
         'search' => 'bunny',
         'orderBy' => 'date',
+        'includeThumbnails' => true,
     ],
 );
 ```
+
+!!! note
+
+    - If the query parameter `includeThumbnails` is set to `true`, the response item(s) will include a non-empty array key `previewImageUrls` containing the URLs for the corresponding image thumbnails.
 
 #### [Create Collection](https://docs.bunny.net/reference/collection_createcollection)
 
