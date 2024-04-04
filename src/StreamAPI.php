@@ -49,19 +49,27 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
      * @param string $collectionId
+     * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      */
     public function getCollection(
         int $libraryId,
         string $collectionId,
+        array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new GetCollection();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
 
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $collectionId],
+            query: $query,
         );
     }
 
