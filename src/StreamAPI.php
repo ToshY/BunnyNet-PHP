@@ -27,6 +27,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnail;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnailByBody;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Model\API\Stream\OEmbed\GetOEmbed;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
@@ -523,6 +524,29 @@ class StreamAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId, $sourceLanguage],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function getOEmbed(
+        array $query,
+    ): BunnyClientResponseInterface {
+        $endpoint = new GetOEmbed();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            query: $query,
         );
     }
 }
