@@ -7,6 +7,11 @@ namespace ToshY\BunnyNet;
 use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
+use ToshY\BunnyNet\Exception\BunnyClientResponseException;
+use ToshY\BunnyNet\Exception\InvalidTypeForKeyValueException;
+use ToshY\BunnyNet\Exception\InvalidTypeForListValueException;
+use ToshY\BunnyNet\Exception\JSONException;
+use ToshY\BunnyNet\Exception\ParameterIsRequiredException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\DeleteCollection;
@@ -20,6 +25,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoHeatmap;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
@@ -316,6 +322,34 @@ class StreamAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws BunnyClientResponseException
+     * @throws InvalidTypeForKeyValueException
+     * @throws InvalidTypeForListValueException
+     * @throws JSONException
+     * @throws ParameterIsRequiredException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function getVideoPlayData(
+        int $libraryId,
+        string $videoId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
+        $endpoint = new GetVideoPlayData();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+            query: $query,
         );
     }
 

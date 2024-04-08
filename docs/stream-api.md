@@ -220,6 +220,19 @@ $streamApi->getVideoHeatmap(
     ```
     A support ticket has been created at bunny.net regarding this issue.
 
+#### [Get Video Play Data](https://docs.bunny.net/reference/video_getvideoplaydata)
+
+```php
+$streamApi->getVideoPlayData(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    query: [
+        'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
+        'expires' => 3600,
+    ],
+);
+```
+
 #### [Get Video Statistics](https://docs.bunny.net/reference/video_getvideostatistics)
 
 ```php
