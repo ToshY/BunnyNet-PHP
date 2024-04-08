@@ -355,6 +355,24 @@ $streamApi->deleteCaption(
 
     - The `sourceLanguage` is the [language shortcode](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the caption.
 
+#### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
+
+```php
+$streamApi->getOEmbed(
+    query: [
+        'url' => 'https://iframe.mediadelivery.net/embed/182595/8a800e53-c949-46d0-8818-af566f032ec1',
+        'maxWidth' => 1280,
+        'maxHeight' => 720,
+        'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
+        'expires' => 3600,
+    ],
+);
+```
+
+!!! note
+
+    - The `url` is a required query parameter.
+
 ## Reference
 
 * [Stream API](https://docs.bunny.net/reference/api-overview)
