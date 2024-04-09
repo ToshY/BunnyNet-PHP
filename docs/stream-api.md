@@ -256,6 +256,22 @@ $streamApi->reEncodeVideo(
 );
 ```
 
+#### [Repackage Video](https://docs.bunny.net/reference/video_repackage)
+
+```php
+$streamApi->repackageVideo(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    query: [
+        'keepOriginalFiles' => true,
+    ],
+);
+```
+
+!!! note
+
+    - This method allows repackiging of videos for libraries that have [Enterprise DRM](https://docs.bunny.net/docs/stream-drm#mediacage-enterprise-drm) enabled.
+
 #### [List Videos](https://docs.bunny.net/reference/video_list)
 
 ```php

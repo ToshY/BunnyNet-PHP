@@ -29,6 +29,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\RepackageVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnail;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnailByBody;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
@@ -396,6 +397,34 @@ class StreamAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$libraryId, $videoId],
+        );
+    }
+
+    /**
+     * @throws BunnyClientResponseException
+     * @throws ClientExceptionInterface
+     * @throws InvalidTypeForKeyValueException
+     * @throws InvalidTypeForListValueException
+     * @throws JSONException
+     * @throws ParameterIsRequiredException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function repackageVideo(
+        int $libraryId,
+        string $videoId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
+        $endpoint = new RepackageVideo();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+            query: $query,
         );
     }
 
