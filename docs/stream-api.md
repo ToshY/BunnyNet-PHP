@@ -356,9 +356,9 @@ $streamApi->fetchVideo(
 $streamApi->addCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    sourceLanguage: 'jp',
+    sourceLanguage: 'ja',
     body: [
-        'srclang' => 'jp',
+        'srclang' => 'ja',
         'label' => 'Subtitles (Japanese)',
         'captionsFile' => 'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
     ],
@@ -367,7 +367,7 @@ $streamApi->addCaption(
 
 !!! note
 
-    - The `sourceLanguage` / `srclang` is the [language shortcode](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the caption.
+    - The `sourceLanguage` / `srclang` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for the caption.
     - The `captionsFile` requires the file contents to be sent as a base64 encoded string.
 
 #### [Delete Caption](https://docs.bunny.net/reference/video_deletecaption)
@@ -376,13 +376,31 @@ $streamApi->addCaption(
 $streamApi->deleteCaption(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    sourceLanguage: 'jp',
+    sourceLanguage: 'ja',
 );
 ```
 
 !!! note
 
-    - The `sourceLanguage` is the [language shortcode](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the caption.
+    - The `sourceLanguage` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for the caption.
+
+#### [Transcribe Video](https://docs.bunny.net/reference/video_transcribevideo)
+
+```php
+$streamApi->transcribeVideo(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    query: [
+        'language' => 'fi',
+        'force' => true,
+    ],
+);
+```
+
+!!! note
+
+    - The `language` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
+    - Once a video has transcribed you need to set `force` to `true` in order to force a new transcription to be added.
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
