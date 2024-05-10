@@ -33,8 +33,6 @@ $loggingApi = new LoggingAPI(
 
 ## Usage
 
-Generate secure URL.
-
 ```php
 // Logging of yesterday.
 $loggingApi->getLog(
