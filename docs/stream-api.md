@@ -270,7 +270,7 @@ $streamApi->repackageVideo(
 
 !!! note
 
-    - This method allows repackiging of videos for libraries that have [Enterprise DRM](https://docs.bunny.net/docs/stream-drm#mediacage-enterprise-drm) enabled.
+    - This method allows repackaging of videos for libraries that have [Enterprise DRM](https://docs.bunny.net/docs/stream-drm#mediacage-enterprise-drm) enabled.
 
 #### [List Videos](https://docs.bunny.net/reference/video_list)
 
