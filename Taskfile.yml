@@ -127,11 +127,11 @@ tasks:
   mkdocs:
     desc: MkDocs build
     cmds:
-      - docker run --rm -it -v $(pwd):/docs squidfunk/mkdocs-material:9.1 build
+      - docker run --rm -it -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.5 build
 
   mkdocs:live:
     desc: MkDocs development server
     vars:
       PORT: '{{.p | default "8001"}}'
     cmds:
-      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs squidfunk/mkdocs-material:9.1
+      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.5

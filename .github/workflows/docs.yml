@@ -24,7 +24,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build docs
-        run: docker run --rm -v $(pwd):/docs squidfunk/mkdocs-material:9.1 build
+        run: docker run --rm -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.5 build
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
