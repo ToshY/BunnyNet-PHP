@@ -367,7 +367,7 @@ $streamApi->addCaption(
 
 !!! note
 
-    - The `sourceLanguage` / `srclang` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for the caption.
+    - The `sourceLanguage` / `srclang` should be an [**ISO 639-1** / **ISO 639-3** language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
     - The `captionsFile` requires the file contents to be sent as a base64 encoded string.
 
 #### [Delete Caption](https://docs.bunny.net/reference/video_deletecaption)
@@ -382,7 +382,18 @@ $streamApi->deleteCaption(
 
 !!! note
 
-    - The `sourceLanguage` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for the caption.
+    - The `sourceLanguage` should be an [**ISO 639-1** / **ISO 639-3** language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
+
+!!! warning
+
+    - If a caption was created with a specific ISO standard for the `sourceLanguage`, then you have to delete it with the same standard. Example: a caption created with `sourceLanguage` **ISO 639-1** can only be deleted by sending a request with `sourceLanguage` **ISO 639-1**.
+    - This endpoint will always return a `200` status code, even if the subtitle with specificied `sourceLanguage` does not exist.
+
+!!! tip
+
+    - If you (regularly) update captions make sure to purge the captions directory associated with the video. If it's not purged you might notice
+    outdated subtitles displayed on the video. You can get the URL for the captions directory by using the [Get Video Play Data](#get-video-play-data) endpoint.
+
 
 #### [Transcribe Video](https://docs.bunny.net/reference/video_transcribevideo)
 
