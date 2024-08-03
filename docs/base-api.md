@@ -1897,7 +1897,7 @@ $baseApi->addStorageZone(
 
 !!! note
 
-    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone
+    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
     the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
     - The key `ZoneTier` has the following possible values (undocumented):
@@ -1972,7 +1972,7 @@ $baseApi->updateStorageZone(
 
 !!! note
 
-    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone
+    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
     the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
     - The key `ReplicationZones` has the following possible values:
