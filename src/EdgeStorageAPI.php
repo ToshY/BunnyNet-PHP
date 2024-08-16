@@ -7,11 +7,14 @@ namespace ToshY\BunnyNet;
 use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Region;
+use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\EdgeStorage\BrowseFiles\ListFiles;
 use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DeleteFile;
 use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DownloadFile;
+use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
+use ToshY\BunnyNet\Validator\ParameterValidator;
 
 class EdgeStorageAPI
 {
@@ -49,6 +52,32 @@ class EdgeStorageAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$storageZoneName, $path, $fileName],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\JSONException
+     * @throws Exception\ParameterIsRequiredException
+     * @param string $storageZoneName
+     * @param mixed $body
+     * @return BunnyClientResponseInterface
+     */
+    public function downloadZip(
+        string $storageZoneName,
+        mixed $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new DownloadZip();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$storageZoneName],
+            body: BodyContentHelper::getBody($body),
         );
     }
 
