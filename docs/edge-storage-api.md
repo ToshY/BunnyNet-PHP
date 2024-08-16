@@ -58,6 +58,42 @@ $edgeStorageApi->downloadFile(
 );
 ```
 
+#### Download Zip
+
+```php
+// Root directory.
+$edgeStorageApi->downloadZip(
+    storageZoneName: 'my-storage-zone-1',
+    body: [
+        'RootPath' => '/my-storage-zone-1/',
+        'Paths' => [
+            '/my-storage-zone-1/',
+        ]
+    ],
+);
+
+// Subdirectory.
+$edgeStorageApi->downloadZip(
+    storageZoneName: 'my-storage-zone-1',
+    body: [
+        'RootPath' => '/my-storage-zone-1/',
+        'Paths' => [
+            '/my-storage-zone-1/images/',
+        ]
+    ],
+);
+```
+
+!!! note
+    - Make sure your `RootPath` and `Paths` contain **leading** and **trailing** slashes.
+        - If you omit the slashes in `RootPath` this will result in a `400` status code.
+        - If you omit the slashes in `Paths` this will result in a `200` status code with an empty ZIP file.
+
+!!! warning
+
+    - This endpoint (with method `POST`) is currently not documented in the API specifications.
+    - This request may fail or timeout if the requested directory has too many files or is too big.
+
 #### [Upload File](https://docs.bunny.net/reference/put_-storagezonename-path-filename)
 
 ```php
