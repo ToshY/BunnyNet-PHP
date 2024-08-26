@@ -4,60 +4,59 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
-enum Region
+enum Region: string
 {
     /** Falkenstein / Frankfurt (Germany) | Main */
-    case DE;
-    case FS;
+    case DE = 'DE';
+    case FS = 'FS';
 
     /** London (United Kingdom) | Main */
-    case UK;
+    case UK = 'UK';
 
     /** Norway (Stockholm) | Main */
-    case SE;
+    case SE = 'SE';
 
     /** Prague (Czech Republic) */
-    case CZ;
+    case CZ = 'CZ';
 
     /** Madrid (Spain) */
-    case ES;
+    case ES = 'ES';
 
     /** New York (United States East) | Main */
-    case NY;
+    case NY = 'NY';
 
     /** Los Angeles (United States West) | Main */
-    case LA;
+    case LA = 'LA';
 
     /** Seattle (United States West) */
-    case WA;
+    case WA = 'WA';
 
     /** Miami (United States East) */
-    case MI;
+    case MI = 'MI';
 
     /** Singapore (Singapore) | Main */
-    case SG;
+    case SG = 'SG';
 
     /** Hong Kong (SAR of China) */
-    case HK;
+    case HK = 'HK';
 
     /** Tokyo (Japan) */
-    case JP;
+    case JP = 'JP';
 
     /** Sydney (Oceania) | Main */
-    case SYD;
+    case SYD = 'SYD';
 
     /** Sao Paolo (Brazil) | Main */
-    case BR;
+    case BR = 'BR';
 
     /** Johannesburg (Africa) | Main */
-    case JH;
+    case JH = 'JH';
 
     public function host(): string
     {
-        $subdomain = sprintf('%s.', strtolower($this->name));
-        if (in_array($this->name, [self::DE->name, self::FS->name], true) === true) {
-            $subdomain = '';
-        }
-        return $subdomain . Host::STORAGE_ENDPOINT;
+        return match ($this) {
+            self::DE, self::FS => Host::STORAGE_ENDPOINT,
+            default => sprintf('%s.%s', strtolower($this->value), Host::STORAGE_ENDPOINT),
+        };
     }
 }

@@ -21,8 +21,8 @@ $bunnyClient = new BunnyClient(
 // Provide the "(Read-Only) Password" available at the "FTP & API Access" section of your specific storage zone.
 $edgeStorageApi = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
-    region: Region::FS,
     client: $bunnyClient,
+    region: Region::FS,
 );
 ```
 
@@ -36,6 +36,7 @@ $edgeStorageApi = new EdgeStorageAPI(
         - `Region::SYD` = Sydney (Oceania)
         - `Region::BR` = Sao Paolo (Brazil)
         - `Region::JH` = Johannesburg (Africa)
+    - The `Region` is a backed enum, so you can supply a value to the `Region::from` or `Region::tryFrom` method to retrieve the corresponding case.
 
 ## Usage
 
