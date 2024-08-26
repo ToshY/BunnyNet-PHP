@@ -64,10 +64,11 @@ tasks:
       - docker compose run --rm $TTY php composer update {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
 
   # Tools
-  grum:init:
-    desc: Init GrumPHP
+  pre-commit:init:
+    desc: Init pre-commit
+    silent: true
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/grumphp git:init
+      - pre-commit install -f
 
   phpcs:
     desc: PHPCS dry run

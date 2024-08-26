@@ -6,7 +6,7 @@
 /.php-cs-fixer.dist.php export-ignore
 /compose.yaml export-ignore
 /Dockerfile export-ignore
-/grumphp.yml export-ignore
+/pre-commit.config.yaml export-ignore
 /mkdocs.yml export-ignore
 /phpmd.baseline.xml export-ignore
 /phpmd.xml export-ignore

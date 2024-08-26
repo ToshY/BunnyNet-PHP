@@ -9,6 +9,7 @@
     <img src="https://img.shields.io/packagist/v/toshy/bunnynet-php?label=Packagist" alt="Current bundle version" />
     <img src="https://img.shields.io/packagist/dt/toshy/bunnynet-php?label=Downloads" alt="Packagist Total Downloads" />
     <img src="https://img.shields.io/packagist/php-v/toshy/bunnynet-php?label=PHP" alt="PHP version requirement" />
+    <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" alt="Pre-commit" />
     <img src="https://img.shields.io/badge/PSR-18-brightgreen" alt="PHP-FIG PSR-18" />
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpcs.yml?branch=master&label=PHPCS" alt="Code style">
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpmd.yml?branch=master&label=PHPMD" alt="Mess detector">
@@ -41,6 +42,7 @@ Features and bugfixes should be based on the `master` branch.
 ### Prerequisites
 
 * [Docker Compose](https://docs.docker.com/compose/install/)
+* [Pre-commit](https://pre-commit.com/#install)
 * [Task (optional)](https://taskfile.dev/installation/)
 
 ### Install dependencies
@@ -49,10 +51,10 @@ Features and bugfixes should be based on the `master` branch.
 task composer:install 
 ```
 
-### Enable GrumPHP
+### Enable pre-commit
 
 ```shell
-task grum:init
+task pre-commit:init
 ```
 
 > Note: Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 

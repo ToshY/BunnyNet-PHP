@@ -41,13 +41,9 @@
     "rector/rector": "^1.0",
     "phpmd/phpmd": "^2.13",
     "friendsofphp/php-cs-fixer": "^3.13",
-    "phpro/grumphp": "^1.15 || ^2.0",
     "phpstan/phpstan": "^1.9",
     "phpunit/phpunit": "^10.0"
   },
   "config": {
-    "allow-plugins": {
-      "phpro/grumphp": true
-    }
   }
 }
