@@ -40,7 +40,7 @@
   "require-dev": {
     "rector/rector": "^1.0",
     "phpmd/phpmd": "^2.13",
-    "friendsofphp/php-cs-fixer": "^3.13",
+    "friendsofphp/php-cs-fixer": "^3.64",
     "phpstan/phpstan": "^1.9",
     "phpunit/phpunit": "^10.0"
   },

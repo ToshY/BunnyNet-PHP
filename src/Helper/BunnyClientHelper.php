@@ -11,7 +11,6 @@ use ToshY\BunnyNet\Enum\MimeType;
 use ToshY\BunnyNet\Exception\BunnyClientResponseException;
 use ToshY\BunnyNet\Exception\JSONException;
 use ToshY\BunnyNet\Model\Client\BunnyClientResponse;
-
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 
 use const JSON_BIGINT_AS_STRING;
