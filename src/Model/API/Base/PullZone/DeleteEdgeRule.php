@@ -16,7 +16,7 @@ class DeleteEdgeRule implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'pullzone/%d/edgerules/%d';
+        return 'pullzone/%d/edgerules/%s';
     }
 
     public function getHeaders(): array
