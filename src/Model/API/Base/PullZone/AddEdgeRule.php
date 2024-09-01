@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class AddOrUpdateEdgeRule implements EndpointInterface, EndpointBodyInterface
+class AddEdgeRule implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
