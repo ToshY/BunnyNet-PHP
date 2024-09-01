@@ -58,7 +58,8 @@ use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddOrUpdateEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
@@ -1693,12 +1694,58 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      * @param array<string,mixed> $body
+     *
+     * @deprecated since 4.5 (to be removed in 5.0). Use {@link addEdgeRule} or {@link updateEdgeRule} instead.
      */
     public function addOrUpdateEdgeRule(
         int $pullZoneId,
         array $body,
     ): BunnyClientResponseInterface {
-        $endpoint = new AddOrUpdateEdgeRule();
+        return $this->addEdgeRule($pullZoneId, $body);
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param int $pullZoneId
+     * @param array<string,mixed> $body
+     */
+    public function addEdgeRule(
+        int $pullZoneId,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new AddEdgeRule();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$pullZoneId],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param int $pullZoneId
+     * @param array<string,mixed> $body
+     */
+    public function updateEdgeRule(
+        int $pullZoneId,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new UpdateEdgeRule();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 

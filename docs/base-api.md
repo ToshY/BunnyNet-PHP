@@ -1436,22 +1436,12 @@ $baseApi->deletePullZone(
 );
 ```
 
-#### [Delete Edge Rule](https://docs.bunny.net/reference/pullzonepublic_deleteedgerule)
+#### [Add Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
 
 ```php
-$baseApi->deleteEdgeRule(
-    pullZoneId: 1,
-    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
-);
-```
-
-#### [Add/Update Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
-
-```php
-$baseApi->addOrUpdateEdgeRule(
+$baseApi->addEdgeRule(
     pullZoneId: 1,
     body: [
-        'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587',
         'ActionType' => 4,
         'ActionParameter1' => '',
         'ActionParameter2' => '',
@@ -1515,6 +1505,27 @@ $baseApi->addOrUpdateEdgeRule(
         - `1` = Match All
         - `2` = Match None
 
+#### [Update Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
+
+```php
+$baseApi->updateEdgeRule(
+    pullZoneId: 1,
+    body: [
+        'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587',
+        'Triggers' => [
+            [
+                'Type' => 7,
+                'PatternMatches' => ['75']
+            ],
+        ],
+    ],
+);
+```
+
+!!! note
+
+    - The keys `Guid` and `Triggers` in the body are required parameters when updating an edge rule.
+
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
 
 ```php
@@ -1531,6 +1542,15 @@ $baseApi->setEdgeRuleEnabled(
 !!! note
 
     -  The key `Id` in the body denotes the pull zone ID (the same as the first argument) and is (for some reason) a required parameter.
+
+#### [Delete Edge Rule](https://docs.bunny.net/reference/pullzonepublic_deleteedgerule)
+
+```php
+$baseApi->deleteEdgeRule(
+    pullZoneId: 1,
+    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
+);
+```
 
 #### Set Zone Security Enabled
 
