@@ -1,0 +1,61 @@
+#!/bin/sh
+
+DOCKER_COMPOSE_RUN="docker compose run -T --rm --no-deps php"
+
+run_command () {
+  COMMAND_NAME=$1
+  COMMAND_RUN=$2
+
+  (
+    OUTPUT=$(eval "$DOCKER_COMPOSE_RUN $COMMAND_RUN" 2>&1)
+    status_code=$?
+
+    if [ $status_code -ne 0 ]; then
+      printf "\r\033[K❌ %s \033[31m%s\033[0m\n" "$COMMAND_NAME" "failed" >&2
+      echo "$OUTPUT" > "/tmp/${COMMAND_NAME}_pre-commit"
+      exit 1
+    else
+      printf "\r\033[K✅ %s \033[32m%s\033[0m\n" "$COMMAND_NAME" "passed" >&2
+    fi
+  ) &
+}
+
+printf "🐚 \033[33m%s\033[0m\n\n" "Executing pre-commit hook..."
+
+# Staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=AMR | grep -E '\.php$|\.php-cs-fixer(\.dist)?\.php|composer\.lock|phpunit\.xml|phpstan(-baseline)?\.neon' | tr '\n' ' ')
+
+HOOK_EXIT_CODE=0
+if [ "$STAGED_FILES" ]; then
+  # PHP-CS-Fixer; run on changed files or on whole project if .php-cs-fixer.dist.php/composer.lock has changed
+  EXTRA_ARGS=''
+  IFS='
+  '
+  if ! echo "${STAGED_FILES}" | grep -qE '\.php-cs-fixer(\.dist)?\.php|composer\.lock'; then
+    EXTRA_ARGS=$(printf -- '--path-mode=intersection %s' "${STAGED_FILES}")
+  fi
+
+  run_command "PHP-CS-Fixer" "vendor/bin/php-cs-fixer fix --dry-run -v --diff --config=.php-cs-fixer.dist.php --show-progress=none $EXTRA_ARGS"
+  run_command "PHPStan" "vendor/bin/phpstan --memory-limit=1G --error-format=table"
+  run_command "PHPMD" "vendor/bin/phpmd src/ text phpmd.xml"
+  run_command "PHPUnit" "vendor/bin/phpunit"
+
+  wait
+
+  for OUTPUT_FILE in /tmp/*_pre-commit; do
+    if [ ! -f "$OUTPUT_FILE" ]; then
+      continue
+    fi
+
+    HOOK_EXIT_CODE=1
+    printf "\n----------------\n❌ %s\n\n" $(basename $OUTPUT_FILE '_output')
+    cat "$OUTPUT_FILE"
+    rm "$OUTPUT_FILE"
+  done
+
+else
+    printf "ℹ️ No staged PHP files\n"
+    HOOK_EXIT_CODE=0
+fi
+
+exit $HOOK_EXIT_CODE

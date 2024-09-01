@@ -1,4 +1,5 @@
 /.github/ export-ignore
+/.githooks/ export-ignore
 /docs/ export-ignore
 /tests/ export-ignore
 /.gitattributes export-ignore
@@ -6,7 +7,6 @@
 /.php-cs-fixer.dist.php export-ignore
 /compose.yaml export-ignore
 /Dockerfile export-ignore
-/pre-commit.config.yaml export-ignore
 /mkdocs.yml export-ignore
 /phpmd.baseline.xml export-ignore
 /phpmd.xml export-ignore

@@ -39,9 +39,9 @@
   },
   "require-dev": {
     "rector/rector": "^1.0",
-    "phpmd/phpmd": "^2.13",
+    "phpmd/phpmd": "^2.15",
     "friendsofphp/php-cs-fixer": "^3.64",
-    "phpstan/phpstan": "^1.9",
+    "phpstan/phpstan": "^1.12",
     "phpunit/phpunit": "^10.0"
   },
   "config": {

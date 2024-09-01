@@ -42,7 +42,6 @@ Features and bugfixes should be based on the `master` branch.
 ### Prerequisites
 
 * [Docker Compose](https://docs.docker.com/compose/install/)
-* [Pre-commit](https://pre-commit.com/#install)
 * [Task (optional)](https://taskfile.dev/installation/)
 
 ### Install dependencies
@@ -51,10 +50,10 @@ Features and bugfixes should be based on the `master` branch.
 task composer:install 
 ```
 
-### Enable pre-commit
+### Enable pre-commit hook
 
 ```shell
-task pre-commit:init
+task git:hooks
 ```
 
 > Note: Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 
