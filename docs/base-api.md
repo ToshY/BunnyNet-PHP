@@ -316,6 +316,33 @@ $baseApi->listDrmCertificates(
     ```
     A support ticket has been created at bunny.net regarding this issue.
 
+### Integrations
+
+#### Get GitHub Integrations
+
+```php
+$baseApi->getGitHubIntegrations();
+```
+
+!!! warning
+
+    This endpoint is (currently) undocumented. 
+
+!!! info
+
+    This endpoint returns the following response:
+    ```json
+    {
+      "Accounts": [
+        {
+          "Id": 1,
+          "Name": "MyConnectedGitHubUsername"
+        }
+      ]
+    }
+    ```
+    The `id` can be used as `IntegrationId` for the [Add Edge Script](edge-scripting-api.md#add-edge-script) endpoint.
+
 ### Region
 
 #### [List Regions](https://docs.bunny.net/reference/regionpublic_index)

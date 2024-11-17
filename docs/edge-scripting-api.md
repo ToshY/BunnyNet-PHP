@@ -76,17 +76,17 @@ $edgeScriptingApi->addEdgeScript(
         'Integration' => [
             'IntegrationId' => 1234,
             'RepositorySettings' => [
-                'Id' => 1234,  
-                'Name' => 'Test Repo',  
-                'Private' => true,  
-                'TemplateUrl' => 'https://example.com',  
+                'Id' => 1234,
+                'Name' => 'my-cool-es-return-repo',
+                'Private' => true,
+                'TemplateUrl' => 'https://github.com/BunnyWay/es-return-json',
             ],
             'DeployConfiguration' => [
-                'Branch' => 1234,  
-                'InstallCommand' => 'Test Repo',  
-                'BuildCommand' => 'true',  
-                'EntryFile' => 'test.js',  
-                'CreateWorkflow' => false,  
+                'Branch' => 'main',
+                'InstallCommand' => 'curl -fsSL https://deno.land/install.sh | sh -s v1.0.0',
+                'BuildCommand' => 'deno task build',
+                'EntryFile' => 'dist/main.js',
+                'CreateWorkflow' => true,
             ],
         ],
     ],
@@ -98,6 +98,9 @@ $edgeScriptingApi->addEdgeScript(
     - The key `ScriptType` has the following possible values:
         - `1` = Standalone (Standalone scripts are ideal for a wide range of applications, such as building RESTful APIs, delivering UI applications, and processing data at the edge.)
         - `2` = Middleware (Middleware scripts common use cases include user authentication, error handling, logging, security enhancements, A/B testing, HTML manipulation, and more.)
+    - The key `RepositorySettings` is not required when creating, editing and deploying on Bunny.net.
+    - The key `DeployConfiguration` is not required when creating a new GitHub repository.
+    - The key `IntegrationId` is required when creating and deploying through GitHub. It can be retrieved from the [Get GitHub Integrations](base-api.md#get-github-integrations) endpoint.
 
 !!! info
 
@@ -111,6 +114,36 @@ $edgeScriptingApi->addEdgeScript(
         ],
     );
     ```
+
+!!! example
+
+    Examples for `DeployConfiguration` payloads.
+
+    `Basic Deno`
+    ```php
+    'DeployConfiguration' => [
+        'Branch' => 'main',
+        'InstallCommand' => 'curl -fsSL https://deno.land/install.sh | sh -s v1.0.0',
+        'BuildCommand' => 'deno task build',
+        'EntryFile' => 'dist/main.js',
+        'CreateWorkflow' => true,
+    ],
+    ```
+
+    `Basic Node.js`
+    ```php
+    'DeployConfiguration' => [
+        'Branch' => 'main',
+        'InstallCommand' => 'npm install',
+        'BuildCommand' => 'npm run build',
+        'EntryFile' => 'dist/index.js',
+        'CreateWorkflow' => true,
+    ],
+    ```
+
+!!! question
+
+    If you want to create a workflow file yourself, check out the [BunnyWay Github action deploy script](https://github.com/BunnyWay/actions/tree/main/deploy-script).
 
 #### [Get Edge Script](https://docs.bunny.net/reference/getedgescriptbyidendpoint_getedgescriptbyid)
 

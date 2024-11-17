@@ -42,6 +42,7 @@ use ToshY\BunnyNet\Model\API\Base\DNSZone\RecheckDNSConfiguration;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
+use ToshY\BunnyNet\Model\API\Base\Integration\GetGitHubIntegrations;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
@@ -593,6 +594,21 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
+    public function getGitHubIntegrations(): BunnyClientResponseInterface
+    {
+        $endpoint = new GetGitHubIntegrations();
+
+        return $this->client->request(
+            endpoint: $endpoint,
         );
     }
 
