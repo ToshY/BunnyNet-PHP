@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class AddComputeScript implements EndpointInterface, EndpointBodyInterface
+class UpdateEdgeScript implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class AddComputeScript implements EndpointInterface, EndpointBodyInterface
 
     public function getPath(): string
     {
-        return 'compute/script';
+        return 'compute/script/%d';
     }
 
     public function getHeaders(): array
@@ -34,7 +34,7 @@ class AddComputeScript implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'RechargeAmount', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ScriptType', type: Type::INT_TYPE, required: true),
         ];
     }

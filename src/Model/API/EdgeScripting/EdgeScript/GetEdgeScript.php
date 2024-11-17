@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class DeleteComputeScript implements EndpointInterface
+class GetEdgeScript implements EndpointInterface
 {
     public function getMethod(): Method
     {
-        return Method::DELETE;
+        return Method::GET;
     }
 
     public function getPath(): string

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
 use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class ListComputeScripts implements EndpointInterface, EndpointQueryInterface
+class GetEdgeScriptStatistics implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class ListComputeScripts implements EndpointInterface, EndpointQueryInterface
 
     public function getPath(): string
     {
-        return 'compute/script';
+        return 'compute/script/%d/statistics';
     }
 
     public function getHeaders(): array
@@ -33,8 +33,10 @@ class ListComputeScripts implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'page', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'dateFrom', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'dateTo', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'loadLatest', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'hourly', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

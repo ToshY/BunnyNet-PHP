@@ -2,28 +2,25 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript;
 
-use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class GetComputeScript implements EndpointInterface
+class RotateDeploymentKey implements EndpointInterface
 {
     public function getMethod(): Method
     {
-        return Method::GET;
+        return Method::POST;
     }
 
     public function getPath(): string
     {
-        return 'compute/script/%d';
+        return 'compute/script/%d/deploymentKey/rotate';
     }
 
     public function getHeaders(): array
     {
-        return [
-            Header::ACCEPT_JSON,
-        ];
+        return [];
     }
 }
