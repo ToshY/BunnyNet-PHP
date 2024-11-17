@@ -218,47 +218,6 @@ $baseApi->applyPromoCode(
 );
 ```
 
-### Compute
-
-
-#### [List Compute Script Releases](https://docs.bunny.net/reference/computeedgescriptpublic_getreleases)
-
-```php
-$baseApi->listComputeScriptReleases(
-    id: 1,
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
-);
-```
-
-#### [Publish Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_publish)
-
-```php
-$baseApi->publishComputeScript(
-    id: 1,
-    query: [
-        'uuid' => '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
-    ],
-    body: [
-        'Note' => 'Initial release',
-    ],
-);
-```
-
-#### [Publish Compute Script (by path parameter)](https://docs.bunny.net/reference/computeedgescriptpublic_publish2)
-
-```php
-$baseApi->publishComputeScriptByPathParameter(
-    id: 1,
-    uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
-    body: [
-        'Note' => 'Initial release',
-    ],
-);
-```
-
 ### Support
 
 #### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
