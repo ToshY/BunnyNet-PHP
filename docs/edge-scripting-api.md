@@ -267,6 +267,51 @@ $edgeScriptingApi->deleteSecret(
 );
 ```
 
+### Release
+
+#### [Get Releases](https://docs.bunny.net/reference/getedgescriptreleaseendpoint_getreleases)
+
+```php
+$edgeScriptingApi->getReleases(
+    id: 1,
+    query: [
+        'page' => 1,
+        'perPage' => 1000,
+    ],
+);
+```
+
+#### [Get Active Release](https://docs.bunny.net/reference/getedgescriptactivereleaseendpoint_getcurrentlyactivereleaseendpoint)
+
+```php
+$edgeScriptingApi->getActiveRelease(
+    id: 1,
+);
+```
+
+#### [Publish Release](https://docs.bunny.net/reference/publishedgescriptreleaseendpoint_publish)
+
+```php
+$edgeScriptingApi->publishRelease(
+    id: 1,
+    body: [
+        'Note' => 'Initial release',
+    ],
+);
+```
+
+#### [Publish Release (by path parameter)](https://docs.bunny.net/reference/publishedgescriptreleaseendpoint_publish2)
+
+```php
+$edgeScriptingApi->publishReleaseByUuid(
+    id: 1,
+    uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
+    body: [
+        'Note' => 'Initial release',
+    ],
+);
+```
+
 ## Reference
 
 * [Edge Scripting API](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)

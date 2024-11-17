@@ -22,6 +22,10 @@ use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\RotateDeploymentKey;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\UpdateEdgeScript;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\GetCode;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\SetCode;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Release\GetActiveReleases;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Release\GetReleases;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Release\PublishRelease;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Release\PublishReleaseByPathParameter;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\AddSecret;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\DeleteSecret;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\ListSecrets;
@@ -479,6 +483,103 @@ class EdgeScriptingAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id, $secretId],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getActiveRelease(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new GetActiveReleases();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getReleases(
+        int $id,
+        array $query = [],
+    ): BunnyClientResponseInterface {
+        $endpoint = new GetReleases();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function publishRelease(
+        int $id,
+        array $body = [],
+    ): BunnyClientResponseInterface {
+        $endpoint = new PublishRelease();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param string $uuid
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function publishReleaseByUuid(
+        int $id,
+        string $uuid,
+        array $body = [],
+    ): BunnyClientResponseInterface {
+        $endpoint = new PublishReleaseByPathParameter();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $uuid],
             body: BodyContentHelper::getBody($body),
         );
     }

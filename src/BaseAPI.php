@@ -26,9 +26,6 @@ use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
 use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScriptReleases;
-use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScriptByPathParameter;
 use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
@@ -48,7 +45,6 @@ use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
-use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
@@ -68,6 +64,7 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
+use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
@@ -469,90 +466,6 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             query: $query,
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function listComputeScriptReleases(
-        int $id,
-        array $query = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new ListComputeScriptReleases();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            query: $query,
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function publishComputeScript(
-        int $id,
-        array $query,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new PublishComputeScript();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            query: $query,
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param string $uuid
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function publishComputeScriptByPathParameter(
-        int $id,
-        string $uuid,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new PublishComputeScriptByPathParameter();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $uuid],
-            body: BodyContentHelper::getBody($body),
         );
     }
 
