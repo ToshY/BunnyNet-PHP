@@ -77,6 +77,7 @@ tasks:
 
         # Symlink hooks
         for hook in $(ls "$APP_HOOKS_DIR"); do
+          chmod +x "$APP_HOOKS_DIR/$hook"
           ln -sf "$APP_HOOKS_DIR/$hook" "$GIT_HOOKS_DIR/$hook"
         done
 
