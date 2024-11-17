@@ -96,10 +96,21 @@ $edgeScriptingApi->addEdgeScript(
 !!! note
 
     - The key `ScriptType` has the following possible values:
-        - `0` = DNS (DNS scripts)
         - `1` = Standalone (Standalone scripts are ideal for a wide range of applications, such as building RESTful APIs, delivering UI applications, and processing data at the edge.)
         - `2` = Middleware (Middleware scripts common use cases include user authentication, error handling, logging, security enhancements, A/B testing, HTML manipulation, and more.)
 
+!!! info
+
+    The Edge Scripting API can also be used for creating DNS scripts.
+   
+    ```php
+    $edgeScriptingApi->addEdgeScript(
+        body: [
+            'Name' => 'DNS Script',
+            'ScriptType' => 0,
+        ],
+    );
+    ```
 
 #### [Get Edge Script](https://docs.bunny.net/reference/getedgescriptbyidendpoint_getedgescriptbyid)
 
