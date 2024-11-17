@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Code;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class GetComputeScriptCode implements EndpointInterface
+class GetCode implements EndpointInterface
 {
     public function getMethod(): Method
     {

@@ -31,14 +31,12 @@ use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScript;
 use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptCode;
 use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScriptReleases;
 use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScripts;
 use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScript;
 use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScriptByPathParameter;
 use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptCode;
 use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
@@ -582,49 +580,6 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function getComputeScriptCode(int $id): BunnyClientResponseInterface
-    {
-        $endpoint = new GetComputeScriptCode();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     * @param array<string,mixed> $body
-     */
-    public function updateComputeScriptCode(
-        int $id,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new UpdateComputeScriptCode();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            body: BodyContentHelper::getBody($body),
         );
     }
 

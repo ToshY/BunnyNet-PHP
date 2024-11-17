@@ -6,6 +6,7 @@
   <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseAPI.php"/>
   <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseAPI.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseAPI.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/EdgeScriptingAPI.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/EdgeStorageAPI.php"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/AddPullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/UpdatePullZone.php" method="getBody"/>

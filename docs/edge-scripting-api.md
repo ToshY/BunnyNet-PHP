@@ -26,6 +26,27 @@ $edgeScriptingApi = new EdgeScriptingAPI(
 
 ## Usage
 
+### Code
+
+#### [Get Code](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)
+
+```php
+$edgeScriptingApi->getCode(
+    id: 1,
+);
+```
+
+#### [Set Code](https://docs.bunny.net/reference/uploadedgescriptcodeendpoint_setcode)
+
+```php
+$edgeScriptingApi->setCode(
+    id: 1,
+    body: [
+        'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
+    ],
+);
+```
+
 ## Reference
 
 * [Edge Scripting API](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)
