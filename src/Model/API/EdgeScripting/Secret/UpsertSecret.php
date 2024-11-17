@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\EdgeScripting\Variable;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Secret;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class UpsertVariable implements EndpointInterface, EndpointBodyInterface
+class UpsertSecret implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class UpsertVariable implements EndpointInterface, EndpointBodyInterface
 
     public function getPath(): string
     {
-        return 'compute/script/%d/variables';
+        return 'compute/script/%d/secrets';
     }
 
     public function getHeaders(): array
@@ -35,8 +35,7 @@ class UpsertVariable implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'DefaultValue', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Secret', type: Type::STRING_TYPE),
         ];
     }
 }

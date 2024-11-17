@@ -212,6 +212,61 @@ $edgeScriptingApi->deleteVariable(
 );
 ```
 
+### Secret
+
+#### [List Secrets](https://docs.bunny.net/reference/listedgescriptsecretsendpoint_listedgescriptsecrets)
+
+```php
+$edgeScriptingApi->listSecrets(
+    id: 1,
+);
+```
+
+#### [Add Secret](https://docs.bunny.net/reference/addedgescriptsecretendpoint_addedgescriptsecret)
+
+```php
+$edgeScriptingApi->addSecret(
+    id: 1,
+    body: [
+        'Name' => 'VerySecretKey',
+        'Secret' => 'V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChEbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXk=',
+    ],
+);
+```
+
+#### [Update Secret](https://docs.bunny.net/reference/updateedgescriptsecretendpoint_updateedgescriptsecret)
+
+```php
+$edgeScriptingApi->updateSecret(
+    id: 1,
+    secretId: 2,
+    body: [
+        'Secret' => 'TmV2ZXIgZ29ubmEgZ2l2ZSB5b3UgdXAKTmV2ZXIgZ29ubmEgbGV0IHlvdSBkb3duCk5ldmVyIGdvbm5hIHJ1biBhcm91bmQgYW5kIGRlc2VydCB5b3UKTmV2ZXIgZ29ubmEgbWFrZSB5b3UgY3J5Ck5ldmVyIGdvbm5hIHNheSBnb29kYnllCk5ldmVyIGdvbm5hIHRlbGwgYSBsaWUgYW5kIGh1cnQgeW91',
+    ],
+);
+```
+
+#### [Upsert Secret](https://docs.bunny.net/reference/upsertedgescriptsecretendpoint_upsertedgescriptsecret)
+
+```php
+$edgeScriptingApi->upsertSecret(
+    id: 1,
+    body: [
+        'Name' => 'VerySecretKey',
+        'Secret' => 'SSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5k',
+    ],
+);
+```
+
+#### [Delete Secret](https://docs.bunny.net/reference/deleteedgescriptsecretendpoint_deletesecret)
+
+```php
+$edgeScriptingApi->deleteSecret(
+    id: 1,
+    secretId: 2,
+);
+```
+
 ## Reference
 
 * [Edge Scripting API](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)

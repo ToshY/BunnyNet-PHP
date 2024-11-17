@@ -22,6 +22,11 @@ use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\RotateDeploymentKey;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\UpdateEdgeScript;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\GetCode;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\SetCode;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\AddSecret;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\DeleteSecret;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\ListSecrets;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\UpdateSecret;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Secret\UpsertSecret;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\AddVariable;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\DeleteVariable;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\GetVariable;
@@ -199,7 +204,6 @@ class EdgeScriptingAPI
         );
     }
 
-
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
@@ -355,6 +359,126 @@ class EdgeScriptingAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     * @param array<string,mixed> $body
+     */
+    public function addSecret(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new AddSecret();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param int $id
+     * @return BunnyClientResponseInterface
+     */
+    public function listSecrets(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new ListSecrets();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function upsertSecret(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new UpsertSecret();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @param int $secretId
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function deleteSecret(
+        int $id,
+        int $secretId,
+    ): BunnyClientResponseInterface {
+        $endpoint = new DeleteSecret();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $secretId],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param int $secretId
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function updateSecret(
+        int $id,
+        int $secretId,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new UpdateSecret();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $secretId],
             body: BodyContentHelper::getBody($body),
         );
     }
