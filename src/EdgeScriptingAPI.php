@@ -22,6 +22,11 @@ use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\RotateDeploymentKey;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\UpdateEdgeScript;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\GetCode;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Code\SetCode;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\AddVariable;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\DeleteVariable;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\GetVariable;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\UpdateVariable;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\UpsertVariable;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
 use ToshY\BunnyNet\Validator\ParameterValidator;
 
@@ -231,6 +236,126 @@ class EdgeScriptingAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     * @param array<string,mixed> $body
+     */
+    public function addVariable(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new AddVariable();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @param int $variableId
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function deleteVariable(
+        int $id,
+        int $variableId,
+    ): BunnyClientResponseInterface {
+        $endpoint = new DeleteVariable();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $variableId],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @param int $variableId
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function getVariable(
+        int $id,
+        int $variableId,
+    ): BunnyClientResponseInterface {
+        $endpoint = new GetVariable();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $variableId],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param int $variableId
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function updateVariable(
+        int $id,
+        int $variableId,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new UpdateVariable();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id, $variableId],
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param array<string,mixed> $body
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function upsertVariable(
+        int $id,
+        array $body,
+    ): BunnyClientResponseInterface {
+        $endpoint = new UpsertVariable();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+            body: BodyContentHelper::getBody($body),
         );
     }
 }

@@ -220,86 +220,6 @@ $baseApi->applyPromoCode(
 
 ### Compute
 
-#### [List Compute Scripts](https://docs.bunny.net/reference/computeedgescriptpublic_index)
-
-```php
-$baseApi->listComputeScripts(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
-);
-```
-
-#### [Add Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_addscript)
-
-```php
-$baseApi->addComputeScript(
-    body: [
-        'Name' => 'Test',
-        'ScriptType' => 1000,
-    ],
-);
-```
-
-!!! note
-
-    - The key `ScriptType` has the following possible values:
-        - `0` = CDN
-        - `1` = DNS
-
-#### [Get Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_index2)
-
-```php
-$baseApi->getComputeScript(
-    id: 1,
-);
-```
-
-#### [Update Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_update)
-
-```php
-$baseApi->updateComputeScript(
-    id: 1,
-    body: [
-        'Name' => 'Test',
-        'ScriptType' => 1000,
-    ],
-);
-```
-
-!!! note
-
-    - The key `ScriptType` has the following possible values:
-        - `0` = CDN
-        - `1` = DNS
-
-#### [Delete Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_delete)
-
-```php
-$baseApi->deleteComputeScript(
-    id: 1,
-);
-```
-
-#### [Get Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_getcode)
-
-```php
-$baseApi->getComputeScriptCode(
-    id: 1,
-);
-```
-
-#### [Update Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_setcode)
-
-```php
-$baseApi->updateComputeScriptCode(
-    id: 1,
-    body: [
-        'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
-    ],
-);
-```
 
 #### [List Compute Script Releases](https://docs.bunny.net/reference/computeedgescriptpublic_getreleases)
 
@@ -336,50 +256,6 @@ $baseApi->publishComputeScriptByPathParameter(
     body: [
         'Note' => 'Initial release',
     ],
-);
-```
-
-#### [Add Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_addvariable)
-
-```php
-$baseApi->addComputeScriptVariable(
-    id: 1,
-    body: [
-        'Name' => 'New Variable',
-        'Required' => true,
-        'DefaultValue' => 'Hello World',
-    ],
-);
-```
-
-#### [Update Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_updatevariable)
-
-```php
-$baseApi->updateComputeScriptVariable(
-    id: 1,
-    variableId: 2,
-    body: [
-        'DefaultValue' => 'Hello World the Sequel',
-        'Required' => false,
-    ],
-);
-```
-
-#### [Get Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_getvariable)
-
-```php
-$baseApi->getComputeScriptVariable(
-    id: 1,
-    variableId: 2,
-);
-```
-
-#### [Delete Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_deletevariable)
-
-```php
-$baseApi->deleteComputeScriptVariable(
-    id: 1,
-    variableId: 2,
 );
 ```
 

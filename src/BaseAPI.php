@@ -26,13 +26,9 @@ use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
 use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScriptVariable;
-use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScriptVariable;
-use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScriptReleases;
 use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScript;
 use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScriptByPathParameter;
-use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
@@ -557,100 +553,6 @@ class BaseAPI
             endpoint: $endpoint,
             parameters: [$id, $uuid],
             body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     * @param array<string,mixed> $body
-     */
-    public function addComputeScriptVariable(
-        int $id,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new AddComputeScriptVariable();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param int $variableId
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function updateComputeScriptVariable(
-        int $id,
-        int $variableId,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new UpdateComputeScriptVariable();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @param int $variableId
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function getComputeScriptVariable(
-        int $id,
-        int $variableId,
-    ): BunnyClientResponseInterface {
-        $endpoint = new GetComputeScriptVariable();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @param int $variableId
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function deleteComputeScriptVariable(
-        int $id,
-        int $variableId,
-    ): BunnyClientResponseInterface {
-        $endpoint = new DeleteComputeScriptVariable();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
         );
     }
 

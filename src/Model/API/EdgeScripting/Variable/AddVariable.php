@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Variable;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class UpdateComputeScriptVariable implements EndpointInterface, EndpointBodyInterface
+class AddVariable implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class UpdateComputeScriptVariable implements EndpointInterface, EndpointBodyInte
 
     public function getPath(): string
     {
-        return 'compute/script/%d/variables/%d';
+        return 'compute/script/%d/variables/add';
     }
 
     public function getHeaders(): array
@@ -34,8 +34,9 @@ class UpdateComputeScriptVariable implements EndpointInterface, EndpointBodyInte
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'DefaultValue', type: Type::NUMERIC_TYPE),
+            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'DefaultValue', type: Type::STRING_TYPE),
         ];
     }
 }

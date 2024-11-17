@@ -153,6 +153,65 @@ $edgeScriptingApi->deleteEdgeScript(
 );
 ```
 
+### Variable
+
+#### [Get Variable](https://docs.bunny.net/reference/getedgescriptvariableendpoint_getvariable)
+
+```php
+$edgeScriptingApi->getVariable(
+    id: 1,
+    variableId: 2,
+);
+```
+
+#### [Add Variable](https://docs.bunny.net/reference/addedgescriptvariableendpoint_addedgescriptvariable)
+
+```php
+$edgeScriptingApi->addVariable(
+    id: 1,
+    body: [
+        'Name' => 'New Variable',
+        'Required' => true,
+        'DefaultValue' => 'Hello World',
+    ],
+);
+```
+
+#### [Update Variable](https://docs.bunny.net/reference/updateedgescriptvariableendpoint_updatevariable)
+
+```php
+$edgeScriptingApi->updateVariable(
+    id: 1,
+    variableId: 2,
+    body: [
+        'Required' => false,
+        'DefaultValue' => 'Hello World the Sequel',
+    ],
+);
+```
+
+#### [Upsert Variable](https://docs.bunny.net/reference/upsertedgescriptvariableendpoint_upsertedgescriptvariable)
+
+```php
+$edgeScriptingApi->upsertVariable(
+    id: 1,
+    body: [
+        'Name' => 'New Variable',
+        'Required' => true,
+        'DefaultValue' => 'Hello World the Third',
+    ],
+);
+```
+
+#### [Delete Variable](https://docs.bunny.net/reference/deleteedgescriptvariableendpoint_deletevariable)
+
+```php
+$edgeScriptingApi->deleteVariable(
+    id: 1,
+    variableId: 2,
+);
+```
+
 ## Reference
 
 * [Edge Scripting API](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)
