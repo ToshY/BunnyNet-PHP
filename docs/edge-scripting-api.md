@@ -42,7 +42,7 @@ $edgeScriptingApi->getCode(
 $edgeScriptingApi->setCode(
     id: 1,
     body: [
-        'Code' => "import * as BunnySDK from \"https://esm.sh/@bunny.net/edgescript-sdk@0.11.2\";\n\n/**\n * Returns an HTTP response.\n * @param {Request} request - The Fetch API Request object.\n * @return {Response} The HTTP response or string.\n */\nBunnySDK.net.http.serve(async (request: Request): Response | Promise<Response> => {\n  const url = new URL(request.url);\n  return new Response(\"Hello from \" + url.pathname);\n});\n",
+        'Code' => "import * as BunnySDK from \"https://esm.sh/@bunny.net/edgescript-sdk@0.11.2\";\n\n/**\n * Returns an HTTP response.\n * @param {Request} request - The Fetch API Request object.\n * @return {Response} The HTTP response or string.\n */\nBunnySDK.net.http.serve(async (request: Request): Response | Promise<Response> => {\n  const url = new URL(request.url);\n  return new Response(\"Hello again from \" + url.pathname);\n});\n",
     ],
 );
 ```
@@ -68,7 +68,7 @@ $edgeScriptingApi->listEdgeScripts(
 ```php
 $edgeScriptingApi->addEdgeScript(
     body: [
-        'Name' => 'Test Script Modified',
+        'Name' => 'Test Script',
         'Code' => "import * as BunnySDK from \"https://esm.sh/@bunny.net/edgescript-sdk@0.11.2\";\n\n/**\n * Returns an HTTP response.\n * @param {Request} request - The Fetch API Request object.\n * @return {Response} The HTTP response or string.\n */\nBunnySDK.net.http.serve(async (request: Request): Response | Promise<Response> => {\n  const url = new URL(request.url);\n  return new Response(\"Hello from \" + url.pathname);\n});\n",
         'ScriptType' => 1,
         'CreateLinkedPullZone' => true,
@@ -99,7 +99,7 @@ $edgeScriptingApi->addEdgeScript(
         - `1` = Standalone (Standalone scripts are ideal for a wide range of applications, such as building RESTful APIs, delivering UI applications, and processing data at the edge.)
         - `2` = Middleware (Middleware scripts common use cases include user authentication, error handling, logging, security enhancements, A/B testing, HTML manipulation, and more.)
     - The key `RepositorySettings` is not required when creating, editing and deploying on Bunny.net.
-    - The key `DeployConfiguration` is not required when creating a new GitHub repository.
+    - The key `Id` (under `RepositorySettings`) and `DeployConfiguration` are not required when creating a new GitHub repository.
     - The key `IntegrationId` is required when creating and deploying through GitHub. It can be retrieved from the [Get GitHub Integrations](base-api.md#get-github-integrations) endpoint.
 
 !!! info
@@ -199,6 +199,11 @@ $edgeScriptingApi->deleteEdgeScript(
 
 ### Variable
 
+!!! info
+
+    There is no "List Variables" endpoint to retrieve all variables for a specific script. Instead, you can retrieve 
+    this information from the [Get Edge Script](#get-edge-script) endpoint.
+
 #### [Get Variable](https://docs.bunny.net/reference/getedgescriptvariableendpoint_getvariable)
 
 ```php
@@ -214,7 +219,7 @@ $edgeScriptingApi->getVariable(
 $edgeScriptingApi->addVariable(
     id: 1,
     body: [
-        'Name' => 'New Variable',
+        'Name' => 'NEW_VARIABLE',
         'Required' => true,
         'DefaultValue' => 'Hello World',
     ],
@@ -240,7 +245,7 @@ $edgeScriptingApi->updateVariable(
 $edgeScriptingApi->upsertVariable(
     id: 1,
     body: [
-        'Name' => 'New Variable',
+        'Name' => 'NEW_VARIABLE',
         'Required' => true,
         'DefaultValue' => 'Hello World the Third',
     ],
@@ -272,7 +277,7 @@ $edgeScriptingApi->listSecrets(
 $edgeScriptingApi->addSecret(
     id: 1,
     body: [
-        'Name' => 'VerySecretKey',
+        'Name' => 'SECRET_KEY',
         'Secret' => 'V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChEbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXk=',
     ],
 );
@@ -296,7 +301,7 @@ $edgeScriptingApi->updateSecret(
 $edgeScriptingApi->upsertSecret(
     id: 1,
     body: [
-        'Name' => 'VerySecretKey',
+        'Name' => 'SECRET_KEY',
         'Secret' => 'SSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5k',
     ],
 );
@@ -349,12 +354,18 @@ $edgeScriptingApi->publishRelease(
 ```php
 $edgeScriptingApi->publishReleaseByUuid(
     id: 1,
-    uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
+    uuid: 'Ab0CdE1F',
     body: [
         'Note' => 'Initial release',
     ],
 );
 ```
+
+!!! note
+
+    - The key `uuid` denotes an 8 character alphanumeric string (and **not** an ["UUID"](https://datatracker.ietf.org/doc/html/rfc9562)), 
+    which can be retrieved from the [Get Releases](#get-releases) or [Get Active Release](#get-active-release) endpoints. It can also
+    be retrieved from the Bunny dashboard in the "Release ID" column of the deployments.
 
 ## Reference
 

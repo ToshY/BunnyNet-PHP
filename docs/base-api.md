@@ -1087,7 +1087,7 @@ $baseApi->addPullZone(
         - `2` = TopLeft
         - `4` = Center
         - `5` = CenterStretch
-    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
+    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
@@ -1283,7 +1283,7 @@ $baseApi->updatePullZone(
         - `2` = TopLeft
         - `4` = Center
         - `5` = CenterStretch
-    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
+    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
