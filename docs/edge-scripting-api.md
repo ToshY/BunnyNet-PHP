@@ -100,7 +100,7 @@ $edgeScriptingApi->addEdgeScript(
         - `2` = Middleware (Middleware scripts common use cases include user authentication, error handling, logging, security enhancements, A/B testing, HTML manipulation, and more.)
     - The key `RepositorySettings` is not required when creating, editing and deploying on Bunny.net.
     - The key `Id` (under `RepositorySettings`) and `DeployConfiguration` are not required when creating a new GitHub repository.
-    - The key `IntegrationId` is required when creating and deploying through GitHub. It can be retrieved from the [Get GitHub Integrations](base-api.md#get-github-integrations) endpoint.
+    - The key `IntegrationId` is required when creating and deploying through GitHub. It can be retrieved from the [Get GitHub Integration](base-api.md#get-github-integration) endpoint.
 
 !!! info
 
