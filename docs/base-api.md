@@ -321,7 +321,7 @@ $baseApi->listDrmCertificates(
 #### Get GitHub Integrations
 
 ```php
-$baseApi->getGitHubIntegrations();
+$baseApi->getGitHubIntegration();
 ```
 
 !!! warning

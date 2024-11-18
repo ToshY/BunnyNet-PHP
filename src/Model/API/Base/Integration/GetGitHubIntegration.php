@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\EndpointInterface;
 /**
  * @note undocumented
  */
-class GetGitHubIntegrations implements EndpointInterface
+class GetGitHubIntegration implements EndpointInterface
 {
     public function getMethod(): Method
     {
