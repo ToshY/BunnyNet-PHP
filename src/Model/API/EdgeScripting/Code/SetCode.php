@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Code;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class PublishComputeScriptByPathParameter implements EndpointInterface, EndpointBodyInterface
+class SetCode implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class PublishComputeScriptByPathParameter implements EndpointInterface, Endpoint
 
     public function getPath(): string
     {
-        return 'compute/script/%d/publish/%s';
+        return 'compute/script/%d/code';
     }
 
     public function getHeaders(): array
@@ -34,7 +34,7 @@ class PublishComputeScriptByPathParameter implements EndpointInterface, Endpoint
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Note', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Code', type: Type::STRING_TYPE),
         ];
     }
 }

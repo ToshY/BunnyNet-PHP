@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Release;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class GetComputeScriptCode implements EndpointInterface
+class GetActiveReleases implements EndpointInterface
 {
     public function getMethod(): Method
     {
@@ -17,7 +17,7 @@ class GetComputeScriptCode implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'compute/script/%d/code';
+        return 'compute/script/%d/releases/active';
     }
 
     public function getHeaders(): array

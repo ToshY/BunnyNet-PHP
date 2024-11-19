@@ -26,20 +26,6 @@ use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
 use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\AddComputeScriptVariable;
-use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\DeleteComputeScriptVariable;
-use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptCode;
-use ToshY\BunnyNet\Model\API\Base\Compute\GetComputeScriptVariable;
-use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScriptReleases;
-use ToshY\BunnyNet\Model\API\Base\Compute\ListComputeScripts;
-use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\PublishComputeScriptByPathParameter;
-use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScript;
-use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptCode;
-use ToshY\BunnyNet\Model\API\Base\Compute\UpdateComputeScriptVariable;
 use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
@@ -56,10 +42,10 @@ use ToshY\BunnyNet\Model\API\Base\DNSZone\RecheckDNSConfiguration;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
+use ToshY\BunnyNet\Model\API\Base\Integration\GetGitHubIntegration;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
-use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
@@ -79,6 +65,7 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
+use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
@@ -493,329 +480,6 @@ class BaseAPI
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function listComputeScripts(array $query = []): BunnyClientResponseInterface
-    {
-        $endpoint = new ListComputeScripts();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            query: $query,
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param array<string,mixed> $body
-     */
-    public function addComputeScript(array $body): BunnyClientResponseInterface
-    {
-        $endpoint = new AddComputeScript();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function getComputeScript(int $id): BunnyClientResponseInterface
-    {
-        $endpoint = new GetComputeScript();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     * @param array<string,mixed> $body
-     */
-    public function updateComputeScript(int $id, array $body): BunnyClientResponseInterface
-    {
-        $endpoint = new UpdateComputeScript();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function deleteComputeScript(int $id): BunnyClientResponseInterface
-    {
-        $endpoint = new DeleteComputeScript();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function getComputeScriptCode(int $id): BunnyClientResponseInterface
-    {
-        $endpoint = new GetComputeScriptCode();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     * @param array<string,mixed> $body
-     */
-    public function updateComputeScriptCode(
-        int $id,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new UpdateComputeScriptCode();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function listComputeScriptReleases(
-        int $id,
-        array $query = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new ListComputeScriptReleases();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            query: $query,
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function publishComputeScript(
-        int $id,
-        array $query,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new PublishComputeScript();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            query: $query,
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param string $uuid
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function publishComputeScriptByPathParameter(
-        int $id,
-        string $uuid,
-        array $body = [],
-    ): BunnyClientResponseInterface {
-        $endpoint = new PublishComputeScriptByPathParameter();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $uuid],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     * @param array<string,mixed> $body
-     */
-    public function addComputeScriptVariable(
-        int $id,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new AddComputeScriptVariable();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param int $variableId
-     * @param array<string,mixed> $body
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function updateComputeScriptVariable(
-        int $id,
-        int $variableId,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new UpdateComputeScriptVariable();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @param int $variableId
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function getComputeScriptVariable(
-        int $id,
-        int $variableId,
-    ): BunnyClientResponseInterface {
-        $endpoint = new GetComputeScriptVariable();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @param int $variableId
-     * @return BunnyClientResponseInterface
-     * @param int $id
-     */
-    public function deleteComputeScriptVariable(
-        int $id,
-        int $variableId,
-    ): BunnyClientResponseInterface {
-        $endpoint = new DeleteComputeScriptVariable();
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$id, $variableId],
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
-     * @return BunnyClientResponseInterface
-     */
     public function listTickets(array $query = []): BunnyClientResponseInterface
     {
         $endpoint = new ListTickets();
@@ -930,6 +594,21 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
+    public function getGitHubIntegration(): BunnyClientResponseInterface
+    {
+        $endpoint = new GetGitHubIntegration();
+
+        return $this->client->request(
+            endpoint: $endpoint,
         );
     }
 

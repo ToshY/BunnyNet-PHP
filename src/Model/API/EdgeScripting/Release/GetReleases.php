@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\Release;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
 use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class ListComputeScripts implements EndpointInterface, EndpointQueryInterface
+class GetReleases implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class ListComputeScripts implements EndpointInterface, EndpointQueryInterface
 
     public function getPath(): string
     {
-        return 'compute/script';
+        return 'compute/script/%d/releases';
     }
 
     public function getHeaders(): array

@@ -59,6 +59,7 @@ nav:
     - Base: base-api.md
     - Edge Storage: edge-storage-api.md
     - Stream: stream-api.md
+    - Edge Scripting: edge-scripting-api.md
     - Logging: logging-api.md
   - Other:
     - Image Processing: image-processing.md

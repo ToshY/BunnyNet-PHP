@@ -2,22 +2,25 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\Base\Integration;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class DeleteComputeScriptVariable implements EndpointInterface
+/**
+ * @note undocumented
+ */
+class GetGitHubIntegration implements EndpointInterface
 {
     public function getMethod(): Method
     {
-        return Method::DELETE;
+        return Method::GET;
     }
 
     public function getPath(): string
     {
-        return 'compute/script/%d/variables/%d';
+        return 'integration/github';
     }
 
     public function getHeaders(): array

@@ -218,171 +218,6 @@ $baseApi->applyPromoCode(
 );
 ```
 
-### Compute
-
-#### [List Compute Scripts](https://docs.bunny.net/reference/computeedgescriptpublic_index)
-
-```php
-$baseApi->listComputeScripts(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
-);
-```
-
-#### [Add Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_addscript)
-
-```php
-$baseApi->addComputeScript(
-    body: [
-        'Name' => 'Test',
-        'ScriptType' => 1000,
-    ],
-);
-```
-
-!!! note
-
-    - The key `ScriptType` has the following possible values:
-        - `0` = CDN
-        - `1` = DNS
-
-#### [Get Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_index2)
-
-```php
-$baseApi->getComputeScript(
-    id: 1,
-);
-```
-
-#### [Update Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_update)
-
-```php
-$baseApi->updateComputeScript(
-    id: 1,
-    body: [
-        'Name' => 'Test',
-        'ScriptType' => 1000,
-    ],
-);
-```
-
-!!! note
-
-    - The key `ScriptType` has the following possible values:
-        - `0` = CDN
-        - `1` = DNS
-
-#### [Delete Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_delete)
-
-```php
-$baseApi->deleteComputeScript(
-    id: 1,
-);
-```
-
-#### [Get Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_getcode)
-
-```php
-$baseApi->getComputeScriptCode(
-    id: 1,
-);
-```
-
-#### [Update Compute Script Code](https://docs.bunny.net/reference/computeedgescriptpublic_setcode)
-
-```php
-$baseApi->updateComputeScriptCode(
-    id: 1,
-    body: [
-        'Code' => "export default function handleQuery(event) {\n    console.log(\"Hello world!\")\n    return new TxtRecord(\"Hello world!\");\n}",
-    ],
-);
-```
-
-#### [List Compute Script Releases](https://docs.bunny.net/reference/computeedgescriptpublic_getreleases)
-
-```php
-$baseApi->listComputeScriptReleases(
-    id: 1,
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
-);
-```
-
-#### [Publish Compute Script](https://docs.bunny.net/reference/computeedgescriptpublic_publish)
-
-```php
-$baseApi->publishComputeScript(
-    id: 1,
-    query: [
-        'uuid' => '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
-    ],
-    body: [
-        'Note' => 'Initial release',
-    ],
-);
-```
-
-#### [Publish Compute Script (by path parameter)](https://docs.bunny.net/reference/computeedgescriptpublic_publish2)
-
-```php
-$baseApi->publishComputeScriptByPathParameter(
-    id: 1,
-    uuid: '173d4dfc-a8dd-42f5-a55c-cba765c75aa5',
-    body: [
-        'Note' => 'Initial release',
-    ],
-);
-```
-
-#### [Add Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_addvariable)
-
-```php
-$baseApi->addComputeScriptVariable(
-    id: 1,
-    body: [
-        'Name' => 'New Variable',
-        'Required' => true,
-        'DefaultValue' => 'Hello World',
-    ],
-);
-```
-
-#### [Update Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_updatevariable)
-
-```php
-$baseApi->updateComputeScriptVariable(
-    id: 1,
-    variableId: 2,
-    body: [
-        'DefaultValue' => 'Hello World the Sequel',
-        'Required' => false,
-    ],
-);
-```
-
-#### [Get Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_getvariable)
-
-```php
-$baseApi->getComputeScriptVariable(
-    id: 1,
-    variableId: 2,
-);
-```
-
-#### [Delete Compute Script Variable](https://docs.bunny.net/reference/computeedgescriptpublic_deletevariable)
-
-```php
-$baseApi->deleteComputeScriptVariable(
-    id: 1,
-    variableId: 2,
-);
-```
-
 ### Support
 
 #### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
@@ -480,6 +315,33 @@ $baseApi->listDrmCertificates(
     {"Message":"An error has occurred."}
     ```
     A support ticket has been created at bunny.net regarding this issue.
+
+### Integrations
+
+#### Get GitHub Integration
+
+```php
+$baseApi->getGitHubIntegration();
+```
+
+!!! warning
+
+    This endpoint is (currently) undocumented. 
+
+!!! info
+
+    This endpoint returns the following response:
+    ```json
+    {
+      "Accounts": [
+        {
+          "Id": 1,
+          "Name": "MyConnectedGitHubUsername"
+        }
+      ]
+    }
+    ```
+    The `id` can be used as `IntegrationId` for the [Add Edge Script](edge-scripting-api.md#add-edge-script) endpoint.
 
 ### Region
 
@@ -1225,7 +1087,7 @@ $baseApi->addPullZone(
         - `2` = TopLeft
         - `4` = Center
         - `5` = CenterStretch
-    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
+    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
@@ -1421,7 +1283,7 @@ $baseApi->updatePullZone(
         - `2` = TopLeft
         - `4` = Center
         - `5` = CenterStretch
-    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The UI will
+    - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.

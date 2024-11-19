@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\Compute;
+namespace ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
-use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class UpdateComputeScript implements EndpointInterface, EndpointBodyInterface
+class DeleteEdgeScript implements EndpointInterface, EndpointQueryInterface
 {
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::DELETE;
     }
 
     public function getPath(): string
@@ -27,15 +27,13 @@ class UpdateComputeScript implements EndpointInterface, EndpointBodyInterface
     {
         return [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
         ];
     }
 
-    public function getBody(): array
+    public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'ScriptType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'deleteLinkedPullZones', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
