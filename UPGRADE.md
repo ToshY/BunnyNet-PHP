@@ -1,3 +1,53 @@
+## 5.x
+
+This release comes with breaking changes to what was previously known as "Compute scripts". The endpoints for compute scripts
+were historically only publicly visible in the official API specs for a short amount of time after which they became undocumented (exact timeline unknown).
+
+With the [announcement](https://bunny.net/blog/introducing-bunny-edge-scripting-a-better-way-to-build-and-deploy-applications-at-the-edge/) of "Edge Scripting" on November 7th (2024),
+it became apparent (in hindsight) that the new edge scripts are basically compute scripts (with some minor adaptations).
+
+As edge scripts are now part of what is referred as the "Edge Scripting API" (even though it still uses the same domain of `api.bunny.net`),
+this release reflects (signature) changes in the BunnyNet-PHP library that refactors the previously known compute scripts from the `BaseAPI` to edge scripts in the `EdgeScriptingAPI`.
+
+The `4.x` branch will now no longer be maintained.
+
+### ‼️ Breaking changes
+
+The signature changes are displayed in the table below.
+
+| **4.x**                                        | **5.x**                                                                                                                                | **5.x signature notes**   |
+|------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| `BaseAPI::listComputeScripts`                  | [`EdgeScriptingAPI::listEdgeScripts`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#list-edge-scripts)                      |                           |
+| `BaseAPI::addComputeScript`                    | [`EdgeScriptingAPI::addEdgeScript`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#add-edge-script)                          |                           |
+| `BaseAPI::getComputeScript`                    | [`EdgeScriptingAPI::getEdgeScript`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-edge-script)                          |                           |
+| -                                              | [`EdgeScriptingAPI::getEdgeScriptStatistics`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-edge-script-statistics)     |                           |
+| `BaseAPI::updateComputeScript`                 | [`EdgeScriptingAPI::updateEdgeScript`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#update-edge-script)                    |                           |
+| `BaseAPI::deleteComputeScript`                 | [`EdgeScriptingAPI::deleteEdgeScript`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#delete-edge-script)                    | Added `query` argument.   |
+| `BaseAPI::getComputeScriptCode`                | [`EdgeScriptingAPI::getCode`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-code)                                       |                           |
+| `BaseAPI::updateComputeScriptCode`             | [`EdgeScriptingAPI::setCode`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#set-code)                                       |                           |
+| `BaseAPI::listComputeScriptReleases`           | [`EdgeScriptingAPI::getReleases`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-releases)                               |                           |
+| -                                              | [`EdgeScriptingAPI::getActiveRelease`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-active-release)                    |                           |
+| `BaseAPI::publishComputeScript`                | [`EdgeScriptingAPI::publishRelease`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#publish-release)                         | Removed `query` argument. |
+| `BaseAPI::publishComputeScriptByPathParameter` | [`EdgeScriptingAPI::publishReleaseByUuid`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#publish-release-by-path-parameter) |                           |
+| `BaseAPI::getComputeScriptVariable`            | [`EdgeScriptingAPI::getVariable`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#get-variable)                               |                           |
+| `BaseAPI::addComputeScriptVariable`            | [`EdgeScriptingAPI::addVariable`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#add-variable)                               |                           |
+| `BaseAPI::updateComputeScriptVariable`         | [`EdgeScriptingAPI::updateVariable`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#update-variable)                         |                           |
+| -                                              | [`EdgeScriptingAPI::upsertVariable`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#upsert-variable)                         |                           |
+| `BaseAPI::deleteComputeScriptVariable`         | [`EdgeScriptingAPI::deleteVariable`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#delete-variable)                         |                           |
+| -                                              | [`EdgeScriptingAPI::listSecrets`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#list-secrets)                               |                           |
+| -                                              | [`EdgeScriptingAPI::addSecret`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#add-secret)                                   |                           |
+| -                                              | [`EdgeScriptingAPI::updateSecret`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#update-secret)                             |                           |
+| -                                              | [`EdgeScriptingAPI::upsertSecret`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#upsert-secret)                             |                           |
+| -                                              | [`EdgeScriptingAPI::deleteSecret`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#delete-secret)                             |                           |
+
+Further usage examples can be found in the documentation website: [toshy.github.io/BunnyNet-PHP/edge-scripting-api](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/).
+
+### 🚀 Enhancements
+
+| **Endpoint** | **Action** | **Method**                                                                                      | **Notes**                                                                                                                                                             |
+|--------------|------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Base API     | ADD        | [`getGitHubIntegration`](https://toshy.github.io/BunnyNet-PHP/base-api/#get-github-integration) | Retrieves `id` that can be used as `integrationId` for [`EdgeScriptingAPI::addEdgeScript`](https://toshy.github.io/BunnyNet-PHP/edge-scripting-api/#add-edge-script). |
+
 ## 4.x
 
 This release comes with breaking changes to a couple of methods regarding uploading of files. To allow
