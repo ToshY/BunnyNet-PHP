@@ -13,12 +13,11 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\EdgeStorageAPI;
 use ToshY\BunnyNet\Enum\Region;
 
-// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
 );
 
-// Provide the "(Read-Only) Password" available at the "FTP & API Access" section of your specific storage zone.
+// Provide the password of the specific storage zone.
 $edgeStorageApi = new EdgeStorageAPI(
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
     client: $bunnyClient,

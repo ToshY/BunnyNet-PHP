@@ -19,12 +19,11 @@ require 'vendor/autoload.php';
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\LoggingAPI;
 
-// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
 );
 
-// Provide the API key available at the "Account Settings > API" section.
+// Provide the account API key.
 $loggingApi = new LoggingAPI(
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
     client: $bunnyClient,

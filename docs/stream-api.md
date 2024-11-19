@@ -12,12 +12,11 @@ require 'vendor/autoload.php';
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\StreamAPI;
 
-// Create a BunnyClient using any HTTP client implementing "Psr\Http\Client\ClientInterface".
 $bunnyClient = new BunnyClient(
     client: new \Symfony\Component\HttpClient\Psr18Client()
 );
 
-// Provide the "API key" available at the "API > API Key" section of your specific video library.
+// Provide the specific video library API key.
 $streamApi = new StreamAPI(
     apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc',
     client: $bunnyClient
