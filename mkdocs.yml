@@ -41,10 +41,10 @@ markdown_extensions:
   - pymdownx.highlight:
       use_pygments: false
 extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js
   - javascripts/highlight.js
 extra_css:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/tokyo-night-dark.min.css
   - stylesheets/extra.css
 extra:
   generator: false
