@@ -34,7 +34,7 @@ class SetForceSSL implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Hostname', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'ForceSSL', type: Type::BOOLEAN_TYPE, required: true),
         ];
     }
