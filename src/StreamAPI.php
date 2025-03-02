@@ -19,6 +19,8 @@ use ToshY\BunnyNet\Model\API\Stream\ManageCollections\GetCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\UpdateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddCaption;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddOutputCodecToVideo;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteUnconfiguredResolutions;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\CreateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteCaption;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteVideo;
@@ -26,6 +28,7 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoPlayData;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoResolutionsInfo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
@@ -402,6 +405,28 @@ class StreamAPI
     }
 
     /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param int $outputCodecId
+     * @return BunnyClientResponseInterface
+     */
+    public function addOutputCodecToVideo(
+        int $libraryId,
+        string $videoId,
+        int $outputCodecId,
+    ): BunnyClientResponseInterface {
+        $endpoint = new AddOutputCodecToVideo();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId, $outputCodecId],
+        );
+    }
+
+    /**
      * @throws BunnyClientResponseException
      * @throws ClientExceptionInterface
      * @throws InvalidTypeForKeyValueException
@@ -609,6 +634,54 @@ class StreamAPI
         array $query,
     ): BunnyClientResponseInterface {
         $endpoint = new TranscribeVideo();
+
+        ParameterValidator::validate($query, $endpoint->getQuery());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+            query: $query,
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @param int $libraryId
+     * @param string $videoId
+     * @return BunnyClientResponseInterface
+     */
+    public function videoResolutionsInfo(
+        int $libraryId,
+        string $videoId,
+    ): BunnyClientResponseInterface {
+        $endpoint = new GetVideoResolutionsInfo();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$libraryId, $videoId],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @param int $libraryId
+     * @param string $videoId
+     * @param array<string,mixed> $query
+     * @return BunnyClientResponseInterface
+     */
+    public function cleanupUnconfiguredResolutions(
+        int $libraryId,
+        string $videoId,
+        array $query,
+    ): BunnyClientResponseInterface {
+        $endpoint = new DeleteUnconfiguredResolutions();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 

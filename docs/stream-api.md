@@ -255,6 +255,24 @@ $streamApi->reEncodeVideo(
 );
 ```
 
+#### [Add output codec to video](https://docs.bunny.net/reference/video_reencodeusingcodec)
+
+```php
+$streamApi->addOutputCodecToVideo(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    outputCodecId: 0,
+);
+```
+
+!!! note
+
+    - The argument `outputCodecId` has the following possible values:
+        - `0` = x264
+        - `1` = vp9
+        - `2` = hevc
+        - `3` = av1
+
 #### [Repackage Video](https://docs.bunny.net/reference/video_repackage)
 
 ```php
@@ -411,6 +429,39 @@ $streamApi->transcribeVideo(
 
     - The `language` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
     - Once a video has transcribed you need to set `force` to `true` in order to force a new transcription to be added.
+
+#### [Video resolutions info](https://docs.bunny.net/reference/video_getvideoresolutions)
+
+```php
+$streamApi->videoResolutionsInfo(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+);
+```
+
+#### [Cleanup unconfigured resolutions](https://docs.bunny.net/reference/video_deleteresolutions)
+
+```php
+$streamApi->cleanupUnconfiguredResolutions(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    query: [
+        'resolutionsToDelete' => '240p,360p',
+        'deleteNonConfiguredResolutions' => false,
+        'deleteOriginal' => false,
+        'deleteMp4Files' => false,
+        'dryRun' => false,
+    ],
+);
+```
+
+!!! note
+
+    - The key `resolutionsToDelete` consists of comma separated resolutions.
+
+!!! tip
+
+    Use the [Video Resolutions Info](#video-resolutions-info) endpoint to retrieve the resolutions for the video.
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
