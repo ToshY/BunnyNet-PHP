@@ -261,7 +261,7 @@ $streamApi->reEncodeVideo(
 $streamApi->addOutputCodecToVideo(
     libraryId: 1,
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    outputCodecId: 0,
+    outputCodecId: 2,
 );
 ```
 
@@ -269,9 +269,13 @@ $streamApi->addOutputCodecToVideo(
 
     - The argument `outputCodecId` has the following possible values:
         - `0` = x264
-        - `1` = vp9
-        - `2` = hevc
-        - `3` = av1
+        - `1` = vp9 (premium)
+        - `2` = hevc (premium)
+        - `3` = av1 (premium)
+
+!!! warning
+
+    This endpoint will return a `400` status code if premium encoding is not enabled (even if the `outputCodecId` value `0` is given).
 
 #### [Repackage Video](https://docs.bunny.net/reference/video_repackage)
 
@@ -462,6 +466,10 @@ $streamApi->cleanupUnconfiguredResolutions(
 !!! tip
 
     Use the [Video Resolutions Info](#video-resolutions-info) endpoint to retrieve the resolutions for the video.
+
+!!! warning
+
+    This endpoint will return a `400` status code if all available resolutions for the video are passed to `resolutionsToDelete`, as there must be at least one resolution available after cleanup.
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
