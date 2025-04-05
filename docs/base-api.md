@@ -663,6 +663,22 @@ $baseApi->deleteDnsZone(
 );
 ```
 
+#### [Enable DNSSEC on DNS Zone](https://docs.bunny.net/reference/managednszonednssecendpoint_enablednssecdnszone)
+
+```php
+$baseApi->enableDnssecOnDnsZone(
+    id: 1,
+);
+```
+
+#### [Disable DNSSEC on DNS Zone](https://docs.bunny.net/reference/managednszonednssecendpoint_disablednssecdnszone)
+
+```php
+$baseApi->disableDnssecOnDnsZone(
+    id: 1,
+);
+```
+
 #### [Export DNS Zone](https://docs.bunny.net/reference/dnszonepublic_export)
 
 ```php
