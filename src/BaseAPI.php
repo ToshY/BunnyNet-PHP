@@ -32,7 +32,9 @@ use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\CheckDNSZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSRecord;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSZone;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\DisableDNSSECOnDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\DismissDNSConfigurationNotice;
+use ToshY\BunnyNet\Model\API\Base\DNSZone\EnableDNSSECOnDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\ExportDNSRecords;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZone;
 use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZoneQueryStatistics;
@@ -1029,6 +1031,40 @@ class BaseAPI
     public function deleteDnsZone(int $id): BunnyClientResponseInterface
     {
         $endpoint = new DeleteDNSZone();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function enableDnssecOnDnsZone(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new EnableDNSSECOnDNSZone();
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     * @param int $id
+     */
+    public function disableDnssecOnDnsZone(int $id): BunnyClientResponseInterface
+    {
+        $endpoint = new DisableDNSSECOnDNSZone();
 
         return $this->client->request(
             endpoint: $endpoint,
