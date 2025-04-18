@@ -34,7 +34,7 @@ class CreateRateLimit implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'ruleName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ruleDescription', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ruleConfiguration', type: Type::ARRAY_TYPE, children: [

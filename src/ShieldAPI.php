@@ -420,7 +420,7 @@ class ShieldAPI
      */
     public function listDdosEnums(): BunnyClientResponseInterface
     {
-        $endpoint = new ListDDOsEnums();
+        $endpoint = new ListDDoSEnums();
 
         return $this->client->request(
             endpoint: $endpoint,
