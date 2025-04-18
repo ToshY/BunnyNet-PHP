@@ -33,6 +33,7 @@ use ToshY\BunnyNet\Model\API\Shield\WAF\UpdateCustomWAFRule;
 use ToshY\BunnyNet\Model\API\Shield\WAF\UpdateCustomWAFRuleByPatch;
 use ToshY\BunnyNet\Model\API\Shield\Zone\CreateShieldZone;
 use ToshY\BunnyNet\Model\API\Shield\Zone\GetShieldZone;
+use ToshY\BunnyNet\Model\API\Shield\Zone\GetShieldZoneByPullZoneId;
 use ToshY\BunnyNet\Model\API\Shield\Zone\ListShieldZones;
 use ToshY\BunnyNet\Model\API\Shield\Zone\UpdateShieldZone;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
@@ -101,7 +102,7 @@ class ShieldAPI
      */
     public function getShieldZoneByPullZoneId(int $pullZoneId): BunnyClientResponseInterface
     {
-        $endpoint = new GetShieldZone();
+        $endpoint = new GetShieldZoneByPullZoneId();
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -238,17 +239,21 @@ class ShieldAPI
      * @throws Exception\InvalidTypeForKeyValueException
      * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\ParameterIsRequiredException
+     * @param int $shieldZoneId
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
-    public function listCustomWafRules(array $query = []): BunnyClientResponseInterface
-    {
+    public function listCustomWafRules(
+        int $shieldZoneId,
+        array $query = [],
+    ): BunnyClientResponseInterface {
         $endpoint = new ListCustomWAFRules();
 
         ParameterValidator::validate($query, $endpoint->getQuery());
 
         return $this->client->request(
             endpoint: $endpoint,
+            parameters: [$shieldZoneId],
             query: $query,
         );
     }
