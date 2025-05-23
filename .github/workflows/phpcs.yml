@@ -17,6 +17,7 @@ jobs:
           - '8.1'
           - '8.2'
           - '8.3'
+          - '8.4'
 
     steps:
       - name: Checkout
@@ -31,4 +32,6 @@ jobs:
         uses: ramsey/composer-install@v3
 
       - name: PHP CS Fixer
-        run: PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer fix --dry-run -v --diff
+        run: vendor/bin/php-cs-fixer fix --dry-run -v --diff
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.php-versions == '8.4' && '1' || '' }}

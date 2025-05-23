@@ -24,7 +24,7 @@ class ParameterValidator
     public static function validate(
         array $values,
         array $template,
-        string $parentKey = null,
+        ?string $parentKey = null,
     ): void {
         foreach ($template as $abstractParameterObject) {
             $abstractParameterObjectName = $abstractParameterObject->getName();
