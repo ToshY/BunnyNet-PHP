@@ -41,55 +41,56 @@ class ParameterValidator
                 }
             }
 
-            $parameterNameInValuesKey = in_array($abstractParameterObjectName, array_keys($values), true);
-            $parameterIsRequired = $abstractParameterObject->isRequired();
+            if (array_is_list($values) === true && $abstractParameterObjectName !== null) {
+                foreach ($values as $value) {
+                    [
+                        $parameterNameInValuesKey,
+                        $parameterIsRequired,
+                        $isValueOptionalAndNotInOptions,
+                    ] = self::isValueOptionalAndNotInOptions(
+                        $abstractParameterObjectName,
+                        $value,
+                        $abstractParameterObject,
+                    );
 
-            if (
-                false === $parameterIsRequired
-                && false === $parameterNameInValuesKey
-            ) {
+                    if ($isValueOptionalAndNotInOptions === true) {
+                        continue;
+                    }
+
+                    self::validateParameterValue(
+                        $parameterIsRequired,
+                        $parameterNameInValuesKey,
+                        $abstractParameterObjectName,
+                        $value[$abstractParameterObjectName],
+                        $abstractParameterObjectType,
+                        $abstractParameterObjectChildren,
+                    );
+                }
+
                 continue;
             }
 
-            if (
-                true === $parameterIsRequired
-                && false === $parameterNameInValuesKey
-            ) {
-                throw ParameterIsRequiredException::withKey(
-                    key: $abstractParameterObjectName,
-                );
+            [
+                $parameterNameInValuesKey,
+                $parameterIsRequired,
+                $isValueOptionalAndNotInOptions,
+            ] = self::isValueOptionalAndNotInOptions(
+                $abstractParameterObjectName,
+                $values,
+                $abstractParameterObject,
+            );
+
+            if ($isValueOptionalAndNotInOptions === true) {
+                continue;
             }
 
-            $parameterValue = $values[$abstractParameterObjectName];
-
-            if (
-                Type::ARRAY_TYPE === $abstractParameterObjectType
-                && null !== $abstractParameterObjectChildren
-            ) {
-                foreach ($abstractParameterObjectChildren as $childAbstractParameterObject) {
-                    if (
-                        null !== $childAbstractParameterObject->getName()
-                        && false === is_array($parameterValue)
-                    ) {
-                        self::checkTypeForKeyValue(
-                            value: $parameterValue,
-                            parameterType: $abstractParameterObjectType,
-                            parameterName: $abstractParameterObjectName,
-                        );
-                    }
-
-                    self::validate(
-                        $parameterValue,
-                        [$childAbstractParameterObject],
-                        $abstractParameterObjectName,
-                    );
-                }
-            }
-
-            self::checkTypeForKeyValue(
-                value: $parameterValue,
-                parameterType: $abstractParameterObjectType,
-                parameterName: $abstractParameterObjectName,
+            self::validateParameterValue(
+                $parameterIsRequired,
+                $parameterNameInValuesKey,
+                $abstractParameterObjectName,
+                $values[$abstractParameterObjectName],
+                $abstractParameterObjectType,
+                $abstractParameterObjectChildren,
             );
         }
     }
@@ -108,10 +109,34 @@ class ParameterValidator
         }
 
         throw InvalidTypeForKeyValueException::withKeyValueType(
-            key:  $parameterName,
+            key: $parameterName,
             expectedValueType: $parameterType,
             actualValue: $value,
         );
+    }
+
+    /**
+     * @param string|null $abstractParameterObjectName
+     * @param mixed $value
+     * @param AbstractParameter $abstractParameterObject
+     * @return bool[]
+     */
+    private static function isValueOptionalAndNotInOptions(
+        string|null $abstractParameterObjectName,
+        mixed $value,
+        AbstractParameter $abstractParameterObject,
+    ): array {
+        $parameterNameInValuesKey = in_array($abstractParameterObjectName, array_keys($value), true);
+        $parameterIsRequired = $abstractParameterObject->isRequired();
+
+        if (
+            false === $parameterIsRequired
+            && false === $parameterNameInValuesKey
+        ) {
+            return [$parameterNameInValuesKey, $parameterIsRequired, true];
+        }
+
+        return [$parameterNameInValuesKey, $parameterIsRequired, false];
     }
 
     /**
@@ -131,6 +156,68 @@ class ParameterValidator
             parentKey: $parentKey,
             expectedValueType: $parameterType,
             actualValue: $value,
+        );
+    }
+
+    /**
+     * @throws InvalidTypeForKeyValueException
+     * @throws InvalidTypeForListValueException
+     * @throws ParameterIsRequiredException
+     * @param bool $parameterIsRequired
+     * @param bool $parameterNameInValuesKey
+     * @param string|null $abstractParameterObjectName
+     * @param mixed $values
+     * @param Type $abstractParameterObjectType
+     * @param array<AbstractParameter>|null $abstractParameterObjectChildren
+     * @return void
+     */
+    private static function validateParameterValue(
+        bool $parameterIsRequired,
+        bool $parameterNameInValuesKey,
+        ?string $abstractParameterObjectName,
+        mixed $values,
+        Type $abstractParameterObjectType,
+        ?array $abstractParameterObjectChildren,
+    ): void {
+        if (
+            true === $parameterIsRequired
+            && false === $parameterNameInValuesKey
+        ) {
+            throw ParameterIsRequiredException::withKey(
+                key: $abstractParameterObjectName,
+            );
+        }
+
+        $parameterValue = $values;
+
+        if (
+            Type::ARRAY_TYPE === $abstractParameterObjectType
+            && null !== $abstractParameterObjectChildren
+        ) {
+            foreach ($abstractParameterObjectChildren as $childAbstractParameterObject) {
+                if (
+                    null !== $childAbstractParameterObject->getName()
+                    && false === is_array($parameterValue)
+                ) {
+                    self::checkTypeForKeyValue(
+                        value: $parameterValue,
+                        parameterType: $abstractParameterObjectType,
+                        parameterName: $abstractParameterObjectName,
+                    );
+                }
+
+                self::validate(
+                    $parameterValue,
+                    [$childAbstractParameterObject],
+                    $abstractParameterObjectName,
+                );
+            }
+        }
+
+        self::checkTypeForKeyValue(
+            value: $parameterValue,
+            parameterType: $abstractParameterObjectType,
+            parameterName: $abstractParameterObjectName,
         );
     }
 }

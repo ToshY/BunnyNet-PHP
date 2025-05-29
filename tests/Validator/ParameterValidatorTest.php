@@ -245,6 +245,48 @@ class ParameterValidatorTest extends TestCase
         );
     }
 
+    /**
+     * @note Tests "ARRAY_TYPE" that are objects; objects can be distinguished from arrays by checking the direct child.
+     * If the direct child has a valid name (not `null`), then the parent is an object
+     * If the direct child has a `null` name, then the parent is an array.
+     *
+     * Example is `Triggers` with `Type` at `ListEdgeScripts`.
+     */
+    public function testNestedParametersObjectArrayOptionalParentRequiredChild(): void
+    {
+        $this->expectNotToPerformAssertions();
+
+        $template = [
+            new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter2', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Parameter3', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'NestedParameter1', type: Type::INT_TYPE, required: true),
+                new AbstractParameter(name: 'NestedParameter2', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                ]),
+            ]),
+        ];
+
+        $values = [
+            'Parameter1' => 'test1',
+            'Parameter2' => 'test2',
+            'Parameter3' => [
+                [
+                    'NestedParameter1' => 1,
+                    'NestedParameter2' => [
+                        'test3',
+                        'test4',
+                    ],
+                ],
+            ],
+        ];
+
+        ParameterValidator::validate(
+            $values,
+            $template,
+        );
+    }
+
     public function testNestedParametersCommaSeparatedValuesOnParemter2Child(): void
     {
         $this->expectNotToPerformAssertions();
