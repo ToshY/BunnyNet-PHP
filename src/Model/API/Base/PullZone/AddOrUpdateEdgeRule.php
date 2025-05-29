@@ -38,11 +38,11 @@ class AddOrUpdateEdgeRule implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'ActionParameter1', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ActionParameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Triggers', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'Type', type: Type::INT_TYPE, required: true),
                 new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::STRING_TYPE),
                 ]),
-                new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE, required: true),
                 new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE, required: true),
