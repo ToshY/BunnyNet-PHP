@@ -23,6 +23,13 @@ class DownloadZip implements EndpointInterface, EndpointBodyInterface
         return '%s/';
     }
 
+    public function getHeaders(): array
+    {
+        return [
+            Header::CONTENT_TYPE_JSON,
+        ];
+    }
+
     public function getBody(): array
     {
         return [
@@ -30,13 +37,6 @@ class DownloadZip implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'Paths', type: Type::ARRAY_TYPE, required: true, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
-        ];
-    }
-
-    public function getHeaders(): array
-    {
-        return [
-            Header::CONTENT_TYPE_JSON,
         ];
     }
 }
