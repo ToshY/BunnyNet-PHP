@@ -28,6 +28,7 @@ use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\MimeType;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Generator\Helper\ModelBodyMethodHelper;
+use ToshY\BunnyNet\Generator\Helper\ModelMethodHelper;
 use ToshY\BunnyNet\Generator\Utils\ArrayUtils;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
@@ -88,6 +89,9 @@ class ModelGenerator
 
     /**
      * @throws ReflectionException
+     * @throws TypeErrorException
+     * @throws UnresolvableReferenceException
+     * @return void
      */
     public function generate(): void
     {
@@ -165,6 +169,10 @@ class ModelGenerator
         return $staticProperty->getValue();
     }
 
+    /**
+     * @throws UnresolvableReferenceException
+     * @throws TypeErrorException
+     */
     private function generateModel(
         string $path,
         string $httpMethod,
@@ -175,16 +183,12 @@ class ModelGenerator
     ): void {
         $existingClassHeaders = $this->getExistingModelHeaders($endpointClass);
 
-        $newSpecsPathParameters = $this->processParameters(
+        $newSpecsPathParameters = $this->processParametersForPath(
             operation: $operation,
-            type: 'path',
-            processType: [$this, 'processParametersForPath'],
         );
 
-        $newSpecsQueryParameters = $this->processParameters(
+        $newSpecsQueryParameters = $this->processParametersForQuery(
             operation: $operation,
-            type: 'query',
-            processType: [$this, 'processParametersForQuery'],
         );
 
         $bodyParameters = [];
@@ -221,6 +225,7 @@ class ModelGenerator
     /**
      * @throws TypeErrorException
      * @throws UnresolvableReferenceException
+     * @throws Exception
      * @param Operation $operation
      * @return array<\ToshY\BunnyNet\Generator\Model\AbstractParameter>
      */
@@ -273,7 +278,7 @@ class ModelGenerator
      * @param string $path
      * @param array<array<string,string>> $existingClassHeaders
      * @param array<string,mixed> $pathParameters
-     * @param array<string,mixed> $queryParameters
+     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $queryParameters
      * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $bodyParameters
      * @param Operation $operation
      * @return string
@@ -478,7 +483,7 @@ class ModelGenerator
 
     /**
      * @param ClassType $class
-     * @param array<string,mixed> $parameters
+     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $parameters
      * @return void
      */
     private function addQuery(ClassType $class, array $parameters): void
@@ -487,19 +492,9 @@ class ModelGenerator
         $method->setReturnType('array');
         $method->setPublic();
 
-        $queryCode = "return [\n";
-        foreach ($parameters as $param) {
-            $name = $param['name'];
-            $type = $param['type'] ?? 'string';
-            $phpType = $this->mapJsonTypeToPhpType($type);
-            $isRequired = (bool)($param['required'] ?? false);
-            $required = $isRequired ? ', required: true' : '';
+        $queryCode = ModelMethodHelper::generateAbstractParameterArrayCode($parameters);
 
-            $queryCode .= "    new AbstractParameter(name: '$name', type: Type::$phpType$required),\n";
-        }
-        $queryCode .= "];";
-
-        $method->setBody($queryCode);
+        $method->setBody('return [' . "\n" . PrinterUtils::indentCode($queryCode) . "\n" . '];');
     }
 
     /**
@@ -513,20 +508,9 @@ class ModelGenerator
         $method->setReturnType('array');
         $method->setPublic();
 
-        $bodyCode = ModelBodyMethodHelper::generateAbstractParameterArrayCode($parameters);
+        $bodyCode = ModelMethodHelper::generateAbstractParameterArrayCode($parameters);
 
         $method->setBody('return [' . "\n" . PrinterUtils::indentCode($bodyCode) . "\n" . '];');
-    }
-
-    private function mapJsonTypeToPhpType(string $jsonType): string
-    {
-        return match ($jsonType) {
-            'integer', 'int32', 'int64' => Type::INT_TYPE->name,
-            'number', 'double' => Type::NUMERIC_TYPE->name,
-            'boolean' => Type::BOOLEAN_TYPE->name,
-            'array', 'object' => Type::ARRAY_TYPE->name,
-            default => Type::STRING_TYPE->name,
-        };
     }
 
     /**
@@ -551,15 +535,44 @@ class ModelGenerator
     }
 
     /**
+     * @throws UnresolvableReferenceException
+     * @return array<\ToshY\BunnyNet\Generator\Model\AbstractParameter>
      * @param Operation $operation
-     * @param string $type
-     * @param callable $processType
+     */
+    private function processParametersForQuery(Operation $operation): array
+    {
+        $abstractParameters = [];
+        if (empty($operation->parameters)) {
+            return $abstractParameters;
+        }
+
+        foreach ($operation->parameters as $parameterRef) {
+            $parameter = ($parameterRef instanceof Reference) ? $parameterRef->resolve() : $parameterRef;
+
+            if (!$parameter instanceof Parameter || $parameter->in !== 'query') {
+                continue;
+            }
+
+            if ($parameter->schema instanceof Schema) {
+                $parentRequiredList = ($parameter->required ?? false) ? [$parameter->name] : [];
+
+                $abstractParameters[] = ModelMethodHelper::createParameterRepresentation(
+                    $parameter->name,
+                    $parameter->schema,
+                    $parentRequiredList,
+                );
+            }
+        }
+
+        return $abstractParameters;
+    }
+
+    /**
+     * @param Operation $operation
      * @return array<mixed>
      */
-    private function processParameters(
+    private function processParametersForPath(
         Operation $operation,
-        string $type,
-        callable $processType,
     ): array {
         $parameters = [];
         foreach ($operation->parameters ?? [] as $parameter) {
@@ -567,45 +580,18 @@ class ModelGenerator
             $paramName = $parameter->name;
             /* @phpstan-ignore-next-line nullsafe.neverNull */
             $paramType = $parameter->schema?->type ?? 'string';
-            $paramRequired = $parameter->required ?? false;
 
-            if ($parameter->in !== $type) {
+            if ($parameter->in !== 'path') {
                 continue;
             }
 
-            $parameters[] = $processType($paramName, $paramType, $paramRequired);
+            $parameters[] = [
+                'name' => $paramName,
+                'type' => $paramType,
+            ];
         }
 
         return $parameters;
-    }
-
-    /**
-     * @param string $paramName
-     * @param string $paramType
-     * @param bool $paramRequired
-     * @return array<string,string>
-     */
-    private function processParametersForPath(string $paramName, string $paramType, bool $paramRequired = true): array
-    {
-        return [
-            'name' => $paramName,
-            'type' => $paramType,
-        ];
-    }
-
-    /**
-     * @param string $paramName
-     * @param string $paramType
-     * @param bool $paramRequired
-     * @return array<string,string|bool>
-     */
-    private function processParametersForQuery(string $paramName, string $paramType, bool $paramRequired = false): array
-    {
-        return [
-            'name' => $paramName,
-            'type' => $paramType,
-            'required' => func_get_arg(2),
-        ];
     }
 
     private function createNewNamespace(string $originalNamespace): string
