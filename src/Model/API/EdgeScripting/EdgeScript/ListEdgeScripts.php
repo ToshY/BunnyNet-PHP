@@ -33,7 +33,9 @@ class ListEdgeScripts implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'type', type: Type::ARRAY_TYPE),
+            new AbstractParameter(name: 'type', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::INT_TYPE),
+            ]),
             new AbstractParameter(name: 'page', type: Type::INT_TYPE),
             new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
             new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
