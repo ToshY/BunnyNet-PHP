@@ -28,7 +28,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "ToshY\\BunnyNet\\Tests\\": "tests/"
+      "ToshY\\BunnyNet\\Tests\\": "tests/",
+      "ToshY\\BunnyNet\\Generator\\": "generator/"
     }
   },
   "require": {
@@ -42,7 +43,9 @@
     "phpmd/phpmd": "^2.15",
     "friendsofphp/php-cs-fixer": "^3.75",
     "phpstan/phpstan": "^2.1",
-    "phpunit/phpunit": "^10.0"
+    "phpunit/phpunit": "^10.0",
+    "nette/php-generator": "^4.1",
+    "cebe/php-openapi": "^1.8"
   },
   "config": {
   }

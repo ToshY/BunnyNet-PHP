@@ -27,7 +27,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -45,7 +45,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -63,7 +63,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -81,7 +81,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -99,7 +99,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -112,8 +112,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter1',
                 'string',
                 'integer',
-                5
-            )
+                5,
+            ),
         );
 
         $template = [
@@ -126,7 +126,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -139,8 +139,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter1',
                 'string',
                 'double',
-                1.23
-            )
+                1.23,
+            ),
         );
 
         $template = [
@@ -153,7 +153,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -166,8 +166,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter1',
                 'string',
                 'boolean',
-                1
-            )
+                1,
+            ),
         );
 
         $template = [
@@ -180,7 +180,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -193,8 +193,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter1',
                 'string',
                 'array',
-                json_encode([])
-            )
+                json_encode([]),
+            ),
         );
 
         $template = [
@@ -207,7 +207,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -241,7 +241,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -274,7 +274,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -287,8 +287,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter1',
                 'string',
                 'integer',
-                1
-            )
+                1,
+            ),
         );
 
         $template = [
@@ -316,7 +316,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -329,8 +329,8 @@ class ParameterValidatorTest extends TestCase
                 'Parameter3',
                 'array',
                 'integer',
-                1
-            )
+                1,
+            ),
         );
 
         $template = [
@@ -352,7 +352,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -365,8 +365,8 @@ class ParameterValidatorTest extends TestCase
                 'NestedParameter1',
                 'int',
                 'string',
-                'test5'
-            )
+                'test5',
+            ),
         );
 
         $template = [
@@ -394,7 +394,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 
@@ -407,8 +407,8 @@ class ParameterValidatorTest extends TestCase
                 'NestedParameter2',
                 'string',
                 'integer',
-                2
-            )
+                2,
+            ),
         );
 
         $template = [
@@ -436,7 +436,7 @@ class ParameterValidatorTest extends TestCase
 
         ParameterValidator::validate(
             $values,
-            $template
+            $template,
         );
     }
 }

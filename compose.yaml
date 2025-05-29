@@ -4,5 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      API_SPEC_MANIFEST: ${API_SPEC_MANIFEST:-}
     volumes:
       - ./:/app

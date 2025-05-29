@@ -6,6 +6,7 @@ env:
   GID:
     sh: id -g
   TTY: ''
+  API_SPEC_MANIFEST: https://toshy.github.io/bunnynet-openapi-specification/manifest.json
 
 tasks:
   default:
@@ -63,6 +64,22 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php composer update {{.PACKAGE}} {{.CLI_ARGS | default "--no-cache"}}
 
+  composer:audit:
+    desc: Composer audit
+    cmds:
+      - docker compose run --rm $TTY php composer audit
+
+  # Generator
+  specs:maps:
+    desc: Generate model mapping files from OpenAPI specs
+    cmds:
+      - docker compose run --rm $TTY php php /app/generator/Command/generate-maps.php
+
+  specs:models:
+    desc: Generate model from mapping file
+    cmds:
+      - docker compose run --rm $TTY php php /app/generator/Command/generate-models.php {{.CLI_ARGS | default "--log"}}
+
   # Git
   git:hooks:
     desc: Setup git hooks
@@ -112,7 +129,7 @@ tasks:
   phpstan:
     desc: PHPStan run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpstan analyse --error-format=table
+      - docker compose run --rm $TTY php vendor/bin/phpstan analyse --error-format=table --memory-limit=256M
 
   phpstan:baseline:
     desc: PHPStan update baseline
