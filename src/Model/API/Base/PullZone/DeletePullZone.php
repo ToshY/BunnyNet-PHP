@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\API\Base\PullZone;
 
-use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
@@ -22,8 +21,6 @@ class DeletePullZone implements EndpointInterface
 
     public function getHeaders(): array
     {
-        return [
-            Header::ACCEPT_JSON,
-        ];
+        return [];
     }
 }

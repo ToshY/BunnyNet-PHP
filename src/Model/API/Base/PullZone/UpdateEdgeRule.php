@@ -33,13 +33,21 @@ class UpdateEdgeRule implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Guid', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'Triggers', type: Type::ARRAY_TYPE, required: true, children: [
-                new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'Guid', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'ActionType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'ActionParameter1', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'ActionParameter2', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Triggers', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'Type', type: Type::INT_TYPE, required: true),
                 new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::STRING_TYPE),
                 ]),
+                new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE, required: true),
+                new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'Description', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE, required: true),
         ];
     }
 }

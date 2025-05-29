@@ -54,8 +54,8 @@ class CreateShieldZone implements EndpointInterface, EndpointBodyInterface
                 new AbstractParameter(name: 'wafRealtimeThreatIntelligenceEnabled', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'wafProfileId', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'wafEngineConfig', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: 'name', type: Type::STRING_TYPE),
-                    new AbstractParameter(name: 'valueEncoded', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'name', type: Type::STRING_TYPE, required: true),
+                    new AbstractParameter(name: 'valueEncoded', type: Type::STRING_TYPE, required: true),
                 ]),
                 new AbstractParameter(name: 'dDoSShieldSensitivity', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSExecutionMode', type: Type::INT_TYPE),

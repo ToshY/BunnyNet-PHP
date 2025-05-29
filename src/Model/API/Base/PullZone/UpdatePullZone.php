@@ -132,17 +132,17 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'OptimizerWatermarkEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkUrl', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkPosition', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'OptimizerWatermarkOffset', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'OptimizerWatermarkOffset', type: Type::NUMERIC_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkMinImageSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerAutomaticOptimizationEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerClasses', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Name', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
                 ]),
             ]),
             new AbstractParameter(name: 'OptimizerForceClasses', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'Type', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginRetries', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginConnectTimeout', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginResponseTimeout', type: Type::INT_TYPE),
@@ -165,8 +165,7 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             ]),
             new AbstractParameter(name: 'EnableSafeHop', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OriginShieldQueueMaxWaitTime', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'UseBackgroundUpdate', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'OriginShieldMaxQueuedRequests', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OriginShieldMaxQueuedRequests', type: Type::INT_TYPE),
             new AbstractParameter(name: 'UseBackgroundUpdate', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableAutoSSL', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'LogAnonymizationType', type: Type::INT_TYPE),
@@ -182,10 +181,10 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'EnableSmartCache', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableRequestCoalescing', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'RequestCoalescingTimeout', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'DisableLetsEncrypt', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'DisableLetsEncrypt', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableBunnyImageAi', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'BunnyAiImageBlueprints', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Name', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
                 ]),
@@ -197,7 +196,7 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'PreloadingScreenCodeEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'PreloadingScreenDelay', type: Type::INT_TYPE),
             new AbstractParameter(name: 'RoutingFilters', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
         ];
     }

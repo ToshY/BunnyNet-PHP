@@ -34,7 +34,7 @@ class UpdateStorageZone implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'CacheTag', type: Type::ARRAY_TYPE, children: [
+            new AbstractParameter(name: 'ReplicationZones', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'OriginUrl', type: Type::STRING_TYPE),

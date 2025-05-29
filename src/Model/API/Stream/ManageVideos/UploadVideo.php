@@ -26,6 +26,7 @@ class UploadVideo implements EndpointInterface, EndpointQueryInterface
     public function getHeaders(): array
     {
         return [
+            Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_OCTET_STREAM,
         ];
     }
@@ -33,7 +34,12 @@ class UploadVideo implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
+            new AbstractParameter(name: 'jitEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'enabledResolutions', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'enabledOutputCodecs', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'transcribeEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'transcribeLanguages', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'sourceLanguage', type: Type::STRING_TYPE),
         ];
     }
 }

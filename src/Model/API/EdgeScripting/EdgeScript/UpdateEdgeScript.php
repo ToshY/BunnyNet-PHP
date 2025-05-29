@@ -35,7 +35,7 @@ class UpdateEdgeScript implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'ScriptType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'ScriptType', type: Type::INT_TYPE),
         ];
     }
 }

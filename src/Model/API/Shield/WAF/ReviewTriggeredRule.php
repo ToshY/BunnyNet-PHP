@@ -27,6 +27,7 @@ class ReviewTriggeredRule implements EndpointInterface, EndpointBodyInterface
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON_ALL,
         ];
     }
 

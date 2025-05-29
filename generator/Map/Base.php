@@ -45,7 +45,6 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedIP;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteAllowedReferer as PullZoneDeleteAllowedReferer;
@@ -65,6 +64,7 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\PurgeCache;
 use ToshY\BunnyNet\Model\API\Base\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
+use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
@@ -295,7 +295,7 @@ final class Base
             'delete' => DeleteEdgeRule::class,
         ],
         '/pullzone/{pullZoneId}/edgerules/addOrUpdate' => [
-            'post' => AddEdgeRule::class,
+            'post' => UpdateEdgeRule::class,
         ],
         '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}/setEdgeRuleEnabled' => [
             'post' => SetEdgeRuleEnabled::class,

@@ -33,7 +33,7 @@ class SetThumbnail implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'thumbnailUrl', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'thumbnailUrl', type: Type::STRING_TYPE),
         ];
     }
 }

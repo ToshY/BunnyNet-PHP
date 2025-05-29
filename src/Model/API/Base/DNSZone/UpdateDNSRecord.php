@@ -38,6 +38,8 @@ class UpdateDNSRecord implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'Ttl', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Weight', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'Priority', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Flags', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Tag', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Port', type: Type::INT_TYPE),
@@ -55,6 +57,7 @@ class UpdateDNSRecord implements EndpointInterface, EndpointBodyInterface
                 new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'Comment', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Id', type: Type::INT_TYPE, required: true),
         ];
     }
 }

@@ -27,13 +27,14 @@ class ConfigureAutoRecharge implements EndpointInterface, EndpointBodyInterface
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'AutoRechargeEnabled', type: Type::BOOLEAN_TYPE, required: true),
+            new AbstractParameter(name: 'AutoRechargeEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'PaymentMethodToken', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'PaymentAmount', type: Type::NUMERIC_TYPE),
             new AbstractParameter(name: 'RechargeTreshold', type: Type::NUMERIC_TYPE),

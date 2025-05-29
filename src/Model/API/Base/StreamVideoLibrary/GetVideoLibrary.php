@@ -6,12 +6,9 @@ namespace ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointInterface;
-use ToshY\BunnyNet\Model\EndpointQueryInterface;
 
-class GetVideoLibrary implements EndpointInterface, EndpointQueryInterface
+class GetVideoLibrary implements EndpointInterface
 {
     public function getMethod(): Method
     {
@@ -27,13 +24,6 @@ class GetVideoLibrary implements EndpointInterface, EndpointQueryInterface
     {
         return [
             Header::ACCEPT_JSON,
-        ];
-    }
-
-    public function getQuery(): array
-    {
-        return [
-            new AbstractParameter(name: 'includeAccessKey', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

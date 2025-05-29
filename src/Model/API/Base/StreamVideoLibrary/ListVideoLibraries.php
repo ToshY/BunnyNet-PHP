@@ -36,7 +36,6 @@ class ListVideoLibraries implements EndpointInterface, EndpointQueryInterface
             new AbstractParameter(name: 'page', type: Type::INT_TYPE),
             new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
             new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'includeAccessKey', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
