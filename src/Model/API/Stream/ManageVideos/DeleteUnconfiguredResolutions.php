@@ -33,11 +33,11 @@ class DeleteUnconfiguredResolutions implements EndpointInterface, EndpointQueryI
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'resolutionsToDelete', type: Type::STRING_TYPE, required: false),
-            new AbstractParameter(name: 'deleteNonConfiguredResolutions', type: Type::BOOLEAN_TYPE, required: false),
-            new AbstractParameter(name: 'deleteOriginal', type: Type::BOOLEAN_TYPE, required: false),
-            new AbstractParameter(name: 'deleteMp4Files', type: Type::BOOLEAN_TYPE, required: false),
-            new AbstractParameter(name: 'dryRun', type: Type::BOOLEAN_TYPE, required: false),
+            new AbstractParameter(name: 'resolutionsToDelete', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'deleteNonConfiguredResolutions', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'deleteOriginal', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'deleteMp4Files', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'dryRun', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

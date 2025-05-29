@@ -17,7 +17,7 @@ class ResolveAbuseCase implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'dmca/%d/check';
+        return 'abusecase/%d/resolve';
     }
 
     public function getHeaders(): array
