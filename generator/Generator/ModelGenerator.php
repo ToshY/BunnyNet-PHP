@@ -227,7 +227,7 @@ class ModelGenerator
      * @throws UnresolvableReferenceException
      * @throws Exception
      * @param Operation $operation
-     * @return array<\ToshY\BunnyNet\Generator\Model\AbstractParameter>
+     * @return array<\ToshY\BunnyNet\Model\AbstractParameter>
      */
     private function processBodySchema(Operation $operation): array
     {
@@ -278,8 +278,8 @@ class ModelGenerator
      * @param string $path
      * @param array<array<string,string>> $existingClassHeaders
      * @param array<string,mixed> $pathParameters
-     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $queryParameters
-     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $bodyParameters
+     * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $queryParameters
+     * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $bodyParameters
      * @param Operation $operation
      * @return string
      */
@@ -483,7 +483,7 @@ class ModelGenerator
 
     /**
      * @param ClassType $class
-     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $parameters
+     * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $parameters
      * @return void
      */
     private function addQuery(ClassType $class, array $parameters): void
@@ -499,7 +499,7 @@ class ModelGenerator
 
     /**
      * @param ClassType $class
-     * @param array<\ToshY\BunnyNet\Generator\Model\AbstractParameter> $parameters
+     * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $parameters
      * @return void
      */
     private function addBody(ClassType $class, array $parameters): void
@@ -536,7 +536,7 @@ class ModelGenerator
 
     /**
      * @throws UnresolvableReferenceException
-     * @return array<\ToshY\BunnyNet\Generator\Model\AbstractParameter>
+     * @return array<\ToshY\BunnyNet\Model\AbstractParameter>
      * @param Operation $operation
      */
     private function processParametersForQuery(Operation $operation): array

@@ -41,9 +41,11 @@ class CreateTicket implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'Message', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'LinkedStorageZone', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Attachments', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Body', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'FileName', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'ContentType', type: Type::STRING_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Body', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'FileName', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'ContentType', type: Type::STRING_TYPE),
+                ]),
             ]),
         ];
     }

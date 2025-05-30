@@ -37,9 +37,9 @@ class CreateCustomWAFRule implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'ruleName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ruleDescription', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'ruleConfiguration', type: Type::ARRAY_TYPE, children: [
+            new AbstractParameter(name: 'ruleConfiguration', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'actionType', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'variableTypes', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'variableTypes', type: Type::OBJECT_TYPE, children: [
                     new AbstractParameter(name: 'REQUEST_URI', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'REQUEST_URI_RAW', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'ARGS', type: Type::STRING_TYPE),

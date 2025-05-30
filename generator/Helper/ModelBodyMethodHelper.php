@@ -10,8 +10,8 @@ use cebe\openapi\spec\Reference;
 use cebe\openapi\spec\Schema;
 use InvalidArgumentException;
 use LogicException;
-use ToshY\BunnyNet\Generator\Model\AbstractParameter;
-use ToshY\BunnyNet\Generator\Model\Type;
+use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
 
 /**
@@ -112,7 +112,7 @@ final class ModelBodyMethodHelper
                 if ($tempCombinedSchema->additionalProperties instanceof Schema) {
                     $parameters[] = new AbstractParameter(
                         name: null, // Dynamic keys for a map at root level
-                        type: Type::ARRAY_TYPE, // Represent the map itself as an array
+                        type: Type::OBJECT_TYPE, // Represent the dictionary itself as an object
                         required: false, // Not "required" as a specific named property
                         children: [
                             ModelMethodHelper::createParameterRepresentation(null, $tempCombinedSchema->additionalProperties),
@@ -157,7 +157,7 @@ final class ModelBodyMethodHelper
                 // This means the root object can have arbitrary properties whose values conform to this schema
                 $parameters[] = new AbstractParameter(
                     name: null, // Represents the dynamic keys of the root object
-                    type: Type::ARRAY_TYPE, // Represent the dictionary itself as an array
+                    type: Type::OBJECT_TYPE, // Represent the dictionary itself as an object
                     required: false, // Not a required named property
                     children: [
                         ModelMethodHelper::createParameterRepresentation(null, $effectiveRootSchema->additionalProperties),

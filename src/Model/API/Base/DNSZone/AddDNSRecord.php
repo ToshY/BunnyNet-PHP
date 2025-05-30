@@ -53,8 +53,10 @@ class AddDNSRecord implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'SmartRoutingType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Disabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnviromentalVariables', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
+                ]),
             ]),
             new AbstractParameter(name: 'Comment', type: Type::STRING_TYPE),
         ];

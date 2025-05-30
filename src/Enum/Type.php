@@ -11,4 +11,5 @@ enum Type: string
     case NUMERIC_TYPE = 'numeric';
     case STRING_TYPE = 'string';
     case ARRAY_TYPE = 'array';
+    case OBJECT_TYPE = 'object';
 }

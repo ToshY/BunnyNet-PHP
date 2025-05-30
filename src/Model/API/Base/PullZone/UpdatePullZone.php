@@ -136,9 +136,11 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'OptimizerWatermarkMinImageSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerAutomaticOptimizationEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerClasses', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Properties', type: Type::OBJECT_TYPE, children: [
+                        new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                    ]),
                 ]),
             ]),
             new AbstractParameter(name: 'OptimizerForceClasses', type: Type::BOOLEAN_TYPE),
@@ -184,9 +186,11 @@ class UpdatePullZone implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'DisableLetsEncrypt', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableBunnyImageAi', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'BunnyAiImageBlueprints', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'Properties', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Properties', type: Type::OBJECT_TYPE, children: [
+                        new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                    ]),
                 ]),
             ]),
             new AbstractParameter(name: 'PreloadingScreenEnabled', type: Type::BOOLEAN_TYPE),

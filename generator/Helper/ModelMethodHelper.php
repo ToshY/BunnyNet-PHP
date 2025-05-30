@@ -9,8 +9,8 @@ use cebe\openapi\spec\Reference;
 use cebe\openapi\spec\Schema;
 use InvalidArgumentException;
 use LogicException;
-use ToshY\BunnyNet\Generator\Model\AbstractParameter;
-use ToshY\BunnyNet\Generator\Model\Type;
+use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
 
 final class ModelMethodHelper
@@ -31,37 +31,93 @@ final class ModelMethodHelper
     ): AbstractParameter {
         $effectiveSchema = self::getEffectiveSchema($schema);
         $children = null;
-        $paramType = null;
+        $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
+        ;
 
         $isCurrentParamRequired = ($name !== null) && in_array($name, $parentRequiredList, true);
 
-        // Handle oneOf/anyOf by creating children for each alternative.
-        // The main parameter will have a 'MIXED' type.
+        // Handle oneOf/anyOf
         if (isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) {
-            $paramType = Type::MIXED_TYPE;
             $alternatives = isset($effectiveSchema->{'x-oneOf'}) ? $effectiveSchema->oneOf : $effectiveSchema->anyOf;
             $children = [];
-            foreach ($alternatives as $altSchemaRef) {
-                $altSchema = ($altSchemaRef instanceof Reference) ? $altSchemaRef->resolve() : $altSchemaRef;
-                if ($altSchema instanceof Schema) {
-                    $effectiveAltSchema = self::getEffectiveSchema($altSchema);
-                    // If it's an object with direct properties or additionalProperties, we'll try to represent its structure
-                    if ($effectiveAltSchema->type === 'object' && (!empty($effectiveAltSchema->properties) || isset($effectiveAltSchema->additionalProperties))) {
-                        $childrenOfMixed = [];
-                        if (!empty($effectiveAltSchema->properties)) {
-                            $objRequiredList = $effectiveAltSchema->required ?? [];
-                            foreach ($effectiveAltSchema->properties as $propName => $propertySchema) {
-                                $childrenOfMixed[] = self::createParameterRepresentation(
-                                    $propName,
-                                    $propertySchema,
-                                    $objRequiredList,
+
+            // Case 1: Single alternative and it's an object (or resolves to an object)
+            if (count($alternatives) === 1) {
+                $singleAltSchema = ($alternatives[0] instanceof Reference) ? $alternatives[0]->resolve() : $alternatives[0];
+                if ($singleAltSchema instanceof Schema) {
+                    $effectiveSingleAltSchema = self::getEffectiveSchema($singleAltSchema);
+                    if ($effectiveSingleAltSchema->type === 'object') {
+                        $paramType = Type::OBJECT_TYPE; // The parameter is an object
+                        $objRequiredList = $effectiveSingleAltSchema->required ?? [];
+
+                        // Directly populate children from the properties of this single object alternative
+                        foreach ($effectiveSingleAltSchema->properties as $propName => $propertySchema) {
+                            $children[] = self::createParameterRepresentation(
+                                $propName,
+                                $propertySchema,
+                                $objRequiredList,
+                            );
+                        }
+                        // Handle additionalProperties for this single object alternative if it's a map (no explicit properties)
+                        if (isset($effectiveSingleAltSchema->additionalProperties) && empty($effectiveSingleAltSchema->properties) && $effectiveSingleAltSchema->additionalProperties !== false) {
+                            if ($effectiveSingleAltSchema->additionalProperties instanceof Schema) {
+                                $children[] = new AbstractParameter(
+                                    name: null,
+                                    type: self::mapOpenApiTypeToEnumType($effectiveSingleAltSchema->additionalProperties),
+                                    required: false,
+                                    children: self::createParameterRepresentation(
+                                        null,
+                                        $effectiveSingleAltSchema->additionalProperties,
+                                    )->getChildren(),
+                                );
+                            } else {
+                                // This case means additionalProperties is `true`, resulting in a free-form map.
+                                // If MIXED_TYPE is removed, this might default to OBJECT_TYPE for the value,
+                                // or it might need to throw an error depending on strictness.
+                                $children[] = new AbstractParameter(
+                                    name: null,
+                                    type: Type::OBJECT_TYPE, // Default to object type for free-form map values
+                                    required: false,
+                                    children: null,
                                 );
                             }
                         }
-                        // This section was problematic for nested 'Properties' in OptimizerClasses
-                        if (isset($effectiveAltSchema->additionalProperties)) {
-                            // If it's a map (object without explicit 'properties' but with 'additionalProperties')
-                            if (empty($effectiveAltSchema->properties)) {
+                    } else {
+                        // Single alternative but not an object (e.g., scalar or array), map to its actual type
+                        $paramType = self::mapOpenApiTypeToEnumType($effectiveSingleAltSchema);
+                        $singleAlternativeRepresentation = self::createParameterRepresentation(null, $effectiveSingleAltSchema);
+                        if ($singleAlternativeRepresentation->getChildren() !== null) {
+                            $children = $singleAlternativeRepresentation->getChildren();
+                        } else {
+                            $children = null; // Ensure children is null if the representation has no children
+                        }
+                    }
+                }
+            } else { // Case 2: Multiple alternatives in oneOf/anyOf.
+                // The mapOpenApiTypeToEnumType function will now throw an exception if it encounters
+                // a truly mixed type that doesn't resolve to an object.
+                // We'll let mapOpenApiTypeToEnumType determine the type and potential error for the parent parameter.
+                $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
+
+                // Collect children from all alternatives if it's a structure that can be merged,
+                // or if it's a collection of disparate types (which should now error out via mapOpenApiTypeToEnumType).
+                foreach ($alternatives as $altSchemaRef) {
+                    $altSchema = ($altSchemaRef instanceof Reference) ? $altSchemaRef->resolve() : $altSchemaRef;
+                    if ($altSchema instanceof Schema) {
+                        $effectiveAltSchema = self::getEffectiveSchema($altSchema);
+                        if ($effectiveAltSchema->type === 'object' || (!empty($effectiveAltSchema->properties) || (isset($effectiveAltSchema->additionalProperties) && $effectiveAltSchema->additionalProperties !== false))) {
+                            $childrenOfMixed = [];
+                            if (!empty($effectiveAltSchema->properties)) {
+                                $objRequiredList = $effectiveAltSchema->required ?? [];
+                                foreach ($effectiveAltSchema->properties as $propName => $propertySchema) {
+                                    $childrenOfMixed[] = self::createParameterRepresentation(
+                                        $propName,
+                                        $propertySchema,
+                                        $objRequiredList,
+                                    );
+                                }
+                            }
+                            if (isset($effectiveAltSchema->additionalProperties) && empty($effectiveAltSchema->properties) && $effectiveAltSchema->additionalProperties !== false) {
                                 if ($effectiveAltSchema->additionalProperties instanceof Schema) {
                                     $childrenOfMixed[] = new AbstractParameter(
                                         name: null,
@@ -72,33 +128,33 @@ final class ModelMethodHelper
                                             $effectiveAltSchema->additionalProperties,
                                         )->getChildren(),
                                     );
-                                } else { // additionalProperties is true (free-form object values)
+                                } else {
                                     $childrenOfMixed[] = new AbstractParameter(
                                         name: null,
-                                        type: Type::MIXED_TYPE,
+                                        type: Type::OBJECT_TYPE, // Default to object type for free-form map values
                                         required: false,
                                         children: null,
                                     );
                                 }
                             }
-                        }
-                        if (!empty($childrenOfMixed)) {
-                            $children = array_merge($children, $childrenOfMixed); // Merge children from alternatives
+                            if (!empty($childrenOfMixed)) {
+                                $children = array_merge($children, $childrenOfMixed); // Merge children from alternatives
+                            }
+                        } else {
+                            // If an alternative is a scalar or simple array, this might lead to an error
+                            // from mapOpenApiTypeToEnumType when we assign paramType above.
+                            // If it reaches here, it means the overall type is already determined or error-ed out.
+                            // For now, we still need to process its children if it has any, but the type itself
+                            // should have been caught by the parent `mapOpenApiTypeToEnumType` call.
+                            $tempRepresentation = self::createParameterRepresentation(null, $effectiveAltSchema);
+                            if ($tempRepresentation->getChildren() !== null) {
+                                $children = array_merge($children, $tempRepresentation->getChildren());
+                            }
                         }
                     }
                 }
+                $children = array_values(array_unique($children, SORT_REGULAR)); // Remove duplicates
             }
-            $children = array_values(array_unique($children, SORT_REGULAR)); // Remove duplicates for combined children
-            if (empty($children)) { // If after trying to parse alternatives, we still have no children
-                return new AbstractParameter(
-                    name: $name,
-                    type: Type::MIXED_TYPE,
-                    required: $isCurrentParamRequired,
-                    children: null,
-                );
-            }
-            // If we found children, we can still return as mixed, but with those children to describe possible structures.
-            // Or we could return as object if all alternatives were objects. For now, keep as MIXED_TYPE.
         }
 
 
@@ -109,73 +165,61 @@ final class ModelMethodHelper
                 if ($itemsSchema instanceof Schema) {
                     $effectiveItemsSchema = self::getEffectiveSchema($itemsSchema);
 
-                    $children = [];
-                    // Array of objects (with explicit properties or additionalProperties)
-                    if ($effectiveItemsSchema->type === 'object') {
-                        // This is where the core issue for nested 'Properties' lay.
-                        // If the object primarily defines `additionalProperties` and has no fixed `properties`,
-                        // it should be treated as a map, and its "children" should represent the *values* of that map.
-                        // We only add children for explicit properties or if it's a true map.
+                    // Array of objects (items are objects)
+                    if ($effectiveItemsSchema->type === 'object' || !empty($effectiveItemsSchema->properties)) {
+                        $itemObjectChildren = [];
+                        $itemRequiredList = $effectiveItemsSchema->required ?? [];
 
+                        // Populate children for explicit properties of the inner object
                         if (!empty($effectiveItemsSchema->properties)) {
-                            // Case 1: Array of objects with *named* properties
-                            $itemRequiredList = $effectiveItemsSchema->required ?? [];
                             foreach ($effectiveItemsSchema->properties as $propName => $propertySchema) {
-                                $children[] = self::createParameterRepresentation(
-                                    $propName,
+                                $itemObjectChildren[] = self::createParameterRepresentation(
+                                    (string)$propName,
                                     $propertySchema,
                                     $itemRequiredList,
                                 );
                             }
                         }
 
-                        if (isset($effectiveItemsSchema->additionalProperties)) {
-                            // Case 2: Array of objects that are *maps* (defined by additionalProperties)
-                            // This applies to OptimizerClasses.Properties and BunnyAiImageBlueprints.Properties
-                            // Here, the 'children' of the OBJECT_TYPE parameter should be the type of the map's *values*.
-                            if (empty($effectiveItemsSchema->properties)) { // If it's purely a map, no fixed properties
-                                if ($effectiveItemsSchema->additionalProperties instanceof Schema) {
-                                    // Recursively call createParameterRepresentation for the value type
-                                    $childrenForMapValue = self::createParameterRepresentation(
+                        // Handle additionalProperties for the item object (if it's a map)
+                        if (isset($effectiveItemsSchema->additionalProperties) && empty($effectiveItemsSchema->properties) && $effectiveItemsSchema->additionalProperties !== false) {
+                            if ($effectiveItemsSchema->additionalProperties instanceof Schema) {
+                                $itemObjectChildren[] = new AbstractParameter(
+                                    name: null, // Represents the value type of the map
+                                    type: self::mapOpenApiTypeToEnumType($effectiveItemsSchema->additionalProperties),
+                                    required: false,
+                                    children: self::createParameterRepresentation(
                                         null,
                                         $effectiveItemsSchema->additionalProperties,
-                                    )->getChildren();
-                                    $children[] = new AbstractParameter(
-                                        name: null, // This represents the value of the dynamic key in the map
-                                        type: self::mapOpenApiTypeToEnumType(
-                                            $effectiveItemsSchema->additionalProperties,
-                                        ),
-                                        required: false,
-                                        children: $childrenForMapValue, // Pass its children if it's a complex value
-                                    );
-                                } else { // additionalProperties is true (array of free-form objects)
-                                    $children[] = new AbstractParameter(
-                                        name: null,
-                                        type: Type::MIXED_TYPE, // array of generic mixed values
-                                        required: false,
-                                        children: null,
-                                    );
-                                }
+                                    )->getChildren(),
+                                );
                             } else {
-                                // Case 3: Object with *both* named properties and additionalProperties
-                                // This scenario typically means the object has some fixed keys and can have arbitrary others.
-                                // For simplicity and to avoid the extra null object, we assume the named properties sufficiently describe it.
-                                // If you need to represent the "arbitrary" part, you'd need a different strategy (e.g., a flag).
+                                $itemObjectChildren[] = new AbstractParameter(
+                                    name: null,
+                                    type: Type::OBJECT_TYPE, // Default to object type for free-form map values
+                                    required: false,
+                                    children: null,
+                                );
                             }
                         }
 
-                        // Handle empty object schemas (e.g., {} as an item)
-                        if (empty($children) && empty($effectiveItemsSchema->properties) && !isset($effectiveItemsSchema->additionalProperties)) {
-                            // This is an object with no further specified properties (empty object schema)
-                            $children[] = new AbstractParameter(name: null, type: Type::OBJECT_TYPE, required: false);
-                        }
+                        // For the item object itself (e.g., each "Trigger" in the "Triggers" array)
+                        $children = [
+                            new AbstractParameter(
+                                name: null,
+                                type: Type::OBJECT_TYPE,
+                                required: false,
+                                children: $itemObjectChildren,
+                            ),
+                        ];
                     } elseif (isset($effectiveItemsSchema->{'x-oneOf'}) || isset($effectiveItemsSchema->{'x-anyOf'})) {
                         // Array of oneOf/anyOf types. Create a single child representing the complex item type.
+                        // mapOpenApiTypeToEnumType will throw if it's a truly mixed type
                         $children[] = new AbstractParameter(
                             name: null,
-                            type: Type::MIXED_TYPE,
+                            type: self::mapOpenApiTypeToEnumType($effectiveItemsSchema), // Map to its actual type
                             required: false,
-                            children: null,
+                            children: self::createParameterRepresentation(null, $effectiveItemsSchema)->getChildren(),
                         );
                     } else {
                         // Array of simple types (string, int, etc.) or nested arrays
@@ -184,7 +228,7 @@ final class ModelMethodHelper
                 }
             }
         } elseif ($effectiveSchema->type === 'object') {
-            $paramType = Type::ARRAY_TYPE;
+            $paramType = Type::OBJECT_TYPE; // Default to OBJECT_TYPE for objects
             $children = [];
 
             if (!empty($effectiveSchema->properties)) {
@@ -197,105 +241,29 @@ final class ModelMethodHelper
                 }
             }
 
-            // Handle additionalProperties for objects themselves
-            // Only add if there are no explicit properties (i.e., it's a map).
-            if (isset($effectiveSchema->additionalProperties) && empty($effectiveSchema->properties)) {
+            // Handle additionalProperties for objects that are effectively maps (no explicit properties)
+            if (isset($effectiveSchema->additionalProperties) && empty($effectiveSchema->properties) && $effectiveSchema->additionalProperties !== false) {
+                $paramType = Type::OBJECT_TYPE; // Use OBJECT_TYPE for the map itself
                 if ($effectiveSchema->additionalProperties instanceof Schema) {
-                    $subMappedType = self::mapOpenApiTypeToEnumType($effectiveSchema->additionalProperties);
-                    /* @phpstan-ignore-next-line identical.alwaysTrue */
-                    if ($subMappedType !== Type::OBJECT_TYPE && $effectiveSchema->type === 'object') {
-                        $subMappedType = Type::ARRAY_TYPE;
-                    }
-
+                    // Object with arbitrary keys whose values conform to a specific schema
                     $children[] = new AbstractParameter(
-                        name: null, // The key name is dynamic, so we give null
-                        type: $subMappedType,
-                        required: false,
+                        name: null, // Represents the value type of the map
+                        type: self::mapOpenApiTypeToEnumType($effectiveSchema->additionalProperties),
+                        required: false, // Not a required named property
                         children: self::createParameterRepresentation(
                             null,
                             $effectiveSchema->additionalProperties,
                         )->getChildren(),
                     );
-                } else { // additionalProperties is true (free-form object)
-                    if (isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) {
-                        $paramType = Type::ARRAY_TYPE;
-                        $alternatives = isset($effectiveSchema->{'x-oneOf'}) ? $effectiveSchema->oneOf : $effectiveSchema->anyOf;
-                        $children = [];
-                        foreach ($alternatives as $altSchemaRef) {
-                            $altSchema = ($altSchemaRef instanceof Reference) ? $altSchemaRef->resolve(
-                            ) : $altSchemaRef;
-                            if ($altSchema instanceof Schema) {
-                                $effectiveAltSchema = self::getEffectiveSchema($altSchema);
-                                // If it's an object with direct properties or additionalProperties, we'll try to represent its structure
-                                if ($effectiveAltSchema->type === 'object' && (!empty($effectiveAltSchema->properties) || isset($effectiveAltSchema->additionalProperties))) {
-                                    $childrenOfMixed = [];
-                                    if (!empty($effectiveAltSchema->properties)) {
-                                        $objRequiredList = $effectiveAltSchema->required ?? [];
-                                        foreach ($effectiveAltSchema->properties as $propName => $propertySchema) {
-                                            $childrenOfMixed[] = self::createParameterRepresentation(
-                                                $propName,
-                                                $propertySchema,
-                                                $objRequiredList,
-                                            );
-                                        }
-                                    }
-                                    // This section was problematic for nested 'Properties' in OptimizerClasses
-                                    if (isset($effectiveAltSchema->additionalProperties)) {
-                                        // If it's a map (object without explicit 'properties' but with 'additionalProperties')
-                                        if (empty($effectiveAltSchema->properties)) {
-                                            if ($effectiveAltSchema->additionalProperties instanceof Schema) {
-                                                $childrenOfMixed[] = new AbstractParameter(
-                                                    name: null,
-                                                    type: self::mapOpenApiTypeToEnumType(
-                                                        $effectiveAltSchema->additionalProperties,
-                                                    ),
-                                                    required: false,
-                                                    children: self::createParameterRepresentation(
-                                                        null,
-                                                        $effectiveAltSchema->additionalProperties,
-                                                    )->getChildren(),
-                                                );
-                                            } else { // additionalProperties is true (free-form object values)
-                                                $childrenOfMixed[] = new AbstractParameter(
-                                                    name: null,
-                                                    type: Type::MIXED_TYPE,
-                                                    required: false,
-                                                    children: null,
-                                                );
-                                            }
-                                        }
-                                    }
-                                    if (!empty($childrenOfMixed)) {
-                                        $children = array_merge(
-                                            $children,
-                                            $childrenOfMixed,
-                                        ); // Merge children from alternatives
-                                    }
-                                }
-                            }
-                        }
-                        $children = array_values(
-                            array_unique($children, SORT_REGULAR),
-                        ); // Remove duplicates for combined children
-                        if (empty($children)) { // If after trying to parse alternatives, we still have no children
-                            return new AbstractParameter(
-                                name: $name,
-                                type: Type::MIXED_TYPE,
-                                required: $isCurrentParamRequired,
-                                children: null,
-                            );
-                        }
-                        // If we found children, we can still return as mixed, but with those children to describe possible structures.
-                        // Or we could return as object if all alternatives were objects. For now, keep as MIXED_TYPE.
-                    }
+                } else { // additionalProperties is true (free-form object values)
+                    $children[] = new AbstractParameter(
+                        name: null,
+                        type: Type::OBJECT_TYPE, // A generic free-form object
+                        required: false,
+                        children: null,
+                    );
                 }
             }
-            // If an object has no properties and no additionalProperties, it's an empty object.
-            // Children remain null/empty.
-        } else {
-            // Scalar types (string, integer, boolean, number)
-            $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
-            // No children for scalar types.
         }
 
         return new AbstractParameter(
@@ -315,18 +283,55 @@ final class ModelMethodHelper
     public static function getEffectiveSchema(Schema $schema): Schema
     {
         $currentSchema = $schema;
-        // Handle oneOf/anyOf first, as they represent choices, not merges
-        if (!empty($currentSchema->oneOf)) {
-            $clonedSchema = clone $currentSchema;
-            $clonedSchema->type = 'object'; // Or 'mixed' for a more generic type
-            $clonedSchema->{'x-oneOf'} = true;  // @phpstan-ignore property.notFound
+        $clonedSchema = clone $currentSchema; // Always start with a clone to avoid modifying original
+
+        // Handle oneOf/anyOf
+        if (empty($currentSchema->oneOf) === false) {
+            /* @phpstan-ignore-next-line property.notFound */
+            $clonedSchema->{'x-oneOf'} = true;
+            if (count($currentSchema->oneOf) === 1) {
+                $singleAltSchema = ($currentSchema->oneOf[0] instanceof Reference) ? $currentSchema->oneOf[0]->resolve() : $currentSchema->oneOf[0];
+                if ($singleAltSchema instanceof Schema) {
+                    $effectiveSingleAltSchema = self::getEffectiveSchema($singleAltSchema);
+                    if ($effectiveSingleAltSchema->type === 'object') {
+                        // If oneOf resolves to a single object, merge its properties
+                        $clonedSchema->properties = self::mergeProperties(
+                            $clonedSchema->properties ?? [],
+                            $effectiveSingleAltSchema->properties ?? [],
+                        );
+                        $clonedSchema->required = array_values(array_unique(array_merge(
+                            $clonedSchema->required ?? [],
+                            $effectiveSingleAltSchema->required ?? [],
+                        )));
+                        $clonedSchema->type = 'object'; // Ensure type is object
+                    }
+                }
+            }
+
             return $clonedSchema;
         }
 
-        if (!empty($currentSchema->anyOf)) {
-            $clonedSchema = clone $currentSchema;
-            $clonedSchema->type = 'object'; // Or 'mixed'
-            $clonedSchema->{'x-anyOf'} = true;  // @phpstan-ignore property.notFound
+        if (empty($currentSchema->anyOf) === false) {
+            /* @phpstan-ignore-next-line property.notFound */
+            $clonedSchema->{'x-anyOf'} = true;
+            if (count($currentSchema->anyOf) === 1) {
+                $singleAltSchema = ($currentSchema->anyOf[0] instanceof Reference) ? $currentSchema->anyOf[0]->resolve() : $currentSchema->anyOf[0];
+                if ($singleAltSchema instanceof Schema) {
+                    $effectiveSingleAltSchema = self::getEffectiveSchema($singleAltSchema);
+                    if ($effectiveSingleAltSchema->type === 'object') {
+                        // If anyOf resolves to a single object, merge its properties
+                        $clonedSchema->properties = self::mergeProperties(
+                            $clonedSchema->properties ?? [],
+                            $effectiveSingleAltSchema->properties ?? [],
+                        );
+                        $clonedSchema->required = array_values(array_unique(array_merge(
+                            $clonedSchema->required ?? [],
+                            $effectiveSingleAltSchema->required ?? [],
+                        )));
+                        $clonedSchema->type = 'object'; // Ensure type is object
+                    }
+                }
+            }
             return $clonedSchema;
         }
 
@@ -441,9 +446,11 @@ final class ModelMethodHelper
         } elseif (isset($currentSchema->items)) {
             $clonedSchema = clone $currentSchema;
             $clonedSchema->type = 'array';
-        } elseif (isset($currentSchema->additionalProperties)) { // Added this check
+        }
+        // Only infer 'object' from additionalProperties if type is null AND no properties/items
+        elseif ($currentSchema->type === null && empty($currentSchema->properties) && !isset($currentSchema->items) && isset($currentSchema->additionalProperties)) {
             $clonedSchema = clone $currentSchema;
-            $clonedSchema->type = 'object'; // An object with additionalProperties is still an object
+            $clonedSchema->type = 'object';
         }
 
 
@@ -549,6 +556,26 @@ final class ModelMethodHelper
     }
 
     /**
+     * Helper to merge properties arrays.
+     *
+     * @param array<string, Schema> $targetProperties
+     * @param array<string, Schema> $sourceProperties
+     * @return array<string, Schema>
+     */
+    private static function mergeProperties(array $targetProperties, array $sourceProperties): array
+    {
+        $mergedProperties = $targetProperties;
+        foreach ($sourceProperties as $propName => $propSchema) {
+            if (isset($mergedProperties[$propName]) && $propSchema instanceof Schema) {
+                $mergedProperties[$propName] = self::mergeSchemas($mergedProperties[$propName], $propSchema);
+            } else {
+                $mergedProperties[$propName] = $propSchema;
+            }
+        }
+        return $mergedProperties;
+    }
+
+    /**
      * Recursively converts AbstractParameter array into code string.
      *
      * @param AbstractParameter[] $params
@@ -586,24 +613,30 @@ final class ModelMethodHelper
 
     /**
      * Maps OpenAPI schema type to your Type enum.
-     * Adjusted to handle `x-oneOf` and `x-anyOf` markers.
-     * @throws UnresolvableReferenceException
+     * Adjusted to handle `x-oneOf` and `x-anyOf` markers by throwing an exception if genuinely mixed.
+     * @throws UnresolvableReferenceException|InvalidArgumentException
      */
     private static function mapOpenApiTypeToEnumType(Schema $schema): Type
     {
-        // If it's a marked oneOf/anyOf, return MIXED_TYPE or another appropriate type
-        if (isset($schema->{'x-oneOf'}) || isset($schema->{'x-anyOf'})) {
-            return Type::MIXED_TYPE; // Indicates a complex type that needs special handling
+        $effectiveSchema = self::getEffectiveSchema($schema);
+
+        // If it's explicitly an object or has properties, it's an object type
+        if ($effectiveSchema->type === 'object' || !empty($effectiveSchema->properties)) {
+            return Type::OBJECT_TYPE;
         }
 
-        $effectiveSchema = self::getEffectiveSchema($schema);
+        // If it still has oneOf/anyOf markers at this point, it means it's not a clear object type,
+        // and thus, it's a truly mixed type that we now want to error on.
+        if (isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) {
+            throw new InvalidArgumentException(
+                "Unsupported: Schema defines a genuinely mixed type (oneOf/anyOf) that does not resolve to a concrete object or scalar. Schema title: " . ($effectiveSchema->title ?? 'N/A') . ". Full schema: " . substr(json_encode($effectiveSchema->getSerializableData()), 0, 200) . "...",
+            );
+        }
+
         $openApiType = $effectiveSchema->type;
 
         if ($openApiType === null) {
-            // If still null after resolving, try to infer based on properties/items if not already done
-            if (!empty($effectiveSchema->properties)) {
-                return Type::OBJECT_TYPE;
-            } elseif (isset($effectiveSchema->items)) {
+            if (isset($effectiveSchema->items)) {
                 return Type::ARRAY_TYPE;
             }
             throw new InvalidArgumentException(
