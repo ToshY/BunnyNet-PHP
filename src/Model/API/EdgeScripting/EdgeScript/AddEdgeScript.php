@@ -39,15 +39,15 @@ class AddEdgeScript implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'ScriptType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'CreateLinkedPullZone', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'LinkedPullZoneName', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Integration', type: Type::ARRAY_TYPE, children: [
+            new AbstractParameter(name: 'Integration', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'IntegrationId', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'RepositorySettings', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'RepositorySettings', type: Type::OBJECT_TYPE, children: [
                     new AbstractParameter(name: 'Id', type: Type::INT_TYPE),
                     new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'Private', type: Type::BOOLEAN_TYPE),
                     new AbstractParameter(name: 'TemplateUrl', type: Type::STRING_TYPE),
                 ]),
-                new AbstractParameter(name: 'DeployConfiguration', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: 'DeployConfiguration', type: Type::OBJECT_TYPE, children: [
                     new AbstractParameter(name: 'Branch', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'InstallCommand', type: Type::STRING_TYPE),
                     new AbstractParameter(name: 'BuildCommand', type: Type::STRING_TYPE),

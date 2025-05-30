@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\EndpointBodyInterface;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class AddEdgeRule implements EndpointInterface, EndpointBodyInterface
+class AddOrUpdateEdgeRule implements EndpointInterface, EndpointBodyInterface
 {
     public function getMethod(): Method
     {
@@ -38,12 +38,14 @@ class AddEdgeRule implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'ActionParameter1', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ActionParameter2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Triggers', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Type', type: Type::INT_TYPE, required: true),
+                    new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
+                        new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                    ]),
+                    new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE, required: true),
+                    new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
                 ]),
-                new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE, required: true),
             new AbstractParameter(name: 'Description', type: Type::STRING_TYPE),

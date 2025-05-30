@@ -36,6 +36,7 @@ class CreateVideo implements EndpointInterface, EndpointBodyInterface
         return [
             new AbstractParameter(name: 'title', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'collectionId', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'thumbnailTime', type: Type::INT_TYPE),
         ];
     }
 }

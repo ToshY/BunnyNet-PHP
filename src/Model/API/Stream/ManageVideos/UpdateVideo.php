@@ -37,17 +37,23 @@ class UpdateVideo implements EndpointInterface, EndpointBodyInterface
             new AbstractParameter(name: 'title', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'collectionId', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'chapters', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'title', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'start', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'end', type: Type::INT_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'title', type: Type::STRING_TYPE, required: true),
+                    new AbstractParameter(name: 'start', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'end', type: Type::INT_TYPE),
+                ]),
             ]),
             new AbstractParameter(name: 'moments', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'label', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'timestamp', type: Type::INT_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'label', type: Type::STRING_TYPE, required: true),
+                    new AbstractParameter(name: 'timestamp', type: Type::INT_TYPE),
+                ]),
             ]),
             new AbstractParameter(name: 'metaTags', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: 'property', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'value', type: Type::STRING_TYPE),
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'property', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'value', type: Type::STRING_TYPE),
+                ]),
             ]),
         ];
     }

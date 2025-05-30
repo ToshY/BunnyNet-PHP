@@ -15,6 +15,8 @@ use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
 use ToshY\BunnyNet\Model\API\Base\APIKeys\ListAPIKeys;
+use ToshY\BunnyNet\Model\API\Base\Auth\AuthJwt2fa;
+use ToshY\BunnyNet\Model\API\Base\Auth\RefreshJwt;
 use ToshY\BunnyNet\Model\API\Base\Billing\ApplyPromoCode;
 use ToshY\BunnyNet\Model\API\Base\Billing\ClaimAffiliateCredits;
 use ToshY\BunnyNet\Model\API\Base\Billing\ConfigureAutoRecharge;
@@ -47,7 +49,7 @@ use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
 use ToshY\BunnyNet\Model\API\Base\Integration\GetGitHubIntegration;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
@@ -67,7 +69,6 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityEnabled;
 use ToshY\BunnyNet\Model\API\Base\PullZone\SetZoneSecurityIncludeHashRemoteIPEnabled;
-use ToshY\BunnyNet\Model\API\Base\PullZone\UpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
 use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
@@ -238,6 +239,43 @@ class BaseAPI
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @throws Exception\InvalidTypeForKeyValueException
+     * @throws Exception\InvalidTypeForListValueException
+     * @throws Exception\ParameterIsRequiredException
+     * @return BunnyClientResponseInterface
+     * @param array<string,mixed> $body
+     */
+    public function authJwtTwoFactorAuthentication(array $body): BunnyClientResponseInterface
+    {
+        $endpoint = new AuthJwt2fa();
+
+        ParameterValidator::validate($body, $endpoint->getBody());
+
+        return $this->client->request(
+            endpoint: $endpoint,
+            body: BodyContentHelper::getBody($body),
+        );
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws Exception\BunnyClientResponseException
+     * @throws Exception\JSONException
+     * @return BunnyClientResponseInterface
+     */
+    public function refreshJwt(): BunnyClientResponseInterface
+    {
+        $endpoint = new RefreshJwt();
+
+        return $this->client->request(
+            endpoint: $endpoint,
         );
     }
 
@@ -677,25 +715,17 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $id
      */
     public function getVideoLibrary(
         int $id,
-        array $query = [],
     ): BunnyClientResponseInterface {
         $endpoint = new GetVideoLibrary();
-
-        ParameterValidator::validate($query, $endpoint->getQuery());
 
         return $this->client->request(
             endpoint: $endpoint,
             parameters: [$id],
-            query: $query,
         );
     }
 
@@ -1409,58 +1439,12 @@ class BaseAPI
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      * @param array<string,mixed> $body
-     *
-     * @deprecated since 4.5 (to be removed in 5.0). Use {@link addEdgeRule} or {@link updateEdgeRule} instead.
      */
     public function addOrUpdateEdgeRule(
         int $pullZoneId,
         array $body,
     ): BunnyClientResponseInterface {
-        return $this->addEdgeRule($pullZoneId, $body);
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $pullZoneId
-     * @param array<string,mixed> $body
-     */
-    public function addEdgeRule(
-        int $pullZoneId,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new AddEdgeRule();
-
-        ParameterValidator::validate($body, $endpoint->getBody());
-
-        return $this->client->request(
-            endpoint: $endpoint,
-            parameters: [$pullZoneId],
-            body: BodyContentHelper::getBody($body),
-        );
-    }
-
-    /**
-     * @throws ClientExceptionInterface
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
-     * @return BunnyClientResponseInterface
-     * @param int $pullZoneId
-     * @param array<string,mixed> $body
-     */
-    public function updateEdgeRule(
-        int $pullZoneId,
-        array $body,
-    ): BunnyClientResponseInterface {
-        $endpoint = new UpdateEdgeRule();
+        $endpoint = new AddOrUpdateEdgeRule();
 
         ParameterValidator::validate($body, $endpoint->getBody());
 

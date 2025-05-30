@@ -35,7 +35,7 @@ class SetEdgeRuleEnabled implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'Id', type: Type::INT_TYPE, required: true),
-            new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE, required: true),
+            new AbstractParameter(name: 'Value', type: Type::BOOLEAN_TYPE, required: true),
         ];
     }
 }

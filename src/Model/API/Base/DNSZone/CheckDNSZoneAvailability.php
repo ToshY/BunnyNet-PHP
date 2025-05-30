@@ -27,13 +27,14 @@ class CheckDNSZoneAvailability implements EndpointInterface, EndpointBodyInterfa
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
         ];
     }
 }

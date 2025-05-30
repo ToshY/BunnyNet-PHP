@@ -35,8 +35,8 @@ class ListStorageZones implements EndpointInterface, EndpointQueryInterface
         return [
             new AbstractParameter(name: 'page', type: Type::INT_TYPE),
             new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'includeDeleted', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
         ];
     }
 }

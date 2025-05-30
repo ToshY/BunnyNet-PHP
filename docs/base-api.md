@@ -88,6 +88,24 @@ $baseApi->checkAbuseCase(
 );
 ```
 
+### Auth
+
+#### [Auth JWT 2FA](https://docs.bunny.net/reference/authpublic_authjwt2fa)
+
+```php
+$baseApi->authJwtTwoFactorAuthentication(
+    body: [
+        'Code' => 'abc',
+    ],
+);
+```
+
+#### [Refresh JWT](https://docs.bunny.net/reference/authpublic_refreshjwt)
+
+```php
+$baseApi->refreshJwt();
+```
+
 ### Countries
 
 #### [List Countries](https://docs.bunny.net/reference/countriespublic_getcountrylist)
@@ -276,6 +294,8 @@ $baseApi->createTicket(
     body: [
         'Subject' => 'Good day!',
         'LinkedPullZone' => 1,
+        'LinkedVideoLibrary' => 3,
+        'LinkedDnsZone' => 4,
         'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
         'LinkedStorageZone' => 2,
         'Attachments' => [
@@ -360,7 +380,6 @@ $baseApi->listVideoLibraries(
         'page' => 0,
         'perPage' => 1000,
         'search' => 'bunny',
-        'includeAccessKey' => false,
     ],
 );
 ```
@@ -406,9 +425,6 @@ $baseApi->addVideoLibrary(
 ```php
 $baseApi->getVideoLibrary(
     id: 1,
-    query: [
-        'includeAccessKey' => false,
-    ],
 );
 ```
 
@@ -458,6 +474,20 @@ $baseApi->updateVideoLibrary(
         'EnableTranscribingTitleGeneration' => false,
         'EnableTranscribingDescriptionGeneration' => false,
         'TranscribingCaptionLanguages' => [],
+        'RememberPlayerPosition' => true,
+        'EnableMultiAudioTrackSupport' => true,
+        'UseSeparateAudioStream' => true,
+        'JitEncodingEnabled' => true,
+        'OutputCodecs' => 'x264,vp9,hevc,av1',
+        'AppleFairPlayDrm' => [
+            'Enabled' => false,
+        ],
+        'GoogleWidevineDrm' => [
+            'Enabled' => false,
+            'SdOnlyForL3' => false,
+            'WidevineMinClientSecurityLevel' => 1,
+        ],
+        'EncodingTier' => 0
     ],
 );
 ```
@@ -485,6 +515,9 @@ $baseApi->updateVideoLibrary(
         - `airplay`
         - `fullscreen`
     - To get a full list of possible value options for key `TranscribingCaptionLanguages`, see the [Get Languages](#get-languages) endpoint.
+    - The key `EncodingTier` has the following possible values:
+        - `0` = Free
+        - `1` = Premium
 
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
@@ -816,6 +849,7 @@ $baseApi->updateDnsRecord(
             ],
         ],
         'Comment' => '',
+        'Id' => 1,
     ],
 );
 ```
@@ -1316,7 +1350,7 @@ $baseApi->deletePullZone(
 #### [Add Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
 
 ```php
-$baseApi->addEdgeRule(
+$baseApi->addOrUpdateEdgeRule(
     pullZoneId: 1,
     body: [
         'ActionType' => 4,
@@ -1381,27 +1415,7 @@ $baseApi->addEdgeRule(
         - `0` = Match Any
         - `1` = Match All
         - `2` = Match None
-
-#### [Update Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
-
-```php
-$baseApi->updateEdgeRule(
-    pullZoneId: 1,
-    body: [
-        'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587',
-        'Triggers' => [
-            [
-                'Type' => 7,
-                'PatternMatches' => ['75']
-            ],
-        ],
-    ],
-);
-```
-
-!!! note
-
-    - The keys `Guid` and `Triggers` in the body are required parameters when updating an edge rule.
+    - The keys `Guid`, `Type` and `PatternMatchingType` in the body are required parameters when updating an edge rule.
 
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
 

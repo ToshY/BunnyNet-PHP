@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\API\Base\AbuseCase;
+namespace ToshY\BunnyNet\Model\API\Base\Auth;
 
+use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\EndpointInterface;
 
-class ResolveAbuseCase implements EndpointInterface
+class RefreshJwt implements EndpointInterface
 {
     public function getMethod(): Method
     {
@@ -16,11 +17,13 @@ class ResolveAbuseCase implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'abusecase/%d/resolve';
+        return 'auth/jwt/refresh';
     }
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            Header::ACCEPT_JSON,
+        ];
     }
 }

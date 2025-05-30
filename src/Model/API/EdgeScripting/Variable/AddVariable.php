@@ -35,7 +35,7 @@ class AddVariable implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE, required: true),
             new AbstractParameter(name: 'DefaultValue', type: Type::STRING_TYPE),
         ];
     }

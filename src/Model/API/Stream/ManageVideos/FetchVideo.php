@@ -36,16 +36,18 @@ class FetchVideo implements EndpointInterface, EndpointQueryInterface, EndpointB
     {
         return [
             new AbstractParameter(name: 'collectionId', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'thumbnailTime', type: Type::INT_TYPE),
         ];
     }
 
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'url', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'headers', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::ARRAY_TYPE),
+            new AbstractParameter(name: 'url', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'headers', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'title', type: Type::STRING_TYPE),
         ];
     }
 }

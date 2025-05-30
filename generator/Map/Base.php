@@ -11,6 +11,8 @@ use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetDMCACase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
 use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
+use ToshY\BunnyNet\Model\API\Base\Auth\AuthJwt2fa;
+use ToshY\BunnyNet\Model\API\Base\Auth\RefreshJwt;
 use ToshY\BunnyNet\Model\API\Base\Billing\ApplyPromoCode;
 use ToshY\BunnyNet\Model\API\Base\Billing\ClaimAffiliateCredits;
 use ToshY\BunnyNet\Model\API\Base\Billing\ConfigureAutoRecharge;
@@ -45,7 +47,7 @@ use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedIP;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddEdgeRule;
+use ToshY\BunnyNet\Model\API\Base\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteAllowedReferer as PullZoneDeleteAllowedReferer;
@@ -142,10 +144,10 @@ final class Base
             'post' => CheckAbuseCase::class,
         ],
         '/auth/jwt/2fa' => [
-            'post' => null,
+            'post' => AuthJwt2fa::class,
         ],
         '/auth/jwt/refresh' => [
-            'post' => null,
+            'post' => RefreshJwt::class,
         ],
         '/search' => [
             'get' => GlobalSearch::class,
@@ -295,7 +297,7 @@ final class Base
             'delete' => DeleteEdgeRule::class,
         ],
         '/pullzone/{pullZoneId}/edgerules/addOrUpdate' => [
-            'post' => AddEdgeRule::class,
+            'post' => AddOrUpdateEdgeRule::class,
         ],
         '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}/setEdgeRuleEnabled' => [
             'post' => SetEdgeRuleEnabled::class,
