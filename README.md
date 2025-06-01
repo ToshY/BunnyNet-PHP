@@ -58,6 +58,24 @@ task git:hooks
 > Note: Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 
 > You can also run these checks with `task contribute`.
 
+### 🤖 Automated PRs
+
+This repository has a workflow run (see [generator](.github/workflows/generator.yml)) that creates or updates existing [models](src/Model/API) based on the latest OpenAPI specifications and subsequently
+creates a (draft) PR for these changes. You can identify these automated PRs with the labels `OpenAPI` and `automated`.
+
+The automated PRs contain 3 tasks:
+- [x] Add/Update API models
+- [ ] Add/Update API public methods for corresponding models
+- [ ] Update documentation
+
+The first task is already done by the generator, but if you want to fix the other two tasks, please use the following way of working.
+
+1. Fork the repository and make sure to copy all branches (not just `master`).
+2. Create a branch based on the automated PR branch.
+   - The automated branches will be prefixed with `patch/automated-models` followed by a commit hash, e.g. `patch/automated-models-12efdf9`.
+3. Make the desired changes in your own branch.
+4. Create a PR with your branch, denote your changes and reference the existing automated (draft) PR.
+
 ## ❕ Licence
 
 This repository comes with a [MIT license](./LICENSE).
