@@ -1353,6 +1353,7 @@ $baseApi->deletePullZone(
 $baseApi->addOrUpdateEdgeRule(
     pullZoneId: 1,
     body: [
+        'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587', // required for update, not add
         'ActionType' => 4,
         'ActionParameter1' => '',
         'ActionParameter2' => '',
