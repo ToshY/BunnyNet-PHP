@@ -30,7 +30,7 @@ class ResetReadOnlyPassword implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'id', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'id', type: Type::INT_TYPE, required: true),
         ];
     }
 }

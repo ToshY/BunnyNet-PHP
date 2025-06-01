@@ -33,7 +33,7 @@ class GetOEmbed implements EndpointInterface, EndpointQueryInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'url', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'url', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'maxWidth', type: Type::INT_TYPE),
             new AbstractParameter(name: 'maxHeight', type: Type::INT_TYPE),
             new AbstractParameter(name: 'token', type: Type::STRING_TYPE),

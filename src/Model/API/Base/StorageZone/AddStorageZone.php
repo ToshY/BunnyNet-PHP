@@ -35,12 +35,12 @@ class AddStorageZone implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'OriginUrl', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Region', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'Region', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'ReplicationRegions', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
-            new AbstractParameter(name: 'Region', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'ZoneTier', type: Type::INT_TYPE, required: true),
         ];
     }
 }

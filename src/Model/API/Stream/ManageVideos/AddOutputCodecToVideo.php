@@ -17,7 +17,7 @@ class AddOutputCodecToVideo implements EndpointInterface
 
     public function getPath(): string
     {
-        return 'library/%d/videos/%s/outputs/%s';
+        return 'library/%d/videos/%s/outputs/%d';
     }
 
     public function getHeaders(): array

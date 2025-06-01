@@ -27,6 +27,7 @@ class CreatePaymentCheckout implements EndpointInterface, EndpointBodyInterface
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
@@ -34,7 +35,7 @@ class CreatePaymentCheckout implements EndpointInterface, EndpointBodyInterface
     {
         return [
             new AbstractParameter(name: 'RechargeAmount', type: Type::NUMERIC_TYPE, required: true),
-            new AbstractParameter(name: 'PaymentMethodToken', type: Type::NUMERIC_TYPE),
+            new AbstractParameter(name: 'PaymentAmount', type: Type::NUMERIC_TYPE, required: true),
             new AbstractParameter(name: 'PaymentRequestId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Nonce', type: Type::STRING_TYPE, required: true),
         ];

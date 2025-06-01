@@ -24,7 +24,6 @@ class DeleteCaption implements EndpointInterface
     {
         return [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON_ALL,
         ];
     }
 }

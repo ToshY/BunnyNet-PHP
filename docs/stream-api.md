@@ -167,6 +167,7 @@ $streamApi->createVideo(
     body: [
         'title' => 'Bunny Hoppers',
         'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+        'thumbnailTime' => 10000,
     ],
 );
 ```
@@ -176,7 +177,7 @@ $streamApi->createVideo(
     - The `title` does not need to match the video filename and/or extension you're intending to upload.
     - A `collectionId` is not required.
     - The response returns the video's GUID, which is required for video upload (see [Upload Video](#upload-video)).
-
+    - The `thumbnailTime` denotes the video time in milliseconds to extract the main video thumbnail.
 
 #### [Upload Video](https://docs.bunny.net/reference/video_uploadvideo)
 
@@ -197,7 +198,12 @@ $streamApi->uploadVideo(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     body: $content,
     query: [
+        'jitEnabled' => true,
         'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
+        'enabledOutputCodecs' => 'x264,vp9',
+        'transcribeEnabled' => true,
+        'transcribeLanguages' => 'fi,jp',
+        'sourceLanguage' => 'en',
     ],
 );
 ```
@@ -336,12 +342,18 @@ $streamApi->fetchVideo(
             'newKey-1' => 'New Value 1',
             'newKey-2' => 'New Value 2',
         ],
+        'title' => 'Title for the video',
     ],
     query: [
         'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+        'thumbnailTime' => 10000,
     ],
 );
 ```
+
+!!! note
+
+    - The `thumbnailTime` denotes the video time in milliseconds to extract the main video thumbnail.
 
 #### [Add Caption](https://docs.bunny.net/reference/video_addcaption)
 
@@ -398,6 +410,15 @@ $streamApi->transcribeVideo(
         'language' => 'fi',
         'force' => true,
     ],
+    body: [
+        'targetLanguages' => [
+            'fi',
+            'jp'
+        ],
+        'generateTitle' => true,
+        'generateDescription' => true,
+        'sourceLanguage' => 'en',
+    ],   
 );
 ```
 
@@ -405,6 +426,7 @@ $streamApi->transcribeVideo(
 
     - The `language` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
     - Once a video has transcribed you need to set `force` to `true` in order to force a new transcription to be added.
+    - The body parameter `sourceLanguage` takes precedence over the query parameter `language`.
 
 #### [Video resolutions info](https://docs.bunny.net/reference/video_getvideoresolutions)
 
@@ -414,6 +436,10 @@ $streamApi->videoResolutionsInfo(
     videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
 );
 ```
+
+!!! warning
+
+    - This endpoint returns a `500` status code if the video has not been fully processed yet.
 
 #### [Cleanup unconfigured resolutions](https://docs.bunny.net/reference/video_deleteresolutions)
 

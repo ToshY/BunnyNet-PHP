@@ -53,6 +53,11 @@ $edgeScriptingApi->setCode(
 ```php
 $edgeScriptingApi->listEdgeScripts(
     query: [
+        'type' => [
+            0,
+            1,
+            2,
+        ],
         'page' => 1,
         'perPage' => 1000,
         'search' => 'Test',
@@ -61,6 +66,13 @@ $edgeScriptingApi->listEdgeScripts(
     ],
 );
 ```
+
+!!! note
+
+    - The key `type` has the following possible values:
+        - `0` = DNS (DNS scripts)
+        - `1` = Standalone (Standalone scripts are ideal for a wide range of applications, such as building RESTful APIs, delivering UI applications, and processing data at the edge.)
+        - `2` = Middleware (Middleware scripts common use cases include user authentication, error handling, logging, security enhancements, A/B testing, HTML manipulation, and more.)
 
 #### [Add Edge Script](https://docs.bunny.net/reference/createedgescriptendpoint_addscript)
 

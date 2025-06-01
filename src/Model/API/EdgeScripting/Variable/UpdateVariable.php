@@ -34,8 +34,8 @@ class UpdateVariable implements EndpointInterface, EndpointBodyInterface
     public function getBody(): array
     {
         return [
+            new AbstractParameter(name: 'DefaultValue', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Required', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'DefaultValue', type: Type::NUMERIC_TYPE),
         ];
     }
 }

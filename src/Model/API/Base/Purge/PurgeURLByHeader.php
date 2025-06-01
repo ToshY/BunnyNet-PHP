@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\API\Base\Purge;
 
+use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
@@ -24,7 +25,9 @@ class PurgeURLByHeader implements EndpointInterface, EndpointQueryInterface
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            Header::ACCEPT_JSON,
+        ];
     }
 
     public function getQuery(): array
