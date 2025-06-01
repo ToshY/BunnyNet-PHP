@@ -27,7 +27,7 @@ edge storage, video streaming, image optimizers and much more!
 ## 🧰 Install
 
 ```bash
-composer require toshy/bunnynet-php:^5.0
+composer require toshy/bunnynet-php:^6.0
 ```
 
 ## 📜 Documentation
