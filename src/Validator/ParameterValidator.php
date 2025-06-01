@@ -56,7 +56,7 @@ class ParameterValidator
 
                 throw UnexpectedParameterForObjectException::withKeyAndContext(
                     key: $actualKey,
-                    context: $parentKey ? 'nested object "' . $parentKey . '"' : 'root object',
+                    parent: $parentKey,
                     expectedKeys: $expectedParameterNames,
                 );
             }
@@ -123,6 +123,7 @@ class ParameterValidator
                         $itemValue[$abstractParameterObjectName] ?? null,
                         $abstractParameterObjectType,
                         $abstractParameterObjectChildren,
+                        $parentKey,
                     );
                 }
 
@@ -150,6 +151,7 @@ class ParameterValidator
                 $values[$abstractParameterObjectName] ?? null,
                 $abstractParameterObjectType,
                 $abstractParameterObjectChildren,
+                $parentKey,
             );
         }
     }
@@ -174,6 +176,7 @@ class ParameterValidator
         mixed $values,
         Type $abstractParameterObjectType,
         ?array $abstractParameterObjectChildren,
+        ?string $parentKey,
     ): void {
         if (
             true === $parameterIsRequired
@@ -181,6 +184,7 @@ class ParameterValidator
         ) {
             throw ParameterIsRequiredException::withKey(
                 key: $abstractParameterObjectName,
+                parent: $parentKey,
             );
         }
 

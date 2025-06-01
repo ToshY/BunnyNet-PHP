@@ -8,15 +8,15 @@ use Exception;
 
 class UnexpectedParameterForObjectException extends Exception
 {
-    public const MESSAGE = 'Unexpected parameter `%s provided for `%s`%s.';
+    public const MESSAGE = 'Unexpected parameter `%s` provided%s%s.';
 
     /**
      * @param string $key
-     * @param string $context
+     * @param string|null $parent
      * @param string[] $expectedKeys
      * @return self
      */
-    public static function withKeyAndContext(string $key, string $context, array $expectedKeys = []): self
+    public static function withKeyAndContext(string $key, string|null $parent, array $expectedKeys = []): self
     {
         $expectedKeysPart = '';
         if (empty($expectedKeys) === false) {
@@ -27,7 +27,7 @@ class UnexpectedParameterForObjectException extends Exception
             sprintf(
                 self::MESSAGE,
                 $key,
-                $context,
+                $parent ? sprintf(' (at parent key `%s`)', $parent) : '',
                 $expectedKeysPart,
             ),
         );

@@ -437,6 +437,10 @@ $streamApi->videoResolutionsInfo(
 );
 ```
 
+!!! warning
+
+    - This endpoint returns a `500` status code if the video has not been fully processed yet.
+
 #### [Cleanup unconfigured resolutions](https://docs.bunny.net/reference/video_deleteresolutions)
 
 ```php

@@ -183,6 +183,7 @@ class ParameterValidatorTest extends TestCase
             sprintf(
                 ParameterIsRequiredException::MESSAGE,
                 'RequiredProp',
+                ' (at parent key `MyObject`)',
             ),
         );
 
@@ -240,7 +241,14 @@ class ParameterValidatorTest extends TestCase
     public function testArrayOfObjectsParameterThrowsExceptionOnMismatchedKey(): void
     {
         $this->expectException(UnexpectedParameterForObjectException::class);
-        $this->expectExceptionMessage('Unexpected parameter `EnvironmentalVariables provided for `root object`, expected one of: [Variables].');
+        $this->expectExceptionMessage(
+            sprintf(
+                UnexpectedParameterForObjectException::MESSAGE,
+                'EnvironmentalVariables',
+                null,
+                ', expected one of: [Variables]',
+            ),
+        );
 
         $template = [
             new AbstractParameter(name: 'Variables', type: Type::ARRAY_TYPE, children: [
