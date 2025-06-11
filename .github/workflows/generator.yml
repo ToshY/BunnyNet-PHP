@@ -31,6 +31,7 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7.0.8
+        id: cpr
         with:
           commit-message: Updated API models
           title: '[OpenAPI] Updated API models'
