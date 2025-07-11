@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Exception;
+namespace ToshY\BunnyNet\Exception\Validation;
 
 use Exception;
 use ToshY\BunnyNet\Enum\Type;
 
-class InvalidTypeForListValueException extends Exception
+class InvalidTypeForKeyValueException extends Exception implements BunnyValidatorExceptionInterface
 {
-    public const MESSAGE = 'Key `%s` expected list value of type `%s` got `%s` (%s).';
+    public const MESSAGE = 'Key `%s` expected value of type `%s` got `%s` (%s).';
 
-    public static function withParentKeyValueType(
-        string $parentKey,
+    public static function withKeyValueType(
+        string $key,
         Type $expectedValueType,
         mixed $actualValue,
     ): self {
         return new self(
             sprintf(
                 self::MESSAGE,
-                $parentKey,
+                $key,
                 $expectedValueType->value,
                 gettype($actualValue),
                 is_array($actualValue) === true ? json_encode($actualValue) : $actualValue,

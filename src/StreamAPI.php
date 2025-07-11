@@ -8,10 +8,10 @@ use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Exception\BunnyClientResponseException;
-use ToshY\BunnyNet\Exception\InvalidTypeForKeyValueException;
-use ToshY\BunnyNet\Exception\InvalidTypeForListValueException;
 use ToshY\BunnyNet\Exception\JSONException;
-use ToshY\BunnyNet\Exception\ParameterIsRequiredException;
+use ToshY\BunnyNet\Exception\Validation\BunnyValidatorExceptionInterface;
+use ToshY\BunnyNet\Exception\Validation\InvalidTypeForKeyValueException;
+use ToshY\BunnyNet\Exception\Validation\InvalidTypeForListValueException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\DeleteCollection;
@@ -20,9 +20,9 @@ use ToshY\BunnyNet\Model\API\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\API\Stream\ManageCollections\UpdateCollection;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddOutputCodecToVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteUnconfiguredResolutions;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\CreateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteCaption;
+use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteUnconfiguredResolutions;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideo;
@@ -39,17 +39,19 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Model\API\Stream\OEmbed\GetOEmbed;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class StreamAPI
 {
     /**
      * @param string $apiKey
      * @param BunnyClient $client
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -60,9 +62,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $collectionId
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -75,7 +75,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetCollection();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -88,9 +88,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $collectionId
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -103,7 +101,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateCollection();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -136,9 +134,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -149,7 +145,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ListCollections();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -162,9 +158,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      * @param array<string,mixed> $body
@@ -175,7 +169,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new CreateCollection();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -208,9 +202,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $videoId
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -223,7 +215,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateVideo();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -256,9 +248,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $libraryId
      * @param array<string,mixed> $body
@@ -269,7 +259,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new CreateVideo();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -282,9 +272,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param mixed $body
@@ -299,7 +287,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UploadVideo();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -335,7 +323,7 @@ class StreamAPI
      * @throws InvalidTypeForKeyValueException
      * @throws InvalidTypeForListValueException
      * @throws JSONException
-     * @throws ParameterIsRequiredException
+     * @throws BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
@@ -348,7 +336,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetVideoPlayData();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -361,9 +349,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -374,7 +360,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ListVideoStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -431,7 +417,7 @@ class StreamAPI
      * @throws InvalidTypeForKeyValueException
      * @throws InvalidTypeForListValueException
      * @throws JSONException
-     * @throws ParameterIsRequiredException
+     * @throws BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
@@ -444,7 +430,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new RepackageVideo();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -457,9 +443,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $libraryId
@@ -470,7 +454,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ListVideos();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -483,9 +467,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
@@ -498,7 +480,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new SetThumbnail();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -511,9 +493,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $body
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -526,8 +506,8 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new FetchVideo();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->query($query, $endpoint);
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -541,9 +521,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param string $sourceLanguage
@@ -558,7 +536,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddCaption();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -593,9 +571,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
@@ -608,7 +584,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new TranscribeVideo();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -641,9 +617,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $libraryId
      * @param string $videoId
      * @param array<string,mixed> $query
@@ -656,7 +630,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new DeleteUnconfiguredResolutions();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -669,9 +643,7 @@ class StreamAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -680,7 +652,7 @@ class StreamAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetOEmbed();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,

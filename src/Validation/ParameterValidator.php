@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Validator;
+namespace ToshY\BunnyNet\Validation;
 
 use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Exception\InvalidTypeForKeyValueException;
-use ToshY\BunnyNet\Exception\InvalidTypeForListValueException;
-use ToshY\BunnyNet\Exception\ParameterIsRequiredException;
-use ToshY\BunnyNet\Exception\UnexpectedParameterForObjectException;
+use ToshY\BunnyNet\Exception\Validation\InvalidTypeForKeyValueException;
+use ToshY\BunnyNet\Exception\Validation\InvalidTypeForListValueException;
+use ToshY\BunnyNet\Exception\Validation\ParameterIsRequiredException;
+use ToshY\BunnyNet\Exception\Validation\UnexpectedParameterForObjectException;
 use ToshY\BunnyNet\Model\AbstractParameter;
 
 class ParameterValidator

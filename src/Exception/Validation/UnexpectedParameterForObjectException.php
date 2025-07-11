@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Exception;
+namespace ToshY\BunnyNet\Exception\Validation;
 
 use Exception;
 
-class UnexpectedParameterForObjectException extends Exception
+class UnexpectedParameterForObjectException extends Exception implements BunnyValidatorExceptionInterface
 {
     public const MESSAGE = 'Unexpected parameter `%s` provided%s%s.';
 

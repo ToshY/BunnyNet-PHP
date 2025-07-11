@@ -8,11 +8,10 @@ use Psr\Http\Client\ClientExceptionInterface;
 use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Exception\BunnyClientResponseException;
-use ToshY\BunnyNet\Exception\InvalidTypeForKeyValueException;
-use ToshY\BunnyNet\Exception\InvalidTypeForListValueException;
 use ToshY\BunnyNet\Exception\JSONException;
-use ToshY\BunnyNet\Exception\ParameterIsRequiredException;
 use ToshY\BunnyNet\Helper\BodyContentHelper;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Code\GetCode;
+use ToshY\BunnyNet\Model\API\EdgeScripting\Code\SetCode;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\AddEdgeScript;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\DeleteEdgeScript;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\GetEdgeScript;
@@ -20,8 +19,6 @@ use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\GetEdgeScriptStatistics;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\ListEdgeScripts;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\RotateDeploymentKey;
 use ToshY\BunnyNet\Model\API\EdgeScripting\EdgeScript\UpdateEdgeScript;
-use ToshY\BunnyNet\Model\API\EdgeScripting\Code\GetCode;
-use ToshY\BunnyNet\Model\API\EdgeScripting\Code\SetCode;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Release\GetActiveReleases;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Release\GetReleases;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Release\PublishRelease;
@@ -37,17 +34,19 @@ use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\GetVariable;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\UpdateVariable;
 use ToshY\BunnyNet\Model\API\EdgeScripting\Variable\UpsertVariable;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class EdgeScriptingAPI
 {
     /**
      * @param string $apiKey
      * @param BunnyClient $client
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -75,9 +74,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -88,7 +85,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new SetCode();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -100,10 +97,8 @@ class EdgeScriptingAPI
     /**
      * @throws ClientExceptionInterface
      * @throws BunnyClientResponseException
-     * @throws InvalidTypeForKeyValueException
-     * @throws InvalidTypeForListValueException
      * @throws JSONException
-     * @throws ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $id
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -112,7 +107,7 @@ class EdgeScriptingAPI
     {
         $endpoint = new DeleteEdgeScript();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -142,9 +137,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -153,7 +146,7 @@ class EdgeScriptingAPI
     {
         $endpoint = new UpdateEdgeScript();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -165,10 +158,8 @@ class EdgeScriptingAPI
     /**
      * @throws ClientExceptionInterface
      * @throws BunnyClientResponseException
-     * @throws InvalidTypeForKeyValueException
-     * @throws InvalidTypeForListValueException
      * @throws JSONException
-     * @throws ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $id
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -177,7 +168,7 @@ class EdgeScriptingAPI
     {
         $endpoint = new GetEdgeScriptStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -190,9 +181,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -200,7 +189,7 @@ class EdgeScriptingAPI
     {
         $endpoint = new ListEdgeScripts();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -212,9 +201,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -222,7 +209,7 @@ class EdgeScriptingAPI
     {
         $endpoint = new AddEdgeScript();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -251,9 +238,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -264,7 +249,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddVariable();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -317,9 +302,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $variableId
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -332,7 +315,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateVariable();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -345,9 +328,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -358,7 +339,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpsertVariable();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -371,9 +352,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -384,7 +363,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddSecret();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -397,9 +376,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $id
      * @return BunnyClientResponseInterface
      */
@@ -417,9 +394,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -430,7 +405,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpsertSecret();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -463,9 +438,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $secretId
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -478,7 +451,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateSecret();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -508,9 +481,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -521,7 +492,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetReleases();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -534,9 +505,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -547,7 +516,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new PublishRelease();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -560,9 +529,7 @@ class EdgeScriptingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $uuid
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -575,7 +542,7 @@ class EdgeScriptingAPI
     ): BunnyClientResponseInterface {
         $endpoint = new PublishReleaseByPathParameter();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,

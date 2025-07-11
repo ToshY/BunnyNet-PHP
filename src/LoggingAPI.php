@@ -10,17 +10,19 @@ use ToshY\BunnyNet\Client\BunnyClient;
 use ToshY\BunnyNet\Enum\Host;
 use ToshY\BunnyNet\Model\API\Logging\GetLog;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class LoggingAPI
 {
     /**
      * @param string $apiKey
      * @param BunnyClient $client
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -31,9 +33,7 @@ class LoggingAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $pullZoneId
      * @param DateTimeInterface $dateTime
      * @param array<string,mixed> $query
@@ -47,7 +47,7 @@ class LoggingAPI
         $endpoint = new GetLog();
         $dateTimeFormat = $dateTime->format('m-d-y');
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
