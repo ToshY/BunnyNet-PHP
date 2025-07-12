@@ -208,8 +208,10 @@ use ToshY\BunnyNet\Model\API\Stream\ManageVideos\TranscribeVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Model\API\Stream\OEmbed\GetOEmbed;
+use ToshY\BunnyNet\Validation\Strategy\Body\LaxBodyValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\Body\NoBodyValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\Body\StrictBodyValidationStrategy;
+use ToshY\BunnyNet\Validation\Strategy\Query\LaxQueryValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\Query\NoQueryValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\Query\StrictQueryValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\ValidationModelStrategy;
@@ -221,6 +223,8 @@ enum ModelStrategy
     case STRICT_QUERY;
 
     case STRICT_BODY;
+
+    case LAX;
 
     case NONE;
 
@@ -482,6 +486,10 @@ enum ModelStrategy
             self::STRICT_BODY => new ValidationModelStrategy(
                 query: new NoQueryValidationStrategy(),
                 body: new StrictBodyValidationStrategy(),
+            ),
+            self::LAX => new ValidationModelStrategy(
+                query: new LaxQueryValidationStrategy(),
+                body: new LaxBodyValidationStrategy(),
             ),
             self::NONE => new ValidationModelStrategy(
                 query: new NoQueryValidationStrategy(),
