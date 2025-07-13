@@ -9,17 +9,11 @@ Bunny Stream was designed for developers to easily upload, process, and display 
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\StreamAPI;
-
-$bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client()
-);
-
-// Provide the specific video library API key.
-$streamApi = new StreamAPI(
+$bunnyHttpClient = new BunnyHttpClient(
+    client: new \Symfony\Component\HttpClient\Psr18Client(),
+    // Provide the specific video library API key.
     apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc',
-    client: $bunnyClient
+    baseUrl: Endpoint::STREAM
 );
 ```
 

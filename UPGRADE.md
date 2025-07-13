@@ -1,3 +1,11 @@
+## 7.x
+
+### ‼️ Breaking changes
+
+@todo
+
+The `6.x` branch will now no longer be maintained.
+
 ## 6.x
 
 This release comes with minor breaking changes for public methods that have been removed to ensure OpenAPI specifications compatibility.
@@ -47,6 +55,8 @@ The following bugs were discovered after the generator scripts recreated the mod
 | Stream API         | UPDATE     | [`transcribeVideo`](https://toshy.github.io/BunnyNet-PHP/stream-api/#transcribe-video)                        | Header `CONTENT_TYPE_JSON` added; Query parameter `language` not required; Body parameters `targetLanguages`, `generateTitle`, `generateDescription`, `sourceLanguage` added                                                                                              |
 | Stream API         | UPDATE     | [`getOEmbed`](https://toshy.github.io/BunnyNet-PHP/stream-api/#get-oembed)                                    | Query parameter `url` not required                                                                                                                                                                                                                                        |
 
+
+The `5.x` branch will now no longer be maintained.
 
 ### 🚀 Enhancements
 

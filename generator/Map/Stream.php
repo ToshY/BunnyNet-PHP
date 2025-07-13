@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Generator\Map;
 
-use ToshY\BunnyNet\Model\API\Stream\ManageCollections\CreateCollection;
-use ToshY\BunnyNet\Model\API\Stream\ManageCollections\DeleteCollection;
-use ToshY\BunnyNet\Model\API\Stream\ManageCollections\GetCollection;
-use ToshY\BunnyNet\Model\API\Stream\ManageCollections\ListCollections;
-use ToshY\BunnyNet\Model\API\Stream\ManageCollections\UpdateCollection;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddCaption;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\AddOutputCodecToVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\CreateVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteCaption;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteUnconfiguredResolutions;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\DeleteVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\FetchVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoHeatmap;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoPlayData;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\GetVideoResolutionsInfo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideoStatistics;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ListVideos;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\ReEncodeVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\RepackageVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\SetThumbnail;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\TranscribeVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UpdateVideo;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
-use ToshY\BunnyNet\Model\API\Stream\OEmbed\GetOEmbed;
+use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\CreateCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections;
+use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CreateVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteCaption;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteUnconfiguredResolutions;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoResolutionsInfo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Model\Api\Stream\OEmbed\GetOEmbed;
 
 final class Stream
 {

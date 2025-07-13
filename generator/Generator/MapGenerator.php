@@ -23,7 +23,7 @@ use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\OpenApiModelUtils;
 use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
-use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\ModelInterface;
 
 class MapGenerator
 {
@@ -108,7 +108,7 @@ class MapGenerator
 
             $reflectionClass = new ReflectionClass($fqcn);
             if (
-                $reflectionClass->implementsInterface(EndpointInterface::class) === false
+                $reflectionClass->implementsInterface(ModelInterface::class) === false
                 || $reflectionClass->isInstantiable() === false
 
             ) {

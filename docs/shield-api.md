@@ -1,4 +1,4 @@
-# Base API
+# Shield API
 
 Bunny Shield: a powerful, next-generation web security suite—built to democratize access to serious, scalable protection that supports you from the moment you go live.
 
@@ -9,17 +9,14 @@ Bunny Shield: a powerful, next-generation web security suite—built to democrat
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\ShieldAPI;
-use ToshY\BunnyNet\Client\BunnyClient;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
+$bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
-);
-
-// Provide the account API key.
-$shieldApi = new ShieldAPI(
+    // Provide the account API key.
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient,
+    baseUrl: Endpoint::SHIELD
 );
 ```
 

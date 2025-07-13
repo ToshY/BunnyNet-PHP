@@ -27,7 +27,7 @@ edge storage, video streaming, image optimizers and much more!
 ## 🧰 Install
 
 ```bash
-composer require toshy/bunnynet-php:^6.0
+composer require toshy/bunnynet-php:^7.0
 ```
 
 ## 📜 Documentation
@@ -63,12 +63,11 @@ task git:hooks
 This repository has a workflow run (see [generator](.github/workflows/generator.yml)) that creates or updates existing [models](src/Model/API) based on the latest OpenAPI specifications and subsequently
 creates a (draft) PR for these changes. You can identify these automated PRs with the labels `OpenAPI` and `automated`.
 
-The automated PRs contain 3 tasks:
+The automated PRs contain two tasks:
 - [x] Add/Update API models
-- [ ] Add/Update API public methods for corresponding models
 - [ ] Update documentation
 
-The first task is already done by the generator, but if you want to fix the other two tasks, please use the following way of working.
+The first task is already done by the generator, but if you want to fix the other task, please use the following way of working.
 
 1. Fork the repository and make sure to copy all branches (not just `master`).
 2. Create a branch based on the automated PR branch.

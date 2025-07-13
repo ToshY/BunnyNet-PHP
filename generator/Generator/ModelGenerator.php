@@ -18,11 +18,16 @@ use cebe\openapi\SpecObjectInterface;
 use Exception;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\PsrPrinter;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
 use Throwable;
+use ToshY\BunnyNet\Attributes\BodyProperty;
+use ToshY\BunnyNet\Attributes\HeaderProperty;
+use ToshY\BunnyNet\Attributes\PathProperty;
+use ToshY\BunnyNet\Attributes\QueryProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\MimeType;
@@ -36,9 +41,9 @@ use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
 use ToshY\BunnyNet\Generator\Utils\OpenApiModelUtils;
 use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
 use ToshY\BunnyNet\Model\AbstractParameter;
-use ToshY\BunnyNet\Model\EndpointBodyInterface;
-use ToshY\BunnyNet\Model\EndpointInterface;
-use ToshY\BunnyNet\Model\EndpointQueryInterface;
+use ToshY\BunnyNet\Model\BodyModelInterface;
+use ToshY\BunnyNet\Model\ModelInterface;
+use ToshY\BunnyNet\Model\QueryModelInterface;
 
 class ModelGenerator
 {
@@ -191,6 +196,10 @@ class ModelGenerator
             operation: $operation,
         );
 
+        $newSpecsHeaderParameters = $this->processParametersForHeader(
+            operation: $operation,
+        );
+
         $bodyParameters = [];
         if ($operation->requestBody !== null) {
             $bodyParameters = $this->processBodySchema($operation);
@@ -204,6 +213,7 @@ class ModelGenerator
             $existingClassHeaders,
             $newSpecsPathParameters,
             $newSpecsQueryParameters,
+            $newSpecsHeaderParameters,
             $bodyParameters,
             $operation,
         );
@@ -279,6 +289,7 @@ class ModelGenerator
      * @param array<array<string,string>> $existingClassHeaders
      * @param array<string,mixed> $pathParameters
      * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $queryParameters
+     * @param array<string,mixed> $headerParameters
      * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $bodyParameters
      * @param Operation $operation
      * @return string
@@ -291,6 +302,7 @@ class ModelGenerator
         array $existingClassHeaders,
         array $pathParameters,
         array $queryParameters,
+        array $headerParameters,
         array $bodyParameters,
         Operation $operation,
     ): string {
@@ -300,25 +312,36 @@ class ModelGenerator
         $namespace = $file->addNamespace($namespace);
         $namespace->addUse(Method::class);
         $namespace->addUse(Type::class);
-        $namespace->addUse(EndpointInterface::class);
+        $namespace->addUse(ModelInterface::class);
 
-        $implements = [EndpointInterface::class];
+        $implements = [ModelInterface::class];
         if (empty($queryParameters) === false) {
-            $implements[] = EndpointQueryInterface::class;
-            $namespace->addUse(EndpointQueryInterface::class);
+            $implements[] = QueryModelInterface::class;
+            $namespace->addUse(QueryModelInterface::class);
         }
 
         if (empty($bodyParameters) === false) {
-            $implements[] = EndpointBodyInterface::class;
-            $namespace->addUse(EndpointBodyInterface::class);
+            $implements[] = BodyModelInterface::class;
+            $namespace->addUse(BodyModelInterface::class);
         }
 
         if (empty($queryParameters) === false || empty($bodyParameters) === false) {
             $namespace->addUse(AbstractParameter::class);
         }
 
+        $constructorReplacements = [];
+        if (isset($this->replacements[$className]['constructor']) === true) {
+            $constructorReplacements = $this->replacements[$className]['constructor'];
+        }
+
+        $hasQueryParameters = in_array(QueryModelInterface::class, $implements, true);
+        $hasBodyParameters = in_array(BodyModelInterface::class, $implements, true);
+
         $class = $namespace->addClass($className);
         $class->setImplements($implements);
+        if (empty($constructorReplacements) === false || $hasQueryParameters === true || $hasBodyParameters === true || empty($headerParameters) === false) {
+            $this->addConstructor($namespace, $class, $pathParameters, $constructorReplacements, $headerParameters, $hasQueryParameters, $hasBodyParameters);
+        }
         $this->addMethod($class, $httpMethod);
         $this->addPath($class, $path, $pathParameters);
 
@@ -327,11 +350,11 @@ class ModelGenerator
             $namespace->addUse(Header::class);
         }
 
-        if (in_array(EndpointQueryInterface::class, $implements, true) === true) {
+        if ($hasQueryParameters === true) {
             $this->addQuery($class, $queryParameters);
         }
 
-        if (in_array(EndpointBodyInterface::class, $implements, true)) {
+        if ($hasBodyParameters === true) {
             $this->addBody($class, $bodyParameters);
         }
 
@@ -349,6 +372,128 @@ class ModelGenerator
         }
 
         return [];
+    }
+
+    /**
+     * @param PhpNamespace $namespace
+     * @param ClassType $class
+     * @param array<string,mixed> $pathParameters
+     * @param array<string,mixed> $replacements
+     * @param array<string,mixed> $headerParameters
+     * @param bool $hasQueryParameters
+     * @param bool $hasBodyParameters
+     * @return void
+     */
+    private function addConstructor(
+        PhpNamespace $namespace,
+        ClassType $class,
+        array $pathParameters,
+        array $replacements,
+        array $headerParameters,
+        bool $hasQueryParameters,
+        bool $hasBodyParameters,
+    ): void {
+        $constructor = $class->addMethod('__construct');
+        $constructor->setPublic();
+
+        $constructorComments = [];
+        foreach ($pathParameters as $param) {
+            $name = $param['name'];
+            $type = self::getPhpTypeFromOpenApiType($param['type']);
+            if (
+                array_key_exists($name, $replacements) === true
+                && array_key_exists('type', $replacements[$name])
+            ) {
+                $type = self::getPhpTypeFromOpenApiType($replacements[$name]['type']);
+            }
+
+            $constructor->addPromotedParameter($name)
+                ->setType($type)
+                ->setVisibility('public')
+                ->addAttribute(PathProperty::class)
+                ->setReadOnly();
+
+            $constructorComments[] = sprintf('@param %s $%s', $type, $name);
+        }
+
+        if (empty($pathParameters) === false) {
+            $namespace->addUse(PathProperty::class);
+        }
+
+        $queryType = $replacements['query']['type'] ?? 'array';
+        if ($hasQueryParameters === true || empty($replacements['query']) === false) {
+            $type = self::getPhpTypeFromOpenApiType($queryType);
+            $queryComment = match ($type) {
+                'array' => 'array<string,mixed>',
+                default => $type,
+            };
+
+            $constructorComments[] = sprintf('@param %s $query', $queryComment);
+
+            $property = $constructor->addPromotedParameter('query')
+                ->setType($type)
+                ->setVisibility('public')
+                ->addAttribute(QueryProperty::class)
+                ->setReadOnly();
+
+            // Always set the default value except if the value is null
+            $defaultValue = [];
+            if (
+                !array_key_exists('query', $replacements)
+                || !array_key_exists('default', $replacements['query'])
+                || $replacements['query']['default'] !== null
+            ) {
+                $property->setDefaultValue($replacements['query']['default'] ?? $defaultValue);
+            }
+
+            $namespace->addUse(QueryProperty::class);
+        }
+
+        $bodyType = $replacements['body']['type'] ?? 'array';
+        if ($hasBodyParameters === true || empty($replacements['body']) === false) {
+            $type = self::getPhpTypeFromOpenApiType($bodyType);
+            $bodyComment = match ($type) {
+                'array' => 'array<string,mixed>',
+                default => $type,
+            };
+
+            $constructorComments[] = sprintf('@param %s $body', $bodyComment);
+
+            $property = $constructor->addPromotedParameter('body')
+                ->setType($type)
+                ->setVisibility('public')
+                ->addAttribute(BodyProperty::class)
+                ->setReadOnly();
+
+            // Always set the default value except if the value is null
+            $defaultValue = [];
+            if (
+                !array_key_exists('body', $replacements)
+                || !array_key_exists('default', $replacements['body'])
+                || $replacements['body']['default'] !== null
+            ) {
+                $property->setDefaultValue($replacements['body']['default'] ?? $defaultValue);
+            }
+
+            $namespace->addUse(BodyProperty::class);
+        }
+
+        if (empty($headerParameters) === false) {
+            $constructor->addPromotedParameter('headers')
+                ->setType('array')
+                ->setVisibility('public')
+                ->addAttribute(HeaderProperty::class)
+                ->setDefaultValue([])
+                ->setReadOnly();
+
+            $constructorComments[] = '@param array<string,string> $headers';
+
+            $namespace->addUse(HeaderProperty::class);
+        }
+
+        foreach ($constructorComments as $comment) {
+            $constructor->addComment($comment);
+        }
     }
 
     /**
@@ -594,6 +739,35 @@ class ModelGenerator
         return $parameters;
     }
 
+    /**
+     * @param Operation $operation
+     * @return array<mixed>
+     */
+    private function processParametersForHeader(
+        Operation $operation,
+    ): array {
+        $parameters = [];
+        foreach ($operation->parameters ?? [] as $parameter) {
+            /** @var Parameter $parameter */
+            $paramName = $parameter->name;
+            /* @phpstan-ignore-next-line nullsafe.neverNull */
+            $paramType = $parameter->schema?->type ?? 'string';
+
+            // Skip the "AccessKey" header if its defined in the parameters, as this is handled by API/Client already
+            if ($parameter->in !== 'header' || $paramName === 'AccessKey') {
+                continue;
+            }
+
+            $parameters[] = [
+                'name' => $paramName,
+                'type' => $paramType,
+                'required' => $parameter->required ?? false,
+            ];
+        }
+
+        return $parameters;
+    }
+
     private function createNewNamespace(string $originalNamespace): string
     {
         // Extract the API type (e.g., Base, Stream) from the original namespace
@@ -628,7 +802,7 @@ class ModelGenerator
 
                 try {
                     $reflectionClass = new ReflectionClass($endpointClass);
-                    /** @var EndpointInterface $instance */
+                    /** @var ModelInterface $instance */
                     $instance = $reflectionClass->newInstance();
 
                     $existingEndpoints[$endpointClass] = [
@@ -781,5 +955,19 @@ class ModelGenerator
             $namespace,
             $class,
         ];
+    }
+
+    public static function getPhpTypeFromOpenApiType(string $openApiType): string
+    {
+        return match ($openApiType) {
+            'string' => Type::STRING_TYPE->value,
+            'integer' => Type::INT_TYPE->value,
+            'number' => 'float',
+            'boolean' => Type::BOOLEAN_TYPE->value,
+            'array' => Type::ARRAY_TYPE->value,
+            'object' => 'array',
+            'mixed' => 'mixed',
+            default => throw new \InvalidArgumentException("Unknown OpenAPI type: $openApiType"),
+        };
     }
 }

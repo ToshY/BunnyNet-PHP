@@ -4,24 +4,17 @@ Bunny Optimizer is a real-time on the fly image manipulation and optimization se
 images for faster image delivery, bandwidth savings and enables smart dynamic image manipulation using a simple query
 API.
 
-## Setup
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-use ToshY\BunnyNet\ImageProcessor;
-
-$imageProcessor = new ImageProcessor();
-```
-
 ## Usage
 
 Generate URL with optimization parameters.
 
 ```php
-$imageProcessor->generate(
+<?php
+require 'vendor/autoload.php';
+
+use ToshY\BunnyNet\BunnyImageProcessor;
+
+BunnyImageProcessor::generate(
     url: 'https://myzone.b-cdn.net/bunny.jpg',
     optimization: [
         'width' => 200,

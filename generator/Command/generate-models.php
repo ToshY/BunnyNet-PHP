@@ -7,7 +7,10 @@ use ToshY\BunnyNet\Generator\Generator\ModelGenerator;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
+use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -15,7 +18,7 @@ $options = getopt('', ['log']);
 $showDiscrepancyLog = isset($options['log']);
 
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
-$modelOutputDirectory = __DIR__ . '/../../src/Model/API';
+$modelOutputDirectory = __DIR__ . '/../../src/Model/API2';
 $baseMapNamespace = 'ToshY\\BunnyNet\\Generator\\Map';
 
 $file = FileUtils::getFile($apiSpecManifest);
@@ -47,8 +50,42 @@ foreach ($manifests as $file) {
     };
 
     $replacements = match ($key) {
+        'Base' => [
+            ClassUtils::getShortClassName(ImportDnsRecords::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+        ],
+        'EdgeStorage' => [
+            ClassUtils::getShortClassName(DownloadZip::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+            ClassUtils::getShortClassName(UploadFile::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+        ],
         'Stream' => [
             ClassUtils::getShortClassName(UploadVideo::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
                 'headers' => array_merge(
                     Header::ACCEPT_JSON,
                     Header::CONTENT_TYPE_OCTET_STREAM,

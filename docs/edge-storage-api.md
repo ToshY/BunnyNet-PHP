@@ -9,33 +9,16 @@ Edge Storage is a cloud storage solution provided by bunny.net that automaticall
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\EdgeStorageAPI;
-use ToshY\BunnyNet\Enum\Region;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
+$bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
-);
-
-// Provide the password of the specific storage zone.
-$edgeStorageApi = new EdgeStorageAPI(
+    // Provide the password of the specific storage zone.
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
-    client: $bunnyClient,
-    region: Region::FS,
+    baseUrl: Endpoint::EDGE_STORAGE_FS
 );
 ```
-
-!!! note 
-    - The argument `region` has the following possible values:
-        - `Region::DE` = Falkenstein / Frankfurt (Germany)
-        - `Region::UK` = London (United Kingdom)
-        - `Region::NY` = New York (United States East)
-        - `Region::LA` = Los Angeles (United States West)
-        - `Region::SG` = Singapore (Singapore)
-        - `Region::SYD` = Sydney (Oceania)
-        - `Region::BR` = Sao Paolo (Brazil)
-        - `Region::JH` = Johannesburg (Africa)
-    - The `Region` is a backed enum, so you can supply a value to the `Region::from` or `Region::tryFrom` method to retrieve the corresponding case.
 
 ## Usage
 

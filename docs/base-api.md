@@ -11,17 +11,14 @@ Everything that can be done with the control panel can also be achieved with the
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\BaseAPI;
-use ToshY\BunnyNet\Client\BunnyClient;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
+$bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
-);
-
-// Provide the account API key.
-$baseApi = new BaseAPI(
+    // Provide the account API key.
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient,
+    baseUrl: Endpoint::BASE
 );
 ```
 
@@ -32,12 +29,14 @@ $baseApi = new BaseAPI(
 #### [List Abuse Cases](https://docs.bunny.net/reference/abusecasepublic_index)
 
 ```php
-$baseApi->listAbuseCases(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
-);
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ListAbuseCases(
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+        ],
+    )
+)
 ```
 
 #### [Get DMCA Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase)

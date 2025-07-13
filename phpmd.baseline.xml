@@ -1,23 +1,11 @@
 <?xml version="1.0"?>
 <phpmd-baseline>
-  <violation rule="PHPMD\Rule\Design\LongClass" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\ExcessivePublicCount" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyMethods" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\WeightedMethodCount" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/BaseAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/EdgeScriptingAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/EdgeScriptingAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/EdgeStorageAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/AddPullZone.php" method="getBody"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/API/Base/PullZone/UpdatePullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/BunnyTokenAuthentication.php" method="sign"/>
+  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/BunnyTokenAuthentication.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/Helper/BunnyHttpClientHelper.php"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/ShieldAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/ShieldAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\TooManyPublicMethods" file="src/StreamAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/StreamAPI.php"/>
-  <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/TokenAuthentication.php" method="sign"/>
-  <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/TokenAuthentication.php"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Base/PullZone/AddPullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Base/PullZone/UpdatePullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\NpathComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Validation/ParameterValidator.php" method="validate"/>

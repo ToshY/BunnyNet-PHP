@@ -40,7 +40,6 @@ jobs:
 
             Checklist:
             - [x] Add/Update API models
-            - [ ] Add/Update API public methods for corresponding models
             - [ ] Update documentation
           branch: patch/automated-models
           branch-suffix: short-commit-hash
