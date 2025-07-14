@@ -7,7 +7,7 @@ namespace ToshY\BunnyNet\Exception\Client;
 use Exception;
 use Throwable;
 
-class BunnyClientResponseException extends Exception
+class BunnyHttpClientResponseException extends Exception
 {
     public function __construct(string $message, int $code = 0, Throwable|null $previous = null)
     {

@@ -7,7 +7,7 @@ namespace ToshY\BunnyNet;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use ToshY\BunnyNet\Exception\Client\BunnyClientResponseException;
+use ToshY\BunnyNet\Exception\Client\BunnyHttpClientResponseException;
 use ToshY\BunnyNet\Exception\Client\BunnyJsonException;
 use ToshY\BunnyNet\Helper\BunnyHttpClientHelper;
 use ToshY\BunnyNet\Model\Client\BunnyHttpClientResponseInterface;
@@ -23,7 +23,7 @@ class BunnyHttpClient
     }
 
     /**
-     * @throws BunnyClientResponseException
+     * @throws BunnyHttpClientResponseException
      * @throws ClientExceptionInterface
      * @throws BunnyJsonException
      * @return BunnyHttpClientResponseInterface

@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Attributes\HeaderProperty;
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Attributes\QueryProperty;
 use ToshY\BunnyNet\Enum\MimeType;
-use ToshY\BunnyNet\Exception\Client\BunnyClientResponseException;
+use ToshY\BunnyNet\Exception\Client\BunnyHttpClientResponseException;
 use ToshY\BunnyNet\Exception\Client\BunnyJsonException;
 use ToshY\BunnyNet\Model\Client\BunnyHttpClientPayload;
 use ToshY\BunnyNet\Model\Client\BunnyHttpClientResponse;
@@ -131,7 +131,7 @@ class BunnyHttpClientHelper
     }
 
     /**
-     * @throws BunnyClientResponseException
+     * @throws BunnyHttpClientResponseException
      * @throws BunnyJsonException
      * @return BunnyHttpClientResponseInterface
      * @param RequestInterface $request
@@ -146,7 +146,7 @@ class BunnyHttpClientHelper
         if ($statusCode < 200 || $statusCode >= 400) {
             $body = (string) $response->getBody();
 
-            throw new BunnyClientResponseException($body, $statusCode);
+            throw new BunnyHttpClientResponseException($body, $statusCode);
         }
 
         try {

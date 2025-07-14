@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet;
 
 use ToshY\BunnyNet\Enum\ModelStrategy;
-use ToshY\BunnyNet\Enum\ValidationType;
 use ToshY\BunnyNet\Exception\Validation\BunnyValidatorExceptionInterface;
 use ToshY\BunnyNet\Helper\BunnyValidatorHelper;
 use ToshY\BunnyNet\Model\BodyModelInterface;
@@ -20,10 +19,12 @@ class BunnyValidator
      * @param array<class-string,ModelStrategy> $modelStrategyOverride
      */
     public function __construct(
-        ValidationType $validationType = ValidationType::MODEL,
         array $modelStrategyOverride = [],
     ) {
-        $this->modelStrategy = $validationType->getStrategy($modelStrategyOverride);
+        $this->modelStrategy = array_merge(
+            ModelStrategy::all(),
+            $modelStrategyOverride,
+        );
     }
 
     /**

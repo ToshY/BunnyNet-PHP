@@ -9,6 +9,9 @@ Bunny Stream was designed for developers to easily upload, process, and display 
 
 require 'vendor/autoload.php';
 
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
+
 $bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
     // Provide the specific video library API key.
