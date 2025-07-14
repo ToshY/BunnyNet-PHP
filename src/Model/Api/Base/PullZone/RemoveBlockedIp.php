@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary;
+namespace ToshY\BunnyNet\Model\Api\Base\PullZone;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteBlockedReferer implements ModelInterface, BodyModelInterface
+class RemoveBlockedIp implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class DeleteBlockedReferer implements ModelInterface, BodyModelInterface
 
     public function getPath(): string
     {
-        return 'videolibrary/%d/removeBlockedReferrer';
+        return 'pullzone/%d/removeBlockedIp';
     }
 
     public function getHeaders(): array
@@ -34,7 +34,7 @@ class DeleteBlockedReferer implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'BlockedIp', type: Type::STRING_TYPE, required: true),
         ];
     }
 }

@@ -2,39 +2,39 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\WAF;
+namespace ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
-use ToshY\BunnyNet\Model\QueryModelInterface;
 
-class ListCustomWafRules implements ModelInterface, QueryModelInterface
+class RemoveBlockedReferer implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
-        return Method::GET;
+        return Method::POST;
     }
 
     public function getPath(): string
     {
-        return 'shield/waf/custom-rules/%d';
+        return 'videolibrary/%d/removeBlockedReferrer';
     }
 
     public function getHeaders(): array
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
-    public function getQuery(): array
+    public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'page', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'perPage', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
         ];
     }
 }

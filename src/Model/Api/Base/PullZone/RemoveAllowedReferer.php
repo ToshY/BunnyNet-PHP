@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteAllowedReferer implements ModelInterface, BodyModelInterface
+class RemoveAllowedReferer implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {

@@ -51,9 +51,9 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteAllowedReferer as PullZoneDeleteAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteBlockedReferer as PullZoneDeleteBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneDeleteAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneDeleteBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
@@ -91,8 +91,8 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as VideoL
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as VideoLibraryAddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteAllowedReferer as VideoLibraryDeleteAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteBlockedReferer as VideoLibraryDeleteBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer as VideoLibraryDeleteAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as VideoLibraryDeleteBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
@@ -154,7 +154,7 @@ use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadFile;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Api\Logging\GetLog;
-use ToshY\BunnyNet\Model\Api\Shield\DDoS\ListDdosEnums;
+use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
@@ -165,19 +165,19 @@ use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\DeleteRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\GetRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\ListRateLimits;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\UpdateRateLimit;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\CreateCustomWafRule;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\DeleteCustomWafRule;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\GetCustomWafRule;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ListCustomWafRules;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ListWafEngineConfiguration;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ListWafEnums;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ListWafProfiles;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ListWafRules;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ReviewTriggeredRule;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ReviewTriggeredRuleAiRecommendation;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\ReviewTriggeredRules;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\UpdateCustomWafRule;
-use ToshY\BunnyNet\Model\Api\Shield\WAF\UpdateCustomWafRuleByPatch;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\CreateCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\DeleteCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\GetCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListCustomWafRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEngineConfiguration;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEnums;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafProfiles;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRuleAiRecommendation;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRuleByPatch;
 use ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId;
@@ -192,7 +192,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CreateVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteCaption;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteUnconfiguredResolutions;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo;
@@ -200,7 +200,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoResolutionsInfo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
@@ -317,7 +317,7 @@ enum ModelStrategy
         PullZoneAddBlockedReferer::class => self::STRICT_BODY,
         PullZoneDeleteBlockedReferer::class => self::STRICT_BODY,
         AddBlockedIp::class => self::STRICT_BODY,
-        DeleteBlockedIp::class => self::STRICT_BODY,
+        RemoveBlockedIp::class => self::STRICT_BODY,
         PurgeUrl::class => self::STRICT_QUERY,
         PurgeUrlByHeader::class => self::STRICT_QUERY,
         GetStatistics::class => self::STRICT_QUERY,
@@ -442,7 +442,7 @@ enum ModelStrategy
         UploadVideo::class => self::STRICT_QUERY,
         GetVideoHeatmap::class => self::NONE,
         GetVideoPlayData::class => self::STRICT_QUERY,
-        ListVideoStatistics::class => self::STRICT_QUERY,
+        GetVideoStatistics::class => self::STRICT_QUERY,
         ReEncodeVideo::class => self::NONE,
         AddOutputCodecToVideo::class => self::NONE,
         RepackageVideo::class => self::STRICT_QUERY,
@@ -453,7 +453,7 @@ enum ModelStrategy
         DeleteCaption::class => self::NONE,
         TranscribeVideo::class => self::STRICT_QUERY,
         GetVideoResolutionsInfo::class => self::NONE,
-        DeleteUnconfiguredResolutions::class => self::STRICT_QUERY,
+        CleanupUnconfiguredResolutions::class => self::STRICT_QUERY,
         GetOEmbed::class => self::STRICT_QUERY,
     ];
 

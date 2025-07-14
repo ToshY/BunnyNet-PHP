@@ -1,6 +1,6 @@
 # Base API
 
-Base endpoint for pull zones, video libraries, storage zones, billing, support, and more. 
+Base endpoint for pull zones, video libraries, storage zones, billing, support, and more.
 <br />
 Everything that can be done with the control panel can also be achieved with the API.
 
@@ -42,8 +42,12 @@ $bunnyHttpClient->request(
 #### [Get DMCA Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase)
 
 ```php
-$baseApi->getDmcaCase(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetDmcaCase(
+        path: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
@@ -54,8 +58,12 @@ $baseApi->getDmcaCase(
 #### [Get Abuse Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase2)
 
 ```php
-$baseApi->getAbuseCase(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetAbuseCase(
+        path: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
@@ -66,24 +74,36 @@ $baseApi->getAbuseCase(
 #### [Resolve DMCA Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase)
 
 ```php
-$baseApi->resolveDmcaCase(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveDmcaCase(
+        path: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
 #### [Resolve Abuse Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase2)
 
 ```php
-$baseApi->resolveAbuseCase(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveAbuseCase(
+        path: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
 #### [Check Abuse Case](https://docs.bunny.net/reference/abusecasepublic_checkabusecase)
 
 ```php
-$baseApi->checkAbuseCase(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\CheckAbuseCase(
+        path: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
@@ -92,17 +112,21 @@ $baseApi->checkAbuseCase(
 #### [Auth JWT 2FA](https://docs.bunny.net/reference/authpublic_authjwt2fa)
 
 ```php
-$baseApi->authJwtTwoFactorAuthentication(
-    body: [
-        'Code' => 'abc',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Auth\AuthJwt2fa(
+        body: [
+            'Code' => 'abc',
+        ],
+    )
 );
 ```
 
 #### [Refresh JWT](https://docs.bunny.net/reference/authpublic_refreshjwt)
 
 ```php
-$baseApi->refreshJwt();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Auth\RefreshJwt()
+);
 ```
 
 ### Countries
@@ -110,7 +134,9 @@ $baseApi->refreshJwt();
 #### [List Countries](https://docs.bunny.net/reference/countriespublic_getcountrylist)
 
 ```php
-$baseApi->listCountries();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Countries\ListCountries()
+);
 ```
 
 ### API Keys
@@ -118,11 +144,13 @@ $baseApi->listCountries();
 #### [List API Keys](https://docs.bunny.net/reference/apikeypublic_listapikeys)
 
 ```php
-$baseApi->listApiKeys(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\ApiKeys\ListApiKeys(
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+        ],
+    )
 );
 ```
 
@@ -138,19 +166,23 @@ $baseApi->listApiKeys(
 #### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
 
 ```php
-$baseApi->getBillingDetails();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingDetails()
+);
 ```
 
 #### [Configure Auto Recharge](https://docs.bunny.net/reference/billingpublic_configureautorecharge)
 
 ```php
-$baseApi->configureAutoRecharge(
-    body: [
-        'AutoRechargeEnabled' => true,
-        'PaymentMethodToken' => 1000,
-        'PaymentAmount' => 10,
-        'RechargeTreshold' => 2,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\ConfigureAutoRecharge(
+        body: [
+            'AutoRechargeEnabled' => true,
+            'PaymentMethodToken' => 1000,
+            'PaymentAmount' => 10,
+            'RechargeTreshold' => 2,
+        ],
+    )
 );
 ```
 
@@ -162,13 +194,15 @@ $baseApi->configureAutoRecharge(
 #### [Create Payment Checkout](https://docs.bunny.net/reference/billingpublic_checkout)
 
 ```php
-$baseApi->createPaymentCheckout(
-    body: [
-        'RechargeAmount' => 10,
-        'PaymentAmount' => 10,
-        'PaymentRequestId' => 123456,
-        'Nonce' => 'ab',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\CreatePaymentCheckout(
+        body: [
+            'RechargeAmount' => 10,
+            'PaymentAmount' => 10,
+            'PaymentRequestId' => 123456,
+            'Nonce' => 'ab',
+        ],
+    )
 );
 ```
 
@@ -179,58 +213,76 @@ $baseApi->createPaymentCheckout(
 #### [Prepare Payment Authorization](https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization)
 
 ```php
-$baseApi->preparePaymentAuthorization();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\PreparePaymentAuthorization()
+);
 ```
 
 #### [Get Affiliate Details](https://docs.bunny.net/reference/billingpublic_affiliatedetails)
 
 ```php
-$baseApi->getAffiliateDetails();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\GetAffiliateDetails()
+);
 ```
 
 #### [Claim Affiliate Credits](https://docs.bunny.net/reference/billingpublic_affiliateclaim)
 
 ```php
-$baseApi->claimAffiliateCredits();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\ClaimAffiliateCredits()
+);
 ```
 
 #### [Get The Coinify Bitcoin exchange rate](https://docs.bunny.net/reference/billingpublic_coinifyexchangerate)
 
 ```php
-$baseApi->getCoinifyBitcoinExchangeRate();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\GetCoinifyBitcoinExchangeRate()
+);
 ```
 
 #### [Create Coinify payment](https://docs.bunny.net/reference/billingpublic_createcoinifypayment)
 
 ```php
-$baseApi->createCoinifyPayment(
-    query: [
-        'amount' => 123,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\CreateCoinifyPayment(
+        query: [
+            'amount' => 123,
+        ],
+    )
 );
 ```
 
 #### [Get Billing Summary](https://docs.bunny.net/reference/billingpublic_summary)
 
 ```php
-$baseApi->getBillingSummary();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummary()
+);
 ```
 
 #### [Get Billing Summary PDF](https://docs.bunny.net/reference/billingpublic_summarypdf)
 
 ```php
-$baseApi->getBillingSummaryPdf(
-    billingRecordId: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF(
+        path: [
+            'billingRecordId' => 1,
+        ],
+    )
 );
 ```
 
 #### [Apply Promo Code](https://docs.bunny.net/reference/billingpublic_applycode)
 
 ```php
-$baseApi->applyPromoCode(
-    query: [
-        'CouponCode' => 'YOUFOUNDME',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Billing\ApplyPromoCode(
+        query: [
+            'CouponCode' => 'YOUFOUNDME',
+        ],
+    )
 );
 ```
 
@@ -239,45 +291,53 @@ $baseApi->applyPromoCode(
 #### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
 
 ```php
-$baseApi->listTickets(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Support\ListTickets(
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+        ],
+    )
 );
 ```
 
 #### [Get Ticket Details](https://docs.bunny.net/reference/supportpublic_index2)
 
 ```php
-$baseApi->getTicketDetails(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Support\GetTicketDetails(
+        id: 1,
+    )
 );
 ```
 
 #### [Close Ticket](https://docs.bunny.net/reference/supportpublic_close)
 
 ```php
-$baseApi->closeTicket(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket(
+        id: 1,
+    )
 );
 ```
 
 #### [Reply Ticket](https://docs.bunny.net/reference/supportpublic_reply)
 
 ```php
-$baseApi->closeTicket(
-    id: 1,
-    body: [
-        'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
-        'Attachments' => [
-            [
-                'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
-                'FileName' => 'details.txt',
-                'ContentType' => 'text/plain',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Support\ReplyTicket(
+        id: 1,
+        body: [
+            'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
+            'Attachments' => [
+                [
+                    'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
+                    'FileName' => 'details.txt',
+                    'ContentType' => 'text/plain',
+                ],
             ],
         ],
-    ],
+    )
 );
 ```
 
@@ -288,23 +348,25 @@ $baseApi->closeTicket(
 #### [Create Ticket](https://docs.bunny.net/reference/supportpublic_createticket)
 
 ```php
-$baseApi->createTicket(
-    id: 1,
-    body: [
-        'Subject' => 'Good day!',
-        'LinkedPullZone' => 1,
-        'LinkedVideoLibrary' => 3,
-        'LinkedDnsZone' => 4,
-        'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
-        'LinkedStorageZone' => 2,
-        'Attachments' => [
-            [
-                'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
-                'FileName' => 'details.txt',
-                'ContentType' => 'text/plain',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket(
+        id: 1,
+        body: [
+            'Subject' => 'Good day!',
+            'LinkedPullZone' => 1,
+            'LinkedVideoLibrary' => 3,
+            'LinkedDnsZone' => 4,
+            'Message' => 'Hope you are having a nice day!\n\nThe weather is nice outside.',
+            'LinkedStorageZone' => 2,
+            'Attachments' => [
+                [
+                    'Body' => 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==',
+                    'FileName' => 'details.txt',
+                    'ContentType' => 'text/plain',
+                ],
             ],
         ],
-    ],
+    )
 );
 ```
 
@@ -318,11 +380,13 @@ $baseApi->createTicket(
 #### [List DRM Certificates](https://docs.bunny.net/reference/drmcertificatepublic_index)
 
 ```php
-$baseApi->listDrmCertificates(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates(	
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+        ],
+    )
 );
 ```
 
@@ -339,7 +403,9 @@ $baseApi->listDrmCertificates(
 #### Get GitHub Integration
 
 ```php
-$baseApi->getGitHubIntegration();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration()
+);
 ```
 
 !!! warning
@@ -366,7 +432,9 @@ $baseApi->getGitHubIntegration();
 #### [List Regions](https://docs.bunny.net/reference/regionpublic_index)
 
 ```php
-$baseApi->listRegions();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Region\ListRegions()
+);
 ```
 
 ### Stream Video Library
@@ -374,12 +442,14 @@ $baseApi->listRegions();
 #### [List Video Libraries](https://docs.bunny.net/reference/videolibrarypublic_index)
 
 ```php
-$baseApi->listVideoLibraries(
-    query: [
-        'page' => 0,
-        'perPage' => 1000,
-        'search' => 'bunny',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries(
+        query: [
+            'page' => 0,
+            'perPage' => 1000,
+            'search' => 'bunny',
+        ],
+    )
 );
 ```
 
@@ -390,25 +460,27 @@ $baseApi->listVideoLibraries(
 #### [Add Video Library](https://docs.bunny.net/reference/videolibrarypublic_add)
 
 ```php
-$baseApi->addVideoLibrary(
-    body: [
-        'Name' => 'New Video Library',
-        'ReplicationRegions' => [
-            'UK',
-            'SE',
-            'NY',
-            'LA',
-            'SG',
-            'SYD',
-            'BR',
-            'JH',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary(
+        body: [
+            'Name' => 'New Video Library',
+            'ReplicationRegions' => [
+                'UK',
+                'SE',
+                'NY',
+                'LA',
+                'SG',
+                'SYD',
+                'BR',
+                'JH',
+            ],
         ],
-    ],
+    )
 );
 ```
 
 !!! note
-    
+
     - The key `ReplicationRegions` has the following possible values:
         - `UK` = London (United Kingdom)
         - `SE` = Norway (Stockholm)
@@ -422,72 +494,76 @@ $baseApi->addVideoLibrary(
 #### [Get Video Library](https://docs.bunny.net/reference/videolibrarypublic_index2)
 
 ```php
-$baseApi->getVideoLibrary(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary(	
+        id: 1,
+    ),
 );
 ```
 
 #### [Update Video Library](https://docs.bunny.net/reference/videolibrarypublic_update)
 
 ```php
-$baseApi->updateVideoLibrary(
-    id: 1,
-    body: [
-        'Name' => 'New Video Library V2',
-        'CustomHTML' => '<style>.plyr--full-ui input[type=range]{color: purple}</style>',
-        'PlayerKeyColor' => '6a329f',
-        'EnableTokenAuthentication' => true,
-        'EnableTokenIPVerification' => false,
-        'ResetToken' => false,
-        'WatermarkPositionLeft' => 0,
-        'WatermarkPositionTop' => 0,
-        'WatermarkWidth' => 0,
-        'WatermarkHeight' => 0,
-        'EnabledResolutions' => '720p,1080p,1440p,2160p',
-        'ViAiPublisherId' => '',
-        'VastTagUrl' => '',
-        'WebhookUrl' => 'https://example.com/video-status',
-        'CaptionsFontSize' => 20,
-        'CaptionsFontColor' => 'white',
-        'CaptionsBackground' => 'black',
-        'UILanguage' => 'GR',
-        'AllowEarlyPlay' => true,
-        'PlayerTokenAuthenticationEnabled' => true,
-        'BlockNoneReferrer' => true,
-        'EnableMP4Fallback' => true,
-        'KeepOriginalFiles' => true,
-        'AllowDirectPlay' => true,
-        'EnableDRM' => false,
-        'Controls' => 'play,progress,current-time,mute,volume,pip,fullscreen',
-        'Bitrate240p' => 600,
-        'Bitrate360p' => 800,
-        'Bitrate480p' => 1400,
-        'Bitrate720p' => 2800,
-        'Bitrate1080p' => 5000,
-        'Bitrate1440p' => 8000,
-        'Bitrate2160p' => 25000,
-        'ShowHeatmap' => false,
-        'EnableContentTagging' => true,
-        'FontFamily' => 'Arial',
-        'EnableTranscribing' => false,
-        'EnableTranscribingTitleGeneration' => false,
-        'EnableTranscribingDescriptionGeneration' => false,
-        'TranscribingCaptionLanguages' => [],
-        'RememberPlayerPosition' => true,
-        'EnableMultiAudioTrackSupport' => true,
-        'UseSeparateAudioStream' => true,
-        'JitEncodingEnabled' => true,
-        'OutputCodecs' => 'x264,vp9,hevc,av1',
-        'AppleFairPlayDrm' => [
-            'Enabled' => false,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary(
+        id: 1,
+        body: [
+            'Name' => 'New Video Library V2',
+            'CustomHTML' => '<style>.plyr--full-ui input[type=range]{color: purple}</style>',
+            'PlayerKeyColor' => '6a329f',
+            'EnableTokenAuthentication' => true,
+            'EnableTokenIPVerification' => false,
+            'ResetToken' => false,
+            'WatermarkPositionLeft' => 0,
+            'WatermarkPositionTop' => 0,
+            'WatermarkWidth' => 0,
+            'WatermarkHeight' => 0,
+            'EnabledResolutions' => '720p,1080p,1440p,2160p',
+            'ViAiPublisherId' => '',
+            'VastTagUrl' => '',
+            'WebhookUrl' => 'https://example.com/video-status',
+            'CaptionsFontSize' => 20,
+            'CaptionsFontColor' => 'white',
+            'CaptionsBackground' => 'black',
+            'UILanguage' => 'GR',
+            'AllowEarlyPlay' => true,
+            'PlayerTokenAuthenticationEnabled' => true,
+            'BlockNoneReferrer' => true,
+            'EnableMP4Fallback' => true,
+            'KeepOriginalFiles' => true,
+            'AllowDirectPlay' => true,
+            'EnableDRM' => false,
+            'Controls' => 'play,progress,current-time,mute,volume,pip,fullscreen',
+            'Bitrate240p' => 600,
+            'Bitrate360p' => 800,
+            'Bitrate480p' => 1400,
+            'Bitrate720p' => 2800,
+            'Bitrate1080p' => 5000,
+            'Bitrate1440p' => 8000,
+            'Bitrate2160p' => 25000,
+            'ShowHeatmap' => false,
+            'EnableContentTagging' => true,
+            'FontFamily' => 'Arial',
+            'EnableTranscribing' => false,
+            'EnableTranscribingTitleGeneration' => false,
+            'EnableTranscribingDescriptionGeneration' => false,
+            'TranscribingCaptionLanguages' => [],
+            'RememberPlayerPosition' => true,
+            'EnableMultiAudioTrackSupport' => true,
+            'UseSeparateAudioStream' => true,
+            'JitEncodingEnabled' => true,
+            'OutputCodecs' => 'x264,vp9,hevc,av1',
+            'AppleFairPlayDrm' => [
+                'Enabled' => false,
+            ],
+            'GoogleWidevineDrm' => [
+                'Enabled' => false,
+                'SdOnlyForL3' => false,
+                'WidevineMinClientSecurityLevel' => 1,
+            ],
+            'EncodingTier' => 0
         ],
-        'GoogleWidevineDrm' => [
-            'Enabled' => false,
-            'SdOnlyForL3' => false,
-            'WidevineMinClientSecurityLevel' => 1,
-        ],
-        'EncodingTier' => 0
-    ],
+    )
 );
 ```
 
@@ -521,59 +597,73 @@ $baseApi->updateVideoLibrary(
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
 ```php
-$baseApi->deleteVideoLibrary(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary(
+        id: 1,
+    )
 );
 ```
 
 #### [Get Languages](https://docs.bunny.net/reference/videolibrarypublic_index3)
 
 ```php
-$baseApi->getLanguages();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages()
+);
 ```
 
 #### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
 
 ```php
-$baseApi->resetVideoLibraryPassword(
-    query: [
-        'id' => 1,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword(
+        query: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
 #### [Reset Password (by path parameter)](https://docs.bunny.net/reference/videolibrarypublic_resetpassword2)
 
 ```php
-$baseApi->resetVideoLibraryPasswordByPathParameter(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter(
+        id: 1,
+    )
 );
 ```
 
 #### [Add Watermark](https://docs.bunny.net/reference/videolibrarypublic_addwatermark)
 
 ```php
-$baseApi->addWatermark(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark(   		
+        id: 1,
+    )
 );
 ```
 
 #### [Delete Watermark](https://docs.bunny.net/reference/videolibrarypublic_deletewatermark)
 
 ```php
-$baseApi->deleteWatermark(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark(
+        id: 1,
+    )
 );
 ```
 
 #### [Add Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer)
 
 ```php
-$baseApi->addVideoLibraryAllowedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.example.com,*.example.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer(
+        id: 1,
+        body: [
+            'Hostname' => '*.example.com,*.example.org',
+        ],
+    )
 );
 ```
 
@@ -584,11 +674,13 @@ $baseApi->addVideoLibraryAllowedReferer(
 #### [Remove Allowed Referer](https://docs.bunny.net/reference/videolibrarypublic_removeallowedreferrer)
 
 ```php
-$baseApi->removeVideoLibraryAllowedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer(
+        id: 1,
+        body: [
+            'Hostname' => '*.example.com',
+        ],
+    )
 );
 ```
 
@@ -599,11 +691,13 @@ $baseApi->removeVideoLibraryAllowedReferer(
 #### [Add Blocked Referer](ttps://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
 
 ```php
-$baseApi->addVideoLibraryBlockedReferer(
-    id: 1,
-    body: [
-        'Hostname' => 'evil.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer(
+        id: 1,
+        body: [
+            'Hostname' => 'evil.org',
+        ],
+    )
 );
 ```
 
@@ -614,11 +708,13 @@ $baseApi->addVideoLibraryBlockedReferer(
 #### [Remove Blocked Referer](https://docs.bunny.net/reference/videolibrarypublic_removeblockedreferrer)
 
 ```php
-$baseApi->removeVideoLibraryBlockedReferer(
-    id: 1,
-    body: [
-        'Hostname' => 'evil.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer(
+        id: 1,
+        body: [
+            'Hostname' => 'evil.org',
+        ],
+    )
 );
 ```
 
@@ -631,12 +727,14 @@ $baseApi->removeVideoLibraryBlockedReferer(
 #### [List DNS Zones](https://docs.bunny.net/reference/dnszonepublic_index)
 
 ```php
-$baseApi->listDnsZones(
-    query: [
-        'page' => 1,
-        'perPage' => 1000,
-        'search' => 'bunny.net',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\ListDnsZones(
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+            'search' => 'bunny.net',
+        ],
+    )
 );
 ```
 
@@ -648,35 +746,41 @@ $baseApi->listDnsZones(
 #### [Add DNS Zone](https://docs.bunny.net/reference/dnszonepublic_add)
 
 ```php
-$baseApi->addDnsZone(
-    body: [
-        'Domain' => 'example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsZone(	
+        body: [
+            'Domain' => 'example.com',
+        ],
+    )
 );
 ```
 
 #### [Get DNS Zone](https://docs.bunny.net/reference/dnszonepublic_index2)
 
 ```php
-$baseApi->getDnsZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZone(
+        id: 1,
+    )
 );
 ```
 
 #### [Update DNS Zone](https://docs.bunny.net/reference/dnszonepublic_update)
 
 ```php
-$baseApi->updateDnsZone(
-    id: 1,
-    body: [
-        'CustomNameserversEnabled' => true,
-        'Nameserver1' => 'abbby.ns.cloudflare.com',
-        'Nameserver2' => 'jonah.ns.cloudflare.com',
-        'SoaEmail' => 'admin@example.com',
-        'LoggingEnabled' => true,
-        'LogAnonymizationType' => true,
-        'LoggingIPAnonymizationEnabled' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone(
+        id: 1,
+        body: [
+            'CustomNameserversEnabled' => true,
+            'Nameserver1' => 'abbby.ns.cloudflare.com',
+            'Nameserver2' => 'jonah.ns.cloudflare.com',
+            'SoaEmail' => 'admin@example.com',
+            'LoggingEnabled' => true,
+            'LogAnonymizationType' => true,
+            'LoggingIPAnonymizationEnabled' => true,
+        ],
+    )
 );
 ```
 
@@ -690,89 +794,103 @@ $baseApi->updateDnsZone(
 #### [Delete DNS Zone](https://docs.bunny.net/reference/dnszonepublic_delete)
 
 ```php
-$baseApi->deleteDnsZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsZone(
+        id: 1,
+    )
 );
 ```
 
 #### [Enable DNSSEC on DNS Zone](https://docs.bunny.net/reference/managednszonednssecendpoint_enablednssecdnszone)
 
 ```php
-$baseApi->enableDnssecOnDnsZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\EnableDnssecOnDnsZone(
+        id: 1,
+    )
 );
 ```
 
 #### [Disable DNSSEC on DNS Zone](https://docs.bunny.net/reference/managednszonednssecendpoint_disablednssecdnszone)
 
 ```php
-$baseApi->disableDnssecOnDnsZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\DisableDnssecOnDnsZone(
+        id: 1,
+    )
 );
 ```
 
 #### [Export DNS Zone](https://docs.bunny.net/reference/dnszonepublic_export)
 
 ```php
-$baseApi->exportDnsZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\ExportDnsRecords(
+        id: 1,
+    )
 );
 ```
 
 #### [Get DNS Query Statistics](https://docs.bunny.net/reference/dnszonepublic_statistics)
 
 ```php
-$baseApi->getDnsZoneQueryStatistics(
-    id: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZoneQueryStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+        ],
+    )
 );
 ```
 
 #### [Check DNS Zone Availability](https://docs.bunny.net/reference/dnszonepublic_checkavailability)
 
 ```php
-$baseApi->checkDnsZoneAvailability(
-    body: [
-        'Name' => 'example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\CheckDnsZoneAvailability(
+        body: [
+            'Name' => 'example.com',
+        ],
+    )
 );
 ```
 
 #### [Add DNS Record](https://docs.bunny.net/reference/dnszonepublic_addrecord)
 
 ```php
-$baseApi->addDnsRecord(
-    zoneId: 1,
-    body: [
-        'Type' => 3,
-        'Ttl' => 15,
-        'Value' => 'My TXT Value',
-        'Name' => '',
-        'Weight' => 0,
-        'Priority' => 0,
-        'Flags' => 0,
-        'Tag' => '',
-        'Port' => 0,
-        'PullZoneId' => 0,
-        'ScriptId' => 0,
-        'Accelerated' => false,
-        'MonitorType' => 0,
-        'GeolocationLatitude' => 0,
-        'GeolocationLongitude' => 0,
-        'LatencyZone' => null,
-        'SmartRoutingType' => 0,
-        'Disabled' => false,
-        'EnviromentalVariables' => [
-            [
-                'Name' => 'Hello',
-                'Value' => 'World',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord(
+        zoneId: 1,
+        body: [
+            'Type' => 3,
+            'Ttl' => 15,
+            'Value' => 'My TXT Value',
+            'Name' => '',
+            'Weight' => 0,
+            'Priority' => 0,
+            'Flags' => 0,
+            'Tag' => '',
+            'Port' => 0,
+            'PullZoneId' => 0,
+            'ScriptId' => 0,
+            'Accelerated' => false,
+            'MonitorType' => 0,
+            'GeolocationLatitude' => 0,
+            'GeolocationLongitude' => 0,
+            'LatencyZone' => null,
+            'SmartRoutingType' => 0,
+            'Disabled' => false,
+            'EnviromentalVariables' => [
+                [
+                    'Name' => 'Hello',
+                    'Value' => 'World',
+                ],
             ],
+            'Comment' => '',
         ],
-        'Comment' => '',
-    ],
+    )
 );
 ```
 
@@ -819,37 +937,39 @@ $baseApi->addDnsRecord(
 #### [Update DNS Record](https://docs.bunny.net/reference/dnszonepublic_updaterecord)
 
 ```php
-$baseApi->updateDnsRecord(
-    zoneId: 1,
-    id: 2,
-    body: [
-        'Type' => 3,
-        'Ttl' => 15,
-        'Value' => 'My TXT Value',
-        'Name' => '',
-        'Weight' => 0,
-        'Priority' => 0,
-        'Flags' => 0,
-        'Tag' => '',
-        'Port' => 0,
-        'PullZoneId' => 0,
-        'ScriptId' => 0,
-        'Accelerated' => false,
-        'MonitorType' => 0,
-        'GeolocationLatitude' => 0,
-        'GeolocationLongitude' => 0,
-        'LatencyZone' => null,
-        'SmartRoutingType' => 0,
-        'Disabled' => false,
-        'EnviromentalVariables' => [
-            [
-                'Name' => 'Hello',
-                'Value' => 'World',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord(
+        zoneId: 1,
+        id: 2,
+        body: [
+            'Type' => 3,
+            'Ttl' => 15,
+            'Value' => 'My TXT Value',
+            'Name' => '',
+            'Weight' => 0,
+            'Priority' => 0,
+            'Flags' => 0,
+            'Tag' => '',
+            'Port' => 0,
+            'PullZoneId' => 0,
+            'ScriptId' => 0,
+            'Accelerated' => false,
+            'MonitorType' => 0,
+            'GeolocationLatitude' => 0,
+            'GeolocationLongitude' => 0,
+            'LatencyZone' => null,
+            'SmartRoutingType' => 0,
+            'Disabled' => false,
+            'EnviromentalVariables' => [
+                [
+                    'Name' => 'Hello',
+                    'Value' => 'World',
+                ],
             ],
+            'Comment' => '',
+            'Id' => 1,
         ],
-        'Comment' => '',
-        'Id' => 1,
-    ],
+    )
 );
 ```
 
@@ -896,25 +1016,31 @@ $baseApi->updateDnsRecord(
 #### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_deleterecord)
 
 ```php
-$baseApi->deleteDnsRecord(
-    zoneId: 1,
-    id: 2,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsRecord(
+        zoneId: 1,
+        id: 2,
+    )
 );
 ```
 
 #### [Recheck DNS Configuration](https://docs.bunny.net/reference/dnszonepublic_recheckdns)
 
 ```php
-$baseApi->recheckDNSConfiguration(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration(	
+        id: 1,
+    )
 );
 ```
 
 #### [Dismiss DNS Configuration Notice](https://docs.bunny.net/reference/dnszonepublic_dismissnameservercheck)
 
 ```php
-$baseApi->dismissDnsConfigurationNotice(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\DismissDnsConfigurationNotice(		
+        id: 1,
+    )
 );
 ```
 
@@ -932,9 +1058,11 @@ $content = file_get_contents('./example.com.2023-08-20.bind');
 $content = $filesystem->readStream('./example.com.2023-08-20.bind');
 
 // Import DNS records.
-$baseApi->importDnsRecords(
-    zoneId: 1,
-    body: $content,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords(
+        zoneId: 1,
+        body: $content,
+    )
 );
 ```
 
@@ -943,13 +1071,15 @@ $baseApi->importDnsRecords(
 #### [List Pull Zones](https://docs.bunny.net/reference/pullzonepublic_index)
 
 ```php
-$baseApi->listPullZones(
-    query: [
-        'page' => 0,
-        'perPage' => 1000,
-        'search' => 'bunny',
-        'includeCertificate' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\ListPullZones(
+        query: [
+            'page' => 0,
+            'perPage' => 1000,
+            'search' => 'bunny',
+            'includeCertificate' => false,
+        ],
+    )
 );
 ```
 
@@ -960,141 +1090,143 @@ $baseApi->listPullZones(
 #### [Add Pull Zone](https://docs.bunny.net/reference/pullzonepublic_add)
 
 ```php
-$baseApi->addPullZone(
-    body: [
-        'OriginUrl' => 'https://my-bucket-2.service.com',
-        'AllowedReferrers' => [],
-        'BlockedReferrers' => [],
-        'BlockedIps' => [],
-        'EnableGeoZoneUS' => true,
-        'EnableGeoZoneEU' => true,
-        'EnableGeoZoneASIA' => true,
-        'EnableGeoZoneSA' => true,
-        'EnableGeoZoneAF' => true,
-        'BlockRootPathAccess' => false,
-        'BlockPostRequests' => false,
-        'EnableQueryStringOrdering' => true,
-        'EnableWebpVary' => false,
-        'EnableAvifVary' => false,
-        'EnableMobileVary' => false,
-        'EnableCountryCodeVary' => false,
-        'EnableHostnameVary' => false,
-        'EnableCacheSlice' => false,
-        'ZoneSecurityEnabled' => false,
-        'ZoneSecurityIncludeHashRemoteIP' => false,
-        'IgnoreQueryStrings' => true,
-        'MonthlyBandwidthLimit' => 0,
-        'AccessControlOriginHeaderExtensions' => [],
-        'EnableAccessControlOriginHeader' => true,
-        'DisableCookies' => true,
-        'BudgetRedirectedCountries' => [],
-        'BlockedCountries' => [],
-        'CacheControlMaxAgeOverride' => -1,
-        'CacheControlPublicMaxAgeOverride' => -1,
-        'CacheControlBrowserMaxAgeOverride' => 157784760,
-        'AddHostHeader' => false,
-        'AddCanonicalHeader' => false,
-        'EnableLogging' => true,
-        'LoggingIPAnonymizationEnabled' => true,
-        'PermaCacheStorageZoneId' => 0,
-        'AWSSigningEnabled' => false,
-        'AWSSigningKey' => null,
-        'AWSSigningRegionName' => null,
-        'AWSSigningSecret' => null,
-        'EnableOriginShield' => false,
-        'OriginShieldZoneCode' => 'FR',
-        'EnableTLS1' => true,
-        'EnableTLS1_1' => true,
-        'CacheErrorResponses' => false,
-        'VerifyOriginSSL' => false,
-        'LogForwardingEnabled' => false,
-        'LogForwardingHostname' => null,
-        'LogForwardingPort' => 0,
-        'LogForwardingToken' => null,
-        'LogForwardingProtocol' => 0,
-        'LoggingSaveToStorage' => false,
-        'LoggingStorageZoneId' => 0,
-        'FollowRedirects' => false,
-        'ConnectionLimitPerIPCount' => 0,
-        'RequestLimit' => 0,
-        'LimitRateAfter' => 0,
-        'LimitRatePerSecond' => 0,
-        'BurstSize' => 0,
-        'WAFEnabled' => false,
-        'WAFDisabledRuleGroups' => [],
-        'WAFDisabledRules' => [],
-        'WAFEnableRequestHeaderLogging' => false,
-        'WAFRequestHeaderIgnores' => [],
-        'ErrorPageEnableCustomCode' => false,
-        'ErrorPageCustomCode' => null,
-        'ErrorPageEnableStatuspageWidget' => false,
-        'ErrorPageStatuspageCode' => null,
-        'ErrorPageWhitelabel' => false,
-        'OptimizerEnabled' => false,
-        'OptimizerDesktopMaxWidth' => 1600,
-        'OptimizerMobileMaxWidth' => 800,
-        'OptimizerImageQuality' => 85,
-        'OptimizerMobileImageQuality' => 70,
-        'OptimizerEnableWebP' => true,
-        'OptimizerEnableManipulationEngine' => true,
-        'OptimizerMinifyCSS' => true,
-        'OptimizerMinifyJavaScript' => true,
-        'OptimizerWatermarkEnabled' => true,
-        'OptimizerWatermarkUrl' => '',
-        'OptimizerWatermarkPosition' => 0,
-        'OptimizerWatermarkOffset' => 3,
-        'OptimizerWatermarkMinImageSize' => 300,
-        'OptimizerAutomaticOptimizationEnabled' => true,
-        'OptimizerClasses' => [],
-        'OptimizerForceClasses' => false,
-        'Type' => 0,
-        'OriginRetries' => 0,
-        'OriginConnectTimeout' => 10,
-        'OriginResponseTimeout' => 60,
-        'UseStaleWhileUpdating' => false,
-        'UseStaleWhileOffline' => false,
-        'OriginRetry5XXResponses' => false,
-        'OriginRetryConnectionTimeout' => true,
-        'OriginRetryResponseTimeout' => true,
-        'OriginRetryDelay' => 0,
-        'DnsOriginPort' => 0,
-        'DnsOriginScheme' => '',
-        'QueryStringVaryParameters' => [],
-        'OriginShieldEnableConcurrencyLimit' => false,
-        'OriginShieldMaxConcurrentRequests' => 5000,
-        'EnableCookieVary' => false,
-        'CookieVaryParameters' => [],
-        'EnableSafeHop' => false,
-        'OriginShieldQueueMaxWaitTime' => 30,
-        'UseBackgroundUpdate' => false,
-        'OriginShieldMaxQueuedRequests' => 5000,
-        'UseBackgroundUpdate' => true,
-        'EnableAutoSSL' => false,
-        'LogAnonymizationType' => 0,
-        'StorageZoneId' => 0,
-        'EdgeScriptId' => 0,
-        'OriginType' => 0,
-        'MagicContainersAppId' => '',
-        'LogFormat' => 0,
-        'LogForwardingFormat' => 0,
-        'ShieldDDosProtectionType' => 1,
-        'ShieldDDosProtectionEnabled' => false,
-        'OriginHostHeader' => '',
-        'EnableSmartCache' => false,
-        'EnableRequestCoalescing' => false,
-        'RequestCoalescingTimeout' => 30,
-        'DisableLetsEncrypt' => false,
-        'EnableBunnyImageAi' => false,
-        'BunnyAiImageBlueprints' => [],
-        'PreloadingScreenEnabled' => false,
-        'PreloadingScreenCode' => '',
-        'PreloadingScreenLogoUrl' => null,
-        'PreloadingScreenTheme' => 0,
-        'PreloadingScreenCodeEnabled' => false,
-        'PreloadingScreenDelay' => 700,
-        'RoutingFilters' => [],
-        'Name' => 'New Pull Zone',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddPullZone(
+        body: [
+            'OriginUrl' => 'https://my-bucket-2.service.com',
+            'AllowedReferrers' => [],
+            'BlockedReferrers' => [],
+            'BlockedIps' => [],
+            'EnableGeoZoneUS' => true,
+            'EnableGeoZoneEU' => true,
+            'EnableGeoZoneASIA' => true,
+            'EnableGeoZoneSA' => true,
+            'EnableGeoZoneAF' => true,
+            'BlockRootPathAccess' => false,
+            'BlockPostRequests' => false,
+            'EnableQueryStringOrdering' => true,
+            'EnableWebpVary' => false,
+            'EnableAvifVary' => false,
+            'EnableMobileVary' => false,
+            'EnableCountryCodeVary' => false,
+            'EnableHostnameVary' => false,
+            'EnableCacheSlice' => false,
+            'ZoneSecurityEnabled' => false,
+            'ZoneSecurityIncludeHashRemoteIP' => false,
+            'IgnoreQueryStrings' => true,
+            'MonthlyBandwidthLimit' => 0,
+            'AccessControlOriginHeaderExtensions' => [],
+            'EnableAccessControlOriginHeader' => true,
+            'DisableCookies' => true,
+            'BudgetRedirectedCountries' => [],
+            'BlockedCountries' => [],
+            'CacheControlMaxAgeOverride' => -1,
+            'CacheControlPublicMaxAgeOverride' => -1,
+            'CacheControlBrowserMaxAgeOverride' => 157784760,
+            'AddHostHeader' => false,
+            'AddCanonicalHeader' => false,
+            'EnableLogging' => true,
+            'LoggingIPAnonymizationEnabled' => true,
+            'PermaCacheStorageZoneId' => 0,
+            'AWSSigningEnabled' => false,
+            'AWSSigningKey' => null,
+            'AWSSigningRegionName' => null,
+            'AWSSigningSecret' => null,
+            'EnableOriginShield' => false,
+            'OriginShieldZoneCode' => 'FR',
+            'EnableTLS1' => true,
+            'EnableTLS1_1' => true,
+            'CacheErrorResponses' => false,
+            'VerifyOriginSSL' => false,
+            'LogForwardingEnabled' => false,
+            'LogForwardingHostname' => null,
+            'LogForwardingPort' => 0,
+            'LogForwardingToken' => null,
+            'LogForwardingProtocol' => 0,
+            'LoggingSaveToStorage' => false,
+            'LoggingStorageZoneId' => 0,
+            'FollowRedirects' => false,
+            'ConnectionLimitPerIPCount' => 0,
+            'RequestLimit' => 0,
+            'LimitRateAfter' => 0,
+            'LimitRatePerSecond' => 0,
+            'BurstSize' => 0,
+            'WAFEnabled' => false,
+            'WAFDisabledRuleGroups' => [],
+            'WAFDisabledRules' => [],
+            'WAFEnableRequestHeaderLogging' => false,
+            'WAFRequestHeaderIgnores' => [],
+            'ErrorPageEnableCustomCode' => false,
+            'ErrorPageCustomCode' => null,
+            'ErrorPageEnableStatuspageWidget' => false,
+            'ErrorPageStatuspageCode' => null,
+            'ErrorPageWhitelabel' => false,
+            'OptimizerEnabled' => false,
+            'OptimizerDesktopMaxWidth' => 1600,
+            'OptimizerMobileMaxWidth' => 800,
+            'OptimizerImageQuality' => 85,
+            'OptimizerMobileImageQuality' => 70,
+            'OptimizerEnableWebP' => true,
+            'OptimizerEnableManipulationEngine' => true,
+            'OptimizerMinifyCSS' => true,
+            'OptimizerMinifyJavaScript' => true,
+            'OptimizerWatermarkEnabled' => true,
+            'OptimizerWatermarkUrl' => '',
+            'OptimizerWatermarkPosition' => 0,
+            'OptimizerWatermarkOffset' => 3,
+            'OptimizerWatermarkMinImageSize' => 300,
+            'OptimizerAutomaticOptimizationEnabled' => true,
+            'OptimizerClasses' => [],
+            'OptimizerForceClasses' => false,
+            'Type' => 0,
+            'OriginRetries' => 0,
+            'OriginConnectTimeout' => 10,
+            'OriginResponseTimeout' => 60,
+            'UseStaleWhileUpdating' => false,
+            'UseStaleWhileOffline' => false,
+            'OriginRetry5XXResponses' => false,
+            'OriginRetryConnectionTimeout' => true,
+            'OriginRetryResponseTimeout' => true,
+            'OriginRetryDelay' => 0,
+            'DnsOriginPort' => 0,
+            'DnsOriginScheme' => '',
+            'QueryStringVaryParameters' => [],
+            'OriginShieldEnableConcurrencyLimit' => false,
+            'OriginShieldMaxConcurrentRequests' => 5000,
+            'EnableCookieVary' => false,
+            'CookieVaryParameters' => [],
+            'EnableSafeHop' => false,
+            'OriginShieldQueueMaxWaitTime' => 30,
+            'UseBackgroundUpdate' => false,
+            'OriginShieldMaxQueuedRequests' => 5000,
+            'UseBackgroundUpdate' => true,
+            'EnableAutoSSL' => false,
+            'LogAnonymizationType' => 0,
+            'StorageZoneId' => 0,
+            'EdgeScriptId' => 0,
+            'OriginType' => 0,
+            'MagicContainersAppId' => '',
+            'LogFormat' => 0,
+            'LogForwardingFormat' => 0,
+            'ShieldDDosProtectionType' => 1,
+            'ShieldDDosProtectionEnabled' => false,
+            'OriginHostHeader' => '',
+            'EnableSmartCache' => false,
+            'EnableRequestCoalescing' => false,
+            'RequestCoalescingTimeout' => 30,
+            'DisableLetsEncrypt' => false,
+            'EnableBunnyImageAi' => false,
+            'BunnyAiImageBlueprints' => [],
+            'PreloadingScreenEnabled' => false,
+            'PreloadingScreenCode' => '',
+            'PreloadingScreenLogoUrl' => null,
+            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenCodeEnabled' => false,
+            'PreloadingScreenDelay' => 700,
+            'RoutingFilters' => [],
+            'Name' => 'New Pull Zone',
+        ],
+    )
 );
 ```
 
@@ -1145,152 +1277,156 @@ $baseApi->addPullZone(
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
 ```php
-$baseApi->getPullZone(
-    id: 1,
-    query: [
-        'includeCertificate' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\GetPullZone(
+        id: 1,
+        query: [
+            'includeCertificate' => false,
+        ],
+    )
 );
 ```
 
 #### [Update Pull Zone](https://docs.bunny.net/reference/pullzonepublic_updatepullzone)
 
 ```php
-$baseApi->updatePullZone(
-    id: 1,
-    body: [
-        'OriginUrl' => 'https://my-bucket-2.service.com',
-        'AllowedReferrers' => [],
-        'BlockedReferrers' => [],
-        'BlockedIps' => [],
-        'EnableGeoZoneUS' => true,
-        'EnableGeoZoneEU' => true,
-        'EnableGeoZoneASIA' => true,
-        'EnableGeoZoneSA' => true,
-        'EnableGeoZoneAF' => true,
-        'BlockRootPathAccess' => false,
-        'BlockPostRequests' => false,
-        'EnableQueryStringOrdering' => true,
-        'EnableWebpVary' => false,
-        'EnableAvifVary' => false,
-        'EnableMobileVary' => false,
-        'EnableCountryCodeVary' => false,
-        'EnableHostnameVary' => false,
-        'EnableCacheSlice' => false,
-        'ZoneSecurityEnabled' => false,
-        'ZoneSecurityIncludeHashRemoteIP' => false,
-        'IgnoreQueryStrings' => true,
-        'MonthlyBandwidthLimit' => 0,
-        'AccessControlOriginHeaderExtensions' => [],
-        'EnableAccessControlOriginHeader' => true,
-        'DisableCookies' => true,
-        'BudgetRedirectedCountries' => [],
-        'BlockedCountries' => [],
-        'CacheControlMaxAgeOverride' => -1,
-        'CacheControlPublicMaxAgeOverride' => -1,
-        'CacheControlBrowserMaxAgeOverride' => 157784760,
-        'AddHostHeader' => false,
-        'AddCanonicalHeader' => false,
-        'EnableLogging' => true,
-        'LoggingIPAnonymizationEnabled' => true,
-        'PermaCacheStorageZoneId' => 0,
-        'AWSSigningEnabled' => false,
-        'AWSSigningKey' => null,
-        'AWSSigningRegionName' => null,
-        'AWSSigningSecret' => null,
-        'EnableOriginShield' => false,
-        'OriginShieldZoneCode' => 'FR',
-        'EnableTLS1' => true,
-        'EnableTLS1_1' => true,
-        'CacheErrorResponses' => false,
-        'VerifyOriginSSL' => false,
-        'LogForwardingEnabled' => false,
-        'LogForwardingHostname' => null,
-        'LogForwardingPort' => 0,
-        'LogForwardingToken' => null,
-        'LogForwardingProtocol' => 0,
-        'LoggingSaveToStorage' => false,
-        'LoggingStorageZoneId' => 0,
-        'FollowRedirects' => false,
-        'ConnectionLimitPerIPCount' => 0,
-        'RequestLimit' => 0,
-        'LimitRateAfter' => 0,
-        'LimitRatePerSecond' => 0,
-        'BurstSize' => 0,
-        'WAFEnabled' => false,
-        'WAFDisabledRuleGroups' => [],
-        'WAFDisabledRules' => [],
-        'WAFEnableRequestHeaderLogging' => false,
-        'WAFRequestHeaderIgnores' => [],
-        'ErrorPageEnableCustomCode' => false,
-        'ErrorPageCustomCode' => null,
-        'ErrorPageEnableStatuspageWidget' => false,
-        'ErrorPageStatuspageCode' => null,
-        'ErrorPageWhitelabel' => false,
-        'OptimizerEnabled' => false,
-        'OptimizerDesktopMaxWidth' => 1600,
-        'OptimizerMobileMaxWidth' => 800,
-        'OptimizerImageQuality' => 85,
-        'OptimizerMobileImageQuality' => 70,
-        'OptimizerEnableWebP' => true,
-        'OptimizerEnableManipulationEngine' => true,
-        'OptimizerMinifyCSS' => true,
-        'OptimizerMinifyJavaScript' => true,
-        'OptimizerWatermarkEnabled' => true,
-        'OptimizerWatermarkUrl' => '',
-        'OptimizerWatermarkPosition' => 0,
-        'OptimizerWatermarkOffset' => 3,
-        'OptimizerWatermarkMinImageSize' => 300,
-        'OptimizerAutomaticOptimizationEnabled' => true,
-        'OptimizerClasses' => [],
-        'OptimizerForceClasses' => false,
-        'Type' => 0,
-        'OriginRetries' => 0,
-        'OriginConnectTimeout' => 10,
-        'OriginResponseTimeout' => 60,
-        'UseStaleWhileUpdating' => false,
-        'UseStaleWhileOffline' => false,
-        'OriginRetry5XXResponses' => false,
-        'OriginRetryConnectionTimeout' => true,
-        'OriginRetryResponseTimeout' => true,
-        'OriginRetryDelay' => 0,
-        'DnsOriginPort' => 0,
-        'DnsOriginScheme' => '',
-        'QueryStringVaryParameters' => [],
-        'OriginShieldEnableConcurrencyLimit' => false,
-        'OriginShieldMaxConcurrentRequests' => 5000,
-        'EnableCookieVary' => false,
-        'CookieVaryParameters' => [],
-        'EnableSafeHop' => false,
-        'OriginShieldQueueMaxWaitTime' => 30,
-        'UseBackgroundUpdate' => false,
-        'OriginShieldMaxQueuedRequests' => 5000,
-        'UseBackgroundUpdate' => true,
-        'EnableAutoSSL' => false,
-        'LogAnonymizationType' => 0,
-        'StorageZoneId' => 0,
-        'EdgeScriptId' => 0,
-        'OriginType' => 0,
-        'MagicContainersAppId' => '',
-        'LogFormat' => 0,
-        'LogForwardingFormat' => 0,
-        'ShieldDDosProtectionType' => 1,
-        'ShieldDDosProtectionEnabled' => false,
-        'OriginHostHeader' => '',
-        'EnableSmartCache' => false,
-        'EnableRequestCoalescing' => false,
-        'RequestCoalescingTimeout' => 30,
-        'DisableLetsEncrypt' => false,
-        'EnableBunnyImageAi' => false,
-        'BunnyAiImageBlueprints' => [],
-        'PreloadingScreenEnabled' => false,
-        'PreloadingScreenCode' => '',
-        'PreloadingScreenLogoUrl' => null,
-        'PreloadingScreenTheme' => 0,
-        'PreloadingScreenCodeEnabled' => false,
-        'PreloadingScreenDelay' => 700,
-        'RoutingFilters' => [],
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePullZone(
+        id: 1,
+        body: [
+            'OriginUrl' => 'https://my-bucket-2.service.com',
+            'AllowedReferrers' => [],
+            'BlockedReferrers' => [],
+            'BlockedIps' => [],
+            'EnableGeoZoneUS' => true,
+            'EnableGeoZoneEU' => true,
+            'EnableGeoZoneASIA' => true,
+            'EnableGeoZoneSA' => true,
+            'EnableGeoZoneAF' => true,
+            'BlockRootPathAccess' => false,
+            'BlockPostRequests' => false,
+            'EnableQueryStringOrdering' => true,
+            'EnableWebpVary' => false,
+            'EnableAvifVary' => false,
+            'EnableMobileVary' => false,
+            'EnableCountryCodeVary' => false,
+            'EnableHostnameVary' => false,
+            'EnableCacheSlice' => false,
+            'ZoneSecurityEnabled' => false,
+            'ZoneSecurityIncludeHashRemoteIP' => false,
+            'IgnoreQueryStrings' => true,
+            'MonthlyBandwidthLimit' => 0,
+            'AccessControlOriginHeaderExtensions' => [],
+            'EnableAccessControlOriginHeader' => true,
+            'DisableCookies' => true,
+            'BudgetRedirectedCountries' => [],
+            'BlockedCountries' => [],
+            'CacheControlMaxAgeOverride' => -1,
+            'CacheControlPublicMaxAgeOverride' => -1,
+            'CacheControlBrowserMaxAgeOverride' => 157784760,
+            'AddHostHeader' => false,
+            'AddCanonicalHeader' => false,
+            'EnableLogging' => true,
+            'LoggingIPAnonymizationEnabled' => true,
+            'PermaCacheStorageZoneId' => 0,
+            'AWSSigningEnabled' => false,
+            'AWSSigningKey' => null,
+            'AWSSigningRegionName' => null,
+            'AWSSigningSecret' => null,
+            'EnableOriginShield' => false,
+            'OriginShieldZoneCode' => 'FR',
+            'EnableTLS1' => true,
+            'EnableTLS1_1' => true,
+            'CacheErrorResponses' => false,
+            'VerifyOriginSSL' => false,
+            'LogForwardingEnabled' => false,
+            'LogForwardingHostname' => null,
+            'LogForwardingPort' => 0,
+            'LogForwardingToken' => null,
+            'LogForwardingProtocol' => 0,
+            'LoggingSaveToStorage' => false,
+            'LoggingStorageZoneId' => 0,
+            'FollowRedirects' => false,
+            'ConnectionLimitPerIPCount' => 0,
+            'RequestLimit' => 0,
+            'LimitRateAfter' => 0,
+            'LimitRatePerSecond' => 0,
+            'BurstSize' => 0,
+            'WAFEnabled' => false,
+            'WAFDisabledRuleGroups' => [],
+            'WAFDisabledRules' => [],
+            'WAFEnableRequestHeaderLogging' => false,
+            'WAFRequestHeaderIgnores' => [],
+            'ErrorPageEnableCustomCode' => false,
+            'ErrorPageCustomCode' => null,
+            'ErrorPageEnableStatuspageWidget' => false,
+            'ErrorPageStatuspageCode' => null,
+            'ErrorPageWhitelabel' => false,
+            'OptimizerEnabled' => false,
+            'OptimizerDesktopMaxWidth' => 1600,
+            'OptimizerMobileMaxWidth' => 800,
+            'OptimizerImageQuality' => 85,
+            'OptimizerMobileImageQuality' => 70,
+            'OptimizerEnableWebP' => true,
+            'OptimizerEnableManipulationEngine' => true,
+            'OptimizerMinifyCSS' => true,
+            'OptimizerMinifyJavaScript' => true,
+            'OptimizerWatermarkEnabled' => true,
+            'OptimizerWatermarkUrl' => '',
+            'OptimizerWatermarkPosition' => 0,
+            'OptimizerWatermarkOffset' => 3,
+            'OptimizerWatermarkMinImageSize' => 300,
+            'OptimizerAutomaticOptimizationEnabled' => true,
+            'OptimizerClasses' => [],
+            'OptimizerForceClasses' => false,
+            'Type' => 0,
+            'OriginRetries' => 0,
+            'OriginConnectTimeout' => 10,
+            'OriginResponseTimeout' => 60,
+            'UseStaleWhileUpdating' => false,
+            'UseStaleWhileOffline' => false,
+            'OriginRetry5XXResponses' => false,
+            'OriginRetryConnectionTimeout' => true,
+            'OriginRetryResponseTimeout' => true,
+            'OriginRetryDelay' => 0,
+            'DnsOriginPort' => 0,
+            'DnsOriginScheme' => '',
+            'QueryStringVaryParameters' => [],
+            'OriginShieldEnableConcurrencyLimit' => false,
+            'OriginShieldMaxConcurrentRequests' => 5000,
+            'EnableCookieVary' => false,
+            'CookieVaryParameters' => [],
+            'EnableSafeHop' => false,
+            'OriginShieldQueueMaxWaitTime' => 30,
+            'UseBackgroundUpdate' => false,
+            'OriginShieldMaxQueuedRequests' => 5000,
+            'UseBackgroundUpdate' => true,
+            'EnableAutoSSL' => false,
+            'LogAnonymizationType' => 0,
+            'StorageZoneId' => 0,
+            'EdgeScriptId' => 0,
+            'OriginType' => 0,
+            'MagicContainersAppId' => '',
+            'LogFormat' => 0,
+            'LogForwardingFormat' => 0,
+            'ShieldDDosProtectionType' => 1,
+            'ShieldDDosProtectionEnabled' => false,
+            'OriginHostHeader' => '',
+            'EnableSmartCache' => false,
+            'EnableRequestCoalescing' => false,
+            'RequestCoalescingTimeout' => 30,
+            'DisableLetsEncrypt' => false,
+            'EnableBunnyImageAi' => false,
+            'BunnyAiImageBlueprints' => [],
+            'PreloadingScreenEnabled' => false,
+            'PreloadingScreenCode' => '',
+            'PreloadingScreenLogoUrl' => null,
+            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenCodeEnabled' => false,
+            'PreloadingScreenDelay' => 700,
+            'RoutingFilters' => [],
+        ],
+    )
 );
 ```
 
@@ -1341,36 +1477,40 @@ $baseApi->updatePullZone(
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
 ```php
-$baseApi->deletePullZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeletePullZone(
+        id: 1,
+    )
 );
 ```
 
-#### [Add Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
+#### [Add/Update Edge Rule](https://docs.bunny.net/reference/pullzonepublic_addedgerule)
 
 ```php
-$baseApi->addOrUpdateEdgeRule(
-    pullZoneId: 1,
-    body: [
-        'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587', // required for update, not add
-        'ActionType' => 4,
-        'ActionParameter1' => '',
-        'ActionParameter2' => '',
-        'Triggers' => [
-            [
-                'Type' => 0,
-                'PatternMatches' => [
-                    'https://example.b-cdn.net/images/*',
-                    'https://example.b-cdn.net/videos/*',
-                ]
-                'PatternMatchingType' => 0,
-                'Parameter1' => '',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule(
+        pullZoneId: 1,
+        body: [
+            'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587', // required for update, not add
+            'ActionType' => 4,
+            'ActionParameter1' => '',
+            'ActionParameter2' => '',
+            'Triggers' => [
+                [
+                    'Type' => 0,
+                    'PatternMatches' => [
+                        'https://example.b-cdn.net/images/*',
+                        'https://example.b-cdn.net/videos/*',
+                    ]
+                    'PatternMatchingType' => 0,
+                    'Parameter1' => '',
+                ],
             ],
+            'TriggerMatchingType' => 0,
+            'Description' => '',
+            'Enabled' => true,
         ],
-        'TriggerMatchingType' => 0,
-        'Description' => '',
-        'Enabled' => true
-    ],
+    )
 );
 ```
 
@@ -1420,13 +1560,15 @@ $baseApi->addOrUpdateEdgeRule(
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
 
 ```php
-$baseApi->setEdgeRuleEnabled(
-    pullZoneId: 1,
-    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
-    body: [
-        'Id' => 1,
-        'Value' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\SetEdgeRuleEnabled(
+        pullZoneId: 1,
+        edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
+        body: [
+            'Id' => 1,
+            'Value' => true,
+        ],
+    )
 );
 ```
 
@@ -1437,18 +1579,22 @@ $baseApi->setEdgeRuleEnabled(
 #### [Delete Edge Rule](https://docs.bunny.net/reference/pullzonepublic_deleteedgerule)
 
 ```php
-$baseApi->deleteEdgeRule(
-    pullZoneId: 1,
-    edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule(
+        pullZoneId: 1,
+        edgeRuleId: 'c71d9594-3bc6-4639-9896-ba3e96217587',
+    )
 );
 ```
 
 #### Set Zone Security Enabled
 
 ```php
-$baseApi->setZoneSecurityEnabled(
-    Id: 1,
-    Value: true
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\SetZoneSecurityEnabled(
+        Id: 1,
+        Value: true,
+    )
 );
 ```
 
@@ -1457,15 +1603,17 @@ $baseApi->setZoneSecurityEnabled(
     - This endpoint corresponds to toggling the **Enable Token Authentication** switch in the **Token Authentication > Security** section of your pull zone.
 
 !!! warning
-    
+
     - This endpoint is currently not documented in the API specifications.
 
 #### Set Zone Security Include Hash Remote IP Enabled
 
 ```php
-$baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
-    Id: 1,
-    Value: true
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\SetZoneSecurityIncludeHashRemoteIpEnabled(
+        Id: 1,
+        Value: true,
+    )
 );
 ```
 
@@ -1480,52 +1628,60 @@ $baseApi->setZoneSecurityIncludeHashRemoteIPEnabled(
 #### [Get Origin Shield Queue Statistics](https://docs.bunny.net/reference/pullzonepublic_originshieldconcurrencystatistics)
 
 ```php
-$baseApi->getOriginShieldQueueStatistics(
-    pullZoneId: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'hourly' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\GetOriginShieldQueueStatistics(
+        pullZoneId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+        ],
+    )
 );
 ```
 
 #### [Get SafeHop Statistics](https://docs.bunny.net/reference/pullzonepublic_safehopstatistics)
 
 ```php
-$baseApi->getSafeHopStatistics(
-    pullZoneId: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'hourly' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\GetSafeHopStatistics(
+        pullZoneId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+        ],
+    )
 );
 ```
 
 #### [Get Optimizer Statistics](https://docs.bunny.net/reference/pullzonepublic_optimizerstatistics)
 
 ```php
-$baseApi->getOptimizerStatistics(
-    pullZoneId: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'hourly' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\GetOptimizerStatistics(
+        pullZoneId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+        ],
+    )
 );
 ```
 
 #### Get WAF Statistics
 
 ```php
-$baseApi->getWafStatistics(
-    pullZoneId: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'hourly' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\GetWafStatistics(
+        pullZoneId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+        ],
+    )
 );
 ```
 
@@ -1536,44 +1692,52 @@ $baseApi->getWafStatistics(
 #### [Load Free Certificate](https://docs.bunny.net/reference/pullzonepublic_loadfreecertificate)
 
 ```php
-$baseApi->loadFreeCertificate(
-    query: [
-        'hostname' => 'cdn.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate(
+        query: [
+            'hostname' => 'cdn.example.com',
+        ],
+    )
 );
 ```
 
 #### [Purge Cache (by tag)](https://docs.bunny.net/reference/pullzonepublic_purgecachepostbytag)
 
 ```php
-$baseApi->purgePullZoneCache(
-    id: 1,
-    body: [
-        'CacheTag' => 'mytag-region-*',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\PurgeCache(
+        id: 1,
+        body: [
+            'CacheTag' => 'mytag-region-*',
+        ],
+    )
 );
 ```
 
 #### [Check Pull Zone Availability](https://docs.bunny.net/reference/pullzonepublic_checkavailability)
 
 ```php
-$baseApi->checkPullZoneAvailability(
-    body: [
-        'Name' => 'test',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability(
+        body: [
+            'Name' => 'test',
+        ],
+    )
 );
 ```
 
 #### [Add Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
 
 ```php
-$baseApi->addCertificate(
-    id: 1,
-    body: [
-        'Hostname' => 'cdn.example.com',
-        'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
-        'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomCertificate(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+            'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
+            'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t',
+        ],
+    )
 );
 ```
 
@@ -1584,64 +1748,76 @@ $baseApi->addCertificate(
 #### [Remove Certificate](https://docs.bunny.net/reference/pullzonepublic_removecertificate)
 
 ```php
-$baseApi->removeCertificate(
-    id: 1,
-    body: [
-        'Hostname' => 'cdn.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
 );
 ```
 
 #### [Add Custom Hostname](https://docs.bunny.net/reference/pullzonepublic_addhostname)
 
 ```php
-$baseApi->addCustomHostname(
-    id: 1,
-    body: [
-        'Hostname' => 'cdn.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
 );
 ```
 
 #### [Remove Custom Hostname](https://docs.bunny.net/reference/pullzonepublic_removehostname)
 
 ```php
-$baseApi->removeCustomHostname(
-    id: 1,
-    body: [
-        'Hostname' => 'cdn.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
 );
 ```
 
 #### [Set Force SSL](https://docs.bunny.net/reference/pullzonepublic_setforcessl)
 
 ```php
-$baseApi->setForceSsl(
-    id: 1,
-    body: [
-        'Hostname' => 'cdn.example.com',
-        'ForceSSL' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\SetForceSsl(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+            'ForceSSL' => true,
+        ],
+    )
 );
 ```
 
 #### [Reset Token Key](https://docs.bunny.net/reference/pullzonepublic_resetsecuritykey)
 
 ```php
-$baseApi->resetPullZoneTokenKey(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey(
+        id: 1,
+    )
 );
 ```
 
 #### [Add Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_addallowedreferrer)
 
 ```php
-$baseApi->addPullZoneAllowedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.example.com,*.example.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer(
+        id: 1,
+        body: [
+            'Hostname' => '*.example.com,*.example.org',
+        ],
+    )
 );
 ```
 
@@ -1652,11 +1828,13 @@ $baseApi->addPullZoneAllowedReferer(
 #### [Remove Allowed Referer](https://docs.bunny.net/reference/pullzonepublic_removeallowedreferrer)
 
 ```php
-$baseApi->removePullZoneAllowedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.example.com',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer(	
+        id: 1,
+        body: [
+            'Hostname' => '*.example.com',
+        ],
+    )
 );
 ```
 
@@ -1667,11 +1845,13 @@ $baseApi->removePullZoneAllowedReferer(
 #### [Add Blocked Referer](https://docs.bunny.net/reference/pullzonepublic_addblockedreferrer)
 
 ```php
-$baseApi->addPullZoneBlockedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.evil.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer(
+        id: 1,
+        body: [
+            'Hostname' => '*.evil.org',
+        ],
+    )
 );
 ```
 
@@ -1682,33 +1862,39 @@ $baseApi->addPullZoneBlockedReferer(
 #### [Remove Blocked Referer](https://docs.bunny.net/reference/pullzonepublic_removeblockedreferrer)
 
 ```php
-$baseApi->removePullZoneBlockedReferer(
-    id: 1,
-    body: [
-        'Hostname' => '*.evil.org',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer(
+        id: 1,
+        body: [
+            'Hostname' => '*.evil.org',
+        ],
+    )
 );
 ```
 
 #### [Add Blocked IP](https://docs.bunny.net/reference/pullzonepublic_addblockedip)
 
 ```php
-$baseApi->addPullZoneBlockedIp(
-    id: 1,
-    body: [
-        'BlockedIp' => '12.345.67.89',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp(
+        id: 1,
+        body: [
+            'BlockedIp' => '12.345.67.89',
+        ],
+    )
 );
 ```
 
 #### [Remove Blocked IP](https://docs.bunny.net/reference/pullzonepublic_removeblockedip)
 
 ```php
-$baseApi->removePullZoneBlockedIp(
-    id: 1,
-    body: [
-        'BlockedIp' => '12.345.67.89',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp(
+        id: 1,
+        body: [
+            'BlockedIp' => '12.345.67.89',
+        ],
+    )
 );
 ```
 
@@ -1717,24 +1903,28 @@ $baseApi->removePullZoneBlockedIp(
 #### [Purge URL](https://docs.bunny.net/reference/purgepublic_indexpost)
 
 ```php
-$baseApi->purgeUrl(
-    query: [
-        'url' => 'https://example.b-cdn.net/images/*',
-        'async' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl
+        query: [
+            'url' => 'https://example.b-cdn.net/images/*',
+            'async' => false,
+        ],
+    )
 );
 ```
 
 #### [Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
 
 ```php
-$baseApi->purgeUrlByHeader(
-    query: [
-        'url' => 'https://example.b-cdn.net/images/*',
-        'headerName' => '',
-        'headerValue' => '',
-        'async' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrlByHeader(
+        query: [
+            'url' => 'https://example.b-cdn.net/images/*',
+            'headerName' => '',
+            'headerValue' => '',
+            'async' => false,
+        ],
+    )
 );
 ```
 
@@ -1743,12 +1933,14 @@ $baseApi->purgeUrlByHeader(
 #### [Global Search](https://docs.bunny.net/reference/searchpublic_globalsearch)
 
 ```php
-$baseApi->getGlobalSearch(
-    query: [
-        'search' => 'bunny',
-        'from' => 0,
-        'size' => 20,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Search\GlobalSearch(
+        query: [
+            'search' => 'bunny',
+            'from' => 0,
+            'size' => 20,
+        ],
+    )
 );
 ```
 
@@ -1761,15 +1953,17 @@ $baseApi->getGlobalSearch(
 #### [Get Statistics (traffic, cache hit & bandwidth)](https://docs.bunny.net/reference/statisticspublic_index)
 
 ```php
-$baseApi->getStatistics(
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'pullZone' => -1,
-        'serverZoneId' => -1,
-        'loadErrors' => false,
-        'hourly' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Statistics\GetStatistics(
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'pullZone' => -1,
+            'serverZoneId' => -1,
+            'loadErrors' => false,
+            'hourly' => false,
+        ],
+    )
 );
 ```
 
@@ -1778,13 +1972,15 @@ $baseApi->getStatistics(
 #### [List Storage Zones](https://docs.bunny.net/reference/storagezonepublic_index)
 
 ```php
-$baseApi->listStorageZones(
-    query: [
-        'page' => 0,
-        'perPage' => 1000,
-        'search' => 'bunny',
-        'includeDeleted' => 1000,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones(
+        query: [
+            'page' => 0,
+            'perPage' => 1000,
+            'search' => 'bunny',
+            'includeDeleted' => 1000,
+        ],
+    )
 );
 ```
 
@@ -1795,14 +1991,16 @@ $baseApi->listStorageZones(
 #### [Add Storage Zone](https://docs.bunny.net/reference/storagezonepublic_add)
 
 ```php
-$baseApi->addStorageZone(
-    body: [
-        'OriginUrl' => '',
-        'Name' => 'Test',
-        'Region' => 'DE',
-        'ReplicationRegions' => '',
-        'ZoneTier' => 0,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\AddStorageZone(
+        body: [
+            'OriginUrl' => '',
+            'Name' => 'Test',
+            'Region' => 'DE',
+            'ReplicationRegions' => '',
+            'ZoneTier' => 0,
+        ],
+    )
 );
 ```
 
@@ -1844,40 +2042,38 @@ $baseApi->addStorageZone(
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
 ```php
-$baseApi->checkStorageZoneAvailability(
-    body: [
-        'Name' => 'Test',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\CheckStorageZoneAvailability(
+        body: [
+            'Name' => 'Test',
+        ],
+    )
 );
 ```
 
 #### [Get Storage Zone](https://docs.bunny.net/reference/storagezonepublic_index2)
 
 ```php
-$baseApi->getStorageZone(
-    id: 1,
-);
-```
-
-#### [Get Storage Zone](https://docs.bunny.net/reference/storagezonepublic_index2)
-
-```php
-$baseApi->getStorageZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\Model(
+        id: 1,
+    )
 );
 ```
 
 #### [Update Storage Zone](https://docs.bunny.net/reference/storagezonepublic_update)
 
 ```php
-$baseApi->updateStorageZone(
-    id: 1,
-    body: [
-        'ReplicationZones' => '',
-        'OriginUrl' => '',
-        'Custom404FilePath' => 'my-custom-404.html',
-        'Rewrite404To200' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone(
+        id: 1,
+        body: [
+            'ReplicationZones' => '',
+            'OriginUrl' => '',
+            'Custom404FilePath' => 'my-custom-404.html',
+            'Rewrite404To200' => false,
+        ],
+    )
 );
 ```
 
@@ -1906,46 +2102,56 @@ $baseApi->updateStorageZone(
 #### [Delete Storage Zone](https://docs.bunny.net/reference/storagezonepublic_delete)
 
 ```php
-$baseApi->deleteStorageZone(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\DeleteStorageZone(	
+        id: 1,
+    )
 );
 ```
 
 #### [Get Storage Zone Statistics](https://docs.bunny.net/reference/storagezonepublic_storagezonestatistics)
 
 ```php
-$baseApi->getStorageZoneStatistics(
-    id: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+        ],
+    )
 );
 ```
 
 #### [Get Storage Zone Connections](https://docs.bunny.net/reference/storagezonepublic_connections)
 
 ```php
-$baseApi->getStorageZoneConnections(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneConnections(
+        id: 1,
+    )
 );
 ```
 
 #### [Reset Password](https://docs.bunny.net/reference/storagezonepublic_resetpassword)
 
 ```php
-$baseApi->resetStorageZonePassword(
-    id: 1,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword(
+        id: 1,
+    )
 );
 ```
 
 #### [Reset Read-Only Password](https://docs.bunny.net/reference/storagezonepublic_resetreadonlypassword)
 
 ```php
-$baseApi->resetStorageZoneReadOnlyPassword(
-    query: [
-        'id' => 1,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword(		
+        query: [
+            'id' => 1,
+        ],
+    )
 );
 ```
 
@@ -1954,152 +2160,190 @@ $baseApi->resetStorageZoneReadOnlyPassword(
 #### [Get Home Feed](ttps://docs.bunny.net/reference/userpublic_homefeed)
 
 ```php
-$baseApi->getHomeFeed();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed()
+);
 ```
 
 #### [Get User Details](https://docs.bunny.net/reference/userpublic_index)
 
 ```php
-$baseApi->getUserDetails();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails()
+);
 ```
 
 #### [Update User Details](https://docs.bunny.net/reference/userpublic_updateuser)
 
 ```php
-$baseApi->updateUserDetails(
-    body: [
-        'FirstName' => 'John',
-        'Email' => 'john.doe@example.com',
-        'BillingEmail' => 'john.doe@example.com',
-        'LastName' => 'Doe',
-        'StreetAddress' => '1985 Robinson Court',
-        'City' => 'Windom',
-        'ZipCode' => '75492',
-        'Country' => 'US',
-        'CompanyName' => '',
-        'VATNumber' => '',
-        'ReceiveNotificationEmails' => true,
-        'ReceivePromotionalEmails' => false,
-        'Password' => '1234Abcd',
-        'OldPassword' => 'Abcd1234',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\UpdateUserDetails(
+        body: [
+            'FirstName' => 'John',
+            'Email' => 'john.doe@example.com',
+            'BillingEmail' => 'john.doe@example.com',
+            'LastName' => 'Doe',
+            'StreetAddress' => '1985 Robinson Court',
+            'City' => 'Windom',
+            'ZipCode' => '75492',
+            'Country' => 'US',
+            'CompanyName' => '',
+            'VATNumber' => '',
+            'ReceiveNotificationEmails' => true,
+            'ReceivePromotionalEmails' => false,
+            'Password' => '1234Abcd',
+            'OldPassword' => 'Abcd1234',
+        ],
+    )
 );
 ```
 
 #### [Resend Email Confirmation](https://docs.bunny.net/reference/userpublic_resendemailconfirmation)
 
 ```php
-$baseApi->resendEmailConfirmation();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\ResendEmailConfirmation()
+);
 ```
 
 #### [Reset API Key](https://docs.bunny.net/reference/userpublic_resetapikey)
 
 ```php
-$baseApi->resetUserApiKey();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\ResetApiKey()
+);
 ```
 
 #### [List Close Account Reasons](https://docs.bunny.net/reference/userpublic_listcloseaccountreasons)
 
 ```php
-$baseApi->listCloseAccountReasons();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons()
+);
 ```
 
 #### [Close Account](https://docs.bunny.net/reference/userpublic_closeaccount)
 
 ```php
-$baseApi->closeAccount(
-    body: [
-        'Password' => 'Abcd1234',
-        'Reason' => 'No longer needed.',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\CloseAccount(
+        body: [
+            'Password' => 'Abcd1234',
+            'Reason' => 'No longer needed.',
+        ],
+    )
 );
 ```
 
 #### [Get DPA Details](https://docs.bunny.net/reference/userpublic_dpa)
 
 ```php
-$baseApi->getDpaDetails();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails()
+);
 ```
 
 #### [Accept DPA](https://docs.bunny.net/reference/userpublic_dpaaccept)
 
 ```php
-$baseApi->acceptDpa();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\AcceptDpa()
+);
 ```
 
 #### [Get DPA Details (HTML)](https://docs.bunny.net/reference/userpublic_dpapdfhhtml)
 
 ```php
-$baseApi->getDpaDetailsHtml();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml()
+);
 ```
 
 #### [List Notifications](https://docs.bunny.net/reference/userpublic_notificationslist)
 
 ```php
-$baseApi->listNotifications();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\ListNotifications()
+);
 ```
 
 #### [Set Notifications Opened](https://docs.bunny.net/reference/userpublic_setnotificationsopened)
 
 ```php
-$baseApi->setNotificationsOpened();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\SetNotificationsOpened()
+);
 ```
 
 #### [Get Marketing Details](https://docs.bunny.net/reference/userpublic_marketingdetails)
 
 ```php
-$baseApi->getMarketingDetails();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails()
+);
 ```
 
 #### [Get What's New Items](https://docs.bunny.net/reference/userpublic_whatsnew)
 
 ```php
-$baseApi->getWhatsNewItems();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems()
+);
 ```
 
 #### [Reset What's New](https://docs.bunny.net/reference/userpublic_whatsnewreset)
 
 ```php
-$baseApi->resetWhatsNew();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\ResetWhatsNew()
+);
 ```
 
 #### [Generate 2FA Verification](https://docs.bunny.net/reference/userpublic_twofactorgenerateverification)
 
 ```php
-$baseApi->generateTwoFactorAuthenticationVerification();
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GenerateTwoFactorAuthenticationVerification();
+);
 ```
 
 #### [Disable 2FA](https://docs.bunny.net/reference/userpublic_twofactordisable)
 
 ```php
-$baseApi->disableTwoFactorAuthentication(
-    body: [
-        'Password' => 'LoremIpsumDolor',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\DisableTwoFactorAuthentication(
+        body: [
+            'Password' => 'LoremIpsumDolor',
+        ],
+    )
 );
 ```
 
 #### [Enable 2FA](https://docs.bunny.net/reference/userpublic_twofactorenable)
 
 ```php
-$baseApi->enableTwoFactorAuthentication(
-    body: [
-        'SecretValidator' => '',
-        'Secret' => '',
-        'TestPin' => '123456',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\EnableTwoFactorAuthentication(	
+        body: [
+            'SecretValidator' => '',
+            'Secret' => '',
+            'TestPin' => '123456',
+        ],
+    )
 );
 ```
 
 #### [Verify 2FA Code](https://docs.bunny.net/reference/userpublic_twofactorverify)
 
 ```php
-$baseApi->verifyTwoFactorAuthenticationCode(
-    body: [
-        'SecretValidator' => '',
-        'Secret' => '',
-        'TestPin' => '123456',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\VerifyTwoFactorAuthenticationCode(
+        body: [
+            'SecretValidator' => '',
+            'Secret' => '',
+            'TestPin' => '123456',
+        ],
+    )
 );
 ```
 

@@ -50,9 +50,9 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteAllowedReferer as PullZoneDeleteAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteBlockedReferer as PullZoneDeleteBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
@@ -87,8 +87,8 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
@@ -238,13 +238,13 @@ final class Base
             'post' => AddAllowedReferer::class,
         ],
         '/videolibrary/{id}/removeAllowedReferrer' => [
-            'post' => DeleteAllowedReferer::class,
+            'post' => RemoveAllowedReferer::class,
         ],
         '/videolibrary/{id}/addBlockedReferrer' => [
             'post' => AddBlockedReferer::class,
         ],
         '/videolibrary/{id}/removeBlockedReferrer' => [
-            'post' => DeleteBlockedReferer::class,
+            'post' => RemoveBlockedReferer::class,
         ],
         '/dnszone' => [
             'get' => ListDnsZones::class,
@@ -342,19 +342,19 @@ final class Base
             'post' => PullZoneAddAllowedReferer::class,
         ],
         '/pullzone/{id}/removeAllowedReferrer' => [
-            'post' => PullZoneDeleteAllowedReferer::class,
+            'post' => PullZoneRemoveAllowedReferer::class,
         ],
         '/pullzone/{id}/addBlockedReferrer' => [
             'post' => PullZoneAddBlockedReferer::class,
         ],
         '/pullzone/{id}/removeBlockedReferrer' => [
-            'post' => PullZoneDeleteBlockedReferer::class,
+            'post' => PullZoneRemoveBlockedReferer::class,
         ],
         '/pullzone/{id}/addBlockedIp' => [
             'post' => AddBlockedIp::class,
         ],
         '/pullzone/{id}/removeBlockedIp' => [
-            'post' => DeleteBlockedIp::class,
+            'post' => RemoveBlockedIp::class,
         ],
         '/purge' => [
             'get' => PurgeUrlByHeader::class,

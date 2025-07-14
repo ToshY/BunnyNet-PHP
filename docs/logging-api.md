@@ -31,23 +31,28 @@ $bunnyHttpClient = new BunnyHttpClient(
 
 ```php
 // Logging of yesterday.
-$loggingApi->getLog(
-    pullZoneId: 1,
-    dateTime: new \DateTime('-1 day'),
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        pullZoneId: 1,
+        dateTime: (new \DateTime('-1 day'))->format('m-d-y'),
+    )
 );
 
 // Logging of yesterday narrowed down by additional query parameters.
-$loggingApi->getLog(
-    pullZoneId: 1,
-    dateTime: new \DateTime('-1 day'),
-    query: [
-        'start' => 10,
-        'end' => 20,
-        'order' => 'asc',
-        'status' => '100,200,300,400,500',
-        'search' => 'bunny.jpg',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        pullZoneId: 1,
+        dateTime: (new \DateTime('-1 day'))->format('m-d-y'),
+        query: [
+            'start' => 10,
+            'end' => 20,
+            'order' => 'asc',
+            'status' => '100,200,300,400,500',
+            'search' => 'bunny.jpg',
+        ],
+    )
 );
+
 ```
 
 !!! note

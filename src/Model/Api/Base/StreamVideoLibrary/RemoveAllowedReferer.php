@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\WAF;
+namespace ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ReviewTriggeredRule implements ModelInterface, BodyModelInterface
+class RemoveAllowedReferer implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
@@ -20,22 +20,21 @@ class ReviewTriggeredRule implements ModelInterface, BodyModelInterface
 
     public function getPath(): string
     {
-        return 'shield/waf/rules/review-triggered/%d';
+        return 'videolibrary/%d/removeAllowedReferrer';
     }
 
     public function getHeaders(): array
     {
         return [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON_ALL,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'ruleId', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'action', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
         ];
     }
 }

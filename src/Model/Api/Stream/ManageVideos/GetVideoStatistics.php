@@ -11,16 +11,16 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
 use ToshY\BunnyNet\Model\QueryModelInterface;
 
-class DeleteUnconfiguredResolutions implements ModelInterface, QueryModelInterface
+class GetVideoStatistics implements ModelInterface, QueryModelInterface
 {
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::GET;
     }
 
     public function getPath(): string
     {
-        return 'library/%d/videos/%s/resolutions/cleanup';
+        return 'library/%d/statistics';
     }
 
     public function getHeaders(): array
@@ -33,11 +33,10 @@ class DeleteUnconfiguredResolutions implements ModelInterface, QueryModelInterfa
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'resolutionsToDelete', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'deleteNonConfiguredResolutions', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'deleteOriginal', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'deleteMp4Files', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'dryRun', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'dateFrom', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'dateTo', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'hourly', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'videoGuid', type: Type::STRING_TYPE),
         ];
     }
 }

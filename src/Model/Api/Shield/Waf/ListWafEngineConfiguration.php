@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\WAF;
+namespace ToshY\BunnyNet\Model\Api\Shield\Waf;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ReviewTriggeredRuleAiRecommendation implements ModelInterface
+class ListWafEngineConfiguration implements ModelInterface
 {
     public function getMethod(): Method
     {
@@ -17,7 +17,7 @@ class ReviewTriggeredRuleAiRecommendation implements ModelInterface
 
     public function getPath(): string
     {
-        return 'shield/waf/rules/review-triggered/ai-recommendation/%d/%s';
+        return 'shield/waf/engine-config';
     }
 
     public function getHeaders(): array

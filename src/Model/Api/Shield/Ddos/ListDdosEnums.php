@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\DDoS;
+namespace ToshY\BunnyNet\Model\Api\Shield\Ddos;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;

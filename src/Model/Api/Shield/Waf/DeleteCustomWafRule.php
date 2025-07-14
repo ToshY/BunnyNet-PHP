@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\WAF;
+namespace ToshY\BunnyNet\Model\Api\Shield\Waf;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ListWafRules implements ModelInterface
+class DeleteCustomWafRule implements ModelInterface
 {
     public function getMethod(): Method
     {
-        return Method::GET;
+        return Method::DELETE;
     }
 
     public function getPath(): string
     {
-        return 'shield/waf/rules';
+        return 'shield/waf/custom-rule/%d';
     }
 
     public function getHeaders(): array

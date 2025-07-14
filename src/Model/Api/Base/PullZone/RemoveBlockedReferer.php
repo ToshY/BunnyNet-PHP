@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteBlockedIp implements ModelInterface, BodyModelInterface
+class RemoveBlockedReferer implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class DeleteBlockedIp implements ModelInterface, BodyModelInterface
 
     public function getPath(): string
     {
-        return 'pullzone/%d/removeBlockedIp';
+        return 'pullzone/%d/removeBlockedReferrer';
     }
 
     public function getHeaders(): array
@@ -34,7 +34,7 @@ class DeleteBlockedIp implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'BlockedIp', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
         ];
     }
 }

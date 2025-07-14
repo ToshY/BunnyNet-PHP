@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\WAF;
+namespace ToshY\BunnyNet\Model\Api\Shield\Waf;
 
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
@@ -11,16 +11,16 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class UpdateCustomWafRule implements ModelInterface, BodyModelInterface
+class CreateCustomWafRule implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
-        return Method::PUT;
+        return Method::POST;
     }
 
     public function getPath(): string
     {
-        return 'shield/waf/custom-rule/%d';
+        return 'shield/waf/custom-rule';
     }
 
     public function getHeaders(): array
@@ -34,6 +34,7 @@ class UpdateCustomWafRule implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
+            new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'ruleName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ruleDescription', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ruleConfiguration', type: Type::OBJECT_TYPE, children: [
