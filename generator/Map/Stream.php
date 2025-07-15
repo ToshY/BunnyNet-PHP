@@ -19,7 +19,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoResolutionsInfo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\VideoResolutionsInfo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
@@ -85,7 +85,7 @@ final class Stream
             'post' => TranscribeVideo::class,
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions' => [
-            'get' => GetVideoResolutionsInfo::class,
+            'get' => VideoResolutionsInfo::class,
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions/cleanup' => [
             'post' => CleanupUnconfiguredResolutions::class,

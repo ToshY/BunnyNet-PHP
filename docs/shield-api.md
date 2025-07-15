@@ -163,7 +163,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Shield AI Triggered Rule Recommendation](https://docs.bunny.net/reference/get_shield-waf-rules-review-triggered-ai-recommendation-shieldzoneid-ruleid)
+#### [Review Triggered Rule AI Recommendation](https://docs.bunny.net/reference/get_shield-waf-rules-review-triggered-ai-recommendation-shieldzoneid-ruleid)
 
 ```php
 $bunnyHttpClient->request(

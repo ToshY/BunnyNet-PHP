@@ -53,8 +53,8 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\GetOptimizerStatistics;
@@ -324,13 +324,13 @@ final class Base
             'post' => AddCustomCertificate::class,
         ],
         '/pullzone/{id}/removeCertificate' => [
-            'delete' => DeleteCertificate::class,
+            'delete' => RemoveCertificate::class,
         ],
         '/pullzone/{id}/addHostname' => [
             'post' => AddCustomHostname::class,
         ],
         '/pullzone/{id}/removeHostname' => [
-            'delete' => DeleteCustomHostname::class,
+            'delete' => RemoveCustomHostname::class,
         ],
         '/pullzone/{id}/setForceSSL' => [
             'post' => SetForceSsl::class,

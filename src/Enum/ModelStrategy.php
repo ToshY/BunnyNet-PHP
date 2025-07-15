@@ -54,8 +54,8 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneDeleteAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneDeleteBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\GetOptimizerStatistics;
@@ -198,7 +198,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoResolutionsInfo;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\VideoResolutionsInfo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
@@ -307,9 +307,9 @@ enum ModelStrategy
         PurgeCache::class => self::STRICT_BODY,
         CheckPullZoneAvailability::class => self::STRICT_BODY,
         AddCustomCertificate::class => self::STRICT_BODY,
-        DeleteCertificate::class => self::STRICT_BODY,
+        RemoveCertificate::class => self::STRICT_BODY,
         AddCustomHostname::class => self::STRICT_BODY,
-        DeleteCustomHostname::class => self::STRICT_BODY,
+        RemoveCustomHostname::class => self::STRICT_BODY,
         SetForceSsl::class => self::STRICT_BODY,
         ResetTokenKey::class => self::NONE,
         PullZoneAddAllowedReferer::class => self::STRICT_BODY,
@@ -452,7 +452,7 @@ enum ModelStrategy
         AddCaption::class => self::STRICT_BODY,
         DeleteCaption::class => self::NONE,
         TranscribeVideo::class => self::STRICT_QUERY,
-        GetVideoResolutionsInfo::class => self::NONE,
+        VideoResolutionsInfo::class => self::NONE,
         CleanupUnconfiguredResolutions::class => self::STRICT_QUERY,
         GetOEmbed::class => self::STRICT_QUERY,
     ];

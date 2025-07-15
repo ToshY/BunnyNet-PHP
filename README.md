@@ -65,15 +65,19 @@ creates a (draft) PR for these changes. You can identify these automated PRs wit
 
 The automated PRs contain two tasks:
 - [x] Add/Update API models
-- [ ] Update documentation
+- [ ] Add/Update `ModelStrategy` (when needed)
+- [ ] Add/Update documentation examples (when needed)
 
-The first task is already done by the generator, but if you want to fix the other task, please use the following way of working.
+The first task is already done by the generator, but if you want to fix the other two tasks, please use the following way of working.
 
 1. Fork the repository and make sure to copy all branches (not just `master`).
 2. Create a branch based on the automated PR branch.
    - The automated branches will be prefixed with `patch/automated-models` followed by a commit hash, e.g. `patch/automated-models-12efdf9`.
 3. Make the desired changes in your own branch.
 4. Create a PR with your branch, denote your changes and reference the existing automated (draft) PR.
+
+> [!NOTE]  
+> The generator will only add or update models, not delete existing ones.
 
 ## ❕ Licence
 

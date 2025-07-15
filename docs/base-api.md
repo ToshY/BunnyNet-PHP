@@ -1726,7 +1726,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Add Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
+#### [Add Custom Certificate](https://docs.bunny.net/reference/pullzonepublic_addcertificate)
 
 ```php
 $bunnyHttpClient->request(
@@ -1749,7 +1749,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCertificate(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate(
         id: 1,
         body: [
             'Hostname' => 'cdn.example.com',
@@ -1775,7 +1775,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteCustomHostname(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname(
         id: 1,
         body: [
             'Hostname' => 'cdn.example.com',
@@ -1904,7 +1904,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl
+    new \ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl(
         query: [
             'url' => 'https://example.b-cdn.net/images/*',
             'async' => false,
@@ -2055,7 +2055,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\Model(
+    new \ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZone(
         id: 1,
     )
 );

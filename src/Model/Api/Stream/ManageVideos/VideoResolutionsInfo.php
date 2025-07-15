@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetVideoResolutionsInfo implements ModelInterface
+class VideoResolutionsInfo implements ModelInterface
 {
     public function getMethod(): Method
     {

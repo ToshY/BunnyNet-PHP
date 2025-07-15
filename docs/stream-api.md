@@ -359,10 +359,6 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
-
-    - This method allows for uploading a thumbnail based on body contents.
-
 #### [Fetch Video](https://docs.bunny.net/reference/video_fetchnewvideo)
 
 ```php
@@ -473,7 +469,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoResolutionsInfo(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\VideoResolutionsInfo(
         libraryId: 1,
         videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
     )

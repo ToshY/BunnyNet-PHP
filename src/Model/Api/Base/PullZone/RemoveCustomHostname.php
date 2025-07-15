@@ -11,7 +11,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteCertificate implements ModelInterface, BodyModelInterface
+class RemoveCustomHostname implements ModelInterface, BodyModelInterface
 {
     public function getMethod(): Method
     {
@@ -20,7 +20,7 @@ class DeleteCertificate implements ModelInterface, BodyModelInterface
 
     public function getPath(): string
     {
-        return 'pullzone/%d/removeCertificate';
+        return 'pullzone/%d/removeHostname';
     }
 
     public function getHeaders(): array

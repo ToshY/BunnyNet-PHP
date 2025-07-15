@@ -16,6 +16,7 @@ $bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
     // Provide the password of the specific storage zone.
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
+    // Use the Edge Storage endpoint for your storage zone.
     baseUrl: Endpoint::EDGE_STORAGE_FS
 );
 ```
