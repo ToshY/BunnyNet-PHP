@@ -216,7 +216,7 @@ use ToshY\BunnyNet\Validation\Strategy\Query\NoQueryValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\Query\StrictQueryValidationStrategy;
 use ToshY\BunnyNet\Validation\Strategy\ValidationModelStrategy;
 
-enum ModelStrategy
+enum ModelValidationStrategy
 {
     case STRICT;
 
@@ -228,7 +228,7 @@ enum ModelStrategy
 
     case NONE;
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const BASE = [
         ListAbuseCases::class => self::STRICT_QUERY,
         GetDmcaCase::class => self::NONE,
@@ -353,7 +353,7 @@ enum ModelStrategy
         VerifyTwoFactorAuthenticationCode::class => self::STRICT_BODY,
     ];
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const EDGE_SCRIPTING = [
         GetCode::class => self::NONE,
         SetCode::class => self::STRICT_BODY,
@@ -380,7 +380,7 @@ enum ModelStrategy
         PublishReleaseByPathParameter::class => self::STRICT_BODY,
     ];
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const EDGE_STORAGE = [
         DownloadFile::class => self::NONE,
         DownloadZip::class => self::STRICT_BODY,
@@ -390,12 +390,12 @@ enum ModelStrategy
     ];
 
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const LOGGING = [
         GetLog::class => self::STRICT_QUERY,
     ];
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const SHIELD = [
         ListShieldZones::class => self::STRICT_QUERY,
         GetShieldZone::class => self::NONE,
@@ -428,7 +428,7 @@ enum ModelStrategy
         ListEventLogs::class => self::NONE,
     ];
 
-    /** @var array<class-string,ModelStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> */
     private const STREAM = [
         GetCollection::class => self::STRICT_QUERY,
         UpdateCollection::class => self::STRICT_BODY,
@@ -458,7 +458,7 @@ enum ModelStrategy
     ];
 
     /**
-     * @return array<class-string,ModelStrategy>
+     * @return array<class-string,ModelValidationStrategy>
      */
     public static function all(): array
     {

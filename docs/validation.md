@@ -14,6 +14,7 @@ require 'vendor/autoload.php';
 use ToshY\BunnyNet\BunnyHttpClient;
 use ToshY\BunnyNet\BunnyValidator;
 use ToshY\BunnyNet\Enum\Endpoint;
+use ToshY\BunnyNet\Enum\ModelValidationStrategy;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 
 // Default - Using STRICT strategy when applicable for both query and body parameters
@@ -21,29 +22,29 @@ $bunnyValidator = new BunnyValidator();
 
 // Using the "STRICT_QUERY" strategy performs strict validation on just the query parameters
 $bunnyValidator = new BunnyValidator(
-    modelStrategyOverride: [
-        TranscribeVideo::class => ModelStrategy::STRICT_QUERY,
+    strategyOverride: [
+        TranscribeVideo::class => ModelValidationStrategy::STRICT_QUERY,
     ]
 );
 
 // Using the "STRICT_BODY" strategy performs strict validation on just the body parameters
 $bunnyValidator = new BunnyValidator(
-    modelStrategyOverride: [
-        TranscribeVideo::class => ModelStrategy::STRICT_BODY,
+    strategyOverride: [
+        TranscribeVideo::class => ModelValidationStrategy::STRICT_BODY,
     ]
 );
 
 // Using the "LAX" strategy allows unofficial query and body parameters to be sent in the request
 $bunnyValidator = new BunnyValidator(
-    modelStrategyOverride: [
-        TranscribeVideo::class => ModelStrategy::LAX,
+    strategyOverride: [
+        TranscribeVideo::class => ModelValidationStrategy::LAX,
     ]
 );
 
 // Using the "NONE" strategy will skip validation
 $bunnyValidator = new BunnyValidator(
-    modelStrategyOverride: [
-        TranscribeVideo::class => ModelStrategy::NONE,
+    strategyOverride: [
+        TranscribeVideo::class => ModelValidationStrategy::NONE,
     ]
 );
 

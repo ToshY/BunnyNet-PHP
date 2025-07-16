@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use ToshY\BunnyNet\Enum\ModelStrategy;
+use ToshY\BunnyNet\Enum\ModelValidationStrategy;
 use ToshY\BunnyNet\Exception\Validation\BunnyValidatorExceptionInterface;
 use ToshY\BunnyNet\Helper\BunnyValidatorHelper;
 use ToshY\BunnyNet\Model\BodyModelInterface;
@@ -12,18 +12,18 @@ use ToshY\BunnyNet\Model\QueryModelInterface;
 
 class BunnyValidator
 {
-    /** @var array<class-string,ModelStrategy> $modelStrategy */
+    /** @var array<class-string,ModelValidationStrategy> $modelStrategy */
     private array $modelStrategy;
 
     /**
-     * @param array<class-string,ModelStrategy> $modelStrategyOverride
+     * @param array<class-string,ModelValidationStrategy> $strategyOverride
      */
     public function __construct(
-        array $modelStrategyOverride = [],
+        array $strategyOverride = [],
     ) {
         $this->modelStrategy = array_merge(
-            ModelStrategy::all(),
-            $modelStrategyOverride,
+            ModelValidationStrategy::all(),
+            $strategyOverride,
         );
     }
 
@@ -39,7 +39,7 @@ class BunnyValidator
             return;
         }
 
-        /** @var ModelStrategy $modelStrategy */
+        /** @var ModelValidationStrategy $modelStrategy */
         $modelStrategy = $this->modelStrategy[$model::class];
         $queryStrategy = $modelStrategy->validationStrategy()->query;
 
@@ -60,7 +60,7 @@ class BunnyValidator
             return;
         }
 
-        /** @var ModelStrategy $modelStrategy */
+        /** @var ModelValidationStrategy $modelStrategy */
         $modelStrategy = $this->modelStrategy[$model::class];
         $bodyStrategy = $modelStrategy->validationStrategy()->body;
 
