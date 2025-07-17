@@ -123,7 +123,7 @@ use ToshY\BunnyNet\Model\Api\Base\User\VerifyTwoFactorAuthenticationCode;
 
 final class Base
 {
-    /** @var array<string,array<string,class-string|null>> */
+    /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/abusecase' => [
             'get' => ListAbuseCases::class,

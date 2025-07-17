@@ -4,18 +4,14 @@ The library ships with an optional validator that can be used to (pre-)validate 
 
 ## Example
 
-The following will demonstrate how to use the `BunnyValidator` to validate the query and body parameters for the `TranscribeVideo` model. 
+The following will demonstrate how to use the `BunnyValidator` to validate the query and body parameters for the `TranscribeVideo` model.
 
 ```php
 <?php
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\BunnyHttpClient;
-use ToshY\BunnyNet\BunnyValidator;
-use ToshY\BunnyNet\Enum\Endpoint;
-use ToshY\BunnyNet\Enum\ModelValidationStrategy;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
+use ToshY\BunnyNet\BunnyHttpClient;use ToshY\BunnyNet\BunnyValidator;use ToshY\BunnyNet\Enum\Endpoint;use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 
 // Default - Using STRICT strategy when applicable for both query and body parameters
 $bunnyValidator = new BunnyValidator();

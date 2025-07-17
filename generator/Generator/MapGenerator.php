@@ -227,11 +227,13 @@ class MapGenerator
 
         $class = $namespace->addClass($outputFileName);
         $class->setFinal();
+        $class->addComment('@internal');
+
         $property = $class->addProperty('endpoints')
             ->setType('array')
             ->setStatic()
             ->setVisibility('public')
-            ->setComment('@var array<string,array<string,class-string|null>>');
+            ->setComment('@var array<string,array<string,class-string|null>> $endpoints');
 
         $arrayCode = self::generateMultilineMapping($remappedClassnames);
         $property->setValue(new Literal($arrayCode));

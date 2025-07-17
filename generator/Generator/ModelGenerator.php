@@ -32,6 +32,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\MimeType;
 use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Generator\Helper\ModelBodyMethodHelper;
 use ToshY\BunnyNet\Generator\Helper\ModelMethodHelper;
 use ToshY\BunnyNet\Generator\Utils\ArrayUtils;
@@ -55,6 +56,12 @@ class ModelGenerator
     private array $replacements;
 
     private string $mappingClass;
+
+    private string $validationMappingClass;
+
+    private string $validationMappingNamespace;
+
+    private string $validationMappingClassNamespace;
 
     private string $baseNamespace;
 
@@ -80,11 +87,17 @@ class ModelGenerator
         string $apiSpecPath,
         string $outputDir,
         string $mappingClass,
+        string $validationMappingClass,
+        string $validationMappingNamespace,
+        string $validationMappingClassNamespace,
         array $replacements = [],
         LoggerUtils $logger = new LoggerUtils(),
     ) {
         $this->outputDirectory = $outputDir;
         $this->mappingClass = $mappingClass;
+        $this->validationMappingClass = $validationMappingClass;
+        $this->validationMappingNamespace = $validationMappingNamespace;
+        $this->validationMappingClassNamespace = $validationMappingClassNamespace;
         $this->baseNamespace = $this->filePathToFqcn($outputDir);
         $this->existingEndpoints = $this->scanExistingEndpoints();
         $this->apiSpec = $this->parseApiSpec($apiSpecPath);
@@ -103,6 +116,7 @@ class ModelGenerator
         // Get endpoints from the mapping class
         $endpoints = $this->getEndpointsFromMappingClass();
 
+        $modelValidationStrategyCollection = [];
         // Process each endpoint
         foreach ($endpoints as $path => $methods) {
             foreach ($methods as $httpMethod => $endpointClass) {
@@ -152,9 +166,22 @@ class ModelGenerator
                 }
 
                 // Generate the model
-                $this->generateModel($path, $httpMethod, $operation, $className, $endpointClass, $newNamespace);
+                $modelValidationStrategyCollection[$className] = [
+                    'modelValidationStrategy' => $this->generateModel(
+                        $path,
+                        $httpMethod,
+                        $operation,
+                        $className,
+                        $endpointClass,
+                        $newNamespace,
+                    ),
+                    'namespace' => $newNamespace,
+                    'className' => $className,
+                ];
             }
         }
+        // Write the validation strategy map files
+        $this->generateValidationMapping($modelValidationStrategyCollection);
     }
 
     /**
@@ -185,7 +212,7 @@ class ModelGenerator
         string $className,
         string $endpointClass,
         string $newNamespace,
-    ): void {
+    ): ModelValidationStrategy {
         $existingClassHeaders = $this->getExistingModelHeaders($endpointClass);
 
         $newSpecsPathParameters = $this->processParametersForPath(
@@ -205,7 +232,7 @@ class ModelGenerator
             $bodyParameters = $this->processBodySchema($operation);
         }
 
-        $code = $this->generatePhpFile(
+        [$code, $modelValidationStrategy] = $this->generatePhpFile(
             $className,
             $newNamespace,
             $httpMethod,
@@ -230,6 +257,51 @@ class ModelGenerator
         FileUtils::saveFile($filePath, $code);
 
         echo "Generated model: $filePath\n";
+
+        return $modelValidationStrategy;
+    }
+
+    /**
+     * @param array{string: array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed}} $modelValidationStrategyCollection
+     * @return void
+     */
+    private function generateValidationMapping(array $modelValidationStrategyCollection): void
+    {
+        $mappingClassName = $this->validationMappingClass;
+        $mappingNamespace = $this->validationMappingNamespace;
+        $mappingClassNamespace = $this->validationMappingClassNamespace;
+
+        $file = new PhpFile();
+        $file->setStrictTypes();
+
+        $namespace = $file->addNamespace($mappingNamespace);
+        $namespace->addUse(ModelValidationStrategy::class);
+        $class = $namespace->addClass($mappingClassName);
+        $class->setFinal();
+
+        $lines = ["["];
+        /**
+         * @var class-string $className
+         * @var array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed} $validationStrategyInfo
+         */
+        foreach ($modelValidationStrategyCollection as $className => $validationStrategyInfo) {
+            $namespace->addUse($validationStrategyInfo['namespace']);
+
+            $lines[] = PrinterUtils::indentCode(ClassUtils::getShortClassName($className) . '::class => ' . ClassUtils::getShortClassName(ModelValidationStrategy::class) . '::' . $validationStrategyInfo['modelValidationStrategy']->name);
+        }
+
+        $class->addProperty('map')
+            ->setStatic()
+            ->setType('array')
+            ->setValue(implode("\n", $lines))
+            ->setComment('@var array<class-string,ModelValidationStrategy>');
+
+        $code = (new PsrPrinter())->printFile($file);
+
+        $filePath = FileUtils::getAbsoluteRealPath($mappingClassNamespace . '.php');
+        FileUtils::saveFile($filePath, $code);
+
+        echo "Generated validation map: $filePath\n";
     }
 
     /**
@@ -292,7 +364,7 @@ class ModelGenerator
      * @param array<string,mixed> $headerParameters
      * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $bodyParameters
      * @param Operation $operation
-     * @return string
+     * @return array{string, ModelValidationStrategy}
      */
     private function generatePhpFile(
         string $className,
@@ -305,7 +377,7 @@ class ModelGenerator
         array $headerParameters,
         array $bodyParameters,
         Operation $operation,
-    ): string {
+    ): array {
         $file = new PhpFile();
         $file->setStrictTypes();
 
@@ -340,7 +412,15 @@ class ModelGenerator
         $class = $namespace->addClass($className);
         $class->setImplements($implements);
         if (empty($constructorReplacements) === false || $hasQueryParameters === true || $hasBodyParameters === true || empty($headerParameters) === false) {
-            $this->addConstructor($namespace, $class, $pathParameters, $constructorReplacements, $headerParameters, $hasQueryParameters, $hasBodyParameters);
+            $this->addConstructor(
+                $namespace,
+                $class,
+                $pathParameters,
+                $constructorReplacements,
+                $headerParameters,
+                $hasQueryParameters,
+                $hasBodyParameters,
+            );
         }
         $this->addMethod($class, $httpMethod);
         $this->addPath($class, $path, $pathParameters);
@@ -358,7 +438,16 @@ class ModelGenerator
             $this->addBody($class, $bodyParameters);
         }
 
-        return (new PsrPrinter())->printFile($file);
+        $modelValidationStrategy = ModelValidationStrategy::NONE;
+        if ($hasQueryParameters === true && $hasBodyParameters === true) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT;
+        } elseif ($hasQueryParameters === true && $hasBodyParameters === false) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT_QUERY;
+        } elseif ($hasQueryParameters === false && $hasBodyParameters === true) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT_BODY;
+        }
+
+        return [(new PsrPrinter())->printFile($file), $modelValidationStrategy];
     }
 
     /**

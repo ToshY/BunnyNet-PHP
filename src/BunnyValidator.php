@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet;
 
-use ToshY\BunnyNet\Enum\ModelValidationStrategy;
+use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Exception\Validation\BunnyValidatorExceptionInterface;
 use ToshY\BunnyNet\Helper\BunnyValidatorHelper;
 use ToshY\BunnyNet\Model\BodyModelInterface;

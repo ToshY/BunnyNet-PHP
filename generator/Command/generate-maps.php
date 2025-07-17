@@ -26,11 +26,11 @@ $data = [];
 foreach ($manifests as $file) {
     $description = $file['sourceDescription'];
     $key = match (true) {
-        str_contains($description, 'bunny.net API') => 'Base',
-        str_contains($description, 'Edge Scripting API') => 'EdgeScripting',
-        str_contains($description, 'Edge Storage API') => 'EdgeStorage',
-        str_contains($description, 'Stream API') => 'Stream',
-        str_contains($description, 'Shield API') => 'Shield',
+        str_contains($description, 'bunny.net API') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($description, 'Edge Scripting API') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
+        str_contains($description, 'Edge Storage API') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
+        str_contains($description, 'Stream API') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
+        str_contains($description, 'Shield API') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
         default => throw new RuntimeException(
             sprintf(
                 'Unknown API type with description: `%s`',
@@ -40,7 +40,7 @@ foreach ($manifests as $file) {
     };
 
     $ignoreEndpoints = match ($key) {
-        'Base' => [
+        \ToshY\BunnyNet\Enum\Generator::BASE->value => [
             /* Changed to EdgeScripting */
             '/compute/script',
             '/compute/script/{id}',

@@ -20,6 +20,7 @@ $showDiscrepancyLog = isset($options['log']);
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
 $modelOutputDirectory = __DIR__ . '/../../src/Model/API2';
 $baseMapNamespace = 'ToshY\\BunnyNet\\Generator\\Map';
+$validationMapNamespace = 'ToshY\\BunnyNet\\Enum\\Validation\\Map';
 
 $file = FileUtils::getFile($apiSpecManifest);
 if ($file === false) {
@@ -36,11 +37,11 @@ $data = [];
 foreach ($manifests as $file) {
     $description = $file['sourceDescription'];
     $key = match (true) {
-        str_contains($description, 'bunny.net API') => 'Base',
-        str_contains($description, 'Edge Scripting API') => 'EdgeScripting',
-        str_contains($description, 'Edge Storage API') => 'EdgeStorage',
-        str_contains($description, 'Stream API') => 'Stream',
-        str_contains($description, 'Shield API') => 'Shield',
+        str_contains($description, 'bunny.net API') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($description, 'Edge Scripting API') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
+        str_contains($description, 'Edge Storage API') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
+        str_contains($description, 'Stream API') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
+        str_contains($description, 'Shield API') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
         default => throw new RuntimeException(
             sprintf(
                 'Unknown API type with description: `%s`',
@@ -50,7 +51,7 @@ foreach ($manifests as $file) {
     };
 
     $replacements = match ($key) {
-        'Base' => [
+        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
             ClassUtils::getShortClassName(ImportDnsRecords::class) => [
                 'constructor' => [
                     'body' => [
@@ -60,7 +61,7 @@ foreach ($manifests as $file) {
                 ],
             ],
         ],
-        'EdgeStorage' => [
+        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => [
             ClassUtils::getShortClassName(DownloadZip::class) => [
                 'constructor' => [
                     'body' => [
@@ -78,7 +79,7 @@ foreach ($manifests as $file) {
                 ],
             ],
         ],
-        'Stream' => [
+        \ToshY\BunnyNet\Enum\Generator::STREAM->value => [
             ClassUtils::getShortClassName(UploadVideo::class) => [
                 'constructor' => [
                     'body' => [
@@ -98,6 +99,9 @@ foreach ($manifests as $file) {
     $data[$key] = [
         'apiSpecPath' => $file['fileUrl'],
         'mappingClass' => $baseMapNamespace . '\\' . $key,
+        'validationMappingClass' => $key,
+        'validationMappingNamespace' => $validationMapNamespace,
+        'validationMappingClassNamespace' => $validationMapNamespace . '\\' . $key,
         'outputDirectory' => $modelOutputDirectory . '/' . $key,
         'replacements' => $replacements,
     ];
@@ -113,6 +117,9 @@ foreach ($data as $apiType => $config) {
         $config['apiSpecPath'],
         $config['outputDirectory'],
         $config['mappingClass'],
+        $config['validationMappingClass'],
+        $config['validationMappingNamespace'],
+        $config['validationMappingClassNamespace'],
         $config['replacements'],
         $logger,
     );
