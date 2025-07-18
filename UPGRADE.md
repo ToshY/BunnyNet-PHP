@@ -1,10 +1,122 @@
 ## 7.x
 
+This release comes with breaking changes for the usability of the library.
+
+Back in release [`6.0`](https://github.com/ToshY/BunnyNet-PHP/releases/tag/6.0.0) I introduced compatibility with OpenAPI specifications. After further research and consideration, I realised that the models that were generated should be enough for the end user to create a request with, making the existing API classes (`BaseAPI`, `EdgeScriptingAPI`, `EdgeStorageAPI`, `LoggingAPI`, `ShieldAPI` and `StreamAPI`) obsolete if the users have a single entrypoint that could be used instead, which eventually became the `BunnyHttpClient`.
+
+> [!CAUTION]  
+> Due to the nature of this release, I cannot guarantee this list of breaking changes is complete. Thank you for your understanding.
+
 ### ‼️ Breaking changes
 
-@todo
+#### `BunnyHttpClient`
 
-The `6.x` branch will now no longer be maintained.
+All requests will now have to be made using the `ToshY\BunnyNet\BunnyHttpClient` (previously `ToshY\BunnyNet\Client\BunnyClient`), which now requires the `apiKey` and
+`baseUrl` to be set when constructing.
+
+**Example**
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
+
+$bunnyHttpClient = new BunnyHttpClient(
+    client: new \Symfony\Component\HttpClient\Psr18Client(),
+    // Provide the account API key.
+    apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
+    baseUrl: Endpoint::BASE
+);
+```
+
+| **6.x**                             | **7.x**                          | **7.x signature notes**                   |
+|-------------------------------------|----------------------------------|-------------------------------------------|
+| `ToshY\BunnyNet\Client\BunnyClient` | `ToshY\BunnyNet\BunnyHttpClient` | Requires `apiKey` and `baseUrl` to be set |
+
+#### Models
+
+The `BunnyHttpClient` now has a public `request` method that accepts any model implementing `ModelInterface`.
+
+**Example**
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ListAbuseCases(
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+        ],
+    )
+)
+```
+
+All publicly usable models can be found under the [`\ToshY\BunnyNet\Model\Api`](https://github.com/ToshY/BunnyNet-PHP/blob/master/src/Model/Api) namespace.
+
+> [!NOTE]  
+> Examples have been updated in the [documentation](https://toshy.github.io/BunnyNet-PHP/).
+
+#### `ImageProcessor` & `TokenAuthenitcation`
+
+The `ImageProcessor` and `TokenAuthentication` have been renamed by prefixing it with `Bunny`.
+
+| **6.x**                              | **7.x**                              | **7.x signature notes**     |
+|--------------------------------------|--------------------------------------|-----------------------------|
+| `ToshY\BunnyNet\ImageProcessor`      | `ToshY\BunnyNet\BunnyImageProcessor` | `generate` method is static |
+| `ToshY\BunnyNet\TokenAuthentication` | `ToshY\BunnyNet\BunnyTokenAuthentication` |                             |
+
+#### `BunnyValidator`
+
+The `BunnyValidator` was introduced in [`6.1`](https://github.com/ToshY/BunnyNet-PHP/releases/tag/6.1.0) as an initial way of making validation optional and/or more flexible. Up until now, the validator was always used by the API classes.
+
+With this release, the `BunnyValidator` has become optional, no longer is used by default and separated from the formerly known API classes.
+
+**Example**
+```php
+$bunnyValidator = new BunnyValidator();
+
+// Construct the payload
+$payload = new TranscribeVideo(
+    libraryId: 1,
+    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    query: [
+        'language' => 'fi',
+        'force' => true,
+    ],
+    body: [
+        'targetLanguages' => [
+            'fi',
+            'jp'
+        ],
+        'generateTitle' => true,
+        'generateDescription' => true,
+        'sourceLanguage' => 'en',
+    ],   
+);
+
+// Perform validation and catch if necessary
+try {
+    $bunnyValidator->query($payload);
+    $bunnyValidator->body($payload);
+} catch (BunnyValidatorExceptionInterface) {
+    // ...
+}
+```
+
+| **6.x**                                    | **7.x**                         |
+|--------------------------------------------|---------------------------------|
+| `ToshY\BunnyNet\Validation\BunnyValidator` | `ToshY\BunnyNet\BunnyValidator` |
+
+
+> [!NOTE]  
+> Usage examples for the `BunnyValidator` have been added to the [documentation](https://toshy.github.io/BunnyNet-PHP/validation/).
+
+#### Naming coding standards
+
+All classes (and namespaces) have been updated according to the latest [coding standards](https://github.com/php/policies/blob/06ef24434942f3b09241ccbde124b83ca8a18042/coding-standards-and-naming.rst?plain=1#L26), where abbreviations/acronyms/initialisms have been renamed to be treated like regular words (camelcasing).
+
+> [!IMPORTANT]  
+> The `6.x` branch will now no longer be maintained.
 
 ## 6.x
 
