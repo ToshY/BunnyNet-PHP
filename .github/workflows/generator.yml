@@ -1,8 +1,13 @@
 name: Generator
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 env:
   API_SPEC_MANIFEST: https://toshy.github.io/bunnynet-openapi-specification/manifest.json

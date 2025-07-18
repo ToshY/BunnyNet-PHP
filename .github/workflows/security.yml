@@ -1,4 +1,5 @@
 name: Security Check
+
 on:
   push:
     branches:
@@ -8,6 +9,9 @@ on:
       - master
   schedule:
     - cron: '0 3 * * 0'
+
+permissions:
+  contents: read
 
 jobs:
   build:
