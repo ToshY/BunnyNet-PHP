@@ -33,16 +33,16 @@ $bunnyHttpClient = new BunnyHttpClient(
 // Logging of yesterday.
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        date: (new \DateTime('-1 day'))->format('m-d-y'),
         pullZoneId: 1,
-        dateTime: (new \DateTime('-1 day'))->format('m-d-y'),
     )
 );
 
 // Logging of yesterday narrowed down by additional query parameters.
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        date: (new \DateTime('-1 day'))->format('m-d-y'),
         pullZoneId: 1,
-        dateTime: (new \DateTime('-1 day'))->format('m-d-y'),
         query: [
             'start' => 10,
             'end' => 20,
@@ -52,7 +52,6 @@ $bunnyHttpClient->request(
         ],
     )
 );
-
 ```
 
 !!! note

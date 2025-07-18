@@ -17,7 +17,7 @@ use ToshY\BunnyNet\Model\Api\EdgeScripting\EdgeScript\UpdateEdgeScript;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Release\GetActiveReleases;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Release\GetReleases;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishRelease;
-use ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishReleaseByPathParameter;
+use ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishReleaseByUuid;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Secret\AddSecret;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Secret\DeleteSecret;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Secret\ListSecrets;
@@ -55,6 +55,6 @@ final class EdgeScripting
         GetActiveReleases::class => ModelValidationStrategy::NONE,
         GetReleases::class => ModelValidationStrategy::STRICT_QUERY,
         PublishRelease::class => ModelValidationStrategy::STRICT_BODY,
-        PublishReleaseByPathParameter::class => ModelValidationStrategy::STRICT_BODY,
+        PublishReleaseByUuid::class => ModelValidationStrategy::STRICT_BODY,
     ];
 }

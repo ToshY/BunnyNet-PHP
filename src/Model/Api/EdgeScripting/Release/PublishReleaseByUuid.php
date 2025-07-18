@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class PublishReleaseByPathParameter implements ModelInterface, BodyModelInterface
+class PublishReleaseByUuid implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $id

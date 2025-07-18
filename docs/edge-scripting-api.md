@@ -405,7 +405,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishReleaseByPathParameter(
+    new \ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishReleaseByUuid(
         id: 1,
         uuid: 'Ab0CdE1F',
         body: [
