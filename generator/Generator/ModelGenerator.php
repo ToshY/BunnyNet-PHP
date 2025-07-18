@@ -17,6 +17,7 @@ use cebe\openapi\spec\Schema;
 use cebe\openapi\SpecObjectInterface;
 use Exception;
 use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\PsrPrinter;
@@ -55,13 +56,14 @@ class ModelGenerator
     /** @var array<string,array<mixed>> */
     private array $replacements;
 
+    /** @var array<class-string,ModelValidationStrategy> */
+    private array $validationReplacements;
+
     private string $mappingClass;
 
     private string $validationMappingClass;
 
     private string $validationMappingNamespace;
-
-    private string $validationMappingClassNamespace;
 
     private string $baseNamespace;
 
@@ -69,6 +71,8 @@ class ModelGenerator
     private array $existingEndpoints;
 
     private LoggerUtils $logger;
+
+    private string $validationMappingOutputDirectory;
 
     /**
      * @throws IOException
@@ -79,7 +83,11 @@ class ModelGenerator
      * @param string $apiSpecPath
      * @param string $outputDir
      * @param string $mappingClass
+     * @param string $validationMappingClass
+     * @param string $validationMappingNamespace
+     * @param string $validationMappingOutputDirectory
      * @param array<string,array<mixed>> $replacements
+     * @param array<class-string,ModelValidationStrategy> $validationReplacements
      * @param LoggerUtils $logger
      */
 
@@ -89,19 +97,21 @@ class ModelGenerator
         string $mappingClass,
         string $validationMappingClass,
         string $validationMappingNamespace,
-        string $validationMappingClassNamespace,
+        string $validationMappingOutputDirectory,
         array $replacements = [],
+        array $validationReplacements = [],
         LoggerUtils $logger = new LoggerUtils(),
     ) {
         $this->outputDirectory = $outputDir;
         $this->mappingClass = $mappingClass;
         $this->validationMappingClass = $validationMappingClass;
         $this->validationMappingNamespace = $validationMappingNamespace;
-        $this->validationMappingClassNamespace = $validationMappingClassNamespace;
+        $this->validationMappingOutputDirectory = $validationMappingOutputDirectory;
         $this->baseNamespace = $this->filePathToFqcn($outputDir);
         $this->existingEndpoints = $this->scanExistingEndpoints();
         $this->apiSpec = $this->parseApiSpec($apiSpecPath);
         $this->replacements = $replacements;
+        $this->validationReplacements = $validationReplacements;
         $this->logger = $logger;
     }
 
@@ -166,7 +176,7 @@ class ModelGenerator
                 }
 
                 // Generate the model
-                $modelValidationStrategyCollection[$className] = [
+                $modelValidationStrategyCollection[] = [
                     'modelValidationStrategy' => $this->generateModel(
                         $path,
                         $httpMethod,
@@ -262,14 +272,13 @@ class ModelGenerator
     }
 
     /**
-     * @param array{string: array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed}} $modelValidationStrategyCollection
+     * @param list<array{modelValidationStrategy:ModelValidationStrategy, namespace:string, className: mixed}> $modelValidationStrategyCollection
      * @return void
      */
     private function generateValidationMapping(array $modelValidationStrategyCollection): void
     {
         $mappingClassName = $this->validationMappingClass;
         $mappingNamespace = $this->validationMappingNamespace;
-        $mappingClassNamespace = $this->validationMappingClassNamespace;
 
         $file = new PhpFile();
         $file->setStrictTypes();
@@ -279,26 +288,72 @@ class ModelGenerator
         $class = $namespace->addClass($mappingClassName);
         $class->setFinal();
 
+        $processedClassNames = [];
         $lines = ["["];
         /**
-         * @var class-string $className
          * @var array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed} $validationStrategyInfo
          */
-        foreach ($modelValidationStrategyCollection as $className => $validationStrategyInfo) {
-            $namespace->addUse($validationStrategyInfo['namespace']);
+        foreach ($modelValidationStrategyCollection as $validationStrategyInfo) {
+            $subClassName = ClassUtils::getShortClassName($validationStrategyInfo['className']);
+            $fqcn = $validationStrategyInfo['namespace'] . '\\' . $validationStrategyInfo['className'];
 
-            $lines[] = PrinterUtils::indentCode(ClassUtils::getShortClassName($className) . '::class => ' . ClassUtils::getShortClassName(ModelValidationStrategy::class) . '::' . $validationStrategyInfo['modelValidationStrategy']->name);
+            // Replacements for model validation strategies; should normally not be needed.
+            if (empty($this->validationReplacements[$fqcn]) === false) {
+                $validationStrategyInfo['modelValidationStrategy'] = $this->validationReplacements[$subClassName];
+            }
+
+            $alias = null;
+            $hasAlias = false;
+            if (in_array($subClassName, $processedClassNames, true) === true) {
+                $hasAlias = true;
+                $alias = ClassUtils::getNamespacePart($fqcn) . $subClassName;
+            }
+
+            $newClassName = $hasAlias ? $alias : $subClassName;
+            $namespace->addUse(name: $fqcn, alias: $newClassName);
+
+            $processedClassNames[] = $newClassName;
+
+            // Create the actual line
+            $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
+            $subValidationStrategyValue = $validationStrategyInfo['modelValidationStrategy']->name;
+
+            $lines[] = "$newClassName::class => $subValidationStrategyName::$subValidationStrategyValue,";
         }
+
+        // Append replacements if needed to end of array
+        foreach ($this->validationReplacements as $validationClass => $modelValidationStrategy) {
+            $validationClassName = ClassUtils::getShortClassName($validationClass);
+            if (in_array($validationClassName, $processedClassNames, true) === true) {
+                continue;
+            }
+
+            $namespace->addUse($validationClass);
+
+            $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
+            $lines[] = "$validationClassName::class => $subValidationStrategyName::$modelValidationStrategy->name,";
+        }
+
+        $lines[] = "]";
 
         $class->addProperty('map')
             ->setStatic()
             ->setType('array')
-            ->setValue(implode("\n", $lines))
-            ->setComment('@var array<class-string,ModelValidationStrategy>');
+            ->setValue(new Literal(PrinterUtils::indentCode(implode("\n", $lines), 4)))
+            ->setComment('@var array<class-string,ModelValidationStrategy> $map');
 
         $code = (new PsrPrinter())->printFile($file);
 
-        $filePath = FileUtils::getAbsoluteRealPath($mappingClassNamespace . '.php');
+        // Prepare output directory path
+        $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
+            $this->filePathToFqcn($this->validationMappingOutputDirectory),
+            $mappingClassName,
+            $this->validationMappingOutputDirectory,
+        );
+        FileUtils::createDirectory($this->validationMappingOutputDirectory);
+
+        $filePath = FileUtils::getAbsoluteRealPath($outputDirectoryPath . '.php');
+
         FileUtils::saveFile($filePath, $code);
 
         echo "Generated validation map: $filePath\n";
@@ -860,7 +915,7 @@ class ModelGenerator
     private function createNewNamespace(string $originalNamespace): string
     {
         // Extract the API type (e.g., Base, Stream) from the original namespace
-        if (preg_match('/\\\\Model\\\\API\\\\([^\\\\]+)\\\\(.+)$/', $originalNamespace, $matches)) {
+        if (preg_match('/\\\\Model\\\\Api\\\([^\\\\]+)\\\\(.+)$/', $originalNamespace, $matches)) {
             $subNamespace = $matches[2];
 
             return $this->baseNamespace . '\\' . $subNamespace;

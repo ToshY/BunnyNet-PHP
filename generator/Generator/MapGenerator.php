@@ -101,7 +101,7 @@ class MapGenerator
                 continue;
             }
 
-            $fqcn = self::filePathToFqcn($file->getPathname());
+            $fqcn = FileUtils::filePathToFqcn($file->getPathname());
             if (class_exists($fqcn) === false) {
                 continue;
             }
@@ -131,33 +131,6 @@ class MapGenerator
         }
 
         return $map;
-    }
-
-    /**
-     * Convert a full file path to fully qualified class name assuming PSR-4 and base namespace ToshY\BunnyNet\
-     */
-    private static function filePathToFqcn(string $fullFilepath): string
-    {
-        $normalizedPath = FileUtils::backslashToForwardSlash($fullFilepath);
-
-        $realPath = match (FileUtils::realPath($normalizedPath)) {
-            false => FileUtils::getAbsoluteRealPath($normalizedPath),
-            default => FileUtils::backslashToForwardSlash($fullFilepath),
-        };
-
-        $psr4 = ClassUtils::getPsr4RootNamespace();
-        $sourcePath = '/' . $psr4['path'];
-
-        $relative = FileUtils::getRelativePathWithoutSource($realPath, $sourcePath);
-        $relative = FileUtils::removePhpExtension($relative);
-
-        $namespacePath = ClassUtils::forwardSlashToBackwardSlash($relative);
-
-        return sprintf(
-            '%s%s',
-            $psr4['namespace'],
-            $namespacePath,
-        );
     }
 
     /**

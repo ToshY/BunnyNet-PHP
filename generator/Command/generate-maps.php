@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Generator\Utils\FileUtils;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
-$modelInputDirectory = __DIR__ . '/../../src/Model/API';
+$modelInputDirectory = __DIR__ . '/../../src/Model/Api';
 $outputDirectory = __DIR__ . '/../Map';
 
 $file = FileUtils::getFile($apiSpecManifest);

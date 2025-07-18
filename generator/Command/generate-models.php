@@ -3,11 +3,13 @@
 declare(strict_types=1);
 
 use ToshY\BunnyNet\Enum\Header;
+use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Generator\Generator\ModelGenerator;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
@@ -18,10 +20,11 @@ $options = getopt('', ['log']);
 $showDiscrepancyLog = isset($options['log']);
 
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
-$modelOutputDirectory = __DIR__ . '/../../src/Model/API2';
+$modelOutputDirectory = __DIR__ . '/../../src/Model/Api2';
+$validationMappingOutputDirectory = __DIR__ . '/../../src/Enum/Validation/Map2';
 $baseMapNamespace = 'ToshY\\BunnyNet\\Generator\\Map';
-$validationMapNamespace = 'ToshY\\BunnyNet\\Enum\\Validation\\Map';
 
+$validationMapNamespace = FileUtils::filePathToFqcn($validationMappingOutputDirectory);
 $file = FileUtils::getFile($apiSpecManifest);
 if ($file === false) {
     throw new RuntimeException(
@@ -96,14 +99,22 @@ foreach ($manifests as $file) {
         default => [],
     };
 
+    $validationReplacements  = match ($key) {
+        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
+            GetGitHubIntegration::class => ModelValidationStrategy::NONE,
+        ],
+        default => [],
+    };
+
     $data[$key] = [
         'apiSpecPath' => $file['fileUrl'],
         'mappingClass' => $baseMapNamespace . '\\' . $key,
         'validationMappingClass' => $key,
         'validationMappingNamespace' => $validationMapNamespace,
-        'validationMappingClassNamespace' => $validationMapNamespace . '\\' . $key,
+        'validationMappingOutputDirectory' => $validationMappingOutputDirectory,
         'outputDirectory' => $modelOutputDirectory . '/' . $key,
         'replacements' => $replacements,
+        'validationReplacements' => $validationReplacements,
     ];
 }
 
@@ -119,8 +130,9 @@ foreach ($data as $apiType => $config) {
         $config['mappingClass'],
         $config['validationMappingClass'],
         $config['validationMappingNamespace'],
-        $config['validationMappingClassNamespace'],
+        $config['validationMappingOutputDirectory'],
         $config['replacements'],
+        $config['validationReplacements'],
         $logger,
     );
 
@@ -131,3 +143,6 @@ foreach ($data as $apiType => $config) {
     // Autofix with php-cs-fixer for this API's output directory
     shell_exec('php vendor/bin/php-cs-fixer --quiet fix ' . realpath($config['outputDirectory']));
 }
+
+// Autofix with php-cs-fixer for validation mapping output directory
+shell_exec('php vendor/bin/php-cs-fixer --quiet fix ' . realpath($validationMappingOutputDirectory));
