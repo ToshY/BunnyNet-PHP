@@ -103,6 +103,9 @@ foreach ($manifests as $file) {
         \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
             GetGitHubIntegration::class => ModelValidationStrategy::NONE,
         ],
+        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => [
+            DownloadZip::class => ModelValidationStrategy::STRICT_BODY,
+        ],
         default => [],
     };
 
