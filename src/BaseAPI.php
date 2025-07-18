@@ -116,17 +116,19 @@ use ToshY\BunnyNet\Model\API\Base\User\SetNotificationsOpened;
 use ToshY\BunnyNet\Model\API\Base\User\UpdateUserDetails;
 use ToshY\BunnyNet\Model\API\Base\User\VerifyTwoFactorAuthenticationCode;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class BaseAPI
 {
     /**
      * @param string $apiKey
      * @param BunnyClient $client
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -137,11 +139,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\BunnyClientResponseException
-     * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -149,7 +147,7 @@ class BaseAPI
     {
         $endpoint = new ListAbuseCases();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -246,9 +244,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -256,7 +252,7 @@ class BaseAPI
     {
         $endpoint = new AuthJwt2fa();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -297,10 +293,8 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\JSONException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -308,7 +302,7 @@ class BaseAPI
     {
         $endpoint = new ListAPIKeys();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -334,9 +328,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -344,7 +336,7 @@ class BaseAPI
     {
         $endpoint = new ConfigureAutoRecharge();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -356,9 +348,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -366,7 +356,7 @@ class BaseAPI
     {
         $endpoint = new CreatePaymentCheckout();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -438,9 +428,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -448,7 +436,7 @@ class BaseAPI
     {
         $endpoint = new CreateCoinifyPayment();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -492,9 +480,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -502,7 +488,7 @@ class BaseAPI
     {
         $endpoint = new ApplyPromoCode();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -514,9 +500,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -524,7 +508,7 @@ class BaseAPI
     {
         $endpoint = new ListTickets();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -570,9 +554,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -583,7 +565,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ReplyTicket();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -597,9 +579,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -607,7 +587,7 @@ class BaseAPI
     {
         $endpoint = new CreateTicket();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -619,9 +599,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -629,7 +607,7 @@ class BaseAPI
     {
         $endpoint = new ListDRMCertificates();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -671,9 +649,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -681,7 +657,7 @@ class BaseAPI
     {
         $endpoint = new ListVideoLibraries();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -693,9 +669,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -703,7 +677,7 @@ class BaseAPI
     {
         $endpoint = new AddVideoLibrary();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -733,9 +707,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -746,7 +718,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateVideoLibrary();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -791,9 +763,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -801,7 +771,7 @@ class BaseAPI
     {
         $endpoint = new Model\API\Base\StreamVideoLibrary\ResetPassword();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -864,9 +834,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -877,7 +845,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\AddAllowedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -890,9 +858,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -903,7 +869,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteAllowedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -916,9 +882,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -929,7 +893,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\AddBlockedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -942,9 +906,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -955,7 +917,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\StreamVideoLibrary\DeleteBlockedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -968,9 +930,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -978,7 +938,7 @@ class BaseAPI
     {
         $endpoint = new ListDNSZones();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -990,9 +950,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -1000,7 +958,7 @@ class BaseAPI
     {
         $endpoint = new AddDNSZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1029,9 +987,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1042,7 +998,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateDNSZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1123,9 +1079,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -1136,7 +1090,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetDNSZoneQueryStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1149,9 +1103,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -1159,7 +1111,7 @@ class BaseAPI
     {
         $endpoint = new CheckDNSZoneAvailability();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1171,9 +1123,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $zoneId
      * @param array<string,mixed> $body
@@ -1184,7 +1134,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddDNSRecord();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1197,9 +1147,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $id
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -1212,7 +1160,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateDNSRecord();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1300,9 +1248,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -1310,7 +1256,7 @@ class BaseAPI
     {
         $endpoint = new ListPullZones();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1322,9 +1268,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -1332,7 +1276,7 @@ class BaseAPI
     {
         $endpoint = new AddPullZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1344,9 +1288,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $id
@@ -1357,7 +1299,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetPullZone();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1370,9 +1312,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1383,7 +1323,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdatePullZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1433,9 +1373,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
      * @param array<string,mixed> $body
@@ -1446,7 +1384,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddOrUpdateEdgeRule();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1459,9 +1397,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $edgeRuleId
      * @param array<string,mixed> $body
      * @return BunnyClientResponseInterface
@@ -1474,7 +1410,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new SetEdgeRuleEnabled();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1527,9 +1463,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1540,7 +1474,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetOriginShieldQueueStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1553,9 +1487,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1566,7 +1498,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetSafeHopStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1579,9 +1511,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1592,7 +1522,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetOptimizerStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1605,9 +1535,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      * @param int $pullZoneId
@@ -1618,7 +1546,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new GetWAFStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1631,9 +1559,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -1641,7 +1567,7 @@ class BaseAPI
     {
         $endpoint = new LoadFreeCertificate();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1653,9 +1579,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1666,7 +1590,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new PurgeCache();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1679,9 +1603,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -1689,7 +1611,7 @@ class BaseAPI
     {
         $endpoint = new CheckPullZoneAvailability();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1701,9 +1623,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1714,7 +1634,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddCustomCertificate();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1727,9 +1647,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1740,7 +1658,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new DeleteCertificate();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1753,9 +1671,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1766,7 +1682,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new AddCustomHostname();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1779,9 +1695,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1792,7 +1706,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new DeleteCustomHostname();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1805,9 +1719,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1818,7 +1730,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new SetForceSSL();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1848,9 +1760,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1861,7 +1771,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddAllowedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1874,9 +1784,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1887,7 +1795,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteAllowedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1900,9 +1808,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1913,7 +1819,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddBlockedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1926,9 +1832,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1939,7 +1843,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteBlockedReferer();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1952,9 +1856,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1965,7 +1867,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\AddBlockedIP();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -1978,9 +1880,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -1991,7 +1891,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new Model\API\Base\PullZone\DeleteBlockedIP();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2004,9 +1904,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2014,7 +1912,7 @@ class BaseAPI
     {
         $endpoint = new PurgeURL();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2026,9 +1924,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2036,7 +1932,7 @@ class BaseAPI
     {
         $endpoint = new PurgeURLByHeader();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2048,9 +1944,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2058,7 +1952,7 @@ class BaseAPI
     {
         $endpoint = new GetStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2069,10 +1963,8 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\JSONException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2080,7 +1972,7 @@ class BaseAPI
     {
         $endpoint = new GlobalSearch();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2092,9 +1984,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2102,7 +1992,7 @@ class BaseAPI
     {
         $endpoint = new ListStorageZones();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2114,9 +2004,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2124,7 +2012,7 @@ class BaseAPI
     {
         $endpoint = new AddStorageZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2136,9 +2024,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2146,7 +2032,7 @@ class BaseAPI
     {
         $endpoint = new CheckStorageZoneAvailability();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2175,9 +2061,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -2188,7 +2072,7 @@ class BaseAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateStorageZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2217,10 +2101,8 @@ class BaseAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\JSONException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $id
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -2229,7 +2111,7 @@ class BaseAPI
     {
         $endpoint = new GetStorageZoneStatistics();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2276,9 +2158,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -2286,7 +2166,7 @@ class BaseAPI
     {
         $endpoint = new Model\API\Base\StorageZone\ResetReadOnlyPassword();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2328,9 +2208,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2338,7 +2216,7 @@ class BaseAPI
     {
         $endpoint = new UpdateUserDetails();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2395,9 +2273,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2405,7 +2281,7 @@ class BaseAPI
     {
         $endpoint = new CloseAccount();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2552,9 +2428,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2562,7 +2436,7 @@ class BaseAPI
     {
         $endpoint = new DisableTwoFactorAuthentication();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2574,9 +2448,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2584,7 +2456,7 @@ class BaseAPI
     {
         $endpoint = new EnableTwoFactorAuthentication();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -2596,9 +2468,7 @@ class BaseAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -2606,7 +2476,7 @@ class BaseAPI
     {
         $endpoint = new VerifyTwoFactorAuthenticationCode();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,

@@ -37,17 +37,19 @@ use ToshY\BunnyNet\Model\API\Shield\Zone\GetShieldZoneByPullZoneId;
 use ToshY\BunnyNet\Model\API\Shield\Zone\ListShieldZones;
 use ToshY\BunnyNet\Model\API\Shield\Zone\UpdateShieldZone;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class ShieldAPI
 {
     /**
      * @param string $apiKey
      * @param BunnyClient $client
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -57,10 +59,8 @@ class ShieldAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\JSONException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
      */
@@ -68,7 +68,7 @@ class ShieldAPI
     {
         $endpoint = new ListShieldZones();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -114,9 +114,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -124,7 +122,7 @@ class ShieldAPI
     {
         $endpoint = new CreateShieldZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -136,9 +134,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -146,7 +142,7 @@ class ShieldAPI
     {
         $endpoint = new UpdateShieldZone();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -190,9 +186,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $shieldZoneId
      * @param array<string,mixed> $body
@@ -203,7 +197,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ReviewTriggeredRule();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -236,9 +230,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $shieldZoneId
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -249,7 +241,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ListCustomWAFRules();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -279,9 +271,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -292,7 +282,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateCustomWAFRule();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -305,9 +295,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -318,7 +306,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateCustomWAFRuleByPatch();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -348,9 +336,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -359,7 +345,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new CreateCustomWAFRule();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -431,9 +417,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param int $shieldZoneId
      * @param array<string,mixed> $query
      * @return BunnyClientResponseInterface
@@ -444,7 +428,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new ListRateLimits();
 
-        ParameterValidator::validate($query, $endpoint->getQuery());
+        $this->validator->query($query, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -474,9 +458,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param int $id
      * @param array<string,mixed> $body
@@ -487,7 +469,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new UpdateRateLimit();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
@@ -517,9 +499,7 @@ class ShieldAPI
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
      * @throws Exception\JSONException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @return BunnyClientResponseInterface
      * @param array<string,mixed> $body
      */
@@ -528,7 +508,7 @@ class ShieldAPI
     ): BunnyClientResponseInterface {
         $endpoint = new CreateRateLimit();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,

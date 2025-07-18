@@ -18,7 +18,7 @@
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/StreamAPI.php"/>
   <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/TokenAuthentication.php" method="sign"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/TokenAuthentication.php"/>
-  <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validator/ParameterValidator.php" method="validate"/>
-  <violation rule="PHPMD\Rule\Design\NpathComplexity" file="src/Validator/ParameterValidator.php" method="validate"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Validator/ParameterValidator.php" method="validate"/>
+  <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
+  <violation rule="PHPMD\Rule\Design\NpathComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Validation/ParameterValidator.php" method="validate"/>
 </phpmd-baseline>

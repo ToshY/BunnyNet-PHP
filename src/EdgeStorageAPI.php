@@ -14,7 +14,7 @@ use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DownloadFile;
 use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\API\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Client\Interface\BunnyClientResponseInterface;
-use ToshY\BunnyNet\Validator\ParameterValidator;
+use ToshY\BunnyNet\Validation\BunnyValidator;
 
 class EdgeStorageAPI
 {
@@ -22,11 +22,13 @@ class EdgeStorageAPI
      * @param string $apiKey
      * @param BunnyClient $client
      * @param Region $region
+     * @param BunnyValidator $validator
      */
     public function __construct(
         protected readonly string $apiKey,
         protected readonly BunnyClient $client,
         Region $region = Region::FS,
+        protected readonly BunnyValidator $validator = new BunnyValidator(),
     ) {
         $this->client
             ->setApiKey($this->apiKey)
@@ -58,10 +60,8 @@ class EdgeStorageAPI
     /**
      * @throws ClientExceptionInterface
      * @throws Exception\BunnyClientResponseException
-     * @throws Exception\InvalidTypeForKeyValueException
-     * @throws Exception\InvalidTypeForListValueException
      * @throws Exception\JSONException
-     * @throws Exception\ParameterIsRequiredException
+     * @throws Exception\Validation\BunnyValidatorExceptionInterface
      * @param string $storageZoneName
      * @param mixed $body
      * @return BunnyClientResponseInterface
@@ -72,7 +72,7 @@ class EdgeStorageAPI
     ): BunnyClientResponseInterface {
         $endpoint = new DownloadZip();
 
-        ParameterValidator::validate($body, $endpoint->getBody());
+        $this->validator->body($body, $endpoint);
 
         return $this->client->request(
             endpoint: $endpoint,
