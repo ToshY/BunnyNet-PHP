@@ -103,6 +103,7 @@ $content = $filesystem->readStream('./remote-custom.css');
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
         storageZoneName: 'my-storage-zone-1',
+        path: '',
         fileName: 'remote-bunny.jpg',
         body: $content,
     )
@@ -112,9 +113,9 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
         storageZoneName: 'my-storage-zone-1',
+        path: 'css',
         fileName: 'remote-custom.css',
         body: $content,
-        path: 'css',
     )
 );
 
@@ -122,9 +123,9 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
         storageZoneName: 'my-storage-zone-1',
+        path: 'css',
         fileName: 'remote-custom.css',
         body: $content,
-        path: 'css',
         headers: [
             'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',
         ],
@@ -143,6 +144,7 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DeleteFile(
         storageZoneName: 'my-storage-zone-1',
+        path: '',
         fileName: 'bunny.jpg',
     )
 );
@@ -151,8 +153,8 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DeleteFile(
         storageZoneName: 'my-storage-zone-1',
-        fileName: 'custom.css',
         path: 'css',
+        fileName: 'custom.css',
     )
 );
 ```
@@ -166,6 +168,7 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeStorage\BrowseFiles\ListFiles(
         storageZoneName: 'my-storage-zone-1',
+        path: '',
     )
 );
 

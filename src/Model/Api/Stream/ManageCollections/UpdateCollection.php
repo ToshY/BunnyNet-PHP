@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Api\Stream\ManageCollections;
 
+use ToshY\BunnyNet\Attributes\BodyProperty;
+use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
@@ -13,6 +15,21 @@ use ToshY\BunnyNet\Model\ModelInterface;
 
 class UpdateCollection implements ModelInterface, BodyModelInterface
 {
+    /**
+     * @param int $libraryId
+     * @param string $collectionId
+     * @param array<string,mixed> $body
+     */
+    public function __construct(
+        #[PathProperty]
+        public readonly int $libraryId,
+        #[PathProperty]
+        public readonly string $collectionId,
+        #[BodyProperty]
+        public readonly array $body = [],
+    ) {
+    }
+
     public function getMethod(): Method
     {
         return Method::POST;
@@ -27,7 +44,7 @@ class UpdateCollection implements ModelInterface, BodyModelInterface
     {
         return [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON_ALL,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 

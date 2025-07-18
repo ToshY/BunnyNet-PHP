@@ -31,27 +31,27 @@ use ToshY\BunnyNet\Model\Api\EdgeScripting\Variable\UpsertVariable;
 
 final class EdgeScripting
 {
-    /** @var array<class-string,ModelValidationStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
         GetCode::class => ModelValidationStrategy::NONE,
         SetCode::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteEdgeScript::class => ModelValidationStrategy::STRICT_QUERY,
         GetEdgeScript::class => ModelValidationStrategy::NONE,
         UpdateEdgeScript::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteEdgeScript::class => ModelValidationStrategy::STRICT_QUERY,
         GetEdgeScriptStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListEdgeScripts::class => ModelValidationStrategy::STRICT_QUERY,
         AddEdgeScript::class => ModelValidationStrategy::STRICT_BODY,
         RotateDeploymentKey::class => ModelValidationStrategy::NONE,
         AddVariable::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteVariable::class => ModelValidationStrategy::NONE,
         GetVariable::class => ModelValidationStrategy::NONE,
         UpdateVariable::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteVariable::class => ModelValidationStrategy::NONE,
         UpsertVariable::class => ModelValidationStrategy::STRICT_BODY,
-        AddSecret::class => ModelValidationStrategy::STRICT_BODY,
         ListSecrets::class => ModelValidationStrategy::NONE,
         UpsertSecret::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteSecret::class => ModelValidationStrategy::NONE,
+        AddSecret::class => ModelValidationStrategy::STRICT_BODY,
         UpdateSecret::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteSecret::class => ModelValidationStrategy::NONE,
         GetActiveReleases::class => ModelValidationStrategy::NONE,
         GetReleases::class => ModelValidationStrategy::STRICT_QUERY,
         PublishRelease::class => ModelValidationStrategy::STRICT_BODY,

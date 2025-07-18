@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Api\Shield\Zone;
 
+use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
 class GetShieldZoneByPullZoneId implements ModelInterface
 {
+    /**
+     * @param int $pullZoneId
+     */
+    public function __construct(
+        #[PathProperty]
+        public readonly int $pullZoneId,
+    ) {
+    }
+
     public function getMethod(): Method
     {
         return Method::GET;

@@ -28,9 +28,12 @@ use ToshY\BunnyNet\Model\Api\EdgeScripting\Variable\GetVariable;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Variable\UpdateVariable;
 use ToshY\BunnyNet\Model\Api\EdgeScripting\Variable\UpsertVariable;
 
+/**
+ * @internal
+ */
 final class EdgeScripting
 {
-    /** @var array<string,array<string,class-string|null>> */
+    /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/compute/script/{id}/code' => [
             'get' => GetCode::class,

@@ -33,7 +33,7 @@ use ToshY\BunnyNet\Model\Api\Stream\OEmbed\GetOEmbed;
 
 final class Stream
 {
-    /** @var array<class-string,ModelValidationStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
         GetCollection::class => ModelValidationStrategy::STRICT_QUERY,
         UpdateCollection::class => ModelValidationStrategy::STRICT_BODY,
@@ -41,10 +41,9 @@ final class Stream
         ListCollections::class => ModelValidationStrategy::STRICT_QUERY,
         CreateCollection::class => ModelValidationStrategy::STRICT_BODY,
         GetVideo::class => ModelValidationStrategy::NONE,
+        UploadVideo::class => ModelValidationStrategy::STRICT_QUERY,
         UpdateVideo::class => ModelValidationStrategy::STRICT_BODY,
         DeleteVideo::class => ModelValidationStrategy::NONE,
-        CreateVideo::class => ModelValidationStrategy::STRICT_BODY,
-        UploadVideo::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideoHeatmap::class => ModelValidationStrategy::NONE,
         GetVideoPlayData::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideoStatistics::class => ModelValidationStrategy::STRICT_QUERY,
@@ -52,11 +51,12 @@ final class Stream
         AddOutputCodecToVideo::class => ModelValidationStrategy::NONE,
         RepackageVideo::class => ModelValidationStrategy::STRICT_QUERY,
         ListVideos::class => ModelValidationStrategy::STRICT_QUERY,
+        CreateVideo::class => ModelValidationStrategy::STRICT_BODY,
         SetThumbnail::class => ModelValidationStrategy::STRICT_QUERY,
         FetchVideo::class => ModelValidationStrategy::STRICT,
         AddCaption::class => ModelValidationStrategy::STRICT_BODY,
         DeleteCaption::class => ModelValidationStrategy::NONE,
-        TranscribeVideo::class => ModelValidationStrategy::STRICT_QUERY,
+        TranscribeVideo::class => ModelValidationStrategy::STRICT,
         VideoResolutionsInfo::class => ModelValidationStrategy::NONE,
         CleanupUnconfiguredResolutions::class => ModelValidationStrategy::STRICT_QUERY,
         GetOEmbed::class => ModelValidationStrategy::STRICT_QUERY,

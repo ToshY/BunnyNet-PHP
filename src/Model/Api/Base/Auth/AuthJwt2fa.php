@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Api\Base\Auth;
 
+use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
@@ -13,6 +14,15 @@ use ToshY\BunnyNet\Model\ModelInterface;
 
 class AuthJwt2fa implements ModelInterface, BodyModelInterface
 {
+    /**
+     * @param array<string,mixed> $body
+     */
+    public function __construct(
+        #[BodyProperty]
+        public readonly array $body = [],
+    ) {
+    }
+
     public function getMethod(): Method
     {
         return Method::POST;

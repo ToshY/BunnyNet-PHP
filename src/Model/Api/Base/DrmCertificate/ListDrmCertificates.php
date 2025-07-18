@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Api\Base\DrmCertificate;
 
+use ToshY\BunnyNet\Attributes\QueryProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
@@ -13,6 +14,15 @@ use ToshY\BunnyNet\Model\QueryModelInterface;
 
 class ListDrmCertificates implements ModelInterface, QueryModelInterface
 {
+    /**
+     * @param array<string,mixed> $query
+     */
+    public function __construct(
+        #[QueryProperty]
+        public readonly array $query = [],
+    ) {
+    }
+
     public function getMethod(): Method
     {
         return Method::GET;

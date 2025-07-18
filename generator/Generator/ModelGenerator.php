@@ -466,7 +466,13 @@ class ModelGenerator
 
         $class = $namespace->addClass($className);
         $class->setImplements($implements);
-        if (empty($constructorReplacements) === false || $hasQueryParameters === true || $hasBodyParameters === true || empty($headerParameters) === false) {
+        if (
+            empty($pathParameters) === false
+            || empty($constructorReplacements) === false
+            || $hasQueryParameters === true
+            || $hasBodyParameters === true
+            || empty($headerParameters) === false
+        ) {
             $this->addConstructor(
                 $namespace,
                 $class,
@@ -564,6 +570,9 @@ class ModelGenerator
             $namespace->addUse(PathProperty::class);
         }
 
+        // Determine argument order; required arguments before optional ones
+        $determineArgumentOrder = [];
+        $constructorProperties = [];
         $queryType = $replacements['query']['type'] ?? 'array';
         if ($hasQueryParameters === true || empty($replacements['query']) === false) {
             $type = self::getPhpTypeFromOpenApiType($queryType);
@@ -574,23 +583,26 @@ class ModelGenerator
 
             $constructorComments[] = sprintf('@param %s $query', $queryComment);
 
-            $property = $constructor->addPromotedParameter('query')
-                ->setType($type)
-                ->setVisibility('public')
-                ->addAttribute(QueryProperty::class)
-                ->setReadOnly();
+            $constructorProperties['query'] = [
+                'type' => $type,
+                'visibility' => 'public',
+                'attribute' => QueryProperty::class,
+            ];
 
             // Always set the default value except if the value is null
-            $defaultValue = [];
+            $queryDefaultValue = [];
             if (
                 !array_key_exists('query', $replacements)
                 || !array_key_exists('default', $replacements['query'])
                 || $replacements['query']['default'] !== null
             ) {
-                $property->setDefaultValue($replacements['query']['default'] ?? $defaultValue);
+                $queryDefaultValue = $replacements['query']['default'] ?? $queryDefaultValue;
+                $constructorProperties['query']['default'] = $queryDefaultValue;
+            } else {
+                $queryDefaultValue = null;
             }
 
-            $namespace->addUse(QueryProperty::class);
+            $determineArgumentOrder['query'] = $queryDefaultValue;
         }
 
         $bodyType = $replacements['body']['type'] ?? 'array';
@@ -603,36 +615,65 @@ class ModelGenerator
 
             $constructorComments[] = sprintf('@param %s $body', $bodyComment);
 
-            $property = $constructor->addPromotedParameter('body')
-                ->setType($type)
-                ->setVisibility('public')
-                ->addAttribute(BodyProperty::class)
-                ->setReadOnly();
+            $constructorProperties['body'] = [
+                'type' => $type,
+                'visibility' => 'public',
+                'attribute' => BodyProperty::class,
+            ];
 
             // Always set the default value except if the value is null
-            $defaultValue = [];
+            $bodyDefaultValue = [];
             if (
                 !array_key_exists('body', $replacements)
                 || !array_key_exists('default', $replacements['body'])
                 || $replacements['body']['default'] !== null
             ) {
-                $property->setDefaultValue($replacements['body']['default'] ?? $defaultValue);
+                $bodyDefaultValue = $replacements['body']['default'] ?? $bodyDefaultValue;
+                $constructorProperties['body']['default'] = $bodyDefaultValue;
+            } else {
+                $bodyDefaultValue = null;
             }
 
-            $namespace->addUse(BodyProperty::class);
+            $determineArgumentOrder['body'] = $bodyDefaultValue;
         }
 
         if (empty($headerParameters) === false) {
-            $constructor->addPromotedParameter('headers')
-                ->setType('array')
-                ->setVisibility('public')
-                ->addAttribute(HeaderProperty::class)
-                ->setDefaultValue([])
-                ->setReadOnly();
+            $headerDefaultValue = [];
+            $constructorProperties['headers'] = [
+                'type' => 'array',
+                'visibility' => 'public',
+                'attribute' => HeaderProperty::class,
+                'default' => $headerDefaultValue,
+            ];
 
             $constructorComments[] = '@param array<string,string> $headers';
 
-            $namespace->addUse(HeaderProperty::class);
+            $determineArgumentOrder['headers'] = $headerDefaultValue;
+        }
+
+        // Get order
+        $determineArgumentOrder = self::sortNullPriority($determineArgumentOrder);
+
+        // Sort the constructor properties based on the order array
+        $constructorPropertiesSorted = [];
+        foreach (array_keys($determineArgumentOrder) as $key) {
+            if (array_key_exists($key, $constructorProperties)) {
+                $constructorPropertiesSorted[$key] = $constructorProperties[$key];
+            }
+        }
+
+        foreach ($constructorPropertiesSorted as $property => $constructorProperty) {
+            $property = $constructor->addPromotedParameter($property)
+                ->setType($constructorProperty['type'])
+                ->setVisibility($constructorProperty['visibility'])
+                ->addAttribute($constructorProperty['attribute'])
+                ->setReadOnly();
+
+            if (isset($constructorProperty['default']) === true) {
+                $property->setDefaultValue($constructorProperty['default']);
+            }
+
+            $namespace->addUse($constructorProperty['attribute']);
         }
 
         foreach ($constructorComments as $comment) {
@@ -1113,5 +1154,23 @@ class ModelGenerator
             'mixed' => 'mixed',
             default => throw new \InvalidArgumentException("Unknown OpenAPI type: $openApiType"),
         };
+    }
+
+    /**
+     * @param array<string,mixed> $input
+     * @return array<string,mixed>
+     */
+    private static function sortNullPriority(array $input): array
+    {
+        uasort($input, function ($a, $b) {
+            if (is_null($a) && !is_null($b)) {
+                return -1;
+            } elseif (!is_null($a) && is_null($b)) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return $input;
     }
 }

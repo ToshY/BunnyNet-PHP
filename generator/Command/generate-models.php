@@ -20,8 +20,8 @@ $options = getopt('', ['log']);
 $showDiscrepancyLog = isset($options['log']);
 
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
-$modelOutputDirectory = __DIR__ . '/../../src/Model/Api2';
-$validationMappingOutputDirectory = __DIR__ . '/../../src/Enum/Validation/Map2';
+$modelOutputDirectory = __DIR__ . '/../../src/Model/Api';
+$validationMappingOutputDirectory = __DIR__ . '/../../src/Enum/Validation/Map';
 $baseMapNamespace = 'ToshY\\BunnyNet\\Generator\\Map';
 
 $validationMapNamespace = FileUtils::filePathToFqcn($validationMappingOutputDirectory);

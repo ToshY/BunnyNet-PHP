@@ -50,11 +50,6 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\GetOptimizerStatistics;
@@ -64,6 +59,11 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\GetSafeHopStatistics;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ListPullZones;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\PurgeCache;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetForceSsl;
@@ -87,13 +87,13 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
@@ -121,6 +121,9 @@ use ToshY\BunnyNet\Model\Api\Base\User\SetNotificationsOpened;
 use ToshY\BunnyNet\Model\Api\Base\User\UpdateUserDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\VerifyTwoFactorAuthenticationCode;
 
+/**
+ * @internal
+ */
 final class Base
 {
     /** @var array<string,array<string,class-string|null>> $endpoints */

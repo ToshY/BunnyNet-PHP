@@ -34,9 +34,12 @@ use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId;
 use ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones;
 use ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone;
 
+/**
+ * @internal
+ */
 final class Shield
 {
-    /** @var array<string,array<string,class-string|null>> */
+    /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/shield/ddos/enums' => [
             'get' => ListDdosEnums::class,

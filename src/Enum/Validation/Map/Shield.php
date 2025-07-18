@@ -37,8 +37,19 @@ use ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone;
 
 final class Shield
 {
-    /** @var array<class-string,ModelValidationStrategy> */
+    /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
+        ListDdosEnums::class => ModelValidationStrategy::NONE,
+        ListEventLogs::class => ModelValidationStrategy::NONE,
+        GetOverviewMetrics::class => ModelValidationStrategy::NONE,
+        ListRateLimitMetrics::class => ModelValidationStrategy::NONE,
+        GetRateLimitMetrics::class => ModelValidationStrategy::NONE,
+        GetWafRuleMetrics::class => ModelValidationStrategy::NONE,
+        ListRateLimits::class => ModelValidationStrategy::STRICT_QUERY,
+        GetRateLimit::class => ModelValidationStrategy::NONE,
+        DeleteRateLimit::class => ModelValidationStrategy::NONE,
+        UpdateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
+        CreateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
         ListShieldZones::class => ModelValidationStrategy::STRICT_QUERY,
         GetShieldZone::class => ModelValidationStrategy::NONE,
         GetShieldZoneByPullZoneId::class => ModelValidationStrategy::NONE,
@@ -51,22 +62,11 @@ final class Shield
         ListCustomWafRules::class => ModelValidationStrategy::STRICT_QUERY,
         GetCustomWafRule::class => ModelValidationStrategy::NONE,
         UpdateCustomWafRule::class => ModelValidationStrategy::STRICT_BODY,
-        UpdateCustomWafRuleByPatch::class => ModelValidationStrategy::STRICT_BODY,
         DeleteCustomWafRule::class => ModelValidationStrategy::NONE,
+        UpdateCustomWafRuleByPatch::class => ModelValidationStrategy::STRICT_BODY,
         CreateCustomWafRule::class => ModelValidationStrategy::STRICT_BODY,
         ListWafProfiles::class => ModelValidationStrategy::NONE,
         ListWafEnums::class => ModelValidationStrategy::NONE,
         ListWafEngineConfiguration::class => ModelValidationStrategy::NONE,
-        ListDdosEnums::class => ModelValidationStrategy::NONE,
-        ListRateLimits::class => ModelValidationStrategy::STRICT_QUERY,
-        GetRateLimit::class => ModelValidationStrategy::NONE,
-        UpdateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteRateLimit::class => ModelValidationStrategy::NONE,
-        CreateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
-        GetOverviewMetrics::class => ModelValidationStrategy::NONE,
-        ListRateLimitMetrics::class => ModelValidationStrategy::NONE,
-        GetRateLimitMetrics::class => ModelValidationStrategy::NONE,
-        GetWafRuleMetrics::class => ModelValidationStrategy::NONE,
-        ListEventLogs::class => ModelValidationStrategy::NONE,
     ];
 }
