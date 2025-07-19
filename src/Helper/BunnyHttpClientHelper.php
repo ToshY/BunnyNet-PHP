@@ -7,6 +7,7 @@ namespace ToshY\BunnyNet\Helper;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
+use ReflectionProperty;
 use Throwable;
 use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Attributes\HeaderProperty;
@@ -61,18 +62,34 @@ class BunnyHttpClientHelper
     public static function createPath(
         ModelInterface $model,
         BunnyHttpClientPayload $payload,
-    ): string {
+    ): string|null {
+        $pathPayload = [];
+        if (self::isPropertyInitialized($payload, 'path') === true) {
+            $pathPayload = $payload->path;
+        }
+
+        /*
+         * Sprintf does not work when splatting payload when the path is a key-value array.
+         * As the models have `#[PathParameter]` attributes which will passed to the `BunnyHttpClientPayload` in
+         * the same order as the properties are present in the constructor, we can safely use `array_values` here.
+         */
+        $pathArguments = array_values($pathPayload);
+
         return sprintf(
             sprintf(
                 '/%s',
                 $model->getPath(),
             ),
-            ...$payload->path,
+            ...$pathArguments,
         );
     }
 
     public static function createQuery(BunnyHttpClientPayload $payload): string|null
     {
+        if (self::isPropertyInitialized($payload, 'query') === false) {
+            return null;
+        }
+
         $query = $payload->query;
 
         if (true === empty($query)) {
@@ -119,10 +136,15 @@ class BunnyHttpClientHelper
         ModelInterface $model,
         BunnyHttpClientPayload $payload,
     ): array {
+        $payloadHeaders = [];
+        if (self::isPropertyInitialized($payload, 'headers') === true) {
+            $payloadHeaders = $payload->headers;
+        }
+
         return array_filter(
             [
                 ...array_merge(
-                    $payload->headers,
+                    $payloadHeaders,
                     ...$model->getHeaders(),
                 ),
             ],
@@ -184,6 +206,10 @@ class BunnyHttpClientHelper
      */
     public static function createBody(BunnyHttpClientPayload $payload): mixed
     {
+        if (self::isPropertyInitialized($payload, 'body') === false) {
+            return null;
+        }
+
         $body = $payload->body;
 
         // Stream, binary, mixed, non-array content should be sent raw
@@ -216,5 +242,12 @@ class BunnyHttpClientHelper
         }
 
         return false;
+    }
+
+    private static function isPropertyInitialized(object $object, string $property): bool
+    {
+        $reflectionProperty = new ReflectionProperty($object::class, $property);
+
+        return $reflectionProperty->isInitialized($object);
     }
 }

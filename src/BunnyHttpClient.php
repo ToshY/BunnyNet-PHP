@@ -37,19 +37,22 @@ class BunnyHttpClient
         );
         $payload->headers['AccessKey'] = $this->apiKey;
 
+        /** @var string|null $path */
         $path = BunnyHttpClientHelper::createPath(
             model: $model,
             payload: $payload,
         );
 
+        /** @var string|null $query */
         $query = BunnyHttpClientHelper::createQuery(
             payload: $payload,
         );
 
+        // Query is explicitly cast to string as query can return null
         $url = BunnyHttpClientHelper::createUrl(
             baseUrl: $this->baseUrl,
-            path: $path,
-            query: $query,
+            path: (string) $path,
+            query: (string) $query,
         );
 
         $headers = BunnyHttpClientHelper::createHeaders(
