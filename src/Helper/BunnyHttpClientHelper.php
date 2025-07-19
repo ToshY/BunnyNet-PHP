@@ -62,7 +62,7 @@ class BunnyHttpClientHelper
     public static function createPath(
         ModelInterface $model,
         BunnyHttpClientPayload $payload,
-    ): string|null {
+    ): string {
         $pathPayload = [];
         if (self::isPropertyInitialized($payload, 'path') === true) {
             $pathPayload = $payload->path;

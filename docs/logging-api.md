@@ -60,7 +60,7 @@ $bunnyHttpClient->request(
 
 !!! warning
 
-    - Sending the `date` key with an incorrect format (should be `m-d-y`) can result in `403` status code.
+    - Sending the `date` key with an incorrect format (should be `m-d-y`) results in `403` status code.
 
 ## Reference
 
