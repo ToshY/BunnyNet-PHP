@@ -3,11 +3,16 @@
 declare(strict_types=1);
 
 use ToshY\BunnyNet\Enum\Header;
+use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Generator\Generator\ModelGenerator;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
-use ToshY\BunnyNet\Model\API\Stream\ManageVideos\UploadVideo;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
+use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -15,9 +20,11 @@ $options = getopt('', ['log']);
 $showDiscrepancyLog = isset($options['log']);
 
 $apiSpecManifest = getenv('API_SPEC_MANIFEST');
-$modelOutputDirectory = __DIR__ . '/../../src/Model/API';
+$modelOutputDirectory = __DIR__ . '/../../src/Model/Api';
+$validationMappingOutputDirectory = __DIR__ . '/../../src/Enum/Validation/Map';
 $baseMapNamespace = 'ToshY\\BunnyNet\\Generator\\Map';
 
+$validationMapNamespace = FileUtils::filePathToFqcn($validationMappingOutputDirectory);
 $file = FileUtils::getFile($apiSpecManifest);
 if ($file === false) {
     throw new RuntimeException(
@@ -33,11 +40,11 @@ $data = [];
 foreach ($manifests as $file) {
     $description = $file['sourceDescription'];
     $key = match (true) {
-        str_contains($description, 'bunny.net API') => 'Base',
-        str_contains($description, 'Edge Scripting API') => 'EdgeScripting',
-        str_contains($description, 'Edge Storage API') => 'EdgeStorage',
-        str_contains($description, 'Stream API') => 'Stream',
-        str_contains($description, 'Shield API') => 'Shield',
+        str_contains($description, 'bunny.net API') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($description, 'Edge Scripting API') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
+        str_contains($description, 'Edge Storage API') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
+        str_contains($description, 'Stream API') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
+        str_contains($description, 'Shield API') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
         default => throw new RuntimeException(
             sprintf(
                 'Unknown API type with description: `%s`',
@@ -47,8 +54,42 @@ foreach ($manifests as $file) {
     };
 
     $replacements = match ($key) {
-        'Stream' => [
+        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
+            ClassUtils::getShortClassName(ImportDnsRecords::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+        ],
+        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => [
+            ClassUtils::getShortClassName(DownloadZip::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+            ClassUtils::getShortClassName(UploadFile::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
+            ],
+        ],
+        \ToshY\BunnyNet\Enum\Generator::STREAM->value => [
             ClassUtils::getShortClassName(UploadVideo::class) => [
+                'constructor' => [
+                    'body' => [
+                        'type' => 'mixed',
+                        'default' => null,
+                    ],
+                ],
                 'headers' => array_merge(
                     Header::ACCEPT_JSON,
                     Header::CONTENT_TYPE_OCTET_STREAM,
@@ -58,11 +99,25 @@ foreach ($manifests as $file) {
         default => [],
     };
 
+    $validationReplacements  = match ($key) {
+        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
+            GetGitHubIntegration::class => ModelValidationStrategy::NONE,
+        ],
+        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => [
+            DownloadZip::class => ModelValidationStrategy::STRICT_BODY,
+        ],
+        default => [],
+    };
+
     $data[$key] = [
         'apiSpecPath' => $file['fileUrl'],
         'mappingClass' => $baseMapNamespace . '\\' . $key,
+        'validationMappingClass' => $key,
+        'validationMappingNamespace' => $validationMapNamespace,
+        'validationMappingOutputDirectory' => $validationMappingOutputDirectory,
         'outputDirectory' => $modelOutputDirectory . '/' . $key,
         'replacements' => $replacements,
+        'validationReplacements' => $validationReplacements,
     ];
 }
 
@@ -76,7 +131,11 @@ foreach ($data as $apiType => $config) {
         $config['apiSpecPath'],
         $config['outputDirectory'],
         $config['mappingClass'],
+        $config['validationMappingClass'],
+        $config['validationMappingNamespace'],
+        $config['validationMappingOutputDirectory'],
         $config['replacements'],
+        $config['validationReplacements'],
         $logger,
     );
 
@@ -87,3 +146,6 @@ foreach ($data as $apiType => $config) {
     // Autofix with php-cs-fixer for this API's output directory
     shell_exec('php vendor/bin/php-cs-fixer --quiet fix ' . realpath($config['outputDirectory']));
 }
+
+// Autofix with php-cs-fixer for validation mapping output directory
+shell_exec('php vendor/bin/php-cs-fixer --quiet fix ' . realpath($validationMappingOutputDirectory));

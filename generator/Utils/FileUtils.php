@@ -77,7 +77,7 @@ final class FileUtils
 
     public static function removePhpExtension(string $path): string
     {
-        return substr($path, 0, -4);
+        return preg_replace('/\.\w+$/', '', $path);
     }
 
     /**
@@ -131,5 +131,32 @@ final class FileUtils
         }
 
         mkdir($directory, 0755, true);
+    }
+
+    /**
+     * Convert a full file path to fully qualified class name assuming PSR-4 and base namespace ToshY\BunnyNet\
+     */
+    public static function filePathToFqcn(string $fullFilepath): string
+    {
+        $normalizedPath = FileUtils::backslashToForwardSlash($fullFilepath);
+
+        $realPath = match (FileUtils::realPath($normalizedPath)) {
+            false => FileUtils::getAbsoluteRealPath($normalizedPath),
+            default => FileUtils::backslashToForwardSlash($fullFilepath),
+        };
+
+        $psr4 = ClassUtils::getPsr4RootNamespace();
+        $sourcePath = '/' . $psr4['path'];
+
+        $relative = FileUtils::getRelativePathWithoutSource($realPath, $sourcePath);
+        $relative = FileUtils::removePhpExtension($relative);
+
+        $namespacePath = ClassUtils::forwardSlashToBackwardSlash($relative);
+
+        return sprintf(
+            '%s%s',
+            $psr4['namespace'],
+            $namespacePath,
+        );
     }
 }

@@ -16,4 +16,4 @@ Project source code is [hosted on GitHub](https://github.com/ToshY/BunnyNet-PHP)
 
 !!! note
 
-    - The documentation website is based on the `master` branch.
+    The documentation website is based on the `master` branch.

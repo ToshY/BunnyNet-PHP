@@ -17,16 +17,23 @@ use cebe\openapi\spec\Schema;
 use cebe\openapi\SpecObjectInterface;
 use Exception;
 use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\PsrPrinter;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
 use Throwable;
+use ToshY\BunnyNet\Attributes\BodyProperty;
+use ToshY\BunnyNet\Attributes\HeaderProperty;
+use ToshY\BunnyNet\Attributes\PathProperty;
+use ToshY\BunnyNet\Attributes\QueryProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\MimeType;
 use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Generator\Helper\ModelBodyMethodHelper;
 use ToshY\BunnyNet\Generator\Helper\ModelMethodHelper;
 use ToshY\BunnyNet\Generator\Utils\ArrayUtils;
@@ -36,9 +43,9 @@ use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
 use ToshY\BunnyNet\Generator\Utils\OpenApiModelUtils;
 use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
 use ToshY\BunnyNet\Model\AbstractParameter;
-use ToshY\BunnyNet\Model\EndpointBodyInterface;
-use ToshY\BunnyNet\Model\EndpointInterface;
-use ToshY\BunnyNet\Model\EndpointQueryInterface;
+use ToshY\BunnyNet\Model\BodyModelInterface;
+use ToshY\BunnyNet\Model\ModelInterface;
+use ToshY\BunnyNet\Model\QueryModelInterface;
 
 class ModelGenerator
 {
@@ -49,7 +56,14 @@ class ModelGenerator
     /** @var array<string,array<mixed>> */
     private array $replacements;
 
+    /** @var array<class-string,ModelValidationStrategy> */
+    private array $validationReplacements;
+
     private string $mappingClass;
+
+    private string $validationMappingClass;
+
+    private string $validationMappingNamespace;
 
     private string $baseNamespace;
 
@@ -57,6 +71,8 @@ class ModelGenerator
     private array $existingEndpoints;
 
     private LoggerUtils $logger;
+
+    private string $validationMappingOutputDirectory;
 
     /**
      * @throws IOException
@@ -67,7 +83,11 @@ class ModelGenerator
      * @param string $apiSpecPath
      * @param string $outputDir
      * @param string $mappingClass
+     * @param string $validationMappingClass
+     * @param string $validationMappingNamespace
+     * @param string $validationMappingOutputDirectory
      * @param array<string,array<mixed>> $replacements
+     * @param array<class-string,ModelValidationStrategy> $validationReplacements
      * @param LoggerUtils $logger
      */
 
@@ -75,15 +95,23 @@ class ModelGenerator
         string $apiSpecPath,
         string $outputDir,
         string $mappingClass,
+        string $validationMappingClass,
+        string $validationMappingNamespace,
+        string $validationMappingOutputDirectory,
         array $replacements = [],
+        array $validationReplacements = [],
         LoggerUtils $logger = new LoggerUtils(),
     ) {
         $this->outputDirectory = $outputDir;
         $this->mappingClass = $mappingClass;
+        $this->validationMappingClass = $validationMappingClass;
+        $this->validationMappingNamespace = $validationMappingNamespace;
+        $this->validationMappingOutputDirectory = $validationMappingOutputDirectory;
         $this->baseNamespace = $this->filePathToFqcn($outputDir);
         $this->existingEndpoints = $this->scanExistingEndpoints();
         $this->apiSpec = $this->parseApiSpec($apiSpecPath);
         $this->replacements = $replacements;
+        $this->validationReplacements = $validationReplacements;
         $this->logger = $logger;
     }
 
@@ -98,6 +126,7 @@ class ModelGenerator
         // Get endpoints from the mapping class
         $endpoints = $this->getEndpointsFromMappingClass();
 
+        $modelValidationStrategyCollection = [];
         // Process each endpoint
         foreach ($endpoints as $path => $methods) {
             foreach ($methods as $httpMethod => $endpointClass) {
@@ -147,9 +176,22 @@ class ModelGenerator
                 }
 
                 // Generate the model
-                $this->generateModel($path, $httpMethod, $operation, $className, $endpointClass, $newNamespace);
+                $modelValidationStrategyCollection[] = [
+                    'modelValidationStrategy' => $this->generateModel(
+                        $path,
+                        $httpMethod,
+                        $operation,
+                        $className,
+                        $endpointClass,
+                        $newNamespace,
+                    ),
+                    'namespace' => $newNamespace,
+                    'className' => $className,
+                ];
             }
         }
+        // Write the validation strategy map files
+        $this->generateValidationMapping($modelValidationStrategyCollection);
     }
 
     /**
@@ -180,7 +222,7 @@ class ModelGenerator
         string $className,
         string $endpointClass,
         string $newNamespace,
-    ): void {
+    ): ModelValidationStrategy {
         $existingClassHeaders = $this->getExistingModelHeaders($endpointClass);
 
         $newSpecsPathParameters = $this->processParametersForPath(
@@ -191,12 +233,16 @@ class ModelGenerator
             operation: $operation,
         );
 
+        $newSpecsHeaderParameters = $this->processParametersForHeader(
+            operation: $operation,
+        );
+
         $bodyParameters = [];
         if ($operation->requestBody !== null) {
             $bodyParameters = $this->processBodySchema($operation);
         }
 
-        $code = $this->generatePhpFile(
+        [$code, $modelValidationStrategy] = $this->generatePhpFile(
             $className,
             $newNamespace,
             $httpMethod,
@@ -204,6 +250,7 @@ class ModelGenerator
             $existingClassHeaders,
             $newSpecsPathParameters,
             $newSpecsQueryParameters,
+            $newSpecsHeaderParameters,
             $bodyParameters,
             $operation,
         );
@@ -220,6 +267,96 @@ class ModelGenerator
         FileUtils::saveFile($filePath, $code);
 
         echo "Generated model: $filePath\n";
+
+        return $modelValidationStrategy;
+    }
+
+    /**
+     * @param list<array{modelValidationStrategy:ModelValidationStrategy, namespace:string, className: mixed}> $modelValidationStrategyCollection
+     * @return void
+     */
+    private function generateValidationMapping(array $modelValidationStrategyCollection): void
+    {
+        $mappingClassName = $this->validationMappingClass;
+        $mappingNamespace = $this->validationMappingNamespace;
+
+        $file = new PhpFile();
+        $file->setStrictTypes();
+
+        $namespace = $file->addNamespace($mappingNamespace);
+        $namespace->addUse(ModelValidationStrategy::class);
+        $class = $namespace->addClass($mappingClassName);
+        $class->setFinal();
+
+        $processedClassNames = [];
+        $lines = ["["];
+        /**
+         * @var array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed} $validationStrategyInfo
+         */
+        foreach ($modelValidationStrategyCollection as $validationStrategyInfo) {
+            $subClassName = ClassUtils::getShortClassName($validationStrategyInfo['className']);
+            $fqcn = $validationStrategyInfo['namespace'] . '\\' . $validationStrategyInfo['className'];
+
+            // Replacements for model validation strategies; should normally not be needed.
+            if (empty($this->validationReplacements[$fqcn]) === false) {
+                $validationStrategyInfo['modelValidationStrategy'] = $this->validationReplacements[$subClassName];
+            }
+
+            $alias = null;
+            $hasAlias = false;
+            if (in_array($subClassName, $processedClassNames, true) === true) {
+                $hasAlias = true;
+                $alias = ClassUtils::getNamespacePart($fqcn) . $subClassName;
+            }
+
+            $newClassName = $hasAlias ? $alias : $subClassName;
+            $namespace->addUse(name: $fqcn, alias: $newClassName);
+
+            $processedClassNames[] = $newClassName;
+
+            // Create the actual line
+            $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
+            $subValidationStrategyValue = $validationStrategyInfo['modelValidationStrategy']->name;
+
+            $lines[] = "$newClassName::class => $subValidationStrategyName::$subValidationStrategyValue,";
+        }
+
+        // Append replacements if needed to end of array
+        foreach ($this->validationReplacements as $validationClass => $modelValidationStrategy) {
+            $validationClassName = ClassUtils::getShortClassName($validationClass);
+            if (in_array($validationClassName, $processedClassNames, true) === true) {
+                continue;
+            }
+
+            $namespace->addUse($validationClass);
+
+            $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
+            $lines[] = "$validationClassName::class => $subValidationStrategyName::$modelValidationStrategy->name,";
+        }
+
+        $lines[] = "]";
+
+        $class->addProperty('map')
+            ->setStatic()
+            ->setType('array')
+            ->setValue(new Literal(PrinterUtils::indentCode(implode("\n", $lines), 4)))
+            ->setComment('@var array<class-string,ModelValidationStrategy> $map');
+
+        $code = (new PsrPrinter())->printFile($file);
+
+        // Prepare output directory path
+        $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
+            $this->filePathToFqcn($this->validationMappingOutputDirectory),
+            $mappingClassName,
+            $this->validationMappingOutputDirectory,
+        );
+        FileUtils::createDirectory($this->validationMappingOutputDirectory);
+
+        $filePath = FileUtils::getAbsoluteRealPath($outputDirectoryPath . '.php');
+
+        FileUtils::saveFile($filePath, $code);
+
+        echo "Generated validation map: $filePath\n";
     }
 
     /**
@@ -279,9 +416,10 @@ class ModelGenerator
      * @param array<array<string,string>> $existingClassHeaders
      * @param array<string,mixed> $pathParameters
      * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $queryParameters
+     * @param array<string,mixed> $headerParameters
      * @param array<\ToshY\BunnyNet\Model\AbstractParameter> $bodyParameters
      * @param Operation $operation
-     * @return string
+     * @return array{string, ModelValidationStrategy}
      */
     private function generatePhpFile(
         string $className,
@@ -291,34 +429,60 @@ class ModelGenerator
         array $existingClassHeaders,
         array $pathParameters,
         array $queryParameters,
+        array $headerParameters,
         array $bodyParameters,
         Operation $operation,
-    ): string {
+    ): array {
         $file = new PhpFile();
         $file->setStrictTypes();
 
         $namespace = $file->addNamespace($namespace);
         $namespace->addUse(Method::class);
         $namespace->addUse(Type::class);
-        $namespace->addUse(EndpointInterface::class);
+        $namespace->addUse(ModelInterface::class);
 
-        $implements = [EndpointInterface::class];
+        $implements = [ModelInterface::class];
         if (empty($queryParameters) === false) {
-            $implements[] = EndpointQueryInterface::class;
-            $namespace->addUse(EndpointQueryInterface::class);
+            $implements[] = QueryModelInterface::class;
+            $namespace->addUse(QueryModelInterface::class);
         }
 
         if (empty($bodyParameters) === false) {
-            $implements[] = EndpointBodyInterface::class;
-            $namespace->addUse(EndpointBodyInterface::class);
+            $implements[] = BodyModelInterface::class;
+            $namespace->addUse(BodyModelInterface::class);
         }
 
         if (empty($queryParameters) === false || empty($bodyParameters) === false) {
             $namespace->addUse(AbstractParameter::class);
         }
 
+        $constructorReplacements = [];
+        if (isset($this->replacements[$className]['constructor']) === true) {
+            $constructorReplacements = $this->replacements[$className]['constructor'];
+        }
+
+        $hasQueryParameters = in_array(QueryModelInterface::class, $implements, true);
+        $hasBodyParameters = in_array(BodyModelInterface::class, $implements, true);
+
         $class = $namespace->addClass($className);
         $class->setImplements($implements);
+        if (
+            empty($pathParameters) === false
+            || empty($constructorReplacements) === false
+            || $hasQueryParameters === true
+            || $hasBodyParameters === true
+            || empty($headerParameters) === false
+        ) {
+            $this->addConstructor(
+                $namespace,
+                $class,
+                $pathParameters,
+                $constructorReplacements,
+                $headerParameters,
+                $hasQueryParameters,
+                $hasBodyParameters,
+            );
+        }
         $this->addMethod($class, $httpMethod);
         $this->addPath($class, $path, $pathParameters);
 
@@ -327,15 +491,24 @@ class ModelGenerator
             $namespace->addUse(Header::class);
         }
 
-        if (in_array(EndpointQueryInterface::class, $implements, true) === true) {
+        if ($hasQueryParameters === true) {
             $this->addQuery($class, $queryParameters);
         }
 
-        if (in_array(EndpointBodyInterface::class, $implements, true)) {
+        if ($hasBodyParameters === true) {
             $this->addBody($class, $bodyParameters);
         }
 
-        return (new PsrPrinter())->printFile($file);
+        $modelValidationStrategy = ModelValidationStrategy::NONE;
+        if ($hasQueryParameters === true && $hasBodyParameters === true) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT;
+        } elseif ($hasQueryParameters === true && $hasBodyParameters === false) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT_QUERY;
+        } elseif ($hasQueryParameters === false && $hasBodyParameters === true) {
+            $modelValidationStrategy = ModelValidationStrategy::STRICT_BODY;
+        }
+
+        return [(new PsrPrinter())->printFile($file), $modelValidationStrategy];
     }
 
     /**
@@ -349,6 +522,163 @@ class ModelGenerator
         }
 
         return [];
+    }
+
+    /**
+     * @param PhpNamespace $namespace
+     * @param ClassType $class
+     * @param array<string,mixed> $pathParameters
+     * @param array<string,mixed> $replacements
+     * @param array<string,mixed> $headerParameters
+     * @param bool $hasQueryParameters
+     * @param bool $hasBodyParameters
+     * @return void
+     */
+    private function addConstructor(
+        PhpNamespace $namespace,
+        ClassType $class,
+        array $pathParameters,
+        array $replacements,
+        array $headerParameters,
+        bool $hasQueryParameters,
+        bool $hasBodyParameters,
+    ): void {
+        $constructor = $class->addMethod('__construct');
+        $constructor->setPublic();
+
+        $constructorComments = [];
+        foreach ($pathParameters as $param) {
+            $name = $param['name'];
+            $type = self::getPhpTypeFromOpenApiType($param['type']);
+            if (
+                array_key_exists($name, $replacements) === true
+                && array_key_exists('type', $replacements[$name])
+            ) {
+                $type = self::getPhpTypeFromOpenApiType($replacements[$name]['type']);
+            }
+
+            $constructor->addPromotedParameter($name)
+                ->setType($type)
+                ->setVisibility('public')
+                ->addAttribute(PathProperty::class)
+                ->setReadOnly();
+
+            $constructorComments[] = sprintf('@param %s $%s', $type, $name);
+        }
+
+        if (empty($pathParameters) === false) {
+            $namespace->addUse(PathProperty::class);
+        }
+
+        // Determine argument order; required arguments before optional ones
+        $determineArgumentOrder = [];
+        $constructorProperties = [];
+        $queryType = $replacements['query']['type'] ?? 'array';
+        if ($hasQueryParameters === true || empty($replacements['query']) === false) {
+            $type = self::getPhpTypeFromOpenApiType($queryType);
+            $queryComment = match ($type) {
+                'array' => 'array<string,mixed>',
+                default => $type,
+            };
+
+            $constructorComments[] = sprintf('@param %s $query', $queryComment);
+
+            $constructorProperties['query'] = [
+                'type' => $type,
+                'visibility' => 'public',
+                'attribute' => QueryProperty::class,
+            ];
+
+            // Always set the default value except if the value is null
+            $queryDefaultValue = [];
+            if (
+                !array_key_exists('query', $replacements)
+                || !array_key_exists('default', $replacements['query'])
+                || $replacements['query']['default'] !== null
+            ) {
+                $queryDefaultValue = $replacements['query']['default'] ?? $queryDefaultValue;
+                $constructorProperties['query']['default'] = $queryDefaultValue;
+            } else {
+                $queryDefaultValue = null;
+            }
+
+            $determineArgumentOrder['query'] = $queryDefaultValue;
+        }
+
+        $bodyType = $replacements['body']['type'] ?? 'array';
+        if ($hasBodyParameters === true || empty($replacements['body']) === false) {
+            $type = self::getPhpTypeFromOpenApiType($bodyType);
+            $bodyComment = match ($type) {
+                'array' => 'array<string,mixed>',
+                default => $type,
+            };
+
+            $constructorComments[] = sprintf('@param %s $body', $bodyComment);
+
+            $constructorProperties['body'] = [
+                'type' => $type,
+                'visibility' => 'public',
+                'attribute' => BodyProperty::class,
+            ];
+
+            // Always set the default value except if the value is null
+            $bodyDefaultValue = [];
+            if (
+                !array_key_exists('body', $replacements)
+                || !array_key_exists('default', $replacements['body'])
+                || $replacements['body']['default'] !== null
+            ) {
+                $bodyDefaultValue = $replacements['body']['default'] ?? $bodyDefaultValue;
+                $constructorProperties['body']['default'] = $bodyDefaultValue;
+            } else {
+                $bodyDefaultValue = null;
+            }
+
+            $determineArgumentOrder['body'] = $bodyDefaultValue;
+        }
+
+        if (empty($headerParameters) === false) {
+            $headerDefaultValue = [];
+            $constructorProperties['headers'] = [
+                'type' => 'array',
+                'visibility' => 'public',
+                'attribute' => HeaderProperty::class,
+                'default' => $headerDefaultValue,
+            ];
+
+            $constructorComments[] = '@param array<string,string> $headers';
+
+            $determineArgumentOrder['headers'] = $headerDefaultValue;
+        }
+
+        // Get order
+        $determineArgumentOrder = self::sortNullPriority($determineArgumentOrder);
+
+        // Sort the constructor properties based on the order array
+        $constructorPropertiesSorted = [];
+        foreach (array_keys($determineArgumentOrder) as $key) {
+            if (array_key_exists($key, $constructorProperties)) {
+                $constructorPropertiesSorted[$key] = $constructorProperties[$key];
+            }
+        }
+
+        foreach ($constructorPropertiesSorted as $property => $constructorProperty) {
+            $property = $constructor->addPromotedParameter($property)
+                ->setType($constructorProperty['type'])
+                ->setVisibility($constructorProperty['visibility'])
+                ->addAttribute($constructorProperty['attribute'])
+                ->setReadOnly();
+
+            if (isset($constructorProperty['default']) === true) {
+                $property->setDefaultValue($constructorProperty['default']);
+            }
+
+            $namespace->addUse($constructorProperty['attribute']);
+        }
+
+        foreach ($constructorComments as $comment) {
+            $constructor->addComment($comment);
+        }
     }
 
     /**
@@ -594,10 +924,39 @@ class ModelGenerator
         return $parameters;
     }
 
+    /**
+     * @param Operation $operation
+     * @return array<mixed>
+     */
+    private function processParametersForHeader(
+        Operation $operation,
+    ): array {
+        $parameters = [];
+        foreach ($operation->parameters ?? [] as $parameter) {
+            /** @var Parameter $parameter */
+            $paramName = $parameter->name;
+            /* @phpstan-ignore-next-line nullsafe.neverNull */
+            $paramType = $parameter->schema?->type ?? 'string';
+
+            // Skip the "AccessKey" header if its defined in the parameters, as this is handled by API/Client already
+            if ($parameter->in !== 'header' || $paramName === 'AccessKey') {
+                continue;
+            }
+
+            $parameters[] = [
+                'name' => $paramName,
+                'type' => $paramType,
+                'required' => $parameter->required ?? false,
+            ];
+        }
+
+        return $parameters;
+    }
+
     private function createNewNamespace(string $originalNamespace): string
     {
         // Extract the API type (e.g., Base, Stream) from the original namespace
-        if (preg_match('/\\\\Model\\\\API\\\\([^\\\\]+)\\\\(.+)$/', $originalNamespace, $matches)) {
+        if (preg_match('/\\\\Model\\\\Api\\\([^\\\\]+)\\\\(.+)$/', $originalNamespace, $matches)) {
             $subNamespace = $matches[2];
 
             return $this->baseNamespace . '\\' . $subNamespace;
@@ -628,7 +987,7 @@ class ModelGenerator
 
                 try {
                     $reflectionClass = new ReflectionClass($endpointClass);
-                    /** @var EndpointInterface $instance */
+                    /** @var ModelInterface $instance */
                     $instance = $reflectionClass->newInstance();
 
                     $existingEndpoints[$endpointClass] = [
@@ -781,5 +1140,37 @@ class ModelGenerator
             $namespace,
             $class,
         ];
+    }
+
+    public static function getPhpTypeFromOpenApiType(string $openApiType): string
+    {
+        return match ($openApiType) {
+            'string' => Type::STRING_TYPE->value,
+            'integer' => Type::INT_TYPE->value,
+            'number' => 'float',
+            'boolean' => Type::BOOLEAN_TYPE->value,
+            'array' => Type::ARRAY_TYPE->value,
+            'object' => 'array',
+            'mixed' => 'mixed',
+            default => throw new \InvalidArgumentException("Unknown OpenAPI type: $openApiType"),
+        };
+    }
+
+    /**
+     * @param array<string,mixed> $input
+     * @return array<string,mixed>
+     */
+    private static function sortNullPriority(array $input): array
+    {
+        uasort($input, function ($a, $b) {
+            if (is_null($a) && !is_null($b)) {
+                return -1;
+            } elseif (!is_null($a) && is_null($b)) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return $input;
     }
 }

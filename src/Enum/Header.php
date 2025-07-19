@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum;
 
+/**
+ * @internal
+ */
 final class Header
 {
     public const ACCEPT_JSON = [

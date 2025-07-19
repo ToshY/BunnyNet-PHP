@@ -4,138 +4,141 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Generator\Map;
 
-use ToshY\BunnyNet\Model\API\Base\APIKeys\ListAPIKeys;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\CheckAbuseCase;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetAbuseCase;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\GetDMCACase;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\ListAbuseCases;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveAbuseCase;
-use ToshY\BunnyNet\Model\API\Base\AbuseCase\ResolveDMCACase;
-use ToshY\BunnyNet\Model\API\Base\Auth\AuthJwt2fa;
-use ToshY\BunnyNet\Model\API\Base\Auth\RefreshJwt;
-use ToshY\BunnyNet\Model\API\Base\Billing\ApplyPromoCode;
-use ToshY\BunnyNet\Model\API\Base\Billing\ClaimAffiliateCredits;
-use ToshY\BunnyNet\Model\API\Base\Billing\ConfigureAutoRecharge;
-use ToshY\BunnyNet\Model\API\Base\Billing\CreateCoinifyPayment;
-use ToshY\BunnyNet\Model\API\Base\Billing\CreatePaymentCheckout;
-use ToshY\BunnyNet\Model\API\Base\Billing\GetAffiliateDetails;
-use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingDetails;
-use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummary;
-use ToshY\BunnyNet\Model\API\Base\Billing\GetBillingSummaryPDF;
-use ToshY\BunnyNet\Model\API\Base\Billing\GetCoinifyBitcoinExchangeRate;
-use ToshY\BunnyNet\Model\API\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\API\Base\Countries\ListCountries;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSRecord;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\AddDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\CheckDNSZoneAvailability;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSRecord;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\DeleteDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\DisableDNSSECOnDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\DismissDNSConfigurationNotice;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\EnableDNSSECOnDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\ExportDNSRecords;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\GetDNSZoneQueryStatistics;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\ImportDNSRecords;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\ListDNSZones;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\RecheckDNSConfiguration;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSRecord;
-use ToshY\BunnyNet\Model\API\Base\DNSZone\UpdateDNSZone;
-use ToshY\BunnyNet\Model\API\Base\DRMCertificate\ListDRMCertificates;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddAllowedReferer as PullZoneAddAllowedReferer;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedIP;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomCertificate;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddOrUpdateEdgeRule;
-use ToshY\BunnyNet\Model\API\Base\PullZone\AddPullZone;
-use ToshY\BunnyNet\Model\API\Base\PullZone\CheckPullZoneAvailability;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteAllowedReferer as PullZoneDeleteAllowedReferer;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteBlockedIP;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteBlockedReferer as PullZoneDeleteBlockedReferer;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCertificate;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteCustomHostname;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeleteEdgeRule;
-use ToshY\BunnyNet\Model\API\Base\PullZone\DeletePullZone;
-use ToshY\BunnyNet\Model\API\Base\PullZone\GetOptimizerStatistics;
-use ToshY\BunnyNet\Model\API\Base\PullZone\GetOriginShieldQueueStatistics;
-use ToshY\BunnyNet\Model\API\Base\PullZone\GetPullZone;
-use ToshY\BunnyNet\Model\API\Base\PullZone\GetSafeHopStatistics;
-use ToshY\BunnyNet\Model\API\Base\PullZone\ListPullZones;
-use ToshY\BunnyNet\Model\API\Base\PullZone\LoadFreeCertificate;
-use ToshY\BunnyNet\Model\API\Base\PullZone\PurgeCache;
-use ToshY\BunnyNet\Model\API\Base\PullZone\ResetTokenKey;
-use ToshY\BunnyNet\Model\API\Base\PullZone\SetEdgeRuleEnabled;
-use ToshY\BunnyNet\Model\API\Base\PullZone\SetForceSSL;
-use ToshY\BunnyNet\Model\API\Base\PullZone\UpdatePullZone;
-use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURL;
-use ToshY\BunnyNet\Model\API\Base\Purge\PurgeURLByHeader;
-use ToshY\BunnyNet\Model\API\Base\Region\ListRegions;
-use ToshY\BunnyNet\Model\API\Base\Search\GlobalSearch;
-use ToshY\BunnyNet\Model\API\Base\Statistics\GetStatistics;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\AddStorageZone;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\CheckStorageZoneAvailability;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\DeleteStorageZone;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZone;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZoneConnections;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\GetStorageZoneStatistics;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\ListStorageZones;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\ResetReadOnlyPassword;
-use ToshY\BunnyNet\Model\API\Base\StorageZone\UpdateStorageZone;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddAllowedReferer;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddBlockedReferer;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddVideoLibrary;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\AddWatermark;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteAllowedReferer;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteBlockedReferer;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteVideoLibrary;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\DeleteWatermark;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\GetLanguages;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\GetVideoLibrary;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\ListVideoLibraries;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\ResetPassword;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
-use ToshY\BunnyNet\Model\API\Base\StreamVideoLibrary\UpdateVideoLibrary;
-use ToshY\BunnyNet\Model\API\Base\Support\CloseTicket;
-use ToshY\BunnyNet\Model\API\Base\Support\CreateTicket;
-use ToshY\BunnyNet\Model\API\Base\Support\GetTicketDetails;
-use ToshY\BunnyNet\Model\API\Base\Support\ListTickets;
-use ToshY\BunnyNet\Model\API\Base\Support\ReplyTicket;
-use ToshY\BunnyNet\Model\API\Base\User\AcceptDPA;
-use ToshY\BunnyNet\Model\API\Base\User\CloseAccount;
-use ToshY\BunnyNet\Model\API\Base\User\DisableTwoFactorAuthentication;
-use ToshY\BunnyNet\Model\API\Base\User\EnableTwoFactorAuthentication;
-use ToshY\BunnyNet\Model\API\Base\User\GenerateTwoFactorAuthenticationVerification;
-use ToshY\BunnyNet\Model\API\Base\User\GetDPADetails;
-use ToshY\BunnyNet\Model\API\Base\User\GetDPADetailsHTML;
-use ToshY\BunnyNet\Model\API\Base\User\GetHomeFeed;
-use ToshY\BunnyNet\Model\API\Base\User\GetUserDetails;
-use ToshY\BunnyNet\Model\API\Base\User\GetWhatsNewItems;
-use ToshY\BunnyNet\Model\API\Base\User\ListCloseAccountReasons;
-use ToshY\BunnyNet\Model\API\Base\User\ListNotifications;
-use ToshY\BunnyNet\Model\API\Base\User\ResendEmailConfirmation;
-use ToshY\BunnyNet\Model\API\Base\User\ResetAPIKey;
-use ToshY\BunnyNet\Model\API\Base\User\ResetWhatsNew;
-use ToshY\BunnyNet\Model\API\Base\User\SetNotificationsOpened;
-use ToshY\BunnyNet\Model\API\Base\User\UpdateUserDetails;
-use ToshY\BunnyNet\Model\API\Base\User\VerifyTwoFactorAuthenticationCode;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\CheckAbuseCase;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetAbuseCase;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetDmcaCase;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ListAbuseCases;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveAbuseCase;
+use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveDmcaCase;
+use ToshY\BunnyNet\Model\Api\Base\ApiKeys\ListApiKeys;
+use ToshY\BunnyNet\Model\Api\Base\Auth\AuthJwt2fa;
+use ToshY\BunnyNet\Model\Api\Base\Auth\RefreshJwt;
+use ToshY\BunnyNet\Model\Api\Base\Billing\ApplyPromoCode;
+use ToshY\BunnyNet\Model\Api\Base\Billing\ClaimAffiliateCredits;
+use ToshY\BunnyNet\Model\Api\Base\Billing\ConfigureAutoRecharge;
+use ToshY\BunnyNet\Model\Api\Base\Billing\CreateCoinifyPayment;
+use ToshY\BunnyNet\Model\Api\Base\Billing\CreatePaymentCheckout;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetAffiliateDetails;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingDetails;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummary;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetCoinifyBitcoinExchangeRate;
+use ToshY\BunnyNet\Model\Api\Base\Billing\PreparePaymentAuthorization;
+use ToshY\BunnyNet\Model\Api\Base\Countries\ListCountries;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\CheckDnsZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsRecord;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\DisableDnssecOnDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\DismissDnsConfigurationNotice;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\EnableDnssecOnDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\ExportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZoneQueryStatistics;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\ListDnsZones;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer as PullZoneAddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddPullZone;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\CheckPullZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\DeleteEdgeRule;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\DeletePullZone;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\GetOptimizerStatistics;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\GetOriginShieldQueueStatistics;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\GetPullZone;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\GetSafeHopStatistics;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\ListPullZones;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\PurgeCache;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\SetEdgeRuleEnabled;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\SetForceSsl;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePullZone;
+use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl;
+use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrlByHeader;
+use ToshY\BunnyNet\Model\Api\Base\Region\ListRegions;
+use ToshY\BunnyNet\Model\Api\Base\Search\GlobalSearch;
+use ToshY\BunnyNet\Model\Api\Base\Statistics\GetStatistics;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\AddStorageZone;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\CheckStorageZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\DeleteStorageZone;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZone;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneConnections;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneStatistics;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
+use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
+use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
+use ToshY\BunnyNet\Model\Api\Base\Support\GetTicketDetails;
+use ToshY\BunnyNet\Model\Api\Base\Support\ListTickets;
+use ToshY\BunnyNet\Model\Api\Base\Support\ReplyTicket;
+use ToshY\BunnyNet\Model\Api\Base\User\AcceptDpa;
+use ToshY\BunnyNet\Model\Api\Base\User\CloseAccount;
+use ToshY\BunnyNet\Model\Api\Base\User\DisableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\Api\Base\User\EnableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\Api\Base\User\GenerateTwoFactorAuthenticationVerification;
+use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
+use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
+use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
+use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
+use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
+use ToshY\BunnyNet\Model\Api\Base\User\ListNotifications;
+use ToshY\BunnyNet\Model\Api\Base\User\ResendEmailConfirmation;
+use ToshY\BunnyNet\Model\Api\Base\User\ResetApiKey;
+use ToshY\BunnyNet\Model\Api\Base\User\ResetWhatsNew;
+use ToshY\BunnyNet\Model\Api\Base\User\SetNotificationsOpened;
+use ToshY\BunnyNet\Model\Api\Base\User\UpdateUserDetails;
+use ToshY\BunnyNet\Model\Api\Base\User\VerifyTwoFactorAuthenticationCode;
 
+/**
+ * @internal
+ */
 final class Base
 {
-    /** @var array<string,array<string,class-string|null>> */
+    /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/abusecase' => [
             'get' => ListAbuseCases::class,
         ],
         '/dmca/{id}' => [
-            'get' => GetDMCACase::class,
+            'get' => GetDmcaCase::class,
         ],
         '/abusecase/{id}' => [
             'get' => GetAbuseCase::class,
         ],
         '/dmca/{id}/resolve' => [
-            'post' => ResolveDMCACase::class,
+            'post' => ResolveDmcaCase::class,
         ],
         '/abusecase/{id}/resolve' => [
             'post' => ResolveAbuseCase::class,
@@ -189,7 +192,7 @@ final class Base
             'get' => ApplyPromoCode::class,
         ],
         '/apikey' => [
-            'get' => ListAPIKeys::class,
+            'get' => ListApiKeys::class,
         ],
         '/support/ticket/list' => [
             'get' => ListTickets::class,
@@ -207,7 +210,7 @@ final class Base
             'post' => CreateTicket::class,
         ],
         '/drmcertificate' => [
-            'get' => ListDRMCertificates::class,
+            'get' => ListDrmCertificates::class,
         ],
         '/region' => [
             'get' => ListRegions::class,
@@ -238,51 +241,51 @@ final class Base
             'post' => AddAllowedReferer::class,
         ],
         '/videolibrary/{id}/removeAllowedReferrer' => [
-            'post' => DeleteAllowedReferer::class,
+            'post' => RemoveAllowedReferer::class,
         ],
         '/videolibrary/{id}/addBlockedReferrer' => [
             'post' => AddBlockedReferer::class,
         ],
         '/videolibrary/{id}/removeBlockedReferrer' => [
-            'post' => DeleteBlockedReferer::class,
+            'post' => RemoveBlockedReferer::class,
         ],
         '/dnszone' => [
-            'get' => ListDNSZones::class,
-            'post' => AddDNSZone::class,
+            'get' => ListDnsZones::class,
+            'post' => AddDnsZone::class,
         ],
         '/dnszone/{id}' => [
-            'get' => GetDNSZone::class,
-            'post' => UpdateDNSZone::class,
-            'delete' => DeleteDNSZone::class,
+            'get' => GetDnsZone::class,
+            'post' => UpdateDnsZone::class,
+            'delete' => DeleteDnsZone::class,
         ],
         '/dnszone/{id}/dnssec' => [
-            'post' => EnableDNSSECOnDNSZone::class,
-            'delete' => DisableDNSSECOnDNSZone::class,
+            'post' => EnableDnssecOnDnsZone::class,
+            'delete' => DisableDnssecOnDnsZone::class,
         ],
         '/dnszone/{id}/export' => [
-            'get' => ExportDNSRecords::class,
+            'get' => ExportDnsRecords::class,
         ],
         '/dnszone/{id}/statistics' => [
-            'get' => GetDNSZoneQueryStatistics::class,
+            'get' => GetDnsZoneQueryStatistics::class,
         ],
         '/dnszone/checkavailability' => [
-            'post' => CheckDNSZoneAvailability::class,
+            'post' => CheckDnsZoneAvailability::class,
         ],
         '/dnszone/{zoneId}/records' => [
-            'put' => AddDNSRecord::class,
+            'put' => AddDnsRecord::class,
         ],
         '/dnszone/{zoneId}/records/{id}' => [
-            'post' => UpdateDNSRecord::class,
-            'delete' => DeleteDNSRecord::class,
+            'post' => UpdateDnsRecord::class,
+            'delete' => DeleteDnsRecord::class,
         ],
         '/dnszone/{id}/recheckdns' => [
-            'post' => RecheckDNSConfiguration::class,
+            'post' => RecheckDnsConfiguration::class,
         ],
         '/dnszone/{id}/dismissnameservercheck' => [
-            'post' => DismissDNSConfigurationNotice::class,
+            'post' => DismissDnsConfigurationNotice::class,
         ],
         '/dnszone/{zoneId}/import' => [
-            'post' => ImportDNSRecords::class,
+            'post' => ImportDnsRecords::class,
         ],
         '/pullzone' => [
             'get' => ListPullZones::class,
@@ -324,16 +327,16 @@ final class Base
             'post' => AddCustomCertificate::class,
         ],
         '/pullzone/{id}/removeCertificate' => [
-            'delete' => DeleteCertificate::class,
+            'delete' => RemoveCertificate::class,
         ],
         '/pullzone/{id}/addHostname' => [
             'post' => AddCustomHostname::class,
         ],
         '/pullzone/{id}/removeHostname' => [
-            'delete' => DeleteCustomHostname::class,
+            'delete' => RemoveCustomHostname::class,
         ],
         '/pullzone/{id}/setForceSSL' => [
-            'post' => SetForceSSL::class,
+            'post' => SetForceSsl::class,
         ],
         '/pullzone/{id}/resetSecurityKey' => [
             'post' => ResetTokenKey::class,
@@ -342,23 +345,23 @@ final class Base
             'post' => PullZoneAddAllowedReferer::class,
         ],
         '/pullzone/{id}/removeAllowedReferrer' => [
-            'post' => PullZoneDeleteAllowedReferer::class,
+            'post' => PullZoneRemoveAllowedReferer::class,
         ],
         '/pullzone/{id}/addBlockedReferrer' => [
             'post' => PullZoneAddBlockedReferer::class,
         ],
         '/pullzone/{id}/removeBlockedReferrer' => [
-            'post' => PullZoneDeleteBlockedReferer::class,
+            'post' => PullZoneRemoveBlockedReferer::class,
         ],
         '/pullzone/{id}/addBlockedIp' => [
-            'post' => AddBlockedIP::class,
+            'post' => AddBlockedIp::class,
         ],
         '/pullzone/{id}/removeBlockedIp' => [
-            'post' => DeleteBlockedIP::class,
+            'post' => RemoveBlockedIp::class,
         ],
         '/purge' => [
-            'get' => PurgeURLByHeader::class,
-            'post' => PurgeURL::class,
+            'get' => PurgeUrlByHeader::class,
+            'post' => PurgeUrl::class,
         ],
         '/statistics' => [
             'get' => GetStatistics::class,
@@ -401,7 +404,7 @@ final class Base
             'post' => ResendEmailConfirmation::class,
         ],
         '/user/resetApiKey' => [
-            'post' => ResetAPIKey::class,
+            'post' => ResetApiKey::class,
         ],
         '/user/closeaccount/reasons-list' => [
             'get' => ListCloseAccountReasons::class,
@@ -410,13 +413,13 @@ final class Base
             'post' => CloseAccount::class,
         ],
         '/user/dpa' => [
-            'get' => GetDPADetails::class,
+            'get' => GetDpaDetails::class,
         ],
         '/user/dpa/accept' => [
-            'post' => AcceptDPA::class,
+            'post' => AcceptDpa::class,
         ],
         '/user/dpa/pdfhtml' => [
-            'get' => GetDPADetailsHTML::class,
+            'get' => GetDpaDetailsHtml::class,
         ],
         '/user/setNotificationsOpened' => [
             'post' => SetNotificationsOpened::class,

@@ -9,33 +9,17 @@ Edge Storage is a cloud storage solution provided by bunny.net that automaticall
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\EdgeStorageAPI;
-use ToshY\BunnyNet\Enum\Region;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
+$bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
-);
-
-// Provide the password of the specific storage zone.
-$edgeStorageApi = new EdgeStorageAPI(
+    // Provide the password of the specific storage zone.
     apiKey: '6bf3d93a-5078-4d65-a437-501c44576fe6',
-    client: $bunnyClient,
-    region: Region::FS,
+    // Use the Edge Storage endpoint for your storage zone.
+    baseUrl: Endpoint::EDGE_STORAGE_FS
 );
 ```
-
-!!! note 
-    - The argument `region` has the following possible values:
-        - `Region::DE` = Falkenstein / Frankfurt (Germany)
-        - `Region::UK` = London (United Kingdom)
-        - `Region::NY` = New York (United States East)
-        - `Region::LA` = Los Angeles (United States West)
-        - `Region::SG` = Singapore (Singapore)
-        - `Region::SYD` = Sydney (Oceania)
-        - `Region::BR` = Sao Paolo (Brazil)
-        - `Region::JH` = Johannesburg (Africa)
-    - The `Region` is a backed enum, so you can supply a value to the `Region::from` or `Region::tryFrom` method to retrieve the corresponding case.
 
 ## Usage
 
@@ -45,16 +29,20 @@ $edgeStorageApi = new EdgeStorageAPI(
 
 ```php
 // Root directory.
-$edgeStorageApi->downloadFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'bunny.jpg',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadFile(
+        storageZoneName: 'my-storage-zone-1',
+        fileName: 'bunny.jpg',
+    )
 );
 
 // Subdirectory.
-$edgeStorageApi->downloadFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'custom.css',
-    path: 'css',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadFile(
+        storageZoneName: 'my-storage-zone-1',
+        fileName: 'custom.css',
+        path: 'css',
+    )
 );
 ```
 
@@ -62,25 +50,29 @@ $edgeStorageApi->downloadFile(
 
 ```php
 // Root directory.
-$edgeStorageApi->downloadZip(
-    storageZoneName: 'my-storage-zone-1',
-    body: [
-        'RootPath' => '/my-storage-zone-1/',
-        'Paths' => [
-            '/my-storage-zone-1/',
-        ]
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip(
+        storageZoneName: 'my-storage-zone-1',
+        body: [
+            'RootPath' => '/my-storage-zone-1/',
+            'Paths' => [
+                '/my-storage-zone-1/',
+            ],
+        ],
+    )
 );
 
 // Subdirectory.
-$edgeStorageApi->downloadZip(
-    storageZoneName: 'my-storage-zone-1',
-    body: [
-        'RootPath' => '/my-storage-zone-1/',
-        'Paths' => [
-            '/my-storage-zone-1/images/',
-        ]
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip(
+        storageZoneName: 'my-storage-zone-1',
+        body: [
+            'RootPath' => '/my-storage-zone-1/',
+            'Paths' => [
+                '/my-storage-zone-1/images/',
+            ],
+        ],
+    )
 );
 ```
 
@@ -108,50 +100,63 @@ $content = file_get_contents('./local-bunny.jpg');
 $content = $filesystem->readStream('./remote-custom.css');
 
 // Root directory.
-$edgeStorageApi->uploadFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'remote-bunny.jpg',
-    body: $content,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: '',
+        fileName: 'remote-bunny.jpg',
+        body: $content,
+    )
 );
 
 // Subdirectory.
-$edgeStorageApi->uploadFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'remote-custom.css',
-    body: $content,
-    path: 'css',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: 'css',
+        fileName: 'remote-custom.css',
+        body: $content,
+    )
 );
 
 // Subdirectory with additional SHA256 checksum header.
-$edgeStorageApi->uploadFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'remote-custom.css',
-    body: $content,
-    path: 'css',
-    headers: [
-        'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: 'css',
+        fileName: 'remote-custom.css',
+        body: $content,
+        headers: [
+            'Checksum' => '253852201067799F637D8BB144F32D7AAEEF3182BEAA61168E0AA87DBE336D7C',
+        ],
+    )
 );
 ```
 
 !!! warning
 
     - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header must be in **uppercase** characters to ensure a successful upload.
+    - If an incorrect `Checksum` is provided, the response will still be `201` but the file will not be uploaded.
 
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 
 ```php
 // Root directory.
-$edgeStorageApi->deleteFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'bunny.jpg',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DeleteFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: '',
+        fileName: 'bunny.jpg',
+    )
 );
 
 // Subdirectory.
-$edgeStorageApi->deleteFile(
-    storageZoneName: 'my-storage-zone-1',
-    fileName: 'custom.css',
-    path: 'css',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DeleteFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: 'css',
+        fileName: 'custom.css',
+    )
 );
 ```
 
@@ -161,14 +166,19 @@ $edgeStorageApi->deleteFile(
 
 ```php
 // Root directory.
-$edgeStorageApi->listFiles(
-    storageZoneName: 'my-storage-zone-1',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\BrowseFiles\ListFiles(
+        storageZoneName: 'my-storage-zone-1',
+        path: '',
+    )
 );
 
 // Subdirectory.
-$edgeStorageApi->listFiles(
-    storageZoneName: 'my-storage-zone-1',
-    path: 'css',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\BrowseFiles\ListFiles(
+        storageZoneName: 'my-storage-zone-1',
+        path: 'css',
+    )
 );
 ```
 

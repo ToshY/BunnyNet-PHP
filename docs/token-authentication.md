@@ -10,10 +10,10 @@ your content.
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\TokenAuthentication;
+use ToshY\BunnyNet\BunnyTokenAuthentication;
 
 // Provide the API key for the specific pull zone you want to use, available at the "Security > Token Authentication > Url Token Authentication Key" section.
-$tokenAuthentication = new TokenAuthentication(
+$bunnyTokenAuthentication = new BunnyTokenAuthentication(
     token: '5509f27d-9103-4de6-8370-8bd68db859c9',
     hostname: 'https://custom-pullzone.b-cdn.net',
 );
@@ -25,7 +25,7 @@ Sign a URL.
 
 ```php
 // File in root directory.
-$tokenAuthentication->sign(
+bunnyTokenAuthentication->sign(
     file: '/bunny.jpg',
     expirationTime: 3600,
     userIp: null,
