@@ -58,6 +58,10 @@ $bunnyHttpClient->request(
 
     - The key `status` consists of comma separated status codes.
 
+!!! warning
+
+    - Sending the `date` key with an incorrect format (should be `m-d-y`) can result in `403` status code.
+
 ## Reference
 
 * [Logging API](https://docs.bunny.net/docs/cdn-logging)

@@ -136,6 +136,7 @@ $bunnyHttpClient->request(
 !!! warning
 
     - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header must be in **uppercase** characters to ensure a successful upload.
+    - If an incorrect `Checksum` is provided, the response will still be `201` but the file will not be uploaded.
 
 #### [Delete File](https://docs.bunny.net/reference/delete_-storagezonename-path-filename)
 

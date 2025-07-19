@@ -154,13 +154,6 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
-
-    - This endpoint currently returns a `500` status code with the following response: 
-    ```
-    {"Message":"Authorization has been denied for this request."}
-    ```
-
 ### Billing
 
 #### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
@@ -2242,6 +2235,13 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails()
 );
 ```
+
+!!! warning
+
+    - This endpoint currently returns a `500` status code with the following response:
+    ```
+    {"Message":"Authorization has been denied for this request."}
+    ```
 
 #### [Accept DPA](https://docs.bunny.net/reference/userpublic_dpaaccept)
 
