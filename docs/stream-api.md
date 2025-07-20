@@ -9,17 +9,14 @@ Bunny Stream was designed for developers to easily upload, process, and display 
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\StreamAPI;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
-    client: new \Symfony\Component\HttpClient\Psr18Client()
-);
-
-// Provide the specific video library API key.
-$streamApi = new StreamAPI(
+$bunnyHttpClient = new BunnyHttpClient(
+    client: new \Symfony\Component\HttpClient\Psr18Client(),
+    // Provide the specific video library API key.
     apiKey: '710d5fb6-d923-43d6-87f8-ea65c09e76dc',
-    client: $bunnyClient
+    baseUrl: Endpoint::STREAM
 );
 ```
 
@@ -30,12 +27,14 @@ $streamApi = new StreamAPI(
 #### [Get Collection](https://docs.bunny.net/reference/collection_getcollection)
 
 ```php
-$streamApi->getCollection(
-    libraryId: 1,
-    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
-    query: [
-        'includeThumbnails' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection(
+        libraryId: 1,
+        collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
+        query: [
+            'includeThumbnails' => true,
+        ],
+    )
 );
 ```
 
@@ -46,36 +45,42 @@ $streamApi->getCollection(
 #### [Update Collection](https://docs.bunny.net/reference/collection_updatecollection)
 
 ```php
-$streamApi->updateCollection(
-    libraryId: 1,
-    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
-    body: [
-        'name' => 'Bunny Hopping Collection V2',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection(
+        libraryId: 1,
+        collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
+        body: [
+            'name' => 'Bunny Hopping Collection V2',
+        ],
+    )
 );
 ```
 
 #### [Delete Collection](https://docs.bunny.net/reference/collection_deletecollection)
 
 ```php
-$streamApi->deleteCollection(
-    libraryId: 1,
-    collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection(
+        libraryId: 1,
+        collectionId: '97f20caa-649b-4302-9f6e-1d286e0da144',
+    )
 );
 ```
 
 #### [List Collections](https://docs.bunny.net/reference/collection_list)
 
 ```php
-$streamApi->listCollections(
-    libraryId: 1,
-    query: [
-        'page' => 1,
-        'perPage' => 100,
-        'search' => 'bunny',
-        'orderBy' => 'date',
-        'includeThumbnails' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections(
+        libraryId: 1,
+        query: [
+            'page' => 1,
+            'perPage' => 100,
+            'search' => 'bunny',
+            'orderBy' => 'date',
+            'includeThumbnails' => true,
+        ],
+    )
 );
 ```
 
@@ -86,11 +91,13 @@ $streamApi->listCollections(
 #### [Create Collection](https://docs.bunny.net/reference/collection_createcollection)
 
 ```php
-$streamApi->createCollection(
-    libraryId: 1,
-    body: [
-        'name' => 'Bunny Collection',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageCollections\CreateCollection(
+        libraryId: 1,
+        body: [
+            'name' => 'Bunny Collection',
+        ],
+    )
 );
 ```
 
@@ -99,76 +106,84 @@ $streamApi->createCollection(
 #### [Get Video](https://docs.bunny.net/reference/video_getvideo)
 
 ```php
-$streamApi->getVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
 );
 ```
 
 #### [Update Video](https://docs.bunny.net/reference/video_updatevideo)
 
 ```php
-$streamApi->updateVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    body: [
-        'title' => 'Bunny Hoppers',
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-        'chapters' => [
-            [
-                'title' => 'Chapter 1',
-                'start' => 0,
-                'end' => 300,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        body: [
+            'title' => 'Bunny Hoppers',
+            'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'chapters' => [
+                [
+                    'title' => 'Chapter 1',
+                    'start' => 0,
+                    'end' => 300,
+                ],
+                [
+                    'title' => 'Chapter 2',
+                    'start' => 301,
+                    'end' => 500,
+                ],
             ],
-            [
-                'title' => 'Chapter 2',
-                'start' => 301,
-                'end' => 500,
+            'moments' => [
+                [
+                    'label' => 'Awesome Scene 1',
+                    'timestamp' => 70,
+                ],
+                [
+                    'label' => 'Awesome Scene 2',
+                    'timestamp' => 120,
+                ],
+            ],
+            'metaTags' => [
+                [
+                    'property' => 'description',
+                    'value' => 'My Video Description',
+                ],
+                [
+                    'property' => 'robots',
+                    'value' => 'noindex,nofollow',
+                ],
             ],
         ],
-        'moments' => [
-            [
-                'label' => 'Awesome Scene 1',
-                'timestamp' => 70,
-            ],
-            [
-                'label' => 'Awesome Scene 2',
-                'timestamp' => 120,
-            ],
-        ],
-        'metaTags' => [
-            [
-                'property' => 'description',
-                'value' => 'My Video Description',
-            ],
-            [
-                'property' => 'robots',
-                'value' => 'noindex,nofollow',
-            ],
-        ],
-    ],
+    )
 );
 ```
 
 #### [Delete Video](https://docs.bunny.net/reference/video_deletevideo)
 
 ```php
-$streamApi->deleteVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
 );
 ```
 
 #### [Create Video](https://docs.bunny.net/reference/video_createvideo)
 
 ```php
-$streamApi->createVideo(
-    libraryId: 1,
-    body: [
-        'title' => 'Bunny Hoppers',
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-        'thumbnailTime' => 10000,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CreateVideo(
+        libraryId: 1,
+        body: [
+            'title' => 'Bunny Hoppers',
+            'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'thumbnailTime' => 10000,
+        ],
+    )
 );
 ```
 
@@ -193,27 +208,31 @@ $content = file_get_contents('./bunny-hop.mp4');
 $content = $filesystem->readStream('./bunny-hop.mp4');
 
 // Upload video.
-$streamApi->uploadVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    body: $content,
-    query: [
-        'jitEnabled' => true,
-        'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
-        'enabledOutputCodecs' => 'x264,vp9',
-        'transcribeEnabled' => true,
-        'transcribeLanguages' => 'fi,jp',
-        'sourceLanguage' => 'en',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        body: $content,
+        query: [
+            'jitEnabled' => true,
+            'enabledResolutions' => '240p,360p,480p,720p,1080p,1440p,2160p',
+            'enabledOutputCodecs' => 'x264,vp9',
+            'transcribeEnabled' => true,
+            'transcribeLanguages' => 'fi,jp',
+            'sourceLanguage' => 'en',
+        ],
+    )
 );
 ```
 
 #### [Get Video Heatmap](https://docs.bunny.net/reference/video_getvideoheatmap)
 
 ```php
-$streamApi->getVideoHeatmap(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
 );
 ```
 
@@ -228,46 +247,54 @@ $streamApi->getVideoHeatmap(
 #### [Get Video Play Data](https://docs.bunny.net/reference/video_getvideoplaydata)
 
 ```php
-$streamApi->getVideoPlayData(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    query: [
-        'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
-        'expires' => 3600,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
+            'expires' => 3600,
+        ],
+    )
 );
 ```
 
 #### [Get Video Statistics](https://docs.bunny.net/reference/video_getvideostatistics)
 
 ```php
-$streamApi->getVideoStatistics(
-    libraryId: 1,
-    query: [
-        'dateFrom' => 'm-d-Y',
-        'dateTo' => 'm-d-Y',
-        'hourly' => false,
-        'videoGuid' => 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics(
+        libraryId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+            'videoGuid' => 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        ],
+    )
 );
 ```
 
 #### [Re-encode Video](https://docs.bunny.net/reference/video_reencodevideo)
 
 ```php
-$streamApi->reEncodeVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
 );
 ```
 
 #### [Add output codec to video](https://docs.bunny.net/reference/video_reencodeusingcodec)
 
 ```php
-$streamApi->addOutputCodecToVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    outputCodecId: 2,
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        outputCodecId: 2,
+    )
 );
 ```
 
@@ -286,12 +313,14 @@ $streamApi->addOutputCodecToVideo(
 #### [Repackage Video](https://docs.bunny.net/reference/video_repackage)
 
 ```php
-$streamApi->repackageVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    query: [
-        'keepOriginalFiles' => true,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'keepOriginalFiles' => true,
+        ],
+    )
 );
 ```
 
@@ -302,52 +331,54 @@ $streamApi->repackageVideo(
 #### [List Videos](https://docs.bunny.net/reference/video_list)
 
 ```php
-$streamApi->listVideos(
-    libraryId: 1,
-    query: [
-        'page' => 1,
-        'itemsPerPage' => 100,
-        'search' => 'bunny',
-        'collection' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-        'orderBy' => 'date',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos(
+        libraryId: 1,
+        query: [
+            'page' => 1,
+            'itemsPerPage' => 100,
+            'search' => 'bunny',
+            'collection' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'orderBy' => 'date',
+        ],
+    )
 );
 ```
 
 #### [Set Thumbnail](https://docs.bunny.net/reference/video_setthumbnail)
 
 ```php
-$streamApi->setThumbnail(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    query: [
-        'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg',
+        ],
+    )
 );
 ```
-
-!!! note
-
-    - This method allows for uploading a thumbnail based on body contents.
 
 #### [Fetch Video](https://docs.bunny.net/reference/video_fetchnewvideo)
 
 ```php
-$streamApi->fetchVideo(
-    libraryId: 1,
-    body: [
-        'url' => 'https://example.com/bunny-hop.mp4',
-        'headers' => [
-            'newKey' => 'New Value',
-            'newKey-1' => 'New Value 1',
-            'newKey-2' => 'New Value 2',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo(
+        libraryId: 1,
+        body: [
+            'url' => 'https://example.com/bunny-hop.mp4',
+            'headers' => [
+                'newKey' => 'New Value',
+                'newKey-1' => 'New Value 1',
+                'newKey-2' => 'New Value 2',
+            ],
+            'title' => 'Title for the video',
         ],
-        'title' => 'Title for the video',
-    ],
-    query: [
-        'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
-        'thumbnailTime' => 10000,
-    ],
+        query: [
+            'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'thumbnailTime' => 10000,
+        ],
+    )
 );
 ```
 
@@ -358,15 +389,17 @@ $streamApi->fetchVideo(
 #### [Add Caption](https://docs.bunny.net/reference/video_addcaption)
 
 ```php
-$streamApi->addCaption(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    sourceLanguage: 'ja',
-    body: [
-        'srclang' => 'ja',
-        'label' => 'Subtitles (Japanese)',
-        'captionsFile' => 'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        sourceLanguage: 'ja',
+        body: [
+            'srclang' => 'ja',
+            'label' => 'Subtitles (Japanese)',
+            'captionsFile' => 'MQowMDowMDowMCwwMDAgLS0+IDAwOjAxOjAwLDAwMApOZXZlciBnb25uYSBnaXZlIHlvdSB1cC4K',
+        ],
+    )
 );
 ```
 
@@ -378,10 +411,12 @@ $streamApi->addCaption(
 #### [Delete Caption](https://docs.bunny.net/reference/video_deletecaption)
 
 ```php
-$streamApi->deleteCaption(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    sourceLanguage: 'ja',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteCaption(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        sourceLanguage: 'ja',
+    )
 );
 ```
 
@@ -403,22 +438,24 @@ $streamApi->deleteCaption(
 #### [Transcribe Video](https://docs.bunny.net/reference/video_transcribevideo)
 
 ```php
-$streamApi->transcribeVideo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    query: [
-        'language' => 'fi',
-        'force' => true,
-    ],
-    body: [
-        'targetLanguages' => [
-            'fi',
-            'jp'
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'language' => 'fi',
+            'force' => true,
         ],
-        'generateTitle' => true,
-        'generateDescription' => true,
-        'sourceLanguage' => 'en',
-    ],   
+        body: [
+            'targetLanguages' => [
+                'fi',
+                'jp'
+            ],
+            'generateTitle' => true,
+            'generateDescription' => true,
+            'sourceLanguage' => 'en',
+        ],   
+    )
 );
 ```
 
@@ -431,9 +468,11 @@ $streamApi->transcribeVideo(
 #### [Video resolutions info](https://docs.bunny.net/reference/video_getvideoresolutions)
 
 ```php
-$streamApi->videoResolutionsInfo(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\VideoResolutionsInfo(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
 );
 ```
 
@@ -444,16 +483,18 @@ $streamApi->videoResolutionsInfo(
 #### [Cleanup unconfigured resolutions](https://docs.bunny.net/reference/video_deleteresolutions)
 
 ```php
-$streamApi->cleanupUnconfiguredResolutions(
-    libraryId: 1,
-    videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
-    query: [
-        'resolutionsToDelete' => '240p,360p',
-        'deleteNonConfiguredResolutions' => false,
-        'deleteOriginal' => false,
-        'deleteMp4Files' => false,
-        'dryRun' => false,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'resolutionsToDelete' => '240p,360p',
+            'deleteNonConfiguredResolutions' => false,
+            'deleteOriginal' => false,
+            'deleteMp4Files' => false,
+            'dryRun' => false,
+        ],
+    )
 );
 ```
 
@@ -472,14 +513,16 @@ $streamApi->cleanupUnconfiguredResolutions(
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
 ```php
-$streamApi->getOEmbed(
-    query: [
-        'url' => 'https://iframe.mediadelivery.net/embed/182595/8a800e53-c949-46d0-8818-af566f032ec1',
-        'maxWidth' => 1280,
-        'maxHeight' => 720,
-        'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
-        'expires' => 3600,
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\OEmbed\GetOEmbed(
+        query: [
+            'url' => 'https://iframe.mediadelivery.net/embed/182595/8a800e53-c949-46d0-8818-af566f032ec1',
+            'maxWidth' => 1280,
+            'maxHeight' => 720,
+            'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
+            'expires' => 3600,
+        ],
+    )
 );
 ```
 

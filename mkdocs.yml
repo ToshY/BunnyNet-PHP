@@ -62,6 +62,8 @@ nav:
     - Edge Scripting: edge-scripting-api.md
     - Shield: shield-api.md
     - Logging: logging-api.md
-  - Other:
+  - Validation:
+    - Model validation: validation.md
+  - Tools:
     - Image Processing: image-processing.md
     - Token Authentication: token-authentication.md

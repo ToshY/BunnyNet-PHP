@@ -4,42 +4,45 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Generator\Map;
 
-use ToshY\BunnyNet\Model\API\Shield\DDoS\ListDDoSEnums;
-use ToshY\BunnyNet\Model\API\Shield\EventLogs\ListEventLogs;
-use ToshY\BunnyNet\Model\API\Shield\Metrics\GetOverviewMetrics;
-use ToshY\BunnyNet\Model\API\Shield\Metrics\GetRateLimitMetrics;
-use ToshY\BunnyNet\Model\API\Shield\Metrics\GetWAFRuleMetrics;
-use ToshY\BunnyNet\Model\API\Shield\Metrics\ListRateLimitMetrics;
-use ToshY\BunnyNet\Model\API\Shield\RateLimiting\CreateRateLimit;
-use ToshY\BunnyNet\Model\API\Shield\RateLimiting\DeleteRateLimit;
-use ToshY\BunnyNet\Model\API\Shield\RateLimiting\GetRateLimit;
-use ToshY\BunnyNet\Model\API\Shield\RateLimiting\ListRateLimits;
-use ToshY\BunnyNet\Model\API\Shield\RateLimiting\UpdateRateLimit;
-use ToshY\BunnyNet\Model\API\Shield\WAF\CreateCustomWAFRule;
-use ToshY\BunnyNet\Model\API\Shield\WAF\DeleteCustomWAFRule;
-use ToshY\BunnyNet\Model\API\Shield\WAF\GetCustomWAFRule;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ListCustomWAFRules;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ListWAFEngineConfiguration;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ListWAFEnums;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ListWAFProfiles;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ListWAFRules;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ReviewTriggeredRule;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ReviewTriggeredRuleAIRecommendation;
-use ToshY\BunnyNet\Model\API\Shield\WAF\ReviewTriggeredRules;
-use ToshY\BunnyNet\Model\API\Shield\WAF\UpdateCustomWAFRule;
-use ToshY\BunnyNet\Model\API\Shield\WAF\UpdateCustomWAFRuleByPatch;
-use ToshY\BunnyNet\Model\API\Shield\Zone\CreateShieldZone;
-use ToshY\BunnyNet\Model\API\Shield\Zone\GetShieldZone;
-use ToshY\BunnyNet\Model\API\Shield\Zone\GetShieldZoneByPullZoneId;
-use ToshY\BunnyNet\Model\API\Shield\Zone\ListShieldZones;
-use ToshY\BunnyNet\Model\API\Shield\Zone\UpdateShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
+use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\CreateRateLimit;
+use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\DeleteRateLimit;
+use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\GetRateLimit;
+use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\ListRateLimits;
+use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\UpdateRateLimit;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\CreateCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\DeleteCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\GetCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListCustomWafRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEngineConfiguration;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEnums;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafProfiles;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRuleAiRecommendation;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRuleByPatch;
+use ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId;
+use ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones;
+use ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone;
 
+/**
+ * @internal
+ */
 final class Shield
 {
-    /** @var array<string,array<string,class-string|null>> */
+    /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/shield/ddos/enums' => [
-            'get' => ListDDoSEnums::class,
+            'get' => ListDdosEnums::class,
         ],
         '/shield/event-logs/{shieldZoneId}/{date}/{continuationToken}' => [
             'get' => ListEventLogs::class,
@@ -54,7 +57,7 @@ final class Shield
             'get' => GetRateLimitMetrics::class,
         ],
         '/shield/metrics/shield-zone/{shieldZoneId}/waf-rule/{ruleId}' => [
-            'get' => GetWAFRuleMetrics::class,
+            'get' => GetWafRuleMetrics::class,
         ],
         '/shield/rate-limits/{shieldZoneId}' => [
             'get' => ListRateLimits::class,
@@ -81,35 +84,35 @@ final class Shield
             'patch' => UpdateShieldZone::class,
         ],
         '/shield/waf/rules' => [
-            'get' => ListWAFRules::class,
+            'get' => ListWafRules::class,
         ],
         '/shield/waf/rules/review-triggered/{shieldZoneId}' => [
             'get' => ReviewTriggeredRules::class,
             'post' => ReviewTriggeredRule::class,
         ],
         '/shield/waf/rules/review-triggered/ai-recommendation/{shieldZoneId}/{ruleId}' => [
-            'get' => ReviewTriggeredRuleAIRecommendation::class,
+            'get' => ReviewTriggeredRuleAiRecommendation::class,
         ],
         '/shield/waf/custom-rules/{shieldZoneId}' => [
-            'get' => ListCustomWAFRules::class,
+            'get' => ListCustomWafRules::class,
         ],
         '/shield/waf/custom-rule/{id}' => [
-            'get' => GetCustomWAFRule::class,
-            'put' => UpdateCustomWAFRule::class,
-            'delete' => DeleteCustomWAFRule::class,
-            'patch' => UpdateCustomWAFRuleByPatch::class,
+            'get' => GetCustomWafRule::class,
+            'put' => UpdateCustomWafRule::class,
+            'delete' => DeleteCustomWafRule::class,
+            'patch' => UpdateCustomWafRuleByPatch::class,
         ],
         '/shield/waf/custom-rule' => [
-            'post' => CreateCustomWAFRule::class,
+            'post' => CreateCustomWafRule::class,
         ],
         '/shield/waf/profiles' => [
-            'get' => ListWAFProfiles::class,
+            'get' => ListWafProfiles::class,
         ],
         '/shield/waf/enums' => [
-            'get' => ListWAFEnums::class,
+            'get' => ListWafEnums::class,
         ],
         '/shield/waf/engine-config' => [
-            'get' => ListWAFEngineConfiguration::class,
+            'get' => ListWafEngineConfiguration::class,
         ],
     ];
 }

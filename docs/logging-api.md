@@ -16,17 +16,14 @@ Searchable logs are stored for up to 3 days. If long-term log storage is require
 
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\Client\BunnyClient;
-use ToshY\BunnyNet\LoggingAPI;
+use ToshY\BunnyNet\BunnyHttpClient;
+use ToshY\BunnyNet\Enum\Endpoint;
 
-$bunnyClient = new BunnyClient(
+$bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
-);
-
-// Provide the account API key.
-$loggingApi = new LoggingAPI(
+    // Provide the account API key.
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    client: $bunnyClient,
+    baseUrl: Endpoint::LOGGING
 );
 ```
 
@@ -34,28 +31,36 @@ $loggingApi = new LoggingAPI(
 
 ```php
 // Logging of yesterday.
-$loggingApi->getLog(
-    pullZoneId: 1,
-    dateTime: new \DateTime('-1 day'),
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        date: (new \DateTime('-1 day'))->format('m-d-y'),
+        pullZoneId: 1,
+    )
 );
 
 // Logging of yesterday narrowed down by additional query parameters.
-$loggingApi->getLog(
-    pullZoneId: 1,
-    dateTime: new \DateTime('-1 day'),
-    query: [
-        'start' => 10,
-        'end' => 20,
-        'order' => 'asc',
-        'status' => '100,200,300,400,500',
-        'search' => 'bunny.jpg',
-    ],
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Logging\GetLog(
+        date: (new \DateTime('-1 day'))->format('m-d-y'),
+        pullZoneId: 1,
+        query: [
+            'start' => 10,
+            'end' => 20,
+            'order' => 'asc',
+            'status' => '100,200,300,400,500',
+            'search' => 'bunny.jpg',
+        ],
+    )
 );
 ```
 
 !!! note
 
     - The key `status` consists of comma separated status codes.
+
+!!! warning
+
+    - Sending the `date` key with an incorrect format (should be `m-d-y`) results in `403` status code.
 
 ## Reference
 

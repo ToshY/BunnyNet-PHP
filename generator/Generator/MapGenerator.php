@@ -23,7 +23,7 @@ use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\OpenApiModelUtils;
 use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
-use ToshY\BunnyNet\Model\EndpointInterface;
+use ToshY\BunnyNet\Model\ModelInterface;
 
 class MapGenerator
 {
@@ -101,14 +101,14 @@ class MapGenerator
                 continue;
             }
 
-            $fqcn = self::filePathToFqcn($file->getPathname());
+            $fqcn = FileUtils::filePathToFqcn($file->getPathname());
             if (class_exists($fqcn) === false) {
                 continue;
             }
 
             $reflectionClass = new ReflectionClass($fqcn);
             if (
-                $reflectionClass->implementsInterface(EndpointInterface::class) === false
+                $reflectionClass->implementsInterface(ModelInterface::class) === false
                 || $reflectionClass->isInstantiable() === false
 
             ) {
@@ -131,33 +131,6 @@ class MapGenerator
         }
 
         return $map;
-    }
-
-    /**
-     * Convert a full file path to fully qualified class name assuming PSR-4 and base namespace ToshY\BunnyNet\
-     */
-    private static function filePathToFqcn(string $fullFilepath): string
-    {
-        $normalizedPath = FileUtils::backslashToForwardSlash($fullFilepath);
-
-        $realPath = match (FileUtils::realPath($normalizedPath)) {
-            false => FileUtils::getAbsoluteRealPath($normalizedPath),
-            default => FileUtils::backslashToForwardSlash($fullFilepath),
-        };
-
-        $psr4 = ClassUtils::getPsr4RootNamespace();
-        $sourcePath = '/' . $psr4['path'];
-
-        $relative = FileUtils::getRelativePathWithoutSource($realPath, $sourcePath);
-        $relative = FileUtils::removePhpExtension($relative);
-
-        $namespacePath = ClassUtils::forwardSlashToBackwardSlash($relative);
-
-        return sprintf(
-            '%s%s',
-            $psr4['namespace'],
-            $namespacePath,
-        );
     }
 
     /**
@@ -227,11 +200,13 @@ class MapGenerator
 
         $class = $namespace->addClass($outputFileName);
         $class->setFinal();
+        $class->addComment('@internal');
+
         $property = $class->addProperty('endpoints')
             ->setType('array')
             ->setStatic()
             ->setVisibility('public')
-            ->setComment('@var array<string,array<string,class-string|null>>');
+            ->setComment('@var array<string,array<string,class-string|null>> $endpoints');
 
         $arrayCode = self::generateMultilineMapping($remappedClassnames);
         $property->setValue(new Literal($arrayCode));

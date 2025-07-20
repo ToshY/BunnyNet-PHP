@@ -3,7 +3,7 @@ name: Generator
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * *'
 
 permissions:
   contents: write
@@ -45,8 +45,7 @@ jobs:
 
             Checklist:
             - [x] Add/Update API models
-            - [ ] Add/Update API public methods for corresponding models
-            - [ ] Update documentation
+            - [ ] Add/Update documentation examples (when needed)
           branch: patch/automated-models
           branch-suffix: short-commit-hash
           maintainer-can-modify: true
