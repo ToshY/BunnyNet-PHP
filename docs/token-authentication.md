@@ -25,7 +25,7 @@ Sign a URL.
 
 ```php
 // File in root directory.
-bunnyTokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/bunny.jpg',
     expirationTime: 3600,
     userIp: null,
@@ -39,25 +39,25 @@ bunnyTokenAuthentication->sign(
 );
 
 // File in subdirectory.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/css/custom.css',
 );
 
 // Change expiration time.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/css/custom.css',
     expirationTime: 10,
 );
 
 // With IPv4 and not allowing associated subnet.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/css/custom.css',
     userIp: '12.345.67.89',
     allowSubnet: false
 );
 
 // With directory token enabled and path specified for video streaming.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
@@ -65,7 +65,7 @@ $tokenAuthentication->sign(
 );
 
 // Allow or block certain countries, e.g. allow "US" and block "RU".
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
@@ -75,7 +75,7 @@ $tokenAuthentication->sign(
 );
 
 // Allow from specific referrer.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
@@ -84,7 +84,7 @@ $tokenAuthentication->sign(
 );
 
 // Limit the download speed limit to 5 Mb/s.
-$tokenAuthentication->sign(
+$bunnyTokenAuthentication->sign(
     file: '/videos/cute-bunnies/playlist.m3u8',
     userIp: '12.345.67.89',
     isDirectoryToken: true,
