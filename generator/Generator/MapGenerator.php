@@ -115,7 +115,7 @@ class MapGenerator
                 continue;
             }
 
-            $newInstance = $reflectionClass->newInstance();
+            $newInstance = $reflectionClass->newInstanceWithoutConstructor();
             $path = OpenApiModelUtils::normalizePath($newInstance->getPath());
             $method = $newInstance->getMethod();
             if ($method instanceof Method === false) {
