@@ -24,7 +24,6 @@ use Nette\PhpGenerator\PsrPrinter;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
-use Throwable;
 use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Attributes\HeaderProperty;
 use ToshY\BunnyNet\Attributes\PathProperty;
@@ -985,19 +984,15 @@ class ModelGenerator
                     continue;
                 }
 
-                try {
-                    $reflectionClass = new ReflectionClass($endpointClass);
-                    /** @var ModelInterface $instance */
-                    $instance = $reflectionClass->newInstance();
+                $reflectionClass = new ReflectionClass($endpointClass);
+                /** @var ModelInterface $instance */
+                $instance = $reflectionClass->newInstanceWithoutConstructor();
 
-                    $existingEndpoints[$endpointClass] = [
-                        'headers' => $instance->getHeaders(),
-                        'path' => $instance->getPath(),
-                        'method' => $instance->getMethod(),
-                    ];
-                } catch (Throwable) {
-                    continue;
-                }
+                $existingEndpoints[$endpointClass] = [
+                    'headers' => $instance->getHeaders(),
+                    'path' => $instance->getPath(),
+                    'method' => $instance->getMethod(),
+                ];
             }
         }
 
