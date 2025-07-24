@@ -21,14 +21,8 @@ final class Endpoint
     /** @var string Logging API endpoint */
     public const LOGGING = 'logging.bunnycdn.com';
 
-    /** @deprecated Will be removed in 7.1. Use Endpoint::EDGE_STORAGE_DE instead. */
-    public const EDGE_STORAGE = self::EDGE_STORAGE_DE;
-
     /** @var string Storage Zone Region API Endpoint | Frankfurt (Germany) | Main */
     public const EDGE_STORAGE_DE = 'storage.bunnycdn.com';
-
-    /** @deprecated Will be removed in 7.1. Use Endpoint::EDGE_STORAGE_DE instead. */
-    public const EDGE_STORAGE_FS = self::EDGE_STORAGE_DE;
 
     /** @var string Storage Zone Region API Endpoint | London (United Kingdom) | Main */
     public const EDGE_STORAGE_UK = 'uk.storage.bunnycdn.com';
