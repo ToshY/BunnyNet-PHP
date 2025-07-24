@@ -35,6 +35,37 @@ $bunnyHttpClient = new BunnyHttpClient(
 |-------------------------------------|----------------------------------|-------------------------------------------|
 | `ToshY\BunnyNet\Client\BunnyClient` | `ToshY\BunnyNet\BunnyHttpClient` | Requires `apiKey` and `baseUrl` to be set |
 
+
+#### Removed `Region` in favor of `Endpoint`
+
+With the change of the `BunnyHttpClient` which now requires the user to supply a `baseUrl`, the  `ToshY\BunnyNet\Enum\Region` that was previously used explicitly
+by the **Edge Storage API class**, has been removed in favor of the (new) `ToshY\BunnyNet\Enum\Endpoint`.
+
+| **6.x**                           | **7.x**                                          | **7.x signature notes**                     |
+|-----------------------------------|--------------------------------------------------|---------------------------------------------|
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::BASE`             | Set by API class in  `6.x`; Public in `7.x` |
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::EDGE_SCRIPTING`   | Set by API class in  `6.x`; Public in `7.x` |
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::SHIELD`           | Set by API class in  `6.x`; Public in `7.x` |
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::STREAM`           | Set by API class in  `6.x`; Public in `7.x` |
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::LOGGING`          | Set by API class in  `6.x`; Public in `7.x` |
+| -                                 | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE`     | New in `7.x` (same as `DE` / `FS`)          |
+| `ToshY\BunnyNet\Enum\Region::DE`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_DE`  | Default value `Endpoint::EDGE_STORAGE`      |
+| `ToshY\BunnyNet\Enum\Region::FS`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_FS`  | Default value `Endpoint::EDGE_STORAGE`      |
+| `ToshY\BunnyNet\Enum\Region::UK`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_UK`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::SE`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_SE`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::CZ`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_CZ`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::ED`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_ED`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::NY`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_NY`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::LA`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_LA`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::WA`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_WA`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::MI`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_MI`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::SG`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_SG`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::HK`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_HK`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::JP`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_JP`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::SYD` | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_SYD` |                                             |
+| `ToshY\BunnyNet\Enum\Region::BR`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_BR`  |                                             |
+| `ToshY\BunnyNet\Enum\Region::JH`  | `ToshY\BunnyNet\Enum\Endpoint::EDGE_STORAGE_JH`  |                                             |
+
 #### Models
 
 The `BunnyHttpClient` now has a public `request` method that accepts any model implementing `ModelInterface`.
