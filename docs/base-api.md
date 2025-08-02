@@ -1955,6 +1955,13 @@ $bunnyHttpClient->request(
             'serverZoneId' => -1,
             'loadErrors' => false,
             'hourly' => false,
+            'loadOriginResponseTimes' => false,
+            'loadOriginTraffic' => false,
+            'loadRequestsServed' => false,
+            'loadBandwidthUsed' => false,
+            'loadOriginShieldBandwidth' => false,
+            'loadGeographicTrafficDistribution' => false,
+            'loadUserBalanceHistory' => false,
         ],
     )
 );
