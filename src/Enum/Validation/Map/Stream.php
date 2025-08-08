@@ -30,6 +30,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\VideoResolutionsInfo;
 use ToshY\BunnyNet\Model\Api\Stream\OEmbed\GetOEmbed;
+use ToshY\BunnyNet\Model\Api\Stream\Video\GetVideoHeatmapData;
 
 final class Stream
 {
@@ -46,6 +47,7 @@ final class Stream
         DeleteVideo::class => ModelValidationStrategy::NONE,
         GetVideoHeatmap::class => ModelValidationStrategy::NONE,
         GetVideoPlayData::class => ModelValidationStrategy::STRICT_QUERY,
+        GetVideoHeatmapData::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideoStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ReEncodeVideo::class => ModelValidationStrategy::NONE,
         AddOutputCodecToVideo::class => ModelValidationStrategy::NONE,

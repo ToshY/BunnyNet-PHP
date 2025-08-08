@@ -249,6 +249,9 @@ final class Base
         '/videolibrary/{id}/removeBlockedReferrer' => [
             'post' => RemoveBlockedReferer::class,
         ],
+        '/videolibrary/{id}/drm/statistics' => [
+            'get' => null,
+        ],
         '/dnszone' => [
             'get' => ListDnsZones::class,
             'post' => AddDnsZone::class,

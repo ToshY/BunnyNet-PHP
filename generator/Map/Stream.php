@@ -58,6 +58,9 @@ final class Stream
         '/library/{libraryId}/videos/{videoId}/play' => [
             'get' => GetVideoPlayData::class,
         ],
+        '/library/{libraryId}/videos/{videoId}/play/heatmap' => [
+            'get' => null,
+        ],
         '/library/{libraryId}/statistics' => [
             'get' => GetVideoStatistics::class,
         ],

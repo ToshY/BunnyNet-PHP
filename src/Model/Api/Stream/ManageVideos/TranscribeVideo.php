@@ -56,7 +56,6 @@ class TranscribeVideo implements ModelInterface, QueryModelInterface, BodyModelI
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'language', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'force', type: Type::BOOLEAN_TYPE),
         ];
     }

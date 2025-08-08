@@ -43,6 +43,7 @@ use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Base\GetDrmStatisticsEndpoint\Statistics;
 use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer as PullZoneAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
@@ -170,6 +171,7 @@ final class Base
         RemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
         AddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         RemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        Statistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
         GetDnsZone::class => ModelValidationStrategy::NONE,
