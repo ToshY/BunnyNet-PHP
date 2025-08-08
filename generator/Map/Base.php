@@ -89,6 +89,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
@@ -248,6 +249,9 @@ final class Base
         ],
         '/videolibrary/{id}/removeBlockedReferrer' => [
             'post' => RemoveBlockedReferer::class,
+        ],
+        '/videolibrary/{id}/drm/statistics' => [
+            'get' => GetDrmStatistics::class,
         ],
         '/dnszone' => [
             'get' => ListDnsZones::class,

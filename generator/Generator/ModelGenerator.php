@@ -1117,14 +1117,21 @@ class ModelGenerator
         /* @phpstan-ignore-next-line property.notFound */
         $specData = $this->apiSpec->paths->getPath($path)->getRawSpecData()[$httpMethod];
 
-        [$operationNamespace, $operationClass] = explode('_', $specData['operationId'], 2);
+        $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
 
-        $namespace = OpenApiModelUtils::stripTagSuffix($operationNamespace);
+        [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
+
+        $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
+        $namespace = match ($namespace !== null) {
+            true => ClassUtils::toPascalCase($namespace),
+            false => OpenApiModelUtils::stripTagSuffix($operationNamespace),
+        };
+
         $class = OpenApiModelUtils::stripTagSuffix($operationClass);
 
         if (empty($class) === true) {
             if (empty($specData['summary']) === false) {
-                $class = implode('', array_map('ucfirst', explode(' ', $specData['summary'])));
+                $class = ClassUtils::toPascalCase($specData['summary']);
             } else {
                 // This likely won't happen
                 $this->logger::print("* WARNING: Path '$path' does not have a summary to use for class name\n");
@@ -1135,6 +1142,28 @@ class ModelGenerator
             $namespace,
             $class,
         ];
+    }
+
+    /**
+     * @param string $operationId
+     * @param string[] $tags
+     * @return string
+     */
+    private function retrieveOperationId(string $operationId, array $tags): string
+    {
+        [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
+
+        foreach ($tags as $tag) {
+            if ($operationClass !== $tag) {
+                continue;
+            }
+
+            // Edge case where the current operationId does not conform to the expected format of <namespace>_<class>
+            $operationId = implode('_', [$operationClass, $operationNamespace]);
+            break;
+        }
+
+        return $operationId;
     }
 
     public static function getPhpTypeFromOpenApiType(string $openApiType): string

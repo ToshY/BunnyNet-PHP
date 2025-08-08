@@ -80,6 +80,13 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php php /app/generator/Command/generate-models.php {{.CLI_ARGS | default "--log"}}
 
+  specs:
+    desc: Run maps and models generators
+    cmds:
+      - task: specs:maps
+      - task: specs:models
+      - task: specs:maps
+
   # Git
   git:hooks:
     desc: Setup git hooks

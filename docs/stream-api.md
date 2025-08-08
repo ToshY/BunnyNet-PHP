@@ -244,6 +244,21 @@ $bunnyHttpClient->request(
     ```
     A support ticket has been created at bunny.net regarding this issue.
 
+#### [Get Video Heatmap Data](https://docs.bunny.net/reference/video_getvideoheatmapdata)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'token' => 'ead85f9a-578b-42b7-985f-9a578b12b776',
+            'expires' => 3600,
+        ],
+    )
+);
+```
+
 #### [Get Video Play Data](https://docs.bunny.net/reference/video_getvideoplaydata)
 
 ```php
@@ -443,7 +458,6 @@ $bunnyHttpClient->request(
         libraryId: 1,
         videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
         query: [
-            'language' => 'fi',
             'force' => true,
         ],
         body: [
@@ -461,7 +475,7 @@ $bunnyHttpClient->request(
 
 !!! note
 
-    - The `language` is a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
+    - The `targetLanguages` / `sourceLanguage` require a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
     - Once a video has transcribed you need to set `force` to `true` in order to force a new transcription to be added.
     - The body parameter `sourceLanguage` takes precedence over the query parameter `language`.
 

@@ -597,6 +597,20 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [Get Video Library DRM Statistics](https://docs.bunny.net/reference/getdrmstatisticsendpoint_statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+        ],
+    )
+);
+```
+
 #### [Get Languages](https://docs.bunny.net/reference/videolibrarypublic_index3)
 
 ```php
