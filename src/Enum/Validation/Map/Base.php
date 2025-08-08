@@ -91,6 +91,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
@@ -170,6 +171,7 @@ final class Base
         RemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
         AddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         RemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
         GetDnsZone::class => ModelValidationStrategy::NONE,

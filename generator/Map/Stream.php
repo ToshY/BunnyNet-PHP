@@ -18,6 +18,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\DeleteVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\FetchVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
@@ -57,6 +58,9 @@ final class Stream
         ],
         '/library/{libraryId}/videos/{videoId}/play' => [
             'get' => GetVideoPlayData::class,
+        ],
+        '/library/{libraryId}/videos/{videoId}/play/heatmap' => [
+            'get' => GetVideoHeatmapData::class,
         ],
         '/library/{libraryId}/statistics' => [
             'get' => GetVideoStatistics::class,
