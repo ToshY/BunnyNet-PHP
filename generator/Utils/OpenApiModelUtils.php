@@ -27,7 +27,7 @@ final class OpenApiModelUtils
      * @param array<string> $tags
      * @return string
      */
-    public static function stripTagSuffix(string $value, array $tags = ['Public', 'Index']): string
+    public static function stripTagSuffix(string $value, array $tags = ['Public', 'Index', 'Endpoint']): string
     {
         return preg_replace(
             sprintf(
@@ -37,5 +37,18 @@ final class OpenApiModelUtils
             '',
             $value,
         );
+    }
+
+    /**
+     * @param string[] $tags
+     */
+    public static function extractNamespaceFromTags(array $tags): ?string
+    {
+        if (empty($tags) === true) {
+            return null;
+        }
+
+        // The first tag has priority over other tags in case there are multiple.
+        return $tags[0];
     }
 }

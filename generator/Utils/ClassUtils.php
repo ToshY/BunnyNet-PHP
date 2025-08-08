@@ -102,4 +102,19 @@ final class ClassUtils
     {
         return str_replace('/', '\\', $path);
     }
+
+
+    public static function toPascalCase(string $text, string $textDelimiter = ' '): string
+    {
+        return implode(
+            '',
+            array_map(
+                function ($v) {
+                    $v = strtolower($v);
+                    return ucfirst($v);
+                },
+                explode(separator: $textDelimiter, string: $text),
+            ),
+        );
+    }
 }
