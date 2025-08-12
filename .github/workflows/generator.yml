@@ -49,12 +49,12 @@ jobs:
             Checklist:
             - [x] Add/Update API models
             - [ ] Add/Update documentation examples (when needed)
-          branch: patch/automated-models
-          branch-suffix: short-commit-hash
+          branch: generator/update-api-models
           maintainer-can-modify: true
           draft: always-true
           assignees: ToshY
           reviewers: ToshY
+          delete-branch: true
           labels: |
             OpenAPI
             automated
