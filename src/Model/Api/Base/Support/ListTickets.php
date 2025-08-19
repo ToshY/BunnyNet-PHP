@@ -12,6 +12,9 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
 use ToshY\BunnyNet\Model\QueryModelInterface;
 
+/**
+ * @note no longer in OpenAPI spec
+ */
 class ListTickets implements ModelInterface, QueryModelInterface
 {
     /**

@@ -8,6 +8,9 @@ use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
+/**
+ * @note no longer in OpenAPI spec
+ */
 class ResolveAbuseCase implements ModelInterface
 {
     /**

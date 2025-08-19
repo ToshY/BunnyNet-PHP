@@ -7,6 +7,9 @@ namespace ToshY\BunnyNet\Model\Api\Base\User;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
+/**
+ * @note no longer in OpenAPI spec
+ */
 class SetNotificationsOpened implements ModelInterface
 {
     public function getMethod(): Method
