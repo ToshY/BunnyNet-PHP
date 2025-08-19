@@ -3,13 +3,12 @@
 declare(strict_types=1);
 
 use ToshY\BunnyNet\Enum\Header;
-use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
+use ToshY\BunnyNet\Generator\Enum\EndpointEdgeCases;
 use ToshY\BunnyNet\Generator\Generator\ModelGenerator;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
-use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
@@ -100,12 +99,8 @@ foreach ($manifests as $file) {
     };
 
     $validationReplacements  = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
-            GetGitHubIntegration::class => ModelValidationStrategy::NONE,
-        ],
-        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => [
-            DownloadZip::class => ModelValidationStrategy::STRICT_BODY,
-        ],
+        \ToshY\BunnyNet\Enum\Generator::BASE->value, => EndpointEdgeCases::BASE_API_VALIDATION_REPLACEMENTS,
+        \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => EndpointEdgeCases::EDGE_STORAGE_VALIDATION_REPLACEMENTS,
         default => [],
     };
 
