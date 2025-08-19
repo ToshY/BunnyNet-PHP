@@ -36,7 +36,6 @@ class AddPullZone implements ModelInterface, BodyModelInterface
     public function getHeaders(): array
     {
         return [
-            Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
         ];
     }
@@ -51,6 +50,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'BlockedReferrers', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'BlockNoneReferrer', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'BlockedIps', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
@@ -66,6 +66,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'EnableAvifVary', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableMobileVary', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableCountryCodeVary', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableCountryStateCodeVary', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableHostnameVary', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableCacheSlice', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ZoneSecurityEnabled', type: Type::BOOLEAN_TYPE),
@@ -91,6 +92,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'EnableLogging', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'LoggingIPAnonymizationEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'PermaCacheStorageZoneId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'PermaCacheType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'AWSSigningEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'AWSSigningKey', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'AWSSigningRegionName', type: Type::STRING_TYPE),
@@ -114,34 +116,27 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'LimitRateAfter', type: Type::NUMERIC_TYPE),
             new AbstractParameter(name: 'LimitRatePerSecond', type: Type::INT_TYPE),
             new AbstractParameter(name: 'BurstSize', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'WAFEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFDisabledRuleGroups', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
-            new AbstractParameter(name: 'WAFDisabledRules', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
-            new AbstractParameter(name: 'WAFEnableRequestHeaderLogging', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFRequestHeaderIgnores', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
             new AbstractParameter(name: 'ErrorPageEnableCustomCode', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ErrorPageCustomCode', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ErrorPageEnableStatuspageWidget', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ErrorPageStatuspageCode', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ErrorPageWhitelabel', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OptimizerTunnelEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerDesktopMaxWidth', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerMobileMaxWidth', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerImageQuality', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerMobileImageQuality', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerEnableWebP', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OptimizerPrerenderHtml', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerEnableManipulationEngine', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerMinifyCSS', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerMinifyJavaScript', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkUrl', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'OptimizerWatermarkPosition', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'OptimizerWatermarkPosition', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE),
+            ]),
             new AbstractParameter(name: 'OptimizerWatermarkOffset', type: Type::NUMERIC_TYPE),
             new AbstractParameter(name: 'OptimizerWatermarkMinImageSize', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerAutomaticOptimizationEnabled', type: Type::BOOLEAN_TYPE),
@@ -154,6 +149,8 @@ class AddPullZone implements ModelInterface, BodyModelInterface
                 ]),
             ]),
             new AbstractParameter(name: 'OptimizerForceClasses', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OptimizerStaticHtmlWordPressPath', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'OptimizerStaticHtmlWordPressBypassCookie', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginRetries', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginConnectTimeout', type: Type::INT_TYPE),
@@ -166,9 +163,6 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'OriginRetryDelay', type: Type::INT_TYPE),
             new AbstractParameter(name: 'DnsOriginPort', type: Type::INT_TYPE),
             new AbstractParameter(name: 'DnsOriginScheme', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'QueryStringVaryParameters', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
             new AbstractParameter(name: 'OriginShieldEnableConcurrencyLimit', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OriginShieldMaxConcurrentRequests', type: Type::INT_TYPE),
             new AbstractParameter(name: 'EnableCookieVary', type: Type::BOOLEAN_TYPE),
@@ -183,8 +177,11 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'LogAnonymizationType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'StorageZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'EdgeScriptId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'MiddlewareScriptId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'EdgeScriptExecutionPhase', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OriginType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'MagicContainersAppId', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'MagicContainersEndpointId', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'LogFormat', type: Type::INT_TYPE),
             new AbstractParameter(name: 'LogForwardingFormat', type: Type::INT_TYPE),
             new AbstractParameter(name: 'ShieldDDosProtectionType', type: Type::INT_TYPE),
@@ -206,12 +203,18 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'PreloadingScreenEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'PreloadingScreenCode', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'PreloadingScreenLogoUrl', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'PreloadingScreenShowOnFirstVisit', type: Type::BOOLEAN_TYPE, required: true),
             new AbstractParameter(name: 'PreloadingScreenTheme', type: Type::INT_TYPE),
             new AbstractParameter(name: 'PreloadingScreenCodeEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'PreloadingScreenDelay', type: Type::INT_TYPE),
             new AbstractParameter(name: 'RoutingFilters', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'StickySessionType', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'StickySessionCookieName', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'StickySessionClientHeaders', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'OptimizerEnableUpscaling', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableWebSockets', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
         ];
     }

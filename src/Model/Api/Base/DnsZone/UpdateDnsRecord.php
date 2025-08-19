@@ -76,6 +76,7 @@ class UpdateDnsRecord implements ModelInterface, BodyModelInterface
                 ]),
             ]),
             new AbstractParameter(name: 'Comment', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'AutoSslIssuance', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'Id', type: Type::INT_TYPE, required: true),
         ];
     }

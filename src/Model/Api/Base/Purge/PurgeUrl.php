@@ -40,7 +40,7 @@ class PurgeUrl implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'url', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'url', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'async', type: Type::BOOLEAN_TYPE),
         ];
     }

@@ -40,7 +40,7 @@ class ResetPassword implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'id', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'id', type: Type::INT_TYPE),
         ];
     }
 }

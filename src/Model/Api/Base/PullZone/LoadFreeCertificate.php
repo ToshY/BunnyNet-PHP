@@ -43,7 +43,7 @@ class LoadFreeCertificate implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'hostname', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'hostname', type: Type::STRING_TYPE),
         ];
     }
 }
