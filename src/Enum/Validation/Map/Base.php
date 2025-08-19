@@ -44,9 +44,9 @@ use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer as PullZoneAddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
@@ -61,9 +61,9 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\GetSafeHopStatistics;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ListPullZones;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\PurgeCache;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
@@ -85,8 +85,8 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
@@ -95,8 +95,8 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
@@ -128,6 +128,75 @@ final class Base
 {
     /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
+        ListPullZones::class => ModelValidationStrategy::STRICT_QUERY,
+        AddPullZone::class => ModelValidationStrategy::STRICT_BODY,
+        GetPullZone::class => ModelValidationStrategy::STRICT_QUERY,
+        UpdatePullZone::class => ModelValidationStrategy::STRICT_BODY,
+        DeletePullZone::class => ModelValidationStrategy::NONE,
+        GetOriginShieldQueueStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
+        AddOrUpdateEdgeRule::class => ModelValidationStrategy::STRICT_BODY,
+        SetEdgeRuleEnabled::class => ModelValidationStrategy::STRICT_BODY,
+        PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
+        CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        AddCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
+        SetForceSsl::class => ModelValidationStrategy::STRICT_BODY,
+        ResetTokenKey::class => ModelValidationStrategy::STRICT_BODY,
+        AddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        AddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        AddBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteEdgeRule::class => ModelValidationStrategy::NONE,
+        RemoveCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
+        ListCountries::class => ModelValidationStrategy::NONE,
+        ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
+        AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
+        GetDnsZone::class => ModelValidationStrategy::NONE,
+        UpdateDnsZone::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteDnsZone::class => ModelValidationStrategy::NONE,
+        ExportDnsRecords::class => ModelValidationStrategy::NONE,
+        CheckDnsZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteDnsRecord::class => ModelValidationStrategy::NONE,
+        ImportDnsRecords::class => ModelValidationStrategy::NONE,
+        AddDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
+        ListRegions::class => ModelValidationStrategy::NONE,
+        ListVideoLibraries::class => ModelValidationStrategy::STRICT_QUERY,
+        AddVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
+        GetVideoLibrary::class => ModelValidationStrategy::NONE,
+        UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
+        GetLanguages::class => ModelValidationStrategy::NONE,
+        ResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
+        ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        AddWatermark::class => ModelValidationStrategy::NONE,
+        DeleteWatermark::class => ModelValidationStrategy::NONE,
+        PurgeUrl::class => ModelValidationStrategy::STRICT_QUERY,
+        ListStorageZones::class => ModelValidationStrategy::STRICT_QUERY,
+        AddStorageZone::class => ModelValidationStrategy::STRICT_BODY,
+        GetStorageZone::class => ModelValidationStrategy::NONE,
+        UpdateStorageZone::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteStorageZone::class => ModelValidationStrategy::STRICT_QUERY,
+        CheckStorageZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        StorageZoneResetPassword::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyPassword::class => ModelValidationStrategy::STRICT_QUERY,
+        GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        ListApiKeys::class => ModelValidationStrategy::STRICT_QUERY,
+        GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
+        DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
+        GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListAbuseCases::class => ModelValidationStrategy::STRICT_QUERY,
         GetDmcaCase::class => ModelValidationStrategy::NONE,
         GetAbuseCase::class => ModelValidationStrategy::NONE,
@@ -136,8 +205,6 @@ final class Base
         CheckAbuseCase::class => ModelValidationStrategy::NONE,
         AuthJwt2fa::class => ModelValidationStrategy::STRICT_BODY,
         RefreshJwt::class => ModelValidationStrategy::NONE,
-        GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
-        ListCountries::class => ModelValidationStrategy::NONE,
         GetBillingDetails::class => ModelValidationStrategy::NONE,
         ConfigureAutoRecharge::class => ModelValidationStrategy::STRICT_BODY,
         CreatePaymentCheckout::class => ModelValidationStrategy::STRICT_BODY,
@@ -149,84 +216,16 @@ final class Base
         GetBillingSummary::class => ModelValidationStrategy::NONE,
         GetBillingSummaryPDF::class => ModelValidationStrategy::NONE,
         ApplyPromoCode::class => ModelValidationStrategy::STRICT_QUERY,
-        ListApiKeys::class => ModelValidationStrategy::STRICT_QUERY,
+        RecheckDnsConfiguration::class => ModelValidationStrategy::NONE,
+        DismissDnsConfigurationNotice::class => ModelValidationStrategy::NONE,
+        ListDrmCertificates::class => ModelValidationStrategy::STRICT_QUERY,
+        PurgeUrlByHeader::class => ModelValidationStrategy::STRICT_QUERY,
         ListTickets::class => ModelValidationStrategy::STRICT_QUERY,
         GetTicketDetails::class => ModelValidationStrategy::NONE,
         CloseTicket::class => ModelValidationStrategy::NONE,
         ReplyTicket::class => ModelValidationStrategy::STRICT_BODY,
         CreateTicket::class => ModelValidationStrategy::STRICT_BODY,
-        ListDrmCertificates::class => ModelValidationStrategy::STRICT_QUERY,
-        ListRegions::class => ModelValidationStrategy::NONE,
-        ListVideoLibraries::class => ModelValidationStrategy::STRICT_QUERY,
-        AddVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
-        GetVideoLibrary::class => ModelValidationStrategy::NONE,
-        UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
-        GetLanguages::class => ModelValidationStrategy::NONE,
-        ResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
-        AddWatermark::class => ModelValidationStrategy::NONE,
-        DeleteWatermark::class => ModelValidationStrategy::NONE,
-        AddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        AddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
-        AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
-        GetDnsZone::class => ModelValidationStrategy::NONE,
-        UpdateDnsZone::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteDnsZone::class => ModelValidationStrategy::NONE,
-        EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
-        DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
-        ExportDnsRecords::class => ModelValidationStrategy::NONE,
-        GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        CheckDnsZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
-        AddDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
-        UpdateDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteDnsRecord::class => ModelValidationStrategy::NONE,
-        RecheckDnsConfiguration::class => ModelValidationStrategy::NONE,
-        DismissDnsConfigurationNotice::class => ModelValidationStrategy::NONE,
-        ImportDnsRecords::class => ModelValidationStrategy::NONE,
-        ListPullZones::class => ModelValidationStrategy::STRICT_QUERY,
-        AddPullZone::class => ModelValidationStrategy::STRICT_BODY,
-        GetPullZone::class => ModelValidationStrategy::STRICT_QUERY,
-        UpdatePullZone::class => ModelValidationStrategy::STRICT_BODY,
-        DeletePullZone::class => ModelValidationStrategy::NONE,
-        DeleteEdgeRule::class => ModelValidationStrategy::NONE,
-        AddOrUpdateEdgeRule::class => ModelValidationStrategy::STRICT_BODY,
-        SetEdgeRuleEnabled::class => ModelValidationStrategy::STRICT_BODY,
-        GetOriginShieldQueueStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
-        PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
-        CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
-        AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveCertificate::class => ModelValidationStrategy::STRICT_BODY,
-        AddCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
-        SetForceSsl::class => ModelValidationStrategy::STRICT_BODY,
-        ResetTokenKey::class => ModelValidationStrategy::NONE,
-        PullZoneAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        PullZoneRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        PullZoneAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        PullZoneRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        AddBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
-        PurgeUrlByHeader::class => ModelValidationStrategy::STRICT_QUERY,
-        PurgeUrl::class => ModelValidationStrategy::STRICT_QUERY,
-        GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        ListStorageZones::class => ModelValidationStrategy::STRICT_QUERY,
-        AddStorageZone::class => ModelValidationStrategy::STRICT_BODY,
-        CheckStorageZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
-        GetStorageZone::class => ModelValidationStrategy::NONE,
-        UpdateStorageZone::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteStorageZone::class => ModelValidationStrategy::NONE,
         GetStorageZoneConnections::class => ModelValidationStrategy::NONE,
-        GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        StorageZoneResetPassword::class => ModelValidationStrategy::NONE,
-        ResetReadOnlyPassword::class => ModelValidationStrategy::STRICT_QUERY,
         GetHomeFeed::class => ModelValidationStrategy::NONE,
         ListNotifications::class => ModelValidationStrategy::NONE,
         GetUserDetails::class => ModelValidationStrategy::NONE,
@@ -246,5 +245,6 @@ final class Base
         EnableTwoFactorAuthentication::class => ModelValidationStrategy::STRICT_BODY,
         VerifyTwoFactorAuthenticationCode::class => ModelValidationStrategy::STRICT_BODY,
         GetGitHubIntegration::class => ModelValidationStrategy::NONE,
+        GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
     ];
 }
