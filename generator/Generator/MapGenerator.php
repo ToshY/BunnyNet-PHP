@@ -38,12 +38,16 @@ class MapGenerator
     /** @var string[] */
     private array $ignoreEndpoints;
 
+    /** @var array<string,array<string,class-string>> */
+    private array $keepUndocumentedEndpoints;
+
     /**
      * @param string $apiSpecPath
      * @param string $outputDir
      * @param string $outputFileName
      * @param string $baseApiDir
      * @param string[] $ignoreEndpoints
+     * @param array<string,array<string,class-string>> $keepUndocumentedEndpoints
      */
     public function __construct(
         string $apiSpecPath,
@@ -51,12 +55,14 @@ class MapGenerator
         string $outputFileName,
         string $baseApiDir,
         array $ignoreEndpoints,
+        array $keepUndocumentedEndpoints = [],
     ) {
         $this->apiSpecPath = $apiSpecPath;
         $this->outputDir = $outputDir;
         $this->outputFileName = $outputFileName;
         $this->baseApiDir = $baseApiDir;
         $this->ignoreEndpoints = $ignoreEndpoints;
+        $this->keepUndocumentedEndpoints = $keepUndocumentedEndpoints;
 
         if (!is_dir($outputDir) && !mkdir($outputDir, 0755, true) && !is_dir($outputDir)) {
             throw new RuntimeException("Failed to create output directory: $outputDir");
@@ -75,7 +81,12 @@ class MapGenerator
         $openApi = Reader::readFromJsonFile($this->apiSpecPath);
 
         $classMap = self::scanExistingModelEndpointClasses($this->baseApiDir);
-        $endpointMapping = self::createEndpointToModelClassMapping($openApi, $classMap, $this->ignoreEndpoints);
+        $endpointMapping = self::createEndpointToModelClassMapping(
+            $openApi,
+            $classMap,
+            $this->ignoreEndpoints,
+            $this->keepUndocumentedEndpoints,
+        );
 
         $code = self::generateMappingCode(
             $endpointMapping,
@@ -137,12 +148,14 @@ class MapGenerator
      * @param SpecObjectInterface|OpenApi $openApi
      * @param array<string,string> $classMap
      * @param string[] $ignoreEndpoints
+     * @param array<string,array<string,class-string>> $keepUndocumentedEndpoints
      * @return array<string,array<string,class-string|null>>
      */
     private static function createEndpointToModelClassMapping(
         SpecObjectInterface|OpenApi $openApi,
         array $classMap,
         array $ignoreEndpoints = [],
+        array $keepUndocumentedEndpoints = [],
     ): array {
         $mapping = [];
         /* @phpstan-ignore-next-line property.notFound */
@@ -159,6 +172,25 @@ class MapGenerator
             }
 
             foreach ($pathItem->getOperations() as $httpMethod => $operation) {
+                if (in_array(
+                    $httpMethod,
+                    ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'],
+                    true,
+                ) === false) {
+                    continue;
+                }
+
+                $key = "$normPath|$httpMethod";
+                $className = $classMap[$key] ?? null;
+                $mapping[$openApiPath][$httpMethod] = $className;
+            }
+        }
+
+        // Append undocumented OpenAPI endpoints that are still usable
+        foreach ($keepUndocumentedEndpoints as $openApiPath => $pathItem) {
+            $normPath = OpenApiModelUtils::normalizePath($openApiPath);
+
+            foreach ($pathItem as $httpMethod => $operation) {
                 if (in_array(
                     $httpMethod,
                     ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'],

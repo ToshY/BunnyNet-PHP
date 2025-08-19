@@ -8,6 +8,9 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
+/**
+ * @note no longer in OpenAPI spec
+ */
 class AcceptDpa implements ModelInterface
 {
     public function getMethod(): Method

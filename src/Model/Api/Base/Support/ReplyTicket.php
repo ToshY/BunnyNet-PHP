@@ -13,6 +13,9 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
+/**
+ * @note no longer in OpenAPI spec
+ */
 class ReplyTicket implements ModelInterface, BodyModelInterface
 {
     /**

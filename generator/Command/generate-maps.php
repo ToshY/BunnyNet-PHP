@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ToshY\BunnyNet\Generator\Enum\EndpointEdgeCases;
 use ToshY\BunnyNet\Generator\Generator\MapGenerator;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 
@@ -39,18 +40,9 @@ foreach ($manifests as $file) {
         ),
     };
 
-    $ignoreEndpoints = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value => [
-            /* Changed to EdgeScripting */
-            '/compute/script',
-            '/compute/script/{id}',
-            '/compute/script/{id}/code',
-            '/compute/script/{id}/releases',
-            '/compute/script/{id}/publish',
-            '/compute/script/{id}/publish/{uuid}',
-            '/compute/script/{id}/variables/add',
-            '/compute/script/{id}/variables/{variableId}',
-        ],
+    // Endpoints that are still available to use but no longer in the OpenAPI specs
+    $keepUndocumentedEndpoints = match ($key) {
+        \ToshY\BunnyNet\Enum\Generator::BASE->value => EndpointEdgeCases::BASE_API_UNDOCUMENTED_IN_OPEN_API_SPECS,
         default => [],
     };
 
@@ -59,7 +51,8 @@ foreach ($manifests as $file) {
         'modelDirectory' => $modelInputDirectory . '/' . $key,
         'mappingClassName' => $key,
         'outputDirectory' => $outputDirectory,
-        'ignoreEndpoints' => $ignoreEndpoints,
+        'ignoreEndpoints' => [],
+        'keepUndocumentedEndpoints' => $keepUndocumentedEndpoints,
     ];
 }
 
@@ -70,6 +63,7 @@ foreach ($data as $namespace => $config) {
         $config['mappingClassName'],
         $config['modelDirectory'],
         $config['ignoreEndpoints'],
+        $config['keepUndocumentedEndpoints'],
     );
     $generator->generate();
 
