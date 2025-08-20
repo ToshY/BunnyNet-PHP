@@ -40,6 +40,21 @@ foreach ($manifests as $file) {
         ),
     };
 
+    $ignoreEndpoints = match ($key) {
+        \ToshY\BunnyNet\Enum\Generator::BASE->value => [
+            /* Changed to EdgeScripting */
+            '/compute/script',
+            '/compute/script/{id}',
+            '/compute/script/{id}/code',
+            '/compute/script/{id}/releases',
+            '/compute/script/{id}/publish',
+            '/compute/script/{id}/publish/{uuid}',
+            '/compute/script/{id}/variables/add',
+            '/compute/script/{id}/variables/{variableId}',
+        ],
+        default => [],
+    };
+
     // Endpoints that are still available to use but no longer in the OpenAPI specs
     $keepUndocumentedEndpoints = match ($key) {
         \ToshY\BunnyNet\Enum\Generator::BASE->value => EndpointEdgeCases::BASE_API_UNDOCUMENTED_IN_OPEN_API_SPECS,
@@ -51,7 +66,7 @@ foreach ($manifests as $file) {
         'modelDirectory' => $modelInputDirectory . '/' . $key,
         'mappingClassName' => $key,
         'outputDirectory' => $outputDirectory,
-        'ignoreEndpoints' => [],
+        'ignoreEndpoints' => $ignoreEndpoints,
         'keepUndocumentedEndpoints' => $keepUndocumentedEndpoints,
     ];
 }
