@@ -137,6 +137,10 @@ class ModelGenerator
                     );
 
                     [$newNamespaceDirectory, $className] = $this->getNamespaceFromPath($path, $httpMethod);
+                    if (empty($className) === true) {
+                        continue;
+                    }
+
                     $newNamespace = $this->baseNamespace . '\\' . $newNamespaceDirectory;
                     $endpointClass = $newNamespace . '\\' . $className;
                 } else {
@@ -298,7 +302,7 @@ class ModelGenerator
 
             // Replacements for model validation strategies; should normally not be needed.
             if (empty($this->validationReplacements[$fqcn]) === false) {
-                $validationStrategyInfo['modelValidationStrategy'] = $this->validationReplacements[$subClassName];
+                $validationStrategyInfo['modelValidationStrategy'] = $this->validationReplacements[$fqcn];
             }
 
             $alias = null;
@@ -1133,7 +1137,7 @@ class ModelGenerator
             if (empty($specData['summary']) === false) {
                 $class = ClassUtils::toPascalCase($specData['summary']);
             } else {
-                // This likely won't happen
+                // This likely won't happen... unless for deprecated/no longer supported endpoints like /compute/script
                 $this->logger::print("* WARNING: Path '$path' does not have a summary to use for class name\n");
             }
         }
