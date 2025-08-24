@@ -27,7 +27,7 @@ jobs:
         run: docker run --rm -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.6 build
 
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./site
 
