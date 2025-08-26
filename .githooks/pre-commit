@@ -1,5 +1,8 @@
 #!/bin/sh
 
+export UID=$(id -u)
+export GID=$(id -g)
+
 DOCKER_COMPOSE_RUN="docker compose run -T --rm --no-deps php"
 
 run_command () {
