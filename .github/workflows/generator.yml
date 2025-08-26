@@ -49,6 +49,11 @@ jobs:
             Checklist:
             - [x] Add/Update API models
             - [ ] Add/Update documentation examples (when needed)
+
+            See [ToshY/bunnynet-openapi-specification][2] for a full changelog of the [OpenAPI specs][1].
+
+            [1]: https://toshy.github.io/bunnynet-openapi-specification/manifest.json
+            [2]: https://github.com/ToshY/bunnynet-openapi-specification/releases
           branch: generator/update-api-models
           maintainer-can-modify: true
           draft: always-true
