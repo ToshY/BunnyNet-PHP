@@ -20,9 +20,8 @@
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
 edge storage, video streaming, image optimizers and much more!
 
-<small>
-<b>Note</b>: This is a non-official library for the <a href="https://docs.bunny.net/docs">bunny.net API</a>.
-</small>
+> [!IMPORTANT]  
+> This is a non-official PHP library for the [Bunny.net API](https://docs.bunny.net/docs).
 
 ## 🧰 Install
 
@@ -55,7 +54,8 @@ task composer:install
 task git:hooks
 ```
 
-> Note: Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 
+> [!NOTE]  
+> Checks for `phpcs`, `phpstan`, `phpmd` and `phpunit` are executed when committing. 
 > You can also run these checks with `task contribute`.
 
 ### 🤖 Automated PRs
