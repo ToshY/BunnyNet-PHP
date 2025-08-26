@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  phpcs:
+  phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
     strategy:
