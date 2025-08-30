@@ -44,9 +44,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetDmcaCase(
-        path: [
-            'id' => 1,
-        ],
+        id: 1,
     )
 );
 ```
@@ -60,9 +58,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetAbuseCase(
-        path: [
-            'id' => 1,
-        ],
+        id: 1,
     )
 );
 ```
@@ -76,9 +72,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveDmcaCase(
-        path: [
-            'id' => 1,
-        ],
+        id: 1,
     )
 );
 ```
@@ -88,9 +82,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveAbuseCase(
-        path: [
-            'id' => 1,
-        ],
+        id: 1,
     )
 );
 ```
@@ -100,9 +92,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\AbuseCase\CheckAbuseCase(
-        path: [
-            'id' => 1,
-        ],
+        id: 1,
     )
 );
 ```
@@ -260,9 +250,7 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF(
-        path: [
-            'billingRecordId' => 1,
-        ],
+        billingRecordId: 1,
     )
 );
 ```
