@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Attributes\QueryProperty;
+use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
@@ -34,7 +35,9 @@ class ResetPassword implements ModelInterface, QueryModelInterface
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            Header::ACCEPT_JSON,
+        ];
     }
 
     public function getQuery(): array

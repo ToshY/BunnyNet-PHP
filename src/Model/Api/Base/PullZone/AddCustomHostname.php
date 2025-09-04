@@ -41,6 +41,7 @@ class AddCustomHostname implements ModelInterface, BodyModelInterface
     {
         return [
             Header::CONTENT_TYPE_JSON,
+            Header::ACCEPT_JSON,
         ];
     }
 
