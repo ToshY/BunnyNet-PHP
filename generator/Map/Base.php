@@ -97,7 +97,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\Statistics;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -306,7 +306,7 @@ final class Base
             'get' => GetDrmStatistics::class,
         ],
         '/videolibrary/{id}/transcribing/statistics' => [
-            'get' => Statistics::class,
+            'get' => GetTranscribingStatistics::class,
         ],
         '/statistics' => [
             'get' => GetStatistics::class,

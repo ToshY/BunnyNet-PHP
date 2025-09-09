@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
 use ToshY\BunnyNet\Model\QueryModelInterface;
 
-class Statistics implements ModelInterface, QueryModelInterface
+class GetTranscribingStatistics implements ModelInterface, QueryModelInterface
 {
     /**
      * @param int $id

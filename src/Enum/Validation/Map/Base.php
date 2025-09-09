@@ -99,7 +99,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\Statistics;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -197,7 +197,7 @@ final class Base
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListApiKeys::class => ModelValidationStrategy::STRICT_QUERY,
         GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        Statistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetTranscribingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         ListAbuseCases::class => ModelValidationStrategy::STRICT_QUERY,
         GetDmcaCase::class => ModelValidationStrategy::NONE,
