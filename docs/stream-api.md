@@ -38,7 +38,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - If the query parameter `includeThumbnails` is set to `true`, the response item(s) will include a non-empty array key `previewImageUrls` containing the URLs for the corresponding image thumbnails.
 
@@ -84,7 +84,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - If the query parameter `includeThumbnails` is set to `true`, the response item(s) will include a non-empty array key `previewImageUrls` containing the URLs for the corresponding image thumbnails.
 
@@ -187,7 +187,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `title` does not need to match the video filename and/or extension you're intending to upload.
     - A `collectionId` is not required.
@@ -236,7 +236,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning
 
     - This endpoint currently returns a `500` status code with the following response: 
     ```
@@ -313,7 +313,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The argument `outputCodecId` has the following possible values:
         - `0` = x264
@@ -321,7 +321,7 @@ $bunnyHttpClient->request(
         - `2` = hevc (premium)
         - `3` = av1 (premium)
 
-!!! warning
+??? warning
 
     This endpoint will return a `400` status code if premium encoding is not enabled (even if the `outputCodecId` value `0` is given).
 
@@ -339,7 +339,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - This method allows repackaging of videos for libraries that have [Enterprise DRM](https://docs.bunny.net/docs/stream-drm#mediacage-enterprise-drm) enabled.
 
@@ -397,7 +397,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `thumbnailTime` denotes the video time in milliseconds to extract the main video thumbnail.
 
@@ -418,7 +418,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `sourceLanguage` / `srclang` should be an [**ISO 639-1** / **ISO 639-3** language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
     - The `captionsFile` requires the file contents to be sent as a base64 encoded string.
@@ -435,16 +435,16 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `sourceLanguage` should be an [**ISO 639-1** / **ISO 639-3** language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
 
-!!! warning
+??? warning
 
     - If a caption was created with a specific ISO standard for the `sourceLanguage`, then you have to delete it with the same standard. Example: a caption created with `sourceLanguage` **ISO 639-1** can only be deleted by sending a request with `sourceLanguage` **ISO 639-1**.
     - This endpoint will always return a `200` status code, even if the subtitle with specificied `sourceLanguage` does not exist.
 
-!!! tip
+??? tip
 
     - If you (regularly) update captions make sure to purge the captions directory associated with the video. If it's not purged you might notice
     outdated subtitles displayed on the video. You can get the URL for the captions directory by using the [Get Video Play Data](#get-video-play-data) endpoint.
@@ -473,7 +473,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `targetLanguages` / `sourceLanguage` require a [two-letter (set 1) language abbreviation](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for transcribing the video.
     - Once a video has transcribed you need to set `force` to `true` in order to force a new transcription to be added.
@@ -490,7 +490,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning
 
     - This endpoint returns a `500` status code if the video has not been fully processed yet.
 
@@ -512,15 +512,15 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `resolutionsToDelete` consists of comma separated resolutions.
 
-!!! tip
+??? tip
 
     Use the [Video Resolutions Info](#video-resolutions-info) endpoint to retrieve the resolutions for the video.
 
-!!! warning
+??? warning
 
     This endpoint will return a `400` status code if all available resolutions for the video are passed to `resolutionsToDelete`, as there must be at least one resolution available after cleanup.
 
@@ -540,7 +540,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The `url` is a required query parameter.
 

@@ -70,7 +70,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `type` has the following possible values:
         - `0` = DNS (DNS scripts)
@@ -109,7 +109,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `ScriptType` has the following possible values:
         - `1` = Standalone (Standalone scripts are ideal for a wide range of applications, such as building RESTful APIs, delivering UI applications, and processing data at the edge.)
@@ -118,7 +118,7 @@ $bunnyHttpClient->request(
     - The key `Id` (under `RepositorySettings`) and `DeployConfiguration` are not required when creating a new GitHub repository.
     - The key `IntegrationId` is required when creating and deploying through GitHub. It can be retrieved from the [Get GitHub Integration](base-api.md#get-github-integration) endpoint.
 
-!!! info
+??? info
 
     The Edge Scripting API can also be used for creating DNS scripts.
    
@@ -133,7 +133,7 @@ $bunnyHttpClient->request(
     );
     ```
 
-!!! example
+??? example
 
     Examples for `DeployConfiguration` payloads.
 
@@ -159,7 +159,7 @@ $bunnyHttpClient->request(
     ],
     ```
 
-!!! question
+??? question
 
     If you want to create a workflow file yourself, check out the [BunnyWay Github action deploy script](https://github.com/BunnyWay/actions/tree/main/deploy-script).
 
@@ -203,7 +203,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `ScriptType` has the following possible values:
         - `0` = DNS (DNS scripts)
@@ -225,7 +225,7 @@ $bunnyHttpClient->request(
 
 ### Variable
 
-!!! info
+??? info
 
     There is no "List Variables" endpoint to retrieve all variables for a specific script. Instead, you can retrieve 
     this information from the [Get Edge Script](#get-edge-script) endpoint.
@@ -415,7 +415,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `uuid` denotes an 8 character alphanumeric string (and **not** an ["UUID"](https://datatracker.ietf.org/doc/html/rfc9562)), 
     which can be retrieved from the [Get Releases](#get-releases) or [Get Active Release](#get-active-release) endpoints. It can also

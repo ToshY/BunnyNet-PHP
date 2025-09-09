@@ -39,7 +39,7 @@ $bunnyHttpClient->request(
 )
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -53,7 +53,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -67,7 +67,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -81,7 +81,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -95,7 +95,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -109,7 +109,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -127,7 +127,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -139,7 +139,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -178,7 +178,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -197,12 +197,12 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `RechargeTreshold` (misspelled) has a value range of 2-2000.
     - The key `PaymentAmount` has a value range of 10-2000.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -221,11 +221,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `PaymentAmount` has a value range of 10-2000.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -237,7 +237,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -249,7 +249,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -261,7 +261,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -273,7 +273,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -289,7 +289,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -301,7 +301,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -315,7 +315,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -331,7 +331,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -350,7 +350,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -364,7 +364,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -378,7 +378,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -402,11 +402,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Body` requires its contents to be base64 encoded.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -435,12 +435,12 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The keys `LinkedPullZone` and `LinkedStorageZone` are not required unlike stated in the API specifications.
     - The key `Body` requires its contents to be base64 encoded.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -459,7 +459,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -473,11 +473,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-!!! info
+??? info
 
     This endpoint returns the following response:
     ```json
@@ -518,7 +518,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -544,7 +544,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `ReplicationRegions` has the following possible values:
         - `UK` = London (United Kingdom)
@@ -637,7 +637,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnabledResolutions` has the following possible values (comma separated):
         - `240p`
@@ -766,7 +766,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` allows multiple values through comma separated values.
 
@@ -783,7 +783,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -800,7 +800,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -817,7 +817,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -837,7 +837,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` can be used to filter on `Id` or `Domain`. A search value with an `Id` value will perform an exact match,
     whereas a search value with a `Domain` will perform a wildcard search: `bunny`, `nny` and `.net` will all match the DNS zone for `bunny.net`.
@@ -884,7 +884,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `LogAnonymizationType` has the following possible values:
         - `0` = `OneDigit`
@@ -998,7 +998,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnviromentalVariables` is misspelled in the API specifications.
     - The key `Type` has the following possible values:
@@ -1066,7 +1066,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnviromentalVariables` is misspelled in the API specifications.
     - The key `Type` has the following possible values:
@@ -1116,7 +1116,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -1130,7 +1130,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -1173,7 +1173,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -1331,7 +1331,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Type` has the following possible values:
         - `0` = Premium
@@ -1542,7 +1542,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Type` has the following possible values:
         - `0` = `Premium`
@@ -1636,7 +1636,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `ActionType` has the following possible values:
         - `0` = `ForceSSL`
@@ -1709,7 +1709,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     -  The key `Id` in the body denotes the pull zone ID (the same as the first argument) and is (for some reason) a required parameter.
 
@@ -1735,11 +1735,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - This endpoint corresponds to toggling the **Enable Token Authentication** switch in the **Token Authentication > Security** section of your pull zone.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
@@ -1754,11 +1754,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - This endpoint corresponds to toggling the **Token IP Validation** switch in the **Token Authentication > Security** section of your pull zone.
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
@@ -1822,7 +1822,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
@@ -1878,7 +1878,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The keys `Certificate` and `CertificateKey` require the file contents to be sent as base64 encoded strings.
 
@@ -1958,7 +1958,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` allows multiple values through comma separated values.
 
@@ -1975,7 +1975,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -1992,7 +1992,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -2065,7 +2065,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2085,7 +2085,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2132,7 +2132,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -2152,7 +2152,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
@@ -2226,7 +2226,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
@@ -2285,7 +2285,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2321,7 +2321,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2333,7 +2333,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2362,7 +2362,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2374,7 +2374,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2386,7 +2386,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2398,7 +2398,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2415,7 +2415,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2427,7 +2427,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2439,7 +2439,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2451,7 +2451,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2463,7 +2463,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2475,7 +2475,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2487,7 +2487,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2499,7 +2499,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2511,7 +2511,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2523,7 +2523,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2539,7 +2539,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2557,7 +2557,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
@@ -2575,7 +2575,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning "Undocumented endpoint"
+??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 

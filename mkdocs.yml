@@ -37,6 +37,7 @@ markdown_extensions:
   - tables:
   - toc:
   - admonition:
+  - pymdownx.details:
   - pymdownx.extra:
   - pymdownx.highlight:
       use_pygments: false

@@ -38,7 +38,7 @@ BunnyImageProcessor::generate(
 );
 ```
 
-!!! note
+???+ note
 
     - The `quality` argument determines the compression level of the resulting image with 0 being the lowest level of
     compression and 100 being the highest. Higher compression means smaller files, but might visually degrade the image
