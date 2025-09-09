@@ -26,7 +26,7 @@ $bunnyHttpClient = new BunnyHttpClient(
 
 ### Abuse Case
 
-#### [List Abuse Cases](https://docs.bunny.net/reference/abusecasepublic_index)
+#### List Abuse Cases
 
 ```php
 $bunnyHttpClient->request(
@@ -43,7 +43,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get DMCA Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase)
+#### Get DMCA Case
 
 ```php
 $bunnyHttpClient->request(
@@ -57,7 +57,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Abuse Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase2)
+#### Get Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -71,7 +71,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Resolve DMCA Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase)
+#### Resolve DMCA Case
 
 ```php
 $bunnyHttpClient->request(
@@ -85,7 +85,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Resolve Abuse Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase2)
+#### Resolve Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -99,7 +99,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Check Abuse Case](https://docs.bunny.net/reference/abusecasepublic_checkabusecase)
+#### Check Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -115,7 +115,7 @@ $bunnyHttpClient->request(
 
 ### Auth
 
-#### [Auth JWT 2FA](https://docs.bunny.net/reference/authpublic_authjwt2fa)
+#### Auth JWT 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -131,7 +131,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Refresh JWT](https://docs.bunny.net/reference/authpublic_refreshjwt)
+#### Refresh JWT
 
 ```php
 $bunnyHttpClient->request(
@@ -170,7 +170,7 @@ $bunnyHttpClient->request(
 
 ### Billing
 
-#### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
+#### Get Billing Details
 
 ```php
 $bunnyHttpClient->request(
@@ -182,7 +182,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Configure Auto Recharge](https://docs.bunny.net/reference/billingpublic_configureautorecharge)
+#### Configure Auto Recharge
 
 ```php
 $bunnyHttpClient->request(
@@ -206,7 +206,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Create Payment Checkout](https://docs.bunny.net/reference/billingpublic_checkout)
+#### Create Payment Checkout
 
 ```php
 $bunnyHttpClient->request(
@@ -229,7 +229,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Prepare Payment Authorization](https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization)
+#### Prepare Payment Authorization
 
 ```php
 $bunnyHttpClient->request(
@@ -241,7 +241,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Affiliate Details](https://docs.bunny.net/reference/billingpublic_affiliatedetails)
+#### Get Affiliate Details
 
 ```php
 $bunnyHttpClient->request(
@@ -253,7 +253,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Claim Affiliate Credits](https://docs.bunny.net/reference/billingpublic_affiliateclaim)
+#### Claim Affiliate Credits
 
 ```php
 $bunnyHttpClient->request(
@@ -265,7 +265,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get The Coinify Bitcoin exchange rate](https://docs.bunny.net/reference/billingpublic_coinifyexchangerate)
+#### Get The Coinify Bitcoin exchange rate
 
 ```php
 $bunnyHttpClient->request(
@@ -277,7 +277,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Create Coinify payment](https://docs.bunny.net/reference/billingpublic_createcoinifypayment)
+#### Create Coinify payment
 
 ```php
 $bunnyHttpClient->request(
@@ -293,7 +293,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Billing Summary](https://docs.bunny.net/reference/billingpublic_summary)
+#### Get Billing Summary
 
 ```php
 $bunnyHttpClient->request(
@@ -305,7 +305,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Billing Summary PDF](https://docs.bunny.net/reference/billingpublic_summarypdf)
+#### Get Billing Summary PDF
 
 ```php
 $bunnyHttpClient->request(
@@ -319,7 +319,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Apply Promo Code](https://docs.bunny.net/reference/billingpublic_applycode)
+#### Apply Promo Code
 
 ```php
 $bunnyHttpClient->request(
@@ -337,7 +337,7 @@ $bunnyHttpClient->request(
 
 ### Support
 
-#### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
+#### List Tickets
 
 ```php
 $bunnyHttpClient->request(
@@ -354,7 +354,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Ticket Details](https://docs.bunny.net/reference/supportpublic_index2)
+#### Get Ticket Details
 
 ```php
 $bunnyHttpClient->request(
@@ -368,7 +368,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Close Ticket](https://docs.bunny.net/reference/supportpublic_close)
+#### Close Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -382,7 +382,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Reply Ticket](https://docs.bunny.net/reference/supportpublic_reply)
+#### Reply Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -410,7 +410,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Create Ticket](https://docs.bunny.net/reference/supportpublic_createticket)
+#### Create Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -446,7 +446,7 @@ $bunnyHttpClient->request(
 
 ### DRM Certificate
 
-#### [List DRM Certificates](https://docs.bunny.net/reference/drmcertificatepublic_index)
+#### List DRM Certificates
 
 ```php
 $bunnyHttpClient->request(
@@ -787,7 +787,7 @@ $bunnyHttpClient->request(
 
     - The key `Hostname` does *not* allow multiple values.
 
-#### [Add Blocked Referer](ttps://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
+#### [Add Blocked Referer](https://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
 
 ```php
 $bunnyHttpClient->request(
@@ -893,6 +893,7 @@ $bunnyHttpClient->request(
         - `0` = `Ecdsa`
         - `1` = `Rsa`
     - In order to disable `LoggingIPAnonymizationEnabled` you first need to agree to the DPA agreement (GDPR).
+    - The API accepts both the integer as well as enum value for the `LogAnonymizationType` and `CertificateKeyType`.
 
 #### [Delete DNS Zone](https://docs.bunny.net/reference/dnszonepublic_delete)
 
@@ -1105,7 +1106,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Recheck DNS Configuration](https://docs.bunny.net/reference/dnszonepublic_recheckdns)
+#### Recheck DNS Configuration
 
 ```php
 $bunnyHttpClient->request(
@@ -1119,7 +1120,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Dismiss DNS Configuration Notice](https://docs.bunny.net/reference/dnszonepublic_dismissnameservercheck)
+#### Dismiss DNS Configuration Notice
 
 ```php
 $bunnyHttpClient->request(
@@ -2049,7 +2050,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
+#### Purge URL (by header)
 
 ```php
 $bunnyHttpClient->request(
@@ -2070,7 +2071,7 @@ $bunnyHttpClient->request(
 
 ### Search
 
-#### [Global Search](https://docs.bunny.net/reference/searchpublic_globalsearch)
+#### Global Search
 
 ```php
 $bunnyHttpClient->request(
@@ -2274,7 +2275,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Storage Zone Connections](https://docs.bunny.net/reference/storagezonepublic_connections)
+#### Get Storage Zone Connections
 
 ```php
 $bunnyHttpClient->request(
@@ -2312,7 +2313,7 @@ $bunnyHttpClient->request(
 
 ### User
 
-#### [Get Home Feed](ttps://docs.bunny.net/reference/userpublic_homefeed)
+#### Get Home Feed
 
 ```php
 $bunnyHttpClient->request(
@@ -2324,7 +2325,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get User Details](https://docs.bunny.net/reference/userpublic_index)
+#### Get User Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2336,7 +2337,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Update User Details](https://docs.bunny.net/reference/userpublic_updateuser)
+#### Update User Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2365,7 +2366,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Resend Email Confirmation](https://docs.bunny.net/reference/userpublic_resendemailconfirmation)
+#### Resend Email Confirmation
 
 ```php
 $bunnyHttpClient->request(
@@ -2377,7 +2378,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Reset API Key](https://docs.bunny.net/reference/userpublic_resetapikey)
+#### Reset API Key
 
 ```php
 $bunnyHttpClient->request(
@@ -2389,7 +2390,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [List Close Account Reasons](https://docs.bunny.net/reference/userpublic_listcloseaccountreasons)
+#### List Close Account Reasons
 
 ```php
 $bunnyHttpClient->request(
@@ -2401,7 +2402,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Close Account](https://docs.bunny.net/reference/userpublic_closeaccount)
+#### Close Account
 
 ```php
 $bunnyHttpClient->request(
@@ -2418,7 +2419,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get DPA Details](https://docs.bunny.net/reference/userpublic_dpa)
+#### Get DPA Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2430,7 +2431,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Accept DPA](https://docs.bunny.net/reference/userpublic_dpaaccept)
+#### Accept DPA
 
 ```php
 $bunnyHttpClient->request(
@@ -2442,7 +2443,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get DPA Details (HTML)](https://docs.bunny.net/reference/userpublic_dpapdfhhtml)
+#### Get DPA Details (HTML)
 
 ```php
 $bunnyHttpClient->request(
@@ -2454,7 +2455,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [List Notifications](https://docs.bunny.net/reference/userpublic_notificationslist)
+#### List Notifications
 
 ```php
 $bunnyHttpClient->request(
@@ -2466,7 +2467,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Set Notifications Opened](https://docs.bunny.net/reference/userpublic_setnotificationsopened)
+#### Set Notifications Opened
 
 ```php
 $bunnyHttpClient->request(
@@ -2478,7 +2479,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Marketing Details](https://docs.bunny.net/reference/userpublic_marketingdetails)
+#### Get Marketing Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2486,7 +2487,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get What's New Items](https://docs.bunny.net/reference/userpublic_whatsnew)
+!!! warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get What's New Items
 
 ```php
 $bunnyHttpClient->request(
@@ -2510,7 +2515,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Generate 2FA Verification](https://docs.bunny.net/reference/userpublic_twofactorgenerateverification)
+#### Generate 2FA Verification
 
 ```php
 $bunnyHttpClient->request(
@@ -2522,7 +2527,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Disable 2FA](https://docs.bunny.net/reference/userpublic_twofactordisable)
+#### Disable 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -2538,7 +2543,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Enable 2FA](https://docs.bunny.net/reference/userpublic_twofactorenable)
+#### Enable 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -2556,7 +2561,7 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Verify 2FA Code](https://docs.bunny.net/reference/userpublic_twofactorverify)
+#### Verify 2FA Code
 
 ```php
 $bunnyHttpClient->request(

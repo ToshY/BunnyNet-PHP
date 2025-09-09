@@ -44,6 +44,7 @@ use ToshY\BunnyNet\Model\Api\Base\User\GenerateTwoFactorAuthenticationVerificati
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
 use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
@@ -180,6 +181,9 @@ final class EndpointEdgeCases
         '/user/dpa/pdfhtml' => [
             'get' => GetDpaDetailsHtml::class,
         ],
+        '/user/mkd' => [
+            'get' => GetMarketingDetails::class,
+        ],
         '/user/setNotificationsOpened' => [
             'post' => SetNotificationsOpened::class,
         ],
@@ -253,6 +257,7 @@ final class EndpointEdgeCases
         VerifyTwoFactorAuthenticationCode::class => ModelValidationStrategy::STRICT_BODY,
         GetGitHubIntegration::class => ModelValidationStrategy::NONE,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
+        GetMarketingDetails::class => ModelValidationStrategy::NONE,
     ];
 
     public const EDGE_STORAGE_VALIDATION_REPLACEMENTS = [
