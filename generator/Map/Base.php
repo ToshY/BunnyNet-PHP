@@ -91,13 +91,13 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -112,6 +112,7 @@ use ToshY\BunnyNet\Model\Api\Base\User\GenerateTwoFactorAuthenticationVerificati
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
 use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
@@ -428,6 +429,9 @@ final class Base
         ],
         '/user/dpa/pdfhtml' => [
             'get' => GetDpaDetailsHtml::class,
+        ],
+        '/user/mkd' => [
+            'get' => GetMarketingDetails::class,
         ],
         '/user/setNotificationsOpened' => [
             'post' => SetNotificationsOpened::class,

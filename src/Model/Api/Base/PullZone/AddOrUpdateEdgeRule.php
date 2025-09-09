@@ -40,8 +40,8 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
     public function getHeaders(): array
     {
         return [
-            Header::CONTENT_TYPE_JSON,
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON,
         ];
     }
 
