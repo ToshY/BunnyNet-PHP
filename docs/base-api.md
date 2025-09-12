@@ -619,7 +619,7 @@ $bunnyHttpClient->request(
             'GoogleWidevineDrm' => [
                 'Enabled' => false,
                 'SdOnlyForL3' => false,
-                'MinClientSecurityLevel' => 1,
+                'MinClientSecurityLevel' => 'None',
             ],
             'EnableCaptionsInPlaylist' => true,
             'RememberPlayerPosition' => true,
@@ -630,8 +630,8 @@ $bunnyHttpClient->request(
             'OutputCodecs' => 'x264,vp9,hevc,av1',
             'PlayerVersion' => 1,
             'RemoveMetadataFromFallbackVideos' => false,
-            'DrmVersion' => '1.0',
-            'PlaybackSpeeds' => '0.25,0.5,0.75,1,1.25,1.5,1.75,2',
+            'DrmVersion' => 'Basic',
+            'PlaybackSpeeds' => '0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0,2.5,3,3.5,4',
         ],
     )
 );
@@ -659,6 +659,15 @@ $bunnyHttpClient->request(
         - `pip`
         - `airplay`
         - `fullscreen`
+    - The key `MinClientSecurityLevel` has the following possible values:
+        - `None`
+        - `L1`
+        - `L2`
+        - `L3`
+    - The key `DrmVersion` has the following possible values:
+        - `Basic`
+        - `Enterprise`
+        - `BasicV2`
     - To get a full list of possible value options for key `TranscribingCaptionLanguages`, see the [Get Languages](#get-languages) endpoint.
     - The key `EncodingTier` has the following possible values:
         - `0` = `Free`
@@ -688,6 +697,11 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? warning "404 Not Found"
+    
+    This endpoint currently returns a 404 response. A support ticket has been created to address this issue.
+
 
 #### [Get Video Library DRM Statistics](https://docs.bunny.net/reference/getdrmstatisticsendpoint_statistics)
 
@@ -1220,7 +1234,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
-            'PermaCacheType' => '',
+            'PermaCacheType' => 'Automatic',
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1235,7 +1249,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 0,
+            'LogForwardingProtocol' => 'UDP',
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1293,17 +1307,17 @@ $bunnyHttpClient->request(
             'OriginShieldMaxQueuedRequests' => 5000,
             'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 0,
+            'LogAnonymizationType' => 'OneDigit',
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
             'MiddlewareScriptId' => 0,
-            'EdgeScriptExecutionPhase' => '',
-            'OriginType' => 0,
+            'EdgeScriptExecutionPhase' => 'Cache',
+            'OriginType' => 'OriginUrl',
             'MagicContainersAppId' => '',
             'MagicContainersEndpointId' => '',
-            'LogFormat' => 0,
-            'LogForwardingFormat' => 0,
-            'ShieldDDosProtectionType' => 1,
+            'LogFormat' => 'Plain',
+            'LogForwardingFormat' => 'Plain',
+            'ShieldDDosProtectionType' => 'DetectOnly',
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1316,11 +1330,11 @@ $bunnyHttpClient->request(
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
             'PreloadingScreenShowOnFirstVisit' => true,
-            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenTheme' => 'Dark',
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
-            'StickySessionType' => '',
+            'StickySessionType' => 'Off',
             'StickySessionCookieName' => '',
             'StickySessionClientHeaders' => '',
             'EnableWebSockets' => false,
@@ -1337,43 +1351,47 @@ $bunnyHttpClient->request(
         - `0` = Premium
         - `1` = Volume
     - The key `OriginType` has the following possible values:
-        - `0` = OriginUrl
-        - `1` = DnsAccelerate
-        - `2` = StorageZone
-        - `3` = LoadBalancer
-        - `4` = EdgeScript
-        - `5` = MagicContainers
-        - `6` = PushZone
+        - `0` = `OriginUrl`
+        - `1` = `DnsAccelerate`
+        - `2` = `StorageZone`
+        - `3` = `LoadBalancer`
+        - `4` = `EdgeScript`
+        - `5` = `MagicContainers`
+        - `6` = `PushZone`
     - The key `LogFormat` has the following possible values:
         - `0` = `Plain`
         - `1` = `JSON`
     - The key `LogForwardingFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
-    - The key `ShieldDDosProtectionType` has the following possible values:
-        - `0` = DetectOnly
-        - `1` = ActiveStandard
-        - `2` = ActiveAggressive
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogAnonymizationType` has the following possible values:
-        - `0` = Remove one octet
-        - `1` = Drop IP
+        - `0` = `OneDigit`
+        - `1` = `Drop`
     - The key `LogForwardingProtocol` has the following possible values:
         - `0` = `UDP`
         - `1` = `TCP`
         - `2` = `TCPEncrypted`
         - `3` = `DataDog`
+    - The key `ShieldDDosProtectionType` has the following possible values:
+        - `0` = `DetectOnly`
+        - `1` = `ActiveStandard`
+        - `2` = `ActiveAggresive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
         - `0` = `BottomLeft`
         - `1` = `BottomRight`
         - `2` = `TopLeft`
         - `4` = `Center`
         - `5` = `CenterStretch`
+    - The key `PreloadingScreenTheme` has the following possible values:
+        - `0` = `Light`
+        - `1` = `Dark`
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `On`
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-    - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
-      It is advised **not** to update these values until the feature is implemented, therefore these options
-      are removed from the example above.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
@@ -1432,7 +1450,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
-            'PermaCacheType' => '',
+            'PermaCacheType' => 'Automatic',
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1447,7 +1465,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 0,
+            'LogForwardingProtocol' => 'UDP',
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1504,17 +1522,17 @@ $bunnyHttpClient->request(
             'OriginShieldMaxQueuedRequests' => 5000,
             'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 0,
+            'LogAnonymizationType' => 'OneDigit',
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
             'MiddlewareScriptId' => 0,
-            'EdgeScriptExecutionPhase' => '',
-            'OriginType' => 0,
+            'EdgeScriptExecutionPhase' => 'Cache',
+            'OriginType' => 'OriginUrl',
             'MagicContainersAppId' => '',
             'MagicContainersEndpointId' => '',
-            'LogFormat' => 0,
-            'LogForwardingFormat' => 0,
-            'ShieldDDosProtectionType' => 1,
+            'LogFormat' => 'Plain',
+            'LogForwardingFormat' => 'Plain',
+            'ShieldDDosProtectionType' => 'DetectOnly',
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1527,11 +1545,11 @@ $bunnyHttpClient->request(
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
             'PreloadingScreenShowOnFirstVisit' => true,
-            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenTheme' => 'Dark',
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
-            'StickySessionType' => '',
+            'StickySessionType' => 'Off',
             'StickySessionCookieName' => '',
             'StickySessionClientHeaders' => '',
             'OptimizerEnableUpscaling' => false,
@@ -1545,8 +1563,8 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `Type` has the following possible values:
-        - `0` = `Premium`
-        - `1` = `Volume`
+        - `0` = Premium
+        - `1` = Volume
     - The key `OriginType` has the following possible values:
         - `0` = `OriginUrl`
         - `1` = `DnsAccelerate`
@@ -1556,35 +1574,41 @@ $bunnyHttpClient->request(
         - `5` = `MagicContainers`
         - `6` = `PushZone`
     - The key `LogFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogForwardingFormat` has the following possible values:
         - `0` = `Plain`
         - `1` = `JSON`
+    - The key `LogAnonymizationType` has the following possible values:
+        - `0` = `OneDigit`
+        - `1` = `Drop`
+    - The key `LogForwardingProtocol` has the following possible values:
+        - `0` = `UDP`
+        - `1` = `TCP`
+        - `2` = `TCPEncrypted`
+        - `3` = `DataDog`
     - The key `ShieldDDosProtectionType` has the following possible values:
         - `0` = `DetectOnly`
         - `1` = `ActiveStandard`
-        - `2` = `ActiveAggressive`
-    - The key `LogAnonymizationType` has the following possible values:
-        - `0` = `Remove one octet`
-        - `1` = `Drop IP`
-    - The key `LogForwardingProtocol` has the following possible values:
-        - `0` = UDP
-        - `1` = TCP
-        - `2` = TCPEncrypted
-        - `3` = DataDog
+        - `2` = `ActiveAggresive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
-        - `0` = BottomLeft
-        - `1` = BottomRight
-        - `2` = TopLeft
-        - `4` = Center
-        - `5` = CenterStretch
+        - `0` (BottomLeft)
+        - `1` (BottomRight)
+        - `2` (TopLeft)
+        - `4` (Center)
+        - `5` (CenterStretch)
+    - The key `PreloadingScreenTheme` has the following possible values:
+        - `0` = `Light`
+        - `1` = `Dark`
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `On`
     - The key `PreloadingScreenShowOnFirstVisit` is required when using preloading screen features.
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - New parameters have been added for WebSocket support (`EnableWebSockets`, `MaxWebSocketConnections`), sticky sessions (`StickySessionType`, `StickySessionCookieName`, `StickySessionClientHeaders`), and additional optimizer settings.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
@@ -1615,7 +1639,7 @@ $bunnyHttpClient->request(
                         'https://example.b-cdn.net/images/*',
                         'https://example.b-cdn.net/videos/*',
                     ]
-                    'PatternMatchingType' => 0,
+                    'PatternMatchingType' => 'MatchAny',
                     'Parameter1' => '',
                 ],
             ],
@@ -2146,7 +2170,7 @@ $bunnyHttpClient->request(
             'Name' => 'Test',
             'Region' => 'DE',
             'ReplicationRegions' => '',
-            'ZoneTier' => 0,
+            'ZoneTier' => 'Standard',
         ],
     )
 );
