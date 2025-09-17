@@ -698,11 +698,6 @@ $bunnyHttpClient->request(
 );
 ```
 
-??? warning "404 Not Found"
-    
-    This endpoint currently returns a 404 response. A support ticket has been created to address this issue.
-
-
 #### [Get Video Library DRM Statistics](https://docs.bunny.net/reference/getdrmstatisticsendpoint_statistics)
 
 ```php
