@@ -387,7 +387,7 @@ class ParameterValidatorTest extends TestCase
             new AbstractParameter(name: 'GoogleWidevineDrm', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'SdOnlyForL3', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'WidevineMinClientSecurityLevel', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'MinClientSecurityLevel', type: Type::STRING_TYPE),
             ]),
         ];
 
@@ -395,7 +395,7 @@ class ParameterValidatorTest extends TestCase
             'GoogleWidevineDrm' => [
                 'Enabled' => true,
                 'SdOnlyForL3' => false,
-                'WidevineMinClientSecurityLevel' => 1,
+                'MinClientSecurityLevel' => 'None',
             ],
         ];
 
