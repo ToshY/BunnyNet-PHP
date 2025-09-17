@@ -40,6 +40,7 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
     public function getHeaders(): array
     {
         return [
+            Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
         ];
     }
@@ -48,12 +49,13 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
     {
         return [
             new AbstractParameter(name: 'Guid', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'ActionType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'ActionType', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ActionParameter1', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ActionParameter2', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'ActionParameter3', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Triggers', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
-                    new AbstractParameter(name: 'Type', type: Type::INT_TYPE, required: true),
+                    new AbstractParameter(name: 'Type', type: Type::STRING_TYPE, required: true),
                     new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
                         new AbstractParameter(name: null, type: Type::STRING_TYPE),
                     ]),
@@ -61,9 +63,18 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
                     new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
                 ]),
             ]),
-            new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'ExtraActions', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'ActionType', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'ActionParameter1', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'ActionParameter2', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'ActionParameter3', type: Type::STRING_TYPE),
+                ]),
+            ]),
+            new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Description', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE, required: true),
+            new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OrderIndex', type: Type::INT_TYPE),
         ];
     }
 }

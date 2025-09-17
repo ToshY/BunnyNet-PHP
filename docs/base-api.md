@@ -26,7 +26,7 @@ $bunnyHttpClient = new BunnyHttpClient(
 
 ### Abuse Case
 
-#### [List Abuse Cases](https://docs.bunny.net/reference/abusecasepublic_index)
+#### List Abuse Cases
 
 ```php
 $bunnyHttpClient->request(
@@ -39,7 +39,11 @@ $bunnyHttpClient->request(
 )
 ```
 
-#### [Get DMCA Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get DMCA Case
 
 ```php
 $bunnyHttpClient->request(
@@ -49,11 +53,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint currently returns a `401` status code.
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Get Abuse Case](https://docs.bunny.net/reference/abusecasepublic_getabusecase2)
+#### Get Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -63,11 +67,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint currently returns a `401` status code.
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Resolve DMCA Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase)
+#### Resolve DMCA Case
 
 ```php
 $bunnyHttpClient->request(
@@ -77,7 +81,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Resolve Abuse Case](https://docs.bunny.net/reference/abusecasepublic_resolveabusecase2)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Resolve Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -87,7 +95,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Check Abuse Case](https://docs.bunny.net/reference/abusecasepublic_checkabusecase)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Check Abuse Case
 
 ```php
 $bunnyHttpClient->request(
@@ -97,9 +109,13 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
 ### Auth
 
-#### [Auth JWT 2FA](https://docs.bunny.net/reference/authpublic_authjwt2fa)
+#### Auth JWT 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -111,13 +127,21 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Refresh JWT](https://docs.bunny.net/reference/authpublic_refreshjwt)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Refresh JWT
 
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\Auth\RefreshJwt()
 );
 ```
+
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 ### Countries
 
@@ -146,7 +170,7 @@ $bunnyHttpClient->request(
 
 ### Billing
 
-#### [Get Billing Details](https://docs.bunny.net/reference/billingpublic_index)
+#### Get Billing Details
 
 ```php
 $bunnyHttpClient->request(
@@ -154,7 +178,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Configure Auto Recharge](https://docs.bunny.net/reference/billingpublic_configureautorecharge)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Configure Auto Recharge
 
 ```php
 $bunnyHttpClient->request(
@@ -169,12 +197,16 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `RechargeTreshold` (misspelled) has a value range of 2-2000.
     - The key `PaymentAmount` has a value range of 10-2000.
 
-#### [Create Payment Checkout](https://docs.bunny.net/reference/billingpublic_checkout)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Create Payment Checkout
 
 ```php
 $bunnyHttpClient->request(
@@ -189,11 +221,15 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `PaymentAmount` has a value range of 10-2000.
 
-#### [Prepare Payment Authorization](https://docs.bunny.net/reference/billingpublic_paymentsprepareauthorization)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Prepare Payment Authorization
 
 ```php
 $bunnyHttpClient->request(
@@ -201,7 +237,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Affiliate Details](https://docs.bunny.net/reference/billingpublic_affiliatedetails)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get Affiliate Details
 
 ```php
 $bunnyHttpClient->request(
@@ -209,7 +249,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Claim Affiliate Credits](https://docs.bunny.net/reference/billingpublic_affiliateclaim)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Claim Affiliate Credits
 
 ```php
 $bunnyHttpClient->request(
@@ -217,7 +261,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get The Coinify Bitcoin exchange rate](https://docs.bunny.net/reference/billingpublic_coinifyexchangerate)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get The Coinify Bitcoin exchange rate
 
 ```php
 $bunnyHttpClient->request(
@@ -225,7 +273,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Create Coinify payment](https://docs.bunny.net/reference/billingpublic_createcoinifypayment)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Create Coinify payment
 
 ```php
 $bunnyHttpClient->request(
@@ -237,7 +289,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Billing Summary](https://docs.bunny.net/reference/billingpublic_summary)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get Billing Summary
 
 ```php
 $bunnyHttpClient->request(
@@ -245,7 +301,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Billing Summary PDF](https://docs.bunny.net/reference/billingpublic_summarypdf)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get Billing Summary PDF
 
 ```php
 $bunnyHttpClient->request(
@@ -255,7 +315,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Apply Promo Code](https://docs.bunny.net/reference/billingpublic_applycode)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Apply Promo Code
 
 ```php
 $bunnyHttpClient->request(
@@ -267,9 +331,13 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
 ### Support
 
-#### [List Tickets](https://docs.bunny.net/reference/supportpublic_index)
+#### List Tickets
 
 ```php
 $bunnyHttpClient->request(
@@ -282,7 +350,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Ticket Details](https://docs.bunny.net/reference/supportpublic_index2)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get Ticket Details
 
 ```php
 $bunnyHttpClient->request(
@@ -292,7 +364,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Close Ticket](https://docs.bunny.net/reference/supportpublic_close)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Close Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -302,7 +378,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Reply Ticket](https://docs.bunny.net/reference/supportpublic_reply)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Reply Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -322,11 +402,15 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Body` requires its contents to be base64 encoded.
 
-#### [Create Ticket](https://docs.bunny.net/reference/supportpublic_createticket)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Create Ticket
 
 ```php
 $bunnyHttpClient->request(
@@ -351,14 +435,18 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The keys `LinkedPullZone` and `LinkedStorageZone` are not required unlike stated in the API specifications.
     - The key `Body` requires its contents to be base64 encoded.
 
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
 ### DRM Certificate
 
-#### [List DRM Certificates](https://docs.bunny.net/reference/drmcertificatepublic_index)
+#### List DRM Certificates
 
 ```php
 $bunnyHttpClient->request(
@@ -371,13 +459,9 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint currently returns a `500` status code with the following response: 
-    ```
-    {"Message":"An error has occurred."}
-    ```
-    A support ticket has been created at bunny.net regarding this issue.
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 ### Integrations
 
@@ -389,11 +473,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    This endpoint is (currently) undocumented. 
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-!!! info
+??? info
 
     This endpoint returns the following response:
     ```json
@@ -434,7 +518,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -460,7 +544,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `ReplicationRegions` has the following possible values:
         - `UK` = London (United Kingdom)
@@ -529,26 +613,31 @@ $bunnyHttpClient->request(
             'EnableTranscribingTitleGeneration' => false,
             'EnableTranscribingDescriptionGeneration' => false,
             'TranscribingCaptionLanguages' => [],
-            'RememberPlayerPosition' => true,
-            'EnableMultiAudioTrackSupport' => true,
-            'UseSeparateAudioStream' => true,
-            'JitEncodingEnabled' => true,
-            'OutputCodecs' => 'x264,vp9,hevc,av1',
             'AppleFairPlayDrm' => [
                 'Enabled' => false,
             ],
             'GoogleWidevineDrm' => [
                 'Enabled' => false,
                 'SdOnlyForL3' => false,
-                'WidevineMinClientSecurityLevel' => 1,
+                'MinClientSecurityLevel' => 'None',
             ],
-            'EncodingTier' => 0
+            'EnableCaptionsInPlaylist' => true,
+            'RememberPlayerPosition' => true,
+            'EnableMultiAudioTrackSupport' => true,
+            'UseSeparateAudioStream' => true,
+            'JitEncodingEnabled' => true,
+            'EncodingTier' => 'Free',
+            'OutputCodecs' => 'x264,vp9,hevc,av1',
+            'PlayerVersion' => 1,
+            'RemoveMetadataFromFallbackVideos' => false,
+            'DrmVersion' => 'Basic',
+            'PlaybackSpeeds' => '0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0,2.5,3,3.5,4',
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnabledResolutions` has the following possible values (comma separated):
         - `240p`
@@ -570,10 +659,20 @@ $bunnyHttpClient->request(
         - `pip`
         - `airplay`
         - `fullscreen`
+    - The key `MinClientSecurityLevel` has the following possible values:
+        - `None`
+        - `L1`
+        - `L2`
+        - `L3`
+    - The key `DrmVersion` has the following possible values:
+        - `Basic`
+        - `Enterprise`
+        - `BasicV2`
     - To get a full list of possible value options for key `TranscribingCaptionLanguages`, see the [Get Languages](#get-languages) endpoint.
     - The key `EncodingTier` has the following possible values:
-        - `0` = Free
-        - `1` = Premium
+        - `0` = `Free`
+        - `1` = `Premium`
+    - The API accepts both the integer as well as enum value for the `EncodingTier`.
 
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
@@ -581,6 +680,20 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary(
         id: 1,
+    )
+);
+```
+
+#### [Get Video Library Transcribing Statistics](https://docs.bunny.net/reference/gettranscribingstatistics_statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+        ],
     )
 );
 ```
@@ -662,7 +775,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` allows multiple values through comma separated values.
 
@@ -679,11 +792,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
-#### [Add Blocked Referer](ttps://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
+#### [Add Blocked Referer](https://docs.bunny.net/reference/videolibrarypublic_addblockedreferrer)
 
 ```php
 $bunnyHttpClient->request(
@@ -696,7 +809,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -713,7 +826,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -733,7 +846,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` can be used to filter on `Id` or `Domain`. A search value with an `Id` value will perform an exact match,
     whereas a search value with a `Domain` will perform a wildcard search: `bunny`, `nny` and `.net` will all match the DNS zone for `bunny.net`.
@@ -772,19 +885,24 @@ $bunnyHttpClient->request(
             'Nameserver2' => 'jonah.ns.cloudflare.com',
             'SoaEmail' => 'admin@example.com',
             'LoggingEnabled' => true,
-            'LogAnonymizationType' => true,
+            'LogAnonymizationType' => 'OneDigit',
+            'CertificateKeyType' => 'Ecdsa',
             'LoggingIPAnonymizationEnabled' => true,
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
-    - The key `LogAnonymizationType` has the following possible values (undocumented):
-        - `0` = Remove one octet
-        - `1` = Drop IP
+    - The key `LogAnonymizationType` has the following possible values:
+        - `0` = `OneDigit`
+        - `1` = `Drop`
+    - The key `CertificateKeyType` has the following possible values:
+        - `0` = `Ecdsa`
+        - `1` = `Rsa`
     - In order to disable `LoggingIPAnonymizationEnabled` you first need to agree to the DPA agreement (GDPR).
+    - The API accepts both the integer as well as enum value for the `LogAnonymizationType` and `CertificateKeyType`.
 
 #### [Delete DNS Zone](https://docs.bunny.net/reference/dnszonepublic_delete)
 
@@ -859,7 +977,7 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord(
         zoneId: 1,
         body: [
-            'Type' => 3,
+            'Type' => 'TXT',
             'Ttl' => 15,
             'Value' => 'My TXT Value',
             'Name' => '',
@@ -871,11 +989,11 @@ $bunnyHttpClient->request(
             'PullZoneId' => 0,
             'ScriptId' => 0,
             'Accelerated' => false,
-            'MonitorType' => 0,
+            'MonitorType' => 'None',
             'GeolocationLatitude' => 0,
             'GeolocationLongitude' => 0,
             'LatencyZone' => null,
-            'SmartRoutingType' => 0,
+            'SmartRoutingType' => 'None',
             'Disabled' => false,
             'EnviromentalVariables' => [
                 [
@@ -889,45 +1007,34 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnviromentalVariables` is misspelled in the API specifications.
     - The key `Type` has the following possible values:
-        - `0` = A
-        - `1` = AAAA
-        - `2` = CNAME
-        - `3` = TXT
-        - `4` = MX
-        - `5` = RDR (Redirect)
-        - `6` = Flatten
-        - `7` = PZ (Pull Zone)
-        - `8` = SRV
-        - `9` = CAA
-        - `10` = PTR
-        - `11` = SCR (Script)
-        - `12` = NS
-    - The key `TTL` has the following possible values (in seconds):
-        - `15`
-        - `30`
-        - `60` =  1 minute
-        - `120` = 2 minutes
-        - `300` = 5 minutes
-        - `900` = 15 minutes
-        - `1800` = 30 minutes
-        - `3600` = 1 hour
-        - `18000` = 5 hours
-        - `43200` = 12 hours
-        - `86400` = 1 day
+        - `0` = `A`
+        - `1` = `AAAA`
+        - `2` = `CNAME`
+        - `3` = `TXT`
+        - `4` = `MX`
+        - `5` = `RDR` (Redirect)
+        - `6` = `Flatten`
+        - `7` = `PZ` (Pull Zone)
+        - `8` = `SRV`
+        - `9` = `CAA`
+        - `10` = `PTR`
+        - `11` = `SCR` (Script)
+        - `12` = `NS`
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
-        - `0` = None
-        - `1` = Ping
-        - `2` = HTTP
-        - `3` = Monitor
+        - `0` = `None`
+        - `1` = `Ping`
+        - `2` = `HTTP`
+        - `3` = `Monitor`
     - The key `SmartRoutingType` has the following possible values:
-        - `0` = None
-        - `1` = Latency
-        - `2` = Geolocation
+        - `0` = `None`
+        - `1` = `Latency`
+        - `2` = `Geolocation`
+    - The API accepts both the integer as well as enum value for the `Type`, `MonitorType` and `SmartRoutingType`.
 
 #### [Update DNS Record](https://docs.bunny.net/reference/dnszonepublic_updaterecord)
 
@@ -937,7 +1044,7 @@ $bunnyHttpClient->request(
         zoneId: 1,
         id: 2,
         body: [
-            'Type' => 3,
+            'Type' => 'TXT',
             'Ttl' => 15,
             'Value' => 'My TXT Value',
             'Name' => '',
@@ -949,11 +1056,11 @@ $bunnyHttpClient->request(
             'PullZoneId' => 0,
             'ScriptId' => 0,
             'Accelerated' => false,
-            'MonitorType' => 0,
+            'MonitorType' => 'None',
             'GeolocationLatitude' => 0,
             'GeolocationLongitude' => 0,
             'LatencyZone' => null,
-            'SmartRoutingType' => 0,
+            'SmartRoutingType' => 'None',
             'Disabled' => false,
             'EnviromentalVariables' => [
                 [
@@ -968,45 +1075,34 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `EnviromentalVariables` is misspelled in the API specifications.
     - The key `Type` has the following possible values:
-        - `0` = A
-        - `1` = AAAA
-        - `2` = CNAME
-        - `3` = TXT
-        - `4` = MX
-        - `5` = RDR (Redirect)
-        - `6` = Flatten
-        - `7` = PZ (Pull Zone)
-        - `8` = SRV
-        - `9` = CAA
-        - `10` = PTR
-        - `11` = SCR (Script)
-        - `12` = NS
-    - The key `TTL` has the following possible values (in seconds):
-        - `15`
-        - `30`
-        - `60` =  1 minute
-        - `120` = 2 minutes
-        - `300` = 5 minutes
-        - `900` = 15 minutes
-        - `1800` = 30 minutes
-        - `3600` = 1 hour
-        - `18000` = 5 hours
-        - `43200` = 12 hours
-        - `86400` = 1 day
+        - `0` = `A`
+        - `1` = `AAAA`
+        - `2` = `CNAME`
+        - `3` = `TXT`
+        - `4` = `MX`
+        - `5` = `Redirect`
+        - `6` = `Flatten`
+        - `7` = `PullZone`
+        - `8` = `SRV`
+        - `9` = `CAA`
+        - `10` = `PTR`
+        - `11` = `Script`
+        - `12` = `NS`
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
-        - `0` = None
-        - `1` = Ping
-        - `2` = HTTP
-        - `3` = Monitor
+        - `0` = `None`
+        - `1` = `Ping`
+        - `2` = `HTTP`
+        - `3` = `Monitor`
     - The key `SmartRoutingType` has the following possible values:
-        - `0` = None
-        - `1` = Latency
-        - `2` = Geolocation
+        - `0` = `None`
+        - `1` = `Latency`
+        - `2` = `Geolocation`
+    - The API accepts both the integer as well as enum value for the `Type`, `MonitorType` and `SmartRoutingType`.
 
 #### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_deleterecord)
 
@@ -1019,7 +1115,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Recheck DNS Configuration](https://docs.bunny.net/reference/dnszonepublic_recheckdns)
+#### Recheck DNS Configuration
 
 ```php
 $bunnyHttpClient->request(
@@ -1029,7 +1125,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Dismiss DNS Configuration Notice](https://docs.bunny.net/reference/dnszonepublic_dismissnameservercheck)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Dismiss DNS Configuration Notice
 
 ```php
 $bunnyHttpClient->request(
@@ -1038,6 +1138,10 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 #### [Import DNS Records](https://docs.bunny.net/reference/dnszonepublic_import)
 
@@ -1078,7 +1182,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -1091,6 +1195,7 @@ $bunnyHttpClient->request(
             'OriginUrl' => 'https://my-bucket-2.service.com',
             'AllowedReferrers' => [],
             'BlockedReferrers' => [],
+            'BlockNoneReferrer' => false,
             'BlockedIps' => [],
             'EnableGeoZoneUS' => true,
             'EnableGeoZoneEU' => true,
@@ -1104,6 +1209,7 @@ $bunnyHttpClient->request(
             'EnableAvifVary' => false,
             'EnableMobileVary' => false,
             'EnableCountryCodeVary' => false,
+            'EnableCountryStateCodeVary' => false,
             'EnableHostnameVary' => false,
             'EnableCacheSlice' => false,
             'ZoneSecurityEnabled' => false,
@@ -1123,6 +1229,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
+            'PermaCacheType' => 'Automatic',
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1137,7 +1244,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 0,
+            'LogForwardingProtocol' => 'UDP',
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1146,22 +1253,19 @@ $bunnyHttpClient->request(
             'LimitRateAfter' => 0,
             'LimitRatePerSecond' => 0,
             'BurstSize' => 0,
-            'WAFEnabled' => false,
-            'WAFDisabledRuleGroups' => [],
-            'WAFDisabledRules' => [],
-            'WAFEnableRequestHeaderLogging' => false,
-            'WAFRequestHeaderIgnores' => [],
             'ErrorPageEnableCustomCode' => false,
             'ErrorPageCustomCode' => null,
             'ErrorPageEnableStatuspageWidget' => false,
             'ErrorPageStatuspageCode' => null,
             'ErrorPageWhitelabel' => false,
             'OptimizerEnabled' => false,
+            'OptimizerTunnelEnabled' => false,
             'OptimizerDesktopMaxWidth' => 1600,
             'OptimizerMobileMaxWidth' => 800,
             'OptimizerImageQuality' => 85,
             'OptimizerMobileImageQuality' => 70,
             'OptimizerEnableWebP' => true,
+            'OptimizerPrerenderHtml' => false,
             'OptimizerEnableManipulationEngine' => true,
             'OptimizerMinifyCSS' => true,
             'OptimizerMinifyJavaScript' => true,
@@ -1173,6 +1277,9 @@ $bunnyHttpClient->request(
             'OptimizerAutomaticOptimizationEnabled' => true,
             'OptimizerClasses' => [],
             'OptimizerForceClasses' => false,
+            'OptimizerStaticHtmlWordPressPath' => '',
+            'OptimizerStaticHtmlWordPressBypassCookie' => '',
+            'OptimizerEnableUpscaling' => false,
             'Type' => 0,
             'OriginRetries' => 0,
             'OriginConnectTimeout' => 10,
@@ -1192,18 +1299,20 @@ $bunnyHttpClient->request(
             'CookieVaryParameters' => [],
             'EnableSafeHop' => false,
             'OriginShieldQueueMaxWaitTime' => 30,
-            'UseBackgroundUpdate' => false,
             'OriginShieldMaxQueuedRequests' => 5000,
-            'UseBackgroundUpdate' => true,
+            'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 0,
+            'LogAnonymizationType' => 'OneDigit',
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
-            'OriginType' => 0,
+            'MiddlewareScriptId' => 0,
+            'EdgeScriptExecutionPhase' => 'Cache',
+            'OriginType' => 'OriginUrl',
             'MagicContainersAppId' => '',
-            'LogFormat' => 0,
-            'LogForwardingFormat' => 0,
-            'ShieldDDosProtectionType' => 1,
+            'MagicContainersEndpointId' => '',
+            'LogFormat' => 'Plain',
+            'LogForwardingFormat' => 'Plain',
+            'ShieldDDosProtectionType' => 'DetectOnly',
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1215,59 +1324,69 @@ $bunnyHttpClient->request(
             'PreloadingScreenEnabled' => false,
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
-            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenShowOnFirstVisit' => true,
+            'PreloadingScreenTheme' => 'Dark',
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
+            'StickySessionType' => 'Off',
+            'StickySessionCookieName' => '',
+            'StickySessionClientHeaders' => '',
+            'EnableWebSockets' => false,
+            'MaxWebSocketConnections' => 0,
             'Name' => 'New Pull Zone',
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
     - The key `OriginType` has the following possible values:
-        - `0` = OriginUrl
-        - `1` = DnsAccelerate
-        - `2` = StorageZone
-        - `3` = LoadBalancer
-        - `4` = EdgeScript
-        - `5` = MagicContainers
-        - `6` = PushZone
+        - `0` = `OriginUrl`
+        - `1` = `DnsAccelerate`
+        - `2` = `StorageZone`
+        - `3` = `LoadBalancer`
+        - `4` = `EdgeScript`
+        - `5` = `MagicContainers`
+        - `6` = `PushZone`
     - The key `LogFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogForwardingFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
-    - The key `ShieldDDosProtectionType` has the following possible values:
-        - `0` = DetectOnly
-        - `1` = ActiveStandard
-        - `2` = ActiveAggressive
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogAnonymizationType` has the following possible values:
-        - `0` = Remove one octet
-        - `1` = Drop IP
+        - `0` = `OneDigit`
+        - `1` = `Drop`
     - The key `LogForwardingProtocol` has the following possible values:
-        - `0` = UDP
-        - `1` = TCP
-        - `2` = TCPEncrypted
-        - `3` = DataDog
+        - `0` = `UDP`
+        - `1` = `TCP`
+        - `2` = `TCPEncrypted`
+        - `3` = `DataDog`
+    - The key `ShieldDDosProtectionType` has the following possible values:
+        - `0` = `DetectOnly`
+        - `1` = `ActiveStandard`
+        - `2` = `ActiveAggresive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
-        - `0` = BottomLeft
-        - `1` = BottomRight
-        - `2` = TopLeft
-        - `4` = Center
-        - `5` = CenterStretch
+        - `0` = `BottomLeft`
+        - `1` = `BottomRight`
+        - `2` = `TopLeft`
+        - `4` = `Center`
+        - `5` = `CenterStretch`
+    - The key `PreloadingScreenTheme` has the following possible values:
+        - `0` = `Light`
+        - `1` = `Dark`
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `On`
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-    - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
-      It is advised **not** to update these values until the feature is implemented, therefore these options
-      are removed from the example above.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
@@ -1292,6 +1411,7 @@ $bunnyHttpClient->request(
             'OriginUrl' => 'https://my-bucket-2.service.com',
             'AllowedReferrers' => [],
             'BlockedReferrers' => [],
+            'BlockNoneReferrer' => false,
             'BlockedIps' => [],
             'EnableGeoZoneUS' => true,
             'EnableGeoZoneEU' => true,
@@ -1305,6 +1425,7 @@ $bunnyHttpClient->request(
             'EnableAvifVary' => false,
             'EnableMobileVary' => false,
             'EnableCountryCodeVary' => false,
+            'EnableCountryStateCodeVary' => false,
             'EnableHostnameVary' => false,
             'EnableCacheSlice' => false,
             'ZoneSecurityEnabled' => false,
@@ -1324,6 +1445,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
+            'PermaCacheType' => 'Automatic',
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1338,7 +1460,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 0,
+            'LogForwardingProtocol' => 'UDP',
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1347,22 +1469,19 @@ $bunnyHttpClient->request(
             'LimitRateAfter' => 0,
             'LimitRatePerSecond' => 0,
             'BurstSize' => 0,
-            'WAFEnabled' => false,
-            'WAFDisabledRuleGroups' => [],
-            'WAFDisabledRules' => [],
-            'WAFEnableRequestHeaderLogging' => false,
-            'WAFRequestHeaderIgnores' => [],
             'ErrorPageEnableCustomCode' => false,
             'ErrorPageCustomCode' => null,
             'ErrorPageEnableStatuspageWidget' => false,
             'ErrorPageStatuspageCode' => null,
             'ErrorPageWhitelabel' => false,
             'OptimizerEnabled' => false,
+            'OptimizerTunnelEnabled' => false,
             'OptimizerDesktopMaxWidth' => 1600,
             'OptimizerMobileMaxWidth' => 800,
             'OptimizerImageQuality' => 85,
             'OptimizerMobileImageQuality' => 70,
             'OptimizerEnableWebP' => true,
+            'OptimizerPrerenderHtml' => false,
             'OptimizerEnableManipulationEngine' => true,
             'OptimizerMinifyCSS' => true,
             'OptimizerMinifyJavaScript' => true,
@@ -1374,6 +1493,8 @@ $bunnyHttpClient->request(
             'OptimizerAutomaticOptimizationEnabled' => true,
             'OptimizerClasses' => [],
             'OptimizerForceClasses' => false,
+            'OptimizerStaticHtmlWordPressPath' => '',
+            'OptimizerStaticHtmlWordPressBypassCookie' => '',
             'Type' => 0,
             'OriginRetries' => 0,
             'OriginConnectTimeout' => 10,
@@ -1393,18 +1514,20 @@ $bunnyHttpClient->request(
             'CookieVaryParameters' => [],
             'EnableSafeHop' => false,
             'OriginShieldQueueMaxWaitTime' => 30,
-            'UseBackgroundUpdate' => false,
             'OriginShieldMaxQueuedRequests' => 5000,
-            'UseBackgroundUpdate' => true,
+            'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 0,
+            'LogAnonymizationType' => 'OneDigit',
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
-            'OriginType' => 0,
+            'MiddlewareScriptId' => 0,
+            'EdgeScriptExecutionPhase' => 'Cache',
+            'OriginType' => 'OriginUrl',
             'MagicContainersAppId' => '',
-            'LogFormat' => 0,
-            'LogForwardingFormat' => 0,
-            'ShieldDDosProtectionType' => 1,
+            'MagicContainersEndpointId' => '',
+            'LogFormat' => 'Plain',
+            'LogForwardingFormat' => 'Plain',
+            'ShieldDDosProtectionType' => 'DetectOnly',
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1416,58 +1539,71 @@ $bunnyHttpClient->request(
             'PreloadingScreenEnabled' => false,
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
-            'PreloadingScreenTheme' => 0,
+            'PreloadingScreenShowOnFirstVisit' => true,
+            'PreloadingScreenTheme' => 'Dark',
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
+            'StickySessionType' => 'Off',
+            'StickySessionCookieName' => '',
+            'StickySessionClientHeaders' => '',
+            'OptimizerEnableUpscaling' => false,
+            'EnableWebSockets' => false,
+            'MaxWebSocketConnections' => 0,
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
     - The key `Type` has the following possible values:
         - `0` = Premium
         - `1` = Volume
     - The key `OriginType` has the following possible values:
-        - `0` = OriginUrl
-        - `1` = DnsAccelerate
-        - `2` = StorageZone
-        - `3` = LoadBalancer
-        - `4` = EdgeScript
-        - `5` = MagicContainers
-        - `6` = PushZone
+        - `0` = `OriginUrl`
+        - `1` = `DnsAccelerate`
+        - `2` = `StorageZone`
+        - `3` = `LoadBalancer`
+        - `4` = `EdgeScript`
+        - `5` = `MagicContainers`
+        - `6` = `PushZone`
     - The key `LogFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogForwardingFormat` has the following possible values:
-        - `0` = Plain
-        - `1` = JSON
-    - The key `ShieldDDosProtectionType` has the following possible values:
-        - `0` = DetectOnly
-        - `1` = ActiveStandard
-        - `2` = ActiveAggressive
+        - `0` = `Plain`
+        - `1` = `JSON`
     - The key `LogAnonymizationType` has the following possible values:
-        - `0` = Remove one octet
-        - `1` = Drop IP
+        - `0` = `OneDigit`
+        - `1` = `Drop`
     - The key `LogForwardingProtocol` has the following possible values:
-        - `0` = UDP
-        - `1` = TCP
-        - `2` = TCPEncrypted
-        - `3` = DataDog
+        - `0` = `UDP`
+        - `1` = `TCP`
+        - `2` = `TCPEncrypted`
+        - `3` = `DataDog`
+    - The key `ShieldDDosProtectionType` has the following possible values:
+        - `0` = `DetectOnly`
+        - `1` = `ActiveStandard`
+        - `2` = `ActiveAggresive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
-        - `0` = BottomLeft
-        - `1` = BottomRight
-        - `2` = TopLeft
-        - `4` = Center
-        - `5` = CenterStretch
+        - `0` (BottomLeft)
+        - `1` (BottomRight)
+        - `2` (TopLeft)
+        - `4` (Center)
+        - `5` (CenterStretch)
+    - The key `PreloadingScreenTheme` has the following possible values:
+        - `0` = `Light`
+        - `1` = `Dark`
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `On`
+    - The key `PreloadingScreenShowOnFirstVisit` is required when using preloading screen features.
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
-    - The `WAF` related settings are not implemented yet. This feature is currently being worked on and does not have an ETA.
-      It is advised **not** to update these values until the feature is implemented, therefore these options
-      are removed from the example above.
+    - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
@@ -1487,69 +1623,94 @@ $bunnyHttpClient->request(
         pullZoneId: 1,
         body: [
             'Guid' => 'c71d9594-3bc6-4639-9896-ba3e96217587', // required for update, not add
-            'ActionType' => 4,
+            'ActionType' => 'BlockRequest',
             'ActionParameter1' => '',
             'ActionParameter2' => '',
+            'ActionParameter3' => '',
             'Triggers' => [
                 [
-                    'Type' => 0,
+                    'Type' => 'URL',
                     'PatternMatches' => [
                         'https://example.b-cdn.net/images/*',
                         'https://example.b-cdn.net/videos/*',
                     ]
-                    'PatternMatchingType' => 0,
+                    'PatternMatchingType' => 'MatchAny',
                     'Parameter1' => '',
                 ],
             ],
-            'TriggerMatchingType' => 0,
+            'ExtraActions' => [
+                [
+                    'ActionType' => 'SetStatusCode',
+                    'ActionParameter1' => '',
+                    'ActionParameter2' => '',
+                    'ActionParameter3' => '',
+                ],
+            ],
+            'TriggerMatchingType' => 'MatchAny',
             'Description' => '',
             'Enabled' => true,
+            'OrderIndex' => 1,
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
     - The key `ActionType` has the following possible values:
-        - `0` = Force SSL
-        - `1` = Redirect To URL
-        - `2` = Change Origin URL
-        - `3` = Override Cache Time
-        - `4` = Block Request
-        - `5` = Set Response header
-        - `6` = Set Request Header
-        - `7` = Force Download
-        - `8` = Disable Token Authentication
-        - `9` = Enable Token Authentication
-        - `10` = Override Cache Time Public
-        - `11` = Ignore Query String (Cache Vary)
-        - `12` = Disable Bunny Optimizer
-        - `13` = Force Compression
-        - `14` = Set Status Code
-        - `15` = Bypass Perma-Cache
-        - `16` = Override Browser Cache Time
-        - `17` = Origin Storage
-        - `18` = Set Network Rate Limit
-        - `19` = Set Connection Limit
-        - `20` = Set Requests Per Second Limit
+        - `0` = `ForceSSL`
+        - `1` = `Redirect`
+        - `2` = `OriginUrl`
+        - `3` = `OverrideCacheTime`
+        - `4` = `BlockRequest`
+        - `5` = `SetResponseHeader`
+        - `6` = `SetRequestHeader`
+        - `7` = `ForceDownload`
+        - `8` = `DisableTokenAuthentication`
+        - `9` = `EnableTokenAuthentication`
+        - `10` = `OverrideCacheTimePublic`
+        - `11` = `IgnoreQueryString`
+        - `12` = `DisableOptimizer`
+        - `13` = `ForceCompression`
+        - `14` = `SetStatusCode`
+        - `15` = `BypassPermaCache`
+        - `16` = `OverrideBrowserCacheTime`
+        - `17` = `OriginStorage`
+        - `18` = `SetNetworkRateLimit`
+        - `19` = `SetConnectionLimit`
+        - `20` = `SetRequestsPerSecondLimit`
+        - `21` = `RunEdgeScript`
+        - `22` = `OriginMagicContainers`
+        - `23` = `DisableWAF`
+        - `24` = `RetryOrigin`
+        - `25` = `OverrideBrowserCacheResponseHeader`
+        - `26` = `RemoveBrowserCacheResponseHeader`
+        - `27` = `DisableShieldChallenge`
+        - `28` = `DisableShield`
+        - `29` = `DisableShieldBotDetection`
+        - `30` = `BypassAwsS3Authentication`
+        - `31` = `DisableShieldAccessLists`
+        - `32` = `DisableShieldRateLimiting`
     - The key `Type` in a `Trigger` object has the following possible values:
-        - `0` = URL
-        - `1` = Request Header
-        - `2` = Response Header
-        - `3` = File/URL Extension
-        - `4` = Country Code (2 letter)
-        - `5` = Remote IP
-        - `6` = Query String
-        - `7` = Random Chance (%)
-        - `8` = Status Code
-        - `9` = Request method
-        - `10` = Cookie Value
-        - `11` = Country State Code
+        - `0` = `URL`
+        - `1` = `RequestHeader`
+        - `2` = `ResponseHeader`
+        - `3` = `URLExtension`
+        - `4` = `CountryCode`
+        - `5` = `RemoteIP`
+        - `6` = `UrlQueryString`
+        - `7` = `RandomChance`
+        - `8` = `StatusCode`
+        - `9` = `RequestMethod`
+        - `10` = `CookieValue`
+        - `11` = `CountryStateCode`
+        - `12` = `OriginRetryAttemptCount`
+        - `13` = `OriginConnectionError`
     - The key `TriggerMatchingType` has the following possible values:
-        - `0` = Match Any
-        - `1` = Match All
-        - `2` = Match None
+        - `0` = `MatchAny`
+        - `1` = `MatchAll`
+        - `2` = `MatchNone`
+    - The API accepts both the integer as well as enum value for the `ActionType`, `Type` and `TriggerMatchingType`.
     - The keys `Guid`, `Type` and `PatternMatchingType` in the body are required parameters when updating an edge rule.
 
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
@@ -1567,7 +1728,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     -  The key `Id` in the body denotes the pull zone ID (the same as the first argument) and is (for some reason) a required parameter.
 
@@ -1593,13 +1754,13 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - This endpoint corresponds to toggling the **Enable Token Authentication** switch in the **Token Authentication > Security** section of your pull zone.
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint is currently not documented in the API specifications.
+    This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
 #### Set Zone Security Include Hash Remote IP Enabled
 
@@ -1612,13 +1773,13 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - This endpoint corresponds to toggling the **Token IP Validation** switch in the **Token Authentication > Security** section of your pull zone.
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint is currently not documented in the API specifications.
+    This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
 #### [Get Origin Shield Queue Statistics](https://docs.bunny.net/reference/pullzonepublic_originshieldconcurrencystatistics)
 
@@ -1680,9 +1841,9 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint is currently not documented in the API specifications.
+    This endpoint is not documented in the OpenAPI specifications but can still be used indefinitely.
 
 #### [Load Free Certificate](https://docs.bunny.net/reference/pullzonepublic_loadfreecertificate)
 
@@ -1736,7 +1897,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The keys `Certificate` and `CertificateKey` require the file contents to be sent as base64 encoded strings.
 
@@ -1816,7 +1977,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` allows multiple values through comma separated values.
 
@@ -1833,7 +1994,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -1850,7 +2011,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `Hostname` does *not* allow multiple values.
 
@@ -1908,7 +2069,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Purge URL (by header)](https://docs.bunny.net/reference/purgepublic_index)
+#### Purge URL (by header)
 
 ```php
 $bunnyHttpClient->request(
@@ -1923,9 +2084,13 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
 ### Search
 
-#### [Global Search](https://docs.bunny.net/reference/searchpublic_globalsearch)
+#### Global Search
 
 ```php
 $bunnyHttpClient->request(
@@ -1939,9 +2104,9 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - It is unclear from the current API specifications what you can actually search for with this endpoint.
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 ### Statistics
 
@@ -1986,7 +2151,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `search` is currently not functional.
 
@@ -2000,20 +2165,20 @@ $bunnyHttpClient->request(
             'Name' => 'Test',
             'Region' => 'DE',
             'ReplicationRegions' => '',
-            'ZoneTier' => 0,
+            'ZoneTier' => 'Standard',
         ],
     )
 );
 ```
 
-!!! note
+??? note
 
     - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
     the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
     - The key `ZoneTier` has the following possible values (undocumented):
-        - `0` = Standard = HDD
-        - `1` = Edge = SSD
+        - `0` = `Standard` (HDD)
+        - `1` = `Edge` (SSD)
     - The key `Region` has the following possible values:
         - `DE` = Falkenstein / Frankfurt (Germany) | HDD + SSD
         - `UK` = London (United Kingdom) | HDD
@@ -2040,6 +2205,7 @@ $bunnyHttpClient->request(
         - `SYD` = Sydney (Oceania) | HDD + SSD
         - `BR` = Sao Paolo (Brazil) | HDD + SSD
         - `JH` = Johannesburg (Africa) | HDD + SSD
+    - The API accepts both the integer as well as enum value for the `ZoneTier`.
 
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
@@ -2079,7 +2245,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
     So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
@@ -2107,6 +2273,9 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\StorageZone\DeleteStorageZone(	
         id: 1,
+        query: [
+            'deleteLinkedPullZones' => true,
+        ],   
     )
 );
 ```
@@ -2125,7 +2294,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Storage Zone Connections](https://docs.bunny.net/reference/storagezonepublic_connections)
+#### Get Storage Zone Connections
 
 ```php
 $bunnyHttpClient->request(
@@ -2134,6 +2303,10 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 #### [Reset Password](https://docs.bunny.net/reference/storagezonepublic_resetpassword)
 
@@ -2159,7 +2332,7 @@ $bunnyHttpClient->request(
 
 ### User
 
-#### [Get Home Feed](ttps://docs.bunny.net/reference/userpublic_homefeed)
+#### Get Home Feed
 
 ```php
 $bunnyHttpClient->request(
@@ -2167,7 +2340,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get User Details](https://docs.bunny.net/reference/userpublic_index)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get User Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2175,7 +2352,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Update User Details](https://docs.bunny.net/reference/userpublic_updateuser)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Update User Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2200,7 +2381,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Resend Email Confirmation](https://docs.bunny.net/reference/userpublic_resendemailconfirmation)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Resend Email Confirmation
 
 ```php
 $bunnyHttpClient->request(
@@ -2208,7 +2393,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Reset API Key](https://docs.bunny.net/reference/userpublic_resetapikey)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Reset API Key
 
 ```php
 $bunnyHttpClient->request(
@@ -2216,7 +2405,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [List Close Account Reasons](https://docs.bunny.net/reference/userpublic_listcloseaccountreasons)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### List Close Account Reasons
 
 ```php
 $bunnyHttpClient->request(
@@ -2224,7 +2417,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Close Account](https://docs.bunny.net/reference/userpublic_closeaccount)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Close Account
 
 ```php
 $bunnyHttpClient->request(
@@ -2237,7 +2434,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get DPA Details](https://docs.bunny.net/reference/userpublic_dpa)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get DPA Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2245,14 +2446,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning "Undocumented endpoint"
 
-    - This endpoint currently returns a `500` status code with the following response:
-    ```
-    {"Message":"Authorization has been denied for this request."}
-    ```
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Accept DPA](https://docs.bunny.net/reference/userpublic_dpaaccept)
+#### Accept DPA
 
 ```php
 $bunnyHttpClient->request(
@@ -2260,7 +2458,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get DPA Details (HTML)](https://docs.bunny.net/reference/userpublic_dpapdfhhtml)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get DPA Details (HTML)
 
 ```php
 $bunnyHttpClient->request(
@@ -2268,7 +2470,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [List Notifications](https://docs.bunny.net/reference/userpublic_notificationslist)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### List Notifications
 
 ```php
 $bunnyHttpClient->request(
@@ -2276,7 +2482,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Set Notifications Opened](https://docs.bunny.net/reference/userpublic_setnotificationsopened)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Set Notifications Opened
 
 ```php
 $bunnyHttpClient->request(
@@ -2284,7 +2494,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get Marketing Details](https://docs.bunny.net/reference/userpublic_marketingdetails)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get Marketing Details
 
 ```php
 $bunnyHttpClient->request(
@@ -2292,13 +2506,21 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get What's New Items](https://docs.bunny.net/reference/userpublic_whatsnew)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get What's New Items
 
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems()
 );
 ```
+
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 #### [Reset What's New](https://docs.bunny.net/reference/userpublic_whatsnewreset)
 
@@ -2308,7 +2530,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Generate 2FA Verification](https://docs.bunny.net/reference/userpublic_twofactorgenerateverification)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Generate 2FA Verification
 
 ```php
 $bunnyHttpClient->request(
@@ -2316,7 +2542,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Disable 2FA](https://docs.bunny.net/reference/userpublic_twofactordisable)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Disable 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -2328,7 +2558,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Enable 2FA](https://docs.bunny.net/reference/userpublic_twofactorenable)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Enable 2FA
 
 ```php
 $bunnyHttpClient->request(
@@ -2342,7 +2576,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Verify 2FA Code](https://docs.bunny.net/reference/userpublic_twofactorverify)
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Verify 2FA Code
 
 ```php
 $bunnyHttpClient->request(
@@ -2355,6 +2593,10 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? warning "Undocumented endpoint"
+
+    This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
 ## Reference
 

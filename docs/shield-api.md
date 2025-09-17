@@ -91,7 +91,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
 
     - The key `shieldZoneId` is not needed or required when creating a shield zone.
 
@@ -362,7 +362,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning
 
     - If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `We do not support Custom WAF Rule creation on our Free Tier of Bunny Shield, please upgrade to Advanced.`
 

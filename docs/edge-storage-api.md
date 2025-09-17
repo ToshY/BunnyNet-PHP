@@ -76,12 +76,12 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! note
+??? note
     - Make sure your `RootPath` and `Paths` contain **leading** and **trailing** slashes.
         - If you omit the slashes in `RootPath` this will result in a `400` status code.
         - If you omit the slashes in `Paths` this will result in a `200` status code with an empty ZIP file.
 
-!!! warning
+??? warning
 
     - This endpoint (with method `POST`) is currently not documented in the API specifications.
     - This request may fail or timeout if the requested directory has too many files or is too big.
@@ -133,7 +133,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-!!! warning
+??? warning
 
     - While a hash value in hexidecimal string representation is case insensitive, the value for the `Checksum` header must be in **uppercase** characters to ensure a successful upload.
     - If an incorrect `Checksum` is provided, the response will still be `201` but the file will not be uploaded.

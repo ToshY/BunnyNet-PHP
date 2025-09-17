@@ -40,6 +40,7 @@ class AddCustomHostname implements ModelInterface, BodyModelInterface
     public function getHeaders(): array
     {
         return [
+            Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
         ];
     }

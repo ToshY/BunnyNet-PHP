@@ -93,7 +93,7 @@ $bunnyTokenAuthentication->sign(
 );
 ```
 
-!!! note
+???+ note
 
     - The argument `expirationTime` denotes the time in seconds the resource is available after signing.
     - The argument `speedLimit` denotes the download speed limit (in kB/s) for the resource.
@@ -109,7 +109,7 @@ $bunnyTokenAuthentication->sign(
     the DNS from that country and in turn, we start returning `127.0.0.1` queries towards the hostnames in use instead
     of the standard CDN routing. The traffic essentially doesn't even touch our servers in such a case."*
 
-!!! warning
+???+ warning
     
     - The example using `speedLimit` for token authentication is currently not working as expected, as it returns a `403` status
     code. A support ticket has been created at bunny.net regarding this issue.
