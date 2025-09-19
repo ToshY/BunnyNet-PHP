@@ -59,7 +59,7 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
                     new AbstractParameter(name: 'PatternMatches', type: Type::ARRAY_TYPE, children: [
                         new AbstractParameter(name: null, type: Type::STRING_TYPE),
                     ]),
-                    new AbstractParameter(name: 'PatternMatchingType', type: Type::INT_TYPE, required: true),
+                    new AbstractParameter(name: 'PatternMatchingType', type: Type::STRING_TYPE, required: true),
                     new AbstractParameter(name: 'Parameter1', type: Type::STRING_TYPE),
                 ]),
             ]),
@@ -71,7 +71,7 @@ class AddOrUpdateEdgeRule implements ModelInterface, BodyModelInterface
                     new AbstractParameter(name: 'ActionParameter3', type: Type::STRING_TYPE),
                 ]),
             ]),
-            new AbstractParameter(name: 'TriggerMatchingType', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'TriggerMatchingType', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Description', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OrderIndex', type: Type::INT_TYPE),
