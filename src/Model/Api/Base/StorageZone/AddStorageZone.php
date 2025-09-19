@@ -50,6 +50,7 @@ class AddStorageZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'ZoneTier', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'StorageZoneType', type: Type::STRING_TYPE),
         ];
     }
 }
