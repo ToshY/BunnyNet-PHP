@@ -2166,6 +2166,7 @@ $bunnyHttpClient->request(
             'Region' => 'DE',
             'ReplicationRegions' => '',
             'ZoneTier' => 'Standard',
+            'StorageZoneType' => 'Supported',
         ],
     )
 );
@@ -2206,6 +2207,12 @@ $bunnyHttpClient->request(
         - `BR` = Sao Paolo (Brazil) | HDD + SSD
         - `JH` = Johannesburg (Africa) | HDD + SSD
     - The API accepts both the integer as well as enum value for the `ZoneTier`.
+
+??? warning
+
+    - The key `StorageZoneType` has the following possible values but does not seem to have any effect.
+        - `Supported`
+        - `Unsupported
 
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
