@@ -2210,9 +2210,7 @@ $bunnyHttpClient->request(
 
 ??? warning
 
-    - The key `StorageZoneType` has the following possible values but does not seem to have any effect.
-        - `Supported`
-        - `Unsupported
+    - The key `StorageZoneType` is related to an upcoming feature and currently does not serve any purpose.
 
 #### [Check Storage Zone Availability](https://docs.bunny.net/reference/storagezonepublic_checkavailability)
 
