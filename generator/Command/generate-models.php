@@ -37,17 +37,17 @@ $manifests = FileUtils::jsonDecode($file);
 
 $data = [];
 foreach ($manifests as $file) {
-    $description = $file['sourceDescription'];
+    $fileName = strtolower($file['fileName']);
     $key = match (true) {
-        str_contains($description, 'bunny.net API') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
-        str_contains($description, 'Edge Scripting API') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
-        str_contains($description, 'Edge Storage API') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
-        str_contains($description, 'Stream API') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
-        str_contains($description, 'Shield API') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
+        str_contains($fileName, 'base-api') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($fileName, 'edge-scripting') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
+        str_contains($fileName, 'edge-storage') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
+        str_contains($fileName, 'stream-api') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
+        str_contains($fileName, 'shield-api') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
         default => throw new RuntimeException(
             sprintf(
-                'Unknown API type with description: `%s`',
-                $description,
+                'Unknown API type with file name: `%s`',
+                $fileName,
             ),
         ),
     };
