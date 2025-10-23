@@ -48,6 +48,7 @@ class AddVideoLibrary implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'ReplicationRegions', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'PlayerVersion', type: Type::INT_TYPE),
         ];
     }
 }

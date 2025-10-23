@@ -26,6 +26,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SmartGenerate;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
@@ -59,6 +60,7 @@ final class Stream
         AddCaption::class => ModelValidationStrategy::STRICT_BODY,
         DeleteCaption::class => ModelValidationStrategy::NONE,
         TranscribeVideo::class => ModelValidationStrategy::STRICT,
+        SmartGenerate::class => ModelValidationStrategy::STRICT_BODY,
         VideoResolutionsInfo::class => ModelValidationStrategy::NONE,
         CleanupUnconfiguredResolutions::class => ModelValidationStrategy::STRICT_QUERY,
         GetOEmbed::class => ModelValidationStrategy::STRICT_QUERY,

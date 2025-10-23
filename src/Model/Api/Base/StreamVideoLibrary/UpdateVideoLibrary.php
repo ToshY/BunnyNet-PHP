@@ -90,6 +90,17 @@ class UpdateVideoLibrary implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'TranscribingCaptionLanguages', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'DrmVersion', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'PlaybackSpeeds', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingChaptersGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingMomentsGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableCaptionsInPlaylist', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'RememberPlayerPosition', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableMultiAudioTrackSupport', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'UseSeparateAudioStream', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'JitEncodingEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EncodingTier', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'OutputCodecs', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'AppleFairPlayDrm', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE),
             ]),
@@ -98,17 +109,9 @@ class UpdateVideoLibrary implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: 'SdOnlyForL3', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'MinClientSecurityLevel', type: Type::STRING_TYPE),
             ]),
-            new AbstractParameter(name: 'EnableCaptionsInPlaylist', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'RememberPlayerPosition', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'EnableMultiAudioTrackSupport', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'UseSeparateAudioStream', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'JitEncodingEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'EncodingTier', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'OutputCodecs', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'PlayerVersion', type: Type::INT_TYPE),
             new AbstractParameter(name: 'RemoveMetadataFromFallbackVideos', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'DrmVersion', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'PlaybackSpeeds', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'ScaleVideoUsingBothDimensions', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
