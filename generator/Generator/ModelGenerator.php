@@ -16,6 +16,7 @@ use cebe\openapi\spec\Reference;
 use cebe\openapi\spec\Schema;
 use cebe\openapi\SpecObjectInterface;
 use Exception;
+use Nette\InvalidStateException;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpFile;
@@ -141,7 +142,10 @@ class ModelGenerator
                         continue;
                     }
 
+                    $newNamespaceDirectory = rtrim($newNamespaceDirectory, '\\');
+
                     $newNamespace = $this->baseNamespace . '\\' . $newNamespaceDirectory;
+                    $newNamespace = rtrim($newNamespace, '\\');
                     $endpointClass = $newNamespace . '\\' . $className;
                 } else {
                     $shortClassName = ClassUtils::getShortClassName($endpointClass);
@@ -261,7 +265,7 @@ class ModelGenerator
         // Prepare output directory path
         $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
             $this->baseNamespace,
-            $newNamespace,
+            $this->baseNamespace === $newNamespace ? '' : $newNamespace,
             $this->outputDirectory,
         );
         FileUtils::createDirectory($outputDirectoryPath);
@@ -313,7 +317,11 @@ class ModelGenerator
             }
 
             $newClassName = $hasAlias ? $alias : $subClassName;
-            $namespace->addUse(name: $fqcn, alias: $newClassName);
+            try {
+                $namespace->addUse(name: $fqcn, alias: $newClassName);
+            } catch (InvalidStateException) {
+                $namespace->addUse(name: $fqcn, alias: $newClassName . 'V2');
+            }
 
             $processedClassNames[] = $newClassName;
 
@@ -1112,6 +1120,7 @@ class ModelGenerator
     }
 
     /**
+     * @note This is only used when an API class is newly created
      * @param string $path
      * @param string $httpMethod
      * @return string[]
@@ -1120,6 +1129,33 @@ class ModelGenerator
     {
         /* @phpstan-ignore-next-line property.notFound */
         $specData = $this->apiSpec->paths->getPath($path)->getRawSpecData()[$httpMethod];
+
+        if (isset($specData['operationId']) === false && (empty($specData['summary']) === true || empty($specData['description']) === true)) {
+            $class = self::generateOperationIdFrompath($path, $httpMethod);
+
+            $namespace = empty($specData['tags']) === false ? OpenApiModelUtils::extractNamespaceFromTags(
+                $specData['tags'],
+            ) : '';
+
+            return [
+                $namespace,
+                $class,
+            ];
+        }
+
+        if (isset($specData['tags']) === false) {
+            if (empty($specData['summary']) === false) {
+                return [
+                    '',
+                    ClassUtils::toPascalCase($specData['summary']),
+                ];
+            } elseif (empty($specData['description']) === false) {
+                return [
+                    '',
+                    ClassUtils::toPascalCase($specData['description']),
+                ];
+            }
+        }
 
         $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
 
@@ -1147,6 +1183,30 @@ class ModelGenerator
             $class,
         ];
     }
+
+    private static function generateOperationIdFrompath(string $path, string $method): string
+    {
+        $path = trim($path, '/');
+
+        $parts = explode('/', $path);
+
+        // remove first part
+        array_shift($parts);
+
+        if (empty($parts) === true) {
+            $parts = ['List'];
+        }
+
+        $parts = array_filter($parts, fn ($p) => !preg_match('/^{.*}$/', $p));
+
+        $parts = array_map(
+            fn ($p) => str_replace(' ', '', ClassUtils::toPascalCase(str_replace(['-', '_'], ' ', $p))),
+            $parts,
+        );
+
+        return ClassUtils::toPascalCase($method) . implode('', $parts);
+    }
+
 
     /**
      * @param string $operationId

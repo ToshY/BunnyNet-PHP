@@ -11,6 +11,7 @@ use cebe\openapi\json\InvalidJsonPointerSyntaxException;
 use cebe\openapi\Reader;
 use cebe\openapi\spec\OpenApi;
 use cebe\openapi\SpecObjectInterface;
+use Nette\InvalidStateException;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpNamespace;
 use RecursiveDirectoryIterator;
@@ -106,7 +107,15 @@ class MapGenerator
     private static function scanExistingModelEndpointClasses(string $directory): array
     {
         $map = [];
-        $recursiveIteratorIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+
+        try {
+            $directoryIterator = new RecursiveDirectoryIterator($directory);
+        } catch (\UnexpectedValueException) {
+            mkdir($directory, 0755, true);
+            $directoryIterator = new RecursiveDirectoryIterator($directory);
+        }
+
+        $recursiveIteratorIterator = new RecursiveIteratorIterator($directoryIterator);
         foreach ($recursiveIteratorIterator as $file) {
             if ($file->isFile() === false || $file->getExtension() !== FileUtils::PHP_EXTENSION) {
                 continue;
@@ -272,7 +281,11 @@ class MapGenerator
                 }
 
                 $newClassName = $hasAlias ? $alias : $shortClassName;
-                $namespace->addUse(name: $fqcn, alias: $newClassName);
+                try {
+                    $namespace->addUse(name: $fqcn, alias: $newClassName);
+                } catch (InvalidStateException) {
+                    $namespace->addUse(name: $fqcn, alias: $newClassName . 'V2');
+                }
 
                 $processedClassNames[] = $newClassName;
                 $remapping[$path][$method] = $newClassName;
