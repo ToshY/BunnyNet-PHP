@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class SmartGenerate implements ModelInterface, BodyModelInterface
+class TriggerSmartActions implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $libraryId
