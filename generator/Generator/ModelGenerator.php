@@ -16,7 +16,6 @@ use cebe\openapi\spec\Reference;
 use cebe\openapi\spec\Schema;
 use cebe\openapi\SpecObjectInterface;
 use Exception;
-use Nette\InvalidStateException;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpFile;
@@ -317,11 +316,7 @@ class ModelGenerator
             }
 
             $newClassName = $hasAlias ? $alias : $subClassName;
-            try {
-                $namespace->addUse(name: $fqcn, alias: $newClassName);
-            } catch (InvalidStateException) {
-                $namespace->addUse(name: $fqcn, alias: $newClassName . 'V2');
-            }
+            $namespace->addUse(name: $fqcn, alias: $newClassName);
 
             $processedClassNames[] = $newClassName;
 
@@ -1131,7 +1126,7 @@ class ModelGenerator
         $specData = $this->apiSpec->paths->getPath($path)->getRawSpecData()[$httpMethod];
 
         if (isset($specData['operationId']) === false && (empty($specData['summary']) === true || empty($specData['description']) === true)) {
-            $class = self::generateOperationIdFrompath($path, $httpMethod);
+            $class = self::generateOperationIdFromPath($path, $httpMethod);
 
             $namespace = empty($specData['tags']) === false ? OpenApiModelUtils::extractNamespaceFromTags(
                 $specData['tags'],
@@ -1184,7 +1179,7 @@ class ModelGenerator
         ];
     }
 
-    private static function generateOperationIdFrompath(string $path, string $method): string
+    private static function generateOperationIdFromPath(string $path, string $method): string
     {
         $path = trim($path, '/');
         $parts = explode('/', $path);

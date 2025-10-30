@@ -2,24 +2,21 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\OriginErrors;
+namespace ToshY\BunnyNet\Model\Api\Shield\Waf;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetOriginErrorLogsForASpecificPullZoneAndDate implements ModelInterface
+class GetWafRules implements ModelInterface
 {
     /**
-     * @param int $pullZoneId
-     * @param string $dateTime
+     * @param int $shieldZoneId
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $pullZoneId,
-        #[PathProperty]
-        public readonly string $dateTime,
+        public readonly int $shieldZoneId,
     ) {
     }
 
@@ -30,7 +27,7 @@ class GetOriginErrorLogsForASpecificPullZoneAndDate implements ModelInterface
 
     public function getPath(): string
     {
-        return '%d/%s';
+        return 'shield/waf/rules/%d';
     }
 
     public function getHeaders(): array

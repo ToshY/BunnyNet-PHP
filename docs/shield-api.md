@@ -28,7 +28,7 @@ $bunnyHttpClient = new BunnyHttpClient(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones(
         query: [
             'page' => 1,
             'perPage' => 1000,
@@ -41,7 +41,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone(
         shieldZoneId: 1,
     )
 );
@@ -51,7 +51,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId(
         pullZoneId: 1,
     )
 );
@@ -61,7 +61,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone(
         body: [
             'pullZoneId' => 1,
             'shieldZone' => [
@@ -99,7 +99,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone(
         body: [
             'shieldZoneId' => 2,
             'shieldZone' => [

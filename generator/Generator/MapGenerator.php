@@ -11,7 +11,6 @@ use cebe\openapi\json\InvalidJsonPointerSyntaxException;
 use cebe\openapi\Reader;
 use cebe\openapi\spec\OpenApi;
 use cebe\openapi\SpecObjectInterface;
-use Nette\InvalidStateException;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpNamespace;
 use RecursiveDirectoryIterator;
@@ -281,11 +280,7 @@ class MapGenerator
                 }
 
                 $newClassName = $hasAlias ? $alias : $shortClassName;
-                try {
-                    $namespace->addUse(name: $fqcn, alias: $newClassName);
-                } catch (InvalidStateException) {
-                    $namespace->addUse(name: $fqcn, alias: $newClassName . 'V2');
-                }
+                $namespace->addUse(name: $fqcn, alias: $newClassName);
 
                 $processedClassNames[] = $newClassName;
                 $remapping[$path][$method] = $newClassName;

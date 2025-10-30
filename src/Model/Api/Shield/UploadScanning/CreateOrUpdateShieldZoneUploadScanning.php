@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\AccessLists;
+namespace ToshY\BunnyNet\Model\Api\Shield\UploadScanning;
 
 use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Attributes\PathProperty;
@@ -13,16 +13,13 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class PatchShieldZoneAccessListsById implements ModelInterface, BodyModelInterface
+class CreateOrUpdateShieldZoneUploadScanning implements ModelInterface, BodyModelInterface
 {
     /**
-     * @param int $id
      * @param int $shieldZoneId
      * @param array<string,mixed> $body
      */
     public function __construct(
-        #[PathProperty]
-        public readonly int $id,
         #[PathProperty]
         public readonly int $shieldZoneId,
         #[BodyProperty]
@@ -37,7 +34,7 @@ class PatchShieldZoneAccessListsById implements ModelInterface, BodyModelInterfa
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/%d/access-lists/%d';
+        return 'shield/shield-zone/%d/upload-scanning';
     }
 
     public function getHeaders(): array
@@ -51,9 +48,10 @@ class PatchShieldZoneAccessListsById implements ModelInterface, BodyModelInterfa
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'name', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'content', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'checksum', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'isEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'csamScanningMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'antivirusScanningMode', type: Type::INT_TYPE),
         ];
     }
 }

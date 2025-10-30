@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class PostShieldZoneAccessLists implements ModelInterface, BodyModelInterface
+class CreateShieldZoneAccessList implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $shieldZoneId

@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class PatchShieldZoneAccessListsConfigurationsById implements ModelInterface, BodyModelInterface
+class UpdateShieldZoneAccessList implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $id
@@ -37,7 +37,7 @@ class PatchShieldZoneAccessListsConfigurationsById implements ModelInterface, Bo
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/%d/access-lists/configurations/%d';
+        return 'shield/shield-zone/%d/access-lists/%d';
     }
 
     public function getHeaders(): array
@@ -51,8 +51,9 @@ class PatchShieldZoneAccessListsConfigurationsById implements ModelInterface, Bo
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'isEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'action', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'name', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'content', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'checksum', type: Type::STRING_TYPE),
         ];
     }
 }

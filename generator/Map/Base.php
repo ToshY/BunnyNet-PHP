@@ -113,6 +113,7 @@ use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
 use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
 use ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails;
+use ToshY\BunnyNet\Model\Api\Base\User\GetUserAuditLog;
 use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
@@ -307,7 +308,7 @@ final class Base
             'delete' => DisableDnssecOnDnsZone::class,
         ],
         '/user/audit/{date}' => [
-            'get' => null,
+            'get' => GetUserAuditLog::class,
         ],
         '/statistics' => [
             'get' => GetStatistics::class,

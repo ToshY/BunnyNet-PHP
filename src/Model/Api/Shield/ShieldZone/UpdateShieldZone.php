@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\Zone;
+namespace ToshY\BunnyNet\Model\Api\Shield\ShieldZone;
 
 use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Enum\Header;

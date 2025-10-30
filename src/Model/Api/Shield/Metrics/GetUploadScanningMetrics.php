@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\Zone;
+namespace ToshY\BunnyNet\Model\Api\Shield\Metrics;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetShieldZone implements ModelInterface
+class GetUploadScanningMetrics implements ModelInterface
 {
     /**
      * @param int $shieldZoneId
@@ -27,7 +27,7 @@ class GetShieldZone implements ModelInterface
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/%d';
+        return 'shield/metrics/shield-zone/%d/upload-scanning';
     }
 
     public function getHeaders(): array

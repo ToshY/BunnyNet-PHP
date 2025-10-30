@@ -9,7 +9,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetMetricsShieldZoneBotDetection implements ModelInterface
+class GetBotDetectionMetrics implements ModelInterface
 {
     /**
      * @param int $shieldZoneId

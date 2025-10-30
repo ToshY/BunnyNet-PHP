@@ -2,35 +2,32 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\AccessLists;
+namespace ToshY\BunnyNet\Model\Api\Shield\ShieldZone;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteShieldZoneAccessListsById implements ModelInterface
+class GetShieldZoneByPullZoneId implements ModelInterface
 {
     /**
-     * @param int $id
-     * @param int $shieldZoneId
+     * @param int $pullZoneId
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $id,
-        #[PathProperty]
-        public readonly int $shieldZoneId,
+        public readonly int $pullZoneId,
     ) {
     }
 
     public function getMethod(): Method
     {
-        return Method::DELETE;
+        return Method::GET;
     }
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/%d/access-lists/%d';
+        return 'shield/shield-zone/get-by-pullzone/%d';
     }
 
     public function getHeaders(): array

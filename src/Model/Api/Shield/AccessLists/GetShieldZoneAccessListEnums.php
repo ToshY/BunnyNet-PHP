@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\Waf;
+namespace ToshY\BunnyNet\Model\Api\Shield\AccessLists;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetWafRulesByShieldzoneid implements ModelInterface
+class GetShieldZoneAccessListEnums implements ModelInterface
 {
     /**
-     * @param int $shieldZoneId
+     * @param string $shieldZoneId
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $shieldZoneId,
+        public readonly string $shieldZoneId,
     ) {
     }
 
@@ -27,7 +27,7 @@ class GetWafRulesByShieldzoneid implements ModelInterface
 
     public function getPath(): string
     {
-        return 'shield/waf/rules/%d';
+        return 'shield/shield-zone/%s/access-lists/enums';
     }
 
     public function getHeaders(): array

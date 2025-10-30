@@ -7,7 +7,7 @@ namespace ToshY\BunnyNet\Model\Api\Shield\Promo;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetPromoState implements ModelInterface
+class GetCurrentPromotions implements ModelInterface
 {
     public function getMethod(): Method
     {

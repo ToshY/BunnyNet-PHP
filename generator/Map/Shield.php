@@ -4,20 +4,42 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Generator\Map;
 
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\DeleteShieldZoneAccessList;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\ListShieldZoneAccessLists;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessList;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessListEnums;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneAccessList;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneCuratedThreatList;
+use ToshY\BunnyNet\Model\Api\Shield\AccessLists\CreateShieldZoneAccessList;
+use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
+use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Promo\GetCurrentPromotions;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\CreateRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\DeleteRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\GetRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\ListRateLimits;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\UpdateRateLimit;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZonesPullzoneMapping;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\UploadScanning\GetShieldZoneUploadScanning;
+use ToshY\BunnyNet\Model\Api\Shield\UploadScanning\CreateOrUpdateShieldZoneUploadScanning;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\CreateCustomWafRule;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\DeleteCustomWafRule;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\GetCustomWafRule;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\GetWafRules;
+use ToshY\BunnyNet\Model\Api\Shield\Waf\GetWafRulesPlanSegmentation;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListCustomWafRules;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEngineConfiguration;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEnums;
@@ -27,11 +49,6 @@ use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRuleAiRecommendation;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRules;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRule;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\UpdateCustomWafRuleByPatch;
-use ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone;
-use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone;
-use ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId;
-use ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones;
-use ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone;
 
 /**
  * @internal
@@ -41,23 +58,23 @@ final class Shield
     /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
         '/shield/shield-zone/{shieldZoneId}/access-lists' => [
-            'get' => null,
-            'post' => null,
+            'get' => ListShieldZoneAccessLists::class,
+            'post' => CreateShieldZoneAccessList::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/access-lists/configurations/{id}' => [
-            'patch' => null,
+            'patch' => UpdateShieldZoneCuratedThreatList::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/access-lists/{id}' => [
-            'get' => null,
-            'delete' => null,
-            'patch' => null,
+            'get' => GetShieldZoneAccessList::class,
+            'delete' => DeleteShieldZoneAccessList::class,
+            'patch' => UpdateShieldZoneAccessList::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/access-lists/enums' => [
-            'get' => null,
+            'get' => GetShieldZoneAccessListEnums::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/bot-detection' => [
-            'get' => null,
-            'patch' => null,
+            'get' => GetShieldZoneBotDetection::class,
+            'patch' => CreateOrUpdateShieldZoneBotDetection::class,
         ],
         '/shield/ddos/enums' => [
             'get' => ListDdosEnums::class,
@@ -78,13 +95,13 @@ final class Shield
             'get' => GetWafRuleMetrics::class,
         ],
         '/shield/metrics/shield-zone/{shieldZoneId}/bot-detection' => [
-            'get' => null,
+            'get' => GetBotDetectionMetrics::class,
         ],
         '/shield/metrics/shield-zone/{shieldZoneId}/upload-scanning' => [
-            'get' => null,
+            'get' => GetUploadScanningMetrics::class,
         ],
         '/shield/promo/state' => [
-            'get' => null,
+            'get' => GetCurrentPromotions::class,
         ],
         '/shield/rate-limits/{shieldZoneId}' => [
             'get' => ListRateLimits::class,
@@ -101,7 +118,7 @@ final class Shield
             'get' => ListShieldZones::class,
         ],
         '/shield/shield-zones/pullzone-mapping' => [
-            'get' => null,
+            'get' => GetShieldZonesPullzoneMapping::class,
         ],
         '/shield/shield-zone/{shieldZoneId}' => [
             'get' => GetShieldZone::class,
@@ -114,14 +131,14 @@ final class Shield
             'patch' => UpdateShieldZone::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/upload-scanning' => [
-            'get' => null,
-            'patch' => null,
+            'get' => GetShieldZoneUploadScanning::class,
+            'patch' => CreateOrUpdateShieldZoneUploadScanning::class,
         ],
         '/shield/waf/rules/{shieldZoneId}' => [
-            'get' => null,
+            'get' => GetWafRules::class,
         ],
         '/shield/waf/rules/plan-segmentation' => [
-            'get' => null,
+            'get' => GetWafRulesPlanSegmentation::class,
         ],
         '/shield/waf/rules/review-triggered/{shieldZoneId}' => [
             'get' => ReviewTriggeredRules::class,

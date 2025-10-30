@@ -9,12 +9,15 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetShieldZoneAccessLists implements ModelInterface
+class GetShieldZoneAccessList implements ModelInterface
 {
     /**
+     * @param int $id
      * @param int $shieldZoneId
      */
     public function __construct(
+        #[PathProperty]
+        public readonly int $id,
         #[PathProperty]
         public readonly int $shieldZoneId,
     ) {
@@ -27,7 +30,7 @@ class GetShieldZoneAccessLists implements ModelInterface
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/%d/access-lists';
+        return 'shield/shield-zone/%d/access-lists/%d';
     }
 
     public function getHeaders(): array
