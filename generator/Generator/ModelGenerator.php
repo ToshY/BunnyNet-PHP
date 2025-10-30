@@ -1187,24 +1187,39 @@ class ModelGenerator
     private static function generateOperationIdFrompath(string $path, string $method): string
     {
         $path = trim($path, '/');
-
         $parts = explode('/', $path);
 
-        // remove first part
+        // Remove the first static segment (like 'shield')
         array_shift($parts);
 
-        if (empty($parts) === true) {
-            $parts = ['List'];
+        // If the last part is a path parameter (e.g. {id}), keep it
+        $lastIsParam = !empty($parts) && preg_match('/^{.*}$/', end($parts));
+
+        // Filter out all params unless it's the last one and lastIsParam = true
+        $filteredParts = [];
+        foreach ($parts as $i => $p) {
+            $isParam = preg_match('/^{.*}$/', $p);
+            if (!$isParam || ($i === array_key_last($parts) && $lastIsParam)) {
+                $filteredParts[] = $p;
+            }
         }
 
-        $parts = array_filter($parts, fn ($p) => !preg_match('/^{.*}$/', $p));
+        // If no parts left, fallback to 'Root'
+        if (empty($filteredParts)) {
+            $filteredParts = ['Root'];
+        }
 
-        $parts = array_map(
-            fn ($p) => str_replace(' ', '', ClassUtils::toPascalCase(str_replace(['-', '_'], ' ', $p))),
-            $parts,
-        );
+        $filteredParts = array_map(function ($p) {
+            $p = trim($p, '{}');
+            return ClassUtils::toPascalCase(str_replace(['-', '_'], ' ', $p));
+        }, $filteredParts);
 
-        return ClassUtils::toPascalCase($method) . implode('', $parts);
+        if ($lastIsParam && count($filteredParts) > 1) {
+            $last = array_pop($filteredParts);
+            $filteredParts[] = 'By' . $last;
+        }
+
+        return ClassUtils::toPascalCase($method) . implode('', $filteredParts);
     }
 
 
