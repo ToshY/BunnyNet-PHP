@@ -22,7 +22,6 @@ use ToshY\BunnyNet\Model\Api\Shield\Waf\ListCustomWafRules;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEngineConfiguration;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEnums;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafProfiles;
-use ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafRules;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRule;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRuleAiRecommendation;
 use ToshY\BunnyNet\Model\Api\Shield\Waf\ReviewTriggeredRules;
@@ -41,6 +40,25 @@ final class Shield
 {
     /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
+        '/shield/shield-zone/{shieldZoneId}/access-lists' => [
+            'get' => null,
+            'post' => null,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/access-lists/configurations/{id}' => [
+            'patch' => null,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/access-lists/{id}' => [
+            'get' => null,
+            'delete' => null,
+            'patch' => null,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/access-lists/enums' => [
+            'get' => null,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/bot-detection' => [
+            'get' => null,
+            'patch' => null,
+        ],
         '/shield/ddos/enums' => [
             'get' => ListDdosEnums::class,
         ],
@@ -59,6 +77,15 @@ final class Shield
         '/shield/metrics/shield-zone/{shieldZoneId}/waf-rule/{ruleId}' => [
             'get' => GetWafRuleMetrics::class,
         ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/bot-detection' => [
+            'get' => null,
+        ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/upload-scanning' => [
+            'get' => null,
+        ],
+        '/shield/promo/state' => [
+            'get' => null,
+        ],
         '/shield/rate-limits/{shieldZoneId}' => [
             'get' => ListRateLimits::class,
         ],
@@ -73,6 +100,9 @@ final class Shield
         '/shield/shield-zones' => [
             'get' => ListShieldZones::class,
         ],
+        '/shield/shield-zones/pullzone-mapping' => [
+            'get' => null,
+        ],
         '/shield/shield-zone/{shieldZoneId}' => [
             'get' => GetShieldZone::class,
         ],
@@ -83,8 +113,15 @@ final class Shield
             'post' => CreateShieldZone::class,
             'patch' => UpdateShieldZone::class,
         ],
-        '/shield/waf/rules' => [
-            'get' => ListWafRules::class,
+        '/shield/shield-zone/{shieldZoneId}/upload-scanning' => [
+            'get' => null,
+            'patch' => null,
+        ],
+        '/shield/waf/rules/{shieldZoneId}' => [
+            'get' => null,
+        ],
+        '/shield/waf/rules/plan-segmentation' => [
+            'get' => null,
         ],
         '/shield/waf/rules/review-triggered/{shieldZoneId}' => [
             'get' => ReviewTriggeredRules::class,

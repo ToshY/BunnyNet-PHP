@@ -47,6 +47,7 @@ class UpdateShieldZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'shieldZone', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'premiumPlan', type: Type::BOOLEAN_TYPE),
+                new AbstractParameter(name: 'planType', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'learningMode', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'learningModeUntil', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'wafEnabled', type: Type::BOOLEAN_TYPE),
@@ -69,6 +70,8 @@ class UpdateShieldZone implements ModelInterface, BodyModelInterface
                         new AbstractParameter(name: 'valueEncoded', type: Type::STRING_TYPE, required: true),
                     ]),
                 ]),
+                new AbstractParameter(name: 'wafRequestBodyLimitAction', type: Type::INT_TYPE),
+                new AbstractParameter(name: 'wafResponseBodyLimitAction', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSShieldSensitivity', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSExecutionMode', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSChallengeWindow', type: Type::INT_TYPE),

@@ -91,6 +91,9 @@ final class Stream
         '/library/{libraryId}/videos/{videoId}/transcribe' => [
             'post' => TranscribeVideo::class,
         ],
+        '/library/{libraryId}/videos/{videoId}/smart' => [
+            'post' => null,
+        ],
         '/library/{libraryId}/videos/{videoId}/resolutions' => [
             'get' => VideoResolutionsInfo::class,
         ],
