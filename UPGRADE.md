@@ -1,3 +1,65 @@
+## 8.x
+
+This release comes with minor breaking changes due to changing namespaces for 5 Shield API models.
+
+### ‼️ Breaking changes
+
+| **7.x**                                                          | **8.x**                                                                |
+|------------------------------------------------------------------|------------------------------------------------------------------------|
+| `ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone`          | `ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone`          |
+| `ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone`             | `ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone`             |
+| `ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId` | `ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId` |
+| `ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones`           | `ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones`           |
+| `ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone`          | `ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone`          |
+
+### 🐛 Bug fixes
+
+#### Generator
+
+- Fixed generated classnames when missing the `operationId` property in the OpenAPI specs.
+- Fixed path parameter ordering when the `parameters` property in the OpenAPI specs is unordered.
+
+### 🚀 Enhancements
+
+| **API**       | **Action** | **Class**                                                                                                                                 | **Notes**                    |
+|---------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| Origin Errors | ADD        | [`GetOriginErrorLogs`](https://toshy.github.io/BunnyNet-PHP/origin-errors-api/#get-origin-errors-for-pullzone-id-and-date)                | [OpenAPI] Updated API models |
+| Base          | UPDATE     | [`AddOrUpdateEdgeRule`](https://toshy.github.io/BunnyNet-PHP/base-api/#addupdate-edge-rule)                                               | [OpenAPI] Updated API models |
+| Base          | UPDATE     | [`AddStorageZone`](https://toshy.github.io/BunnyNet-PHP/base-api/#add-storage-zone)                                                       | [OpenAPI] Updated API models |
+| Base          | UPDATE     | [`AddVideoLibrary`](https://toshy.github.io/BunnyNet-PHP/base-api/#add-video-library)                                                     | [OpenAPI] Updated API models |
+| Base          | UPDATE     | [`UpdateVideoLibrary`](https://toshy.github.io/BunnyNet-PHP/base-api/#update-video-library)                                               | [OpenAPI] Updated API models |
+| Base          | ADD        | [`GetUserAuditLog`](https://toshy.github.io/BunnyNet-PHP/base-api/#get-user-audit-log)                                                    | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`ListShieldZoneAccessLists`](https://toshy.github.io/BunnyNet-PHP/shield-api/#list-shield-zone-access-lists)                             | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetShieldZoneAccessList`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-access-list)                                 | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetShieldZoneAccessListEnums`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-access-list-enums)                      | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`CreateShieldZoneAccessList`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-shield-zone-access-list)                           | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`UpdateShieldZoneAccessList`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-shield-zone-access-list)                           | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`UpdateShieldZoneCuratedThreatList`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-shield-zone-curated-threat-list)            | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`DeleteShieldZoneAccessList`](https://toshy.github.io/BunnyNet-PHP/shield-api/#delete-shield-zone-access-list)                           | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetShieldZoneBotDetection`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-bot-detection)                             | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`CreateOrUpdateShieldZoneBotDetection`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-or-update-shield-zone-bot-detection)     | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetBotDetectionMetrics`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-bot-detection-metrics)                                    | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetUploadScanningMetrics`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-upload-scanning-metrics)                                | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetCurrentPromotions`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-current-promotions)                             | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`CreateRateLimit`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-rate-limit)                                                   | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`UpdateRateLimit`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-rate-limit)                                                   | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`CreateShieldZone`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-shield-zone)                                                 | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`GetShieldZone`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone)                                                       | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`GetShieldZoneByPullZoneId`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-by-pullzoneid)                             | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`ListShieldZones`](https://toshy.github.io/BunnyNet-PHP/shield-api/#list-shield-zones)                                                   | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`ListShieldZonesPullzoneMapping`](https://toshy.github.io/BunnyNet-PHP/shield-api/#list-shield-zones-pull-zone-mapping)                  | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`UpdateShieldZone`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-shield-zone)                                                 | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetShieldZoneUploadScanning`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-shield-zone-upload-scanning)                         | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`CreateOrUpdateShieldZoneUploadScanning`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-or-update-shield-zone-upload-scanning) | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`CreateCustomWafRule`](https://toshy.github.io/BunnyNet-PHP/shield-api/#create-custom-waf-rule)                                          | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetWafRules`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-waf-rules)                                                           | [OpenAPI] Updated API models |
+| Shield        | ADD        | [`GetWafRulesPlanSegmentation`](https://toshy.github.io/BunnyNet-PHP/shield-api/#get-waf-rules-plan-segmentation)                         | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`UpdateCustomWafRule`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-custom-waf-rule)                                          | [OpenAPI] Updated API models |
+| Shield        | UPDATE     | [`UpdateCustomWafRuleByPatch`](https://toshy.github.io/BunnyNet-PHP/shield-api/#update-custom-waf-rule-patch)                             | [OpenAPI] Updated API models |
+| Stream        | UPDATE     | [`TranscribeVideo`](https://toshy.github.io/BunnyNet-PHP/stream-api/#transcribe-video)                                                    | [OpenAPI] Updated API models |
+| Stream        | ADD        | [`TriggerSmartActions`](https://toshy.github.io/BunnyNet-PHP/stream-api/#trigger-smart-actions)                                           | [OpenAPI] Updated API models |
+| Stream        | UPDATE     | [`UploadVideo`](https://toshy.github.io/BunnyNet-PHP/stream-api/#upload-video)                                                            | [OpenAPI] Updated API models |
+
 ## 7.x
 
 This release comes with breaking changes for the usability of the library.

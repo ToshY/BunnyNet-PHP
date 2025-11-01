@@ -3,7 +3,7 @@
 Using [composer](https://getcomposer.org/doc/00-intro.md), run:
 
 ```shell
-composer require toshy/bunnynet-php:^7.0
+composer require toshy/bunnynet-php:^8.0
 ```
 
 ### Upgrading

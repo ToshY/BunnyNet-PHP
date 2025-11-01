@@ -1025,7 +1025,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Create Or Update Shield Zone Bot Detection](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-bot-detection)
+#### [Create Or Update Shield Zone Upload Scanning](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-upload-scanning)
 
 ```php
 $bunnyHttpClient->request(
