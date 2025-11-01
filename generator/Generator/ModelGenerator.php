@@ -232,6 +232,7 @@ class ModelGenerator
         $existingClassHeaders = $this->getExistingModelHeaders($endpointClass);
 
         $newSpecsPathParameters = $this->processParametersForPath(
+            path: $path,
             operation: $operation,
         );
 
@@ -908,6 +909,7 @@ class ModelGenerator
      * @return array<mixed>
      */
     private function processParametersForPath(
+        string $path,
         Operation $operation,
     ): array {
         $parameters = [];
@@ -926,6 +928,18 @@ class ModelGenerator
                 'type' => $paramType,
             ];
         }
+
+        // Extract the path parameters from the path
+        $matches = [];
+        preg_match_all('/\{([a-zA-Z0-9_]+)\}/', $path, $matches);
+        /* @phpstan-ignore-next-line nullCoalesce.offset */
+        $pathParameters = $matches[1] ?? [];
+
+        usort($parameters, function ($a, $b) use ($pathParameters) {
+            $pos_a = array_search($a['name'], $pathParameters, true);
+            $pos_b = array_search($b['name'], $pathParameters, true);
+            return $pos_a <=> $pos_b;
+        });
 
         return $parameters;
     }

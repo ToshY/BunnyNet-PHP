@@ -16,15 +16,15 @@ use ToshY\BunnyNet\Model\ModelInterface;
 class UpdateShieldZoneAccessList implements ModelInterface, BodyModelInterface
 {
     /**
-     * @param int $id
      * @param int $shieldZoneId
+     * @param int $id
      * @param array<string,mixed> $body
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $id,
-        #[PathProperty]
         public readonly int $shieldZoneId,
+        #[PathProperty]
+        public readonly int $id,
         #[BodyProperty]
         public readonly array $body = [],
     ) {

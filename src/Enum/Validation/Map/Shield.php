@@ -31,8 +31,8 @@ use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\UpdateRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId;
-use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZonesPullzoneMapping;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZonesPullzoneMapping;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\UploadScanning\CreateOrUpdateShieldZoneUploadScanning;
 use ToshY\BunnyNet\Model\Api\Shield\UploadScanning\GetShieldZoneUploadScanning;
@@ -79,7 +79,7 @@ final class Shield
         UpdateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
         CreateRateLimit::class => ModelValidationStrategy::STRICT_BODY,
         ListShieldZones::class => ModelValidationStrategy::STRICT_QUERY,
-        GetShieldZonesPullzoneMapping::class => ModelValidationStrategy::NONE,
+        ListShieldZonesPullzoneMapping::class => ModelValidationStrategy::NONE,
         GetShieldZone::class => ModelValidationStrategy::NONE,
         GetShieldZoneByPullZoneId::class => ModelValidationStrategy::NONE,
         CreateShieldZone::class => ModelValidationStrategy::STRICT_BODY,

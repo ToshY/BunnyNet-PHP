@@ -37,11 +37,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [List Shield Zone Pull Zone Mapping](https://docs.bunny.net/reference/get_shield-shield-zones-pullzone-mapping)
+#### [List Shield Zones Pull Zone Mapping](https://docs.bunny.net/reference/get_shield-shield-zones-pullzone-mapping)
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZonesPullzoneMapping()
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZonesPullzoneMapping()
 );
 ```
 
@@ -513,7 +513,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get WAF Rules Segmentation](https://docs.bunny.net/reference/get_shield-waf-rules-plan-segmentation)
+#### [Get WAF Rules Plan Segmentation](https://docs.bunny.net/reference/get_shield-waf-rules-plan-segmentation)
 
 ```php
 $bunnyHttpClient->request(

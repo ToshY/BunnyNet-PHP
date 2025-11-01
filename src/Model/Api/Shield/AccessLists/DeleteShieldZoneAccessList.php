@@ -12,14 +12,14 @@ use ToshY\BunnyNet\Model\ModelInterface;
 class DeleteShieldZoneAccessList implements ModelInterface
 {
     /**
-     * @param int $id
      * @param int $shieldZoneId
+     * @param int $id
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $id,
-        #[PathProperty]
         public readonly int $shieldZoneId,
+        #[PathProperty]
+        public readonly int $id,
     ) {
     }
 

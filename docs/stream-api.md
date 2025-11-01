@@ -548,6 +548,10 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? warning
+
+    This endpoint will return a `400` status code if premium encoding is there are no captions are available (or transcribing has not been triggered).
+
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
 ```php
