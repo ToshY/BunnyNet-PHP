@@ -477,7 +477,7 @@ $bunnyHttpClient->request(
 
 ??? warning
 
-    - If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `We do not support Custom WAF Rule creation on our Free Tier of Bunny Shield, please upgrade to Advanced.`
+    If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `We do not support Custom WAF Rule creation on our Free Tier of Bunny Shield, please upgrade to Advanced.`
 
 #### [List WAF Profiles](https://docs.bunny.net/reference/get_shield-waf-profiles)
 
@@ -892,6 +892,10 @@ $bunnyHttpClient->request(
         - `1` = CIDR Blocks
         - `2` = ASNs
         - `3` = Countries
+
+??? warning
+
+    If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `Custom Access List limit exceeded. You can have a maximum of 1 custom lists. Please upgrade your Bunny Shield tier or contact support for assistance.`
 
 #### [Update Shield Zone Access List](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-access-lists-id)
 
