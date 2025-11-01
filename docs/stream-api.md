@@ -220,6 +220,10 @@ $bunnyHttpClient->request(
             'transcribeEnabled' => true,
             'transcribeLanguages' => 'fi,jp',
             'sourceLanguage' => 'en',
+            'generateTitle' => true,
+            'generateDescription' => true,
+            'generateChapters' => true,
+            'generateMoments' => true,
         ],
     )
 );
@@ -467,6 +471,8 @@ $bunnyHttpClient->request(
             ],
             'generateTitle' => true,
             'generateDescription' => true,
+            'generateChapters' => true,
+            'generateMoments' => true,
             'sourceLanguage' => 'en',
         ],   
     )
@@ -523,6 +529,28 @@ $bunnyHttpClient->request(
 ??? warning
 
     This endpoint will return a `400` status code if all available resolutions for the video are passed to `resolutionsToDelete`, as there must be at least one resolution available after cleanup.
+
+#### [Trigger Smart Actions](https://docs.bunny.net/reference/video_smartgenerate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TriggerSmartActions(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        body: [
+            'generateTitle' => true,
+            'generateDescription' => true,
+            'generateChapters' => true,
+            'generateMoments' => true,
+            'sourceLanguage' => 'en',
+        ],
+    )
+);
+```
+
+??? warning
+
+    This endpoint will return a `400` status code if premium encoding is there are no captions are available (or transcribing has not been triggered).
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 

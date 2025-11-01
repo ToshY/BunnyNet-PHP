@@ -106,7 +106,15 @@ class MapGenerator
     private static function scanExistingModelEndpointClasses(string $directory): array
     {
         $map = [];
-        $recursiveIteratorIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+
+        try {
+            $directoryIterator = new RecursiveDirectoryIterator($directory);
+        } catch (\UnexpectedValueException) {
+            mkdir($directory, 0755, true);
+            $directoryIterator = new RecursiveDirectoryIterator($directory);
+        }
+
+        $recursiveIteratorIterator = new RecursiveIteratorIterator($directoryIterator);
         foreach ($recursiveIteratorIterator as $file) {
             if ($file->isFile() === false || $file->getExtension() !== FileUtils::PHP_EXTENSION) {
                 continue;

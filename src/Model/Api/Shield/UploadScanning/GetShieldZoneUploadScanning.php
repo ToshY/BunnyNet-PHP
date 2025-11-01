@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Shield\Zone;
+namespace ToshY\BunnyNet\Model\Api\Shield\UploadScanning;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetShieldZoneByPullZoneId implements ModelInterface
+class GetShieldZoneUploadScanning implements ModelInterface
 {
     /**
-     * @param int $pullZoneId
+     * @param int $shieldZoneId
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $pullZoneId,
+        public readonly int $shieldZoneId,
     ) {
     }
 
@@ -27,7 +27,7 @@ class GetShieldZoneByPullZoneId implements ModelInterface
 
     public function getPath(): string
     {
-        return 'shield/shield-zone/get-by-pullzone/%d';
+        return 'shield/shield-zone/%d/upload-scanning';
     }
 
     public function getHeaders(): array

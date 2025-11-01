@@ -20,4 +20,6 @@ enum Generator: string
     case SHIELD = 'Shield';
 
     case STREAM = 'Stream';
+
+    case ORIGIN_ERRORS = 'OriginErrors';
 }

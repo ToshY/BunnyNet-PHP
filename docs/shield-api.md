@@ -28,7 +28,7 @@ $bunnyHttpClient = new BunnyHttpClient(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\ListShieldZones(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones(
         query: [
             'page' => 1,
             'perPage' => 1000,
@@ -37,11 +37,19 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [List Shield Zones Pull Zone Mapping](https://docs.bunny.net/reference/get_shield-shield-zones-pullzone-mapping)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZonesPullzoneMapping()
+);
+```
+
 #### [Get Shield Zone](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid)
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone(
         shieldZoneId: 1,
     )
 );
@@ -51,7 +59,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\GetShieldZoneByPullZoneId(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId(
         pullZoneId: 1,
     )
 );
@@ -61,12 +69,13 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\CreateShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone(
         body: [
             'pullZoneId' => 1,
             'shieldZone' => [
                 'shieldZoneId' => 2,
                 'premiumPlan' => false,
+                'planType' => 0,
                 'learningMode' => true,
                 'learningModeUntil' => 'Y-m-d\TH:i:s',
                 'wafEnabled' => true,
@@ -78,6 +87,8 @@ $bunnyHttpClient->request(
                 'wafRealtimeThreatIntelligenceEnabled' => false,
                 'wafProfileId' => 1,
                 'wafEngineConfig' => [],
+                'wafRequestBodyLimitAction' => 0,
+                'wafResponseBodyLimitAction' => 0,
                 'dDoSShieldSensitivity' => 1,
                 'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
@@ -99,12 +110,13 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Shield\Zone\UpdateShieldZone(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone(
         body: [
             'shieldZoneId' => 2,
             'shieldZone' => [
                 'shieldZoneId' => 2,
                 'premiumPlan' => false,
+                'planType' => 0,
                 'learningMode' => true,
                 'learningModeUntil' => 'Y-m-d\TH:i:s',
                 'wafEnabled' => true,
@@ -116,6 +128,8 @@ $bunnyHttpClient->request(
                 'wafRealtimeThreatIntelligenceEnabled' => false,
                 'wafProfileId' => 1,
                 'wafEngineConfig' => [],
+                'wafRequestBodyLimitAction' => 0,
+                'wafResponseBodyLimitAction' => 0,
                 'dDoSShieldSensitivity' => 1,
                 'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
@@ -243,6 +257,39 @@ $bunnyHttpClient->request(
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
+                'chainedRuleConditions' => [
+                    [
+                        'variableTypes' => [
+                            'REQUEST_URI' => 'string',
+                            'REQUEST_URI_RAW' => 'string',
+                            'ARGS' => 'string',
+                            'ARGS_COMBINED_SIZE' => 'string',
+                            'ARGS_GET' => 'string',
+                            'ARGS_GET_NAMES' => 'string',
+                            'ARGS_POST' => 'string',
+                            'ARGS_POST_NAMES' => 'string',
+                            'FILES_NAMES' => 'string',
+                            'GEO' => 'string',
+                            'REMOTE_ADDR' => 'string',
+                            'QUERY_STRING' => 'string',
+                            'REQUEST_BASENAME' => 'string',
+                            'REQUEST_BODY' => 'string',
+                            'REQUEST_COOKIES_NAMES' => 'string',
+                            'REQUEST_COOKIES' => 'string',
+                            'REQUEST_FILENAME' => 'string',
+                            'REQUEST_HEADERS_NAMES' => 'string',
+                            'REQUEST_HEADERS' => 'string',
+                            'REQUEST_LINE' => 'string',
+                            'REQUEST_METHOD' => 'string',
+                            'REQUEST_PROTOCOL' => 'string',
+                            'RESPONSE_BODY' => 'string',
+                            'RESPONSE_HEADERS' => 'string',
+                            'RESPONSE_STATUS' => 'string',
+                        ],
+                        'operatorType' => 0,
+                        'value' => 'string',
+                    ],
+                ],
             ],
         ],
     )
@@ -294,6 +341,39 @@ $bunnyHttpClient->request(
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
+                'chainedRuleConditions' => [
+                    [
+                        'variableTypes' => [
+                            'REQUEST_URI' => 'string',
+                            'REQUEST_URI_RAW' => 'string',
+                            'ARGS' => 'string',
+                            'ARGS_COMBINED_SIZE' => 'string',
+                            'ARGS_GET' => 'string',
+                            'ARGS_GET_NAMES' => 'string',
+                            'ARGS_POST' => 'string',
+                            'ARGS_POST_NAMES' => 'string',
+                            'FILES_NAMES' => 'string',
+                            'GEO' => 'string',
+                            'REMOTE_ADDR' => 'string',
+                            'QUERY_STRING' => 'string',
+                            'REQUEST_BASENAME' => 'string',
+                            'REQUEST_BODY' => 'string',
+                            'REQUEST_COOKIES_NAMES' => 'string',
+                            'REQUEST_COOKIES' => 'string',
+                            'REQUEST_FILENAME' => 'string',
+                            'REQUEST_HEADERS_NAMES' => 'string',
+                            'REQUEST_HEADERS' => 'string',
+                            'REQUEST_LINE' => 'string',
+                            'REQUEST_METHOD' => 'string',
+                            'REQUEST_PROTOCOL' => 'string',
+                            'RESPONSE_BODY' => 'string',
+                            'RESPONSE_HEADERS' => 'string',
+                            'RESPONSE_STATUS' => 'string',
+                        ],
+                        'operatorType' => 0,
+                        'value' => 'string',
+                    ],
+                ],
             ],
         ],
     )
@@ -356,6 +436,39 @@ $bunnyHttpClient->request(
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
+                'chainedRuleConditions' => [
+                    [
+                        'variableTypes' => [
+                            'REQUEST_URI' => 'string',
+                            'REQUEST_URI_RAW' => 'string',
+                            'ARGS' => 'string',
+                            'ARGS_COMBINED_SIZE' => 'string',
+                            'ARGS_GET' => 'string',
+                            'ARGS_GET_NAMES' => 'string',
+                            'ARGS_POST' => 'string',
+                            'ARGS_POST_NAMES' => 'string',
+                            'FILES_NAMES' => 'string',
+                            'GEO' => 'string',
+                            'REMOTE_ADDR' => 'string',
+                            'QUERY_STRING' => 'string',
+                            'REQUEST_BASENAME' => 'string',
+                            'REQUEST_BODY' => 'string',
+                            'REQUEST_COOKIES_NAMES' => 'string',
+                            'REQUEST_COOKIES' => 'string',
+                            'REQUEST_FILENAME' => 'string',
+                            'REQUEST_HEADERS_NAMES' => 'string',
+                            'REQUEST_HEADERS' => 'string',
+                            'REQUEST_LINE' => 'string',
+                            'REQUEST_METHOD' => 'string',
+                            'REQUEST_PROTOCOL' => 'string',
+                            'RESPONSE_BODY' => 'string',
+                            'RESPONSE_HEADERS' => 'string',
+                            'RESPONSE_STATUS' => 'string',
+                        ],
+                        'operatorType' => 0,
+                        'value' => 'string',
+                    ],
+                ],
             ],
         ],
     )
@@ -364,7 +477,7 @@ $bunnyHttpClient->request(
 
 ??? warning
 
-    - If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `We do not support Custom WAF Rule creation on our Free Tier of Bunny Shield, please upgrade to Advanced.`
+    If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `We do not support Custom WAF Rule creation on our Free Tier of Bunny Shield, please upgrade to Advanced.`
 
 #### [List WAF Profiles](https://docs.bunny.net/reference/get_shield-waf-profiles)
 
@@ -387,6 +500,26 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Shield\Waf\ListWafEngineConfiguration()
+);
+```
+
+#### [Get WAF Rules](https://docs.bunny.net/reference/get_shield-waf-rules-shieldzoneid)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Waf\GetWafRules(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Get WAF Rules Plan Segmentation](https://docs.bunny.net/reference/get_shield-waf-rules-plan-segmentation)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Waf\GetWafRulesPlanSegmentation(
+        shieldZoneId: 1,
+    )
 );
 ```
 
@@ -469,13 +602,56 @@ $bunnyHttpClient->request(
                 'transformationTypes' => [1],
                 'value' => 'string',
                 'requestCount' => 0,
+                'counterKeyType' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
+                'chainedRuleConditions' => [
+                    [
+                        'variableTypes' => [
+                            'REQUEST_URI' => 'string',
+                            'REQUEST_URI_RAW' => 'string',
+                            'ARGS' => 'string',
+                            'ARGS_COMBINED_SIZE' => 'string',
+                            'ARGS_GET' => 'string',
+                            'ARGS_GET_NAMES' => 'string',
+                            'ARGS_POST' => 'string',
+                            'ARGS_POST_NAMES' => 'string',
+                            'FILES_NAMES' => 'string',
+                            'GEO' => 'string',
+                            'REMOTE_ADDR' => 'string',
+                            'QUERY_STRING' => 'string',
+                            'REQUEST_BASENAME' => 'string',
+                            'REQUEST_BODY' => 'string',
+                            'REQUEST_COOKIES_NAMES' => 'string',
+                            'REQUEST_COOKIES' => 'string',
+                            'REQUEST_FILENAME' => 'string',
+                            'REQUEST_HEADERS_NAMES' => 'string',
+                            'REQUEST_HEADERS' => 'string',
+                            'REQUEST_LINE' => 'string',
+                            'REQUEST_METHOD' => 'string',
+                            'REQUEST_PROTOCOL' => 'string',
+                            'RESPONSE_BODY' => 'string',
+                            'RESPONSE_HEADERS' => 'string',
+                            'RESPONSE_STATUS' => 'string',
+                        ],
+                        'operatorType' => 0,
+                        'value' => 'string',
+                    ],
+                ],
             ],
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `counterKeyType` has the following possible values:
+        - `0`
+        - `1`
+        - `2`
+        - `3`
+        - `4`
 
 #### [Delete Rate Limit](https://docs.bunny.net/reference/delete_shield-rate-limit-id)
 
@@ -531,13 +707,56 @@ $bunnyHttpClient->request(
                 'transformationTypes' => [1],
                 'value' => 'string',
                 'requestCount' => 0,
+                'counterKeyType' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
+                'chainedRuleConditions' => [
+                    [
+                        'variableTypes' => [
+                            'REQUEST_URI' => 'string',
+                            'REQUEST_URI_RAW' => 'string',
+                            'ARGS' => 'string',
+                            'ARGS_COMBINED_SIZE' => 'string',
+                            'ARGS_GET' => 'string',
+                            'ARGS_GET_NAMES' => 'string',
+                            'ARGS_POST' => 'string',
+                            'ARGS_POST_NAMES' => 'string',
+                            'FILES_NAMES' => 'string',
+                            'GEO' => 'string',
+                            'REMOTE_ADDR' => 'string',
+                            'QUERY_STRING' => 'string',
+                            'REQUEST_BASENAME' => 'string',
+                            'REQUEST_BODY' => 'string',
+                            'REQUEST_COOKIES_NAMES' => 'string',
+                            'REQUEST_COOKIES' => 'string',
+                            'REQUEST_FILENAME' => 'string',
+                            'REQUEST_HEADERS_NAMES' => 'string',
+                            'REQUEST_HEADERS' => 'string',
+                            'REQUEST_LINE' => 'string',
+                            'REQUEST_METHOD' => 'string',
+                            'REQUEST_PROTOCOL' => 'string',
+                            'RESPONSE_BODY' => 'string',
+                            'RESPONSE_HEADERS' => 'string',
+                            'RESPONSE_STATUS' => 'string',
+                        ],
+                        'operatorType' => 0,
+                        'value' => 'string',
+                    ],
+                ],
             ],
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `counterKeyType` has the following possible values:
+        - `0`
+        - `1`
+        - `2`
+        - `3`
+        - `4`
 
 ### Metrics
 
@@ -582,6 +801,26 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [Get Bot Detection Metrics](https://docs.bunny.net/reference/get_shield-metrics-shield-zone-shieldzoneid-bot-detection)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Get Upload Scanning Metrics](https://docs.bunny.net/reference/get_shield-metrics-shield-zone-shieldzoneid-upload-scanning)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics(
+        shieldZoneId: 1,
+    )
+);
+```
+
 ### Event Logs
 
 #### [List Event Logs](https://docs.bunny.net/reference/get_shield-event-logs-shieldzoneid-date-continuationtoken)
@@ -595,6 +834,223 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+### Access Lists
+
+#### [List Shield Zone Access Lists](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-access-lists)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\ListShieldZoneAccessLists(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Get Shield Zone Access List](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-access-lists-id)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessList(
+        id: 2,
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Get Shield Zone Access List Enums](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-access-lists-enums)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessListEnums(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Create Shield Zone Access List](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-access-lists-enums)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\CreateShieldZoneAccessList(
+        shieldZoneId: 1,
+        body: [
+            'name' => 'Custom Access List',
+            'description' => 'This is a description for the access list',
+            'type' => 0,
+            'content' => '192.168.0.1',
+            'checksum' => '37d7a80604871e579850a658c7add2ae7557d0c6abcc9b31ecddc4424207eba3',
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `0` = IP Addresses 
+        - `1` = CIDR Blocks
+        - `2` = ASNs
+        - `3` = Countries
+
+??? warning
+
+    If this endpoint is requested for a shield zone on a free tier, it returns a `202` status code with the error message: `Custom Access List limit exceeded. You can have a maximum of 1 custom lists. Please upgrade your Bunny Shield tier or contact support for assistance.`
+
+#### [Update Shield Zone Access List](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-access-lists-id)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneAccessList(
+        id: 2,
+        shieldZoneId: 1,
+        body: [
+            'name' => 'Custom Access List Updated',
+            'content' => '192.168.0.1',
+            'checksum' => '37d7a80604871e579850a658c7add2ae7557d0c6abcc9b31ecddc4424207eba3',
+        ],
+    )
+);
+```
+
+#### [Update Shield Zone Curated Threat List](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-access-lists-configurations-id)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneCuratedThreatList(
+        id: 2,
+        shieldZoneId: 1,
+        body: [
+            'isEnabled' => true,
+            'action' => 4,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `action` has the following possible values:
+        - `0` = <unknown>
+        - `1` = Allow
+        - `2` = Block
+        - `3` = Challenge
+        - `4` = Log
+        - `5` = Bypass
+
+#### [Delete Shield Zone Access List](https://docs.bunny.net/reference/delete_shield-shield-zone-shieldzoneid-access-lists-id)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\AccessLists\DeleteShieldZoneAccessList(
+        id: 2,
+        shieldZoneId: 1,
+    )
+);
+```
+
+### Bot Detection
+
+#### [Get Shield Zone Bot Detection](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-bot-detection)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Create Or Update Shield Zone Bot Detection](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-bot-detection)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection(
+        shieldZoneId: 1,
+        body: [
+            'shieldZoneId' => 1,
+            'executionMode' => 0,
+            'requestIntegrity' => [
+                'sensitivity' => 0,    
+            ],
+            'ipAddress' => [
+                'sensitivity' => 0,    
+            ],
+            'browserFingerprint' => [
+                'sensitivity' => 0,    
+                'aggression' => 0,    
+                'complexEnabled' => false,    
+            ],
+        ]
+    )
+);
+```
+
+??? note
+
+    - The key `executionMode` has the following possible values:
+        - `0` = Log
+        - `1` = Challenge
+    - The key `sensitivity` has the following possible values:
+        - `0` = <off>
+        - `1` = Low
+        - `2` = Medium
+        - `3` = High
+    - The key `aggression` has the following possible values:
+        - `0`
+        - `1`
+        - `2`
+        - `3`
+        - `4`
+
+### Promotions
+
+#### [Get Shield Zone Current Promotions](https://docs.bunny.net/reference/get_shield-promo-state)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Promo\GetCurrentPromotions()
+);
+```
+
+### Upload Scanning
+
+#### [Get Shield Zone Upload Scanning](https://docs.bunny.net/reference/get_shield-shield-zone-shieldzoneid-upload-scanning)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\UploadScanning\GetShieldZoneUploadScanning(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Create Or Update Shield Zone Bot Detection](https://docs.bunny.net/reference/patch_shield-shield-zone-shieldzoneid-bot-detection)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\UploadScanning\CreateOrUpdateShieldZoneUploadScanning(
+        shieldZoneId: 1,
+        body: [
+            'shieldZoneId' => 1,
+            'isEnabled' => false,
+            'csamScanningMode' => 2,
+            'antivirusScanningMode' => 1,
+        ]
+    )
+);
+```
+
+??? note
+
+    - The key `csamScanningMode` has the following possible values:
+        - `0` = <off>
+        - `1` = Log
+        - `2` = Block
+    - The key `antivirusScanningMode` has the following possible values:
+        - `0` = <off>
+        - `1` = Log
+        - `2` = Block
 
 ## Reference
 

@@ -61,6 +61,10 @@ class UploadVideo implements ModelInterface, QueryModelInterface
             new AbstractParameter(name: 'transcribeEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'transcribeLanguages', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'sourceLanguage', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'generateTitle', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'generateDescription', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'generateChapters', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'generateMoments', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

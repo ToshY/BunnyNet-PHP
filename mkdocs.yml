@@ -62,6 +62,7 @@ nav:
     - Stream: stream-api.md
     - Edge Scripting: edge-scripting-api.md
     - Shield: shield-api.md
+    - Origin Errors: origin-errors-api.md
     - Logging: logging-api.md
   - Validation:
     - Model validation: validation.md

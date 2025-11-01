@@ -141,7 +141,10 @@ class ModelGenerator
                         continue;
                     }
 
+                    $newNamespaceDirectory = rtrim($newNamespaceDirectory, '\\');
+
                     $newNamespace = $this->baseNamespace . '\\' . $newNamespaceDirectory;
+                    $newNamespace = rtrim($newNamespace, '\\');
                     $endpointClass = $newNamespace . '\\' . $className;
                 } else {
                     $shortClassName = ClassUtils::getShortClassName($endpointClass);
@@ -229,6 +232,7 @@ class ModelGenerator
         $existingClassHeaders = $this->getExistingModelHeaders($endpointClass);
 
         $newSpecsPathParameters = $this->processParametersForPath(
+            path: $path,
             operation: $operation,
         );
 
@@ -261,7 +265,7 @@ class ModelGenerator
         // Prepare output directory path
         $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
             $this->baseNamespace,
-            $newNamespace,
+            $this->baseNamespace === $newNamespace ? '' : $newNamespace,
             $this->outputDirectory,
         );
         FileUtils::createDirectory($outputDirectoryPath);
@@ -905,6 +909,7 @@ class ModelGenerator
      * @return array<mixed>
      */
     private function processParametersForPath(
+        string $path,
         Operation $operation,
     ): array {
         $parameters = [];
@@ -923,6 +928,18 @@ class ModelGenerator
                 'type' => $paramType,
             ];
         }
+
+        // Extract the path parameters from the path
+        $matches = [];
+        preg_match_all('/\{([a-zA-Z0-9_]+)\}/', $path, $matches);
+        /* @phpstan-ignore-next-line nullCoalesce.offset */
+        $pathParameters = $matches[1] ?? [];
+
+        usort($parameters, function ($a, $b) use ($pathParameters) {
+            $pos_a = array_search($a['name'], $pathParameters, true);
+            $pos_b = array_search($b['name'], $pathParameters, true);
+            return $pos_a <=> $pos_b;
+        });
 
         return $parameters;
     }
@@ -1112,6 +1129,7 @@ class ModelGenerator
     }
 
     /**
+     * @note This is only used when an API class is newly created
      * @param string $path
      * @param string $httpMethod
      * @return string[]
@@ -1120,6 +1138,33 @@ class ModelGenerator
     {
         /* @phpstan-ignore-next-line property.notFound */
         $specData = $this->apiSpec->paths->getPath($path)->getRawSpecData()[$httpMethod];
+
+        if (isset($specData['operationId']) === false && (empty($specData['summary']) === true || empty($specData['description']) === true)) {
+            $class = self::generateOperationIdFromPath($path, $httpMethod);
+
+            $namespace = empty($specData['tags']) === false ? OpenApiModelUtils::extractNamespaceFromTags(
+                $specData['tags'],
+            ) : '';
+
+            return [
+                $namespace,
+                $class,
+            ];
+        }
+
+        if (isset($specData['tags']) === false) {
+            if (empty($specData['summary']) === false) {
+                return [
+                    '',
+                    ClassUtils::toPascalCase($specData['summary']),
+                ];
+            } elseif (empty($specData['description']) === false) {
+                return [
+                    '',
+                    ClassUtils::toPascalCase($specData['description']),
+                ];
+            }
+        }
 
         $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
 
@@ -1147,6 +1192,45 @@ class ModelGenerator
             $class,
         ];
     }
+
+    private static function generateOperationIdFromPath(string $path, string $method): string
+    {
+        $path = trim($path, '/');
+        $parts = explode('/', $path);
+
+        // Remove the first static segment (like 'shield')
+        array_shift($parts);
+
+        // If the last part is a path parameter (e.g. {id}), keep it
+        $lastIsParam = !empty($parts) && preg_match('/^{.*}$/', end($parts));
+
+        // Filter out all params unless it's the last one and lastIsParam = true
+        $filteredParts = [];
+        foreach ($parts as $i => $p) {
+            $isParam = preg_match('/^{.*}$/', $p);
+            if (!$isParam || ($i === array_key_last($parts) && $lastIsParam)) {
+                $filteredParts[] = $p;
+            }
+        }
+
+        // If no parts left, fallback to 'Root'
+        if (empty($filteredParts)) {
+            $filteredParts = ['Root'];
+        }
+
+        $filteredParts = array_map(function ($p) {
+            $p = trim($p, '{}');
+            return ClassUtils::toPascalCase(str_replace(['-', '_'], ' ', $p));
+        }, $filteredParts);
+
+        if ($lastIsParam && count($filteredParts) > 1) {
+            $last = array_pop($filteredParts);
+            $filteredParts[] = 'By' . $last;
+        }
+
+        return ClassUtils::toPascalCase($method) . implode('', $filteredParts);
+    }
+
 
     /**
      * @param string $operationId

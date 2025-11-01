@@ -42,9 +42,9 @@ use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer as PullZoneAddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer as PullZoneAddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddOrUpdateEdgeRule;
@@ -59,9 +59,9 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\GetSafeHopStatistics;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ListPullZones;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\PurgeCache;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer as PullZoneRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedIp;
-use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer as PullZoneRemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
@@ -83,8 +83,8 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
@@ -94,8 +94,8 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetLanguages;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetTranscribingStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
@@ -113,6 +113,7 @@ use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
 use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
 use ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails;
+use ToshY\BunnyNet\Model\Api\Base\User\GetUserAuditLog;
 use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
@@ -131,6 +132,9 @@ final class Base
 {
     /** @var array<string,array<string,class-string|null>> $endpoints */
     public static array $endpoints = [
+        '/country' => [
+            'get' => ListCountries::class,
+        ],
         '/dnszone' => [
             'get' => ListDnsZones::class,
             'post' => AddDnsZone::class,
@@ -155,47 +159,6 @@ final class Base
         ],
         '/dnszone/{zoneId}/records' => [
             'put' => AddDnsRecord::class,
-        ],
-        '/country' => [
-            'get' => ListCountries::class,
-        ],
-        '/purge' => [
-            'post' => PurgeUrl::class,
-            'get' => PurgeUrlByHeader::class,
-        ],
-        '/videolibrary' => [
-            'get' => ListVideoLibraries::class,
-            'post' => AddVideoLibrary::class,
-        ],
-        '/videolibrary/{id}' => [
-            'get' => GetVideoLibrary::class,
-            'post' => UpdateVideoLibrary::class,
-            'delete' => DeleteVideoLibrary::class,
-        ],
-        '/videolibrary/languages' => [
-            'get' => GetLanguages::class,
-        ],
-        '/videolibrary/resetApiKey' => [
-            'post' => ResetPassword::class,
-        ],
-        '/videolibrary/{id}/resetApiKey' => [
-            'post' => ResetPasswordByPathParameter::class,
-        ],
-        '/videolibrary/{id}/addAllowedReferrer' => [
-            'post' => AddAllowedReferer::class,
-        ],
-        '/videolibrary/{id}/removeAllowedReferrer' => [
-            'post' => RemoveAllowedReferer::class,
-        ],
-        '/videolibrary/{id}/addBlockedReferrer' => [
-            'post' => AddBlockedReferer::class,
-        ],
-        '/videolibrary/{id}/removeBlockedReferrer' => [
-            'post' => RemoveBlockedReferer::class,
-        ],
-        '/videolibrary/{id}/watermark' => [
-            'put' => AddWatermark::class,
-            'delete' => DeleteWatermark::class,
         ],
         '/pullzone' => [
             'get' => ListPullZones::class,
@@ -243,16 +206,16 @@ final class Base
             'post' => ResetTokenKey::class,
         ],
         '/pullzone/{id}/addAllowedReferrer' => [
-            'post' => PullZoneAddAllowedReferer::class,
+            'post' => AddAllowedReferer::class,
         ],
         '/pullzone/{id}/removeAllowedReferrer' => [
-            'post' => PullZoneRemoveAllowedReferer::class,
+            'post' => RemoveAllowedReferer::class,
         ],
         '/pullzone/{id}/addBlockedReferrer' => [
-            'post' => PullZoneAddBlockedReferer::class,
+            'post' => AddBlockedReferer::class,
         ],
         '/pullzone/{id}/removeBlockedReferrer' => [
-            'post' => PullZoneRemoveBlockedReferer::class,
+            'post' => RemoveBlockedReferer::class,
         ],
         '/pullzone/{id}/addBlockedIp' => [
             'post' => AddBlockedIp::class,
@@ -269,8 +232,39 @@ final class Base
         '/pullzone/{id}/removeHostname' => [
             'delete' => RemoveCustomHostname::class,
         ],
-        '/region' => [
-            'get' => ListRegions::class,
+        '/videolibrary' => [
+            'get' => ListVideoLibraries::class,
+            'post' => AddVideoLibrary::class,
+        ],
+        '/videolibrary/{id}' => [
+            'get' => GetVideoLibrary::class,
+            'post' => UpdateVideoLibrary::class,
+            'delete' => DeleteVideoLibrary::class,
+        ],
+        '/videolibrary/languages' => [
+            'get' => GetLanguages::class,
+        ],
+        '/videolibrary/resetApiKey' => [
+            'post' => ResetPassword::class,
+        ],
+        '/videolibrary/{id}/resetApiKey' => [
+            'post' => ResetPasswordByPathParameter::class,
+        ],
+        '/videolibrary/{id}/addAllowedReferrer' => [
+            'post' => StreamVideoLibraryAddAllowedReferer::class,
+        ],
+        '/videolibrary/{id}/removeAllowedReferrer' => [
+            'post' => StreamVideoLibraryRemoveAllowedReferer::class,
+        ],
+        '/videolibrary/{id}/addBlockedReferrer' => [
+            'post' => StreamVideoLibraryAddBlockedReferer::class,
+        ],
+        '/videolibrary/{id}/removeBlockedReferrer' => [
+            'post' => StreamVideoLibraryRemoveBlockedReferer::class,
+        ],
+        '/videolibrary/{id}/watermark' => [
+            'put' => AddWatermark::class,
+            'delete' => DeleteWatermark::class,
         ],
         '/storagezone' => [
             'get' => ListStorageZones::class,
@@ -290,27 +284,37 @@ final class Base
         '/storagezone/resetReadOnlyPassword' => [
             'post' => ResetReadOnlyPassword::class,
         ],
+        '/region' => [
+            'get' => ListRegions::class,
+        ],
+        '/purge' => [
+            'post' => PurgeUrl::class,
+            'get' => PurgeUrlByHeader::class,
+        ],
+        '/videolibrary/{id}/transcribing/statistics' => [
+            'get' => GetTranscribingStatistics::class,
+        ],
+        '/videolibrary/{id}/drm/statistics' => [
+            'get' => GetDrmStatistics::class,
+        ],
         '/storagezone/{id}/statistics' => [
             'get' => GetStorageZoneStatistics::class,
+        ],
+        '/dnszone/{id}/statistics' => [
+            'get' => GetDnsZoneQueryStatistics::class,
         ],
         '/dnszone/{id}/dnssec' => [
             'post' => EnableDnssecOnDnsZone::class,
             'delete' => DisableDnssecOnDnsZone::class,
         ],
-        '/dnszone/{id}/statistics' => [
-            'get' => GetDnsZoneQueryStatistics::class,
-        ],
-        '/apikey' => [
-            'get' => ListApiKeys::class,
-        ],
-        '/videolibrary/{id}/drm/statistics' => [
-            'get' => GetDrmStatistics::class,
-        ],
-        '/videolibrary/{id}/transcribing/statistics' => [
-            'get' => GetTranscribingStatistics::class,
+        '/user/audit/{date}' => [
+            'get' => GetUserAuditLog::class,
         ],
         '/statistics' => [
             'get' => GetStatistics::class,
+        ],
+        '/apikey' => [
+            'get' => ListApiKeys::class,
         ],
         '/abusecase' => [
             'get' => ListAbuseCases::class,

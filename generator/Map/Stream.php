@@ -25,6 +25,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TriggerSmartActions;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
@@ -90,6 +91,9 @@ final class Stream
         ],
         '/library/{libraryId}/videos/{videoId}/transcribe' => [
             'post' => TranscribeVideo::class,
+        ],
+        '/library/{libraryId}/videos/{videoId}/smart' => [
+            'post' => TriggerSmartActions::class,
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions' => [
             'get' => VideoResolutionsInfo::class,

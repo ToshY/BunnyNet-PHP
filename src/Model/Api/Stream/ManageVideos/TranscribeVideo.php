@@ -68,6 +68,8 @@ class TranscribeVideo implements ModelInterface, QueryModelInterface, BodyModelI
             ]),
             new AbstractParameter(name: 'generateTitle', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'generateDescription', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'generateChapters', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'generateMoments', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'sourceLanguage', type: Type::STRING_TYPE),
         ];
     }

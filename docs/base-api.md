@@ -539,6 +539,7 @@ $bunnyHttpClient->request(
                 'BR',
                 'JH',
             ],
+            'PlayerVersion' => 1,
         ],
     )
 );
@@ -555,6 +556,9 @@ $bunnyHttpClient->request(
         - `SYD` = Sydney (Oceania)
         - `BR` = Sao Paulo (Brazil)
         - `JH` = Johannesburg (Africa)
+    - The key `PlayerVersion` has the following possible values:
+        - `1` = Default video player
+        - `2` = Beta video player
 
 #### [Get Video Library](https://docs.bunny.net/reference/videolibrarypublic_index2)
 
@@ -632,6 +636,9 @@ $bunnyHttpClient->request(
             'RemoveMetadataFromFallbackVideos' => false,
             'DrmVersion' => 'Basic',
             'PlaybackSpeeds' => '0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0,2.5,3,3.5,4',
+            'EnableTranscribingChaptersGeneration' => false,
+            'EnableTranscribingMomentsGeneration' => false,
+            'ScaleVideoUsingBothDimensions' => true,
         ],
     )
 );
@@ -2348,6 +2355,48 @@ $bunnyHttpClient->request(
 ??? warning "Undocumented endpoint"
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
+
+#### Get User Audit Log
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\User\GetUserAuditLog(
+        date: (new \DateTime('-1 day'))->format('m-d-y'),
+        query: [
+            'Product' => [
+                'BunnyShield',
+            ],      
+            'ResourceType' => [
+                'Access Lists',
+            ], 
+            'ResourceId' => [
+                '1',
+            ], 
+            'ActorId' => [
+                '53c6cf29-c7cc-4d82-8187-56938c5e0734',
+            ], 
+            'Order' => [
+                '<key>' => '<value>',
+            ], 
+            'ContinuationToken' => [
+                'MWRiMjM0MTItMzM4Yy00NmFiLWEwYzEtN2E2ZGE2N2FiYzc4LTE3NjE4NjA0ODE4ODM=',
+            ], 
+            'Limit' => [
+                10000
+            ]
+        ],   
+    )
+);
+```
+
+??? note
+
+    - The key `Limit` has a value range of 1-10000.
+
+??? warning
+
+    - The key `Limit` is currently not functional.
+    - The key `Order` has unknown key-value usage.
 
 #### Get User Details
 
