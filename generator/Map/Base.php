@@ -307,6 +307,9 @@ final class Base
             'post' => EnableDnssecOnDnsZone::class,
             'delete' => DisableDnssecOnDnsZone::class,
         ],
+        '/user/closeaccount' => [
+            'post' => CloseAccount::class,
+        ],
         '/user/audit/{date}' => [
             'get' => GetUserAuditLog::class,
         ],
@@ -421,9 +424,6 @@ final class Base
         ],
         '/user/closeaccount/reasons-list' => [
             'get' => ListCloseAccountReasons::class,
-        ],
-        '/user/closeaccount' => [
-            'post' => CloseAccount::class,
         ],
         '/user/dpa' => [
             'get' => GetDpaDetails::class,

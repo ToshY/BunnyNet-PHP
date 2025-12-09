@@ -2375,9 +2375,7 @@ $bunnyHttpClient->request(
             'ActorId' => [
                 '53c6cf29-c7cc-4d82-8187-56938c5e0734',
             ], 
-            'Order' => [
-                '<key>' => '<value>',
-            ], 
+            'Order' => '<value>',
             'ContinuationToken' => [
                 'MWRiMjM0MTItMzM4Yy00NmFiLWEwYzEtN2E2ZGE2N2FiYzc4LTE3NjE4NjA0ODE4ODM=',
             ], 

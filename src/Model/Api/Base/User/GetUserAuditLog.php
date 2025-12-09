@@ -60,9 +60,7 @@ class GetUserAuditLog implements ModelInterface, QueryModelInterface
                 new AbstractParameter(name: 'ActorId', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::STRING_TYPE),
                 ]),
-                new AbstractParameter(name: 'Order', type: Type::OBJECT_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::OBJECT_TYPE),
-                ]),
+                new AbstractParameter(name: 'Order', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'ContinuationToken', type: Type::STRING_TYPE),
                 new AbstractParameter(name: 'Limit', type: Type::INT_TYPE, required: true),
             ]),
