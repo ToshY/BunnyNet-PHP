@@ -1066,7 +1066,7 @@ class ModelGenerator
 
             $newHeadersPerResponse[$code] = self::findMimeTypeForOpenApiContentType(
                 $response->getRawSpecData(),
-                [MimeType::ALL, MimeType::JSON],
+                [MimeType::ALL, MimeType::JSON, MimeType::OCTET_STREAM],
             );
         }
 
