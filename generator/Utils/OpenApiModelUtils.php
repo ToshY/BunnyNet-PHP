@@ -27,7 +27,7 @@ final class OpenApiModelUtils
      * @param array<string> $tags
      * @return string
      */
-    public static function stripTagSuffix(string $value, array $tags = ['Public', 'Index', 'Endpoint']): string
+    public static function stripTagSuffix(string $value, array $tags = ['Public', 'Index', 'Endpoint', 'List', 'Create']): string
     {
         return preg_replace(
             sprintf(
