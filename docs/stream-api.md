@@ -563,6 +563,202 @@ $bunnyHttpClient->request(
 );
 ```
 
+### Manage Live Streams
+
+#### [Get Live Stream by ID](https://docs.bunny.net/reference/LiveStream_GetByStreamId)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetByStreamId(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+#### [Update Live Stream](https://docs.bunny.net/reference/LiveStream_UpdateLiveStream)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateStream(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        body: [
+            'title' => 'Bunny Hoppers',
+            'description' => 'This is a stream for bunnies',
+            'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'dvrEnabled' => false,
+            'dvrWindowSeconds' => false,
+            'recordVod' => false,
+            'scheduledStartTime' => '2026-01-09T15:00:00Z', // UTC
+            'scheduledEndTime' => '2026-01-09T16:00:00Z', // UTC
+            'public' => true,
+            'enableCountdown' => false,
+            'rtmpOutputs' => [
+                'rtmp://a.rtmp.youtube.com/live2',
+                'rtmp://b.rtmp.youtube.com/live2?backup=1',
+            ],
+        ],
+    )
+);
+```
+
+#### [Delete Live Stream](https://docs.bunny.net/reference/LiveStream_DeleteStream)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\DeleteStream(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+#### [Create Live Stream](https://docs.bunny.net/reference/LiveStream_Create)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateStream(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        body: [
+            'title' => 'Bunny Hoppers',
+            'description' => 'This is a stream for bunnies',
+            'collectionId' => '97f20caa-649b-4302-9f6e-1d286e0da144',
+            'dvrEnabled' => false,
+            'dvrWindowSeconds' => false,
+            'recordVod' => false,
+            'scheduledStartTime' => '2026-01-09T15:00:00Z',
+            'scheduledEndTime' => '2026-01-09T16:00:00Z',
+            'public' => true,
+            'enableCountdown' => false,
+            'rtmpOutputs' => [
+                'rtmp://a.rtmp.youtube.com/live2',
+                'rtmp://b.rtmp.youtube.com/live2?backup=1',
+            ],
+        ],
+    )
+);
+```
+
+#### [Get Live Stream Play Data](https://docs.bunny.net/reference/LiveStream_GetStreamPlayData)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetStreamPlayData(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'token' => 'xxx',
+            'expires' => 0,
+        ],
+    )
+);
+```
+
+#### [Get Live Stream Current Bitrate](https://docs.bunny.net/reference/LiveStream_GetLatestBitrate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetCurrentBitrate(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+#### [Get Live Stream Bitrate History](https://docs.bunny.net/reference/LiveStream_GetBitrateHistory)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetBitrateHistory(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'startTime' => '2026-01-09T15:00:00Z',
+            'endTime' => '2026-01-09T16:00:00Z',
+        ],   
+    )
+);
+```
+
+#### [Get Live Stream Thumbnails](https://docs.bunny.net/reference/LiveStream_GetThumbnails)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetThumbnails(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'limit' => 5,
+            'from' => '2026-01-09T16:00:00Z',
+            'to' => '2026-01-09T16:00:00Z',
+        ],   
+    )
+);
+```
+
+#### [Set Live Stream Thumbnail](https://docs.bunny.net/reference/LiveStream_SetThumbnail)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\SetThumbnail(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+        query: [
+            'thumbnailUrl' => 'https://cdn.example.com/thumbnail.jpg',
+        ],   
+    )
+);
+```
+
+#### [List Live Streams](https://docs.bunny.net/reference/LiveStream_List)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\ListStreams(
+        libraryId: 1,
+        query: [
+            'page' => 1,
+            'itemsPerPage' => 100,
+            'search' => 'bunny',
+            'orderBy' => 'date',
+            'collectionId': '97f20caa-649b-4302-9f6e-1d286e0da144',
+        ],  
+    )
+);
+```
+
+#### [Start Live Stream](https://docs.bunny.net/reference/LiveStream_StartStream)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StartStream(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+#### [Stop Live Stream](https://docs.bunny.net/reference/LiveStream_StopStream)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StopStream(
+        libraryId: 1,
+        streamId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+??? note
+
+    Stops the stream, if publishing is still ongoing, it will be stopped by the ingest server.
+    
+??? warning
+    
+    If `DvrEnabled` was set to true, the stream will be converted to a regular video as a VOD. This operation cannot be undone.
+
 ### OEmbed
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
