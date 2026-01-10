@@ -17,6 +17,10 @@ final class Header
         'Accept' => MimeType::ALL,
     ];
 
+    public const ACCEPT_OCTET_STREAM = [
+        'Accept' => MimeType::OCTET_STREAM,
+    ];
+
     public const CONTENT_TYPE_JSON = [
         'Content-Type' => MimeType::JSON,
     ];

@@ -10,18 +10,18 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateNewLiveStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\DeleteStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetBitrateHistory;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetByStreamId;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetLatestBitrate;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetCurrentBitrate;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetStreamPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetThumbnails;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\ListStreams;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\SetThumbnail;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StartStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StopStream;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateLiveStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions;
@@ -56,15 +56,15 @@ final class Stream
         ListCollections::class => ModelValidationStrategy::STRICT_QUERY,
         CreateCollection::class => ModelValidationStrategy::STRICT_BODY,
         GetByStreamId::class => ModelValidationStrategy::NONE,
-        UpdateLiveStream::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateStream::class => ModelValidationStrategy::STRICT_BODY,
         DeleteStream::class => ModelValidationStrategy::NONE,
         GetStreamPlayData::class => ModelValidationStrategy::STRICT_QUERY,
         ListStreams::class => ModelValidationStrategy::STRICT_QUERY,
-        CreateNewLiveStream::class => ModelValidationStrategy::STRICT_BODY,
+        CreateStream::class => ModelValidationStrategy::STRICT_BODY,
         StartStream::class => ModelValidationStrategy::NONE,
         StopStream::class => ModelValidationStrategy::NONE,
         GetBitrateHistory::class => ModelValidationStrategy::STRICT_QUERY,
-        GetLatestBitrate::class => ModelValidationStrategy::NONE,
+        GetCurrentBitrate::class => ModelValidationStrategy::NONE,
         SetThumbnail::class => ModelValidationStrategy::STRICT_QUERY,
         GetThumbnails::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideo::class => ModelValidationStrategy::NONE,

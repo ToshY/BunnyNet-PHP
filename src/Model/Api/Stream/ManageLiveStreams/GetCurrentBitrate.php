@@ -9,7 +9,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetLatestBitrate implements ModelInterface
+class GetCurrentBitrate implements ModelInterface
 {
     /**
      * @param int $libraryId

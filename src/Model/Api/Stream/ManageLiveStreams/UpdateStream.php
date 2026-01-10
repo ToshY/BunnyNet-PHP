@@ -13,15 +13,18 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class CreateNewLiveStream implements ModelInterface, BodyModelInterface
+class UpdateStream implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $libraryId
+     * @param string $streamId
      * @param array<string,mixed> $body
      */
     public function __construct(
         #[PathProperty]
         public readonly int $libraryId,
+        #[PathProperty]
+        public readonly string $streamId,
         #[BodyProperty]
         public readonly array $body = [],
     ) {
@@ -29,12 +32,12 @@ class CreateNewLiveStream implements ModelInterface, BodyModelInterface
 
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::PUT;
     }
 
     public function getPath(): string
     {
-        return 'library/%d/live';
+        return 'library/%d/live/%s';
     }
 
     public function getHeaders(): array

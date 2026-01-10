@@ -9,18 +9,18 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateNewLiveStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\DeleteStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetBitrateHistory;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetByStreamId;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetLatestBitrate;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetCurrentBitrate;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetStreamPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetThumbnails;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\ListStreams;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\SetThumbnail;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StartStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StopStream;
-use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateLiveStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions;
@@ -63,7 +63,7 @@ final class Stream
         ],
         '/library/{libraryId}/live/{streamId}' => [
             'get' => GetByStreamId::class,
-            'put' => UpdateLiveStream::class,
+            'put' => UpdateStream::class,
             'delete' => DeleteStream::class,
         ],
         '/library/{libraryId}/live/{streamId}/play' => [
@@ -71,7 +71,7 @@ final class Stream
         ],
         '/library/{libraryId}/live' => [
             'get' => ListStreams::class,
-            'post' => CreateNewLiveStream::class,
+            'post' => CreateStream::class,
         ],
         '/library/{libraryId}/live/{streamId}/start' => [
             'put' => StartStream::class,
@@ -83,7 +83,7 @@ final class Stream
             'get' => GetBitrateHistory::class,
         ],
         '/library/{libraryId}/live/{streamId}/current-bitrate' => [
-            'get' => GetLatestBitrate::class,
+            'get' => GetCurrentBitrate::class,
         ],
         '/library/{libraryId}/live/{streamId}/thumbnail' => [
             'post' => SetThumbnail::class,
