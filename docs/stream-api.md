@@ -552,6 +552,19 @@ $bunnyHttpClient->request(
 
     This endpoint will return a `400` status code if premium encoding is there are no captions are available (or transcribing has not been triggered).
 
+#### [Get Video Storage Size](https://docs.bunny.net/reference/video_getvideostoragesize)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStorageSize(
+        libraryId: 1,
+        videoId: 'e7e9b99a-ea2a-434a-b200-f6615e7b6abd',
+    )
+);
+```
+
+### OEmbed
+
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)
 
 ```php
