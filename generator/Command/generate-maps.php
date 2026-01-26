@@ -27,7 +27,7 @@ $data = [];
 foreach ($manifests as $file) {
     $fileName = strtolower($file['fileName']);
     $key = match (true) {
-        str_contains($fileName, 'base-api') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($fileName, 'core-api') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
         str_contains($fileName, 'edge-scripting') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
         str_contains($fileName, 'edge-storage') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
         str_contains($fileName, 'stream-api') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
