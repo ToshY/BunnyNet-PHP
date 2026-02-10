@@ -15,6 +15,9 @@ use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
 
 final class ModelMethodHelper
 {
+    /** @var array<string,bool> $processingStack */
+    private static array $processingStack = [];
+
     /**
      * Recursively creates an AbstractParameter representation from an OpenAPI Schema.
      *
@@ -29,10 +32,25 @@ final class ModelMethodHelper
         Schema $schema,
         array $parentRequiredList = [],
     ): AbstractParameter {
+        $schemaHash = spl_object_hash($schema);
+
+        // Check if we're already processing this schema (circular reference detected)
+        if (isset(self::$processingStack[$schemaHash]) === true) {
+            // Break the circular reference by returning a simple object parameter
+            return new AbstractParameter(
+                name: $name,
+                type: Type::OBJECT_TYPE,
+                required: ($name !== null) && in_array($name, $parentRequiredList, true),
+                children: null,
+            );
+        }
+
+        // Mark this schema as being processed
+        self::$processingStack[$schemaHash] = true;
+
         $effectiveSchema = self::getEffectiveSchema($schema);
         $children = null;
         $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
-        ;
 
         $isCurrentParamRequired = ($name !== null) && in_array($name, $parentRequiredList, true);
 
@@ -266,12 +284,17 @@ final class ModelMethodHelper
             }
         }
 
-        return new AbstractParameter(
+        $result = new AbstractParameter(
             name: $name,
             type: $paramType,
             required: $isCurrentParamRequired,
             children: $children,
         );
+
+        // Unmark after processing complete
+        unset(self::$processingStack[$schemaHash]);
+
+        return $result;
     }
 
     /**
@@ -304,10 +327,16 @@ final class ModelMethodHelper
                             $effectiveSingleAltSchema->required ?? [],
                         )));
                         $clonedSchema->type = 'object'; // Ensure type is object
+                    } else {
+                        // If oneOf resolves to a single non-object type (string, integer, etc.), use that type
+                        if ($effectiveSingleAltSchema->type !== null) {
+                            $clonedSchema->type = $effectiveSingleAltSchema->type;
+                            $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                        }
                     }
                 }
             }
-
             return $clonedSchema;
         }
 
@@ -329,6 +358,13 @@ final class ModelMethodHelper
                             $effectiveSingleAltSchema->required ?? [],
                         )));
                         $clonedSchema->type = 'object'; // Ensure type is object
+                    } else {
+                        // If oneOf resolves to a single non-object type (string, integer, etc.), use that type
+                        if ($effectiveSingleAltSchema->type !== null) {
+                            $clonedSchema->type = $effectiveSingleAltSchema->type;
+                            $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                        }
                     }
                 }
             }
@@ -625,15 +661,15 @@ final class ModelMethodHelper
             return Type::OBJECT_TYPE;
         }
 
+        $openApiType = $effectiveSchema->type;
+
         // If it still has oneOf/anyOf markers at this point, it means it's not a clear object type,
         // and thus, it's a truly mixed type that we now want to error on.
-        if (isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) {
+        if ((isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) && $openApiType === null) {
             throw new InvalidArgumentException(
                 "Unsupported: Schema defines a genuinely mixed type (oneOf/anyOf) that does not resolve to a concrete object or scalar. Schema title: " . ($effectiveSchema->title ?? 'N/A') . ". Full schema: " . substr(json_encode($effectiveSchema->getSerializableData()), 0, 200) . "...",
             );
         }
-
-        $openApiType = $effectiveSchema->type;
 
         if ($openApiType === null) {
             if (isset($effectiveSchema->items)) {
