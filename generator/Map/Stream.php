@@ -9,6 +9,18 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\DeleteStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetBitrateHistory;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetByStreamId;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetCurrentBitrate;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetStreamPlayData;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetThumbnails;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\ListStreams;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StartStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StopStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions;
@@ -21,10 +33,11 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStorageSize;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail as ManageVideosSetThumbnail;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TriggerSmartActions;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
@@ -47,6 +60,36 @@ final class Stream
         '/library/{libraryId}/collections' => [
             'get' => ListCollections::class,
             'post' => CreateCollection::class,
+        ],
+        '/library/{libraryId}/live/{streamId}' => [
+            'get' => GetByStreamId::class,
+            'put' => UpdateStream::class,
+            'delete' => DeleteStream::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/play' => [
+            'get' => GetStreamPlayData::class,
+        ],
+        '/library/{libraryId}/live' => [
+            'get' => ListStreams::class,
+            'post' => CreateStream::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/start' => [
+            'put' => StartStream::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/stop' => [
+            'put' => StopStream::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/bitrate-history' => [
+            'get' => GetBitrateHistory::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/current-bitrate' => [
+            'get' => GetCurrentBitrate::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/thumbnail' => [
+            'post' => SetThumbnail::class,
+        ],
+        '/library/{libraryId}/live/{streamId}/thumbnails' => [
+            'get' => GetThumbnails::class,
         ],
         '/library/{libraryId}/videos/{videoId}' => [
             'get' => GetVideo::class,
@@ -80,7 +123,7 @@ final class Stream
             'post' => CreateVideo::class,
         ],
         '/library/{libraryId}/videos/{videoId}/thumbnail' => [
-            'post' => SetThumbnail::class,
+            'post' => ManageVideosSetThumbnail::class,
         ],
         '/library/{libraryId}/videos/fetch' => [
             'post' => FetchVideo::class,
@@ -97,6 +140,9 @@ final class Stream
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions' => [
             'get' => VideoResolutionsInfo::class,
+        ],
+        '/library/{libraryId}/videos/{videoId}/storage' => [
+            'get' => GetVideoStorageSize::class,
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions/cleanup' => [
             'post' => CleanupUnconfiguredResolutions::class,

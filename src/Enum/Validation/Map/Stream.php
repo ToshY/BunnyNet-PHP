@@ -10,6 +10,18 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\ListCollections;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\UpdateCollection;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\CreateStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\DeleteStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetBitrateHistory;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetByStreamId;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetCurrentBitrate;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetStreamPlayData;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\GetThumbnails;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\ListStreams;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StartStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\StopStream;
+use ToshY\BunnyNet\Model\Api\Stream\ManageLiveStreams\UpdateStream;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddCaption;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\AddOutputCodecToVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\CleanupUnconfiguredResolutions;
@@ -22,10 +34,11 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStorageSize;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
-use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\SetThumbnail as ManageVideosSetThumbnail;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TranscribeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\TriggerSmartActions;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UpdateVideo;
@@ -42,6 +55,18 @@ final class Stream
         DeleteCollection::class => ModelValidationStrategy::NONE,
         ListCollections::class => ModelValidationStrategy::STRICT_QUERY,
         CreateCollection::class => ModelValidationStrategy::STRICT_BODY,
+        GetByStreamId::class => ModelValidationStrategy::NONE,
+        UpdateStream::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteStream::class => ModelValidationStrategy::NONE,
+        GetStreamPlayData::class => ModelValidationStrategy::STRICT_QUERY,
+        ListStreams::class => ModelValidationStrategy::STRICT_QUERY,
+        CreateStream::class => ModelValidationStrategy::STRICT_BODY,
+        StartStream::class => ModelValidationStrategy::NONE,
+        StopStream::class => ModelValidationStrategy::NONE,
+        GetBitrateHistory::class => ModelValidationStrategy::STRICT_QUERY,
+        GetCurrentBitrate::class => ModelValidationStrategy::NONE,
+        SetThumbnail::class => ModelValidationStrategy::STRICT_QUERY,
+        GetThumbnails::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideo::class => ModelValidationStrategy::NONE,
         UploadVideo::class => ModelValidationStrategy::STRICT_QUERY,
         UpdateVideo::class => ModelValidationStrategy::STRICT_BODY,
@@ -55,13 +80,14 @@ final class Stream
         RepackageVideo::class => ModelValidationStrategy::STRICT_QUERY,
         ListVideos::class => ModelValidationStrategy::STRICT_QUERY,
         CreateVideo::class => ModelValidationStrategy::STRICT_BODY,
-        SetThumbnail::class => ModelValidationStrategy::STRICT_QUERY,
+        ManageVideosSetThumbnail::class => ModelValidationStrategy::STRICT_QUERY,
         FetchVideo::class => ModelValidationStrategy::STRICT,
         AddCaption::class => ModelValidationStrategy::STRICT_BODY,
         DeleteCaption::class => ModelValidationStrategy::NONE,
         TranscribeVideo::class => ModelValidationStrategy::STRICT,
         TriggerSmartActions::class => ModelValidationStrategy::STRICT_BODY,
         VideoResolutionsInfo::class => ModelValidationStrategy::NONE,
+        GetVideoStorageSize::class => ModelValidationStrategy::NONE,
         CleanupUnconfiguredResolutions::class => ModelValidationStrategy::STRICT_QUERY,
         GetOEmbed::class => ModelValidationStrategy::STRICT_QUERY,
     ];

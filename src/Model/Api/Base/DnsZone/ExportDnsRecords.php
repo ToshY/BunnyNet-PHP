@@ -33,7 +33,7 @@ class ExportDnsRecords implements ModelInterface
     public function getHeaders(): array
     {
         return [
-            Header::ACCEPT_JSON,
+            Header::ACCEPT_OCTET_STREAM,
         ];
     }
 }

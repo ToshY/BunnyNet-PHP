@@ -52,6 +52,11 @@ class UpdateStorageZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'OriginUrl', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'OriginDnsZoneId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'OriginDnsRecordId', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'WordPressCronToken', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'WordPressCronPath', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'WordPressPath', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Custom404FilePath', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Rewrite404To200', type: Type::BOOLEAN_TYPE),
         ];

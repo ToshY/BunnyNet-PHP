@@ -6,7 +6,6 @@ namespace ToshY\BunnyNet\Model\Api\Base\StorageZone;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Attributes\QueryProperty;
-use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
@@ -39,9 +38,7 @@ class DeleteStorageZone implements ModelInterface, QueryModelInterface
 
     public function getHeaders(): array
     {
-        return [
-            Header::ACCEPT_JSON,
-        ];
+        return [];
     }
 
     public function getQuery(): array
