@@ -130,6 +130,63 @@ final class ModelBodyMethodHelper
             return $parameters;
         }
 
+        if ($effectiveRootSchema->type === 'array') {
+            if (!isset($effectiveRootSchema->items)) {
+                throw new InvalidArgumentException(
+                    "Root schema is an array but has no 'items' definition.",
+                );
+            }
+
+            // Create a single parameter representing the array of items
+            $itemsSchema = $effectiveRootSchema->items;
+            $effectiveItemsSchema = ModelMethodHelper::getEffectiveSchema($itemsSchema);
+
+            // For arrays of objects, create the array structure
+            if ($effectiveItemsSchema->type === 'object' || !empty($effectiveItemsSchema->properties)) {
+                $itemParameters = [];
+                $itemRequiredList = $effectiveItemsSchema->required ?? [];
+
+                if (!empty($effectiveItemsSchema->properties)) {
+                    foreach ($effectiveItemsSchema->properties as $propName => $propertySchema) {
+                        $itemParameters[] = ModelMethodHelper::createParameterRepresentation(
+                            (string)$propName,
+                            $propertySchema,
+                            $itemRequiredList,
+                        );
+                    }
+                }
+
+                // Return an array parameter with the object children
+                return [
+                    new AbstractParameter(
+                        name: null,
+                        type: Type::ARRAY_TYPE,
+                        required: true,
+                        children: [
+                            new AbstractParameter(
+                                name: null,
+                                type: Type::OBJECT_TYPE,
+                                required: false,
+                                children: $itemParameters,
+                            ),
+                        ],
+                    ),
+                ];
+            } else {
+                // Array of simple types
+                return [
+                    new AbstractParameter(
+                        name: null,
+                        type: Type::ARRAY_TYPE,
+                        required: true,
+                        children: [
+                            ModelMethodHelper::createParameterRepresentation(null, $effectiveItemsSchema),
+                        ],
+                    ),
+                ];
+            }
+        }
+
         if ($effectiveRootSchema->type !== 'object' || (!isset($effectiveRootSchema->properties) && !isset($effectiveRootSchema->additionalProperties))) {
             if ($effectiveRootSchema->format === 'binary') {
                 return [];

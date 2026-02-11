@@ -145,6 +145,28 @@ class ModelGenerator
 
                     $newNamespace = $this->baseNamespace . '\\' . $newNamespaceDirectory;
                     $newNamespace = rtrim($newNamespace, '\\');
+
+                    // Check if a file with this class name already exists in the namespace
+                    $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
+                        $this->baseNamespace,
+                        $this->baseNamespace === $newNamespace ? '' : $newNamespace,
+                        $this->outputDirectory,
+                    );
+                    $potentialFilePath = $outputDirectoryPath . '/' . $className . '.php';
+
+                    if (file_exists($potentialFilePath) === true) {
+                        /* @phpstan-ignore-next-line property.notFound */
+                        $pathItem = $this->apiSpec->paths->getPath($path);
+                        $operation = $pathItem?->getOperations()[$httpMethod] ?? null;
+
+                        if ($operation !== null && !empty($operation->summary)) {
+                            $summaryClassName = ClassUtils::toPascalCase($operation->summary);
+                            $this->logger::print(
+                                "* INFO: Class '$className' already exists in namespace '$newNamespace'. Using summary-based name: '$summaryClassName'\n",
+                            );
+                            $className = $summaryClassName;
+                        }
+                    }
                     $endpointClass = $newNamespace . '\\' . $className;
                 } else {
                     $shortClassName = ClassUtils::getShortClassName($endpointClass);
@@ -296,7 +318,6 @@ class ModelGenerator
         $class->setFinal();
 
         $processedClassNames = [];
-        $processedFqcns = [];
         $lines = ["["];
         /**
          * @var array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed} $validationStrategyInfo
@@ -304,10 +325,6 @@ class ModelGenerator
         foreach ($modelValidationStrategyCollection as $validationStrategyInfo) {
             $subClassName = ClassUtils::getShortClassName($validationStrategyInfo['className']);
             $fqcn = $validationStrategyInfo['namespace'] . '\\' . $validationStrategyInfo['className'];
-
-            if (in_array($fqcn, $processedFqcns, true) === true) {
-                continue;
-            }
 
             // Replacements for model validation strategies; should normally not be needed.
             if (empty($this->validationReplacements[$fqcn]) === false) {
@@ -325,7 +342,6 @@ class ModelGenerator
             $namespace->addUse(name: $fqcn, alias: $newClassName);
 
             $processedClassNames[] = $newClassName;
-            $processedFqcns[] = $fqcn;
 
             // Create the actual line
             $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
@@ -336,9 +352,6 @@ class ModelGenerator
 
         // Append replacements if needed to end of array
         foreach ($this->validationReplacements as $validationClass => $modelValidationStrategy) {
-            if (in_array($validationClass, $processedFqcns, true) === true) {
-                continue;
-            }
 
             $validationClassName = ClassUtils::getShortClassName($validationClass);
             if (in_array($validationClassName, $processedClassNames, true) === true) {
@@ -349,8 +362,6 @@ class ModelGenerator
 
             $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
             $lines[] = "$validationClassName::class => $subValidationStrategyName::$modelValidationStrategy->name,";
-
-            $processedFqcns[] = $validationClass;
         }
 
         $lines[] = "]";
