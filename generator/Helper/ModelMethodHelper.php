@@ -15,9 +15,6 @@ use ToshY\BunnyNet\Generator\Utils\PrinterUtils;
 
 final class ModelMethodHelper
 {
-    /** @var array<string,bool> $processingStack */
-    private static array $processingStack = [];
-
     /**
      * Recursively creates an AbstractParameter representation from an OpenAPI Schema.
      *
@@ -32,22 +29,6 @@ final class ModelMethodHelper
         Schema $schema,
         array $parentRequiredList = [],
     ): AbstractParameter {
-        $schemaHash = spl_object_hash($schema);
-
-        // Check if we're already processing this schema (circular reference detected)
-        if (isset(self::$processingStack[$schemaHash]) === true) {
-            // Break the circular reference by returning a simple object parameter
-            return new AbstractParameter(
-                name: $name,
-                type: Type::OBJECT_TYPE,
-                required: ($name !== null) && in_array($name, $parentRequiredList, true),
-                children: null,
-            );
-        }
-
-        // Mark this schema as being processed
-        self::$processingStack[$schemaHash] = true;
-
         $effectiveSchema = self::getEffectiveSchema($schema);
         $children = null;
         $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
@@ -284,17 +265,12 @@ final class ModelMethodHelper
             }
         }
 
-        $result = new AbstractParameter(
+        return new AbstractParameter(
             name: $name,
             type: $paramType,
             required: $isCurrentParamRequired,
             children: $children,
         );
-
-        // Unmark after processing complete
-        unset(self::$processingStack[$schemaHash]);
-
-        return $result;
     }
 
     /**
@@ -331,8 +307,12 @@ final class ModelMethodHelper
                         // If oneOf resolves to a single non-object type (string, integer, etc.), use that type
                         if ($effectiveSingleAltSchema->type !== null) {
                             $clonedSchema->type = $effectiveSingleAltSchema->type;
-                            $clonedSchema->format = $effectiveSingleAltSchema->format;
-                            $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            if ($effectiveSingleAltSchema->format !== null) {
+                                $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            }
+                            if ($effectiveSingleAltSchema->enum !== null) {
+                                $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            }
                         }
                     }
                 }
@@ -359,11 +339,15 @@ final class ModelMethodHelper
                         )));
                         $clonedSchema->type = 'object'; // Ensure type is object
                     } else {
-                        // If oneOf resolves to a single non-object type (string, integer, etc.), use that type
+                        // If anyOf resolves to a single non-object type (string, integer, etc.), use that type
                         if ($effectiveSingleAltSchema->type !== null) {
                             $clonedSchema->type = $effectiveSingleAltSchema->type;
-                            $clonedSchema->format = $effectiveSingleAltSchema->format;
-                            $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            if ($effectiveSingleAltSchema->format !== null) {
+                                $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            }
+                            if ($effectiveSingleAltSchema->enum !== null) {
+                                $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            }
                         }
                     }
                 }
