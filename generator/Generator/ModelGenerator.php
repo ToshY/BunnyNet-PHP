@@ -318,7 +318,6 @@ class ModelGenerator
         $class->setFinal();
 
         $processedClassNames = [];
-        $processedFqcns = [];
         $lines = ["["];
         /**
          * @var array{modelValidationStrategy: ModelValidationStrategy, namespace: string, className: mixed} $validationStrategyInfo
@@ -326,10 +325,6 @@ class ModelGenerator
         foreach ($modelValidationStrategyCollection as $validationStrategyInfo) {
             $subClassName = ClassUtils::getShortClassName($validationStrategyInfo['className']);
             $fqcn = $validationStrategyInfo['namespace'] . '\\' . $validationStrategyInfo['className'];
-
-            if (in_array($fqcn, $processedFqcns, true) === true) {
-                continue;
-            }
 
             // Replacements for model validation strategies; should normally not be needed.
             if (empty($this->validationReplacements[$fqcn]) === false) {
@@ -347,7 +342,6 @@ class ModelGenerator
             $namespace->addUse(name: $fqcn, alias: $newClassName);
 
             $processedClassNames[] = $newClassName;
-            $processedFqcns[] = $fqcn;
 
             // Create the actual line
             $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
@@ -358,9 +352,6 @@ class ModelGenerator
 
         // Append replacements if needed to end of array
         foreach ($this->validationReplacements as $validationClass => $modelValidationStrategy) {
-            if (in_array($validationClass, $processedFqcns, true) === true) {
-                continue;
-            }
 
             $validationClassName = ClassUtils::getShortClassName($validationClass);
             if (in_array($validationClassName, $processedClassNames, true) === true) {
@@ -371,8 +362,6 @@ class ModelGenerator
 
             $subValidationStrategyName = ClassUtils::getShortClassName(ModelValidationStrategy::class);
             $lines[] = "$validationClassName::class => $subValidationStrategyName::$modelValidationStrategy->name,";
-
-            $processedFqcns[] = $validationClass;
         }
 
         $lines[] = "]";
