@@ -47,23 +47,21 @@ class GetUserAuditLog implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'request', type: Type::OBJECT_TYPE, children: [
-                new AbstractParameter(name: 'Product', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
-                ]),
-                new AbstractParameter(name: 'ResourceType', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
-                ]),
-                new AbstractParameter(name: 'ResourceId', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
-                ]),
-                new AbstractParameter(name: 'ActorId', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
-                ]),
-                new AbstractParameter(name: 'Order', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'ContinuationToken', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'Limit', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'Product', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'ResourceType', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
+            new AbstractParameter(name: 'ResourceId', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
+            new AbstractParameter(name: 'ActorId', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
+            new AbstractParameter(name: 'Order', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'ContinuationToken', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Limit', type: Type::INT_TYPE),
         ];
     }
 }

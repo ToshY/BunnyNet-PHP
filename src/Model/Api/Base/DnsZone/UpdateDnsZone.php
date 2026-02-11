@@ -53,8 +53,8 @@ class UpdateDnsZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'Nameserver2', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'SoaEmail', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'LoggingEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'LogAnonymizationType', type: Type::STRING_TYPE),
-            new AbstractParameter(name: 'CertificateKeyType', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'LogAnonymizationType', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'CertificateKeyType', type: Type::INT_TYPE),
             new AbstractParameter(name: 'LoggingIPAnonymizationEnabled', type: Type::BOOLEAN_TYPE),
         ];
     }

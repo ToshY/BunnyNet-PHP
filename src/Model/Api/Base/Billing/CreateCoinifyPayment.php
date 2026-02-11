@@ -44,6 +44,7 @@ class CreateCoinifyPayment implements ModelInterface, QueryModelInterface
     {
         return [
             new AbstractParameter(name: 'amount', type: Type::NUMERIC_TYPE, required: true),
+            new AbstractParameter(name: 'paymentRequestId', type: Type::INT_TYPE),
         ];
     }
 }

@@ -145,6 +145,28 @@ class ModelGenerator
 
                     $newNamespace = $this->baseNamespace . '\\' . $newNamespaceDirectory;
                     $newNamespace = rtrim($newNamespace, '\\');
+
+                    // Check if a file with this class name already exists in the namespace
+                    $outputDirectoryPath = FileUtils::getOutputDirectoryFromNamespace(
+                        $this->baseNamespace,
+                        $this->baseNamespace === $newNamespace ? '' : $newNamespace,
+                        $this->outputDirectory,
+                    );
+                    $potentialFilePath = $outputDirectoryPath . '/' . $className . '.php';
+
+                    if (file_exists($potentialFilePath) === true) {
+                        /* @phpstan-ignore-next-line property.notFound */
+                        $pathItem = $this->apiSpec->paths->getPath($path);
+                        $operation = $pathItem?->getOperations()[$httpMethod] ?? null;
+
+                        if ($operation !== null && !empty($operation->summary)) {
+                            $summaryClassName = ClassUtils::toPascalCase($operation->summary);
+                            $this->logger::print(
+                                "* INFO: Class '$className' already exists in namespace '$newNamespace'. Using summary-based name: '$summaryClassName'\n",
+                            );
+                            $className = $summaryClassName;
+                        }
+                    }
                     $endpointClass = $newNamespace . '\\' . $className;
                 } else {
                     $shortClassName = ClassUtils::getShortClassName($endpointClass);
@@ -330,6 +352,7 @@ class ModelGenerator
 
         // Append replacements if needed to end of array
         foreach ($this->validationReplacements as $validationClass => $modelValidationStrategy) {
+
             $validationClassName = ClassUtils::getShortClassName($validationClass);
             if (in_array($validationClassName, $processedClassNames, true) === true) {
                 continue;

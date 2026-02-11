@@ -47,6 +47,7 @@ class UpdateUserDetails implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'FirstName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'Email', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'BillingEmail', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'DmcaEmail', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'LastName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'StreetAddress', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'City', type: Type::STRING_TYPE),

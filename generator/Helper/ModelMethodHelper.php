@@ -32,7 +32,6 @@ final class ModelMethodHelper
         $effectiveSchema = self::getEffectiveSchema($schema);
         $children = null;
         $paramType = self::mapOpenApiTypeToEnumType($effectiveSchema);
-        ;
 
         $isCurrentParamRequired = ($name !== null) && in_array($name, $parentRequiredList, true);
 
@@ -304,10 +303,20 @@ final class ModelMethodHelper
                             $effectiveSingleAltSchema->required ?? [],
                         )));
                         $clonedSchema->type = 'object'; // Ensure type is object
+                    } else {
+                        // If oneOf resolves to a single non-object type (string, integer, etc.), use that type
+                        if ($effectiveSingleAltSchema->type !== null) {
+                            $clonedSchema->type = $effectiveSingleAltSchema->type;
+                            if ($effectiveSingleAltSchema->format !== null) {
+                                $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            }
+                            if ($effectiveSingleAltSchema->enum !== null) {
+                                $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            }
+                        }
                     }
                 }
             }
-
             return $clonedSchema;
         }
 
@@ -329,6 +338,17 @@ final class ModelMethodHelper
                             $effectiveSingleAltSchema->required ?? [],
                         )));
                         $clonedSchema->type = 'object'; // Ensure type is object
+                    } else {
+                        // If anyOf resolves to a single non-object type (string, integer, etc.), use that type
+                        if ($effectiveSingleAltSchema->type !== null) {
+                            $clonedSchema->type = $effectiveSingleAltSchema->type;
+                            if ($effectiveSingleAltSchema->format !== null) {
+                                $clonedSchema->format = $effectiveSingleAltSchema->format;
+                            }
+                            if ($effectiveSingleAltSchema->enum !== null) {
+                                $clonedSchema->enum = $effectiveSingleAltSchema->enum;
+                            }
+                        }
                     }
                 }
             }
@@ -625,15 +645,15 @@ final class ModelMethodHelper
             return Type::OBJECT_TYPE;
         }
 
+        $openApiType = $effectiveSchema->type;
+
         // If it still has oneOf/anyOf markers at this point, it means it's not a clear object type,
         // and thus, it's a truly mixed type that we now want to error on.
-        if (isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) {
+        if ((isset($effectiveSchema->{'x-oneOf'}) || isset($effectiveSchema->{'x-anyOf'})) && $openApiType === null) {
             throw new InvalidArgumentException(
                 "Unsupported: Schema defines a genuinely mixed type (oneOf/anyOf) that does not resolve to a concrete object or scalar. Schema title: " . ($effectiveSchema->title ?? 'N/A') . ". Full schema: " . substr(json_encode($effectiveSchema->getSerializableData()), 0, 200) . "...",
             );
         }
-
-        $openApiType = $effectiveSchema->type;
 
         if ($openApiType === null) {
             if (isset($effectiveSchema->items)) {

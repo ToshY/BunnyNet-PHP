@@ -1,3 +1,4 @@
+/.devcontainer/ export-ignore
 /.github/ export-ignore
 /.githooks/ export-ignore
 /docs/ export-ignore

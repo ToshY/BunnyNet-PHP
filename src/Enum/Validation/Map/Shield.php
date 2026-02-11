@@ -17,6 +17,7 @@ use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
@@ -67,6 +68,7 @@ final class Shield
         ListDdosEnums::class => ModelValidationStrategy::NONE,
         ListEventLogs::class => ModelValidationStrategy::NONE,
         GetOverviewMetrics::class => ModelValidationStrategy::NONE,
+        GetMetricsOverviewDetailed::class => ModelValidationStrategy::STRICT_QUERY,
         ListRateLimitMetrics::class => ModelValidationStrategy::NONE,
         GetRateLimitMetrics::class => ModelValidationStrategy::NONE,
         GetWafRuleMetrics::class => ModelValidationStrategy::NONE,
