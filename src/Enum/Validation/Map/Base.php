@@ -19,6 +19,7 @@ use ToshY\BunnyNet\Model\Api\Base\Billing\ClaimAffiliateCredits;
 use ToshY\BunnyNet\Model\Api\Base\Billing\ConfigureAutoRecharge;
 use ToshY\BunnyNet\Model\Api\Base\Billing\CreateCoinifyPayment;
 use ToshY\BunnyNet\Model\Api\Base\Billing\CreatePaymentCheckout;
+use ToshY\BunnyNet\Model\Api\Base\Billing\DownloadPaymentRequestInvoicePdf;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetAffiliateDetails;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingDetails;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummary;
@@ -26,8 +27,10 @@ use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetCoinifyBitcoinExchangeRate;
 use ToshY\BunnyNet\Model\Api\Base\Billing\PreparePaymentAuthorization;
 use ToshY\BunnyNet\Model\Api\Base\Countries\ListCountries;
+use ToshY\BunnyNet\Model\Api\Base\Couponcode\GenerateCouponCode;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsZone;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddRecordsBulk;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\CheckDnsZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\DeleteDnsZone;
@@ -37,13 +40,19 @@ use ToshY\BunnyNet\Model\Api\Base\DnsZone\EnableDnssecOnDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ExportDnsRecords;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZoneQueryStatistics;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetLatestScan;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\IssueWildcardCertificate;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ListDnsZones;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\Base\PricingPackages\GetPricingPackage;
+use ToshY\BunnyNet\Model\Api\Base\PricingPackages\ListPricingPackages;
+use ToshY\BunnyNet\Model\Api\Base\PricingPackages\ListPricingPackagesOld;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer;
@@ -69,7 +78,10 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetForceSsl;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\SyncPullZoneStaticHtml;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePrivateKeyType;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePullZone;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\ValidateOriginUrl;
 use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl;
 use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrlByHeader;
 use ToshY\BunnyNet\Model\Api\Base\Region\ListRegions;
@@ -82,13 +94,17 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneConnections;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones;
-use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
@@ -98,14 +114,19 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey2;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\GetTicketDetails;
 use ToshY\BunnyNet\Model\Api\Base\Support\ListTickets;
 use ToshY\BunnyNet\Model\Api\Base\Support\ReplyTicket;
+use ToshY\BunnyNet\Model\Api\Base\Team\DeleteTeamMember;
+use ToshY\BunnyNet\Model\Api\Base\Team\EditTeamMember;
+use ToshY\BunnyNet\Model\Api\Base\Team\TeamMemberDetails;
 use ToshY\BunnyNet\Model\Api\Base\User\AcceptDpa;
 use ToshY\BunnyNet\Model\Api\Base\User\CloseAccount;
 use ToshY\BunnyNet\Model\Api\Base\User\DisableTwoFactorAuthentication;
@@ -131,7 +152,16 @@ final class Base
 {
     /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
+        AuthJwt2fa::class => ModelValidationStrategy::STRICT_BODY,
+        RefreshJwt::class => ModelValidationStrategy::NONE,
+        DownloadPaymentRequestInvoicePdf::class => ModelValidationStrategy::NONE,
+        PreparePaymentAuthorization::class => ModelValidationStrategy::NONE,
+        GetCoinifyBitcoinExchangeRate::class => ModelValidationStrategy::NONE,
+        CreateCoinifyPayment::class => ModelValidationStrategy::STRICT_QUERY,
+        GetBillingSummary::class => ModelValidationStrategy::NONE,
+        ApplyPromoCode::class => ModelValidationStrategy::STRICT_QUERY,
         ListCountries::class => ModelValidationStrategy::NONE,
+        GenerateCouponCode::class => ModelValidationStrategy::STRICT_BODY,
         ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
         GetDnsZone::class => ModelValidationStrategy::NONE,
@@ -139,100 +169,58 @@ final class Base
         DeleteDnsZone::class => ModelValidationStrategy::NONE,
         ExportDnsRecords::class => ModelValidationStrategy::NONE,
         CheckDnsZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        AddDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
+        AddRecordsBulk::class => ModelValidationStrategy::STRICT_BODY,
         UpdateDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
         DeleteDnsRecord::class => ModelValidationStrategy::NONE,
+        RecheckDnsConfiguration::class => ModelValidationStrategy::NONE,
+        DismissDnsConfigurationNotice::class => ModelValidationStrategy::NONE,
         ImportDnsRecords::class => ModelValidationStrategy::NONE,
-        AddDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
+        IssueWildcardCertificate::class => ModelValidationStrategy::STRICT_BODY,
         ListPullZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddPullZone::class => ModelValidationStrategy::STRICT_BODY,
         GetPullZone::class => ModelValidationStrategy::STRICT_QUERY,
         UpdatePullZone::class => ModelValidationStrategy::STRICT_BODY,
         DeletePullZone::class => ModelValidationStrategy::NONE,
+        DeleteEdgeRule::class => ModelValidationStrategy::NONE,
+        AddOrUpdateEdgeRule::class => ModelValidationStrategy::STRICT_BODY,
+        SetEdgeRuleEnabled::class => ModelValidationStrategy::STRICT_BODY,
         GetOriginShieldQueueStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        UpdatePrivateKeyType::class => ModelValidationStrategy::STRICT_BODY,
         LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
-        AddOrUpdateEdgeRule::class => ModelValidationStrategy::STRICT_BODY,
-        SetEdgeRuleEnabled::class => ModelValidationStrategy::STRICT_BODY,
         PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
         CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        ValidateOriginUrl::class => ModelValidationStrategy::STRICT_BODY,
         AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveCertificate::class => ModelValidationStrategy::STRICT_BODY,
         AddCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
+        RemoveCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
         SetForceSsl::class => ModelValidationStrategy::STRICT_BODY,
-        ResetTokenKey::class => ModelValidationStrategy::NONE,
+        SyncPullZoneStaticHtml::class => ModelValidationStrategy::STRICT_BODY,
+        ResetTokenKey::class => ModelValidationStrategy::STRICT_BODY,
         AddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
         RemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
         AddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         RemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         AddBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
         RemoveBlockedIp::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteEdgeRule::class => ModelValidationStrategy::NONE,
-        RemoveCertificate::class => ModelValidationStrategy::STRICT_BODY,
-        RemoveCustomHostname::class => ModelValidationStrategy::STRICT_BODY,
-        ListVideoLibraries::class => ModelValidationStrategy::STRICT_QUERY,
-        AddVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
-        GetVideoLibrary::class => ModelValidationStrategy::NONE,
-        UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
-        DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
-        GetLanguages::class => ModelValidationStrategy::NONE,
-        ResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
-        StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        AddWatermark::class => ModelValidationStrategy::NONE,
-        DeleteWatermark::class => ModelValidationStrategy::NONE,
+        PurgeUrlByHeader::class => ModelValidationStrategy::STRICT_QUERY,
+        PurgeUrl::class => ModelValidationStrategy::STRICT_QUERY,
+        ListRegions::class => ModelValidationStrategy::NONE,
         ListStorageZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddStorageZone::class => ModelValidationStrategy::STRICT_BODY,
+        CheckStorageZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
         GetStorageZone::class => ModelValidationStrategy::NONE,
         UpdateStorageZone::class => ModelValidationStrategy::STRICT_BODY,
         DeleteStorageZone::class => ModelValidationStrategy::STRICT_QUERY,
-        CheckStorageZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
-        StorageZoneResetPassword::class => ModelValidationStrategy::NONE,
-        ResetReadOnlyPassword::class => ModelValidationStrategy::STRICT_QUERY,
-        ListRegions::class => ModelValidationStrategy::NONE,
-        PurgeUrl::class => ModelValidationStrategy::STRICT_QUERY,
-        GetTranscribingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
-        DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
-        CloseAccount::class => ModelValidationStrategy::STRICT_BODY,
-        GetUserAuditLog::class => ModelValidationStrategy::STRICT_QUERY,
-        GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        ListApiKeys::class => ModelValidationStrategy::STRICT_QUERY,
-        ListAbuseCases::class => ModelValidationStrategy::STRICT_QUERY,
-        GetDmcaCase::class => ModelValidationStrategy::NONE,
-        GetAbuseCase::class => ModelValidationStrategy::NONE,
-        ResolveDmcaCase::class => ModelValidationStrategy::NONE,
-        ResolveAbuseCase::class => ModelValidationStrategy::NONE,
-        CheckAbuseCase::class => ModelValidationStrategy::NONE,
-        AuthJwt2fa::class => ModelValidationStrategy::STRICT_BODY,
-        RefreshJwt::class => ModelValidationStrategy::NONE,
-        GetBillingDetails::class => ModelValidationStrategy::NONE,
-        ConfigureAutoRecharge::class => ModelValidationStrategy::STRICT_BODY,
-        CreatePaymentCheckout::class => ModelValidationStrategy::STRICT_BODY,
-        PreparePaymentAuthorization::class => ModelValidationStrategy::NONE,
-        GetAffiliateDetails::class => ModelValidationStrategy::NONE,
-        ClaimAffiliateCredits::class => ModelValidationStrategy::NONE,
-        GetCoinifyBitcoinExchangeRate::class => ModelValidationStrategy::NONE,
-        CreateCoinifyPayment::class => ModelValidationStrategy::STRICT_QUERY,
-        GetBillingSummary::class => ModelValidationStrategy::NONE,
-        GetBillingSummaryPDF::class => ModelValidationStrategy::NONE,
-        ApplyPromoCode::class => ModelValidationStrategy::STRICT_QUERY,
-        RecheckDnsConfiguration::class => ModelValidationStrategy::NONE,
-        DismissDnsConfigurationNotice::class => ModelValidationStrategy::NONE,
-        ListDrmCertificates::class => ModelValidationStrategy::STRICT_QUERY,
-        PurgeUrlByHeader::class => ModelValidationStrategy::STRICT_QUERY,
-        ListTickets::class => ModelValidationStrategy::STRICT_QUERY,
-        GetTicketDetails::class => ModelValidationStrategy::NONE,
-        CloseTicket::class => ModelValidationStrategy::NONE,
-        ReplyTicket::class => ModelValidationStrategy::STRICT_BODY,
-        CreateTicket::class => ModelValidationStrategy::STRICT_BODY,
         GetStorageZoneConnections::class => ModelValidationStrategy::NONE,
-        GetHomeFeed::class => ModelValidationStrategy::NONE,
+        ResetPassword::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyPassword::class => ModelValidationStrategy::STRICT_QUERY,
+        TeamMemberDetails::class => ModelValidationStrategy::NONE,
+        EditTeamMember::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteTeamMember::class => ModelValidationStrategy::NONE,
         ListNotifications::class => ModelValidationStrategy::NONE,
         GetUserDetails::class => ModelValidationStrategy::NONE,
         UpdateUserDetails::class => ModelValidationStrategy::STRICT_BODY,
@@ -249,8 +237,62 @@ final class Base
         DisableTwoFactorAuthentication::class => ModelValidationStrategy::STRICT_BODY,
         EnableTwoFactorAuthentication::class => ModelValidationStrategy::STRICT_BODY,
         VerifyTwoFactorAuthenticationCode::class => ModelValidationStrategy::STRICT_BODY,
-        GetGitHubIntegration::class => ModelValidationStrategy::NONE,
+        ListVideoLibraries::class => ModelValidationStrategy::STRICT_QUERY,
+        AddVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
+        GetVideoLibrary::class => ModelValidationStrategy::NONE,
+        UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
+        GetLanguages::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
+        ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyApiKey::class => ModelValidationStrategy::STRICT_QUERY,
+        ResetReadOnlyApiKey2::class => ModelValidationStrategy::NONE,
+        AddWatermark::class => ModelValidationStrategy::NONE,
+        DeleteWatermark::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        GetTranscribingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        AddThumbnail::class => ModelValidationStrategy::NONE,
+        DeleteThumbnail::class => ModelValidationStrategy::NONE,
+        AddLiveWatermark::class => ModelValidationStrategy::NONE,
+        DeleteLiveWatermark::class => ModelValidationStrategy::NONE,
+        GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        CloseAccount::class => ModelValidationStrategy::STRICT_BODY,
+        GetUserAuditLog::class => ModelValidationStrategy::STRICT_QUERY,
+        GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
+        GetPricingPackage::class => ModelValidationStrategy::NONE,
+        ListPricingPackages::class => ModelValidationStrategy::STRICT_QUERY,
+        ListPricingPackagesOld::class => ModelValidationStrategy::STRICT_QUERY,
+        GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
+        DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
+        TriggerScan::class => ModelValidationStrategy::STRICT_BODY,
+        GetLatestScan::class => ModelValidationStrategy::NONE,
+        ListApiKeys::class => ModelValidationStrategy::STRICT_QUERY,
+        ListAbuseCases::class => ModelValidationStrategy::STRICT_QUERY,
+        GetDmcaCase::class => ModelValidationStrategy::NONE,
+        GetAbuseCase::class => ModelValidationStrategy::NONE,
+        ResolveDmcaCase::class => ModelValidationStrategy::NONE,
+        ResolveAbuseCase::class => ModelValidationStrategy::NONE,
+        CheckAbuseCase::class => ModelValidationStrategy::NONE,
+        GetBillingDetails::class => ModelValidationStrategy::NONE,
+        ConfigureAutoRecharge::class => ModelValidationStrategy::STRICT_BODY,
+        CreatePaymentCheckout::class => ModelValidationStrategy::STRICT_BODY,
+        GetAffiliateDetails::class => ModelValidationStrategy::NONE,
+        ClaimAffiliateCredits::class => ModelValidationStrategy::NONE,
+        GetBillingSummaryPDF::class => ModelValidationStrategy::NONE,
+        ListDrmCertificates::class => ModelValidationStrategy::STRICT_QUERY,
+        ListTickets::class => ModelValidationStrategy::STRICT_QUERY,
+        GetTicketDetails::class => ModelValidationStrategy::NONE,
+        CloseTicket::class => ModelValidationStrategy::NONE,
+        ReplyTicket::class => ModelValidationStrategy::STRICT_BODY,
+        CreateTicket::class => ModelValidationStrategy::STRICT_BODY,
+        GetHomeFeed::class => ModelValidationStrategy::NONE,
+        GetGitHubIntegration::class => ModelValidationStrategy::NONE,
         GetMarketingDetails::class => ModelValidationStrategy::NONE,
     ];
 }

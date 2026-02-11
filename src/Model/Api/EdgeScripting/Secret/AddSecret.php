@@ -48,7 +48,7 @@ class AddSecret implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'Secret', type: Type::STRING_TYPE),
         ];
     }
