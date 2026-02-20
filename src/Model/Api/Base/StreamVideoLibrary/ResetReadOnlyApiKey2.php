@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ResetPasswordByPathParameter implements ModelInterface
+class ResetReadOnlyApiKey2 implements ModelInterface
 {
     /**
      * @param int $id
@@ -26,7 +26,7 @@ class ResetPasswordByPathParameter implements ModelInterface
 
     public function getPath(): string
     {
-        return 'videolibrary/%d/resetApiKey';
+        return 'videolibrary/%d/resetReadOnlyApiKey';
     }
 
     public function getHeaders(): array

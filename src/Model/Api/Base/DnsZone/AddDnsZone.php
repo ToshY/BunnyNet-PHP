@@ -45,6 +45,36 @@ class AddDnsZone implements ModelInterface, BodyModelInterface
     {
         return [
             new AbstractParameter(name: 'Domain', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'Records', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'Type', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Ttl', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Weight', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Priority', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Flags', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Tag', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'Port', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'PullZoneId', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'ScriptId', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Accelerated', type: Type::BOOLEAN_TYPE),
+                    new AbstractParameter(name: 'MonitorType', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'GeolocationLatitude', type: Type::NUMERIC_TYPE),
+                    new AbstractParameter(name: 'GeolocationLongitude', type: Type::NUMERIC_TYPE),
+                    new AbstractParameter(name: 'LatencyZone', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'SmartRoutingType', type: Type::INT_TYPE),
+                    new AbstractParameter(name: 'Disabled', type: Type::BOOLEAN_TYPE),
+                    new AbstractParameter(name: 'EnviromentalVariables', type: Type::ARRAY_TYPE, children: [
+                        new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE),
+                            new AbstractParameter(name: 'Value', type: Type::STRING_TYPE),
+                        ]),
+                    ]),
+                    new AbstractParameter(name: 'Comment', type: Type::STRING_TYPE),
+                    new AbstractParameter(name: 'AutoSslIssuance', type: Type::BOOLEAN_TYPE),
+                ]),
+            ]),
         ];
     }
 }
