@@ -17,11 +17,14 @@ class PublishRelease implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $id
+     * @param string $uuid
      * @param array<string,mixed> $body
      */
     public function __construct(
         #[PathProperty]
         public readonly int $id,
+        #[PathProperty]
+        public readonly string $uuid,
         #[BodyProperty]
         public readonly array $body = [],
     ) {
