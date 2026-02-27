@@ -1189,15 +1189,21 @@ class ModelGenerator
             }
         }
 
+
         $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
+        if (str_contains($operationId, '_') === true) {
+            [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
 
-        [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
-
-        $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
-        $namespace = match ($namespace !== null) {
-            true => ClassUtils::toPascalCase($namespace),
-            false => OpenApiModelUtils::stripTagSuffix($operationNamespace),
-        };
+            $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
+            $namespace = match ($namespace !== null) {
+                true => ClassUtils::toPascalCase($namespace),
+                false => OpenApiModelUtils::stripTagSuffix($operationNamespace),
+            };
+        } else {
+            $operationClass = ClassUtils::toPascalCase($operationId);
+            $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
+            $namespace = ClassUtils::toPascalCase($namespace);
+        }
 
         $class = OpenApiModelUtils::stripTagSuffix($operationClass);
 
