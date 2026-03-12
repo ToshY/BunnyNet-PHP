@@ -21,6 +21,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStorageSize;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
@@ -97,6 +98,9 @@ final class Stream
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions' => [
             'get' => VideoResolutionsInfo::class,
+        ],
+        '/library/{libraryId}/videos/{videoId}/storage' => [
+            'get' => GetVideoStorageSize::class,
         ],
         '/library/{libraryId}/videos/{videoId}/resolutions/cleanup' => [
             'post' => CleanupUnconfiguredResolutions::class,

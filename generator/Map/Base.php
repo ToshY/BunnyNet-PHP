@@ -18,11 +18,13 @@ use ToshY\BunnyNet\Model\Api\Base\Billing\ClaimAffiliateCredits;
 use ToshY\BunnyNet\Model\Api\Base\Billing\ConfigureAutoRecharge;
 use ToshY\BunnyNet\Model\Api\Base\Billing\CreateCoinifyPayment;
 use ToshY\BunnyNet\Model\Api\Base\Billing\CreatePaymentCheckout;
+use ToshY\BunnyNet\Model\Api\Base\Billing\DownloadPaymentRequestInvoicePdf;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetAffiliateDetails;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingDetails;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummary;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF;
 use ToshY\BunnyNet\Model\Api\Base\Billing\GetCoinifyBitcoinExchangeRate;
+use ToshY\BunnyNet\Model\Api\Base\Billing\GetPaymentRequests;
 use ToshY\BunnyNet\Model\Api\Base\Billing\PreparePaymentAuthorization;
 use ToshY\BunnyNet\Model\Api\Base\Countries\ListCountries;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord;
@@ -36,12 +38,17 @@ use ToshY\BunnyNet\Model\Api\Base\DnsZone\EnableDnssecOnDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ExportDnsRecords;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZoneQueryStatistics;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\GetLatestScan;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\IssueWildcardCertificate;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\ListDnsZones;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
+use ToshY\BunnyNet\Model\Api\Base\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Base\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Base\PricingPackages\GetPricingPackage;
+use ToshY\BunnyNet\Model\Api\Base\PricingPackages\ListPricingPackages;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\AddBlockedReferer;
@@ -67,6 +74,7 @@ use ToshY\BunnyNet\Model\Api\Base\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\SetForceSsl;
+use ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePrivateKeyType;
 use ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePullZone;
 use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrl;
 use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrlByHeader;
@@ -80,13 +88,17 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneConnections;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ListStorageZones;
-use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword as StorageZoneResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\ResetReadOnlyPassword;
 use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveWatermark;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
@@ -96,8 +108,10 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey2;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -150,6 +164,9 @@ final class Base
         '/dnszone/checkavailability' => [
             'post' => CheckDnsZoneAvailability::class,
         ],
+        '/dnszone/{zoneId}/records' => [
+            'put' => AddDnsRecord::class,
+        ],
         '/dnszone/{zoneId}/records/{id}' => [
             'post' => UpdateDnsRecord::class,
             'delete' => DeleteDnsRecord::class,
@@ -157,8 +174,8 @@ final class Base
         '/dnszone/{zoneId}/import' => [
             'post' => ImportDnsRecords::class,
         ],
-        '/dnszone/{zoneId}/records' => [
-            'put' => AddDnsRecord::class,
+        '/dnszone/{zoneId}/certificate/issue' => [
+            'post' => IssueWildcardCertificate::class,
         ],
         '/pullzone' => [
             'get' => ListPullZones::class,
@@ -169,6 +186,15 @@ final class Base
             'post' => UpdatePullZone::class,
             'delete' => DeletePullZone::class,
         ],
+        '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}' => [
+            'delete' => DeleteEdgeRule::class,
+        ],
+        '/pullzone/{pullZoneId}/edgerules/addOrUpdate' => [
+            'post' => AddOrUpdateEdgeRule::class,
+        ],
+        '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}/setEdgeRuleEnabled' => [
+            'post' => SetEdgeRuleEnabled::class,
+        ],
         '/pullzone/{pullZoneId}/originshield/queuestatistics' => [
             'get' => GetOriginShieldQueueStatistics::class,
         ],
@@ -178,14 +204,11 @@ final class Base
         '/pullzone/{pullZoneId}/optimizer/statistics' => [
             'get' => GetOptimizerStatistics::class,
         ],
+        '/pullzone/{id}/updatePrivateKeyType' => [
+            'post' => UpdatePrivateKeyType::class,
+        ],
         '/pullzone/loadFreeCertificate' => [
             'get' => LoadFreeCertificate::class,
-        ],
-        '/pullzone/{pullZoneId}/edgerules/addOrUpdate' => [
-            'post' => AddOrUpdateEdgeRule::class,
-        ],
-        '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}/setEdgeRuleEnabled' => [
-            'post' => SetEdgeRuleEnabled::class,
         ],
         '/pullzone/{id}/purgeCache' => [
             'post' => PurgeCache::class,
@@ -196,8 +219,14 @@ final class Base
         '/pullzone/{id}/addCertificate' => [
             'post' => AddCustomCertificate::class,
         ],
+        '/pullzone/{id}/removeCertificate' => [
+            'delete' => RemoveCertificate::class,
+        ],
         '/pullzone/{id}/addHostname' => [
             'post' => AddCustomHostname::class,
+        ],
+        '/pullzone/{id}/removeHostname' => [
+            'delete' => RemoveCustomHostname::class,
         ],
         '/pullzone/{id}/setForceSSL' => [
             'post' => SetForceSsl::class,
@@ -223,14 +252,30 @@ final class Base
         '/pullzone/{id}/removeBlockedIp' => [
             'post' => RemoveBlockedIp::class,
         ],
-        '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}' => [
-            'delete' => DeleteEdgeRule::class,
+        '/purge' => [
+            'post' => PurgeUrl::class,
+            'get' => PurgeUrlByHeader::class,
         ],
-        '/pullzone/{id}/removeCertificate' => [
-            'delete' => RemoveCertificate::class,
+        '/region' => [
+            'get' => ListRegions::class,
         ],
-        '/pullzone/{id}/removeHostname' => [
-            'delete' => RemoveCustomHostname::class,
+        '/storagezone' => [
+            'get' => ListStorageZones::class,
+            'post' => AddStorageZone::class,
+        ],
+        '/storagezone/checkavailability' => [
+            'post' => CheckStorageZoneAvailability::class,
+        ],
+        '/storagezone/{id}' => [
+            'get' => GetStorageZone::class,
+            'post' => UpdateStorageZone::class,
+            'delete' => DeleteStorageZone::class,
+        ],
+        '/storagezone/{id}/resetPassword' => [
+            'post' => ResetPassword::class,
+        ],
+        '/storagezone/resetReadOnlyPassword' => [
+            'post' => ResetReadOnlyPassword::class,
         ],
         '/videolibrary' => [
             'get' => ListVideoLibraries::class,
@@ -245,10 +290,20 @@ final class Base
             'get' => GetLanguages::class,
         ],
         '/videolibrary/resetApiKey' => [
-            'post' => ResetPassword::class,
+            'post' => StreamVideoLibraryResetPassword::class,
         ],
         '/videolibrary/{id}/resetApiKey' => [
             'post' => ResetPasswordByPathParameter::class,
+        ],
+        '/videolibrary/resetReadOnlyApiKey' => [
+            'post' => ResetReadOnlyApiKey::class,
+        ],
+        '/videolibrary/{id}/resetReadOnlyApiKey' => [
+            'post' => ResetReadOnlyApiKey2::class,
+        ],
+        '/videolibrary/{id}/watermark' => [
+            'put' => AddWatermark::class,
+            'delete' => DeleteWatermark::class,
         ],
         '/videolibrary/{id}/addAllowedReferrer' => [
             'post' => StreamVideoLibraryAddAllowedReferer::class,
@@ -262,43 +317,40 @@ final class Base
         '/videolibrary/{id}/removeBlockedReferrer' => [
             'post' => StreamVideoLibraryRemoveBlockedReferer::class,
         ],
-        '/videolibrary/{id}/watermark' => [
-            'put' => AddWatermark::class,
-            'delete' => DeleteWatermark::class,
-        ],
-        '/storagezone' => [
-            'get' => ListStorageZones::class,
-            'post' => AddStorageZone::class,
-        ],
-        '/storagezone/{id}' => [
-            'get' => GetStorageZone::class,
-            'post' => UpdateStorageZone::class,
-            'delete' => DeleteStorageZone::class,
-        ],
-        '/storagezone/checkavailability' => [
-            'post' => CheckStorageZoneAvailability::class,
-        ],
-        '/storagezone/{id}/resetPassword' => [
-            'post' => StorageZoneResetPassword::class,
-        ],
-        '/storagezone/resetReadOnlyPassword' => [
-            'post' => ResetReadOnlyPassword::class,
-        ],
-        '/region' => [
-            'get' => ListRegions::class,
-        ],
-        '/purge' => [
-            'post' => PurgeUrl::class,
-            'get' => PurgeUrlByHeader::class,
-        ],
         '/videolibrary/{id}/transcribing/statistics' => [
             'get' => GetTranscribingStatistics::class,
+        ],
+        '/videolibrary/{id}/live/thumbnail' => [
+            'put' => AddThumbnail::class,
+            'delete' => DeleteThumbnail::class,
+        ],
+        '/videolibrary/{id}/live/watermark' => [
+            'put' => AddLiveWatermark::class,
+            'delete' => DeleteLiveWatermark::class,
         ],
         '/videolibrary/{id}/drm/statistics' => [
             'get' => GetDrmStatistics::class,
         ],
+        '/user/closeaccount' => [
+            'post' => CloseAccount::class,
+        ],
+        '/user/audit/{date}' => [
+            'get' => GetUserAuditLog::class,
+        ],
         '/storagezone/{id}/statistics' => [
             'get' => GetStorageZoneStatistics::class,
+        ],
+        '/statistics' => [
+            'get' => GetStatistics::class,
+        ],
+        '/search' => [
+            'get' => GlobalSearch::class,
+        ],
+        '/v3.0/pricing-packages/{pricingPackageId}' => [
+            'get' => GetPricingPackage::class,
+        ],
+        '/v3.0/pricing-packages' => [
+            'get' => ListPricingPackages::class,
         ],
         '/dnszone/{id}/statistics' => [
             'get' => GetDnsZoneQueryStatistics::class,
@@ -307,17 +359,32 @@ final class Base
             'post' => EnableDnssecOnDnsZone::class,
             'delete' => DisableDnssecOnDnsZone::class,
         ],
-        '/user/closeaccount' => [
-            'post' => CloseAccount::class,
+        '/dnszone/records/scan' => [
+            'post' => TriggerScan::class,
         ],
-        '/user/audit/{date}' => [
-            'get' => GetUserAuditLog::class,
+        '/dnszone/{zoneId}/records/scan' => [
+            'get' => GetLatestScan::class,
         ],
-        '/statistics' => [
-            'get' => GetStatistics::class,
+        '/billing' => [
+            'get' => GetBillingDetails::class,
+        ],
+        '/billing/payment-request-invoice/{id}/pdf' => [
+            'get' => DownloadPaymentRequestInvoicePdf::class,
+        ],
+        '/billing/payment-requests' => [
+            'get' => GetPaymentRequests::class,
+        ],
+        '/billing/summary/{billingRecordId}/pdf' => [
+            'get' => GetBillingSummaryPDF::class,
+        ],
+        '/billing/summary' => [
+            'get' => GetBillingSummary::class,
         ],
         '/apikey' => [
             'get' => ListApiKeys::class,
+        ],
+        '/billing/affiliate' => [
+            'get' => GetAffiliateDetails::class,
         ],
         '/abusecase' => [
             'get' => ListAbuseCases::class,
@@ -343,9 +410,6 @@ final class Base
         '/auth/jwt/refresh' => [
             'post' => RefreshJwt::class,
         ],
-        '/billing' => [
-            'get' => GetBillingDetails::class,
-        ],
         '/billing/payment/autorecharge' => [
             'post' => ConfigureAutoRecharge::class,
         ],
@@ -355,9 +419,6 @@ final class Base
         '/billing/payment/prepare-authorization' => [
             'get' => PreparePaymentAuthorization::class,
         ],
-        '/billing/affiliate' => [
-            'get' => GetAffiliateDetails::class,
-        ],
         '/billing/affiliate/claim' => [
             'post' => ClaimAffiliateCredits::class,
         ],
@@ -366,12 +427,6 @@ final class Base
         ],
         '/billing/coinify/create' => [
             'get' => CreateCoinifyPayment::class,
-        ],
-        '/billing/summary' => [
-            'get' => GetBillingSummary::class,
-        ],
-        '/billing/summary/{billingRecordId}/pdf' => [
-            'get' => GetBillingSummaryPDF::class,
         ],
         '/billing/applycode' => [
             'get' => ApplyPromoCode::class,
@@ -384,9 +439,6 @@ final class Base
         ],
         '/drmcertificate' => [
             'get' => ListDrmCertificates::class,
-        ],
-        '/search' => [
-            'get' => GlobalSearch::class,
         ],
         '/support/ticket/list' => [
             'get' => ListTickets::class,

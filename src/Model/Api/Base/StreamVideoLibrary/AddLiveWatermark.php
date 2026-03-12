@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ResetPasswordByPathParameter implements ModelInterface
+class AddLiveWatermark implements ModelInterface
 {
     /**
      * @param int $id
@@ -21,12 +21,12 @@ class ResetPasswordByPathParameter implements ModelInterface
 
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::PUT;
     }
 
     public function getPath(): string
     {
-        return 'videolibrary/%d/resetApiKey';
+        return 'videolibrary/%d/live/watermark';
     }
 
     public function getHeaders(): array

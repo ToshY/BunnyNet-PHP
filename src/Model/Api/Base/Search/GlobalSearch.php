@@ -43,7 +43,7 @@ class GlobalSearch implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'search', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'from', type: Type::INT_TYPE),
             new AbstractParameter(name: 'size', type: Type::INT_TYPE),
         ];

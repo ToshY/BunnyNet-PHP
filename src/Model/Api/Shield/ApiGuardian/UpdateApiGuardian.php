@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\EdgeScripting\Secret;
+namespace ToshY\BunnyNet\Model\Api\Shield\ApiGuardian;
 
 use ToshY\BunnyNet\Attributes\BodyProperty;
 use ToshY\BunnyNet\Attributes\PathProperty;
@@ -13,15 +13,18 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class AddSecret implements ModelInterface, BodyModelInterface
+class UpdateApiGuardian implements ModelInterface, BodyModelInterface
 {
     /**
-     * @param int $id
+     * @param int $shieldZoneId
+     * @param int $endpointId
      * @param array<string,mixed> $body
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $id,
+        public readonly int $shieldZoneId,
+        #[PathProperty]
+        public readonly int $endpointId,
         #[BodyProperty]
         public readonly array $body = [],
     ) {
@@ -29,27 +32,29 @@ class AddSecret implements ModelInterface, BodyModelInterface
 
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::PATCH;
     }
 
     public function getPath(): string
     {
-        return 'compute/script/%d/secrets';
+        return 'shield/shield-zone/%d/api-guardian/endpoint/%d';
     }
 
     public function getHeaders(): array
     {
         return [
             Header::ACCEPT_JSON,
-            Header::CONTENT_TYPE_JSON,
+            Header::CONTENT_TYPE_JSON_ALL,
         ];
     }
 
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'Secret', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'enabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'validateRequestBodySchema', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'validateResponseBodySchema', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'validateAuthorization', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
