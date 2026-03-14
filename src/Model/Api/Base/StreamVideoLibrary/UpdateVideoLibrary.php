@@ -114,24 +114,6 @@ class UpdateVideoLibrary implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'ScaleVideoUsingBothDimensions', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ExposeOriginals', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ExposeVideoMetadata', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'EnableLive', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'Live', type: Type::OBJECT_TYPE, children: [
-                new AbstractParameter(name: 'EnableCountdown', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'EnableVideoOnDemand', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'EnableDvr', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'DvrTimeframeSeconds', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'PreStreamTrailerVideoId', type: Type::STRING_TYPE),
-                new AbstractParameter(name: 'WatermarkPositionLeft', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'WatermarkPositionTop', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'WatermarkWidth', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'WatermarkHeight', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'RtmpOutputs', type: Type::ARRAY_TYPE, children: [
-                    new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
-                        new AbstractParameter(name: 'Endpoint', type: Type::STRING_TYPE),
-                        new AbstractParameter(name: 'StreamKey', type: Type::STRING_TYPE),
-                    ]),
-                ]),
-            ]),
         ];
     }
 }

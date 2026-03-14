@@ -12,14 +12,18 @@ use ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessListEnums;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\ListShieldZoneAccessLists;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneAccessList;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneCuratedThreatList;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardian;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics;
-use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneDetailedMetricsOverview;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
@@ -63,12 +67,16 @@ final class Shield
         DeleteShieldZoneAccessList::class => ModelValidationStrategy::NONE,
         UpdateShieldZoneAccessList::class => ModelValidationStrategy::STRICT_BODY,
         GetShieldZoneAccessListEnums::class => ModelValidationStrategy::NONE,
+        GetApiGuardian::class => ModelValidationStrategy::NONE,
+        UploadOpenapiSpecification::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateOpenapiSpecification::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateApiGuardian::class => ModelValidationStrategy::STRICT_BODY,
         GetShieldZoneBotDetection::class => ModelValidationStrategy::NONE,
         CreateOrUpdateShieldZoneBotDetection::class => ModelValidationStrategy::STRICT_BODY,
         ListDdosEnums::class => ModelValidationStrategy::NONE,
         ListEventLogs::class => ModelValidationStrategy::NONE,
         GetOverviewMetrics::class => ModelValidationStrategy::NONE,
-        GetMetricsOverviewDetailed::class => ModelValidationStrategy::STRICT_QUERY,
+        GetShieldZoneDetailedMetricsOverview::class => ModelValidationStrategy::STRICT_QUERY,
         ListRateLimitMetrics::class => ModelValidationStrategy::NONE,
         GetRateLimitMetrics::class => ModelValidationStrategy::NONE,
         GetWafRuleMetrics::class => ModelValidationStrategy::NONE,
