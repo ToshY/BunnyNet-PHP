@@ -10,7 +10,7 @@ PHP client library for the [Bunny.net](https://bunny.net) API. Each API endpoint
 - **Model classes** (`src/Model/Api/`) — one class per API endpoint. Implements `ModelInterface` and optionally `BodyModelInterface`/`QueryModelInterface`. Constructor properties use `#[PathProperty]`, `#[QueryProperty]`, `#[BodyProperty]`, `#[HeaderProperty]` attributes to tag parameter roles. Path placeholders use `sprintf` format (e.g. `pullzone/%d`).
 - **Validation** — `BunnyValidator` delegates to strategy enums in `src/Enum/Validation/ModelValidationStrategy.php`. Validation maps in `src/Enum/Validation/Map/` are auto-generated.
 - **Generator** (`generator/`) — reads external OpenAPI manifest (`API_SPEC_MANIFEST` env var), produces model classes and validation maps. Two-step: `generate-maps.php` then `generate-models.php`. Run via `task specs`.
-- **Other services**: `BunnyTokenAuthentication` (URL token signing), `BunnyImageProcessor` (image optimization URL builder).
+- **Other services**: `BunnyTokenAuthentication` (URL token signing), `BunnyDynamicImageProcessor` (image optimization URL builder).
 
 ## Model Class Pattern
 

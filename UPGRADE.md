@@ -1,3 +1,25 @@
+## 9.x
+
+This release comes with breaking changes due to changing namespace for all Base API models.
+
+### ‼️ Breaking changes
+
+| **8.x**                                                                         | **9.x**                                                                         |
+|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `ToshY\BunnyNet\Model\Api\Base\*\*`                                             | `ToshY\BunnyNet\Model\Api\Core\*\*`                                             |
+| `ToshY\BunnyNet\BunnyImageProcessor`                                            | `ToshY\BunnyNet\BunnyDynamicImageProcessor`                                     |
+| `ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPathParameter` | `ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPathParameter` |
+
+> [!TIP]
+> You can run the following command in your source directory (e.g. `src/`) to update all occurences of `ToshY\BunnyNet\Model\Api\Base\*\*` to `ToshY\BunnyNet\Model\Api\Core\*\*`:
+> ```shell
+> grep -rl 'ToshY\\BunnyNet\\Model\\Api\\Base\\' src/ --include="*.php" | xargs sed -i 's/ToshY\\BunnyNet\\Model\\Api\\Base\\/ToshY\\BunnyNet\\Model\\Api\\Core\\/g'
+> ```
+
+### 🐘 PHP
+
+Minimum PHP version has been updated to `8.2`.
+
 ## 8.x
 
 This release comes with minor breaking changes due to changing namespaces for 5 Shield API models.
