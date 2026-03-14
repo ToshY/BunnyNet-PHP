@@ -1,12 +1,17 @@
 # Logging API
 
+Access raw request logs via API or dashboard with a 3 day log retention policy.
+
 ### About Logging
+
 Bunny CDN provides a raw logging service giving you access to raw request logs.
 
 ### Privacy & GDPR
+
 To comply with GDPR and privacy regulations all logs are provided with anonymized IP addresses. To enable full IP logging, you will first need to accept and sign the Data Processing Agreement (DPA) in your account settings. After that, a new setting will be enabled in your pull zone logging settings to disable anonymization.
 
 ### Log Retention
+
 Searchable logs are stored for up to 3 days. If long-term log storage is required, an additional Permanent Log Storage feature is available. If enabled, the logs will be automatically uploaded to your selected Edge Storage zone at the end of each day.
 
 ## Setup
@@ -64,4 +69,4 @@ $bunnyHttpClient->request(
 
 ## Reference
 
-* [Logging API](https://docs.bunny.net/docs/cdn-logging)
+* [Logging API](https://docs.bunny.net/cdn/logging)

@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Generator\Generator\ModelGenerator;
 use ToshY\BunnyNet\Generator\Utils\ClassUtils;
 use ToshY\BunnyNet\Generator\Utils\FileUtils;
 use ToshY\BunnyNet\Generator\Utils\LoggerUtils;
-use ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords;
+use ToshY\BunnyNet\Model\Api\Core\DnsZone\ImportDnsRecords;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\UploadFile;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\UploadVideo;
@@ -39,7 +39,7 @@ $data = [];
 foreach ($manifests as $file) {
     $fileName = strtolower($file['fileName']);
     $key = match (true) {
-        str_contains($fileName, 'core-api') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($fileName, 'core-api') => \ToshY\BunnyNet\Enum\Generator::CORE->value,
         str_contains($fileName, 'edge-scripting') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
         str_contains($fileName, 'edge-storage') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
         str_contains($fileName, 'stream-api') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
@@ -54,7 +54,7 @@ foreach ($manifests as $file) {
     };
 
     $replacements = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value, => [
+        \ToshY\BunnyNet\Enum\Generator::CORE->value, => [
             ClassUtils::getShortClassName(ImportDnsRecords::class) => [
                 'constructor' => [
                     'body' => [
@@ -100,7 +100,7 @@ foreach ($manifests as $file) {
     };
 
     $validationReplacements  = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value, => EndpointEdgeCases::BASE_API_VALIDATION_REPLACEMENTS,
+        \ToshY\BunnyNet\Enum\Generator::CORE->value, => EndpointEdgeCases::CORE_API_VALIDATION_REPLACEMENTS,
         \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value, => EndpointEdgeCases::EDGE_STORAGE_VALIDATION_REPLACEMENTS,
         default => [],
     };

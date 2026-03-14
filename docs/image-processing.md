@@ -1,8 +1,6 @@
-# Image Processing
+# Dynamic Images
 
-Bunny Optimizer is a real-time on the fly image manipulation and optimization service that automatically optimizes your
-images for faster image delivery, bandwidth savings and enables smart dynamic image manipulation using a simple query
-API.
+The Dynamic Images API lets you resize, crop, and transform images in real time by appending query parameters to image URLs. No pre-processing or multiple file versions required, just add parameters to your image URLs and Bunny Optimizer handles the rest.
 
 ## Usage
 
@@ -12,9 +10,9 @@ Generate URL with optimization parameters.
 <?php
 require 'vendor/autoload.php';
 
-use ToshY\BunnyNet\BunnyImageProcessor;
+use ToshY\BunnyNet\BunnyDynamicImageProcessor;
 
-BunnyImageProcessor::generate(
+BunnyDynamicImageProcessor::generate(
     url: 'https://myzone.b-cdn.net/bunny.jpg',
     optimization: [
         'width' => 200,
@@ -51,5 +49,5 @@ BunnyImageProcessor::generate(
 
 ## Reference
 
-* [Image Processing API](https://docs.bunny.net/docs/stream-image-processing)
+* [Image Processing API](https://docs.bunny.net/optimizer/dynamic-images/overview)
 * [Bunny Optimizer Engine Documentation](https://support.bunny.net/hc/en-us/articles/360027448392-Bunny-Optimizer-Engine-Documentation)

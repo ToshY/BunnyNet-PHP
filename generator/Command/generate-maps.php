@@ -27,7 +27,7 @@ $data = [];
 foreach ($manifests as $file) {
     $fileName = strtolower($file['fileName']);
     $key = match (true) {
-        str_contains($fileName, 'core-api') => \ToshY\BunnyNet\Enum\Generator::BASE->value,
+        str_contains($fileName, 'core-api') => \ToshY\BunnyNet\Enum\Generator::CORE->value,
         str_contains($fileName, 'edge-scripting') => \ToshY\BunnyNet\Enum\Generator::EDGE_SCRIPTING->value,
         str_contains($fileName, 'edge-storage') => \ToshY\BunnyNet\Enum\Generator::EDGE_STORAGE->value,
         str_contains($fileName, 'stream-api') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
@@ -42,7 +42,7 @@ foreach ($manifests as $file) {
     };
 
     $ignoreEndpoints = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value => [
+        \ToshY\BunnyNet\Enum\Generator::CORE->value => [
             /* Changed to EdgeScripting */
             '/compute/script',
             '/compute/script/{id}',
@@ -58,7 +58,7 @@ foreach ($manifests as $file) {
 
     // Endpoints that are still available to use but no longer in the OpenAPI specs
     $keepUndocumentedEndpoints = match ($key) {
-        \ToshY\BunnyNet\Enum\Generator::BASE->value => EndpointEdgeCases::BASE_API_UNDOCUMENTED_IN_OPEN_API_SPECS,
+        \ToshY\BunnyNet\Enum\Generator::CORE->value => EndpointEdgeCases::CORE_API_UNDOCUMENTED_IN_OPEN_API_SPECS,
         default => [],
     };
 

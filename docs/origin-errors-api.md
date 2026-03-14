@@ -1,8 +1,6 @@
 # Origin Errors API
 
-When your origin stops responding, you shouldn’t have to dig through layers of logs or guess whether it’s DNS, timeouts, or misconfiguration.
-
-Origin Errors Monitoring gives you full visibility into failed origin requests, directly in the dashboard or via API.
+The Origin Errors API provides visibility into failed origin requests. Query error logs by pull zone and date to identify DNS failures, timeouts, and other origin issues.
 
 ## Setup
 

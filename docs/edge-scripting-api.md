@@ -1,6 +1,6 @@
 # Edge Scripting API
 
-Edge Scripting is a  serverless JavaScript platform built on top of Deno, designed to help developers build, deploy, and run JavaScript applications on our massive global network without worrying about hardware, scaling, or load balancing ever again.
+The Scripting API lets you manage edge scripts programmatically. Create scripts, configure deployments, and monitor execution via HTTP.
 
 ## Setup
 
@@ -430,5 +430,5 @@ $bunnyHttpClient->request(
 
 ## Reference
 
-* [Edge Scripting API](https://docs.bunny.net/reference/getedgescriptcodeendpoint_getcode)
+* [Edge Scripting API](https://docs.bunny.net/api-reference/scripting)
 * [Blog "Introducing Edge Scripting: A better way to build and run applications at the edge!" (07-11-2024)](https://bunny.net/blog/introducing-bunny-edge-scripting-a-better-way-to-build-and-deploy-applications-at-the-edge/)

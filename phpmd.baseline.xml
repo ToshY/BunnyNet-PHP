@@ -4,8 +4,8 @@
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/BunnyTokenAuthentication.php"/>
   <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/Helper/BunnyHttpClientHelper.php"/>
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Base/PullZone/AddPullZone.php" method="getBody"/>
-  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Base/PullZone/UpdatePullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Core/PullZone/AddPullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Core/PullZone/UpdatePullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\NpathComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Validation/ParameterValidator.php" method="validate"/>

@@ -1,6 +1,6 @@
 # Edge Storage API
 
-Edge Storage is a cloud storage solution provided by bunny.net that automatically replicates your data to multiple regions around the world. It integrates tightly with the bunny.net CDN and was designed to be the fastest performing global storage solution thanks to smart geographical load balancing.
+The Edge Storage API provides a simple RESTful interface for managing files in your storage zones.
 
 ## Setup
 
@@ -184,4 +184,4 @@ $bunnyHttpClient->request(
 
 ## Reference
 
-* [Edge Storage API](https://docs.bunny.net/reference/storage-api)
+* [Edge Storage API](https://docs.bunny.net/api-reference/storage)
