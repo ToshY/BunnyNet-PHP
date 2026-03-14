@@ -119,3 +119,4 @@ $bunnyTokenAuthentication->sign(
 
 * [Token Authentication Guide](https://support.bunny.net/hc/en-us/articles/360016055099-How-to-sign-URLs-for-BunnyCDN-Token-Authentication)
 * [BunnyWay/BunnyCDN.TokenAuthentication](https://github.com/BunnyWay/BunnyCDN.TokenAuthentication)
+* [Bunny.net Documentation](https://docs.bunny.net/cdn/security/token-authentication/index#token-authentication)

@@ -57,7 +57,7 @@ nav:
   - About: index.md
   - Getting Started: getting-started.md
   - API:
-    - Base: base-api.md
+    - Core Platform: core-api.md
     - Edge Storage: edge-storage-api.md
     - Stream: stream-api.md
     - Edge Scripting: edge-scripting-api.md

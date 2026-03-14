@@ -9,7 +9,7 @@ namespace ToshY\BunnyNet\Enum;
  */
 enum Generator: string
 {
-    case BASE = 'Base';
+    case CORE = 'Core';
 
     case EDGE_SCRIPTING = 'EdgeScripting';
 

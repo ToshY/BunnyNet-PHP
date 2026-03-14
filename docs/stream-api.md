@@ -1,6 +1,6 @@
 # Stream API
 
-Bunny Stream was designed for developers to easily upload, process, and display videos in any type of use-case.
+The Stream API provides a RESTful interface for managing video libraries, uploading videos, and controlling playback settings.
 
 ## Setup
 
@@ -587,4 +587,4 @@ $bunnyHttpClient->request(
 
 ## Reference
 
-* [Stream API](https://docs.bunny.net/reference/api-overview)
+* [Stream API](https://docs.bunny.net/api-reference/stream)

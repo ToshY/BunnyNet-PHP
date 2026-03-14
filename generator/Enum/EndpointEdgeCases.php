@@ -5,61 +5,61 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Generator\Enum;
 
 use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\CheckAbuseCase;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetAbuseCase;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\GetDmcaCase;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ListAbuseCases;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveAbuseCase;
-use ToshY\BunnyNet\Model\Api\Base\AbuseCase\ResolveDmcaCase;
-use ToshY\BunnyNet\Model\Api\Base\Auth\AuthJwt2fa;
-use ToshY\BunnyNet\Model\Api\Base\Auth\RefreshJwt;
-use ToshY\BunnyNet\Model\Api\Base\Billing\ApplyPromoCode;
-use ToshY\BunnyNet\Model\Api\Base\Billing\ClaimAffiliateCredits;
-use ToshY\BunnyNet\Model\Api\Base\Billing\ConfigureAutoRecharge;
-use ToshY\BunnyNet\Model\Api\Base\Billing\CreateCoinifyPayment;
-use ToshY\BunnyNet\Model\Api\Base\Billing\CreatePaymentCheckout;
-use ToshY\BunnyNet\Model\Api\Base\Billing\GetAffiliateDetails;
-use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingDetails;
-use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummary;
-use ToshY\BunnyNet\Model\Api\Base\Billing\GetBillingSummaryPDF;
-use ToshY\BunnyNet\Model\Api\Base\Billing\GetCoinifyBitcoinExchangeRate;
-use ToshY\BunnyNet\Model\Api\Base\Billing\PreparePaymentAuthorization;
-use ToshY\BunnyNet\Model\Api\Base\DnsZone\DismissDnsConfigurationNotice;
-use ToshY\BunnyNet\Model\Api\Base\DnsZone\RecheckDnsConfiguration;
-use ToshY\BunnyNet\Model\Api\Base\DrmCertificate\ListDrmCertificates;
-use ToshY\BunnyNet\Model\Api\Base\Integration\GetGitHubIntegration;
-use ToshY\BunnyNet\Model\Api\Base\Purge\PurgeUrlByHeader;
-use ToshY\BunnyNet\Model\Api\Base\Search\GlobalSearch;
-use ToshY\BunnyNet\Model\Api\Base\StorageZone\GetStorageZoneConnections;
-use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
-use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
-use ToshY\BunnyNet\Model\Api\Base\Support\GetTicketDetails;
-use ToshY\BunnyNet\Model\Api\Base\Support\ListTickets;
-use ToshY\BunnyNet\Model\Api\Base\Support\ReplyTicket;
-use ToshY\BunnyNet\Model\Api\Base\User\AcceptDpa;
-use ToshY\BunnyNet\Model\Api\Base\User\CloseAccount;
-use ToshY\BunnyNet\Model\Api\Base\User\DisableTwoFactorAuthentication;
-use ToshY\BunnyNet\Model\Api\Base\User\EnableTwoFactorAuthentication;
-use ToshY\BunnyNet\Model\Api\Base\User\GenerateTwoFactorAuthenticationVerification;
-use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetails;
-use ToshY\BunnyNet\Model\Api\Base\User\GetDpaDetailsHtml;
-use ToshY\BunnyNet\Model\Api\Base\User\GetHomeFeed;
-use ToshY\BunnyNet\Model\Api\Base\User\GetMarketingDetails;
-use ToshY\BunnyNet\Model\Api\Base\User\GetUserDetails;
-use ToshY\BunnyNet\Model\Api\Base\User\GetWhatsNewItems;
-use ToshY\BunnyNet\Model\Api\Base\User\ListCloseAccountReasons;
-use ToshY\BunnyNet\Model\Api\Base\User\ListNotifications;
-use ToshY\BunnyNet\Model\Api\Base\User\ResendEmailConfirmation;
-use ToshY\BunnyNet\Model\Api\Base\User\ResetApiKey;
-use ToshY\BunnyNet\Model\Api\Base\User\ResetWhatsNew;
-use ToshY\BunnyNet\Model\Api\Base\User\SetNotificationsOpened;
-use ToshY\BunnyNet\Model\Api\Base\User\UpdateUserDetails;
-use ToshY\BunnyNet\Model\Api\Base\User\VerifyTwoFactorAuthenticationCode;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\CheckAbuseCase;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\GetAbuseCase;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\GetDmcaCase;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\ListAbuseCases;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\ResolveAbuseCase;
+use ToshY\BunnyNet\Model\Api\Core\AbuseCase\ResolveDmcaCase;
+use ToshY\BunnyNet\Model\Api\Core\Auth\AuthJwt2fa;
+use ToshY\BunnyNet\Model\Api\Core\Auth\RefreshJwt;
+use ToshY\BunnyNet\Model\Api\Core\Billing\ApplyPromoCode;
+use ToshY\BunnyNet\Model\Api\Core\Billing\ClaimAffiliateCredits;
+use ToshY\BunnyNet\Model\Api\Core\Billing\ConfigureAutoRecharge;
+use ToshY\BunnyNet\Model\Api\Core\Billing\CreateCoinifyPayment;
+use ToshY\BunnyNet\Model\Api\Core\Billing\CreatePaymentCheckout;
+use ToshY\BunnyNet\Model\Api\Core\Billing\GetAffiliateDetails;
+use ToshY\BunnyNet\Model\Api\Core\Billing\GetBillingDetails;
+use ToshY\BunnyNet\Model\Api\Core\Billing\GetBillingSummary;
+use ToshY\BunnyNet\Model\Api\Core\Billing\GetBillingSummaryPDF;
+use ToshY\BunnyNet\Model\Api\Core\Billing\GetCoinifyBitcoinExchangeRate;
+use ToshY\BunnyNet\Model\Api\Core\Billing\PreparePaymentAuthorization;
+use ToshY\BunnyNet\Model\Api\Core\DnsZone\DismissDnsConfigurationNotice;
+use ToshY\BunnyNet\Model\Api\Core\DnsZone\RecheckDnsConfiguration;
+use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Core\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\Core\Purge\PurgeUrlByHeader;
+use ToshY\BunnyNet\Model\Api\Core\Search\GlobalSearch;
+use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneConnections;
+use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
+use ToshY\BunnyNet\Model\Api\Core\Support\CreateTicket;
+use ToshY\BunnyNet\Model\Api\Core\Support\GetTicketDetails;
+use ToshY\BunnyNet\Model\Api\Core\Support\ListTickets;
+use ToshY\BunnyNet\Model\Api\Core\Support\ReplyTicket;
+use ToshY\BunnyNet\Model\Api\Core\User\AcceptDpa;
+use ToshY\BunnyNet\Model\Api\Core\User\CloseAccount;
+use ToshY\BunnyNet\Model\Api\Core\User\DisableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\Api\Core\User\EnableTwoFactorAuthentication;
+use ToshY\BunnyNet\Model\Api\Core\User\GenerateTwoFactorAuthenticationVerification;
+use ToshY\BunnyNet\Model\Api\Core\User\GetDpaDetails;
+use ToshY\BunnyNet\Model\Api\Core\User\GetDpaDetailsHtml;
+use ToshY\BunnyNet\Model\Api\Core\User\GetHomeFeed;
+use ToshY\BunnyNet\Model\Api\Core\User\GetMarketingDetails;
+use ToshY\BunnyNet\Model\Api\Core\User\GetUserDetails;
+use ToshY\BunnyNet\Model\Api\Core\User\GetWhatsNewItems;
+use ToshY\BunnyNet\Model\Api\Core\User\ListCloseAccountReasons;
+use ToshY\BunnyNet\Model\Api\Core\User\ListNotifications;
+use ToshY\BunnyNet\Model\Api\Core\User\ResendEmailConfirmation;
+use ToshY\BunnyNet\Model\Api\Core\User\ResetApiKey;
+use ToshY\BunnyNet\Model\Api\Core\User\ResetWhatsNew;
+use ToshY\BunnyNet\Model\Api\Core\User\SetNotificationsOpened;
+use ToshY\BunnyNet\Model\Api\Core\User\UpdateUserDetails;
+use ToshY\BunnyNet\Model\Api\Core\User\VerifyTwoFactorAuthenticationCode;
 use ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DownloadZip;
 
 final class EndpointEdgeCases
 {
-    public const BASE_API_UNDOCUMENTED_IN_OPEN_API_SPECS = [
+    public const CORE_API_UNDOCUMENTED_IN_OPEN_API_SPECS = [
         '/abusecase' => [
             'get' => ListAbuseCases::class,
         ],
@@ -207,7 +207,7 @@ final class EndpointEdgeCases
         ],
     ];
 
-    public const BASE_API_VALIDATION_REPLACEMENTS = [
+    public const CORE_API_VALIDATION_REPLACEMENTS = [
         ListAbuseCases::class => ModelValidationStrategy::STRICT_QUERY,
         GetDmcaCase::class => ModelValidationStrategy::NONE,
         GetAbuseCase::class => ModelValidationStrategy::NONE,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Helper;
 
+use ReflectionException;
 use InvalidArgumentException;
 use ReflectionClass;
 use ToshY\BunnyNet\Attributes\BodyProperty;
@@ -26,7 +27,7 @@ class BunnyValidatorHelper
         $reflection = new ReflectionClass($model);
         try {
             $property = $reflection->getProperty($propertyName);
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             throw new InvalidArgumentException(
                 message: sprintf(
                     'Model `%s` has no `%s` property despite implementing `%s`.',
@@ -63,7 +64,7 @@ class BunnyValidatorHelper
         $reflection = new ReflectionClass($model);
         try {
             $property = $reflection->getProperty($propertyName);
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             throw new InvalidArgumentException(
                 message: sprintf(
                     'Model `%s` has no `%s` property despite implementing `%s`.',

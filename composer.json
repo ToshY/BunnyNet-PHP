@@ -33,17 +33,17 @@
     }
   },
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "ext-json": "*",
     "psr/http-client": "^1.0",
     "nyholm/psr7": "^1.6.1"
   },
   "require-dev": {
-    "rector/rector": "^2.0",
+    "rector/rector": "^2.3",
     "phpmd/phpmd": "^2.15",
-    "friendsofphp/php-cs-fixer": "^3.75",
+    "friendsofphp/php-cs-fixer": "^3.94",
     "phpstan/phpstan": "^2.1",
-    "phpunit/phpunit": "^10.0",
+    "phpunit/phpunit": "^11.5",
     "nette/php-generator": "^4.1",
     "cebe/php-openapi": "^1.8"
   },

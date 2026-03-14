@@ -1,6 +1,6 @@
 # Shield API
 
-Bunny Shield: a powerful, next-generation web security suite—built to democratize access to serious, scalable protection that supports you from the moment you go live.
+The Shield API provides a RESTful interface for managing security settings on your pull zones. Configure WAF rules, rate limiting, bot detection, and access controls programmatically.
 
 ## Setup
 
@@ -1151,5 +1151,5 @@ $bunnyHttpClient->request(
 
 ## Reference
 
-* [Shield API](https://docs.bunny.net/reference/get_shield-shield-zones)
+* [Shield API](https://docs.bunny.net/api-reference/shield)
 * [Shield API (Swagger)](https://api.bunny.net/shield/docs/index.html)

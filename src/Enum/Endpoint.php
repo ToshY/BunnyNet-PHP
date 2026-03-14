@@ -6,7 +6,7 @@ namespace ToshY\BunnyNet\Enum;
 
 final class Endpoint
 {
-    /** @var string Base API endpoint */
+    /** @var string Core Platform API endpoint */
     public const BASE = 'api.bunny.net';
 
     /** @var string Edge Scripting API endpoint */

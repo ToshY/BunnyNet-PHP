@@ -10,11 +10,11 @@ use ToshY\BunnyNet\Validation\Strategy\Query\QueryValidationStrategyInterface;
 /**
  * @internal
  */
-final class ValidationModelStrategy
+final readonly class ValidationModelStrategy
 {
     public function __construct(
-        public readonly QueryValidationStrategyInterface $query,
-        public readonly BodyValidationStrategyInterface $body,
+        public QueryValidationStrategyInterface $query,
+        public BodyValidationStrategyInterface $body,
     ) {
     }
 }

@@ -14,7 +14,7 @@ PHP client library for the [Bunny.net](https://bunny.net) API. Each API endpoint
 
 ## Model Class Pattern
 
-Every model follows this exact structure (see `src/Model/Api/Base/PullZone/GetPullZone.php`):
+Every model follows this exact structure (see `src/Model/Api/Core/PullZone/GetPullZone.php`):
 
 ```php
 class GetPullZone implements ModelInterface, QueryModelInterface
@@ -72,7 +72,7 @@ task mkdocs:live      # Dev server on port 8001 (override with p=PORT)
 ```
 
 - **`mkdocs.yml`** — site config, nav tree, theme/extensions. The `nav:` section defines page order; update it when adding pages.
-- Each API group has one doc page (e.g. `docs/base-api.md`, `docs/stream-api.md`) containing setup + usage examples for every endpoint in that group.
+- Each API group has one doc page (e.g. `docs/core-api.md`, `docs/stream-api.md`) containing setup + usage examples for every endpoint in that group.
 - Doc pages show usage via `$bunnyHttpClient->request(new ModelClass(...))` snippets — one per endpoint, matching the model classes in `src/Model/Api/`.
 - Undocumented/deprecated endpoints use `??? warning "Undocumented endpoint"` admonitions.
 - Non-API tools (`BunnyImageProcessor`, `BunnyTokenAuthentication`) each have a standalone page under `docs/`.
@@ -82,7 +82,7 @@ task mkdocs:live      # Dev server on port 8001 (override with p=PORT)
 
 | Path                                                                                 | Purpose                                            |
 |--------------------------------------------------------------------------------------|----------------------------------------------------|
-| `src/Model/Api/{Base,Stream,Shield,EdgeStorage,EdgeScripting,OriginErrors,Logging}/` | Auto-generated endpoint models                     |
+| `src/Model/Api/{Core,Stream,Shield,EdgeStorage,EdgeScripting,OriginErrors,Logging}/` | Auto-generated endpoint models                     |
 | `src/Enum/Validation/Map/`                                                           | Auto-generated validation strategy maps            |
 | `src/Attributes/`                                                                    | PHP 8.1 attributes for model property roles        |
 | `src/Validation/Strategy/`                                                           | Body/Query validation strategies (Strict/Lax/None) |
