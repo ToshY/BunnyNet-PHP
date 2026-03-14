@@ -249,6 +249,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_BODY' => 'string',
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
+                    'FINGERPRINT' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -285,6 +286,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_BODY' => 'string',
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
+                            'FINGERPRINT' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -333,6 +335,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_BODY' => 'string',
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
+                    'FINGERPRINT' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -369,6 +372,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_BODY' => 'string',
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
+                            'FINGERPRINT' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -428,6 +432,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_BODY' => 'string',
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
+                    'FINGERPRINT' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -464,6 +469,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_BODY' => 'string',
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
+                            'FINGERPRINT' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -596,6 +602,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_BODY' => 'string',
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
+                    'FINGERPRINT' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -633,6 +640,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_BODY' => 'string',
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
+                            'FINGERPRINT' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -701,6 +709,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_BODY' => 'string',
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
+                    'FINGERPRINT' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -738,6 +747,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_BODY' => 'string',
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
+                            'FINGERPRINT' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -820,6 +830,32 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+#### Get Metrics Overview Detailed
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed(
+        shieldZoneId: 1,
+        query: [
+            'StartDate' => 'm-d-Y',
+            'EndDate' => 'm-d-Y',
+            'Resolution' => 0,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `Resolution` has the following possible values:
+        - `0`
+        - `1`
+        - `2`
+        - `3`
+        - `4`
+        - `5`
+        - `6`
 
 ### Event Logs
 
