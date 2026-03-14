@@ -96,11 +96,11 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddThumbnail;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteThumbnail;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
@@ -113,7 +113,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as Str
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey2;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -204,7 +204,7 @@ final class Base
         StreamVideoLibraryResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
         ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
         ResetReadOnlyApiKey::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetReadOnlyApiKey2::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyApiKeyByPath::class => ModelValidationStrategy::NONE,
         AddWatermark::class => ModelValidationStrategy::NONE,
         DeleteWatermark::class => ModelValidationStrategy::NONE,
         StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
@@ -212,8 +212,8 @@ final class Base
         StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         GetTranscribingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        AddThumbnail::class => ModelValidationStrategy::NONE,
-        DeleteThumbnail::class => ModelValidationStrategy::NONE,
+        AddLiveThumbnail::class => ModelValidationStrategy::NONE,
+        DeleteLiveThumbnail::class => ModelValidationStrategy::NONE,
         AddLiveWatermark::class => ModelValidationStrategy::NONE,
         DeleteLiveWatermark::class => ModelValidationStrategy::NONE,
         GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,

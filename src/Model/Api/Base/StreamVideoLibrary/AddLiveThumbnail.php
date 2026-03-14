@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class ResetReadOnlyApiKey2 implements ModelInterface
+class AddLiveThumbnail implements ModelInterface
 {
     /**
      * @param int $id
@@ -21,12 +21,12 @@ class ResetReadOnlyApiKey2 implements ModelInterface
 
     public function getMethod(): Method
     {
-        return Method::POST;
+        return Method::PUT;
     }
 
     public function getPath(): string
     {
-        return 'videolibrary/%d/resetReadOnlyApiKey';
+        return 'videolibrary/%d/live/thumbnail';
     }
 
     public function getHeaders(): array

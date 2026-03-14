@@ -857,6 +857,67 @@ $bunnyHttpClient->request(
         - `5`
         - `6`
 
+### API Guardian
+
+#### Get API Guardian
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardian(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### Update API Guardian
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian(
+        shieldZoneId: 1,
+        endpointId: 2,
+        body: [
+            'enabled' => true,
+            'validateRequestBodySchema' => true,
+            'validateResponseBodySchema' => false,
+            'validateAuthorization' => false,
+        ],
+    )
+);
+```
+
+??? warning
+
+    - This endpoint returns a `403` status code if you do not have Advanced plan or higher.
+
+#### Upload OpenAPI Specification
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadOpenapiSpecification(
+        shieldZoneId: 1,
+        body: [
+            'content' => '{"openapi":"3.0.0","info":{"title":"My API","version":"1.0.0"}}',
+            'enforceAuthorisationValidation' => false,
+        ],
+    )
+);
+```
+
+#### Update OpenAPI Specification
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification(
+        shieldZoneId: 1,
+        body: [
+            'content' => '{"openapi":"3.0.0","info":{"title":"My API","version":"2.0.0"}}',
+            'enforceAuthorisationValidation' => true,
+        ],
+    )
+);
+```
+
 ### Event Logs
 
 #### [List Event Logs](https://docs.bunny.net/reference/get_shield-event-logs-shieldzoneid-date-continuationtoken)

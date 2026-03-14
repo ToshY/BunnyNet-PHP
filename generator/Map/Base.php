@@ -94,11 +94,11 @@ use ToshY\BunnyNet\Model\Api\Base\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddThumbnail;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveWatermark;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteThumbnail;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveThumbnail;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteWatermark;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\GetDrmStatistics;
@@ -111,7 +111,7 @@ use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\RemoveBlockedReferer as Str
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetPasswordByPathParameter;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey;
-use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey2;
+use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Base\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Base\Support\CreateTicket;
@@ -299,7 +299,7 @@ final class Base
             'post' => ResetReadOnlyApiKey::class,
         ],
         '/videolibrary/{id}/resetReadOnlyApiKey' => [
-            'post' => ResetReadOnlyApiKey2::class,
+            'post' => ResetReadOnlyApiKeyByPath::class,
         ],
         '/videolibrary/{id}/watermark' => [
             'put' => AddWatermark::class,
@@ -321,8 +321,8 @@ final class Base
             'get' => GetTranscribingStatistics::class,
         ],
         '/videolibrary/{id}/live/thumbnail' => [
-            'put' => AddThumbnail::class,
-            'delete' => DeleteThumbnail::class,
+            'put' => AddLiveThumbnail::class,
+            'delete' => DeleteLiveThumbnail::class,
         ],
         '/videolibrary/{id}/live/watermark' => [
             'put' => AddLiveWatermark::class,

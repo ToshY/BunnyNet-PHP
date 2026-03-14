@@ -852,7 +852,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddThumbnail(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveThumbnail(
         id: 1,
     )
 );
@@ -872,7 +872,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteThumbnail(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveThumbnail(
         id: 1,
     )
 );
@@ -894,7 +894,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey2(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKeyByPath(
         id: 1,
     )
 );
@@ -1293,6 +1293,10 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - Only one of `ZoneId` or `Domain` can be provided, not both.
 
 ### Pull Zone
 

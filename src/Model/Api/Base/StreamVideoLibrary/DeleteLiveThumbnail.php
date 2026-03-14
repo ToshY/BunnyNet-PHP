@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DeleteThumbnail implements ModelInterface
+class DeleteLiveThumbnail implements ModelInterface
 {
     /**
      * @param int $id
