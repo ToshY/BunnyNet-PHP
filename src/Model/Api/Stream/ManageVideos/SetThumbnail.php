@@ -44,6 +44,7 @@ class SetThumbnail implements ModelInterface, QueryModelInterface
     {
         return [
             Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_OCTET_STREAM,
         ];
     }
 

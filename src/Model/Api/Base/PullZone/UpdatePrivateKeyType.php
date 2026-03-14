@@ -13,7 +13,7 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\BodyModelInterface;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class PurgeCache implements ModelInterface, BodyModelInterface
+class UpdatePrivateKeyType implements ModelInterface, BodyModelInterface
 {
     /**
      * @param int $id
@@ -34,12 +34,13 @@ class PurgeCache implements ModelInterface, BodyModelInterface
 
     public function getPath(): string
     {
-        return 'pullzone/%d/purgeCache';
+        return 'pullzone/%d/updatePrivateKeyType';
     }
 
     public function getHeaders(): array
     {
         return [
+            Header::ACCEPT_JSON,
             Header::CONTENT_TYPE_JSON,
         ];
     }
@@ -47,7 +48,8 @@ class PurgeCache implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'CacheTag', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'Hostname', type: Type::STRING_TYPE, required: true),
+            new AbstractParameter(name: 'KeyType', type: Type::INT_TYPE, required: true),
         ];
     }
 }

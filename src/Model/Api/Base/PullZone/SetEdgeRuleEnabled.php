@@ -51,8 +51,8 @@ class SetEdgeRuleEnabled implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'Id', type: Type::INT_TYPE, required: true),
-            new AbstractParameter(name: 'Value', type: Type::BOOLEAN_TYPE, required: true),
+            new AbstractParameter(name: 'Id', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'Value', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
