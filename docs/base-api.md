@@ -1322,11 +1322,6 @@ $bunnyHttpClient->request(
             'LimitRateAfter' => 0,
             'LimitRatePerSecond' => 0,
             'BurstSize' => 0,
-            'WAFEnabled' => false,
-            'WAFDisabledRuleGroups' => [],
-            'WAFDisabledRules' => [],
-            'WAFEnableRequestHeaderLogging' => false,
-            'WAFRequestHeaderIgnores' => [],
             'ErrorPageEnableCustomCode' => false,
             'ErrorPageCustomCode' => null,
             'ErrorPageEnableStatuspageWidget' => false,
@@ -1546,11 +1541,6 @@ $bunnyHttpClient->request(
             'LimitRateAfter' => 0,
             'LimitRatePerSecond' => 0,
             'BurstSize' => 0,
-            'WAFEnabled' => false,
-            'WAFDisabledRuleGroups' => [],
-            'WAFDisabledRules' => [],
-            'WAFEnableRequestHeaderLogging' => false,
-            'WAFRequestHeaderIgnores' => [],
             'ErrorPageEnableCustomCode' => false,
             'ErrorPageCustomCode' => null,
             'ErrorPageEnableStatuspageWidget' => false,
@@ -2267,7 +2257,6 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\StorageZone\AddStorageZone(
         body: [
-            'OriginUrl' => '',
             'Name' => 'Test',
             'Region' => 'DE',
             'ReplicationRegions' => '',
@@ -2280,9 +2269,6 @@ $bunnyHttpClient->request(
 
 ??? note
 
-    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
-    So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
-    the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
     - The key `ZoneTier` has the following possible values (undocumented):
         - `0` = `Standard` (HDD)
         - `1` = `Edge` (SSD)

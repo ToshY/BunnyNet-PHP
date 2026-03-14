@@ -121,17 +121,6 @@ class UpdatePullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'LimitRateAfter', type: Type::NUMERIC_TYPE),
             new AbstractParameter(name: 'LimitRatePerSecond', type: Type::INT_TYPE),
             new AbstractParameter(name: 'BurstSize', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'WAFEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFDisabledRuleGroups', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
-            new AbstractParameter(name: 'WAFDisabledRules', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
-            new AbstractParameter(name: 'WAFEnableRequestHeaderLogging', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'WAFRequestHeaderIgnores', type: Type::ARRAY_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::STRING_TYPE),
-            ]),
             new AbstractParameter(name: 'ErrorPageEnableCustomCode', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ErrorPageCustomCode', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'ErrorPageEnableStatuspageWidget', type: Type::BOOLEAN_TYPE),
