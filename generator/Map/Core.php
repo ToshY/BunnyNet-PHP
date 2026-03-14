@@ -109,7 +109,7 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPathParameter;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
@@ -293,7 +293,7 @@ final class Core
             'post' => StreamVideoLibraryResetPassword::class,
         ],
         '/videolibrary/{id}/resetApiKey' => [
-            'post' => ResetPasswordByPathParameter::class,
+            'post' => ResetPasswordByPath::class,
         ],
         '/videolibrary/resetReadOnlyApiKey' => [
             'post' => ResetReadOnlyApiKey::class,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Enum\Validation;
 
-use ToshY\BunnyNet\Enum\Validation\Map\Base;
+use ToshY\BunnyNet\Enum\Validation\Map\Core;
 use ToshY\BunnyNet\Enum\Validation\Map\EdgeScripting;
 use ToshY\BunnyNet\Enum\Validation\Map\EdgeStorage;
 use ToshY\BunnyNet\Enum\Validation\Map\Logging;
@@ -36,7 +36,7 @@ enum ModelValidationStrategy
     public static function all(): array
     {
         return array_merge(
-            Base::$map,
+            Core::$map,
             EdgeScripting::$map,
             EdgeStorage::$map,
             Logging::$map,

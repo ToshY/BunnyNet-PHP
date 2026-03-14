@@ -742,7 +742,7 @@ $bunnyHttpClient->request(
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPathParameter(
+    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath(
         id: 1,
     )
 );

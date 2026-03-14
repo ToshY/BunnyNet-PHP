@@ -111,7 +111,7 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPathParameter;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
@@ -141,7 +141,7 @@ use ToshY\BunnyNet\Model\Api\Core\User\SetNotificationsOpened;
 use ToshY\BunnyNet\Model\Api\Core\User\UpdateUserDetails;
 use ToshY\BunnyNet\Model\Api\Core\User\VerifyTwoFactorAuthenticationCode;
 
-final class Base
+final class Core
 {
     /** @var array<class-string,ModelValidationStrategy> $map */
     public static array $map = [
@@ -202,7 +202,7 @@ final class Base
         DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
         GetLanguages::class => ModelValidationStrategy::NONE,
         StreamVideoLibraryResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetPasswordByPathParameter::class => ModelValidationStrategy::NONE,
+        ResetPasswordByPath::class => ModelValidationStrategy::NONE,
         ResetReadOnlyApiKey::class => ModelValidationStrategy::STRICT_QUERY,
         ResetReadOnlyApiKeyByPath::class => ModelValidationStrategy::NONE,
         AddWatermark::class => ModelValidationStrategy::NONE,
