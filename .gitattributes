@@ -17,3 +17,4 @@
 /rector.php export-ignore
 /Taskfile.yml export-ignore
 /UPGRADE.md export-ignore
+/AGENTS.md export-ignore
