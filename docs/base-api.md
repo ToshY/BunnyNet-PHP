@@ -848,7 +848,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### Add Thumbnail
+#### Add Live Thumbnail
 
 ```php
 $bunnyHttpClient->request(
@@ -868,7 +868,7 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### Delete Thumbnail
+#### Delete Live Thumbnail
 
 ```php
 $bunnyHttpClient->request(
