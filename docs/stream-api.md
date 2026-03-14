@@ -563,7 +563,6 @@ $bunnyHttpClient->request(
 );
 ```
 
-
 ### OEmbed
 
 #### [Get OEmbed](https://docs.bunny.net/reference/oembed_getoembed)

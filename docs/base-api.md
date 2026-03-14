@@ -928,11 +928,69 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsZone(	
         body: [
             'Domain' => 'example.com',
-            'Records' => [],
+            'Records' => [
+                [
+                    'Type' => 3,
+                    'Ttl' => 15,
+                    'Value' => 'My TXT Value',
+                    'Name' => '',
+                    'Weight' => 0,
+                    'Priority' => 0,
+                    'Flags' => 0,
+                    'Tag' => '',
+                    'Port' => 0,
+                    'PullZoneId' => 0,
+                    'ScriptId' => 0,
+                    'Accelerated' => false,
+                    'MonitorType' => 0,
+                    'GeolocationLatitude' => 0,
+                    'GeolocationLongitude' => 0,
+                    'LatencyZone' => null,
+                    'SmartRoutingType' => 0,
+                    'Disabled' => false,
+                    'EnviromentalVariables' => [
+                        [
+                            'Name' => 'Hello',
+                            'Value' => 'World',
+                        ],
+                    ],
+                    'Comment' => '',
+                    'AutoSslIssuance' => true
+                ],
+            ],
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `EnviromentalVariables` is misspelled in the API specifications.
+    - The key `Type` has the following possible values:
+        - `0` = `A`
+        - `1` = `AAAA`
+        - `2` = `CNAME`
+        - `3` = `TXT`
+        - `4` = `MX`
+        - `5` = `RDR` (Redirect)
+        - `6` = `Flatten`
+        - `7` = `PZ` (Pull Zone)
+        - `8` = `SRV`
+        - `9` = `CAA`
+        - `10` = `PTR`
+        - `11` = `SCR` (Script)
+        - `12` = `NS`
+    - The key `ScriptId` is not returned in the response.
+    - The key `MonitorType` has the following possible values:
+        - `0` = `None`
+        - `1` = `Ping`
+        - `2` = `HTTP`
+        - `3` = `Monitor`
+    - The key `SmartRoutingType` has the following possible values:
+        - `0` = `None`
+        - `1` = `Latency`
+        - `2` = `Geolocation`
+    - The key `AutoSslIssuance` controls whether automatic SSL certificates should be issued for this record.
 
 #### [Get DNS Zone](https://docs.bunny.net/reference/dnszonepublic_index2)
 
@@ -1058,6 +1116,7 @@ $bunnyHttpClient->request(
                 ],
             ],
             'Comment' => '',
+            'AutoSslIssuance' => true
         ],
     )
 );
@@ -1125,6 +1184,7 @@ $bunnyHttpClient->request(
                 ],
             ],
             'Comment' => '',
+            'AutoSslIssuance' => true
             'Id' => 1,
         ],
     )
