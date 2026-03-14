@@ -602,7 +602,9 @@ $bunnyHttpClient->request(
             'KeepOriginalFiles' => true,
             'AllowDirectPlay' => true,
             'EnableDRM' => false,
+            'DrmVersion' => 0,
             'Controls' => 'play,progress,current-time,mute,volume,pip,fullscreen',
+            'PlaybackSpeeds' => '0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0,2.5,3,3.5,4',
             'Bitrate240p' => 600,
             'Bitrate360p' => 800,
             'Bitrate480p' => 1400,
@@ -616,29 +618,29 @@ $bunnyHttpClient->request(
             'EnableTranscribing' => false,
             'EnableTranscribingTitleGeneration' => false,
             'EnableTranscribingDescriptionGeneration' => false,
+            'EnableTranscribingChaptersGeneration' => false,
+            'EnableTranscribingMomentsGeneration' => false,
             'TranscribingCaptionLanguages' => [],
+            'EnableCaptionsInPlaylist' => true,
+            'RememberPlayerPosition' => true,
+            'EnableMultiAudioTrackSupport' => true,
+            'UseSeparateAudioStream' => true,
+            'JitEncodingEnabled' => true,
+            'EncodingTier' => 0,
+            'OutputCodecs' => 'x264,vp9,hevc,av1',
             'AppleFairPlayDrm' => [
                 'Enabled' => false,
             ],
             'GoogleWidevineDrm' => [
                 'Enabled' => false,
                 'SdOnlyForL3' => false,
-                'MinClientSecurityLevel' => 'None',
+                'MinClientSecurityLevel' => 0,
             ],
-            'EnableCaptionsInPlaylist' => true,
-            'RememberPlayerPosition' => true,
-            'EnableMultiAudioTrackSupport' => true,
-            'UseSeparateAudioStream' => true,
-            'JitEncodingEnabled' => true,
-            'EncodingTier' => 'Free',
-            'OutputCodecs' => 'x264,vp9,hevc,av1',
             'PlayerVersion' => 1,
             'RemoveMetadataFromFallbackVideos' => false,
-            'DrmVersion' => 'Basic',
-            'PlaybackSpeeds' => '0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0,2.5,3,3.5,4',
-            'EnableTranscribingChaptersGeneration' => false,
-            'EnableTranscribingMomentsGeneration' => false,
             'ScaleVideoUsingBothDimensions' => true,
+            'ExposeOriginals' => false,
+            'ExposeVideoMetadata' => false,
         ],
     )
 );
@@ -667,19 +669,18 @@ $bunnyHttpClient->request(
         - `airplay`
         - `fullscreen`
     - The key `MinClientSecurityLevel` has the following possible values:
-        - `None`
-        - `L1`
-        - `L2`
-        - `L3`
+        - `0` = `None`
+        - `1` = `L1`
+        - `2` = `L2`
+        - `3` = `L3`
     - The key `DrmVersion` has the following possible values:
-        - `Basic`
-        - `Enterprise`
-        - `BasicV2`
+        - `0` = `Basic`
+        - `1` = `Enterprise`
+        - `2` = `BasicV2`
     - To get a full list of possible value options for key `TranscribingCaptionLanguages`, see the [Get Languages](#get-languages) endpoint.
     - The key `EncodingTier` has the following possible values:
         - `0` = `Free`
         - `1` = `Premium`
-    - The API accepts both the integer as well as enum value for the `EncodingTier`.
 
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
@@ -837,6 +838,68 @@ $bunnyHttpClient->request(
 
     - The key `Hostname` does *not* allow multiple values.
 
+#### Add Live Watermark
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveWatermark(
+        id: 1,
+    )
+);
+```
+
+#### Add Live Thumbnail
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\AddLiveThumbnail(
+        id: 1,
+    )
+);
+```
+
+#### Delete Live Watermark
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveWatermark(
+        id: 1,
+    )
+);
+```
+
+#### Delete Live Thumbnail
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\DeleteLiveThumbnail(
+        id: 1,
+    )
+);
+```
+
+#### Reset Read-Only API Key
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKey(
+        query: [
+            'id' => 1,
+        ],
+    )
+);
+```
+
+#### Reset Read-Only API Key (by path parameter)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\StreamVideoLibrary\ResetReadOnlyApiKeyByPath(
+        id: 1,
+    )
+);
+```
+
 ### DNS Zone
 
 #### [List DNS Zones](https://docs.bunny.net/reference/dnszonepublic_index)
@@ -865,10 +928,69 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsZone(	
         body: [
             'Domain' => 'example.com',
+            'Records' => [
+                [
+                    'Type' => 3,
+                    'Ttl' => 15,
+                    'Value' => 'My TXT Value',
+                    'Name' => '',
+                    'Weight' => 0,
+                    'Priority' => 0,
+                    'Flags' => 0,
+                    'Tag' => '',
+                    'Port' => 0,
+                    'PullZoneId' => 0,
+                    'ScriptId' => 0,
+                    'Accelerated' => false,
+                    'MonitorType' => 0,
+                    'GeolocationLatitude' => 0,
+                    'GeolocationLongitude' => 0,
+                    'LatencyZone' => null,
+                    'SmartRoutingType' => 0,
+                    'Disabled' => false,
+                    'EnviromentalVariables' => [
+                        [
+                            'Name' => 'Hello',
+                            'Value' => 'World',
+                        ],
+                    ],
+                    'Comment' => '',
+                    'AutoSslIssuance' => true
+                ],
+            ],
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `EnviromentalVariables` is misspelled in the API specifications.
+    - The key `Type` has the following possible values:
+        - `0` = `A`
+        - `1` = `AAAA`
+        - `2` = `CNAME`
+        - `3` = `TXT`
+        - `4` = `MX`
+        - `5` = `RDR` (Redirect)
+        - `6` = `Flatten`
+        - `7` = `PZ` (Pull Zone)
+        - `8` = `SRV`
+        - `9` = `CAA`
+        - `10` = `PTR`
+        - `11` = `SCR` (Script)
+        - `12` = `NS`
+    - The key `ScriptId` is not returned in the response.
+    - The key `MonitorType` has the following possible values:
+        - `0` = `None`
+        - `1` = `Ping`
+        - `2` = `HTTP`
+        - `3` = `Monitor`
+    - The key `SmartRoutingType` has the following possible values:
+        - `0` = `None`
+        - `1` = `Latency`
+        - `2` = `Geolocation`
+    - The key `AutoSslIssuance` controls whether automatic SSL certificates should be issued for this record.
 
 #### [Get DNS Zone](https://docs.bunny.net/reference/dnszonepublic_index2)
 
@@ -892,8 +1014,8 @@ $bunnyHttpClient->request(
             'Nameserver2' => 'jonah.ns.cloudflare.com',
             'SoaEmail' => 'admin@example.com',
             'LoggingEnabled' => true,
-            'LogAnonymizationType' => 'OneDigit',
-            'CertificateKeyType' => 'Ecdsa',
+            'LogAnonymizationType' => 0,
+            'CertificateKeyType' => 0,
             'LoggingIPAnonymizationEnabled' => true,
         ],
     )
@@ -909,7 +1031,6 @@ $bunnyHttpClient->request(
         - `0` = `Ecdsa`
         - `1` = `Rsa`
     - In order to disable `LoggingIPAnonymizationEnabled` you first need to agree to the DPA agreement (GDPR).
-    - The API accepts both the integer as well as enum value for the `LogAnonymizationType` and `CertificateKeyType`.
 
 #### [Delete DNS Zone](https://docs.bunny.net/reference/dnszonepublic_delete)
 
@@ -951,20 +1072,6 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Get DNS Query Statistics](https://docs.bunny.net/reference/dnszonepublic_statistics)
-
-```php
-$bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\GetDnsZoneQueryStatistics(
-        id: 1,
-        query: [
-            'dateFrom' => 'm-d-Y',
-            'dateTo' => 'm-d-Y',
-        ],
-    )
-);
-```
-
 #### [Check DNS Zone Availability](https://docs.bunny.net/reference/dnszonepublic_checkavailability)
 
 ```php
@@ -984,7 +1091,7 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\DnsZone\AddDnsRecord(
         zoneId: 1,
         body: [
-            'Type' => 'TXT',
+            'Type' => 3,
             'Ttl' => 15,
             'Value' => 'My TXT Value',
             'Name' => '',
@@ -996,11 +1103,11 @@ $bunnyHttpClient->request(
             'PullZoneId' => 0,
             'ScriptId' => 0,
             'Accelerated' => false,
-            'MonitorType' => 'None',
+            'MonitorType' => 0,
             'GeolocationLatitude' => 0,
             'GeolocationLongitude' => 0,
             'LatencyZone' => null,
-            'SmartRoutingType' => 'None',
+            'SmartRoutingType' => 0,
             'Disabled' => false,
             'EnviromentalVariables' => [
                 [
@@ -1009,6 +1116,7 @@ $bunnyHttpClient->request(
                 ],
             ],
             'Comment' => '',
+            'AutoSslIssuance' => true
         ],
     )
 );
@@ -1041,7 +1149,7 @@ $bunnyHttpClient->request(
         - `0` = `None`
         - `1` = `Latency`
         - `2` = `Geolocation`
-    - The API accepts both the integer as well as enum value for the `Type`, `MonitorType` and `SmartRoutingType`.
+    - The key `AutoSslIssuance` controls whether automatic SSL certificates should be issued for this record.
 
 #### [Update DNS Record](https://docs.bunny.net/reference/dnszonepublic_updaterecord)
 
@@ -1051,7 +1159,7 @@ $bunnyHttpClient->request(
         zoneId: 1,
         id: 2,
         body: [
-            'Type' => 'TXT',
+            'Type' => 3,
             'Ttl' => 15,
             'Value' => 'My TXT Value',
             'Name' => '',
@@ -1063,11 +1171,11 @@ $bunnyHttpClient->request(
             'PullZoneId' => 0,
             'ScriptId' => 0,
             'Accelerated' => false,
-            'MonitorType' => 'None',
+            'MonitorType' => 0,
             'GeolocationLatitude' => 0,
             'GeolocationLongitude' => 0,
             'LatencyZone' => null,
-            'SmartRoutingType' => 'None',
+            'SmartRoutingType' => 0,
             'Disabled' => false,
             'EnviromentalVariables' => [
                 [
@@ -1076,6 +1184,7 @@ $bunnyHttpClient->request(
                 ],
             ],
             'Comment' => '',
+            'AutoSslIssuance' => true
             'Id' => 1,
         ],
     )
@@ -1109,7 +1218,6 @@ $bunnyHttpClient->request(
         - `0` = `None`
         - `1` = `Latency`
         - `2` = `Geolocation`
-    - The API accepts both the integer as well as enum value for the `Type`, `MonitorType` and `SmartRoutingType`.
 
 #### [Delete DNS Record](https://docs.bunny.net/reference/dnszonepublic_deleterecord)
 
@@ -1150,27 +1258,45 @@ $bunnyHttpClient->request(
 
     This endpoint is no longer in the OpenAPI specifications but can still be used indefinitely.
 
-#### [Import DNS Records](https://docs.bunny.net/reference/dnszonepublic_import)
+#### Get Latest Scan
 
 ```php
-/*
- * File contents read into string from the local filesystem.
- */
-$content = file_get_contents('./example.com.2023-08-20.bind');
-
-/*
- * File contents handle from a `$filesystem` (Flysystem FtpAdapter).
- */
-$content = $filesystem->readStream('./example.com.2023-08-20.bind');
-
-// Import DNS records.
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\ImportDnsRecords(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\GetLatestScan(
         zoneId: 1,
-        body: $content,
     )
 );
 ```
+
+#### Issue Wildcard Certificate
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\IssueWildcardCertificate(
+        zoneId: 1,
+        body: [
+            'Domain' => '*.example.com',
+        ],
+    )
+);
+```
+
+#### Trigger Scan
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\DnsZone\TriggerScan(
+        body: [
+            'ZoneId' => 1,
+            'Domain' => 'example.com',
+        ],
+    )
+);
+```
+
+??? note
+
+    - Only one of `ZoneId` or `Domain` can be provided, not both.
 
 ### Pull Zone
 
@@ -1236,7 +1362,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
-            'PermaCacheType' => 'Automatic',
+            'PermaCacheType' => 0,
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1251,7 +1377,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 'UDP',
+            'LogForwardingProtocol' => 0,
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1284,6 +1410,7 @@ $bunnyHttpClient->request(
             'OptimizerAutomaticOptimizationEnabled' => true,
             'OptimizerClasses' => [],
             'OptimizerForceClasses' => false,
+            'OptimizerStaticHtmlEnabled' => false,
             'OptimizerStaticHtmlWordPressPath' => '',
             'OptimizerStaticHtmlWordPressBypassCookie' => '',
             'OptimizerEnableUpscaling' => false,
@@ -1309,17 +1436,17 @@ $bunnyHttpClient->request(
             'OriginShieldMaxQueuedRequests' => 5000,
             'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 'OneDigit',
+            'LogAnonymizationType' => 0,
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
             'MiddlewareScriptId' => 0,
-            'EdgeScriptExecutionPhase' => 'Cache',
-            'OriginType' => 'OriginUrl',
+            'EdgeScriptExecutionPhase' => 0,
+            'OriginType' => 0,
             'MagicContainersAppId' => '',
             'MagicContainersEndpointId' => '',
-            'LogFormat' => 'Plain',
-            'LogForwardingFormat' => 'Plain',
-            'ShieldDDosProtectionType' => 'DetectOnly',
+            'LogFormat' => 0,
+            'LogForwardingFormat' => 0,
+            'ShieldDDosProtectionType' => 0,
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1331,12 +1458,12 @@ $bunnyHttpClient->request(
             'PreloadingScreenEnabled' => false,
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
-            'PreloadingScreenShowOnFirstVisit' => true,
-            'PreloadingScreenTheme' => 'Dark',
+            'PreloadingScreenShowOnFirstVisit' => false,
+            'PreloadingScreenTheme' => 1,
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
-            'StickySessionType' => 'Off',
+            'StickySessionType' => 0,
             'StickySessionCookieName' => '',
             'StickySessionClientHeaders' => '',
             'EnableWebSockets' => false,
@@ -1390,9 +1517,11 @@ $bunnyHttpClient->request(
     - The key `StickySessionType` has the following possible values:
         - `0` = `Off`
         - `1` = `On`
+    - The key `PreloadingScreenShowOnFirstVisit` is required when using preloading screen features.
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
+    - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
     - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
@@ -1452,7 +1581,7 @@ $bunnyHttpClient->request(
             'EnableLogging' => true,
             'LoggingIPAnonymizationEnabled' => true,
             'PermaCacheStorageZoneId' => 0,
-            'PermaCacheType' => 'Automatic',
+            'PermaCacheType' => 0,
             'AWSSigningEnabled' => false,
             'AWSSigningKey' => null,
             'AWSSigningRegionName' => null,
@@ -1467,7 +1596,7 @@ $bunnyHttpClient->request(
             'LogForwardingHostname' => null,
             'LogForwardingPort' => 0,
             'LogForwardingToken' => null,
-            'LogForwardingProtocol' => 'UDP',
+            'LogForwardingProtocol' => 0,
             'LoggingSaveToStorage' => false,
             'LoggingStorageZoneId' => 0,
             'FollowRedirects' => false,
@@ -1500,8 +1629,10 @@ $bunnyHttpClient->request(
             'OptimizerAutomaticOptimizationEnabled' => true,
             'OptimizerClasses' => [],
             'OptimizerForceClasses' => false,
+            'OptimizerStaticHtmlEnabled' => false,
             'OptimizerStaticHtmlWordPressPath' => '',
             'OptimizerStaticHtmlWordPressBypassCookie' => '',
+            'OptimizerEnableUpscaling' => false,
             'Type' => 0,
             'OriginRetries' => 0,
             'OriginConnectTimeout' => 10,
@@ -1524,17 +1655,17 @@ $bunnyHttpClient->request(
             'OriginShieldMaxQueuedRequests' => 5000,
             'UseBackgroundUpdate' => false,
             'EnableAutoSSL' => false,
-            'LogAnonymizationType' => 'OneDigit',
+            'LogAnonymizationType' => 0,
             'StorageZoneId' => 0,
             'EdgeScriptId' => 0,
             'MiddlewareScriptId' => 0,
-            'EdgeScriptExecutionPhase' => 'Cache',
-            'OriginType' => 'OriginUrl',
+            'EdgeScriptExecutionPhase' => 0,
+            'OriginType' => 0,
             'MagicContainersAppId' => '',
             'MagicContainersEndpointId' => '',
-            'LogFormat' => 'Plain',
-            'LogForwardingFormat' => 'Plain',
-            'ShieldDDosProtectionType' => 'DetectOnly',
+            'LogFormat' => 0,
+            'LogForwardingFormat' => 0,
+            'ShieldDDosProtectionType' => 0,
             'ShieldDDosProtectionEnabled' => false,
             'OriginHostHeader' => '',
             'EnableSmartCache' => false,
@@ -1546,12 +1677,12 @@ $bunnyHttpClient->request(
             'PreloadingScreenEnabled' => false,
             'PreloadingScreenCode' => '',
             'PreloadingScreenLogoUrl' => null,
-            'PreloadingScreenShowOnFirstVisit' => true,
-            'PreloadingScreenTheme' => 'Dark',
+            'PreloadingScreenShowOnFirstVisit' => false,
+            'PreloadingScreenTheme' => 1,
             'PreloadingScreenCodeEnabled' => false,
             'PreloadingScreenDelay' => 700,
             'RoutingFilters' => [],
-            'StickySessionType' => 'Off',
+            'StickySessionType' => 0,
             'StickySessionCookieName' => '',
             'StickySessionClientHeaders' => '',
             'OptimizerEnableUpscaling' => false,
@@ -1594,11 +1725,11 @@ $bunnyHttpClient->request(
         - `1` = `ActiveStandard`
         - `2` = `ActiveAggresive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
-        - `0` (BottomLeft)
-        - `1` (BottomRight)
-        - `2` (TopLeft)
-        - `4` (Center)
-        - `5` (CenterStretch)
+        - `0` = `BottomLeft`
+        - `1` = `BottomRight`
+        - `2` = `TopLeft`
+        - `4` = `Center`
+        - `5` = `CenterStretch`
     - The key `PreloadingScreenTheme` has the following possible values:
         - `0` = `Light`
         - `1` = `Dark`
@@ -1859,6 +1990,7 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\PullZone\LoadFreeCertificate(
         query: [
             'hostname' => 'cdn.example.com',
+            'useOnlyHttp01' => false,
         ],
     )
 );
@@ -1898,7 +2030,7 @@ $bunnyHttpClient->request(
         body: [
             'Hostname' => 'cdn.example.com',
             'Certificate' => 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwLgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t',
-            'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t',
+            'CertificateKey' => 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpOZXZlciBnb25uYSBsZXQgeW91IGRvd24uCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFYS0tLS0t',
         ],
     )
 );
@@ -1967,6 +2099,9 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\PullZone\ResetTokenKey(
         id: 1,
+        body: [
+            'SecurityKey' => '',
+        ],
     )
 );
 ```
@@ -2035,6 +2170,10 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? note
+
+    - The key `Hostname` does *not* allow multiple values.
+
 #### [Add Blocked IP](https://docs.bunny.net/reference/pullzonepublic_addblockedip)
 
 ```php
@@ -2056,6 +2195,20 @@ $bunnyHttpClient->request(
         id: 1,
         body: [
             'BlockedIp' => '12.345.67.89',
+        ],
+    )
+);
+```
+
+#### Update Private Key Type
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Base\PullZone\UpdatePrivateKeyType(
+        id: 1,
+        body: [
+            'Hostname' => 'cdn.example.com',
+            'KeyType' => 0,
         ],
     )
 );
@@ -2168,12 +2321,11 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Base\StorageZone\AddStorageZone(
         body: [
-            'OriginUrl' => '',
             'Name' => 'Test',
             'Region' => 'DE',
             'ReplicationRegions' => '',
-            'ZoneTier' => 'Standard',
-            'StorageZoneType' => 'Supported',
+            'ZoneTier' => 0,
+            'StorageZoneType' => 0,
         ],
     )
 );
@@ -2181,9 +2333,6 @@ $bunnyHttpClient->request(
 
 ??? note
 
-    - The key `OriginUrl` allows you to specify a backup data source, in case the file does not exist on the Storage Zone.
-    So for example, you would request `/image.png`. Assuming `image.png` doesn't exist on the storage zone,
-    the system will try to proxy and fetch it from the `OriginUrl` instead. You can omit it unless needed.
     - The key `ZoneTier` has the following possible values (undocumented):
         - `0` = `Standard` (HDD)
         - `1` = `Edge` (SSD)
@@ -2376,12 +2525,8 @@ $bunnyHttpClient->request(
                 '53c6cf29-c7cc-4d82-8187-56938c5e0734',
             ], 
             'Order' => '<value>',
-            'ContinuationToken' => [
-                'MWRiMjM0MTItMzM4Yy00NmFiLWEwYzEtN2E2ZGE2N2FiYzc4LTE3NjE4NjA0ODE4ODM=',
-            ], 
-            'Limit' => [
-                10000
-            ]
+            'ContinuationToken' => 'MWRiMjM0MTItMzM4Yy00NmFiLWEwYzEtN2E2ZGE2N2FiYzc4LTE3NjE4NjA0ODE4ODM=',
+            'Limit' => 10000,
         ],   
     )
 );
@@ -2417,6 +2562,7 @@ $bunnyHttpClient->request(
             'FirstName' => 'John',
             'Email' => 'john.doe@example.com',
             'BillingEmail' => 'john.doe@example.com',
+            'DmcaEmail' => 'john.doe@example.com',
             'LastName' => 'Doe',
             'StreetAddress' => '1985 Robinson Court',
             'City' => 'Windom',

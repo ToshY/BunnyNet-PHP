@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Model\Api\Base\Purge;
 
 use ToshY\BunnyNet\Attributes\QueryProperty;
-use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
@@ -35,16 +34,15 @@ class PurgeUrl implements ModelInterface, QueryModelInterface
 
     public function getHeaders(): array
     {
-        return [
-            Header::ACCEPT_JSON,
-        ];
+        return [];
     }
 
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'url', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'url', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'async', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'exactPath', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

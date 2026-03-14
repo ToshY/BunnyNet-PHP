@@ -11,11 +11,16 @@ use ToshY\BunnyNet\Model\Api\Shield\AccessLists\GetShieldZoneAccessListEnums;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\ListShieldZoneAccessLists;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneAccessList;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneCuratedThreatList;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardian;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
@@ -72,6 +77,14 @@ final class Shield
         '/shield/shield-zone/{shieldZoneId}/access-lists/enums' => [
             'get' => GetShieldZoneAccessListEnums::class,
         ],
+        '/shield/shield-zone/{shieldZoneId}/api-guardian' => [
+            'get' => GetApiGuardian::class,
+            'post' => UploadOpenapiSpecification::class,
+            'patch' => UpdateOpenapiSpecification::class,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/api-guardian/endpoint/{endpointId}' => [
+            'patch' => UpdateApiGuardian::class,
+        ],
         '/shield/shield-zone/{shieldZoneId}/bot-detection' => [
             'get' => GetShieldZoneBotDetection::class,
             'patch' => CreateOrUpdateShieldZoneBotDetection::class,
@@ -84,6 +97,9 @@ final class Shield
         ],
         '/shield/metrics/overview/{shieldZoneId}' => [
             'get' => GetOverviewMetrics::class,
+        ],
+        '/shield/metrics/overview/{shieldZoneId}/detailed' => [
+            'get' => GetMetricsOverviewDetailed::class,
         ],
         '/shield/metrics/rate-limits/{shieldZoneId}' => [
             'get' => ListRateLimitMetrics::class,

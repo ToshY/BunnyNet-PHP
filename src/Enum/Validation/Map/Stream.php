@@ -22,6 +22,7 @@ use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmap;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoHeatmapData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoPlayData;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStatistics;
+use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\GetVideoStorageSize;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ListVideos;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\ReEncodeVideo;
 use ToshY\BunnyNet\Model\Api\Stream\ManageVideos\RepackageVideo;
@@ -62,6 +63,7 @@ final class Stream
         TranscribeVideo::class => ModelValidationStrategy::STRICT,
         TriggerSmartActions::class => ModelValidationStrategy::STRICT_BODY,
         VideoResolutionsInfo::class => ModelValidationStrategy::NONE,
+        GetVideoStorageSize::class => ModelValidationStrategy::NONE,
         CleanupUnconfiguredResolutions::class => ModelValidationStrategy::STRICT_QUERY,
         GetOEmbed::class => ModelValidationStrategy::STRICT_QUERY,
     ];

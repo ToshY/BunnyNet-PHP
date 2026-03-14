@@ -394,12 +394,19 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\EdgeScripting\Release\PublishRelease(
         id: 1,
+        uuid: 'Ab0CdE1F',
         body: [
             'Note' => 'Initial release',
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `uuid` denotes an 8 character alphanumeric string (and **not** an ["UUID"](https://datatracker.ietf.org/doc/html/rfc9562)), 
+    which can be retrieved from the [Get Releases](#get-releases) or [Get Active Release](#get-active-release) endpoints. It can also
+    be retrieved from the Bunny dashboard in the "Release ID" column of the deployments.
 
 #### [Publish Release (by path parameter)](https://docs.bunny.net/reference/publishedgescriptreleaseendpoint_publish2)
 

@@ -47,6 +47,7 @@ class PurgeUrlByHeader implements ModelInterface, QueryModelInterface
             new AbstractParameter(name: 'headerName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'headerValue', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'async', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'exactPath', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
