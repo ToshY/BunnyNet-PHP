@@ -726,23 +726,11 @@ $bunnyHttpClient->request(
 );
 ```
 
-#### [Reset Password](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
+#### [Reset API Key](https://docs.bunny.net/reference/videolibrarypublic_resetpassword)
 
 ```php
 $bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPassword(
-        query: [
-            'id' => 1,
-        ],
-    )
-);
-```
-
-#### [Reset Password (by path parameter)](https://docs.bunny.net/reference/videolibrarypublic_resetpassword2)
-
-```php
-$bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath(
+    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey(
         id: 1,
     )
 );
@@ -881,18 +869,6 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey(
-        query: [
-            'id' => 1,
-        ],
-    )
-);
-```
-
-#### Reset Read-Only API Key (by path parameter)
-
-```php
-$bunnyHttpClient->request(
-    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath(
         id: 1,
     )
 );

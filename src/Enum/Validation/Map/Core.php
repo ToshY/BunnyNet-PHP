@@ -108,8 +108,8 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey as StreamVideoLibraryResetApiKey;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Core\Support\CreateTicket;
@@ -197,8 +197,8 @@ final class Core
         UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
         DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
         GetLanguages::class => ModelValidationStrategy::NONE,
-        ResetPasswordByPath::class => ModelValidationStrategy::NONE,
-        ResetReadOnlyApiKeyByPath::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryResetApiKey::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyApiKey::class => ModelValidationStrategy::NONE,
         AddWatermark::class => ModelValidationStrategy::NONE,
         DeleteWatermark::class => ModelValidationStrategy::NONE,
         StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,

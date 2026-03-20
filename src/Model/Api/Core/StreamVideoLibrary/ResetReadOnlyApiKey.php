@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary;
 
-use ToshY\BunnyNet\Attributes\QueryProperty;
+use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Enum\Method;
-use ToshY\BunnyNet\Enum\Type;
-use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
-use ToshY\BunnyNet\Model\QueryModelInterface;
 
-class ResetReadOnlyApiKey implements ModelInterface, QueryModelInterface
+class ResetReadOnlyApiKey implements ModelInterface
 {
     /**
-     * @param array<string,mixed> $query
+     * @param int $id
      */
     public function __construct(
-        #[QueryProperty]
-        public readonly array $query = [],
+        #[PathProperty]
+        public readonly int $id,
     ) {
     }
 
@@ -29,18 +26,11 @@ class ResetReadOnlyApiKey implements ModelInterface, QueryModelInterface
 
     public function getPath(): string
     {
-        return 'videolibrary/resetReadOnlyApiKey';
+        return 'videolibrary/%d/resetReadOnlyApiKey';
     }
 
     public function getHeaders(): array
     {
         return [];
-    }
-
-    public function getQuery(): array
-    {
-        return [
-            new AbstractParameter(name: 'id', type: Type::INT_TYPE, required: true),
-        ];
     }
 }

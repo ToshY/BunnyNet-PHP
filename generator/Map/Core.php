@@ -106,8 +106,8 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey as StreamVideoLibraryResetApiKey;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Core\Support\CreateTicket;
@@ -286,10 +286,10 @@ final class Core
             'get' => GetLanguages::class,
         ],
         '/videolibrary/{id}/resetApiKey' => [
-            'post' => ResetPasswordByPath::class,
+            'post' => StreamVideoLibraryResetApiKey::class,
         ],
         '/videolibrary/{id}/resetReadOnlyApiKey' => [
-            'post' => ResetReadOnlyApiKeyByPath::class,
+            'post' => ResetReadOnlyApiKey::class,
         ],
         '/videolibrary/{id}/watermark' => [
             'put' => AddWatermark::class,
