@@ -33,7 +33,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: PHPStan
         run: php vendor/bin/phpstan analyse --error-format=github --memory-limit=256M
