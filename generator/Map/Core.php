@@ -47,8 +47,6 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
-use ToshY\BunnyNet\Model\Api\Core\PricingPackages\GetPricingPackage;
-use ToshY\BunnyNet\Model\Api\Core\PricingPackages\ListPricingPackages;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedReferer;
@@ -108,9 +106,7 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
@@ -289,14 +285,8 @@ final class Core
         '/videolibrary/languages' => [
             'get' => GetLanguages::class,
         ],
-        '/videolibrary/resetApiKey' => [
-            'post' => StreamVideoLibraryResetPassword::class,
-        ],
         '/videolibrary/{id}/resetApiKey' => [
             'post' => ResetPasswordByPath::class,
-        ],
-        '/videolibrary/resetReadOnlyApiKey' => [
-            'post' => ResetReadOnlyApiKey::class,
         ],
         '/videolibrary/{id}/resetReadOnlyApiKey' => [
             'post' => ResetReadOnlyApiKeyByPath::class,
@@ -345,12 +335,6 @@ final class Core
         ],
         '/search' => [
             'get' => GlobalSearch::class,
-        ],
-        '/v3.0/pricing-packages/{pricingPackageId}' => [
-            'get' => GetPricingPackage::class,
-        ],
-        '/v3.0/pricing-packages' => [
-            'get' => ListPricingPackages::class,
         ],
         '/dnszone/{id}/statistics' => [
             'get' => GetDnsZoneQueryStatistics::class,
