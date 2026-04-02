@@ -2,38 +2,35 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Core\PricingPackages;
+namespace ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
-use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class GetPricingPackage implements ModelInterface
+class ResetApiKey implements ModelInterface
 {
     /**
-     * @param string $pricingPackageId
+     * @param int $id
      */
     public function __construct(
         #[PathProperty]
-        public readonly string $pricingPackageId,
+        public readonly int $id,
     ) {
     }
 
     public function getMethod(): Method
     {
-        return Method::GET;
+        return Method::POST;
     }
 
     public function getPath(): string
     {
-        return 'v3.0/pricing-packages/%s';
+        return 'videolibrary/%d/resetApiKey';
     }
 
     public function getHeaders(): array
     {
-        return [
-            Header::ACCEPT_JSON,
-        ];
+        return [];
     }
 }
