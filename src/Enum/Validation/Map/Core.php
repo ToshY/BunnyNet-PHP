@@ -49,8 +49,6 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Core\Integration\GetGitHubIntegration;
-use ToshY\BunnyNet\Model\Api\Core\PricingPackages\GetPricingPackage;
-use ToshY\BunnyNet\Model\Api\Core\PricingPackages\ListPricingPackages;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedReferer;
@@ -110,10 +108,8 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPassword as StreamVideoLibraryResetPassword;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetPasswordByPath;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey as StreamVideoLibraryResetApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKeyByPath;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
 use ToshY\BunnyNet\Model\Api\Core\Support\CreateTicket;
@@ -201,10 +197,8 @@ final class Core
         UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
         DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
         GetLanguages::class => ModelValidationStrategy::NONE,
-        StreamVideoLibraryResetPassword::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetPasswordByPath::class => ModelValidationStrategy::NONE,
-        ResetReadOnlyApiKey::class => ModelValidationStrategy::STRICT_QUERY,
-        ResetReadOnlyApiKeyByPath::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryResetApiKey::class => ModelValidationStrategy::NONE,
+        ResetReadOnlyApiKey::class => ModelValidationStrategy::NONE,
         AddWatermark::class => ModelValidationStrategy::NONE,
         DeleteWatermark::class => ModelValidationStrategy::NONE,
         StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
@@ -222,8 +216,6 @@ final class Core
         GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
-        GetPricingPackage::class => ModelValidationStrategy::NONE,
-        ListPricingPackages::class => ModelValidationStrategy::STRICT_QUERY,
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
         DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
