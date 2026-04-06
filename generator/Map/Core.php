@@ -106,7 +106,7 @@ use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\GetVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ListVideoLibraries;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveAllowedReferer as StreamVideoLibraryRemoveAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\RemoveBlockedReferer as StreamVideoLibraryRemoveBlockedReferer;
-use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey as StreamVideoLibraryResetApiKey;
+use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\UpdateVideoLibrary;
 use ToshY\BunnyNet\Model\Api\Core\Support\CloseTicket;
@@ -129,7 +129,7 @@ use ToshY\BunnyNet\Model\Api\Core\User\GetWhatsNewItems;
 use ToshY\BunnyNet\Model\Api\Core\User\ListCloseAccountReasons;
 use ToshY\BunnyNet\Model\Api\Core\User\ListNotifications;
 use ToshY\BunnyNet\Model\Api\Core\User\ResendEmailConfirmation;
-use ToshY\BunnyNet\Model\Api\Core\User\ResetApiKey;
+use ToshY\BunnyNet\Model\Api\Core\User\ResetApiKey as UserResetApiKey;
 use ToshY\BunnyNet\Model\Api\Core\User\ResetWhatsNew;
 use ToshY\BunnyNet\Model\Api\Core\User\SetNotificationsOpened;
 use ToshY\BunnyNet\Model\Api\Core\User\UpdateUserDetails;
@@ -286,7 +286,7 @@ final class Core
             'get' => GetLanguages::class,
         ],
         '/videolibrary/{id}/resetApiKey' => [
-            'post' => StreamVideoLibraryResetApiKey::class,
+            'post' => ResetApiKey::class,
         ],
         '/videolibrary/{id}/resetReadOnlyApiKey' => [
             'post' => ResetReadOnlyApiKey::class,
@@ -456,7 +456,7 @@ final class Core
             'post' => ResendEmailConfirmation::class,
         ],
         '/user/resetApiKey' => [
-            'post' => ResetApiKey::class,
+            'post' => UserResetApiKey::class,
         ],
         '/user/closeaccount/reasons-list' => [
             'get' => ListCloseAccountReasons::class,
