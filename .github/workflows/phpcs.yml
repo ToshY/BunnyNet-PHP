@@ -33,7 +33,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: PHP CS Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run -v --diff
