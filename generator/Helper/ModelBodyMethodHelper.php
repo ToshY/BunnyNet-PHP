@@ -187,6 +187,17 @@ final class ModelBodyMethodHelper
             }
         }
 
+        // OpenAPI 3.x allows request bodies to be primitives, not just objects
+        if (in_array($effectiveRootSchema->type, ['string', 'integer', 'number', 'boolean'], true)) {
+            if ($effectiveRootSchema->format === 'binary') {
+                return [];
+            }
+
+            return [
+                ModelMethodHelper::createParameterRepresentation(null, $effectiveRootSchema),
+            ];
+        }
+
         if ($effectiveRootSchema->type !== 'object' || (!isset($effectiveRootSchema->properties) && !isset($effectiveRootSchema->additionalProperties))) {
             if ($effectiveRootSchema->format === 'binary') {
                 return [];
