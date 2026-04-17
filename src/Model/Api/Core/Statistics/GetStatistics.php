@@ -49,6 +49,7 @@ class GetStatistics implements ModelInterface, QueryModelInterface
             new AbstractParameter(name: 'serverZoneId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'loadErrors', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'hourly', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'exactRange', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'loadOriginResponseTimes', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'loadOriginTraffic', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'loadRequestsServed', type: Type::BOOLEAN_TYPE),

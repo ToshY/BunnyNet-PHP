@@ -57,6 +57,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\GetOptimizerStatistics;
@@ -71,6 +72,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCustomHostname;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetForceSsl;
@@ -166,6 +168,8 @@ final class Core
         GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         UpdatePrivateKeyType::class => ModelValidationStrategy::STRICT_BODY,
         LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
+        RequestExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        CompleteExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
         PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
         CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
         AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
