@@ -52,7 +52,9 @@ class CleanupUnconfiguredResolutions implements ModelInterface, QueryModelInterf
         return [
             new AbstractParameter(name: 'resolutionsToDelete', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'deleteNonConfiguredResolutions', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'allResolutions', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'deleteOriginal', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'outputs', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'deleteMp4Files', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'dryRun', type: Type::BOOLEAN_TYPE),
         ];
