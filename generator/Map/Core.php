@@ -55,6 +55,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\GetOptimizerStatistics;
@@ -69,6 +70,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCustomHostname;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetForceSsl;
@@ -84,6 +86,7 @@ use ToshY\BunnyNet\Model\Api\Core\StorageZone\CheckStorageZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\DeleteStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneConnections;
+use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneRegions;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetPassword;
@@ -206,6 +209,12 @@ final class Core
         '/pullzone/loadFreeCertificate' => [
             'get' => LoadFreeCertificate::class,
         ],
+        '/pullzone/requestExternalDnsCertificate' => [
+            'post' => RequestExternalDnsCertificate::class,
+        ],
+        '/pullzone/completeExternalDnsCertificate' => [
+            'post' => CompleteExternalDnsCertificate::class,
+        ],
         '/pullzone/{id}/purgeCache' => [
             'post' => PurgeCache::class,
         ],
@@ -326,6 +335,9 @@ final class Core
         ],
         '/user/audit/{date}' => [
             'get' => GetUserAuditLog::class,
+        ],
+        '/storagezone/regions' => [
+            'get' => GetStorageZoneRegions::class,
         ],
         '/storagezone/{id}/statistics' => [
             'get' => GetStorageZoneStatistics::class,

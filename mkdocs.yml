@@ -60,6 +60,7 @@ nav:
     - Core Platform: core-api.md
     - Edge Storage: edge-storage-api.md
     - Stream: stream-api.md
+    - Magic Containers: magic-containers-api.md
     - Edge Scripting: edge-scripting-api.md
     - Shield: shield-api.md
     - Origin Errors: origin-errors-api.md

@@ -250,6 +250,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
                     'FINGERPRINT' => 'string',
+                    'VERIFIED_BOT_CATEGORY' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -287,6 +288,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
                             'FINGERPRINT' => 'string',
+                            'VERIFIED_BOT_CATEGORY' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -336,6 +338,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
                     'FINGERPRINT' => 'string',
+                    'VERIFIED_BOT_CATEGORY' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -373,6 +376,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
                             'FINGERPRINT' => 'string',
+                            'VERIFIED_BOT_CATEGORY' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -433,6 +437,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
                     'FINGERPRINT' => 'string',
+                    'VERIFIED_BOT_CATEGORY' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -470,6 +475,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
                             'FINGERPRINT' => 'string',
+                            'VERIFIED_BOT_CATEGORY' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -603,6 +609,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
                     'FINGERPRINT' => 'string',
+                    'VERIFIED_BOT_CATEGORY' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -641,6 +648,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
                             'FINGERPRINT' => 'string',
+                            'VERIFIED_BOT_CATEGORY' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -710,6 +718,7 @@ $bunnyHttpClient->request(
                     'RESPONSE_HEADERS' => 'string',
                     'RESPONSE_STATUS' => 'string',
                     'FINGERPRINT' => 'string',
+                    'VERIFIED_BOT_CATEGORY' => 'string',
                 ],
                 'operatorType' => 0,
                 'severityType' => 0,
@@ -748,6 +757,7 @@ $bunnyHttpClient->request(
                             'RESPONSE_HEADERS' => 'string',
                             'RESPONSE_STATUS' => 'string',
                             'FINGERPRINT' => 'string',
+                            'VERIFIED_BOT_CATEGORY' => 'string',
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
@@ -857,6 +867,27 @@ $bunnyHttpClient->request(
         - `5`
         - `6`
 
+#### [Get Shield Zone API Guardian Metrics](https://docs.bunny.net/api-reference/shield/metrics/get-api-guardian-metrics-for-the-specified-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneApiGuardianMetrics(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Get API Guardian Endpoint Metrics](https://docs.bunny.net/api-reference/shield/metrics/get-metrics-for-a-specific-api-guardian-endpoint-within-the-specified-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetApiGuardianEndpointMetrics(
+        shieldZoneId: 1,
+        endpointId: 2,
+    )
+);
+```
+
 ### API Guardian
 
 #### Get API Guardian
@@ -877,10 +908,22 @@ $bunnyHttpClient->request(
         shieldZoneId: 1,
         endpointId: 2,
         body: [
-            'enabled' => true,
+            'isEnabled' => true,
             'validateRequestBodySchema' => true,
             'validateResponseBodySchema' => false,
             'validateAuthorization' => false,
+            'injectionDetectionParameters' => [
+                'Path' => ['string'],
+                'Query' => ['string'],
+                'Header' => ['string'],
+                'Cookie' => ['string'],
+            ],
+            'detectParameterXss' => true,
+            'detectParameterSqli' => true,
+            'rateLimitingEnabled' => false,
+            'rateLimitingType' => 0,
+            'rateLimitingRequestCount' => 0,
+            'rateLimitingTimeframe' => 0,
         ],
     )
 );
@@ -911,9 +954,49 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification(
         shieldZoneId: 1,
         body: [
-            'content' => '{"openapi":"3.0.0","info":{"title":"My API","version":"2.0.0"}}',
-            'enforceAuthorisationValidation' => true,
+            'isEnabled' => true,
+            'executionMode' => 0,
+            'bodyLimitAction' => 0,
+            'unmatchedPathAction' => 0,
         ],
+    )
+);
+```
+
+#### [Upload Your OpenAPI Specification](https://docs.bunny.net/api-reference/shield/api-guardian/upload-your-openapi-specification)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadYourOpenapiSpecification(
+        shieldZoneId: 1,
+        body: [
+            'content' => '{"openapi":"3.0.0","info":{"title":"My API","version":"1.0.0"}}',
+            'enforceAuthorizationValidation' => false,
+        ],
+    )
+);
+```
+
+#### [Update Your OpenAPI Specification](https://docs.bunny.net/api-reference/shield/api-guardian/update-your-openapi-specification)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateYourOpenapiSpecification(
+        shieldZoneId: 1,
+        body: [
+            'content' => '{"openapi":"3.0.0","info":{"title":"My API","version":"2.0.0"}}',
+            'enforceAuthorizationValidation' => true,
+        ],
+    )
+);
+```
+
+#### [Get API Guardian Enums](https://docs.bunny.net/api-reference/shield/api-guardian/get-all-api-guardian-enumeration-types-and-their-values)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardianEnums(
+        shieldZoneId: '46d1703e-7d63-4138-83b1-78695bee5a07',
     )
 );
 ```
@@ -1148,6 +1231,41 @@ $bunnyHttpClient->request(
         - `0` = <off>
         - `1` = Log
         - `2` = Block
+
+### Custom Response Pages
+
+#### [Upload Custom Response Page](https://docs.bunny.net/api-reference/shield/custom-response-pages/upload-a-custom-html-response-page-for-a-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\UploadCustomResponsePage(
+        shieldZoneId: 1,
+        pageType: 'blocked',
+    )
+);
+```
+
+#### [Get Custom Response Page](https://docs.bunny.net/api-reference/shield/custom-response-pages/get-a-custom-html-response-page-for-a-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\GetCustomResponsePage(
+        shieldZoneId: 1,
+        pageType: 'blocked',
+    )
+);
+```
+
+#### [Delete Custom Response Page](https://docs.bunny.net/api-reference/shield/custom-response-pages/delete-a-custom-html-response-page-for-a-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\DeleteCustomResponsePage(
+        shieldZoneId: 1,
+        pageType: 'blocked',
+    )
+);
+```
 
 ## Reference
 

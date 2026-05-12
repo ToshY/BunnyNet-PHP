@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ToshY\BunnyNet\Model\Api\MagicContainers\Volumes;
+
+use ToshY\BunnyNet\Attributes\PathProperty;
+use ToshY\BunnyNet\Enum\Header;
+use ToshY\BunnyNet\Enum\Method;
+use ToshY\BunnyNet\Model\ModelInterface;
+
+class DeleteVolumeInstance implements ModelInterface
+{
+    /**
+     * @param string $appId
+     * @param string $volumeId
+     * @param string $instanceId
+     */
+    public function __construct(
+        #[PathProperty]
+        public readonly string $appId,
+        #[PathProperty]
+        public readonly string $volumeId,
+        #[PathProperty]
+        public readonly string $instanceId,
+    ) {
+    }
+
+    public function getMethod(): Method
+    {
+        return Method::DELETE;
+    }
+
+    public function getPath(): string
+    {
+        return 'apps/%s/volumes/%s/instances/%s';
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            Header::ACCEPT_JSON,
+        ];
+    }
+}

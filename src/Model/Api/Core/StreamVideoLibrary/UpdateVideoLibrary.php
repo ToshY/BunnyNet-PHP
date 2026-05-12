@@ -114,6 +114,7 @@ class UpdateVideoLibrary implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'ScaleVideoUsingBothDimensions', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ExposeOriginals', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ExposeVideoMetadata', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableCompactControls', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

@@ -510,7 +510,9 @@ $bunnyHttpClient->request(
         query: [
             'resolutionsToDelete' => '240p,360p',
             'deleteNonConfiguredResolutions' => false,
+            'allResolutions' => false,
             'deleteOriginal' => false,
+            'outputs' => 'mp4,webm',
             'deleteMp4Files' => false,
             'dryRun' => false,
         ],

@@ -49,6 +49,24 @@ class AddVideoLibrary implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
             new AbstractParameter(name: 'PlayerVersion', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'EncodingTier', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'JitEncodingEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OutputCodecs', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'EnabledResolutions', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'BlockNoneReferrer', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableMP4Fallback', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'KeepOriginalFiles', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'AllowDirectPlay', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableMultiAudioTrackSupport', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribing', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'TranscribingCaptionLanguages', type: Type::ARRAY_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::STRING_TYPE),
+            ]),
+            new AbstractParameter(name: 'EnableTranscribingTitleGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingDescriptionGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingChaptersGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'EnableTranscribingMomentsGeneration', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'AllowEarlyPlay', type: Type::BOOLEAN_TYPE),
         ];
     }
 }

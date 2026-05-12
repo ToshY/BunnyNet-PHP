@@ -48,8 +48,10 @@ class UpdateOpenapiSpecification implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
-            new AbstractParameter(name: 'content', type: Type::STRING_TYPE, required: true),
-            new AbstractParameter(name: 'enforceAuthorisationValidation', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'isEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'executionMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'bodyLimitAction', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'unmatchedPathAction', type: Type::INT_TYPE),
         ];
     }
 }
