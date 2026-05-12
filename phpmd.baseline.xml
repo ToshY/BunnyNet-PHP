@@ -6,6 +6,11 @@
   <violation rule="PHPMD\Rule\CleanCode\BooleanArgumentFlag" file="src/Model/AbstractParameter.php"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Core/PullZone/AddPullZone.php" method="getBody"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/Core/PullZone/UpdatePullZone.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/MagicContainers/Applications/AddApplication.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/MagicContainers/Applications/PatchApplication.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/MagicContainers/Applications/UpdateApplication.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/MagicContainers/Containers/AddApplicationContainerTemplate.php" method="getBody"/>
+  <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Model/Api/MagicContainers/Containers/PatchApplicationContainerTemplate.php" method="getBody"/>
   <violation rule="PHPMD\Rule\CyclomaticComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\NpathComplexity" file="src/Validation/ParameterValidator.php" method="validate"/>
   <violation rule="PHPMD\Rule\Design\LongMethod" file="src/Validation/ParameterValidator.php" method="validate"/>
