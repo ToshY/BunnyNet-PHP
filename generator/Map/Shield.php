@@ -12,17 +12,24 @@ use ToshY\BunnyNet\Model\Api\Shield\AccessLists\ListShieldZoneAccessLists;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneAccessList;
 use ToshY\BunnyNet\Model\Api\Shield\AccessLists\UpdateShieldZoneCuratedThreatList;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardian;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\GetApiGuardianEnums;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification;
-use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateYourOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadYourOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
+use ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\DeleteCustomResponsePage;
+use ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\GetCustomResponsePage;
+use ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\UploadCustomResponsePage;
 use ToshY\BunnyNet\Model\Api\Shield\Ddos\ListDdosEnums;
 use ToshY\BunnyNet\Model\Api\Shield\EventLogs\ListEventLogs;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetApiGuardianEndpointMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetBotDetectionMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneApiGuardianMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
@@ -79,15 +86,26 @@ final class Shield
         ],
         '/shield/shield-zone/{shieldZoneId}/api-guardian' => [
             'get' => GetApiGuardian::class,
-            'post' => UploadOpenapiSpecification::class,
             'patch' => UpdateOpenapiSpecification::class,
         ],
         '/shield/shield-zone/{shieldZoneId}/api-guardian/endpoint/{endpointId}' => [
             'patch' => UpdateApiGuardian::class,
         ],
+        '/shield/shield-zone/{shieldZoneId}/api-guardian/spec' => [
+            'post' => UploadYourOpenapiSpecification::class,
+            'patch' => UpdateYourOpenapiSpecification::class,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/api-guardian/enums' => [
+            'get' => GetApiGuardianEnums::class,
+        ],
         '/shield/shield-zone/{shieldZoneId}/bot-detection' => [
             'get' => GetShieldZoneBotDetection::class,
             'patch' => CreateOrUpdateShieldZoneBotDetection::class,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/custom-page/{pageType}' => [
+            'get' => GetCustomResponsePage::class,
+            'put' => UploadCustomResponsePage::class,
+            'delete' => DeleteCustomResponsePage::class,
         ],
         '/shield/ddos/enums' => [
             'get' => ListDdosEnums::class,
@@ -115,6 +133,12 @@ final class Shield
         ],
         '/shield/metrics/shield-zone/{shieldZoneId}/upload-scanning' => [
             'get' => GetUploadScanningMetrics::class,
+        ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/api-guardian' => [
+            'get' => GetShieldZoneApiGuardianMetrics::class,
+        ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/api-guardian/endpoint/{endpointId}' => [
+            'get' => GetApiGuardianEndpointMetrics::class,
         ],
         '/shield/promo/state' => [
             'get' => GetCurrentPromotions::class,

@@ -57,6 +57,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddCustomHostname;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\GetOptimizerStatistics;
@@ -71,6 +72,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCustomHostname;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetForceSsl;
@@ -86,6 +88,7 @@ use ToshY\BunnyNet\Model\Api\Core\StorageZone\CheckStorageZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\DeleteStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneConnections;
+use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneRegions;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetPassword;
@@ -166,6 +169,8 @@ final class Core
         GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         UpdatePrivateKeyType::class => ModelValidationStrategy::STRICT_BODY,
         LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
+        RequestExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        CompleteExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
         PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
         CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
         AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
@@ -212,6 +217,7 @@ final class Core
         GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         CloseAccount::class => ModelValidationStrategy::STRICT_BODY,
         GetUserAuditLog::class => ModelValidationStrategy::STRICT_QUERY,
+        GetStorageZoneRegions::class => ModelValidationStrategy::NONE,
         GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
