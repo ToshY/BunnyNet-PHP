@@ -163,14 +163,14 @@ tasks:
     cmds:
       - docker compose run --rm $TTY php vendor/bin/rector
 
-  mkdocs:
-    desc: MkDocs build
+  docs:
+    desc: Zensical build
     cmds:
-      - docker run --rm -it -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.6 build
+      - docker run --rm -it -v $(pwd):/docs -w /docs docker.io/zensical/zensical:0.0 build --clean
 
-  mkdocs:live:
-    desc: MkDocs development server
+  docs:live:
+    desc: Zensical development server
     vars:
       PORT: '{{.p | default "8001"}}'
     cmds:
-      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs ghcr.io/squidfunk/mkdocs-material:9.6
+      - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs -w /docs docker.io/zensical/zensical:0.0 serve --dev-addr 0.0.0.0:8000
