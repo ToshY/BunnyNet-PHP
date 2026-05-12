@@ -1,0 +1,104 @@
+[project]
+site_name = "BunnyNet-PHP"
+site_description = "bunny.net API client for PHP"
+repo_name = "ToshY/BunnyNet-PHP"
+repo_url = "https://github.com/ToshY/BunnyNet-PHP"
+docs_dir = "docs"
+site_dir = "site"
+
+extra_javascript = [
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
+    "javascripts/highlight.js",
+]
+
+extra_css = [
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.min.css",
+    "stylesheets/extra.css",
+]
+
+nav = [
+    { "About" = "index.md" },
+    { "Getting Started" = "getting-started.md" },
+    { "API" = [
+        { "Core Platform" = "core-api.md" },
+        { "Edge Storage" = "edge-storage-api.md" },
+        { "Stream" = "stream-api.md" },
+        { "Magic Containers" = "magic-containers-api.md" },
+        { "Edge Scripting" = "edge-scripting-api.md" },
+        { "Shield" = "shield-api.md" },
+        { "Origin Errors" = "origin-errors-api.md" },
+        { "Logging" = "logging-api.md" },
+    ] },
+    { "Validation" = [
+        { "Model validation" = "validation.md" },
+    ] },
+    { "Tools" = [
+        { "Image Processing" = "image-processing.md" },
+        { "Token Authentication" = "token-authentication.md" },
+    ] },
+]
+
+# ----------------------------------------------------------------------------
+# Theme
+# ----------------------------------------------------------------------------
+[project.theme]
+font = false
+logo = "images/favicon.png"
+favicon = "images/favicon.png"
+features = [
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.sections",
+    "toc.follow",
+    "navigation.top",
+    "content.code.copy",
+    "content.code.annotate",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "orange"
+accent = "deep-orange"
+toggle.icon = "material/weather-sunny"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "orange"
+accent = "deep-orange"
+toggle.icon = "material/weather-night"
+toggle.name = "Switch to light mode"
+
+# ----------------------------------------------------------------------------
+# Extra
+# ----------------------------------------------------------------------------
+[project.extra]
+generator = false
+
+[[project.extra.social]]
+icon = "material/rabbit"
+link = "https://bunny.net?ref=pji59zr7a4"
+name = "Affiliate link"
+
+# ----------------------------------------------------------------------------
+# Markdown extensions
+# ----------------------------------------------------------------------------
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.tables]
+[project.markdown_extensions.toc]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.tilde]
+[project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.superfences]
+[project.markdown_extensions.pymdownx.highlight]
+use_pygments = false
+

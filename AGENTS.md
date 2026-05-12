@@ -64,14 +64,14 @@ Git pre-commit hooks run `phpcs`, `phpstan`, `phpmd`, and `phpunit` — enable v
 
 ## Documentation
 
-Docs live in `docs/` and are built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/). Published at [toshy.github.io/BunnyNet-PHP](https://toshy.github.io/BunnyNet-PHP).
+Docs live in `docs/` and are built with [Zensical](https://zensical.org/). Published at [toshy.github.io/BunnyNet-PHP](https://toshy.github.io/BunnyNet-PHP).
 
 ```shell
-task mkdocs           # Build static site to site/
-task mkdocs:live      # Dev server on port 8001 (override with p=PORT)
+task docs             # Build static site to site/
+task docs:live        # Dev server on port 8001 (override with p=PORT)
 ```
 
-- **`mkdocs.yml`** — site config, nav tree, theme/extensions. The `nav:` section defines page order; update it when adding pages.
+- **`zensical.toml`** — site config, nav tree, theme/extensions. The `nav` array defines page order; update it when adding pages.
 - Each API group has one doc page (e.g. `docs/core-api.md`, `docs/stream-api.md`) containing setup + usage examples for every endpoint in that group.
 - Doc pages show usage via `$bunnyHttpClient->request(new ModelClass(...))` snippets — one per endpoint, matching the model classes in `src/Model/Api/`.
 - Undocumented/deprecated endpoints use `??? warning "Undocumented endpoint"` admonitions.
