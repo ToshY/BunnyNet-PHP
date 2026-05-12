@@ -106,11 +106,24 @@ final class ClassUtils
 
     public static function toPascalCase(string $text, string $textDelimiter = ' '): string
     {
+        // If the text contains a delimiter, then we want to lowercase everything before capitalizing the first letter of each word.
+        if (str_contains($text, $textDelimiter) === true) {
+            $callback = fn ($v) => strtolower($v);
+        } else {
+            // This case occurs when a "summary" was used that does not contain a namespace, so it's purely a class name.
+            $callback = fn ($v) => $v;
+        }
+
+        // If the text contains a dash, then we want to replace it with a space so it gets capitalized correctly.
+        if (str_contains($text, '-') === true) {
+            $text = str_replace('-', ' ', $text);
+        }
+
         return implode(
             '',
             array_map(
-                function ($v) {
-                    $v = strtolower($v);
+                function ($v) use ($callback) {
+                    $v = $callback($v);
                     return ucfirst($v);
                 },
                 explode(separator: $textDelimiter, string: $text),

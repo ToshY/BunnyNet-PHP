@@ -22,4 +22,6 @@ enum Generator: string
     case STREAM = 'Stream';
 
     case ORIGIN_ERRORS = 'OriginErrors';
+
+    case MAGIC_CONTAINERS = 'MagicContainers';
 }
