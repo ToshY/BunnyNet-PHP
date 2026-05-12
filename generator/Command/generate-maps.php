@@ -33,6 +33,7 @@ foreach ($manifests as $file) {
         str_contains($fileName, 'stream-api') => \ToshY\BunnyNet\Enum\Generator::STREAM->value,
         str_contains($fileName, 'shield-api') => \ToshY\BunnyNet\Enum\Generator::SHIELD->value,
         str_contains($fileName, 'origin-errors') => \ToshY\BunnyNet\Enum\Generator::ORIGIN_ERRORS->value,
+        str_contains($fileName, 'magic-containers') => \ToshY\BunnyNet\Enum\Generator::MAGIC_CONTAINERS->value,
         default => throw new RuntimeException(
             sprintf(
                 'Unknown API type with file name: `%s`',

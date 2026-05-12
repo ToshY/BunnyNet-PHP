@@ -1189,20 +1189,34 @@ class ModelGenerator
             }
         }
 
+        if (isset($specData['operationId']) === false) {
+            $this->logger::print(
+                sprintf(
+                    "* CRITICAL: Path '%s' (%s) does not have an `operationId` in the OpenAPI spec. Fallback on summary.\n",
+                    $path,
+                    $httpMethod,
+                ),
+            );
 
-        $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
-        if (str_contains($operationId, '_') === true) {
-            [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
-
-            $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
-            $namespace = match ($namespace !== null) {
-                true => ClassUtils::toPascalCase($namespace),
-                false => OpenApiModelUtils::stripTagSuffix($operationNamespace),
-            };
-        } else {
+            $operationId = $specData['summary'] ?? $specData['description'];
             $operationClass = ClassUtils::toPascalCase($operationId);
             $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
             $namespace = ClassUtils::toPascalCase($namespace);
+        } else {
+            $operationId = $this->retrieveOperationId($specData['operationId'], $specData['tags']);
+            if (str_contains($operationId, '_') === true) {
+                [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
+
+                $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
+                $namespace = match ($namespace !== null) {
+                    true => ClassUtils::toPascalCase($namespace),
+                    false => OpenApiModelUtils::stripTagSuffix($operationNamespace),
+                };
+            } else {
+                $operationClass = ClassUtils::toPascalCase($operationId);
+                $namespace = OpenApiModelUtils::extractNamespaceFromTags($specData['tags']);
+                $namespace = ClassUtils::toPascalCase($namespace);
+            }
         }
 
         $class = OpenApiModelUtils::stripTagSuffix($operationClass);
@@ -1268,7 +1282,13 @@ class ModelGenerator
      */
     private function retrieveOperationId(string $operationId, array $tags): string
     {
-        [$operationNamespace, $operationClass] = explode('_', $operationId, 2);
+        $operations = explode('_', $operationId, 2);
+        $operationNamespace = $operations[0];
+        $operationClass = $operations[1] ?? null;
+        if ($operationClass === null) {
+            // In this case the $operationNamespace is actually the class name and there is no namespace in the operationId.
+            return $operationNamespace;
+        }
 
         foreach ($tags as $tag) {
             if ($operationClass !== $tag) {
