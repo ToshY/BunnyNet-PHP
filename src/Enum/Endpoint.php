@@ -24,6 +24,9 @@ final class Endpoint
     /** @var string Origin Errors API endpoint */
     public const ORIGIN_ERRORS = 'cdn-origin-logging.bunny.net';
 
+    /** @var string Magic Containers API endpoint */
+    public const MAGIC_CONTAINERS = 'api.bunny.net/mc';
+
     /** @var string Storage Zone Region API Endpoint | Frankfurt (Germany) | Main */
     public const EDGE_STORAGE_DE = 'storage.bunnycdn.com';
 
