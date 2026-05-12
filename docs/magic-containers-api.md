@@ -16,7 +16,7 @@ $bunnyHttpClient = new BunnyHttpClient(
     client: new \Symfony\Component\HttpClient\Psr18Client(),
     // Provide the account API key.
     apiKey: '2cebf4f8-4bff-429f-86f6-bce2c2163d7e89fb0a86-a1b2-463c-a142-11eba8811989',
-    baseUrl: Endpoint::BASE
+    baseUrl: Endpoint::MAGIC_CONTAINERS
 );
 ```
 
