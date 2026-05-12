@@ -538,6 +538,22 @@ $bunnyHttpClient->request(
                 'JH',
             ],
             'PlayerVersion' => 1,
+            'EncodingTier' => 0,
+            'JitEncodingEnabled' => true,
+            'OutputCodecs' => 'x264,vp9,hevc,av1',
+            'EnabledResolutions' => '720p,1080p,1440p,2160p',
+            'BlockNoneReferrer' => true,
+            'EnableMP4Fallback' => true,
+            'KeepOriginalFiles' => true,
+            'AllowDirectPlay' => true,
+            'EnableMultiAudioTrackSupport' => true,
+            'EnableTranscribing' => false,
+            'TranscribingCaptionLanguages' => [],
+            'EnableTranscribingTitleGeneration' => false,
+            'EnableTranscribingDescriptionGeneration' => false,
+            'EnableTranscribingChaptersGeneration' => false,
+            'EnableTranscribingMomentsGeneration' => false,
+            'AllowEarlyPlay' => true,
         ],
     )
 );
@@ -639,6 +655,7 @@ $bunnyHttpClient->request(
             'ScaleVideoUsingBothDimensions' => true,
             'ExposeOriginals' => false,
             'ExposeVideoMetadata' => false,
+            'EnableCompactControls' => false,
         ],
     )
 );
@@ -2027,6 +2044,30 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [Request External DNS Certificate](https://docs.bunny.net/api-reference/core/pull-zone/request-external-dns-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
+#### [Complete External DNS Certificate](https://docs.bunny.net/api-reference/core/pull-zone/complete-external-dns-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
 #### [Add Custom Hostname](https://docs.bunny.net/reference/pullzonepublic_addhostname)
 
 ```php
@@ -2256,6 +2297,7 @@ $bunnyHttpClient->request(
             'serverZoneId' => -1,
             'loadErrors' => false,
             'hourly' => false,
+            'exactRange' => false,
             'loadOriginResponseTimes' => false,
             'loadOriginTraffic' => false,
             'loadRequestsServed' => false,
@@ -2462,6 +2504,14 @@ $bunnyHttpClient->request(
             'id' => 1,
         ],
     )
+);
+```
+
+#### [Get Storage Zone Regions](https://docs.bunny.net/api-reference/core/storage-zone/get-storage-zone-regions)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneRegions()
 );
 ```
 
