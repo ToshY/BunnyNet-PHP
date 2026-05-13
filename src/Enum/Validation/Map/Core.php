@@ -58,6 +58,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\Count;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\GetOptimizerStatistics;
@@ -158,6 +159,7 @@ final class Core
         IssueWildcardCertificate::class => ModelValidationStrategy::STRICT_BODY,
         ListPullZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddPullZone::class => ModelValidationStrategy::STRICT_BODY,
+        Count::class => ModelValidationStrategy::NONE,
         GetPullZone::class => ModelValidationStrategy::STRICT_QUERY,
         UpdatePullZone::class => ModelValidationStrategy::STRICT_BODY,
         DeletePullZone::class => ModelValidationStrategy::NONE,
