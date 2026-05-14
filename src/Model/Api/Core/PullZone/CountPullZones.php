@@ -8,7 +8,7 @@ use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class Count implements ModelInterface
+class CountPullZones implements ModelInterface
 {
     public function getMethod(): Method
     {

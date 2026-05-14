@@ -4,3 +4,4 @@ composer.lock
 *.php~
 phpstan.neon
 /site
+*.patch

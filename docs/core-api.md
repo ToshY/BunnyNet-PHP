@@ -1310,6 +1310,14 @@ $bunnyHttpClient->request(
 
     - The key `search` is currently not functional.
 
+#### [Count Pull Zones](https://docs.bunny.net/api-reference/core/pull-zone/count-pull-zones)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\CountPullZones()
+);
+```
+
 #### [Add Pull Zone](https://docs.bunny.net/reference/pullzonepublic_add)
 
 ```php

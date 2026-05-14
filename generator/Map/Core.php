@@ -56,7 +56,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
-use ToshY\BunnyNet\Model\Api\Core\PullZone\Count;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CountPullZones;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\GetOptimizerStatistics;
@@ -182,7 +182,7 @@ final class Core
             'post' => AddPullZone::class,
         ],
         '/pullzone/count' => [
-            'get' => Count::class,
+            'get' => CountPullZones::class,
         ],
         '/pullzone/{id}' => [
             'get' => GetPullZone::class,
