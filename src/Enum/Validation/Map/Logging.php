@@ -6,11 +6,13 @@ namespace ToshY\BunnyNet\Enum\Validation\Map;
 
 use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
 use ToshY\BunnyNet\Model\Api\Logging\GetLog;
+use ToshY\BunnyNet\Model\Api\Logging\GetLogV2;
 
 final class Logging
 {
     /** @var array<class-string,ModelValidationStrategy> */
     public static array $map = [
         GetLog::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLogV2::class => ModelValidationStrategy::STRICT_QUERY,
     ];
 }
