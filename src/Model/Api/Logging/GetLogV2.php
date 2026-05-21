@@ -13,22 +13,13 @@ use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
 use ToshY\BunnyNet\Model\QueryModelInterface;
 
-/**
- * @note undocumented
- *
- * @deprecated Logging API v1 is legacy. Use {@see GetLogV2} for the v2 endpoint,
- *             which returns structured JSON, supports rich filtering and pagination.
- */
-class GetLog implements ModelInterface, QueryModelInterface
+class GetLogV2 implements ModelInterface, QueryModelInterface
 {
     /**
      * @param int $pullZoneId
-     * @param string $date
      * @param array<string,mixed> $query
      */
     public function __construct(
-        #[PathProperty]
-        public readonly string $date,
         #[PathProperty]
         public readonly int $pullZoneId,
         #[QueryProperty]
@@ -43,7 +34,7 @@ class GetLog implements ModelInterface, QueryModelInterface
 
     public function getPath(): string
     {
-        return '%s/%d.log';
+        return 'v2/pullzones/%d/logs';
     }
 
     public function getHeaders(): array
@@ -56,11 +47,21 @@ class GetLog implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'start', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'end', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'order', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'from', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'to', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'status', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'cacheStatus', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'country', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'edgeLocation', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'remoteIp', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'urlContains', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'userAgentContains', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'refererContains', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'search', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'includeOriginShield', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'limit', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'offset', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'order', type: Type::STRING_TYPE),
         ];
     }
 }

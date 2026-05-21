@@ -534,7 +534,7 @@ class ModelGenerator
             $modelValidationStrategy = ModelValidationStrategy::STRICT;
         } elseif ($hasQueryParameters === true && $hasBodyParameters === false) {
             $modelValidationStrategy = ModelValidationStrategy::STRICT_QUERY;
-        } elseif ($hasQueryParameters === false && $hasBodyParameters === true) {
+        } elseif ($hasQueryParameters === false && $hasBodyParameters === true) { /* @phpstan-ignore-line booleanAnd.alwaysTrue */
             $modelValidationStrategy = ModelValidationStrategy::STRICT_BODY;
         }
 
