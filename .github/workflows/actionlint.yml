@@ -1,0 +1,27 @@
+name: actionlint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  actionlint:
+    name: Run actionLint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: actionlint
+        uses: eifinger/actionlint-action@1fc89649be682d16ec5cf65ea16e269eb88d3982 # v1.10.2
+        with:
+          version: "1.7.12"
