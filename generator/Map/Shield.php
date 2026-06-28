@@ -17,6 +17,9 @@ use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateYourOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadYourOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\ListBotCategorizations;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategorizationAction;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategoryAction;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\DeleteCustomResponsePage;
@@ -30,6 +33,7 @@ use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneApiGuardianMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneMonthlyOverages;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
@@ -98,6 +102,15 @@ final class Shield
         '/shield/shield-zone/{shieldZoneId}/api-guardian/enums' => [
             'get' => GetApiGuardianEnums::class,
         ],
+        '/shield/shield-zone/{shieldZoneId}/bot-categorization' => [
+            'get' => ListBotCategorizations::class,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/bot-categorization/bots/{botId}' => [
+            'put' => SetBotCategorizationAction::class,
+        ],
+        '/shield/shield-zone/{shieldZoneId}/bot-categorization/categories/{category}' => [
+            'put' => SetBotCategoryAction::class,
+        ],
         '/shield/shield-zone/{shieldZoneId}/bot-detection' => [
             'get' => GetShieldZoneBotDetection::class,
             'patch' => CreateOrUpdateShieldZoneBotDetection::class,
@@ -112,6 +125,9 @@ final class Shield
         ],
         '/shield/event-logs/{shieldZoneId}/{date}/{continuationToken}' => [
             'get' => ListEventLogs::class,
+        ],
+        '/shield/metrics/overages/{shieldZoneId}' => [
+            'get' => GetShieldZoneMonthlyOverages::class,
         ],
         '/shield/metrics/overview/{shieldZoneId}' => [
             'get' => GetOverviewMetrics::class,

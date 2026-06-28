@@ -72,7 +72,7 @@ class UpdateApiGuardian implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'detectParameterXss', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'detectParameterSqli', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'rateLimitingEnabled', type: Type::BOOLEAN_TYPE),
-            new AbstractParameter(name: 'rateLimitingType', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'rateLimitingType', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'rateLimitingRequestCount', type: Type::INT_TYPE),
             new AbstractParameter(name: 'rateLimitingTimeframe', type: Type::INT_TYPE),
         ];

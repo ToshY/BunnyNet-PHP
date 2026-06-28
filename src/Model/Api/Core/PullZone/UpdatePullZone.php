@@ -223,6 +223,7 @@ class UpdatePullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'OptimizerEnableUpscaling', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableWebSockets', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'MaxWebSocketConnections', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'CacheKeyHeaders', type: Type::STRING_TYPE),
         ];
     }
 }

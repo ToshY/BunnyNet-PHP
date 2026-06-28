@@ -18,6 +18,9 @@ use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateApiGuardian;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UpdateYourOpenapiSpecification;
 use ToshY\BunnyNet\Model\Api\Shield\ApiGuardian\UploadYourOpenapiSpecification;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\ListBotCategorizations;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategorizationAction;
+use ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategoryAction;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\CreateOrUpdateShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\BotDetection\GetShieldZoneBotDetection;
 use ToshY\BunnyNet\Model\Api\Shield\CustomResponsePages\DeleteCustomResponsePage;
@@ -31,6 +34,7 @@ use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetMetricsOverviewDetailed;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetOverviewMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetRateLimitMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneApiGuardianMetrics;
+use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneMonthlyOverages;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetUploadScanningMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\GetWafRuleMetrics;
 use ToshY\BunnyNet\Model\Api\Shield\Metrics\ListRateLimitMetrics;
@@ -80,6 +84,9 @@ final class Shield
         UploadYourOpenapiSpecification::class => ModelValidationStrategy::STRICT_BODY,
         UpdateYourOpenapiSpecification::class => ModelValidationStrategy::STRICT_BODY,
         GetApiGuardianEnums::class => ModelValidationStrategy::NONE,
+        ListBotCategorizations::class => ModelValidationStrategy::NONE,
+        SetBotCategorizationAction::class => ModelValidationStrategy::STRICT_BODY,
+        SetBotCategoryAction::class => ModelValidationStrategy::STRICT_BODY,
         GetShieldZoneBotDetection::class => ModelValidationStrategy::NONE,
         CreateOrUpdateShieldZoneBotDetection::class => ModelValidationStrategy::STRICT_BODY,
         GetCustomResponsePage::class => ModelValidationStrategy::NONE,
@@ -87,6 +94,7 @@ final class Shield
         DeleteCustomResponsePage::class => ModelValidationStrategy::NONE,
         ListDdosEnums::class => ModelValidationStrategy::NONE,
         ListEventLogs::class => ModelValidationStrategy::NONE,
+        GetShieldZoneMonthlyOverages::class => ModelValidationStrategy::STRICT_QUERY,
         GetOverviewMetrics::class => ModelValidationStrategy::NONE,
         GetMetricsOverviewDetailed::class => ModelValidationStrategy::STRICT_QUERY,
         ListRateLimitMetrics::class => ModelValidationStrategy::NONE,

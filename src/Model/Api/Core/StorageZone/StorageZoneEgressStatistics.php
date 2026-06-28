@@ -2,59 +2,54 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles;
+namespace ToshY\BunnyNet\Model\Api\Core\StorageZone;
 
-use ToshY\BunnyNet\Attributes\HeaderProperty;
 use ToshY\BunnyNet\Attributes\PathProperty;
 use ToshY\BunnyNet\Attributes\QueryProperty;
+use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Enum\Type;
 use ToshY\BunnyNet\Model\AbstractParameter;
 use ToshY\BunnyNet\Model\ModelInterface;
 use ToshY\BunnyNet\Model\QueryModelInterface;
 
-class DeleteFile implements ModelInterface, QueryModelInterface
+class StorageZoneEgressStatistics implements ModelInterface, QueryModelInterface
 {
     /**
-     * @param string $storageZoneName
-     * @param string $path
-     * @param string $fileName
+     * @param int $id
      * @param array<string,mixed> $query
-     * @param array<string,string> $headers
      */
     public function __construct(
         #[PathProperty]
-        public readonly string $storageZoneName,
-        #[PathProperty]
-        public readonly string $path,
-        #[PathProperty]
-        public readonly string $fileName,
+        public readonly int $id,
         #[QueryProperty]
         public readonly array $query = [],
-        #[HeaderProperty]
-        public readonly array $headers = [],
     ) {
     }
 
     public function getMethod(): Method
     {
-        return Method::DELETE;
+        return Method::GET;
     }
 
     public function getPath(): string
     {
-        return '%s/%s/%s';
+        return 'storagezone/%d/statistics/egress';
     }
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            Header::ACCEPT_JSON,
+        ];
     }
 
     public function getQuery(): array
     {
         return [
-            new AbstractParameter(name: 'allowRootDelete', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'dateFrom', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'dateTo', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'hourly', type: Type::BOOLEAN_TYPE),
         ];
     }
 }
