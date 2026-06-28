@@ -7,6 +7,9 @@ env:
     sh: id -g
   TTY: ''
   API_SPEC_MANIFEST: https://toshy.github.io/bunnynet-openapi-specification/manifest.json
+  ACTIONLINT_IMAGE: rhysd/actionlint:1.7.12
+  ZIZMOR_IMAGE: ghcr.io/zizmorcore/zizmor:1.25.2
+  PINACT_IMAGE: ghcr.io/toshy/docker-pinact:4.1.0
 
 tasks:
   default:
@@ -174,3 +177,57 @@ tasks:
       PORT: '{{.p | default "8001"}}'
     cmds:
       - docker run --rm -it -p {{.PORT}}:8000 -v $(pwd):/docs -w /docs docker.io/zensical/zensical:0.0 serve --dev-addr 0.0.0.0:8000
+
+  # Github Actions
+  actionlint:
+    desc: Lint GitHub Actions workflows in .github/workflows
+    silent: true
+    cmds:
+      - docker run --rm -v "{{.ROOT_DIR}}:/repo" -w /repo "{{.ACTIONLINT_IMAGE}}" -color
+
+  zizmor:
+    desc: Audit GitHub Actions workflows for security issues in .github/workflows
+    silent: true
+    cmds:
+      - docker run --rm -v "{{.ROOT_DIR}}:/repo" -w /repo "{{.ZIZMOR_IMAGE}}" --color=always --collect=workflows .
+
+  pinact:
+    desc: Validate GitHub Actions are pinned to commit SHAs in .github/workflows
+    summary: |
+      Check pinned GitHub Actions against commit SHAs in .github/workflows.
+
+      Usage:
+      - task pinact TOKEN=github_pat_...
+
+      If no "TOKEN" environment variable is passed, you might experience rate limiting.
+      See https://github.com/suzuki-shunsuke/pinact#github-access-token.
+    silent: true
+    vars:
+      TOKEN: '{{.t | default ""}}'
+    cmds:
+      - |
+        docker run --rm \
+          -v "{{.ROOT_DIR}}:/repo" \
+          -e PINACT_GITHUB_TOKEN="{{.TOKEN}}" \
+          "{{.PINACT_IMAGE}}" run --diff
+
+  pinact:fix:
+    desc: Pin GitHub Actions to commit SHAs in-place in .github/workflows
+    summary: |
+      Check pinned GitHub Actions against commit SHAs in .github/workflows and fixes them.
+
+      Usage:
+      - task pinact:fix TOKEN=github_pat_...
+
+      If no "TOKEN" environment variable is passed, you might experience rate limiting.
+      See https://github.com/suzuki-shunsuke/pinact#github-access-token.
+    silent: true
+    vars:
+      TOKEN: '{{.t | default ""}}'
+    cmds:
+      - |
+        docker run --rm \
+          -v "{{.ROOT_DIR}}:/repo" \
+          -u "${UID}:${GID}" \
+          -e PINACT_GITHUB_TOKEN="{{.TOKEN}}" \
+          "{{.PINACT_IMAGE}}" run --fix
