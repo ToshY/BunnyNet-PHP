@@ -15,6 +15,8 @@
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpstan.yml?branch=master&label=PHPStan" alt="Static analysis">
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/phpunit.yml?branch=master&label=PHPUnit" alt="Unit tests">
     <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/security.yml?branch=master&label=Security" alt="Security">
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/zizmor.yml?branch=master&label=Zizmor" alt="Zizmor" />
+    <img src="https://img.shields.io/github/actions/workflow/status/toshy/bunnynet-php/actionlint.yml?branch=master&label=Actionlint" alt="Actionlint" />
 </div>
 
 <a href="https://bunny.net?ref=pji59zr7a4">Bunny.net<a/> is content delivery platform that truly hops: providing CDN,
