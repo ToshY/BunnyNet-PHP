@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace ToshY\BunnyNet\Model\Api\Core\Billing;
+namespace ToshY\BunnyNet\Model\Api\Shield\BotCategorization;
 
 use ToshY\BunnyNet\Attributes\PathProperty;
+use ToshY\BunnyNet\Enum\Header;
 use ToshY\BunnyNet\Enum\Method;
 use ToshY\BunnyNet\Model\ModelInterface;
 
-class DownloadPaymentRequestInvoicePdf implements ModelInterface
+class ListBotCategorizations implements ModelInterface
 {
     /**
-     * @param int $id
+     * @param int $shieldZoneId
      */
     public function __construct(
         #[PathProperty]
-        public readonly int $id,
+        public readonly int $shieldZoneId,
     ) {
     }
 
@@ -26,11 +27,13 @@ class DownloadPaymentRequestInvoicePdf implements ModelInterface
 
     public function getPath(): string
     {
-        return 'billing/payment-request-invoice/%d/pdf';
+        return 'shield/shield-zone/%d/bot-categorization';
     }
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            Header::ACCEPT_JSON,
+        ];
     }
 }

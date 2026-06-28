@@ -24,6 +24,7 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\DeleteContainer
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerConfigSuggestions;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerImageTagDigest;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerRegistry;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTags;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImages;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerRegistries;
@@ -83,6 +84,7 @@ final class MagicContainers
         UpdateContainerRegistry::class => ModelValidationStrategy::STRICT_BODY,
         DeleteContainerRegistry::class => ModelValidationStrategy::NONE,
         ListContainerImageTags::class => ModelValidationStrategy::STRICT_BODY,
+        GetImageConfig::class => ModelValidationStrategy::STRICT_BODY,
         GetContainerImageTagDigest::class => ModelValidationStrategy::STRICT_BODY,
         GetContainerConfigSuggestions::class => ModelValidationStrategy::STRICT_BODY,
         SetContainerEnvironmentVariables::class => ModelValidationStrategy::STRICT_BODY,

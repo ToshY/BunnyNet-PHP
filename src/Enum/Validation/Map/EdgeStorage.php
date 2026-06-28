@@ -17,7 +17,7 @@ final class EdgeStorage
     public static array $map = [
         DownloadFile::class => ModelValidationStrategy::NONE,
         UploadFile::class => ModelValidationStrategy::NONE,
-        DeleteFile::class => ModelValidationStrategy::NONE,
+        DeleteFile::class => ModelValidationStrategy::STRICT_QUERY,
         ListFiles::class => ModelValidationStrategy::NONE,
         DownloadZip::class => ModelValidationStrategy::STRICT_BODY,
     ];
