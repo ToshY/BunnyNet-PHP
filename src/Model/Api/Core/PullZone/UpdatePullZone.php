@@ -64,6 +64,7 @@ class UpdatePullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'EnableGeoZoneASIA', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableGeoZoneSA', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableGeoZoneAF', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'IpFamilyPolicy', type: Type::INT_TYPE),
             new AbstractParameter(name: 'BlockRootPathAccess', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'BlockPostRequests', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableQueryStringOrdering', type: Type::BOOLEAN_TYPE),
@@ -223,6 +224,7 @@ class UpdatePullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'OptimizerEnableUpscaling', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableWebSockets', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'MaxWebSocketConnections', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'CacheKeyHeaders', type: Type::STRING_TYPE),
         ];
     }
 }

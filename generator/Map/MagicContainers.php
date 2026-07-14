@@ -23,6 +23,7 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\DeleteContainer
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerConfigSuggestions;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerImageTagDigest;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerRegistry;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTags;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImages;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerRegistries;
@@ -112,6 +113,9 @@ final class MagicContainers
         ],
         '/registries/tags' => [
             'post' => ListContainerImageTags::class,
+        ],
+        '/registries/image-config' => [
+            'post' => GetImageConfig::class,
         ],
         '/registries/digest' => [
             'post' => GetContainerImageTagDigest::class,

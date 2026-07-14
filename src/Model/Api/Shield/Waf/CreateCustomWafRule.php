@@ -84,6 +84,8 @@ class CreateCustomWafRule implements ModelInterface, BodyModelInterface
                     new AbstractParameter(name: null, type: Type::INT_TYPE),
                 ]),
                 new AbstractParameter(name: 'value', type: Type::STRING_TYPE),
+                new AbstractParameter(name: 'isNegated', type: Type::BOOLEAN_TYPE),
+                new AbstractParameter(name: 'isRegexVariable', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'chainedRuleConditions', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
                         new AbstractParameter(name: 'variableTypes', type: Type::OBJECT_TYPE, children: [
@@ -117,6 +119,8 @@ class CreateCustomWafRule implements ModelInterface, BodyModelInterface
                         ]),
                         new AbstractParameter(name: 'operatorType', type: Type::INT_TYPE),
                         new AbstractParameter(name: 'value', type: Type::STRING_TYPE),
+                        new AbstractParameter(name: 'isNegated', type: Type::BOOLEAN_TYPE),
+                        new AbstractParameter(name: 'isRegexVariable', type: Type::BOOLEAN_TYPE),
                     ]),
                 ]),
             ]),

@@ -58,7 +58,11 @@ class UpdateShieldZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: 'wafLogOnlyRules', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::STRING_TYPE),
                 ]),
+                new AbstractParameter(name: 'wafCustomRuleOrder', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::INT_TYPE),
+                ]),
                 new AbstractParameter(name: 'wafRequestHeaderLoggingEnabled', type: Type::BOOLEAN_TYPE),
+                new AbstractParameter(name: 'requestBodyLoggingEnabled', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'wafRequestIgnoredHeaders', type: Type::ARRAY_TYPE, children: [
                     new AbstractParameter(name: null, type: Type::STRING_TYPE),
                 ]),
@@ -75,9 +79,6 @@ class UpdateShieldZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: 'dDoSShieldSensitivity', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSExecutionMode', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSChallengeWindow', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'blockVpn', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'blockTor', type: Type::BOOLEAN_TYPE),
-                new AbstractParameter(name: 'blockDatacentre', type: Type::BOOLEAN_TYPE),
                 new AbstractParameter(name: 'whitelabelResponsePages', type: Type::BOOLEAN_TYPE),
             ]),
             new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE, required: true),
