@@ -480,6 +480,21 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [Get Image Config](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-image-config)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig(
+        body: [
+            'registryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
+            'imageName' => 'nginx',
+            'imageNamespace' => 'library',
+            'tag' => 'latest',
+        ],
+    )
+);
+```
+
 #### [Get Container Config Suggestions](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-container-config-suggestions)
 
 ```php

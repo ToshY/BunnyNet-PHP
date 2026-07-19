@@ -82,7 +82,9 @@ $bunnyHttpClient->request(
                 'wafExecutionMode' => 1,
                 'wafDisabledRules' => [],
                 'wafLogOnlyRules' => [],
+                'wafCustomRuleOrder' => [],
                 'wafRequestHeaderLoggingEnabled' => true,
+                'requestBodyLoggingEnabled' => false,
                 'wafRequestIgnoredHeaders' => [],
                 'wafRealtimeThreatIntelligenceEnabled' => false,
                 'wafProfileId' => 1,
@@ -92,9 +94,6 @@ $bunnyHttpClient->request(
                 'dDoSShieldSensitivity' => 1,
                 'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
-                'blockVpn' => false,
-                'blockTor' => false,
-                'blockDatacentre' => false,
                 'whitelabelResponsePages' => false,
             ],
         ],
@@ -123,7 +122,9 @@ $bunnyHttpClient->request(
                 'wafExecutionMode' => 1,
                 'wafDisabledRules' => [],
                 'wafLogOnlyRules' => [],
+                'wafCustomRuleOrder' => [],
                 'wafRequestHeaderLoggingEnabled' => true,
+                'requestBodyLoggingEnabled' => false,
                 'wafRequestIgnoredHeaders' => [],
                 'wafRealtimeThreatIntelligenceEnabled' => false,
                 'wafProfileId' => 1,
@@ -133,9 +134,6 @@ $bunnyHttpClient->request(
                 'dDoSShieldSensitivity' => 1,
                 'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
-                'blockVpn' => false,
-                'blockTor' => false,
-                'blockDatacentre' => false,
                 'whitelabelResponsePages' => false,
             ],
         ],
@@ -256,6 +254,8 @@ $bunnyHttpClient->request(
                 'severityType' => 0,
                 'transformationTypes' => [1],
                 'value' => 'string',
+                'isNegated' => false,
+                'isRegexVariable' => false,
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
@@ -292,6 +292,8 @@ $bunnyHttpClient->request(
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
+                        'isNegated' => false,
+                        'isRegexVariable' => false,
                     ],
                 ],
             ],
@@ -344,6 +346,8 @@ $bunnyHttpClient->request(
                 'severityType' => 0,
                 'transformationTypes' => [1],
                 'value' => 'string',
+                'isNegated' => false,
+                'isRegexVariable' => false,
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
@@ -380,6 +384,8 @@ $bunnyHttpClient->request(
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
+                        'isNegated' => false,
+                        'isRegexVariable' => false,
                     ],
                 ],
             ],
@@ -443,6 +449,8 @@ $bunnyHttpClient->request(
                 'severityType' => 0,
                 'transformationTypes' => [1],
                 'value' => 'string',
+                'isNegated' => false,
+                'isRegexVariable' => false,
                 'requestCount' => 0,
                 'timeframe' => 1,
                 'blockTime' => 30,
@@ -479,6 +487,8 @@ $bunnyHttpClient->request(
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
+                        'isNegated' => false,
+                        'isRegexVariable' => false,
                     ],
                 ],
             ],
@@ -615,6 +625,8 @@ $bunnyHttpClient->request(
                 'severityType' => 0,
                 'transformationTypes' => [1],
                 'value' => 'string',
+                'isNegated' => false,
+                'isRegexVariable' => false,
                 'requestCount' => 0,
                 'counterKeyType' => 0,
                 'timeframe' => 1,
@@ -652,6 +664,8 @@ $bunnyHttpClient->request(
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
+                        'isNegated' => false,
+                        'isRegexVariable' => false,
                     ],
                 ],
             ],
@@ -724,6 +738,8 @@ $bunnyHttpClient->request(
                 'severityType' => 0,
                 'transformationTypes' => [1],
                 'value' => 'string',
+                'isNegated' => false,
+                'isRegexVariable' => false,
                 'requestCount' => 0,
                 'counterKeyType' => 0,
                 'timeframe' => 1,
@@ -761,6 +777,8 @@ $bunnyHttpClient->request(
                         ],
                         'operatorType' => 0,
                         'value' => 'string',
+                        'isNegated' => false,
+                        'isRegexVariable' => false,
                     ],
                 ],
             ],
@@ -779,6 +797,20 @@ $bunnyHttpClient->request(
         - `4`
 
 ### Metrics
+
+#### [Get Shield Zone Monthly Overages](https://docs.bunny.net/api-reference/shield/metrics/get-the-overage-breakdown-for-the-specified-shield-zone-for-a-given-month-segmented-by-billing-plan-changes)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\Metrics\GetShieldZoneMonthlyOverages(
+        shieldZoneId: 1,
+        query: [
+            'year' => 2025,
+            'month' => 1,
+        ],
+    )
+);
+```
 
 #### [Get Overview Metrics](https://docs.bunny.net/reference/get_shield-metrics-overview-shieldzoneid)
 
@@ -921,7 +953,7 @@ $bunnyHttpClient->request(
             'detectParameterXss' => true,
             'detectParameterSqli' => true,
             'rateLimitingEnabled' => false,
-            'rateLimitingType' => 0,
+            'rateLimitingType' => '',
             'rateLimitingRequestCount' => 0,
             'rateLimitingTimeframe' => 0,
         ],
@@ -1011,6 +1043,53 @@ $bunnyHttpClient->request(
         shieldZoneId: 1,
         date: 'Y-m-d\TH:i:s',
         continuationToken: 'string',
+    )
+);
+```
+
+#### [Search Event Logs](https://docs.bunny.net/api-reference/shield/event-logs/search-filter-and-group-event-logs-for-a-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\EventLogs\SearchEventLogs(
+        shieldZoneId: 1,
+        body: [
+            'from' => 1704067200,
+            'to' => 1706745600,
+            'query' => 'action:block',
+            'filters' => [
+                [
+                    'field' => 'country',
+                    'op' => 'eq',
+                    'value' => ['US'],
+                ],
+            ],
+            'groupBy' => ['country'],
+            'page' => 1,
+            'pageSize' => 100,
+        ],
+    )
+);
+```
+
+#### [Export Event Logs](https://docs.bunny.net/api-reference/shield/event-logs/export-the-full-filtered-event-logs-set-for-a-shield-zone-as-csv)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\EventLogs\ExportEventLogs(
+        shieldZoneId: 1,
+        body: [
+            'from' => 1704067200,
+            'to' => 1706745600,
+            'query' => 'action:block',
+            'filters' => [
+                [
+                    'field' => 'country',
+                    'op' => 'eq',
+                    'value' => ['US'],
+                ],
+            ],
+        ],
     )
 );
 ```
@@ -1182,6 +1261,56 @@ $bunnyHttpClient->request(
         - `2`
         - `3`
         - `4`
+
+### Bot Categorization
+
+#### [List Bot Categorizations](https://docs.bunny.net/api-reference/shield/bot-categorization/list-bots-available-for-explicit-allowblock-configuration-on-this-shield-zone-grouped-by-category)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\BotCategorization\ListBotCategorizations(
+        shieldZoneId: 1,
+    )
+);
+```
+
+#### [Set Bot Categorization Action](https://docs.bunny.net/api-reference/shield/bot-categorization/set-or-clear-the-action-applied-to-a-categorised-bot-for-this-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategorizationAction(
+        shieldZoneId: 1,
+        botId: 1,
+        body: [
+            'action' => 2,
+        ],
+    )
+);
+```
+
+#### [Set Bot Category Action](https://docs.bunny.net/api-reference/shield/bot-categorization/set-or-clear-the-action-applied-to-every-bot-in-a-category-for-this-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\BotCategorization\SetBotCategoryAction(
+        shieldZoneId: 1,
+        category: 1,
+        body: [
+            'action' => 2,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `action` has the following possible values:
+        - `0` = <unknown>
+        - `1` = Allow
+        - `2` = Block
+        - `3` = Challenge
+        - `4` = Log
+        - `5` = Bypass
 
 ### Promotions
 

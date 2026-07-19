@@ -902,6 +902,7 @@ $bunnyHttpClient->request(
             'page' => 1,
             'perPage' => 1000,
             'search' => 'bunny.net',
+            'view' => 0,
         ],
     )
 );
@@ -989,6 +990,9 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\DnsZone\GetDnsZone(
         id: 1,
+        query: [
+            'view' => 0,
+        ],
     )
 );
 ```
@@ -1070,6 +1074,22 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\DnsZone\CheckDnsZoneAvailability(
         body: [
             'Name' => 'example.com',
+        ],
+    )
+);
+```
+
+#### [List DNS Zone Records](https://docs.bunny.net/api-reference/core/dns-zone/list-dns-zone-records)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZoneRecords(
+        zoneId: 1,
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+            'type' => 0,
+            'search' => 'example',
         ],
     )
 );
@@ -1334,6 +1354,7 @@ $bunnyHttpClient->request(
             'EnableGeoZoneASIA' => true,
             'EnableGeoZoneSA' => true,
             'EnableGeoZoneAF' => true,
+            'IpFamilyPolicy' => 0,
             'BlockRootPathAccess' => false,
             'BlockPostRequests' => false,
             'EnableQueryStringOrdering' => true,
@@ -1467,6 +1488,7 @@ $bunnyHttpClient->request(
             'StickySessionClientHeaders' => '',
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
+            'CacheKeyHeaders' => '',
             'Name' => 'New Pull Zone',
         ],
     )
@@ -1553,6 +1575,7 @@ $bunnyHttpClient->request(
             'EnableGeoZoneASIA' => true,
             'EnableGeoZoneSA' => true,
             'EnableGeoZoneAF' => true,
+            'IpFamilyPolicy' => 0,
             'BlockRootPathAccess' => false,
             'BlockPostRequests' => false,
             'EnableQueryStringOrdering' => true,
@@ -1687,6 +1710,7 @@ $bunnyHttpClient->request(
             'OptimizerEnableUpscaling' => false,
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
+            'CacheKeyHeaders' => '',
         ],
     )
 );
@@ -2069,6 +2093,30 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
+#### [Request External HTTP Certificate](https://docs.bunny.net/api-reference/core/pull-zone/request-external-http-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalHttpCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
+#### [Complete External HTTP Certificate](https://docs.bunny.net/api-reference/core/pull-zone/complete-external-http-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalHttpCertificate(
         body: [
             'Hostname' => 'cdn.example.com',
         ],
@@ -2474,6 +2522,21 @@ $bunnyHttpClient->request(
         query: [
             'dateFrom' => 'm-d-Y',
             'dateTo' => 'm-d-Y',
+        ],
+    )
+);
+```
+
+#### [Get Storage Zone Egress Statistics](https://docs.bunny.net/api-reference/core/storage-zone/get-storage-zone-egress-statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\StorageZone\StorageZoneEgressStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
         ],
     )
 );

@@ -77,6 +77,8 @@ task docs:live        # Dev server on port 8001 (override with p=PORT)
 - Undocumented/deprecated endpoints use `??? warning "Undocumented endpoint"` admonitions.
 - Non-API tools (`BunnyImageProcessor`, `BunnyTokenAuthentication`) each have a standalone page under `docs/`.
 - Automated generator PRs (label `OpenAPI` + `automated`) include a manual task: _"Add/Update documentation examples (when needed)"_ — new or changed models may need corresponding doc snippets added.
+- **Bunny.net docs URL index**: the canonical list of all `docs.bunny.net/api-reference/...` page slugs is published at [`https://docs.bunny.net/llms.txt`](https://docs.bunny.net/llms.txt). When adding or verifying links in doc pages, cross-check the exact slug against this index — Bunny uses long descriptive slugs (e.g. `get-the-overage-breakdown-for-the-specified-shield-zone-for-a-given-month-segmented-by-billing-plan-changes`) rather than short ones, so guessing slugs from endpoint names is unreliable.
+- **Bunny.net docs source repository (fallback)**: if a slug is missing or ambiguous in `llms.txt`, the documentation source lives at [`https://github.com/BunnyWay/documentation`](https://github.com/BunnyWay/documentation) — browse or search that repo to find the underlying Markdown page and confirm the correct slug/path.
 
 ## File Organization
 
