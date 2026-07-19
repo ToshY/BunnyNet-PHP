@@ -902,6 +902,7 @@ $bunnyHttpClient->request(
             'page' => 1,
             'perPage' => 1000,
             'search' => 'bunny.net',
+            'view' => 0,
         ],
     )
 );
@@ -911,6 +912,9 @@ $bunnyHttpClient->request(
 
     - The key `search` can be used to filter on `Id` or `Domain`. A search value with an `Id` value will perform an exact match,
     whereas a search value with a `Domain` will perform a wildcard search: `bunny`, `nny` and `.net` will all match the DNS zone for `bunny.net`.
+    - The key `view` has the following possible values:
+        - `0` = `Full`
+        - `1` = `Lite`
 
 #### [Add DNS Zone](https://docs.bunny.net/reference/dnszonepublic_add)
 
@@ -989,9 +993,18 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\DnsZone\GetDnsZone(
         id: 1,
+        query: [
+            'view' => 0,
+        ],
     )
 );
 ```
+
+??? note
+
+    - The key `view` has the following possible values:
+        - `0` = `Full`
+        - `1` = `Lite`
 
 #### [Update DNS Zone](https://docs.bunny.net/reference/dnszonepublic_update)
 
@@ -1074,6 +1087,39 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+#### [List DNS Zone Records](https://docs.bunny.net/api-reference/core/dns-zone/list-dns-zone-records)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZoneRecords(
+        zoneId: 1,
+        query: [
+            'page' => 1,
+            'perPage' => 1000,
+            'type' => 0,
+            'search' => 'example',
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `0` = `A`
+        - `1` = `AAAA`
+        - `2` = `CNAME`
+        - `3` = `TXT`
+        - `4` = `MX`
+        - `5` = `Redirect`
+        - `6` = `Flatten`
+        - `7` = `PullZone`
+        - `8` = `SRV`
+        - `9` = `CAA`
+        - `10` = `PTR`
+        - `11` = `Script`
+        - `12` = `NS`
 
 #### [Add DNS Record](https://docs.bunny.net/reference/dnszonepublic_addrecord)
 
@@ -1334,6 +1380,7 @@ $bunnyHttpClient->request(
             'EnableGeoZoneASIA' => true,
             'EnableGeoZoneSA' => true,
             'EnableGeoZoneAF' => true,
+            'IpFamilyPolicy' => 0,
             'BlockRootPathAccess' => false,
             'BlockPostRequests' => false,
             'EnableQueryStringOrdering' => true,
@@ -1467,6 +1514,7 @@ $bunnyHttpClient->request(
             'StickySessionClientHeaders' => '',
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
+            'CacheKeyHeaders' => 'Origin,Accept-Encoding',
             'Name' => 'New Pull Zone',
         ],
     )
@@ -1476,8 +1524,8 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `Type` has the following possible values:
-        - `0` = Premium
-        - `1` = Volume
+        - `0` = `Premium`
+        - `1` = `Volume`
     - The key `OriginType` has the following possible values:
         - `0` = `OriginUrl`
         - `1` = `DnsAccelerate`
@@ -1486,6 +1534,14 @@ $bunnyHttpClient->request(
         - `4` = `EdgeScript`
         - `5` = `MagicContainers`
         - `6` = `PushZone`
+    - The key `IpFamilyPolicy` has the following possible values:
+        - `0` = `IPv4Only`
+        - `1` = `DualStack`
+        - `2` = `DualStackPreferIPv6`
+        - `3` = `IPv6Only`
+    - The key `PermaCacheType` has the following possible values:
+        - `0` = `Automatic`
+        - `1` = `Manual`
     - The key `LogFormat` has the following possible values:
         - `0` = `Plain`
         - `1` = `JSON`
@@ -1500,14 +1556,18 @@ $bunnyHttpClient->request(
         - `1` = `TCP`
         - `2` = `TCPEncrypted`
         - `3` = `DataDog`
+    - The key `EdgeScriptExecutionPhase` has the following possible values:
+        - `0` = `Cache`
+        - `1` = `LoadBalancer`
     - The key `ShieldDDosProtectionType` has the following possible values:
         - `0` = `DetectOnly`
         - `1` = `ActiveStandard`
-        - `2` = `ActiveAggresive`
+        - `2` = `ActiveAggressive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
         - `0` = `BottomLeft`
         - `1` = `BottomRight`
         - `2` = `TopLeft`
+        - `3` = `TopRight`
         - `4` = `Center`
         - `5` = `CenterStretch`
     - The key `PreloadingScreenTheme` has the following possible values:
@@ -1521,7 +1581,7 @@ $bunnyHttpClient->request(
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
@@ -1553,6 +1613,7 @@ $bunnyHttpClient->request(
             'EnableGeoZoneASIA' => true,
             'EnableGeoZoneSA' => true,
             'EnableGeoZoneAF' => true,
+            'IpFamilyPolicy' => 0,
             'BlockRootPathAccess' => false,
             'BlockPostRequests' => false,
             'EnableQueryStringOrdering' => true,
@@ -1687,6 +1748,7 @@ $bunnyHttpClient->request(
             'OptimizerEnableUpscaling' => false,
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
+            'CacheKeyHeaders' => 'Origin,Accept-Encoding',
         ],
     )
 );
@@ -1695,8 +1757,8 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `Type` has the following possible values:
-        - `0` = Premium
-        - `1` = Volume
+        - `0` = `Premium`
+        - `1` = `Volume`
     - The key `OriginType` has the following possible values:
         - `0` = `OriginUrl`
         - `1` = `DnsAccelerate`
@@ -1705,6 +1767,14 @@ $bunnyHttpClient->request(
         - `4` = `EdgeScript`
         - `5` = `MagicContainers`
         - `6` = `PushZone`
+    - The key `IpFamilyPolicy` has the following possible values:
+        - `0` = `IPv4Only`
+        - `1` = `DualStack`
+        - `2` = `DualStackPreferIPv6`
+        - `3` = `IPv6Only`
+    - The key `PermaCacheType` has the following possible values:
+        - `0` = `Automatic`
+        - `1` = `Manual`
     - The key `LogFormat` has the following possible values:
         - `0` = `Plain`
         - `1` = `JSON`
@@ -1719,14 +1789,18 @@ $bunnyHttpClient->request(
         - `1` = `TCP`
         - `2` = `TCPEncrypted`
         - `3` = `DataDog`
+    - The key `EdgeScriptExecutionPhase` has the following possible values:
+        - `0` = `Cache`
+        - `1` = `LoadBalancer`
     - The key `ShieldDDosProtectionType` has the following possible values:
         - `0` = `DetectOnly`
         - `1` = `ActiveStandard`
-        - `2` = `ActiveAggresive`
+        - `2` = `ActiveAggressive`
     - The key `OptimizerWatermarkPosition` has the following possible values:
         - `0` = `BottomLeft`
         - `1` = `BottomRight`
         - `2` = `TopLeft`
+        - `3` = `TopRight`
         - `4` = `Center`
         - `5` = `CenterStretch`
     - The key `PreloadingScreenTheme` has the following possible values:
@@ -1740,7 +1814,7 @@ $bunnyHttpClient->request(
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `ShieldDDosProtectionType`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
@@ -1828,11 +1902,14 @@ $bunnyHttpClient->request(
         - `30` = `BypassAwsS3Authentication`
         - `31` = `DisableShieldAccessLists`
         - `32` = `DisableShieldRateLimiting`
+        - `33` = `EnableRequestCoalescing`
+        - `34` = `DisableRequestCoalescing`
+        - `37` = `StripCookiesClientToOrigin`
     - The key `Type` in a `Trigger` object has the following possible values:
-        - `0` = `URL`
+        - `0` = `Url`
         - `1` = `RequestHeader`
         - `2` = `ResponseHeader`
-        - `3` = `URLExtension`
+        - `3` = `UrlExtension`
         - `4` = `CountryCode`
         - `5` = `RemoteIP`
         - `6` = `UrlQueryString`
@@ -1847,7 +1924,11 @@ $bunnyHttpClient->request(
         - `0` = `MatchAny`
         - `1` = `MatchAll`
         - `2` = `MatchNone`
-    - The API accepts both the integer as well as enum value for the `ActionType`, `Type` and `TriggerMatchingType`.
+    - The key `PatternMatchingType` in a `Trigger` object has the following possible values:
+        - `0` = `MatchAny`
+        - `1` = `MatchAll`
+        - `2` = `MatchNone`
+    - The API accepts both the integer as well as enum value for the `ActionType`, `Type`, `TriggerMatchingType` and `PatternMatchingType`.
     - The keys `Guid`, `Type` and `PatternMatchingType` in the body are required parameters when updating an edge rule.
 
 #### [Set Edge Rule Enabled](https://docs.bunny.net/reference/pullzonepublic_setedgeruleenabled)
@@ -2069,6 +2150,30 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
+#### [Request External HTTP Certificate](https://docs.bunny.net/api-reference/core/pull-zone/request-external-http-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalHttpCertificate(
+        body: [
+            'Hostname' => 'cdn.example.com',
+        ],
+    )
+);
+```
+
+#### [Complete External HTTP Certificate](https://docs.bunny.net/api-reference/core/pull-zone/complete-external-http-certificate)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalHttpCertificate(
         body: [
             'Hostname' => 'cdn.example.com',
         ],
@@ -2474,6 +2579,21 @@ $bunnyHttpClient->request(
         query: [
             'dateFrom' => 'm-d-Y',
             'dateTo' => 'm-d-Y',
+        ],
+    )
+);
+```
+
+#### [Get Storage Zone Egress Statistics](https://docs.bunny.net/api-reference/core/storage-zone/get-storage-zone-egress-statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\StorageZone\StorageZoneEgressStatistics(
+        id: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
         ],
     )
 );

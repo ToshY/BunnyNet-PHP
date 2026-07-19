@@ -41,6 +41,7 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\GetDnsZoneQueryStatistics;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\GetLatestScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\ImportDnsRecords;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\IssueWildcardCertificate;
+use ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZoneRecords;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZones;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\RecheckDnsConfiguration;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
@@ -56,6 +57,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalHttpCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CountPullZones;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
@@ -72,6 +74,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalHttpCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetForceSsl;
@@ -92,6 +95,7 @@ use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetReadOnlyPassword;
+use ToshY\BunnyNet\Model\Api\Core\StorageZone\StorageZoneEgressStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
@@ -165,6 +169,7 @@ final class Core
             'post' => CheckDnsZoneAvailability::class,
         ],
         '/dnszone/{zoneId}/records' => [
+            'get' => ListDnsZoneRecords::class,
             'put' => AddDnsRecord::class,
         ],
         '/dnszone/{zoneId}/records/{id}' => [
@@ -198,15 +203,6 @@ final class Core
         '/pullzone/{pullZoneId}/edgerules/{edgeRuleId}/setEdgeRuleEnabled' => [
             'post' => SetEdgeRuleEnabled::class,
         ],
-        '/pullzone/{pullZoneId}/originshield/queuestatistics' => [
-            'get' => GetOriginShieldQueueStatistics::class,
-        ],
-        '/pullzone/{pullZoneId}/safehop/statistics' => [
-            'get' => GetSafeHopStatistics::class,
-        ],
-        '/pullzone/{pullZoneId}/optimizer/statistics' => [
-            'get' => GetOptimizerStatistics::class,
-        ],
         '/pullzone/{id}/updatePrivateKeyType' => [
             'post' => UpdatePrivateKeyType::class,
         ],
@@ -218,6 +214,12 @@ final class Core
         ],
         '/pullzone/completeExternalDnsCertificate' => [
             'post' => CompleteExternalDnsCertificate::class,
+        ],
+        '/pullzone/requestExternalHttpCertificate' => [
+            'post' => RequestExternalHttpCertificate::class,
+        ],
+        '/pullzone/completeExternalHttpCertificate' => [
+            'post' => CompleteExternalHttpCertificate::class,
         ],
         '/pullzone/{id}/purgeCache' => [
             'post' => PurgeCache::class,
@@ -286,9 +288,19 @@ final class Core
         '/storagezone/resetReadOnlyPassword' => [
             'post' => ResetReadOnlyPassword::class,
         ],
+        '/videolibrary/{id}/addAllowedReferrer' => [
+            'post' => StreamVideoLibraryAddAllowedReferer::class,
+        ],
+        '/videolibrary/{id}/addBlockedReferrer' => [
+            'post' => StreamVideoLibraryAddBlockedReferer::class,
+        ],
         '/videolibrary' => [
             'get' => ListVideoLibraries::class,
             'post' => AddVideoLibrary::class,
+        ],
+        '/videolibrary/{id}/watermark' => [
+            'put' => AddWatermark::class,
+            'delete' => DeleteWatermark::class,
         ],
         '/videolibrary/{id}' => [
             'get' => GetVideoLibrary::class,
@@ -298,27 +310,17 @@ final class Core
         '/videolibrary/languages' => [
             'get' => GetLanguages::class,
         ],
+        '/videolibrary/{id}/removeAllowedReferrer' => [
+            'post' => StreamVideoLibraryRemoveAllowedReferer::class,
+        ],
+        '/videolibrary/{id}/removeBlockedReferrer' => [
+            'post' => StreamVideoLibraryRemoveBlockedReferer::class,
+        ],
         '/videolibrary/{id}/resetApiKey' => [
             'post' => ResetApiKey::class,
         ],
         '/videolibrary/{id}/resetReadOnlyApiKey' => [
             'post' => ResetReadOnlyApiKey::class,
-        ],
-        '/videolibrary/{id}/watermark' => [
-            'put' => AddWatermark::class,
-            'delete' => DeleteWatermark::class,
-        ],
-        '/videolibrary/{id}/addAllowedReferrer' => [
-            'post' => StreamVideoLibraryAddAllowedReferer::class,
-        ],
-        '/videolibrary/{id}/removeAllowedReferrer' => [
-            'post' => StreamVideoLibraryRemoveAllowedReferer::class,
-        ],
-        '/videolibrary/{id}/addBlockedReferrer' => [
-            'post' => StreamVideoLibraryAddBlockedReferer::class,
-        ],
-        '/videolibrary/{id}/removeBlockedReferrer' => [
-            'post' => StreamVideoLibraryRemoveBlockedReferer::class,
         ],
         '/videolibrary/{id}/transcribing/statistics' => [
             'get' => GetTranscribingStatistics::class,
@@ -340,11 +342,23 @@ final class Core
         '/user/audit/{date}' => [
             'get' => GetUserAuditLog::class,
         ],
+        '/storagezone/{id}/statistics/egress' => [
+            'get' => StorageZoneEgressStatistics::class,
+        ],
         '/storagezone/regions' => [
             'get' => GetStorageZoneRegions::class,
         ],
         '/storagezone/{id}/statistics' => [
             'get' => GetStorageZoneStatistics::class,
+        ],
+        '/pullzone/{pullZoneId}/optimizer/statistics' => [
+            'get' => GetOptimizerStatistics::class,
+        ],
+        '/pullzone/{pullZoneId}/originshield/queuestatistics' => [
+            'get' => GetOriginShieldQueueStatistics::class,
+        ],
+        '/pullzone/{pullZoneId}/safehop/statistics' => [
+            'get' => GetSafeHopStatistics::class,
         ],
         '/statistics' => [
             'get' => GetStatistics::class,

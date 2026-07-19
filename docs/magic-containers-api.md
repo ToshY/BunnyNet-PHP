@@ -44,7 +44,7 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\Applications\AddApplication(
         body: [
             'name' => 'my-app',
-            'runtimeType' => 'string',
+            'runtimeType' => 'shared',
             'terminationGracePeriodSeconds' => 30,
             'repositorySettings' => [
                 'templateRepository' => 'string',
@@ -71,7 +71,7 @@ $bunnyHttpClient->request(
                     'imageTag' => 'latest',
                     'imageDigest' => 'string',
                     'imageRegistryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
-                    'imagePullPolicy' => 'string',
+                    'imagePullPolicy' => 'ifNotPresent',
                     'entryPoint' => [
                         'command' => 'string',
                         'commandArray' => ['string'],
@@ -183,17 +183,17 @@ $bunnyHttpClient->request(
                                     [
                                         'containerPort' => 8080,
                                         'exposedPort' => 80,
-                                        'protocols' => ['string'],
+                                        'protocols' => ['tcp'],
                                     ],
                                 ],
                             ],
                             'anycast' => [
-                                'type' => 'string',
+                                'type' => 'iPv4',
                                 'portMappings' => [
                                     [
                                         'containerPort' => 8080,
                                         'exposedPort' => 80,
-                                        'protocols' => ['string'],
+                                        'protocols' => ['tcp'],
                                     ],
                                 ],
                             ],
@@ -218,6 +218,21 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? note
+
+    - The key `runtimeType` has the following possible values:
+        - `shared`
+        - `reserved`
+    - The key `imagePullPolicy` (in a `containerTemplates` entry) has the following possible values:
+        - `always`
+        - `ifNotPresent`
+    - The key `type` (in an `anycast` object) has the following possible values:
+        - `iPv4`
+    - The key `protocols` (in a `portMappings` entry, both `cdn` and `anycast`) is an array containing any of the following values:
+        - `tcp`
+        - `udp`
+        - `sctp`
+
 #### [Get Application](https://docs.bunny.net/api-reference/magic-containers/applications/get-application)
 
 ```php
@@ -237,7 +252,7 @@ $bunnyHttpClient->request(
         body: [
             // Same body structure as `Add Application`.
             'name' => 'my-app',
-            'runtimeType' => 'string',
+            'runtimeType' => 'shared',
             'autoScaling' => [
                 'min' => 1,
                 'max' => 5,
@@ -391,7 +406,7 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\AddContainerRegistry(
         body: [
             'displayName' => 'My Registry',
-            'type' => 'string',
+            'type' => 'dockerHub',
             'passwordCredentials' => [
                 'userName' => 'string',
                 'password' => 'string',
@@ -400,6 +415,12 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `dockerHub`
+        - `gitHub`
 
 #### [Get Container Registry](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-container-registry)
 
@@ -419,7 +440,7 @@ $bunnyHttpClient->request(
         registryId: 1,
         body: [
             'displayName' => 'My Registry',
-            'type' => 'string',
+            'type' => 'dockerHub',
             'passwordCredentials' => [
                 'userName' => 'string',
                 'password' => 'string',
@@ -428,6 +449,12 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `dockerHub`
+        - `gitHub`
 
 #### [Delete Container Registry](https://docs.bunny.net/api-reference/magic-containers/containerregistries/delete-container-registry)
 
@@ -470,6 +497,21 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerImageTagDigest(
+        body: [
+            'registryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
+            'imageName' => 'nginx',
+            'imageNamespace' => 'library',
+            'tag' => 'latest',
+        ],
+    )
+);
+```
+
+#### [Get Image Config](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-image-config)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig(
         body: [
             'registryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
             'imageName' => 'nginx',
@@ -526,7 +568,7 @@ $bunnyHttpClient->request(
             'imageTag' => 'latest',
             'imageDigest' => 'string',
             'imageRegistryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
-            'imagePullPolicy' => 'string',
+            'imagePullPolicy' => 'ifNotPresent',
             'entryPoint' => [
                 'command' => 'string',
                 'commandArray' => ['string'],
@@ -638,17 +680,17 @@ $bunnyHttpClient->request(
                             [
                                 'containerPort' => 8080,
                                 'exposedPort' => 80,
-                                'protocols' => ['string'],
+                                'protocols' => ['tcp'],
                             ],
                         ],
                     ],
                     'anycast' => [
-                        'type' => 'string',
+                        'type' => 'iPv4',
                         'portMappings' => [
                             [
                                 'containerPort' => 8080,
                                 'exposedPort' => 80,
-                                'protocols' => ['string'],
+                                'protocols' => ['tcp'],
                             ],
                         ],
                     ],
@@ -664,6 +706,18 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `imagePullPolicy` has the following possible values:
+        - `always`
+        - `ifNotPresent`
+    - The key `type` (in an `anycast` object) has the following possible values:
+        - `iPv4`
+    - The key `protocols` (in a `portMappings` entry, both `cdn` and `anycast`) is an array containing any of the following values:
+        - `tcp`
+        - `udp`
+        - `sctp`
 
 #### [Get Application Container Template](https://docs.bunny.net/api-reference/magic-containers/containers/get-container-template)
 
@@ -751,17 +805,17 @@ $bunnyHttpClient->request(
                     [
                         'containerPort' => 8080,
                         'exposedPort' => 80,
-                        'protocols' => ['string'],
+                        'protocols' => ['tcp'],
                     ],
                 ],
             ],
             'anycast' => [
-                'type' => 'string',
+                'type' => 'iPv4',
                 'portMappings' => [
                     [
                         'containerPort' => 8080,
                         'exposedPort' => 80,
-                        'protocols' => ['string'],
+                        'protocols' => ['tcp'],
                     ],
                 ],
             ],
@@ -769,6 +823,15 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `type` (in an `anycast` object) has the following possible values:
+        - `iPv4`
+    - The key `protocols` (in a `portMappings` entry, both `cdn` and `anycast`) is an array containing any of the following values:
+        - `tcp`
+        - `udp`
+        - `sctp`
 
 #### [Update Application Endpoint](https://docs.bunny.net/api-reference/magic-containers/endpoints/update-application-endpoint)
 
@@ -791,17 +854,17 @@ $bunnyHttpClient->request(
                     [
                         'containerPort' => 8080,
                         'exposedPort' => 80,
-                        'protocols' => ['string'],
+                        'protocols' => ['tcp'],
                     ],
                 ],
             ],
             'anycast' => [
-                'type' => 'string',
+                'type' => 'iPv4',
                 'portMappings' => [
                     [
                         'containerPort' => 8080,
                         'exposedPort' => 80,
-                        'protocols' => ['string'],
+                        'protocols' => ['tcp'],
                     ],
                 ],
             ],
@@ -809,6 +872,15 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `type` (in an `anycast` object) has the following possible values:
+        - `iPv4`
+    - The key `protocols` (in a `portMappings` entry, both `cdn` and `anycast`) is an array containing any of the following values:
+        - `tcp`
+        - `udp`
+        - `sctp`
 
 #### [Delete Application Endpoint](https://docs.bunny.net/api-reference/magic-containers/endpoints/delete-application-endpoint)
 
@@ -848,16 +920,25 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\LogForwarding\CreateLogForwardingConfiguration(
         body: [
             'app' => '46d1703e-7d63-4138-83b1-78695bee5a07',
-            'type' => 'syslog',
+            'type' => 'SyslogUdp',
             'endpoint' => 'logs.example.com',
             'port' => 514,
             'token' => 'string',
-            'format' => 'json',
+            'format' => 'SyslogRfc5424',
             'enabled' => true,
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `SyslogUdp`
+        - `SyslogTcp`
+    - The key `format` has the following possible values:
+        - `SyslogRfc3164`
+        - `SyslogRfc5424`
 
 #### [Get Log Forwarding Configuration](https://docs.bunny.net/api-reference/magic-containers/log-forwarding/get-log-forwarding-configuration)
 
@@ -877,16 +958,25 @@ $bunnyHttpClient->request(
         appId: '46d1703e-7d63-4138-83b1-78695bee5a07',
         body: [
             'app' => '46d1703e-7d63-4138-83b1-78695bee5a07',
-            'type' => 'syslog',
+            'type' => 'SyslogUdp',
             'endpoint' => 'logs.example.com',
             'port' => 514,
             'token' => 'string',
-            'format' => 'json',
+            'format' => 'SyslogRfc5424',
             'enabled' => true,
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `type` has the following possible values:
+        - `SyslogUdp`
+        - `SyslogTcp`
+    - The key `format` has the following possible values:
+        - `SyslogRfc3164`
+        - `SyslogRfc5424`
 
 #### [Delete Log Forwarding Configuration](https://docs.bunny.net/api-reference/magic-containers/log-forwarding/delete-log-forwarding-configuration)
 

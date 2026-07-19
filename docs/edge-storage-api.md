@@ -158,7 +158,23 @@ $bunnyHttpClient->request(
         fileName: 'custom.css',
     )
 );
+
+// Root directory delete (opt-in via `allowRootDelete`).
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\EdgeStorage\ManageFiles\DeleteFile(
+        storageZoneName: 'my-storage-zone-1',
+        path: '',
+        fileName: '',
+        query: [
+            'allowRootDelete' => 'true',
+        ],
+    )
+);
 ```
+
+??? note
+
+    - The key `allowRootDelete` must be provided when deleting the root directory (i.e. an empty `path` and `fileName`).
 
 ### Browse Files
 

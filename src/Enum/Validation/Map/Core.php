@@ -42,6 +42,7 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\GetDnsZoneQueryStatistics;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\GetLatestScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\ImportDnsRecords;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\IssueWildcardCertificate;
+use ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZoneRecords;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\ListDnsZones;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\RecheckDnsConfiguration;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
@@ -58,6 +59,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\AddOrUpdateEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddPullZone;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CheckPullZoneAvailability;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalDnsCertificate;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\CompleteExternalHttpCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\CountPullZones;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeleteEdgeRule;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\DeletePullZone;
@@ -74,6 +76,7 @@ use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveBlockedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RemoveCustomHostname;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalDnsCertificate;
+use ToshY\BunnyNet\Model\Api\Core\PullZone\RequestExternalHttpCertificate;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\ResetTokenKey;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetEdgeRuleEnabled;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\SetForceSsl;
@@ -94,6 +97,7 @@ use ToshY\BunnyNet\Model\Api\Core\StorageZone\GetStorageZoneStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ListStorageZones;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetPassword;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\ResetReadOnlyPassword;
+use ToshY\BunnyNet\Model\Api\Core\StorageZone\StorageZoneEgressStatistics;
 use ToshY\BunnyNet\Model\Api\Core\StorageZone\UpdateStorageZone;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\AddAllowedReferer as StreamVideoLibraryAddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\AddBlockedReferer as StreamVideoLibraryAddBlockedReferer;
@@ -147,11 +151,12 @@ final class Core
         ListCountries::class => ModelValidationStrategy::NONE,
         ListDnsZones::class => ModelValidationStrategy::STRICT_QUERY,
         AddDnsZone::class => ModelValidationStrategy::STRICT_BODY,
-        GetDnsZone::class => ModelValidationStrategy::NONE,
+        GetDnsZone::class => ModelValidationStrategy::STRICT_QUERY,
         UpdateDnsZone::class => ModelValidationStrategy::STRICT_BODY,
         DeleteDnsZone::class => ModelValidationStrategy::NONE,
         ExportDnsRecords::class => ModelValidationStrategy::NONE,
         CheckDnsZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
+        ListDnsZoneRecords::class => ModelValidationStrategy::STRICT_QUERY,
         AddDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
         UpdateDnsRecord::class => ModelValidationStrategy::STRICT_BODY,
         DeleteDnsRecord::class => ModelValidationStrategy::NONE,
@@ -166,13 +171,12 @@ final class Core
         DeleteEdgeRule::class => ModelValidationStrategy::NONE,
         AddOrUpdateEdgeRule::class => ModelValidationStrategy::STRICT_BODY,
         SetEdgeRuleEnabled::class => ModelValidationStrategy::STRICT_BODY,
-        GetOriginShieldQueueStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
-        GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         UpdatePrivateKeyType::class => ModelValidationStrategy::STRICT_BODY,
         LoadFreeCertificate::class => ModelValidationStrategy::STRICT_QUERY,
         RequestExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
         CompleteExternalDnsCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        RequestExternalHttpCertificate::class => ModelValidationStrategy::STRICT_BODY,
+        CompleteExternalHttpCertificate::class => ModelValidationStrategy::STRICT_BODY,
         PurgeCache::class => ModelValidationStrategy::STRICT_BODY,
         CheckPullZoneAvailability::class => ModelValidationStrategy::STRICT_BODY,
         AddCustomCertificate::class => ModelValidationStrategy::STRICT_BODY,
@@ -197,20 +201,20 @@ final class Core
         DeleteStorageZone::class => ModelValidationStrategy::STRICT_QUERY,
         ResetPassword::class => ModelValidationStrategy::NONE,
         ResetReadOnlyPassword::class => ModelValidationStrategy::STRICT_QUERY,
+        StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         ListVideoLibraries::class => ModelValidationStrategy::STRICT_QUERY,
         AddVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
+        AddWatermark::class => ModelValidationStrategy::NONE,
+        DeleteWatermark::class => ModelValidationStrategy::NONE,
         GetVideoLibrary::class => ModelValidationStrategy::NONE,
         UpdateVideoLibrary::class => ModelValidationStrategy::STRICT_BODY,
         DeleteVideoLibrary::class => ModelValidationStrategy::NONE,
         GetLanguages::class => ModelValidationStrategy::NONE,
+        StreamVideoLibraryRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
+        StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         ResetApiKey::class => ModelValidationStrategy::NONE,
         ResetReadOnlyApiKey::class => ModelValidationStrategy::NONE,
-        AddWatermark::class => ModelValidationStrategy::NONE,
-        DeleteWatermark::class => ModelValidationStrategy::NONE,
-        StreamVideoLibraryAddAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryRemoveAllowedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryAddBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
-        StreamVideoLibraryRemoveBlockedReferer::class => ModelValidationStrategy::STRICT_BODY,
         GetTranscribingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         AddLiveThumbnail::class => ModelValidationStrategy::NONE,
         DeleteLiveThumbnail::class => ModelValidationStrategy::NONE,
@@ -219,8 +223,12 @@ final class Core
         GetDrmStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         CloseAccount::class => ModelValidationStrategy::STRICT_BODY,
         GetUserAuditLog::class => ModelValidationStrategy::STRICT_QUERY,
+        StorageZoneEgressStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStorageZoneRegions::class => ModelValidationStrategy::NONE,
         GetStorageZoneStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetOptimizerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetOriginShieldQueueStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
