@@ -104,6 +104,27 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `shieldZoneId` is not needed or required when creating a shield zone.
+    - The key `planType` has the following possible values:
+        - `0` = `Basic`
+        - `1` = `Advanced`
+        - `2` = `Business`
+        - `3` = `Enterprise`
+    - The key `wafExecutionMode` has the following possible values:
+        - `0` = `Log`
+        - `1` = `Block`
+    - The keys `wafRequestBodyLimitAction` and `wafResponseBodyLimitAction` have the following possible values:
+        - `0` = `Block`
+        - `1` = `Log`
+        - `2` = `Ignore`
+    - The key `dDoSShieldSensitivity` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Low`
+        - `2` = `Medium`
+        - `3` = `High`
+        - `4` = `Challenge`
+    - The key `dDoSExecutionMode` has the following possible values:
+        - `0` = `Log`
+        - `1` = `Block`
 
 #### [Update Shield Zone](https://docs.bunny.net/reference/patch_shield-shield-zone2)
 
@@ -141,6 +162,30 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? note
+
+    - The key `planType` has the following possible values:
+        - `0` = `Basic`
+        - `1` = `Advanced`
+        - `2` = `Business`
+        - `3` = `Enterprise`
+    - The key `wafExecutionMode` has the following possible values:
+        - `0` = `Log`
+        - `1` = `Block`
+    - The keys `wafRequestBodyLimitAction` and `wafResponseBodyLimitAction` have the following possible values:
+        - `0` = `Block`
+        - `1` = `Log`
+        - `2` = `Ignore`
+    - The key `dDoSShieldSensitivity` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Low`
+        - `2` = `Medium`
+        - `3` = `High`
+        - `4` = `Challenge`
+    - The key `dDoSExecutionMode` has the following possible values:
+        - `0` = `Log`
+        - `1` = `Block`
+
 ### WAF
 
 #### [List WAF Rules](https://docs.bunny.net/reference/get_shield-waf-rules)
@@ -174,6 +219,13 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `action` has the following possible values:
+        - `0` = `Ignore`
+        - `1` = `LogOnly`
+        - `2` = `DisableRule`
 
 #### [Review Triggered Rule AI Recommendation](https://docs.bunny.net/reference/get_shield-waf-rules-review-triggered-ai-recommendation-shieldzoneid-ruleid)
 
@@ -302,6 +354,57 @@ $bunnyHttpClient->request(
 );
 ```
 
+??? note
+
+    - The key `actionType` has the following possible values:
+        - `1` = `Block`
+        - `2` = `Log`
+        - `3` = `Challenge`
+        - `4` = `Allow`
+        - `5` = `Bypass`
+    - The key `operatorType` (rule-level and inside `chainedRuleConditions`) has the following possible values:
+        - `0` = `BEGINSWITH`
+        - `1` = `ENDSWITH`
+        - `2` = `CONTAINS`
+        - `3` = `CONTAINSWORD`
+        - `4` = `STRMATCH`
+        - `5` = `EQ`
+        - `6` = `GE`
+        - `7` = `GT`
+        - `8` = `LE`
+        - `9` = `LT`
+        - `12` = `WITHIN`
+        - `14` = `RX`
+        - `15` = `STREQ`
+        - `17` = `DETECTSQLI`
+        - `18` = `DETECTXSS`
+    - The key `severityType` has the following possible values:
+        - `0` = `NOTICE`
+        - `1` = `WARNING`
+        - `2` = `CRITICAL`
+    - The key `transformationTypes` is an array containing any of the following values:
+        - `1` = `CMDLINE`
+        - `2` = `COMPRESSWHITESPACE`
+        - `3` = `CSSDECODE`
+        - `4` = `HEXENCODE`
+        - `5` = `HTMLENTITYDECODE`
+        - `6` = `JSDECODE`
+        - `7` = `LENGTH`
+        - `8` = `LOWERCASE`
+        - `9` = `MD5`
+        - `10` = `NORMALIZEPATH`
+        - `11` = `NORMALISEPATH`
+        - `12` = `NORMALIZEPATHWIN`
+        - `13` = `NORMALISEPATHWIN`
+        - `14` = `REMOVECOMMENTS`
+        - `15` = `REMOVENULLS`
+        - `16` = `REMOVEWHITESPACE`
+        - `17` = `REPLACECOMMENTS`
+        - `18` = `SHA1`
+        - `19` = `URLDECODE`
+        - `20` = `URLDECODEUNI`
+        - `21` = `UTF8TOUNICODE`
+
 #### [Update Custom WAF Rule (PATCH)](https://docs.bunny.net/reference/patch_shield-waf-custom-rule-id)
 
 ```php
@@ -393,6 +496,57 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `actionType` has the following possible values:
+        - `1` = `Block`
+        - `2` = `Log`
+        - `3` = `Challenge`
+        - `4` = `Allow`
+        - `5` = `Bypass`
+    - The key `operatorType` (rule-level and inside `chainedRuleConditions`) has the following possible values:
+        - `0` = `BEGINSWITH`
+        - `1` = `ENDSWITH`
+        - `2` = `CONTAINS`
+        - `3` = `CONTAINSWORD`
+        - `4` = `STRMATCH`
+        - `5` = `EQ`
+        - `6` = `GE`
+        - `7` = `GT`
+        - `8` = `LE`
+        - `9` = `LT`
+        - `12` = `WITHIN`
+        - `14` = `RX`
+        - `15` = `STREQ`
+        - `17` = `DETECTSQLI`
+        - `18` = `DETECTXSS`
+    - The key `severityType` has the following possible values:
+        - `0` = `NOTICE`
+        - `1` = `WARNING`
+        - `2` = `CRITICAL`
+    - The key `transformationTypes` is an array containing any of the following values:
+        - `1` = `CMDLINE`
+        - `2` = `COMPRESSWHITESPACE`
+        - `3` = `CSSDECODE`
+        - `4` = `HEXENCODE`
+        - `5` = `HTMLENTITYDECODE`
+        - `6` = `JSDECODE`
+        - `7` = `LENGTH`
+        - `8` = `LOWERCASE`
+        - `9` = `MD5`
+        - `10` = `NORMALIZEPATH`
+        - `11` = `NORMALISEPATH`
+        - `12` = `NORMALIZEPATHWIN`
+        - `13` = `NORMALISEPATHWIN`
+        - `14` = `REMOVECOMMENTS`
+        - `15` = `REMOVENULLS`
+        - `16` = `REMOVEWHITESPACE`
+        - `17` = `REPLACECOMMENTS`
+        - `18` = `SHA1`
+        - `19` = `URLDECODE`
+        - `20` = `URLDECODEUNI`
+        - `21` = `UTF8TOUNICODE`
 
 #### [Delete Custom WAF Rule](https://docs.bunny.net/reference/delete_shield-waf-custom-rule-id)
 
@@ -496,6 +650,57 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `actionType` has the following possible values:
+        - `1` = `Block`
+        - `2` = `Log`
+        - `3` = `Challenge`
+        - `4` = `Allow`
+        - `5` = `Bypass`
+    - The key `operatorType` (rule-level and inside `chainedRuleConditions`) has the following possible values:
+        - `0` = `BEGINSWITH`
+        - `1` = `ENDSWITH`
+        - `2` = `CONTAINS`
+        - `3` = `CONTAINSWORD`
+        - `4` = `STRMATCH`
+        - `5` = `EQ`
+        - `6` = `GE`
+        - `7` = `GT`
+        - `8` = `LE`
+        - `9` = `LT`
+        - `12` = `WITHIN`
+        - `14` = `RX`
+        - `15` = `STREQ`
+        - `17` = `DETECTSQLI`
+        - `18` = `DETECTXSS`
+    - The key `severityType` has the following possible values:
+        - `0` = `NOTICE`
+        - `1` = `WARNING`
+        - `2` = `CRITICAL`
+    - The key `transformationTypes` is an array containing any of the following values:
+        - `1` = `CMDLINE`
+        - `2` = `COMPRESSWHITESPACE`
+        - `3` = `CSSDECODE`
+        - `4` = `HEXENCODE`
+        - `5` = `HTMLENTITYDECODE`
+        - `6` = `JSDECODE`
+        - `7` = `LENGTH`
+        - `8` = `LOWERCASE`
+        - `9` = `MD5`
+        - `10` = `NORMALIZEPATH`
+        - `11` = `NORMALISEPATH`
+        - `12` = `NORMALIZEPATHWIN`
+        - `13` = `NORMALISEPATHWIN`
+        - `14` = `REMOVECOMMENTS`
+        - `15` = `REMOVENULLS`
+        - `16` = `REMOVEWHITESPACE`
+        - `17` = `REPLACECOMMENTS`
+        - `18` = `SHA1`
+        - `19` = `URLDECODE`
+        - `20` = `URLDECODEUNI`
+        - `21` = `UTF8TOUNICODE`
 
 ??? warning
 
@@ -676,12 +881,75 @@ $bunnyHttpClient->request(
 
 ??? note
 
+    - The key `actionType` has the following possible values:
+        - `1` = `RateLimit`
+        - `2` = `Log`
+        - `3` = `Challenge`
+    - The key `operatorType` (rule-level and inside `chainedRuleConditions`) has the following possible values:
+        - `0` = `BEGINSWITH`
+        - `1` = `ENDSWITH`
+        - `2` = `CONTAINS`
+        - `3` = `CONTAINSWORD`
+        - `4` = `STRMATCH`
+        - `5` = `EQ`
+        - `6` = `GE`
+        - `7` = `GT`
+        - `8` = `LE`
+        - `9` = `LT`
+        - `12` = `WITHIN`
+        - `14` = `RX`
+        - `15` = `STREQ`
+        - `17` = `DETECTSQLI`
+        - `18` = `DETECTXSS`
+    - The key `severityType` has the following possible values:
+        - `0` = `NOTICE`
+        - `1` = `WARNING`
+        - `2` = `CRITICAL`
+    - The key `transformationTypes` is an array containing any of the following values:
+        - `1` = `CMDLINE`
+        - `2` = `COMPRESSWHITESPACE`
+        - `3` = `CSSDECODE`
+        - `4` = `HEXENCODE`
+        - `5` = `HTMLENTITYDECODE`
+        - `6` = `JSDECODE`
+        - `7` = `LENGTH`
+        - `8` = `LOWERCASE`
+        - `9` = `MD5`
+        - `10` = `NORMALIZEPATH`
+        - `11` = `NORMALISEPATH`
+        - `12` = `NORMALIZEPATHWIN`
+        - `13` = `NORMALISEPATHWIN`
+        - `14` = `REMOVECOMMENTS`
+        - `15` = `REMOVENULLS`
+        - `16` = `REMOVEWHITESPACE`
+        - `17` = `REPLACECOMMENTS`
+        - `18` = `SHA1`
+        - `19` = `URLDECODE`
+        - `20` = `URLDECODEUNI`
+        - `21` = `UTF8TOUNICODE`
     - The key `counterKeyType` has the following possible values:
-        - `0`
-        - `1`
-        - `2`
-        - `3`
-        - `4`
+        - `0` = `IP`
+        - `1` = `Host`
+        - `2` = `Country`
+        - `3` = `City`
+        - `4` = `ASN`
+        - `5` = `Organization`
+        - `6` = `JA4`
+        - `7` = `IP_JA4`
+    - The key `timeframe` has the following possible values:
+        - `1` = `PerSecond`
+        - `10` = `PerTenSeconds`
+        - `60` = `PerOneMinute`
+        - `300` = `PerFiveMinutes`
+        - `900` = `PerFifteenMinutes`
+        - `3600` = `PerOneHour`
+    - The key `blockTime` has the following possible values:
+        - `30` = `ForThirtySeconds`
+        - `60` = `ForOneMinute`
+        - `300` = `ForFiveMinutes`
+        - `900` = `ForFifteenMinutes`
+        - `1800` = `ForThirtyMinutes`
+        - `3600` = `ForOneHour`
 
 #### [Delete Rate Limit](https://docs.bunny.net/reference/delete_shield-rate-limit-id)
 
@@ -789,12 +1057,75 @@ $bunnyHttpClient->request(
 
 ??? note
 
+    - The key `actionType` has the following possible values:
+        - `1` = `RateLimit`
+        - `2` = `Log`
+        - `3` = `Challenge`
+    - The key `operatorType` (rule-level and inside `chainedRuleConditions`) has the following possible values:
+        - `0` = `BEGINSWITH`
+        - `1` = `ENDSWITH`
+        - `2` = `CONTAINS`
+        - `3` = `CONTAINSWORD`
+        - `4` = `STRMATCH`
+        - `5` = `EQ`
+        - `6` = `GE`
+        - `7` = `GT`
+        - `8` = `LE`
+        - `9` = `LT`
+        - `12` = `WITHIN`
+        - `14` = `RX`
+        - `15` = `STREQ`
+        - `17` = `DETECTSQLI`
+        - `18` = `DETECTXSS`
+    - The key `severityType` has the following possible values:
+        - `0` = `NOTICE`
+        - `1` = `WARNING`
+        - `2` = `CRITICAL`
+    - The key `transformationTypes` is an array containing any of the following values:
+        - `1` = `CMDLINE`
+        - `2` = `COMPRESSWHITESPACE`
+        - `3` = `CSSDECODE`
+        - `4` = `HEXENCODE`
+        - `5` = `HTMLENTITYDECODE`
+        - `6` = `JSDECODE`
+        - `7` = `LENGTH`
+        - `8` = `LOWERCASE`
+        - `9` = `MD5`
+        - `10` = `NORMALIZEPATH`
+        - `11` = `NORMALISEPATH`
+        - `12` = `NORMALIZEPATHWIN`
+        - `13` = `NORMALISEPATHWIN`
+        - `14` = `REMOVECOMMENTS`
+        - `15` = `REMOVENULLS`
+        - `16` = `REMOVEWHITESPACE`
+        - `17` = `REPLACECOMMENTS`
+        - `18` = `SHA1`
+        - `19` = `URLDECODE`
+        - `20` = `URLDECODEUNI`
+        - `21` = `UTF8TOUNICODE`
     - The key `counterKeyType` has the following possible values:
-        - `0`
-        - `1`
-        - `2`
-        - `3`
-        - `4`
+        - `0` = `IP`
+        - `1` = `Host`
+        - `2` = `Country`
+        - `3` = `City`
+        - `4` = `ASN`
+        - `5` = `Organization`
+        - `6` = `JA4`
+        - `7` = `IP_JA4`
+    - The key `timeframe` has the following possible values:
+        - `1` = `PerSecond`
+        - `10` = `PerTenSeconds`
+        - `60` = `PerOneMinute`
+        - `300` = `PerFiveMinutes`
+        - `900` = `PerFifteenMinutes`
+        - `3600` = `PerOneHour`
+    - The key `blockTime` has the following possible values:
+        - `30` = `ForThirtySeconds`
+        - `60` = `ForOneMinute`
+        - `300` = `ForFiveMinutes`
+        - `900` = `ForFifteenMinutes`
+        - `1800` = `ForThirtyMinutes`
+        - `3600` = `ForOneHour`
 
 ### Metrics
 
@@ -891,13 +1222,13 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `Resolution` has the following possible values:
-        - `0`
-        - `1`
-        - `2`
-        - `3`
-        - `4`
-        - `5`
-        - `6`
+        - `0` = `Auto`
+        - `1` = `TwoMinutes`
+        - `2` = `TenMinutes`
+        - `3` = `Hourly`
+        - `4` = `Daily`
+        - `5` = `Weekly`
+        - `6` = `Monthly`
 
 #### [Get Shield Zone API Guardian Metrics](https://docs.bunny.net/api-reference/shield/metrics/get-api-guardian-metrics-for-the-specified-shield-zone)
 
@@ -1007,6 +1338,20 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+??? note
+
+    - The key `executionMode` has the following possible values:
+        - `0` = `Log`
+        - `1` = `Block`
+    - The key `bodyLimitAction` has the following possible values:
+        - `0` = `Block`
+        - `1` = `Log`
+        - `2` = `Ignore`
+    - The key `unmatchedPathAction` has the following possible values:
+        - `0` = `Block`
+        - `1` = `Log`
+        - `2` = `Ignore`
 
 #### [Upload Your OpenAPI Specification](https://docs.bunny.net/api-reference/shield/api-guardian/upload-your-openapi-specification)
 
@@ -1160,10 +1505,12 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `type` has the following possible values:
-        - `0` = IP Addresses 
-        - `1` = CIDR Blocks
-        - `2` = ASNs
-        - `3` = Countries
+        - `0` = `IP`
+        - `1` = `CIDR`
+        - `2` = `ASN`
+        - `3` = `Country`
+        - `4` = `Organization`
+        - `5` = `JA4`
 
 ??? warning
 
@@ -1203,12 +1550,12 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `action` has the following possible values:
-        - `0` = <unknown>
-        - `1` = Allow
-        - `2` = Block
-        - `3` = Challenge
-        - `4` = Log
-        - `5` = Bypass
+        - `0` = `None`
+        - `1` = `Allow`
+        - `2` = `Block`
+        - `3` = `Challenge`
+        - `4` = `Log`
+        - `5` = `Bypass`
 
 #### [Delete Shield Zone Access List](https://docs.bunny.net/reference/delete_shield-shield-zone-shieldzoneid-access-lists-id)
 
@@ -1261,19 +1608,19 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `executionMode` has the following possible values:
-        - `0` = Log
-        - `1` = Challenge
+        - `0` = `LogOnly`
+        - `1` = `Challenge`
     - The key `sensitivity` has the following possible values:
-        - `0` = <off>
-        - `1` = Low
-        - `2` = Medium
-        - `3` = High
+        - `0` = `Off`
+        - `1` = `Low`
+        - `2` = `Medium`
+        - `3` = `High`
     - The key `aggression` has the following possible values:
-        - `0`
-        - `1`
-        - `2`
-        - `3`
-        - `4`
+        - `0` = `Unknown`
+        - `1` = `Low`
+        - `2` = `Medium`
+        - `3` = `High`
+        - `4` = `Custom`
 
 ### Bot Categorization
 
@@ -1318,12 +1665,12 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `action` has the following possible values:
-        - `0` = <unknown>
-        - `1` = Allow
-        - `2` = Block
-        - `3` = Challenge
-        - `4` = Log
-        - `5` = Bypass
+        - `0` = `None`
+        - `1` = `Allow`
+        - `2` = `Block`
+        - `3` = `Challenge`
+        - `4` = `Log`
+        - `5` = `Bypass`
 
 ### Promotions
 
