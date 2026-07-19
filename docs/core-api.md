@@ -1488,7 +1488,7 @@ $bunnyHttpClient->request(
             'StickySessionClientHeaders' => '',
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
-            'CacheKeyHeaders' => '',
+            'CacheKeyHeaders' => 'Origin,Accept-Encoding',
             'Name' => 'New Pull Zone',
         ],
     )
@@ -1710,7 +1710,7 @@ $bunnyHttpClient->request(
             'OptimizerEnableUpscaling' => false,
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
-            'CacheKeyHeaders' => '',
+            'CacheKeyHeaders' => 'Origin,Accept-Encoding',
         ],
     )
 );

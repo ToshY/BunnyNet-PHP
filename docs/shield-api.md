@@ -953,9 +953,9 @@ $bunnyHttpClient->request(
             'detectParameterXss' => true,
             'detectParameterSqli' => true,
             'rateLimitingEnabled' => false,
-            'rateLimitingType' => '',
-            'rateLimitingRequestCount' => 0,
-            'rateLimitingTimeframe' => 0,
+            'rateLimitingType' => 'Global',
+            'rateLimitingRequestCount' => 100,
+            'rateLimitingTimeframe' => 60,
         ],
     )
 );
@@ -964,6 +964,19 @@ $bunnyHttpClient->request(
 ??? warning
 
     - This endpoint returns a `403` status code if you do not have Advanced plan or higher.
+
+??? note
+
+    - The key `rateLimitingType` has the following possible values:
+        - `Global`
+        - `IP`
+    - The key `rateLimitingTimeframe` has the following possible values:
+        - `1` = PerSecond
+        - `10` = PerTenSeconds
+        - `60` = PerOneMinute
+        - `300` = PerFiveMinutes
+        - `900` = PerFifteenMinutes
+        - `3600` = PerOneHour
 
 #### Upload OpenAPI Specification
 
