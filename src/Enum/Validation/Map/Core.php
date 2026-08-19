@@ -50,6 +50,7 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Core\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedReferer;
@@ -231,6 +232,7 @@ final class Core
         GetSafeHopStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
+        GetPriceEstimation::class => ModelValidationStrategy::STRICT_QUERY,
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
         DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,

@@ -77,11 +77,16 @@ class CreateShieldZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: 'wafRequestBodyLimitAction', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'wafResponseBodyLimitAction', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSShieldSensitivity', type: Type::INT_TYPE),
-                new AbstractParameter(name: 'dDoSExecutionMode', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'dDoSChallengeWindow', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'whitelabelResponsePages', type: Type::BOOLEAN_TYPE),
             ]),
             new AbstractParameter(name: 'pullZoneId', type: Type::INT_TYPE, required: true),
+            new AbstractParameter(name: 'accessLists', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::INT_TYPE),
+            ]),
+            new AbstractParameter(name: 'botDetectionExecutionMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'csamScanningMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'antivirusScanningMode', type: Type::INT_TYPE),
         ];
     }
 }

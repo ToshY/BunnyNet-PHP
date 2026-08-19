@@ -46,8 +46,10 @@ use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\GetRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\ListRateLimits;
 use ToshY\BunnyNet\Model\Api\Shield\RateLimiting\UpdateRateLimit;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZoneUnderAttack;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZone;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneByPullZoneId;
+use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneDefaults;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZones;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\ListShieldZonesPullzoneMapping;
 use ToshY\BunnyNet\Model\Api\Shield\ShieldZone\UpdateShieldZone;
@@ -189,6 +191,12 @@ final class Shield
         ],
         '/shield/shield-zone/get-by-pullzone/{pullZoneId}' => [
             'get' => GetShieldZoneByPullZoneId::class,
+        ],
+        '/shield/shield-zone/defaults' => [
+            'get' => GetShieldZoneDefaults::class,
+        ],
+        '/shield/shield-zone/under-attack' => [
+            'post' => CreateShieldZoneUnderAttack::class,
         ],
         '/shield/shield-zone' => [
             'post' => CreateShieldZone::class,
