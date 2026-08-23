@@ -65,6 +65,35 @@ $bunnyHttpClient->request(
 );
 ```
 
+#### [Get Shield Zone Defaults](https://bunny.net/docs/api-reference/shield/shield-zone/get-the-recommended-defaults-for-creating-a-shield-zone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\GetShieldZoneDefaults()
+);
+```
+
+#### [Create Shield Zone Under Attack](https://bunny.net/docs/api-reference/shield/shield-zone/create-a-shield-zone-in-under-attack-mode-for-your-pullzone)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZoneUnderAttack(
+        body: [
+            'pullZoneId' => 1,
+            'planType' => 0,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `planType` has the following possible values:
+        - `0` = `Basic`
+        - `1` = `Advanced`
+        - `2` = `Business`
+        - `3` = `Enterprise`
+
 #### [Create Shield Zone](https://docs.bunny.net/reference/post_shield-shield-zone)
 
 ```php
@@ -72,6 +101,10 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Shield\ShieldZone\CreateShieldZone(
         body: [
             'pullZoneId' => 1,
+            'accessLists' => [],
+            'botDetectionExecutionMode' => 0,
+            'csamScanningMode' => 0,
+            'antivirusScanningMode' => 0,
             'shieldZone' => [
                 'shieldZoneId' => 2,
                 'premiumPlan' => false,
@@ -92,7 +125,6 @@ $bunnyHttpClient->request(
                 'wafRequestBodyLimitAction' => 0,
                 'wafResponseBodyLimitAction' => 0,
                 'dDoSShieldSensitivity' => 1,
-                'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
                 'whitelabelResponsePages' => false,
             ],
@@ -104,6 +136,20 @@ $bunnyHttpClient->request(
 ??? note
 
     - The key `shieldZoneId` is not needed or required when creating a shield zone.
+    - The key `accessLists` is an object mapping an access list identifier to an action, where each action has the following possible values:
+        - `0` = `None`
+        - `1` = `Allow`
+        - `2` = `Block`
+        - `3` = `Challenge`
+        - `4` = `Log`
+        - `5` = `Bypass`
+    - The key `botDetectionExecutionMode` has the following possible values:
+        - `0` = `LogOnly`
+        - `1` = `Challenge`
+    - The keys `csamScanningMode` and `antivirusScanningMode` have the following possible values:
+        - `0` = `Disabled`
+        - `1` = `Log`
+        - `2` = `Block`
     - The key `planType` has the following possible values:
         - `0` = `Basic`
         - `1` = `Advanced`
@@ -122,9 +168,6 @@ $bunnyHttpClient->request(
         - `2` = `Medium`
         - `3` = `High`
         - `4` = `Challenge`
-    - The key `dDoSExecutionMode` has the following possible values:
-        - `0` = `Log`
-        - `1` = `Block`
 
 #### [Update Shield Zone](https://docs.bunny.net/reference/patch_shield-shield-zone2)
 
@@ -153,7 +196,6 @@ $bunnyHttpClient->request(
                 'wafRequestBodyLimitAction' => 0,
                 'wafResponseBodyLimitAction' => 0,
                 'dDoSShieldSensitivity' => 1,
-                'dDoSExecutionMode' => 1,
                 'dDoSChallengeWindow' => 1,
                 'whitelabelResponsePages' => false,
             ],
@@ -182,9 +224,6 @@ $bunnyHttpClient->request(
         - `2` = `Medium`
         - `3` = `High`
         - `4` = `Challenge`
-    - The key `dDoSExecutionMode` has the following possible values:
-        - `0` = `Log`
-        - `1` = `Block`
 
 ### WAF
 
@@ -1423,12 +1462,17 @@ $bunnyHttpClient->request(
                 ],
             ],
             'groupBy' => ['country'],
+            'buckets' => 1,
             'page' => 1,
             'pageSize' => 100,
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `buckets` is the number of time buckets for each group's sparkline histogram over the window (only used when grouping). A value of `0` (default) omits the sparkline and the value is clamped to a maximum of `500`.
 
 #### [Export Event Logs](https://docs.bunny.net/api-reference/shield/event-logs/export-the-full-filtered-event-logs-set-for-a-shield-zone-as-csv)
 
