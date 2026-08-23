@@ -1335,6 +1335,81 @@ $bunnyHttpClient->request(
 
     - Only one of `ZoneId` or `Domain` can be provided, not both.
 
+### Pricing
+
+#### Get Price Estimation
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation(
+        source: 1101,
+        resourceId: 1,
+        query: [
+            'units' => 1,
+        ],
+    )
+);
+```
+
+??? warning
+
+    - This endpoint returns a `404` HTML error page.
+
+??? note
+
+    - The path parameter `resourceId` is the ID of the resource (pull zone, storage zone, video library or edge script) to estimate pricing for.
+    - The query parameter `units` is the optional number of units to calculate the estimated total cost. When omitted, only the active price for the resource is returned.
+    - The path parameter `source` is the billing source to estimate pricing for and has the following possible values:
+        - `1101` = `CDN_Standard_Tier_EU_Traffic`
+        - `1102` = `CDN_Standard_Tier_NA_Traffic`
+        - `1103` = `CDN_Standard_Tier_APAC_Traffic`
+        - `1104` = `CDN_Standard_Tier_AF_Traffic`
+        - `1105` = `CDN_Standard_Tier_SA_Traffic`
+        - `1106` = `CDN_Standard_Tier_Uncategorized`
+        - `1201` = `CDN_Standard_Tier_Stream_EU_Traffic`
+        - `1202` = `CDN_Standard_Tier_Stream_NA_Traffic`
+        - `1203` = `CDN_Standard_Tier_Stream_APAC_Traffic`
+        - `1204` = `CDN_Standard_Tier_Stream_AF_Traffic`
+        - `1205` = `CDN_Standard_Tier_Stream_SA_Traffic`
+        - `1206` = `CDN_Standard_Tier_Stream_Uncategorized`
+        - `1300` = `CDN_Volume_Tier`
+        - `1400` = `CDN_Volume_Tier_Stream`
+        - `1501` = `CDN_Standard_Tier_Storage_EU_Traffic`
+        - `1502` = `CDN_Standard_Tier_Storage_NA_Traffic`
+        - `1503` = `CDN_Standard_Tier_Storage_APAC_Traffic`
+        - `1504` = `CDN_Standard_Tier_Storage_AF_Traffic`
+        - `1505` = `CDN_Standard_Tier_Storage_SA_Traffic`
+        - `1506` = `CDN_Standard_Tier_Storage_Uncategorized`
+        - `1510` = `CDN_Volume_Tier_Storage`
+        - `1630` = `CDN_WebSockets_ConsumptionBased`
+        - `1701` = `CDN_Standard_Tier_MagicContainers_EU_Traffic`
+        - `1702` = `CDN_Standard_Tier_MagicContainers_NA_Traffic`
+        - `1703` = `CDN_Standard_Tier_MagicContainers_APAC_Traffic`
+        - `1704` = `CDN_Standard_Tier_MagicContainers_AF_Traffic`
+        - `1705` = `CDN_Standard_Tier_MagicContainers_SA_Traffic`
+        - `1706` = `CDN_Standard_Tier_MagicContainers_Uncategorized`
+        - `1710` = `CDN_Volume_Tier_MagicContainers`
+        - `1801` = `CDN_Standard_Tier_Scripting_EU_Traffic`
+        - `1802` = `CDN_Standard_Tier_Scripting_NA_Traffic`
+        - `1803` = `CDN_Standard_Tier_Scripting_APAC_Traffic`
+        - `1804` = `CDN_Standard_Tier_Scripting_AF_Traffic`
+        - `1805` = `CDN_Standard_Tier_Scripting_SA_Traffic`
+        - `1806` = `CDN_Standard_Tier_Scripting_Uncategorized`
+        - `1810` = `CDN_Volume_Tier_Scripting`
+        - `2100` = `Storage_Standard_Tier`
+        - `2200` = `Storage_SSD_Tier`
+        - `2300` = `Storage_Standard_Tier_Stream`
+        - `2400` = `Storage_SSD_Tier_Stream`
+        - `4100` = `Transcribing`
+        - `4200` = `PremiumEncoding`
+        - `4300` = `DRM_Base`
+        - `4400` = `DRM_LicenseIssued`
+        - `4501` = `LiveEncoding_SD`
+        - `4502` = `LiveEncoding_HD`
+        - `4503` = `LiveEncoding_4K`
+        - `5200` = `Scripting_CDN_Requests`
+        - `5300` = `Scripting_CDN_CPU`
+
 ### Pull Zone
 
 #### [List Pull Zones](https://docs.bunny.net/reference/pullzonepublic_index)
@@ -1417,6 +1492,7 @@ $bunnyHttpClient->request(
             'OriginShieldZoneCode' => 'FR',
             'EnableTLS1' => true,
             'EnableTLS1_1' => true,
+            'TlsSecurityLevel' => 0,
             'CacheErrorResponses' => false,
             'VerifyOriginSSL' => false,
             'LogForwardingEnabled' => false,
@@ -1515,6 +1591,7 @@ $bunnyHttpClient->request(
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
             'CacheKeyHeaders' => 'Origin,Accept-Encoding',
+            'LoadBalancerId' => 0,
             'Name' => 'New Pull Zone',
         ],
     )
@@ -1563,6 +1640,10 @@ $bunnyHttpClient->request(
         - `0` = `DetectOnly`
         - `1` = `ActiveStandard`
         - `2` = `ActiveAggressive`
+    - The key `TlsSecurityLevel` has the following possible values:
+        - `0` = `Legacy`
+        - `1` = `Compatible`
+        - `2` = `ModernOnly`
     - The key `OptimizerWatermarkPosition` has the following possible values:
         - `0` = `BottomLeft`
         - `1` = `BottomRight`
@@ -1581,7 +1662,7 @@ $bunnyHttpClient->request(
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
@@ -1650,6 +1731,7 @@ $bunnyHttpClient->request(
             'OriginShieldZoneCode' => 'FR',
             'EnableTLS1' => true,
             'EnableTLS1_1' => true,
+            'TlsSecurityLevel' => 0,
             'CacheErrorResponses' => false,
             'VerifyOriginSSL' => false,
             'LogForwardingEnabled' => false,
@@ -1749,6 +1831,7 @@ $bunnyHttpClient->request(
             'EnableWebSockets' => false,
             'MaxWebSocketConnections' => 0,
             'CacheKeyHeaders' => 'Origin,Accept-Encoding',
+            'LoadBalancerId' => 0,
         ],
     )
 );
@@ -1796,6 +1879,10 @@ $bunnyHttpClient->request(
         - `0` = `DetectOnly`
         - `1` = `ActiveStandard`
         - `2` = `ActiveAggressive`
+    - The key `TlsSecurityLevel` has the following possible values:
+        - `0` = `Legacy`
+        - `1` = `Compatible`
+        - `2` = `ModernOnly`
     - The key `OptimizerWatermarkPosition` has the following possible values:
         - `0` = `BottomLeft`
         - `1` = `BottomRight`
@@ -1814,7 +1901,7 @@ $bunnyHttpClient->request(
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
 
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 

@@ -103,6 +103,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'OriginShieldZoneCode', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'EnableTLS1', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableTLS1_1', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'TlsSecurityLevel', type: Type::INT_TYPE),
             new AbstractParameter(name: 'CacheErrorResponses', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'VerifyOriginSSL', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'LogForwardingEnabled', type: Type::BOOLEAN_TYPE),
@@ -221,6 +222,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'EnableWebSockets', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'MaxWebSocketConnections', type: Type::INT_TYPE),
             new AbstractParameter(name: 'CacheKeyHeaders', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'LoadBalancerId', type: Type::INT_TYPE),
             new AbstractParameter(name: 'Name', type: Type::STRING_TYPE, required: true),
         ];
     }

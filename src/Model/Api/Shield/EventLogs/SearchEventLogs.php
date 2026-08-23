@@ -63,6 +63,7 @@ class SearchEventLogs implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'groupBy', type: Type::ARRAY_TYPE, children: [
                 new AbstractParameter(name: null, type: Type::STRING_TYPE),
             ]),
+            new AbstractParameter(name: 'buckets', type: Type::INT_TYPE),
             new AbstractParameter(name: 'page', type: Type::INT_TYPE),
             new AbstractParameter(name: 'pageSize', type: Type::INT_TYPE),
         ];

@@ -48,6 +48,7 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedReferer;
@@ -365,6 +366,9 @@ final class Core
         ],
         '/search' => [
             'get' => GlobalSearch::class,
+        ],
+        '/v1/pricing/{source}/{resourceId}' => [
+            'get' => GetPriceEstimation::class,
         ],
         '/dnszone/{id}/statistics' => [
             'get' => GetDnsZoneQueryStatistics::class,
