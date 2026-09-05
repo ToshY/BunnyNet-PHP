@@ -136,6 +136,8 @@ class UpdatePullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'OptimizerMobileImageQuality', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerEnableWebP', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerPrerenderHtml', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OptimizerHtmlToMarkdown', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'OptimizerLlmsTxt', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerEnableManipulationEngine', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerMinifyCSS', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerMinifyJavaScript', type: Type::BOOLEAN_TYPE),
