@@ -975,6 +975,9 @@ $bunnyHttpClient->request(
         - `10` = `PTR`
         - `11` = `SCR` (Script)
         - `12` = `NS`
+        - `13` = `SVCB`
+        - `14` = `HTTPS`
+        - `15` = `TLSA`
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
         - `0` = `None`
@@ -1120,6 +1123,9 @@ $bunnyHttpClient->request(
         - `10` = `PTR`
         - `11` = `Script`
         - `12` = `NS`
+        - `13` = `SVCB`
+        - `14` = `HTTPS`
+        - `15` = `TLSA`
 
 #### [Add DNS Record](https://docs.bunny.net/reference/dnszonepublic_addrecord)
 
@@ -1176,6 +1182,9 @@ $bunnyHttpClient->request(
         - `10` = `PTR`
         - `11` = `SCR` (Script)
         - `12` = `NS`
+        - `13` = `SVCB`
+        - `14` = `HTTPS`
+        - `15` = `TLSA`
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
         - `0` = `None`
@@ -1245,6 +1254,9 @@ $bunnyHttpClient->request(
         - `10` = `PTR`
         - `11` = `Script`
         - `12` = `NS`
+        - `13` = `SVCB`
+        - `14` = `HTTPS`
+        - `15` = `TLSA`
     - The key `ScriptId` is not returned in the response.
     - The key `MonitorType` has the following possible values:
         - `0` = `None`
@@ -1521,6 +1533,8 @@ $bunnyHttpClient->request(
             'OptimizerMobileImageQuality' => 70,
             'OptimizerEnableWebP' => true,
             'OptimizerPrerenderHtml' => false,
+            'OptimizerHtmlToMarkdown' => 0,
+            'OptimizerLlmsTxt' => false,
             'OptimizerEnableManipulationEngine' => true,
             'OptimizerMinifyCSS' => true,
             'OptimizerMinifyJavaScript' => true,
@@ -1657,12 +1671,15 @@ $bunnyHttpClient->request(
     - The key `StickySessionType` has the following possible values:
         - `0` = `Off`
         - `1` = `On`
+    - The key `OptimizerHtmlToMarkdown` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Simple`
     - The key `PreloadingScreenShowOnFirstVisit` is required when using preloading screen features.
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme`, `StickySessionType` and `OptimizerHtmlToMarkdown`.
 
 #### [Get Pull Zone](https://docs.bunny.net/reference/pullzonepublic_index2)
 
@@ -1760,6 +1777,8 @@ $bunnyHttpClient->request(
             'OptimizerMobileImageQuality' => 70,
             'OptimizerEnableWebP' => true,
             'OptimizerPrerenderHtml' => false,
+            'OptimizerHtmlToMarkdown' => 0,
+            'OptimizerLlmsTxt' => false,
             'OptimizerEnableManipulationEngine' => true,
             'OptimizerMinifyCSS' => true,
             'OptimizerMinifyJavaScript' => true,
@@ -1896,12 +1915,15 @@ $bunnyHttpClient->request(
     - The key `StickySessionType` has the following possible values:
         - `0` = `Off`
         - `1` = `On`
+    - The key `OptimizerHtmlToMarkdown` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Simple`
     - The key `PreloadingScreenShowOnFirstVisit` is required when using preloading screen features.
     - The keys `CacheControlBrowserMaxAgeOverride` and `CacheControlBrowserMaxAgeOverride` accept any values in seconds. The Bunny dashboard will
     show the value `Match Server Cache Expiration` but the value updated through the API will be honored.
     - The key `OriginShieldZoneCode` accepts the 2-digit code `FR` (France, Paris) or `IL` (Illinois, Chicago).
     - The keys `OptimizerClasses` and `BunnyAiImageBlueprints` accept arrays of objects with `Name` and `Properties` fields.
-    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme` and `StickySessionType`.
+    - The API accepts both the integer as well as enum value for the `Type`, `OriginType`, `IpFamilyPolicy`, `PermaCacheType`, `LogFormat`, `LogForwardingFormat`, `LogAnonymizationType`, `LogForwardingProtocol`, `EdgeScriptExecutionPhase`, `ShieldDDosProtectionType`, `TlsSecurityLevel`, `OptimizerWatermarkPosition`, `PreloadingScreenTheme`, `StickySessionType` and `OptimizerHtmlToMarkdown`.
 
 #### [Delete Pull Zone](https://docs.bunny.net/reference/pullzonepublic_delete)
 
