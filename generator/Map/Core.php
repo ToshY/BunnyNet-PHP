@@ -48,6 +48,10 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetAttachedPullZones;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerAccountStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerUsage;
 use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
@@ -369,6 +373,18 @@ final class Core
         ],
         '/v1/pricing/{source}/{resourceId}' => [
             'get' => GetPriceEstimation::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/statistics' => [
+            'get' => GetLoadBalancerStatistics::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/pullzones' => [
+            'get' => GetAttachedPullZones::class,
+        ],
+        '/loadbalancer/statistics' => [
+            'get' => GetLoadBalancerAccountStatistics::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/usage' => [
+            'get' => GetLoadBalancerUsage::class,
         ],
         '/dnszone/{id}/statistics' => [
             'get' => GetDnsZoneQueryStatistics::class,
