@@ -50,6 +50,10 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Core\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetAttachedPullZones;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerAccountStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerUsage;
 use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
@@ -233,6 +237,10 @@ final class Core
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
         GetPriceEstimation::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLoadBalancerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetAttachedPullZones::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLoadBalancerAccountStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLoadBalancerUsage::class => ModelValidationStrategy::STRICT_QUERY,
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
         DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
