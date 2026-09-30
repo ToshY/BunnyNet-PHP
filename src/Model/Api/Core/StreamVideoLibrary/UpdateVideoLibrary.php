@@ -115,6 +115,15 @@ class UpdateVideoLibrary implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'ExposeOriginals', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'ExposeVideoMetadata', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'EnableCompactControls', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'GeoBlocking', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: 'Enabled', type: Type::BOOLEAN_TYPE),
+                new AbstractParameter(name: 'AllowedCountries', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                ]),
+                new AbstractParameter(name: 'BlockedCountries', type: Type::ARRAY_TYPE, children: [
+                    new AbstractParameter(name: null, type: Type::STRING_TYPE),
+                ]),
+            ]),
         ];
     }
 }
