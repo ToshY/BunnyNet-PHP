@@ -50,6 +50,21 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
 use ToshY\BunnyNet\Model\Api\Core\Integration\GetGitHubIntegration;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOriginGroup;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\CreateLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOriginGroup;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetAttachedPullZones;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancer;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerAccountStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerUsage;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancers;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOriginGroup;
 use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
@@ -233,6 +248,21 @@ final class Core
         GetStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GlobalSearch::class => ModelValidationStrategy::STRICT_QUERY,
         GetPriceEstimation::class => ModelValidationStrategy::STRICT_QUERY,
+        AddOrigin::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateOrigin::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteOrigin::class => ModelValidationStrategy::NONE,
+        AddOriginGroup::class => ModelValidationStrategy::STRICT_BODY,
+        UpdateOriginGroup::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteOriginGroup::class => ModelValidationStrategy::NONE,
+        GetLoadBalancers::class => ModelValidationStrategy::STRICT_QUERY,
+        CreateLoadBalancerProfile::class => ModelValidationStrategy::STRICT_BODY,
+        GetLoadBalancer::class => ModelValidationStrategy::NONE,
+        UpdateLoadBalancerProfile::class => ModelValidationStrategy::STRICT_BODY,
+        DeleteLoadBalancerProfile::class => ModelValidationStrategy::NONE,
+        GetLoadBalancerStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetAttachedPullZones::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLoadBalancerAccountStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetLoadBalancerUsage::class => ModelValidationStrategy::STRICT_QUERY,
         GetDnsZoneQueryStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         EnableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
         DisableDnssecOnDnsZone::class => ModelValidationStrategy::NONE,
