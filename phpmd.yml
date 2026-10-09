@@ -1,0 +1,11 @@
+# PHPMD configuration, see https://phpmd.org/documentation/creating-a-ruleset.html
+name: 'ToshY PHPMD rule set'
+description: 'ToshY PHPMD ruleset'
+rules:
+  - ref: rulesets/cleancode.xml
+    exclude:
+      - StaticAccess
+  - ref: rulesets/codesize.xml
+  - ref: rulesets/controversial.xml
+  - ref: rulesets/unusedcode.xml
+  - ref: rulesets/design.xml

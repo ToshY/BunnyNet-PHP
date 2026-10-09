@@ -39,12 +39,12 @@
     "nyholm/psr7": "^1.6.1"
   },
   "require-dev": {
-    "rector/rector": "^2.3",
-    "phpmd/phpmd": "^2.15",
-    "friendsofphp/php-cs-fixer": "^3.94",
-    "phpstan/phpstan": "^2.1",
+    "rector/rector": "^2.7",
+    "phpmd/phpmd": "^3.0",
+    "friendsofphp/php-cs-fixer": "^3.95",
+    "phpstan/phpstan": "^2.3",
     "phpunit/phpunit": "^11.5",
-    "nette/php-generator": "^4.1",
+    "nette/php-generator": "^4.2",
     "cebe/php-openapi": "^1.8"
   },
   "config": {
