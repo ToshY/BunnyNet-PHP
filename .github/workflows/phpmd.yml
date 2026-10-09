@@ -41,4 +41,4 @@ jobs:
         uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
 
       - name: PHPMD
-        run: php vendor/bin/phpmd --strict src/ text phpmd.xml
+        run: php vendor/bin/phpmd --strict analyze src/ phpmd.yml

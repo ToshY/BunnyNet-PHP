@@ -955,7 +955,6 @@ class ModelGenerator
         // Extract the path parameters from the path
         $matches = [];
         preg_match_all('/\{([a-zA-Z0-9_]+)\}/', $path, $matches);
-        /* @phpstan-ignore-next-line nullCoalesce.offset */
         $pathParameters = $matches[1] ?? [];
 
         usort($parameters, function ($a, $b) use ($pathParameters) {

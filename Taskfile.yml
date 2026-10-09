@@ -124,17 +124,17 @@ tasks:
   phpmd:
     desc: PHPMD run
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd src/ text phpmd.xml
+      - docker compose run --rm $TTY php vendor/bin/phpmd analyze src/ phpmd.yml
 
   phpmd:strict:
     desc: PHPMD run with strict argument
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd --strict src/ text phpmd.xml
+      - docker compose run --rm $TTY php vendor/bin/phpmd --strict analyze src/ phpmd.yml
 
   phpmd:baseline:
     desc: PHPMD update baseline
     cmds:
-      - docker compose run --rm $TTY php vendor/bin/phpmd --generate-baseline src/ text phpmd.xml
+      - docker compose run --rm $TTY php vendor/bin/phpmd --generate-baseline analyze src/ phpmd.yml
 
   phpstan:
     desc: PHPStan run

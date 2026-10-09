@@ -64,7 +64,7 @@ if [ "$STAGED_FILES" ]; then
 
   run_command "PHP-CS-Fixer" "docker compose run -T --rm --no-deps php vendor/bin/php-cs-fixer fix --dry-run -v --diff --config=.php-cs-fixer.dist.php --show-progress=none $EXTRA_ARGS"
   run_command "PHPStan" "docker compose run -T --rm --no-deps php vendor/bin/phpstan --memory-limit=1G --error-format=table"
-  run_command "PHPMD" "docker compose run -T --rm --no-deps php vendor/bin/phpmd src/ text phpmd.xml"
+  run_command "PHPMD" "docker compose run -T --rm --no-deps php vendor/bin/phpmd analyze src/ phpmd.yml"
   run_command "PHPUnit" "docker compose run -T --rm --no-deps php vendor/bin/phpunit"
 
   wait
