@@ -48,6 +48,21 @@ use ToshY\BunnyNet\Model\Api\Core\DnsZone\TriggerScan;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsRecord;
 use ToshY\BunnyNet\Model\Api\Core\DnsZone\UpdateDnsZone;
 use ToshY\BunnyNet\Model\Api\Core\DrmCertificate\ListDrmCertificates;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOriginGroup;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\CreateLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOriginGroup;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetAttachedPullZones;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancer;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerAccountStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerStatistics;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerUsage;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancers;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateLoadBalancerProfile;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOrigin;
+use ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOriginGroup;
 use ToshY\BunnyNet\Model\Api\Core\Pricing\GetPriceEstimation;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddAllowedReferer;
 use ToshY\BunnyNet\Model\Api\Core\PullZone\AddBlockedIp;
@@ -369,6 +384,41 @@ final class Core
         ],
         '/v1/pricing/{source}/{resourceId}' => [
             'get' => GetPriceEstimation::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/origingroup/{originGroupId}/origin' => [
+            'post' => AddOrigin::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/origingroup/{originGroupId}/origin/{originId}' => [
+            'post' => UpdateOrigin::class,
+            'delete' => DeleteOrigin::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/origingroup' => [
+            'post' => AddOriginGroup::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/origingroup/{id}' => [
+            'post' => UpdateOriginGroup::class,
+            'delete' => DeleteOriginGroup::class,
+        ],
+        '/loadbalancer' => [
+            'get' => GetLoadBalancers::class,
+            'post' => CreateLoadBalancerProfile::class,
+        ],
+        '/loadbalancer/{loadBalancerId}' => [
+            'get' => GetLoadBalancer::class,
+            'post' => UpdateLoadBalancerProfile::class,
+            'delete' => DeleteLoadBalancerProfile::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/statistics' => [
+            'get' => GetLoadBalancerStatistics::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/pullzones' => [
+            'get' => GetAttachedPullZones::class,
+        ],
+        '/loadbalancer/statistics' => [
+            'get' => GetLoadBalancerAccountStatistics::class,
+        ],
+        '/loadbalancer/{loadBalancerId}/usage' => [
+            'get' => GetLoadBalancerUsage::class,
         ],
         '/dnszone/{id}/statistics' => [
             'get' => GetDnsZoneQueryStatistics::class,

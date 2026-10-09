@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ToshY\BunnyNet\Enum\Validation\Map;
 
 use ToshY\BunnyNet\Enum\Validation\ModelValidationStrategy;
+use ToshY\BunnyNet\Model\Api\Stream\EncodingStatistics\GetEncodingStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
@@ -43,6 +44,7 @@ final class Stream
         DeleteCollection::class => ModelValidationStrategy::NONE,
         ListCollections::class => ModelValidationStrategy::STRICT_QUERY,
         CreateCollection::class => ModelValidationStrategy::STRICT_BODY,
+        GetEncodingStatistics::class => ModelValidationStrategy::STRICT_QUERY,
         GetVideo::class => ModelValidationStrategy::NONE,
         UploadVideo::class => ModelValidationStrategy::STRICT_QUERY,
         UpdateVideo::class => ModelValidationStrategy::STRICT_BODY,
