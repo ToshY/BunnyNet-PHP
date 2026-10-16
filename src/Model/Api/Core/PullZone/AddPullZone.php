@@ -126,6 +126,7 @@ class AddPullZone implements ModelInterface, BodyModelInterface
             new AbstractParameter(name: 'ErrorPageWhitelabel', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerTunnelEnabled', type: Type::BOOLEAN_TYPE),
+            new AbstractParameter(name: 'OptimizerTunnelActiveProbingEnabled', type: Type::BOOLEAN_TYPE),
             new AbstractParameter(name: 'OptimizerDesktopMaxWidth', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerMobileMaxWidth', type: Type::INT_TYPE),
             new AbstractParameter(name: 'OptimizerImageQuality', type: Type::INT_TYPE),
