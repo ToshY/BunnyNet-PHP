@@ -10,6 +10,7 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\DeployApplication;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplication;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationOverview;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationStatistics;
+use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationStatisticsCharts;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationUsageSummary;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\ListApplications;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\PatchApplication;
@@ -20,11 +21,13 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\AutoscalingSettings\GetApplicationA
 use ToshY\BunnyNet\Model\Api\MagicContainers\AutoscalingSettings\UpdateApplicationAutoscaling;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\AddContainerRegistry;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\DeleteContainerRegistry;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\FindContainerImage;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerConfigSuggestions;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerImageTagDigest;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerRegistry;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTags;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTagsPage;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImages;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerRegistries;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\SearchForPublicContainerImages;
@@ -73,6 +76,9 @@ final class MagicContainers
         '/apps/{appId}/statistics' => [
             'get' => GetApplicationStatistics::class,
         ],
+        '/apps/{appId}/statistics/charts' => [
+            'get' => GetApplicationStatisticsCharts::class,
+        ],
         '/apps/{appId}/summary' => [
             'get' => GetApplicationUsageSummary::class,
         ],
@@ -114,6 +120,9 @@ final class MagicContainers
         '/registries/tags' => [
             'post' => ListContainerImageTags::class,
         ],
+        '/registries/tags/paged' => [
+            'post' => ListContainerImageTagsPage::class,
+        ],
         '/registries/image-config' => [
             'post' => GetImageConfig::class,
         ],
@@ -122,6 +131,9 @@ final class MagicContainers
         ],
         '/registries/config-suggestions' => [
             'post' => GetContainerConfigSuggestions::class,
+        ],
+        '/registries/images/find' => [
+            'post' => FindContainerImage::class,
         ],
         '/apps/{appId}/containers/{containerId}/env' => [
             'put' => SetContainerEnvironmentVariables::class,
