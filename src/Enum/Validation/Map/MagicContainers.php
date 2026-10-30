@@ -11,6 +11,7 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\DeployApplication;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplication;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationOverview;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationStatistics;
+use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationStatisticsCharts;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationUsageSummary;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\ListApplications;
 use ToshY\BunnyNet\Model\Api\MagicContainers\Applications\PatchApplication;
@@ -21,11 +22,13 @@ use ToshY\BunnyNet\Model\Api\MagicContainers\AutoscalingSettings\GetApplicationA
 use ToshY\BunnyNet\Model\Api\MagicContainers\AutoscalingSettings\UpdateApplicationAutoscaling;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\AddContainerRegistry;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\DeleteContainerRegistry;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\FindContainerImage;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerConfigSuggestions;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerImageTagDigest;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetContainerRegistry;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\GetImageConfig;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTags;
+use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTagsPage;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImages;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerRegistries;
 use ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\SearchForPublicContainerImages;
@@ -65,6 +68,7 @@ final class MagicContainers
         DeployApplication::class => ModelValidationStrategy::NONE,
         UndeployApplication::class => ModelValidationStrategy::NONE,
         GetApplicationStatistics::class => ModelValidationStrategy::STRICT_QUERY,
+        GetApplicationStatisticsCharts::class => ModelValidationStrategy::STRICT_QUERY,
         GetApplicationUsageSummary::class => ModelValidationStrategy::NONE,
         GetApplicationOverview::class => ModelValidationStrategy::NONE,
         ListApplications::class => ModelValidationStrategy::STRICT_QUERY,
@@ -84,9 +88,11 @@ final class MagicContainers
         UpdateContainerRegistry::class => ModelValidationStrategy::STRICT_BODY,
         DeleteContainerRegistry::class => ModelValidationStrategy::NONE,
         ListContainerImageTags::class => ModelValidationStrategy::STRICT_BODY,
+        ListContainerImageTagsPage::class => ModelValidationStrategy::STRICT_BODY,
         GetImageConfig::class => ModelValidationStrategy::STRICT_BODY,
         GetContainerImageTagDigest::class => ModelValidationStrategy::STRICT_BODY,
         GetContainerConfigSuggestions::class => ModelValidationStrategy::STRICT_BODY,
+        FindContainerImage::class => ModelValidationStrategy::STRICT_BODY,
         SetContainerEnvironmentVariables::class => ModelValidationStrategy::STRICT_BODY,
         GetApplicationContainerTemplate::class => ModelValidationStrategy::NONE,
         DeleteApplicationContainerTemplate::class => ModelValidationStrategy::NONE,

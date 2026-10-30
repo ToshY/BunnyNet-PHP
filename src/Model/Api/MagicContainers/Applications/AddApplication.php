@@ -230,6 +230,10 @@ class AddApplication implements ModelInterface, BodyModelInterface
                     new AbstractParameter(name: 'size', type: Type::INT_TYPE, required: true),
                 ]),
             ]),
+            new AbstractParameter(name: 'gpu', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: 'type', type: Type::STRING_TYPE, required: true),
+                new AbstractParameter(name: 'count', type: Type::INT_TYPE),
+            ]),
         ];
     }
 }
