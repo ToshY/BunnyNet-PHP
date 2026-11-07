@@ -44,6 +44,8 @@ class GetOptimalBaseRegion implements ModelInterface, QueryModelInterface
     {
         return [
             new AbstractParameter(name: 'cdnServerToken', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'gpuType', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'gpuCount', type: Type::INT_TYPE),
         ];
     }
 }

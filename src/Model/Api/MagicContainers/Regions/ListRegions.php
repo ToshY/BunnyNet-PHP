@@ -43,6 +43,8 @@ class ListRegions implements ModelInterface, QueryModelInterface
     public function getQuery(): array
     {
         return [
+            new AbstractParameter(name: 'gpuType', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'gpuCount', type: Type::INT_TYPE),
             new AbstractParameter(name: 'nextCursor', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'limit', type: Type::INT_TYPE),
         ];

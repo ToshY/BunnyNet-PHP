@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ToshY\BunnyNet\Generator\Map;
 
+use ToshY\BunnyNet\Model\Api\Stream\EncodingStatistics\GetEncodingStatistics;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\CreateCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\DeleteCollection;
 use ToshY\BunnyNet\Model\Api\Stream\ManageCollections\GetCollection;
@@ -48,6 +49,9 @@ final class Stream
         '/library/{libraryId}/collections' => [
             'get' => ListCollections::class,
             'post' => CreateCollection::class,
+        ],
+        '/library/{libraryId}/statistics/encoding' => [
+            'get' => GetEncodingStatistics::class,
         ],
         '/library/{libraryId}/videos/{videoId}' => [
             'get' => GetVideo::class,
