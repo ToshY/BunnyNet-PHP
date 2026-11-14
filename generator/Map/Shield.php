@@ -136,6 +136,18 @@ final class Shield
         '/shield/event-logs/{shieldZoneId}/export' => [
             'post' => ExportEventLogs::class,
         ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/waf-rule/{ruleId}' => [
+            'get' => GetWafRuleMetrics::class,
+        ],
+        '/shield/metrics/shield-zone/{shieldZoneId}/upload-scanning' => [
+            'get' => GetUploadScanningMetrics::class,
+        ],
+        '/shield/metrics/rate-limits/{shieldZoneId}' => [
+            'get' => ListRateLimitMetrics::class,
+        ],
+        '/shield/metrics/rate-limit/{id}' => [
+            'get' => GetRateLimitMetrics::class,
+        ],
         '/shield/metrics/overages/{shieldZoneId}' => [
             'get' => GetShieldZoneMonthlyOverages::class,
         ],
@@ -145,20 +157,8 @@ final class Shield
         '/shield/metrics/overview/{shieldZoneId}/detailed' => [
             'get' => GetMetricsOverviewDetailed::class,
         ],
-        '/shield/metrics/rate-limits/{shieldZoneId}' => [
-            'get' => ListRateLimitMetrics::class,
-        ],
-        '/shield/metrics/rate-limit/{id}' => [
-            'get' => GetRateLimitMetrics::class,
-        ],
-        '/shield/metrics/shield-zone/{shieldZoneId}/waf-rule/{ruleId}' => [
-            'get' => GetWafRuleMetrics::class,
-        ],
         '/shield/metrics/shield-zone/{shieldZoneId}/bot-detection' => [
             'get' => GetBotDetectionMetrics::class,
-        ],
-        '/shield/metrics/shield-zone/{shieldZoneId}/upload-scanning' => [
-            'get' => GetUploadScanningMetrics::class,
         ],
         '/shield/metrics/shield-zone/{shieldZoneId}/api-guardian' => [
             'get' => GetShieldZoneApiGuardianMetrics::class,
@@ -219,6 +219,15 @@ final class Shield
         '/shield/waf/rules/review-triggered/ai-recommendation/{shieldZoneId}/{ruleId}' => [
             'get' => ReviewTriggeredRuleAiRecommendation::class,
         ],
+        '/shield/waf/profiles' => [
+            'get' => ListWafProfiles::class,
+        ],
+        '/shield/waf/enums' => [
+            'get' => ListWafEnums::class,
+        ],
+        '/shield/waf/engine-config' => [
+            'get' => ListWafEngineConfiguration::class,
+        ],
         '/shield/waf/custom-rules/{shieldZoneId}' => [
             'get' => ListCustomWafRules::class,
         ],
@@ -230,15 +239,6 @@ final class Shield
         ],
         '/shield/waf/custom-rule' => [
             'post' => CreateCustomWafRule::class,
-        ],
-        '/shield/waf/profiles' => [
-            'get' => ListWafProfiles::class,
-        ],
-        '/shield/waf/enums' => [
-            'get' => ListWafEnums::class,
-        ],
-        '/shield/waf/engine-config' => [
-            'get' => ListWafEngineConfiguration::class,
         ],
     ];
 }
