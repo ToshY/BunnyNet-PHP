@@ -50,6 +50,7 @@ class UpdateContainerRegistry implements ModelInterface, BodyModelInterface
         return [
             new AbstractParameter(name: 'displayName', type: Type::STRING_TYPE, required: true),
             new AbstractParameter(name: 'type', type: Type::STRING_TYPE),
+            new AbstractParameter(name: 'hostName', type: Type::STRING_TYPE),
             new AbstractParameter(name: 'passwordCredentials', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'userName', type: Type::STRING_TYPE, required: true),
                 new AbstractParameter(name: 'password', type: Type::STRING_TYPE, required: true),
