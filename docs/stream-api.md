@@ -101,6 +101,52 @@ $bunnyHttpClient->request(
 );
 ```
 
+### Encoding Statistics
+
+#### [Get Encoding Statistics](https://docs.bunny.net/api-reference/stream/encoding-statistics/get-encoding-statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Stream\EncodingStatistics\GetEncodingStatistics(
+        libraryId: 1,
+        query: [
+            'dateFrom' => 'm-d-Y',
+            'dateTo' => 'm-d-Y',
+            'hourly' => false,
+            'videoCodecs' => [
+                'H264',
+                'AV1',
+            ],
+            'resolutions' => [
+                720,
+                1080,
+            ],
+            'jit' => false,
+        ],
+    )
+);
+```
+
+??? note
+
+    - If no `dateFrom` is passed, it defaults to 14 days ago. Data is available starting 2026-06-15.
+    - Hourly statistics (`hourly` set to `true`) are available for ranges of up to 31 days within the last 89 days.
+    - The key `videoCodecs` is an array containing any of the following values:
+        - `H264`
+        - `VP9`
+        - `HEVC`
+        - `AV1`
+    - The key `resolutions` is an array containing any of the following values:
+        - `240`
+        - `360`
+        - `480`
+        - `540`
+        - `720`
+        - `1080`
+        - `1440`
+        - `2160`
+    - The key `jit` filters on JIT encodes when `true`, on standard encodes when `false`, and includes both when omitted.
+
 ### Manage Videos
 
 #### [Get Video](https://docs.bunny.net/reference/video_getvideo)
