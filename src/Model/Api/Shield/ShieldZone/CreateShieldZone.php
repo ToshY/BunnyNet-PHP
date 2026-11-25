@@ -44,6 +44,12 @@ class CreateShieldZone implements ModelInterface, BodyModelInterface
     public function getBody(): array
     {
         return [
+            new AbstractParameter(name: 'accessLists', type: Type::OBJECT_TYPE, children: [
+                new AbstractParameter(name: null, type: Type::INT_TYPE),
+            ]),
+            new AbstractParameter(name: 'botDetectionExecutionMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'csamScanningMode', type: Type::INT_TYPE),
+            new AbstractParameter(name: 'antivirusScanningMode', type: Type::INT_TYPE),
             new AbstractParameter(name: 'shieldZone', type: Type::OBJECT_TYPE, children: [
                 new AbstractParameter(name: 'shieldZoneId', type: Type::INT_TYPE),
                 new AbstractParameter(name: 'premiumPlan', type: Type::BOOLEAN_TYPE),
@@ -81,12 +87,6 @@ class CreateShieldZone implements ModelInterface, BodyModelInterface
                 new AbstractParameter(name: 'whitelabelResponsePages', type: Type::BOOLEAN_TYPE),
             ]),
             new AbstractParameter(name: 'pullZoneId', type: Type::INT_TYPE, required: true),
-            new AbstractParameter(name: 'accessLists', type: Type::OBJECT_TYPE, children: [
-                new AbstractParameter(name: null, type: Type::INT_TYPE),
-            ]),
-            new AbstractParameter(name: 'botDetectionExecutionMode', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'csamScanningMode', type: Type::INT_TYPE),
-            new AbstractParameter(name: 'antivirusScanningMode', type: Type::INT_TYPE),
         ];
     }
 }

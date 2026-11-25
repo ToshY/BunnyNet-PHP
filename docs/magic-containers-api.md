@@ -213,6 +213,10 @@ $bunnyHttpClient->request(
                     'size' => 10,
                 ],
             ],
+            'gpu' => [
+                'type' => 'string',
+                'count' => 1,
+            ],
         ],
     )
 );
@@ -220,6 +224,7 @@ $bunnyHttpClient->request(
 
 ??? note
 
+    - The key `gpu` is optional; when provided, `type` is required and `count` must be at least `1`.
     - The key `runtimeType` has the following possible values:
         - `shared`
         - `reserved`
@@ -265,6 +270,10 @@ $bunnyHttpClient->request(
             ],
             'containerTemplates' => [],
             'volumes' => [],
+            'gpu' => [
+                'type' => 'string',
+                'count' => 1,
+            ],
         ],
     )
 );
@@ -347,11 +356,41 @@ $bunnyHttpClient->request(
         query: [
             'fromDate' => 'Y-m-d\TH:i:s',
             'toDate' => 'Y-m-d\TH:i:s',
-            'granularity' => 'hour',
+            'granularity' => 'Hourly',
         ],
     )
 );
 ```
+
+??? note
+
+    - The key `granularity` has the following possible values:
+        - `Daily`
+        - `Hourly`
+        - `Minute`
+
+#### [Get Application Statistics Charts](https://docs.bunny.net/api-reference/magic-containers/applications/get-application-statistics-charts)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\Applications\GetApplicationStatisticsCharts(
+        appId: '46d1703e-7d63-4138-83b1-78695bee5a07',
+        query: [
+            'fromDate' => 'Y-m-d\TH:i:s',
+            'toDate' => 'Y-m-d\TH:i:s',
+            'granularity' => 'Hourly',
+        ],
+    )
+);
+```
+
+??? note
+
+    - The keys `fromDate` and `granularity` are required.
+    - The key `granularity` has the following possible values:
+        - `Daily`
+        - `Hourly`
+        - `Minute`
 
 #### [Get Application Usage Summary](https://docs.bunny.net/api-reference/magic-containers/applications/get-application-usage-summary)
 
@@ -407,6 +446,7 @@ $bunnyHttpClient->request(
         body: [
             'displayName' => 'My Registry',
             'type' => 'dockerHub',
+            'hostName' => 'registry.example.com',
             'passwordCredentials' => [
                 'userName' => 'string',
                 'password' => 'string',
@@ -421,6 +461,9 @@ $bunnyHttpClient->request(
     - The key `type` has the following possible values:
         - `dockerHub`
         - `gitHub`
+        - `bunnyRegistry`
+        - `oci`
+    - The key `hostName` is the registry host with an optional port (e.g. `registry.example.com:5000`). It is required for type `oci` and ignored for the other types. An `https://` prefix and namespace path are dropped; `http://` is refused.
 
 #### [Get Container Registry](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-container-registry)
 
@@ -441,6 +484,7 @@ $bunnyHttpClient->request(
         body: [
             'displayName' => 'My Registry',
             'type' => 'dockerHub',
+            'hostName' => 'registry.example.com',
             'passwordCredentials' => [
                 'userName' => 'string',
                 'password' => 'string',
@@ -455,6 +499,9 @@ $bunnyHttpClient->request(
     - The key `type` has the following possible values:
         - `dockerHub`
         - `gitHub`
+        - `bunnyRegistry`
+        - `oci`
+    - The key `hostName` is the registry host with an optional port (e.g. `registry.example.com:5000`). It is required for type `oci` and ignored for the other types. An `https://` prefix and namespace path are dropped; `http://` is refused.
 
 #### [Delete Container Registry](https://docs.bunny.net/api-reference/magic-containers/containerregistries/delete-container-registry)
 
@@ -491,6 +538,47 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+#### [List Container Image Tags Page](https://docs.bunny.net/api-reference/magic-containers/containerregistries/list-container-image-tags-page)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\ListContainerImageTagsPage(
+        body: [
+            'registryId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
+            'imageName' => 'nginx',
+            'imageNamespace' => 'library',
+            'limit' => 100,
+            'cursor' => 'string',
+        ],
+    )
+);
+```
+
+??? note
+
+    - Omit the key `cursor` to retrieve the first page; use the `cursor` from the previous response to retrieve the next page. The response `cursor` is empty on the last page.
+
+#### [Find Container Image](https://docs.bunny.net/api-reference/magic-containers/containerregistries/find-container-image)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\ContainerRegistries\FindContainerImage(
+        body: [
+            'image' => 'ghcr.io/owner/app:v1',
+            'registryIds' => [
+                '46d1703e-7d63-4138-83b1-78695bee5a07',
+                'github',
+            ],
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `image` expects an image reference in the format `[registry/]namespace/name[:tag]`. Without a registry host all selected registries are searched; without a tag nothing is found (not even `latest`) and the image's tags are suggested instead.
+    - The key `registryIds` accepts IDs of your registries, or `dockerhub` / `github`. At least one is required.
 
 #### [Get Container Image Tag Digest](https://docs.bunny.net/api-reference/magic-containers/containerregistries/get-container-image-digest)
 
@@ -1060,6 +1148,8 @@ $bunnyHttpClient->request(
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\Regions\ListRegions(
         query: [
+            'gpuType' => 'string',
+            'gpuCount' => 1,
             'nextCursor' => 'string',
             'limit' => 100,
         ],
@@ -1074,6 +1164,8 @@ $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\MagicContainers\Regions\GetOptimalBaseRegion(
         query: [
             'cdnServerToken' => 'string',
+            'gpuType' => 'string',
+            'gpuCount' => 1,
         ],
     )
 );
@@ -1105,6 +1197,29 @@ $bunnyHttpClient->request(
     )
 );
 ```
+
+#### [Set Volume Mounts](https://docs.bunny.net/api-reference/magic-containers/volumes/set-volume-mounts)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\MagicContainers\Volumes\SetVolumeMounts(
+        appId: '46d1703e-7d63-4138-83b1-78695bee5a07',
+        volumeId: 'e4eaf7f3-4567-4def-bfe2-3456789abcde',
+        body: [
+            'mounts' => [
+                [
+                    'containerId' => 'string',
+                    'mountPath' => '/var/data',
+                ],
+            ],
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `mounts` replaces every mount of the volume in a single application update. Containers left out of the list stop mounting the volume; an empty list detaches it from the application.
 
 #### [Detach Volume](https://docs.bunny.net/api-reference/magic-containers/volumes/detach-volume)
 

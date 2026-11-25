@@ -490,6 +490,307 @@ $bunnyHttpClient->request(
     ```
     The `id` can be used as `IntegrationId` for the [Add Edge Script](edge-scripting-api.md#add-edge-script) endpoint.
 
+### Load Balancer
+
+#### [List Load Balancers](https://docs.bunny.net/api-reference/core/load-balancer/get-the-list-of-load-balancer-profiles)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancers(
+        query: [
+            'page' => 1,
+            'count' => 50,
+        ],
+    )
+);
+```
+
+#### [Create Load Balancer Profile](https://docs.bunny.net/api-reference/core/load-balancer/create-a-new-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\CreateLoadBalancerProfile(
+        body: [
+            'Name' => 'My Load Balancer',
+            'StickySessionType' => 0,
+            'OriginGroupLoadBalancingMethod' => 0,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Cookie`
+    - The key `OriginGroupLoadBalancingMethod` has the following possible values:
+        - `0` = `Weighted Random`
+        - `1` = `Round Robin`
+        - `2` = `Geolocation`
+        - `3` = `Lowest Average Latency`
+
+#### [Get Load Balancer](https://docs.bunny.net/api-reference/core/load-balancer/get-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancer(
+        loadBalancerId: 1,
+    )
+);
+```
+
+#### [Update Load Balancer Profile](https://docs.bunny.net/api-reference/core/load-balancer/update-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateLoadBalancerProfile(
+        loadBalancerId: 1,
+        body: [
+            'Name' => 'My Load Balancer V2',
+            'StickySessionType' => 1,
+            'OriginGroupLoadBalancingMethod' => 2,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `StickySessionType` has the following possible values:
+        - `0` = `Off`
+        - `1` = `Cookie`
+    - The key `OriginGroupLoadBalancingMethod` has the following possible values:
+        - `0` = `Weighted Random`
+        - `1` = `Round Robin`
+        - `2` = `Geolocation`
+        - `3` = `Lowest Average Latency`
+
+#### [Delete Load Balancer Profile](https://docs.bunny.net/api-reference/core/load-balancer/delete-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteLoadBalancerProfile(
+        loadBalancerId: 1,
+    )
+);
+```
+
+#### [Add Origin Group](https://docs.bunny.net/api-reference/core/load-balancer/add-a-new-origin-group-to-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOriginGroup(
+        loadBalancerId: 1,
+        body: [
+            'Name' => 'Europe',
+            'Enabled' => true,
+            'HealthCheckSettings' => [
+                'Enabled' => true,
+                'Path' => '/health',
+            ],
+            'OriginLoadBalancingMethod' => 0,
+            'Latitude' => 52.37,
+            'Longitude' => 4.89,
+            'Weight' => 100,
+            'Priority' => 1,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `OriginLoadBalancingMethod` has the following possible values:
+        - `0` = `Round Robin`
+        - `1` = `Weighted Random`
+        - `2` = `Least Connections`
+        - `3` = `Latency`
+
+#### [Update Origin Group](https://docs.bunny.net/api-reference/core/load-balancer/update-an-origin-group-in-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOriginGroup(
+        loadBalancerId: 1,
+        id: 2,
+        body: [
+            'Name' => 'Europe',
+            'Enabled' => true,
+            'HealthCheckSettings' => [
+                'Enabled' => true,
+                'Path' => '/health',
+            ],
+            'OriginLoadBalancingMethod' => 1,
+            'Latitude' => 52.37,
+            'Longitude' => 4.89,
+            'Weight' => 100,
+            'Priority' => 1,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `OriginLoadBalancingMethod` has the following possible values:
+        - `0` = `Round Robin`
+        - `1` = `Weighted Random`
+        - `2` = `Least Connections`
+        - `3` = `Latency`
+
+#### [Delete Origin Group](https://docs.bunny.net/api-reference/core/load-balancer/delete-an-origin-group-from-a-load-balancer-profile)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOriginGroup(
+        loadBalancerId: 1,
+        id: 2,
+    )
+);
+```
+
+#### [Add Origin](https://docs.bunny.net/api-reference/core/load-balancer/add-a-new-origin-to-an-origin-group)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\AddOrigin(
+        loadBalancerId: 1,
+        originGroupId: 2,
+        body: [
+            'Name' => 'Origin Main',
+            'Weight' => 100,
+            'Enabled' => true,
+            'OriginType' => 0,
+            'StandardOrigin' => [
+                'OriginUrl' => 'https://origin.example.com',
+                'HostHeader' => 'example.com',
+                'VerifySsl' => true,
+            ],
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `OriginType` has the following possible values:
+        - `0` = `Standard` (requires `StandardOrigin`)
+        - `1` = `Storage Zone` (requires `StorageZoneId`)
+        - `2` = `Edge Script` (requires `EdgeScriptId`)
+        - `3` = `Magic Container` (requires `MagicContainersOrigin`)
+    - The key `EndPointId` (in the `MagicContainersOrigin` object) must refer to a CDN endpoint; Anycast endpoints are not supported and should be added as a `Standard` origin instead.
+
+#### [Update Origin](https://docs.bunny.net/api-reference/core/load-balancer/update-an-existing-origin)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\UpdateOrigin(
+        loadBalancerId: 1,
+        originGroupId: 2,
+        originId: 3,
+        body: [
+            'Name' => 'Origin Magic Containers',
+            'Weight' => 100,
+            'Enabled' => true,
+            'OriginType' => 3,
+            'MagicContainersOrigin' => [
+                'AppId' => '46d1703e-7d63-4138-83b1-78695bee5a07',
+                'EndPointId' => 'b2c3d4e5-6789-4abc-def0-123456789abc',
+            ],
+        ],
+    )
+);
+```
+
+??? note
+
+    - The key `OriginType` has the following possible values:
+        - `0` = `Standard` (requires `StandardOrigin`)
+        - `1` = `Storage Zone` (requires `StorageZoneId`)
+        - `2` = `Edge Script` (requires `EdgeScriptId`)
+        - `3` = `Magic Container` (requires `MagicContainersOrigin`)
+    - The key `EndPointId` (in the `MagicContainersOrigin` object) must refer to a CDN endpoint; Anycast endpoints are not supported and should be added as a `Standard` origin instead.
+
+#### [Delete Origin](https://docs.bunny.net/api-reference/core/load-balancer/delete-an-origin-from-an-origin-group)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\DeleteOrigin(
+        loadBalancerId: 1,
+        originGroupId: 2,
+        originId: 3,
+    )
+);
+```
+
+#### [Get Load Balancer Statistics](https://docs.bunny.net/api-reference/core/load-balancer/get-load-balancer-statistics)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerStatistics(
+        loadBalancerId: 1,
+        query: [
+            'from' => 'm-d-Y',
+            'to' => 'm-d-Y',
+            'hourly' => false,
+            'exactRange' => false,
+        ],
+    )
+);
+```
+
+??? note
+
+    - If no `from` is passed, statistics for the last 24 hours are returned.
+    - Hourly statistics (`hourly` set to `true`) are only available for the last 30 days.
+    - The key `exactRange` only has effect when `hourly` is `true`; it preserves the hour components of `from` and `to` instead of rounding to full-day boundaries.
+
+#### [Get Load Balancer Account Statistics](https://docs.bunny.net/api-reference/core/load-balancer/get-statistics-roll-ups-for-all-load-balancers-on-the-account)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerAccountStatistics(
+        query: [
+            'from' => 'm-d-Y',
+            'to' => 'm-d-Y',
+        ],
+    )
+);
+```
+
+#### [Get Attached Pull Zones](https://docs.bunny.net/api-reference/core/load-balancer/get-the-pull-zones-attached-to-a-load-balancer)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetAttachedPullZones(
+        loadBalancerId: 1,
+        query: [
+            'from' => 'm-d-Y',
+            'to' => 'm-d-Y',
+        ],
+    )
+);
+```
+
+#### [Get Load Balancer Usage](https://docs.bunny.net/api-reference/core/load-balancer/get-current-period-request-usage-and-pricing-for-a-load-balancer)
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\LoadBalancer\GetLoadBalancerUsage(
+        loadBalancerId: 1,
+        query: [
+            'year' => 2026,
+            'month' => 11,
+        ],
+    )
+);
+```
+
+??? note
+
+    - The keys `year` and `month` (UTC) default to the current period and should be supplied together.
+
 ### Region
 
 #### [List Regions](https://docs.bunny.net/reference/regionpublic_index)
@@ -656,6 +957,13 @@ $bunnyHttpClient->request(
             'ExposeOriginals' => false,
             'ExposeVideoMetadata' => false,
             'EnableCompactControls' => false,
+            'GeoBlocking' => [
+                'Enabled' => false,
+                'AllowedCountries' => [],
+                'BlockedCountries' => [
+                    'NL',
+                ],
+            ],
         ],
     )
 );
@@ -696,6 +1004,7 @@ $bunnyHttpClient->request(
     - The key `EncodingTier` has the following possible values:
         - `0` = `Free`
         - `1` = `Premium`
+    - The keys `AllowedCountries` and `BlockedCountries` (in the `GeoBlocking` object) expect a list of 2-letter ISO 3166-1 country codes.
 
 #### [Delete Video Library](https://docs.bunny.net/reference/videolibrarypublic_delete)
 
@@ -886,6 +1195,26 @@ $bunnyHttpClient->request(
 ```php
 $bunnyHttpClient->request(
     new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetReadOnlyApiKey(
+        id: 1,
+    )
+);
+```
+
+#### Reset Webhook Signing Secret
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetVideoLibraryWebhookSigningSecret(
+        id: 1,
+    )
+);
+```
+
+#### Reset Live Auto Create Stream Key
+
+```php
+$bunnyHttpClient->request(
+    new \ToshY\BunnyNet\Model\Api\Core\StreamVideoLibrary\ResetLiveAutoCreateStreamKey(
         id: 1,
     )
 );
@@ -1527,6 +1856,7 @@ $bunnyHttpClient->request(
             'ErrorPageWhitelabel' => false,
             'OptimizerEnabled' => false,
             'OptimizerTunnelEnabled' => false,
+            'OptimizerTunnelActiveProbingEnabled' => false,
             'OptimizerDesktopMaxWidth' => 1600,
             'OptimizerMobileMaxWidth' => 800,
             'OptimizerImageQuality' => 85,
@@ -1771,6 +2101,7 @@ $bunnyHttpClient->request(
             'ErrorPageWhitelabel' => false,
             'OptimizerEnabled' => false,
             'OptimizerTunnelEnabled' => false,
+            'OptimizerTunnelActiveProbingEnabled' => false,
             'OptimizerDesktopMaxWidth' => 1600,
             'OptimizerMobileMaxWidth' => 800,
             'OptimizerImageQuality' => 85,

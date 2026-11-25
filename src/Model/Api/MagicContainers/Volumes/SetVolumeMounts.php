@@ -1,0 +1,62 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ToshY\BunnyNet\Model\Api\MagicContainers\Volumes;
+
+use ToshY\BunnyNet\Attributes\BodyProperty;
+use ToshY\BunnyNet\Attributes\PathProperty;
+use ToshY\BunnyNet\Enum\Header;
+use ToshY\BunnyNet\Enum\Method;
+use ToshY\BunnyNet\Enum\Type;
+use ToshY\BunnyNet\Model\AbstractParameter;
+use ToshY\BunnyNet\Model\BodyModelInterface;
+use ToshY\BunnyNet\Model\ModelInterface;
+
+class SetVolumeMounts implements ModelInterface, BodyModelInterface
+{
+    /**
+     * @param string $appId
+     * @param string $volumeId
+     * @param array<string,mixed> $body
+     */
+    public function __construct(
+        #[PathProperty]
+        public readonly string $appId,
+        #[PathProperty]
+        public readonly string $volumeId,
+        #[BodyProperty]
+        public readonly array $body = [],
+    ) {
+    }
+
+    public function getMethod(): Method
+    {
+        return Method::PUT;
+    }
+
+    public function getPath(): string
+    {
+        return 'apps/%s/volumes/%s/mounts';
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            Header::ACCEPT_JSON,
+            Header::CONTENT_TYPE_JSON_ALL,
+        ];
+    }
+
+    public function getBody(): array
+    {
+        return [
+            new AbstractParameter(name: 'mounts', type: Type::ARRAY_TYPE, required: true, children: [
+                new AbstractParameter(name: null, type: Type::OBJECT_TYPE, children: [
+                    new AbstractParameter(name: 'containerId', type: Type::STRING_TYPE, required: true),
+                    new AbstractParameter(name: 'mountPath', type: Type::STRING_TYPE, required: true),
+                ]),
+            ]),
+        ];
+    }
+}
